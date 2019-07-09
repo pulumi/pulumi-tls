@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "outDir": "bin",
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": true,
+        "sourceMap": true,
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "noFallthroughCasesInSwitch": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true
+    },
+    "files": [
+        "certRequest.ts",
+        "getPublicKey.ts",
+        "index.ts",
+        "locallySignedCert.ts",
+        "privateKey.ts",
+        "provider.ts",
+        "selfSignedCert.ts",
+        "utilities.ts"
+    ]
+}
+
