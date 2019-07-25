@@ -22,10 +22,12 @@ import * as utilities from "./utilities";
  *
  * > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.markdown.
  */
-export function getPublicKey(args: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
-    return pulumi.runtime.invoke("tls:index/getPublicKey:getPublicKey", {
+export function getPublicKey(args: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> & GetPublicKeyResult {
+    const promise: Promise<GetPublicKeyResult> = pulumi.runtime.invoke("tls:index/getPublicKey:getPublicKey", {
         "privateKeyPem": args.privateKeyPem,
     }, opts);
+
+    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
