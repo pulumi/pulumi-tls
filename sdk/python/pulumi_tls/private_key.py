@@ -92,6 +92,10 @@ class PrivateKey(pulumi.CustomResource):
         __props__['public_key_openssh'] = None
         __props__['public_key_pem'] = None
 
+        if opts is None:
+            opts = pulumi.ResourceOptions()
+        if opts.version is None:
+            opts.version = utilities.get_version()
         super(PrivateKey, __self__).__init__(
             'tls:index/privateKey:PrivateKey',
             resource_name,

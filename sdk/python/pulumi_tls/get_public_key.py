@@ -54,7 +54,15 @@ class GetPublicKeyResult:
         id is the provider-assigned unique ID for this managed resource.
         """
 
-async def get_public_key(private_key_pem=None,opts=None):
+    # pylint: disable=using-constant-test
+    def __await__(self):
+        if False:
+            yield self
+        return self
+
+    __iter__ = __await__
+
+def get_public_key(private_key_pem=None,opts=None):
     """
     Use this data source to get the public key from a PEM-encoded private key for use in other
     resources.
@@ -64,7 +72,11 @@ async def get_public_key(private_key_pem=None,opts=None):
     __args__ = dict()
 
     __args__['privateKeyPem'] = private_key_pem
-    __ret__ = await pulumi.runtime.invoke('tls:index/getPublicKey:getPublicKey', __args__, opts=opts)
+    if opts is None:
+        opts = pulumi.ResourceOptions()
+    if opts.version is None:
+        opts.version = utilities.get_version()
+    __ret__ = pulumi.runtime.invoke('tls:index/getPublicKey:getPublicKey', __args__, opts=opts).value
 
     return GetPublicKeyResult(
         algorithm=__ret__.get('algorithm'),

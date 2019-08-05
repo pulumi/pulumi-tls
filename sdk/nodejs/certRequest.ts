@@ -97,6 +97,13 @@ export class CertRequest extends pulumi.CustomResource {
             inputs["subjects"] = args ? args.subjects : undefined;
             inputs["certRequestPem"] = undefined /*out*/;
         }
+        if (!opts) {
+            opts = {}
+        }
+
+        if (!opts.version) {
+            opts.version = utilities.getVersion();
+        }
         super(CertRequest.__pulumiType, name, inputs, opts);
     }
 }
