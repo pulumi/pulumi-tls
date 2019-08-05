@@ -80,6 +80,10 @@ class CertRequest(pulumi.CustomResource):
 
         __props__['cert_request_pem'] = None
 
+        if opts is None:
+            opts = pulumi.ResourceOptions()
+        if opts.version is None:
+            opts.version = utilities.get_version()
         super(CertRequest, __self__).__init__(
             'tls:index/certRequest:CertRequest',
             resource_name,

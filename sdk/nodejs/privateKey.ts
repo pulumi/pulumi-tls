@@ -106,6 +106,13 @@ export class PrivateKey extends pulumi.CustomResource {
             inputs["publicKeyOpenssh"] = undefined /*out*/;
             inputs["publicKeyPem"] = undefined /*out*/;
         }
+        if (!opts) {
+            opts = {}
+        }
+
+        if (!opts.version) {
+            opts.version = utilities.getVersion();
+        }
         super(PrivateKey.__pulumiType, name, inputs, opts);
     }
 }

@@ -143,6 +143,13 @@ export class LocallySignedCert extends pulumi.CustomResource {
             inputs["validityEndTime"] = undefined /*out*/;
             inputs["validityStartTime"] = undefined /*out*/;
         }
+        if (!opts) {
+            opts = {}
+        }
+
+        if (!opts.version) {
+            opts.version = utilities.getVersion();
+        }
         super(LocallySignedCert.__pulumiType, name, inputs, opts);
     }
 }

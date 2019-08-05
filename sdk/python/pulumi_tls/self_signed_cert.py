@@ -130,6 +130,10 @@ class SelfSignedCert(pulumi.CustomResource):
         __props__['validity_end_time'] = None
         __props__['validity_start_time'] = None
 
+        if opts is None:
+            opts = pulumi.ResourceOptions()
+        if opts.version is None:
+            opts.version = utilities.get_version()
         super(SelfSignedCert, __self__).__init__(
             'tls:index/selfSignedCert:SelfSignedCert',
             resource_name,

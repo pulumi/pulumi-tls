@@ -146,6 +146,13 @@ export class SelfSignedCert extends pulumi.CustomResource {
             inputs["validityEndTime"] = undefined /*out*/;
             inputs["validityStartTime"] = undefined /*out*/;
         }
+        if (!opts) {
+            opts = {}
+        }
+
+        if (!opts.version) {
+            opts.version = utilities.getVersion();
+        }
         super(SelfSignedCert.__pulumiType, name, inputs, opts);
     }
 }
