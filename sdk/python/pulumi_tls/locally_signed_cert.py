@@ -59,7 +59,7 @@ class LocallySignedCert(pulumi.CustomResource):
     The time after which the certificate is valid, as an
     [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
     """
-    def __init__(__self__, resource_name, opts=None, allowed_uses=None, ca_cert_pem=None, ca_key_algorithm=None, ca_private_key_pem=None, cert_request_pem=None, early_renewal_hours=None, is_ca_certificate=None, validity_period_hours=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, allowed_uses=None, ca_cert_pem=None, ca_key_algorithm=None, ca_private_key_pem=None, cert_request_pem=None, early_renewal_hours=None, is_ca_certificate=None, validity_period_hours=None, __props__=None, __name__=None, __opts__=None):
         """
         Create a LocallySignedCert resource with the given unique name, props, and options.
         
@@ -88,58 +88,91 @@ class LocallySignedCert(pulumi.CustomResource):
         if __opts__ is not None:
             warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
             opts = __opts__
-        if not resource_name:
-            raise TypeError('Missing resource name argument (for URN creation)')
-        if not isinstance(resource_name, str):
-            raise TypeError('Expected resource name to be a string')
-        if opts and not isinstance(opts, pulumi.ResourceOptions):
-            raise TypeError('Expected resource options to be a ResourceOptions instance')
-
-        __props__ = dict()
-
-        if allowed_uses is None:
-            raise TypeError("Missing required property 'allowed_uses'")
-        __props__['allowed_uses'] = allowed_uses
-
-        if ca_cert_pem is None:
-            raise TypeError("Missing required property 'ca_cert_pem'")
-        __props__['ca_cert_pem'] = ca_cert_pem
-
-        if ca_key_algorithm is None:
-            raise TypeError("Missing required property 'ca_key_algorithm'")
-        __props__['ca_key_algorithm'] = ca_key_algorithm
-
-        if ca_private_key_pem is None:
-            raise TypeError("Missing required property 'ca_private_key_pem'")
-        __props__['ca_private_key_pem'] = ca_private_key_pem
-
-        if cert_request_pem is None:
-            raise TypeError("Missing required property 'cert_request_pem'")
-        __props__['cert_request_pem'] = cert_request_pem
-
-        __props__['early_renewal_hours'] = early_renewal_hours
-
-        __props__['is_ca_certificate'] = is_ca_certificate
-
-        if validity_period_hours is None:
-            raise TypeError("Missing required property 'validity_period_hours'")
-        __props__['validity_period_hours'] = validity_period_hours
-
-        __props__['cert_pem'] = None
-        __props__['validity_end_time'] = None
-        __props__['validity_start_time'] = None
-
         if opts is None:
             opts = pulumi.ResourceOptions()
+        if not isinstance(opts, pulumi.ResourceOptions):
+            raise TypeError('Expected resource options to be a ResourceOptions instance')
         if opts.version is None:
             opts.version = utilities.get_version()
+        if opts.id is None:
+            if __props__ is not None:
+                raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
+            __props__ = dict()
+
+            if allowed_uses is None:
+                raise TypeError("Missing required property 'allowed_uses'")
+            __props__['allowed_uses'] = allowed_uses
+            if ca_cert_pem is None:
+                raise TypeError("Missing required property 'ca_cert_pem'")
+            __props__['ca_cert_pem'] = ca_cert_pem
+            if ca_key_algorithm is None:
+                raise TypeError("Missing required property 'ca_key_algorithm'")
+            __props__['ca_key_algorithm'] = ca_key_algorithm
+            if ca_private_key_pem is None:
+                raise TypeError("Missing required property 'ca_private_key_pem'")
+            __props__['ca_private_key_pem'] = ca_private_key_pem
+            if cert_request_pem is None:
+                raise TypeError("Missing required property 'cert_request_pem'")
+            __props__['cert_request_pem'] = cert_request_pem
+            __props__['early_renewal_hours'] = early_renewal_hours
+            __props__['is_ca_certificate'] = is_ca_certificate
+            if validity_period_hours is None:
+                raise TypeError("Missing required property 'validity_period_hours'")
+            __props__['validity_period_hours'] = validity_period_hours
+            __props__['cert_pem'] = None
+            __props__['validity_end_time'] = None
+            __props__['validity_start_time'] = None
         super(LocallySignedCert, __self__).__init__(
             'tls:index/locallySignedCert:LocallySignedCert',
             resource_name,
             __props__,
             opts)
 
+    @staticmethod
+    def get(resource_name, id, opts=None, allowed_uses=None, ca_cert_pem=None, ca_key_algorithm=None, ca_private_key_pem=None, cert_pem=None, cert_request_pem=None, early_renewal_hours=None, is_ca_certificate=None, validity_end_time=None, validity_period_hours=None, validity_start_time=None):
+        """
+        Get an existing LocallySignedCert resource's state with the given name, id, and optional extra
+        properties used to qualify the lookup.
+        :param str resource_name: The unique name of the resulting resource.
+        :param str id: The unique provider ID of the resource to lookup.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[list] allowed_uses: List of keywords each describing a use that is permitted
+               for the issued certificate. The valid keywords are listed below.
+        :param pulumi.Input[str] ca_cert_pem: PEM-encoded certificate data for the CA.
+        :param pulumi.Input[str] ca_key_algorithm: The name of the algorithm for the key provided
+               in `ca_private_key_pem`.
+        :param pulumi.Input[str] ca_private_key_pem: PEM-encoded private key data for the CA.
+               This can be read from a separate file using the ``file`` interpolation
+               function.
+        :param pulumi.Input[str] cert_pem: The certificate data in PEM format.
+        :param pulumi.Input[str] cert_request_pem: PEM-encoded request certificate data.
+        :param pulumi.Input[bool] is_ca_certificate: Boolean controlling whether the CA flag will be set in the
+               generated certificate. Defaults to `false`, meaning that the certificate does not represent
+               a certificate authority.
+        :param pulumi.Input[str] validity_end_time: The time until which the certificate is invalid, as an
+               [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+        :param pulumi.Input[float] validity_period_hours: The number of hours after initial issuing that the
+               certificate will become invalid.
+        :param pulumi.Input[str] validity_start_time: The time after which the certificate is valid, as an
+               [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
 
+        > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/r/locally_signed_cert.html.markdown.
+        """
+        opts = pulumi.ResourceOptions(id=id) if opts is None else opts.merge(pulumi.ResourceOptions(id=id))
+
+        __props__ = dict()
+        __props__["allowed_uses"] = allowed_uses
+        __props__["ca_cert_pem"] = ca_cert_pem
+        __props__["ca_key_algorithm"] = ca_key_algorithm
+        __props__["ca_private_key_pem"] = ca_private_key_pem
+        __props__["cert_pem"] = cert_pem
+        __props__["cert_request_pem"] = cert_request_pem
+        __props__["early_renewal_hours"] = early_renewal_hours
+        __props__["is_ca_certificate"] = is_ca_certificate
+        __props__["validity_end_time"] = validity_end_time
+        __props__["validity_period_hours"] = validity_period_hours
+        __props__["validity_start_time"] = validity_start_time
+        return LocallySignedCert(resource_name, opts=opts, __props__=__props__)
     def translate_output_property(self, prop):
         return tables._CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 

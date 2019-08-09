@@ -93,7 +93,7 @@ func (r *CertRequest) IpAddresses() *pulumi.ArrayOutput {
 }
 
 // The name of the algorithm for the key provided
-// in `private_key_pem`.
+// in `privateKeyPem`.
 func (r *CertRequest) KeyAlgorithm() *pulumi.StringOutput {
 	return (*pulumi.StringOutput)(r.s.State["keyAlgorithm"])
 }
@@ -118,7 +118,7 @@ type CertRequestState struct {
 	// List of IP addresses for which a certificate is being requested.
 	IpAddresses interface{}
 	// The name of the algorithm for the key provided
-	// in `private_key_pem`.
+	// in `privateKeyPem`.
 	KeyAlgorithm interface{}
 	// PEM-encoded private key that the certificate will belong to
 	PrivateKeyPem interface{}
@@ -134,7 +134,7 @@ type CertRequestArgs struct {
 	// List of IP addresses for which a certificate is being requested.
 	IpAddresses interface{}
 	// The name of the algorithm for the key provided
-	// in `private_key_pem`.
+	// in `privateKeyPem`.
 	KeyAlgorithm interface{}
 	// PEM-encoded private key that the certificate will belong to
 	PrivateKeyPem interface{}

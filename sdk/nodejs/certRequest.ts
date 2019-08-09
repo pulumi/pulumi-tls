@@ -48,7 +48,7 @@ export class CertRequest extends pulumi.CustomResource {
     public readonly ipAddresses!: pulumi.Output<string[] | undefined>;
     /**
      * The name of the algorithm for the key provided
-     * in `private_key_pem`.
+     * in `privateKeyPem`.
      */
     public readonly keyAlgorithm!: pulumi.Output<string>;
     /**
@@ -126,7 +126,7 @@ export interface CertRequestState {
     readonly ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of the algorithm for the key provided
-     * in `private_key_pem`.
+     * in `privateKeyPem`.
      */
     readonly keyAlgorithm?: pulumi.Input<string>;
     /**
@@ -154,7 +154,7 @@ export interface CertRequestArgs {
     readonly ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of the algorithm for the key provided
-     * in `private_key_pem`.
+     * in `privateKeyPem`.
      */
     readonly keyAlgorithm: pulumi.Input<string>;
     /**

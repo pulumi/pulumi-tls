@@ -63,7 +63,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
     public readonly isCaCertificate!: pulumi.Output<boolean | undefined>;
     /**
      * The name of the algorithm for the key provided
-     * in `private_key_pem`.
+     * in `privateKeyPem`.
      */
     public readonly keyAlgorithm!: pulumi.Output<string>;
     /**
@@ -73,7 +73,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
     /**
      * The subject for which a certificate is being requested.
      * This is a nested configuration block whose structure matches the
-     * corresponding block for `tls_cert_request`.
+     * corresponding block for `tls..CertRequest`.
      */
     public readonly subjects!: pulumi.Output<{ commonName?: string, country?: string, locality?: string, organization?: string, organizationalUnit?: string, postalCode?: string, province?: string, serialNumber?: string, streetAddresses?: string[] }[]>;
     /**
@@ -190,7 +190,7 @@ export interface SelfSignedCertState {
     readonly isCaCertificate?: pulumi.Input<boolean>;
     /**
      * The name of the algorithm for the key provided
-     * in `private_key_pem`.
+     * in `privateKeyPem`.
      */
     readonly keyAlgorithm?: pulumi.Input<string>;
     /**
@@ -200,7 +200,7 @@ export interface SelfSignedCertState {
     /**
      * The subject for which a certificate is being requested.
      * This is a nested configuration block whose structure matches the
-     * corresponding block for `tls_cert_request`.
+     * corresponding block for `tls..CertRequest`.
      */
     readonly subjects?: pulumi.Input<pulumi.Input<{ commonName?: pulumi.Input<string>, country?: pulumi.Input<string>, locality?: pulumi.Input<string>, organization?: pulumi.Input<string>, organizationalUnit?: pulumi.Input<string>, postalCode?: pulumi.Input<string>, province?: pulumi.Input<string>, serialNumber?: pulumi.Input<string>, streetAddresses?: pulumi.Input<pulumi.Input<string>[]> }>[]>;
     /**
@@ -249,7 +249,7 @@ export interface SelfSignedCertArgs {
     readonly isCaCertificate?: pulumi.Input<boolean>;
     /**
      * The name of the algorithm for the key provided
-     * in `private_key_pem`.
+     * in `privateKeyPem`.
      */
     readonly keyAlgorithm: pulumi.Input<string>;
     /**
@@ -259,7 +259,7 @@ export interface SelfSignedCertArgs {
     /**
      * The subject for which a certificate is being requested.
      * This is a nested configuration block whose structure matches the
-     * corresponding block for `tls_cert_request`.
+     * corresponding block for `tls..CertRequest`.
      */
     readonly subjects: pulumi.Input<pulumi.Input<{ commonName?: pulumi.Input<string>, country?: pulumi.Input<string>, locality?: pulumi.Input<string>, organization?: pulumi.Input<string>, organizationalUnit?: pulumi.Input<string>, postalCode?: pulumi.Input<string>, province?: pulumi.Input<string>, serialNumber?: pulumi.Input<string>, streetAddresses?: pulumi.Input<pulumi.Input<string>[]> }>[]>;
     /**

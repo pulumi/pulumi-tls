@@ -53,14 +53,18 @@ class GetPublicKeyResult:
         """
         id is the provider-assigned unique ID for this managed resource.
         """
-
+class AwaitableGetPublicKeyResult(GetPublicKeyResult):
     # pylint: disable=using-constant-test
     def __await__(self):
         if False:
             yield self
-        return self
-
-    __iter__ = __await__
+        return GetPublicKeyResult(
+            algorithm=self.algorithm,
+            private_key_pem=self.private_key_pem,
+            public_key_fingerprint_md5=self.public_key_fingerprint_md5,
+            public_key_openssh=self.public_key_openssh,
+            public_key_pem=self.public_key_pem,
+            id=self.id)
 
 def get_public_key(private_key_pem=None,opts=None):
     """
@@ -78,7 +82,7 @@ def get_public_key(private_key_pem=None,opts=None):
         opts.version = utilities.get_version()
     __ret__ = pulumi.runtime.invoke('tls:index/getPublicKey:getPublicKey', __args__, opts=opts).value
 
-    return GetPublicKeyResult(
+    return AwaitableGetPublicKeyResult(
         algorithm=__ret__.get('algorithm'),
         private_key_pem=__ret__.get('privateKeyPem'),
         public_key_fingerprint_md5=__ret__.get('publicKeyFingerprintMd5'),

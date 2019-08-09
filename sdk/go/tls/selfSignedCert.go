@@ -133,7 +133,7 @@ func (r *SelfSignedCert) IsCaCertificate() *pulumi.BoolOutput {
 }
 
 // The name of the algorithm for the key provided
-// in `private_key_pem`.
+// in `privateKeyPem`.
 func (r *SelfSignedCert) KeyAlgorithm() *pulumi.StringOutput {
 	return (*pulumi.StringOutput)(r.s.State["keyAlgorithm"])
 }
@@ -145,7 +145,7 @@ func (r *SelfSignedCert) PrivateKeyPem() *pulumi.StringOutput {
 
 // The subject for which a certificate is being requested.
 // This is a nested configuration block whose structure matches the
-// corresponding block for `tls_cert_request`.
+// corresponding block for `.CertRequest`.
 func (r *SelfSignedCert) Subjects() *pulumi.ArrayOutput {
 	return (*pulumi.ArrayOutput)(r.s.State["subjects"])
 }
@@ -186,13 +186,13 @@ type SelfSignedCertState struct {
 	// a certificate authority.
 	IsCaCertificate interface{}
 	// The name of the algorithm for the key provided
-	// in `private_key_pem`.
+	// in `privateKeyPem`.
 	KeyAlgorithm interface{}
 	// PEM-encoded private key that the certificate will belong to
 	PrivateKeyPem interface{}
 	// The subject for which a certificate is being requested.
 	// This is a nested configuration block whose structure matches the
-	// corresponding block for `tls_cert_request`.
+	// corresponding block for `.CertRequest`.
 	Subjects interface{}
 	// The time until which the certificate is invalid, as an
 	// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -221,13 +221,13 @@ type SelfSignedCertArgs struct {
 	// a certificate authority.
 	IsCaCertificate interface{}
 	// The name of the algorithm for the key provided
-	// in `private_key_pem`.
+	// in `privateKeyPem`.
 	KeyAlgorithm interface{}
 	// PEM-encoded private key that the certificate will belong to
 	PrivateKeyPem interface{}
 	// The subject for which a certificate is being requested.
 	// This is a nested configuration block whose structure matches the
-	// corresponding block for `tls_cert_request`.
+	// corresponding block for `.CertRequest`.
 	Subjects interface{}
 	// The number of hours after initial issuing that the
 	// certificate will become invalid.
