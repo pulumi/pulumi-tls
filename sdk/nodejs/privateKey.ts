@@ -53,11 +53,11 @@ export class PrivateKey extends pulumi.CustomResource {
      * The md5 hash of the public key data in
      * OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
      * selected private key format is compatible, as per the rules for
-     * `public_key_openssh`.
+     * `publicKeyOpenssh`.
      */
     public /*out*/ readonly publicKeyFingerprintMd5!: pulumi.Output<string>;
     /**
-     * The public key data in OpenSSH `authorized_keys`
+     * The public key data in OpenSSH `authorizedKeys`
      * format, if the selected private key format is compatible. All RSA keys
      * are supported, and ECDSA keys with curves "P256", "P384" and "P521"
      * are supported. This attribute is empty if an incompatible ECDSA curve
@@ -140,11 +140,11 @@ export interface PrivateKeyState {
      * The md5 hash of the public key data in
      * OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
      * selected private key format is compatible, as per the rules for
-     * `public_key_openssh`.
+     * `publicKeyOpenssh`.
      */
     readonly publicKeyFingerprintMd5?: pulumi.Input<string>;
     /**
-     * The public key data in OpenSSH `authorized_keys`
+     * The public key data in OpenSSH `authorizedKeys`
      * format, if the selected private key format is compatible. All RSA keys
      * are supported, and ECDSA keys with curves "P256", "P384" and "P521"
      * are supported. This attribute is empty if an incompatible ECDSA curve

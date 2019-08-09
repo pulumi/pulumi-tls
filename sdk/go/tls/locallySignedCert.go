@@ -111,7 +111,7 @@ func (r *LocallySignedCert) CaCertPem() *pulumi.StringOutput {
 }
 
 // The name of the algorithm for the key provided
-// in `ca_private_key_pem`.
+// in `caPrivateKeyPem`.
 func (r *LocallySignedCert) CaKeyAlgorithm() *pulumi.StringOutput {
 	return (*pulumi.StringOutput)(r.s.State["caKeyAlgorithm"])
 }
@@ -171,7 +171,7 @@ type LocallySignedCertState struct {
 	// PEM-encoded certificate data for the CA.
 	CaCertPem interface{}
 	// The name of the algorithm for the key provided
-	// in `ca_private_key_pem`.
+	// in `caPrivateKeyPem`.
 	CaKeyAlgorithm interface{}
 	// PEM-encoded private key data for the CA.
 	// This can be read from a separate file using the ``file`` interpolation
@@ -206,7 +206,7 @@ type LocallySignedCertArgs struct {
 	// PEM-encoded certificate data for the CA.
 	CaCertPem interface{}
 	// The name of the algorithm for the key provided
-	// in `ca_private_key_pem`.
+	// in `caPrivateKeyPem`.
 	CaKeyAlgorithm interface{}
 	// PEM-encoded private key data for the CA.
 	// This can be read from a separate file using the ``file`` interpolation

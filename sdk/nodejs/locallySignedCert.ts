@@ -45,7 +45,7 @@ export class LocallySignedCert extends pulumi.CustomResource {
     public readonly caCertPem!: pulumi.Output<string>;
     /**
      * The name of the algorithm for the key provided
-     * in `ca_private_key_pem`.
+     * in `caPrivateKeyPem`.
      */
     public readonly caKeyAlgorithm!: pulumi.Output<string>;
     /**
@@ -169,7 +169,7 @@ export interface LocallySignedCertState {
     readonly caCertPem?: pulumi.Input<string>;
     /**
      * The name of the algorithm for the key provided
-     * in `ca_private_key_pem`.
+     * in `caPrivateKeyPem`.
      */
     readonly caKeyAlgorithm?: pulumi.Input<string>;
     /**
@@ -228,7 +228,7 @@ export interface LocallySignedCertArgs {
     readonly caCertPem: pulumi.Input<string>;
     /**
      * The name of the algorithm for the key provided
-     * in `ca_private_key_pem`.
+     * in `caPrivateKeyPem`.
      */
     readonly caKeyAlgorithm: pulumi.Input<string>;
     /**
