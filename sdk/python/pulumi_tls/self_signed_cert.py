@@ -6,6 +6,7 @@ import json
 import warnings
 import pulumi
 import pulumi.runtime
+from typing import Union
 from . import utilities, tables
 
 class SelfSignedCert(pulumi.CustomResource):
@@ -44,6 +45,16 @@ class SelfSignedCert(pulumi.CustomResource):
     The subject for which a certificate is being requested.
     This is a nested configuration block whose structure matches the
     corresponding block for `.CertRequest`.
+    
+      * `commonName` (`str`)
+      * `country` (`str`)
+      * `locality` (`str`)
+      * `organization` (`str`)
+      * `organizationalUnit` (`str`)
+      * `postalCode` (`str`)
+      * `province` (`str`)
+      * `serialNumber` (`str`)
+      * `streetAddresses` (`list`)
     """
     validity_end_time: pulumi.Output[str]
     """
@@ -80,6 +91,18 @@ class SelfSignedCert(pulumi.CustomResource):
                corresponding block for `.CertRequest`.
         :param pulumi.Input[float] validity_period_hours: The number of hours after initial issuing that the
                certificate will become invalid.
+        
+        The **subjects** object supports the following:
+        
+          * `commonName` (`pulumi.Input[str]`)
+          * `country` (`pulumi.Input[str]`)
+          * `locality` (`pulumi.Input[str]`)
+          * `organization` (`pulumi.Input[str]`)
+          * `organizationalUnit` (`pulumi.Input[str]`)
+          * `postalCode` (`pulumi.Input[str]`)
+          * `province` (`pulumi.Input[str]`)
+          * `serialNumber` (`pulumi.Input[str]`)
+          * `streetAddresses` (`pulumi.Input[list]`)
 
         > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/r/self_signed_cert.html.markdown.
         """
@@ -133,6 +156,7 @@ class SelfSignedCert(pulumi.CustomResource):
         """
         Get an existing SelfSignedCert resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
+        
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -155,10 +179,22 @@ class SelfSignedCert(pulumi.CustomResource):
                certificate will become invalid.
         :param pulumi.Input[str] validity_start_time: The time after which the certificate is valid, as an
                [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+        
+        The **subjects** object supports the following:
+        
+          * `commonName` (`pulumi.Input[str]`)
+          * `country` (`pulumi.Input[str]`)
+          * `locality` (`pulumi.Input[str]`)
+          * `organization` (`pulumi.Input[str]`)
+          * `organizationalUnit` (`pulumi.Input[str]`)
+          * `postalCode` (`pulumi.Input[str]`)
+          * `province` (`pulumi.Input[str]`)
+          * `serialNumber` (`pulumi.Input[str]`)
+          * `streetAddresses` (`pulumi.Input[list]`)
 
         > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/r/self_signed_cert.html.markdown.
         """
-        opts = pulumi.ResourceOptions(id=id) if opts is None else opts.merge(pulumi.ResourceOptions(id=id))
+        opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
         __props__["allowed_uses"] = allowed_uses

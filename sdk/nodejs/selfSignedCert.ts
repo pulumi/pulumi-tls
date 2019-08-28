@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -75,7 +77,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
      * This is a nested configuration block whose structure matches the
      * corresponding block for `tls..CertRequest`.
      */
-    public readonly subjects!: pulumi.Output<{ commonName?: string, country?: string, locality?: string, organization?: string, organizationalUnit?: string, postalCode?: string, province?: string, serialNumber?: string, streetAddresses?: string[] }[]>;
+    public readonly subjects!: pulumi.Output<outputs.SelfSignedCertSubject[]>;
     /**
      * The time until which the certificate is invalid, as an
      * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -202,7 +204,7 @@ export interface SelfSignedCertState {
      * This is a nested configuration block whose structure matches the
      * corresponding block for `tls..CertRequest`.
      */
-    readonly subjects?: pulumi.Input<pulumi.Input<{ commonName?: pulumi.Input<string>, country?: pulumi.Input<string>, locality?: pulumi.Input<string>, organization?: pulumi.Input<string>, organizationalUnit?: pulumi.Input<string>, postalCode?: pulumi.Input<string>, province?: pulumi.Input<string>, serialNumber?: pulumi.Input<string>, streetAddresses?: pulumi.Input<pulumi.Input<string>[]> }>[]>;
+    readonly subjects?: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
     /**
      * The time until which the certificate is invalid, as an
      * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -261,7 +263,7 @@ export interface SelfSignedCertArgs {
      * This is a nested configuration block whose structure matches the
      * corresponding block for `tls..CertRequest`.
      */
-    readonly subjects: pulumi.Input<pulumi.Input<{ commonName?: pulumi.Input<string>, country?: pulumi.Input<string>, locality?: pulumi.Input<string>, organization?: pulumi.Input<string>, organizationalUnit?: pulumi.Input<string>, postalCode?: pulumi.Input<string>, province?: pulumi.Input<string>, serialNumber?: pulumi.Input<string>, streetAddresses?: pulumi.Input<pulumi.Input<string>[]> }>[]>;
+    readonly subjects: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
     /**
      * The number of hours after initial issuing that the
      * certificate will become invalid.

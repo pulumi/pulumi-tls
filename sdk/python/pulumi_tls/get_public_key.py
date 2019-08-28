@@ -6,6 +6,7 @@ import json
 import warnings
 import pulumi
 import pulumi.runtime
+from typing import Union
 from . import utilities, tables
 
 class GetPublicKeyResult:
@@ -70,6 +71,8 @@ def get_public_key(private_key_pem=None,opts=None):
     """
     Use this data source to get the public key from a PEM-encoded private key for use in other
     resources.
+    
+    :param str private_key_pem: The private key to use. Currently-supported key types are "RSA" or "ECDSA".
 
     > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.markdown.
     """
@@ -77,7 +80,7 @@ def get_public_key(private_key_pem=None,opts=None):
 
     __args__['privateKeyPem'] = private_key_pem
     if opts is None:
-        opts = pulumi.ResourceOptions()
+        opts = pulumi.InvokeOptions()
     if opts.version is None:
         opts.version = utilities.get_version()
     __ret__ = pulumi.runtime.invoke('tls:index/getPublicKey:getPublicKey', __args__, opts=opts).value
