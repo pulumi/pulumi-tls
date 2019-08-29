@@ -6,6 +6,7 @@ import json
 import warnings
 import pulumi
 import pulumi.runtime
+from typing import Union
 from . import utilities, tables
 
 class CertRequest(pulumi.CustomResource):
@@ -31,6 +32,16 @@ class CertRequest(pulumi.CustomResource):
     """
     The subject for which a certificate is being requested. This is
     a nested configuration block whose structure is described below.
+    
+      * `commonName` (`str`)
+      * `country` (`str`)
+      * `locality` (`str`)
+      * `organization` (`str`)
+      * `organizationalUnit` (`str`)
+      * `postalCode` (`str`)
+      * `province` (`str`)
+      * `serialNumber` (`str`)
+      * `streetAddresses` (`list`)
     """
     def __init__(__self__, resource_name, opts=None, dns_names=None, ip_addresses=None, key_algorithm=None, private_key_pem=None, subjects=None, __props__=None, __name__=None, __opts__=None):
         """
@@ -44,6 +55,18 @@ class CertRequest(pulumi.CustomResource):
                in `private_key_pem`.
         :param pulumi.Input[list] subjects: The subject for which a certificate is being requested. This is
                a nested configuration block whose structure is described below.
+        
+        The **subjects** object supports the following:
+        
+          * `commonName` (`pulumi.Input[str]`)
+          * `country` (`pulumi.Input[str]`)
+          * `locality` (`pulumi.Input[str]`)
+          * `organization` (`pulumi.Input[str]`)
+          * `organizationalUnit` (`pulumi.Input[str]`)
+          * `postalCode` (`pulumi.Input[str]`)
+          * `province` (`pulumi.Input[str]`)
+          * `serialNumber` (`pulumi.Input[str]`)
+          * `streetAddresses` (`pulumi.Input[list]`)
 
         > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/r/cert_request.html.markdown.
         """
@@ -87,6 +110,7 @@ class CertRequest(pulumi.CustomResource):
         """
         Get an existing CertRequest resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
+        
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -97,10 +121,22 @@ class CertRequest(pulumi.CustomResource):
                in `private_key_pem`.
         :param pulumi.Input[list] subjects: The subject for which a certificate is being requested. This is
                a nested configuration block whose structure is described below.
+        
+        The **subjects** object supports the following:
+        
+          * `commonName` (`pulumi.Input[str]`)
+          * `country` (`pulumi.Input[str]`)
+          * `locality` (`pulumi.Input[str]`)
+          * `organization` (`pulumi.Input[str]`)
+          * `organizationalUnit` (`pulumi.Input[str]`)
+          * `postalCode` (`pulumi.Input[str]`)
+          * `province` (`pulumi.Input[str]`)
+          * `serialNumber` (`pulumi.Input[str]`)
+          * `streetAddresses` (`pulumi.Input[list]`)
 
         > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/r/cert_request.html.markdown.
         """
-        opts = pulumi.ResourceOptions(id=id) if opts is None else opts.merge(pulumi.ResourceOptions(id=id))
+        opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
         __props__["cert_request_pem"] = cert_request_pem

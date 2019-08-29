@@ -20,6 +20,9 @@
         "privateKey.ts",
         "provider.ts",
         "selfSignedCert.ts",
+        "types/index.ts",
+        "types/input.ts",
+        "types/output.ts",
         "utilities.ts"
     ]
 }

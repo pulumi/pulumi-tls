@@ -8,3 +8,7 @@ export * from "./locallySignedCert";
 export * from "./privateKey";
 export * from "./provider";
 export * from "./selfSignedCert";
+
+// Export sub-modules:
+import * as types from "./types/index";
+export {types};

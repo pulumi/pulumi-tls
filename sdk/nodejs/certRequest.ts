@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -59,7 +61,7 @@ export class CertRequest extends pulumi.CustomResource {
      * The subject for which a certificate is being requested. This is
      * a nested configuration block whose structure is described below.
      */
-    public readonly subjects!: pulumi.Output<{ commonName?: string, country?: string, locality?: string, organization?: string, organizationalUnit?: string, postalCode?: string, province?: string, serialNumber?: string, streetAddresses?: string[] }[]>;
+    public readonly subjects!: pulumi.Output<outputs.CertRequestSubject[]>;
 
     /**
      * Create a CertRequest resource with the given unique name, arguments, and options.
@@ -137,7 +139,7 @@ export interface CertRequestState {
      * The subject for which a certificate is being requested. This is
      * a nested configuration block whose structure is described below.
      */
-    readonly subjects?: pulumi.Input<pulumi.Input<{ commonName?: pulumi.Input<string>, country?: pulumi.Input<string>, locality?: pulumi.Input<string>, organization?: pulumi.Input<string>, organizationalUnit?: pulumi.Input<string>, postalCode?: pulumi.Input<string>, province?: pulumi.Input<string>, serialNumber?: pulumi.Input<string>, streetAddresses?: pulumi.Input<pulumi.Input<string>[]> }>[]>;
+    readonly subjects?: pulumi.Input<pulumi.Input<inputs.CertRequestSubject>[]>;
 }
 
 /**
@@ -165,5 +167,5 @@ export interface CertRequestArgs {
      * The subject for which a certificate is being requested. This is
      * a nested configuration block whose structure is described below.
      */
-    readonly subjects: pulumi.Input<pulumi.Input<{ commonName?: pulumi.Input<string>, country?: pulumi.Input<string>, locality?: pulumi.Input<string>, organization?: pulumi.Input<string>, organizationalUnit?: pulumi.Input<string>, postalCode?: pulumi.Input<string>, province?: pulumi.Input<string>, serialNumber?: pulumi.Input<string>, streetAddresses?: pulumi.Input<pulumi.Input<string>[]> }>[]>;
+    readonly subjects: pulumi.Input<pulumi.Input<inputs.CertRequestSubject>[]>;
 }
