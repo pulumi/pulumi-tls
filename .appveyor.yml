@@ -1,0 +1,47 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+configuration: Release
+platform: x64
+clone_folder: '%USERPROFILE%\go\src\github.com\pulumi\pulumi-tls'
+branches:
+    only:
+        - master
+        - /release\/.*/
+        - /v\d*\.\d*\.\d*/
+init:
+- ps: Install-Product node 8.10 x64
+environment:
+  PULUMI_API: https://api.pulumi-staging.io
+  PULUMI_ACCESS_TOKEN:
+    secure: +c7s1GgUunQl8QlLZs7zafFv6lJbZp40fx1kJl7v+n0qa8oq3ssBlVEl9gfoMBgH
+  AWS_ACCESS_KEY_ID:
+    secure: eB7Gfl1GHhz60tH2EEASI7IFsWHDd5SV+kponXwaCSo=
+  AWS_SECRET_ACCESS_KEY:
+    secure: T19RJk7Uv3trAChRRDB82OAUDI8k2q9PaSetU7yDFu4aC+MshdwAhTTN/TaPkwl/
+install:
+- rmdir C:\go /s /q
+- appveyor DownloadFile https://dl.google.com/go/go1.12.9.windows-amd64.zip
+- 7z x go1.12.9.windows-amd64.zip -y -oC:\ > NUL
+- cmd: >-
+    set GOPATH=%USERPROFILE%\go
+
+    set PATH=C:\go\bin;%PATH%;%GOPATH%\bin
+
+    set PulumiRoot=C:\Pulumi
+
+    set PATH=%PulumiRoot%\bin;%PATH%
+
+    go version
+
+    git clone https://github.com/pulumi/scripts.git "%USERPROFILE%\go\src\github.com\pulumi\scripts"
+- ps: >-
+    New-Item -Type Directory "$env:USERPROFILE\go\bin"
+
+    (New-Object System.Net.WebClient).DownloadString('https://get.pulumi.com/install.ps1')
+
+    SET "PATH=%PATH%;%USERPROFILE%\.pulumi\bin"
+build_script:
+- cmd: >-
+    GO111MODULE=on go mod vendor
+    go test -v -count=1 -cover -timeout 2h -parallel 4 ./examples
+test: off
