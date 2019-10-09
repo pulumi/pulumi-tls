@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Upgrade to v2.1.1 of the TLS Terraform Provider
+_(none)_
 
 ---
+
+## 1.0.0 (2019-10-09)
+* Upgrade to v2.1.1 of the TLS Terraform Provider
 
 ## 0.18.5 (2019-09-05)
 * Upgrade to Pulumi v1.0.0
