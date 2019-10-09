@@ -62,6 +62,10 @@ export class CertRequest extends pulumi.CustomResource {
      * a nested configuration block whose structure is described below.
      */
     public readonly subjects!: pulumi.Output<outputs.CertRequestSubject[]>;
+    /**
+     * List of URIs for which a certificate is being requested.
+     */
+    public readonly uris!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a CertRequest resource with the given unique name, arguments, and options.
@@ -81,6 +85,7 @@ export class CertRequest extends pulumi.CustomResource {
             inputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
             inputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
             inputs["subjects"] = state ? state.subjects : undefined;
+            inputs["uris"] = state ? state.uris : undefined;
         } else {
             const args = argsOrState as CertRequestArgs | undefined;
             if (!args || args.keyAlgorithm === undefined) {
@@ -97,6 +102,7 @@ export class CertRequest extends pulumi.CustomResource {
             inputs["keyAlgorithm"] = args ? args.keyAlgorithm : undefined;
             inputs["privateKeyPem"] = args ? args.privateKeyPem : undefined;
             inputs["subjects"] = args ? args.subjects : undefined;
+            inputs["uris"] = args ? args.uris : undefined;
             inputs["certRequestPem"] = undefined /*out*/;
         }
         if (!opts) {
@@ -140,6 +146,10 @@ export interface CertRequestState {
      * a nested configuration block whose structure is described below.
      */
     readonly subjects?: pulumi.Input<pulumi.Input<inputs.CertRequestSubject>[]>;
+    /**
+     * List of URIs for which a certificate is being requested.
+     */
+    readonly uris?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -168,4 +178,8 @@ export interface CertRequestArgs {
      * a nested configuration block whose structure is described below.
      */
     readonly subjects: pulumi.Input<pulumi.Input<inputs.CertRequestSubject>[]>;
+    /**
+     * List of URIs for which a certificate is being requested.
+     */
+    readonly uris?: pulumi.Input<pulumi.Input<string>[]>;
 }

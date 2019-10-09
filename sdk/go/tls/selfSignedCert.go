@@ -40,7 +40,9 @@ func NewSelfSignedCert(ctx *pulumi.Context,
 		inputs["isCaCertificate"] = nil
 		inputs["keyAlgorithm"] = nil
 		inputs["privateKeyPem"] = nil
+		inputs["setSubjectKeyId"] = nil
 		inputs["subjects"] = nil
+		inputs["uris"] = nil
 		inputs["validityPeriodHours"] = nil
 	} else {
 		inputs["allowedUses"] = args.AllowedUses
@@ -50,10 +52,13 @@ func NewSelfSignedCert(ctx *pulumi.Context,
 		inputs["isCaCertificate"] = args.IsCaCertificate
 		inputs["keyAlgorithm"] = args.KeyAlgorithm
 		inputs["privateKeyPem"] = args.PrivateKeyPem
+		inputs["setSubjectKeyId"] = args.SetSubjectKeyId
 		inputs["subjects"] = args.Subjects
+		inputs["uris"] = args.Uris
 		inputs["validityPeriodHours"] = args.ValidityPeriodHours
 	}
 	inputs["certPem"] = nil
+	inputs["readyForRenewal"] = nil
 	inputs["validityEndTime"] = nil
 	inputs["validityStartTime"] = nil
 	s, err := ctx.RegisterResource("tls:index/selfSignedCert:SelfSignedCert", name, true, inputs, opts...)
@@ -77,7 +82,10 @@ func GetSelfSignedCert(ctx *pulumi.Context,
 		inputs["isCaCertificate"] = state.IsCaCertificate
 		inputs["keyAlgorithm"] = state.KeyAlgorithm
 		inputs["privateKeyPem"] = state.PrivateKeyPem
+		inputs["readyForRenewal"] = state.ReadyForRenewal
+		inputs["setSubjectKeyId"] = state.SetSubjectKeyId
 		inputs["subjects"] = state.Subjects
+		inputs["uris"] = state.Uris
 		inputs["validityEndTime"] = state.ValidityEndTime
 		inputs["validityPeriodHours"] = state.ValidityPeriodHours
 		inputs["validityStartTime"] = state.ValidityStartTime
@@ -143,11 +151,27 @@ func (r *SelfSignedCert) PrivateKeyPem() *pulumi.StringOutput {
 	return (*pulumi.StringOutput)(r.s.State["privateKeyPem"])
 }
 
+func (r *SelfSignedCert) ReadyForRenewal() *pulumi.BoolOutput {
+	return (*pulumi.BoolOutput)(r.s.State["readyForRenewal"])
+}
+
+// If `true`, the certificate will include
+// the subject key identifier. Defaults to `false`, in which case the subject
+// key identifier is not set at all.
+func (r *SelfSignedCert) SetSubjectKeyId() *pulumi.BoolOutput {
+	return (*pulumi.BoolOutput)(r.s.State["setSubjectKeyId"])
+}
+
 // The subject for which a certificate is being requested.
 // This is a nested configuration block whose structure matches the
 // corresponding block for `.CertRequest`.
 func (r *SelfSignedCert) Subjects() *pulumi.ArrayOutput {
 	return (*pulumi.ArrayOutput)(r.s.State["subjects"])
+}
+
+// List of URIs for which a certificate is being requested.
+func (r *SelfSignedCert) Uris() *pulumi.ArrayOutput {
+	return (*pulumi.ArrayOutput)(r.s.State["uris"])
 }
 
 // The time until which the certificate is invalid, as an
@@ -190,10 +214,17 @@ type SelfSignedCertState struct {
 	KeyAlgorithm interface{}
 	// PEM-encoded private key that the certificate will belong to
 	PrivateKeyPem interface{}
+	ReadyForRenewal interface{}
+	// If `true`, the certificate will include
+	// the subject key identifier. Defaults to `false`, in which case the subject
+	// key identifier is not set at all.
+	SetSubjectKeyId interface{}
 	// The subject for which a certificate is being requested.
 	// This is a nested configuration block whose structure matches the
 	// corresponding block for `.CertRequest`.
 	Subjects interface{}
+	// List of URIs for which a certificate is being requested.
+	Uris interface{}
 	// The time until which the certificate is invalid, as an
 	// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
 	ValidityEndTime interface{}
@@ -225,10 +256,16 @@ type SelfSignedCertArgs struct {
 	KeyAlgorithm interface{}
 	// PEM-encoded private key that the certificate will belong to
 	PrivateKeyPem interface{}
+	// If `true`, the certificate will include
+	// the subject key identifier. Defaults to `false`, in which case the subject
+	// key identifier is not set at all.
+	SetSubjectKeyId interface{}
 	// The subject for which a certificate is being requested.
 	// This is a nested configuration block whose structure matches the
 	// corresponding block for `.CertRequest`.
 	Subjects interface{}
+	// List of URIs for which a certificate is being requested.
+	Uris interface{}
 	// The number of hours after initial issuing that the
 	// certificate will become invalid.
 	ValidityPeriodHours interface{}

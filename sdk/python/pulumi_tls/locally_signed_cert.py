@@ -45,6 +45,13 @@ class LocallySignedCert(pulumi.CustomResource):
     generated certificate. Defaults to `false`, meaning that the certificate does not represent
     a certificate authority.
     """
+    ready_for_renewal: pulumi.Output[bool]
+    set_subject_key_id: pulumi.Output[bool]
+    """
+    If `true`, the certificate will include
+    the subject key identifier. Defaults to `false`, in which case the subject
+    key identifier is not set at all.
+    """
     validity_end_time: pulumi.Output[str]
     """
     The time until which the certificate is invalid, as an
@@ -60,7 +67,7 @@ class LocallySignedCert(pulumi.CustomResource):
     The time after which the certificate is valid, as an
     [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
     """
-    def __init__(__self__, resource_name, opts=None, allowed_uses=None, ca_cert_pem=None, ca_key_algorithm=None, ca_private_key_pem=None, cert_request_pem=None, early_renewal_hours=None, is_ca_certificate=None, validity_period_hours=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, allowed_uses=None, ca_cert_pem=None, ca_key_algorithm=None, ca_private_key_pem=None, cert_request_pem=None, early_renewal_hours=None, is_ca_certificate=None, set_subject_key_id=None, validity_period_hours=None, __props__=None, __name__=None, __opts__=None):
         """
         Create a LocallySignedCert resource with the given unique name, props, and options.
         
@@ -78,6 +85,9 @@ class LocallySignedCert(pulumi.CustomResource):
         :param pulumi.Input[bool] is_ca_certificate: Boolean controlling whether the CA flag will be set in the
                generated certificate. Defaults to `false`, meaning that the certificate does not represent
                a certificate authority.
+        :param pulumi.Input[bool] set_subject_key_id: If `true`, the certificate will include
+               the subject key identifier. Defaults to `false`, in which case the subject
+               key identifier is not set at all.
         :param pulumi.Input[float] validity_period_hours: The number of hours after initial issuing that the
                certificate will become invalid.
 
@@ -117,10 +127,12 @@ class LocallySignedCert(pulumi.CustomResource):
             __props__['cert_request_pem'] = cert_request_pem
             __props__['early_renewal_hours'] = early_renewal_hours
             __props__['is_ca_certificate'] = is_ca_certificate
+            __props__['set_subject_key_id'] = set_subject_key_id
             if validity_period_hours is None:
                 raise TypeError("Missing required property 'validity_period_hours'")
             __props__['validity_period_hours'] = validity_period_hours
             __props__['cert_pem'] = None
+            __props__['ready_for_renewal'] = None
             __props__['validity_end_time'] = None
             __props__['validity_start_time'] = None
         super(LocallySignedCert, __self__).__init__(
@@ -130,7 +142,7 @@ class LocallySignedCert(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, allowed_uses=None, ca_cert_pem=None, ca_key_algorithm=None, ca_private_key_pem=None, cert_pem=None, cert_request_pem=None, early_renewal_hours=None, is_ca_certificate=None, validity_end_time=None, validity_period_hours=None, validity_start_time=None):
+    def get(resource_name, id, opts=None, allowed_uses=None, ca_cert_pem=None, ca_key_algorithm=None, ca_private_key_pem=None, cert_pem=None, cert_request_pem=None, early_renewal_hours=None, is_ca_certificate=None, ready_for_renewal=None, set_subject_key_id=None, validity_end_time=None, validity_period_hours=None, validity_start_time=None):
         """
         Get an existing LocallySignedCert resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -151,6 +163,9 @@ class LocallySignedCert(pulumi.CustomResource):
         :param pulumi.Input[bool] is_ca_certificate: Boolean controlling whether the CA flag will be set in the
                generated certificate. Defaults to `false`, meaning that the certificate does not represent
                a certificate authority.
+        :param pulumi.Input[bool] set_subject_key_id: If `true`, the certificate will include
+               the subject key identifier. Defaults to `false`, in which case the subject
+               key identifier is not set at all.
         :param pulumi.Input[str] validity_end_time: The time until which the certificate is invalid, as an
                [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         :param pulumi.Input[float] validity_period_hours: The number of hours after initial issuing that the
@@ -171,6 +186,8 @@ class LocallySignedCert(pulumi.CustomResource):
         __props__["cert_request_pem"] = cert_request_pem
         __props__["early_renewal_hours"] = early_renewal_hours
         __props__["is_ca_certificate"] = is_ca_certificate
+        __props__["ready_for_renewal"] = ready_for_renewal
+        __props__["set_subject_key_id"] = set_subject_key_id
         __props__["validity_end_time"] = validity_end_time
         __props__["validity_period_hours"] = validity_period_hours
         __props__["validity_start_time"] = validity_start_time

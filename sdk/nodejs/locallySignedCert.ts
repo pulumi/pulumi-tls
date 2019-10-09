@@ -74,6 +74,13 @@ export class LocallySignedCert extends pulumi.CustomResource {
      * a certificate authority.
      */
     public readonly isCaCertificate!: pulumi.Output<boolean | undefined>;
+    public /*out*/ readonly readyForRenewal!: pulumi.Output<boolean>;
+    /**
+     * If `true`, the certificate will include
+     * the subject key identifier. Defaults to `false`, in which case the subject
+     * key identifier is not set at all.
+     */
+    public readonly setSubjectKeyId!: pulumi.Output<boolean | undefined>;
     /**
      * The time until which the certificate is invalid, as an
      * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -110,6 +117,8 @@ export class LocallySignedCert extends pulumi.CustomResource {
             inputs["certRequestPem"] = state ? state.certRequestPem : undefined;
             inputs["earlyRenewalHours"] = state ? state.earlyRenewalHours : undefined;
             inputs["isCaCertificate"] = state ? state.isCaCertificate : undefined;
+            inputs["readyForRenewal"] = state ? state.readyForRenewal : undefined;
+            inputs["setSubjectKeyId"] = state ? state.setSubjectKeyId : undefined;
             inputs["validityEndTime"] = state ? state.validityEndTime : undefined;
             inputs["validityPeriodHours"] = state ? state.validityPeriodHours : undefined;
             inputs["validityStartTime"] = state ? state.validityStartTime : undefined;
@@ -140,8 +149,10 @@ export class LocallySignedCert extends pulumi.CustomResource {
             inputs["certRequestPem"] = args ? args.certRequestPem : undefined;
             inputs["earlyRenewalHours"] = args ? args.earlyRenewalHours : undefined;
             inputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
+            inputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
             inputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
             inputs["certPem"] = undefined /*out*/;
+            inputs["readyForRenewal"] = undefined /*out*/;
             inputs["validityEndTime"] = undefined /*out*/;
             inputs["validityStartTime"] = undefined /*out*/;
         }
@@ -198,6 +209,13 @@ export interface LocallySignedCertState {
      * a certificate authority.
      */
     readonly isCaCertificate?: pulumi.Input<boolean>;
+    readonly readyForRenewal?: pulumi.Input<boolean>;
+    /**
+     * If `true`, the certificate will include
+     * the subject key identifier. Defaults to `false`, in which case the subject
+     * key identifier is not set at all.
+     */
+    readonly setSubjectKeyId?: pulumi.Input<boolean>;
     /**
      * The time until which the certificate is invalid, as an
      * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -253,6 +271,12 @@ export interface LocallySignedCertArgs {
      * a certificate authority.
      */
     readonly isCaCertificate?: pulumi.Input<boolean>;
+    /**
+     * If `true`, the certificate will include
+     * the subject key identifier. Defaults to `false`, in which case the subject
+     * key identifier is not set at all.
+     */
+    readonly setSubjectKeyId?: pulumi.Input<boolean>;
     /**
      * The number of hours after initial issuing that the
      * certificate will become invalid.

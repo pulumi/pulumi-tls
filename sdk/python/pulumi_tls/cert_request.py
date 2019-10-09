@@ -43,7 +43,11 @@ class CertRequest(pulumi.CustomResource):
       * `serialNumber` (`str`)
       * `streetAddresses` (`list`)
     """
-    def __init__(__self__, resource_name, opts=None, dns_names=None, ip_addresses=None, key_algorithm=None, private_key_pem=None, subjects=None, __props__=None, __name__=None, __opts__=None):
+    uris: pulumi.Output[list]
+    """
+    List of URIs for which a certificate is being requested.
+    """
+    def __init__(__self__, resource_name, opts=None, dns_names=None, ip_addresses=None, key_algorithm=None, private_key_pem=None, subjects=None, uris=None, __props__=None, __name__=None, __opts__=None):
         """
         Create a CertRequest resource with the given unique name, props, and options.
         
@@ -55,6 +59,7 @@ class CertRequest(pulumi.CustomResource):
                in `private_key_pem`.
         :param pulumi.Input[list] subjects: The subject for which a certificate is being requested. This is
                a nested configuration block whose structure is described below.
+        :param pulumi.Input[list] uris: List of URIs for which a certificate is being requested.
         
         The **subjects** object supports the following:
         
@@ -98,6 +103,7 @@ class CertRequest(pulumi.CustomResource):
             if subjects is None:
                 raise TypeError("Missing required property 'subjects'")
             __props__['subjects'] = subjects
+            __props__['uris'] = uris
             __props__['cert_request_pem'] = None
         super(CertRequest, __self__).__init__(
             'tls:index/certRequest:CertRequest',
@@ -106,7 +112,7 @@ class CertRequest(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, cert_request_pem=None, dns_names=None, ip_addresses=None, key_algorithm=None, private_key_pem=None, subjects=None):
+    def get(resource_name, id, opts=None, cert_request_pem=None, dns_names=None, ip_addresses=None, key_algorithm=None, private_key_pem=None, subjects=None, uris=None):
         """
         Get an existing CertRequest resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -121,6 +127,7 @@ class CertRequest(pulumi.CustomResource):
                in `private_key_pem`.
         :param pulumi.Input[list] subjects: The subject for which a certificate is being requested. This is
                a nested configuration block whose structure is described below.
+        :param pulumi.Input[list] uris: List of URIs for which a certificate is being requested.
         
         The **subjects** object supports the following:
         
@@ -145,6 +152,7 @@ class CertRequest(pulumi.CustomResource):
         __props__["key_algorithm"] = key_algorithm
         __props__["private_key_pem"] = private_key_pem
         __props__["subjects"] = subjects
+        __props__["uris"] = uris
         return CertRequest(resource_name, opts=opts, __props__=__props__)
     def translate_output_property(self, prop):
         return tables._CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop

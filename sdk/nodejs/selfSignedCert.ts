@@ -72,12 +72,23 @@ export class SelfSignedCert extends pulumi.CustomResource {
      * PEM-encoded private key that the certificate will belong to
      */
     public readonly privateKeyPem!: pulumi.Output<string>;
+    public /*out*/ readonly readyForRenewal!: pulumi.Output<boolean>;
+    /**
+     * If `true`, the certificate will include
+     * the subject key identifier. Defaults to `false`, in which case the subject
+     * key identifier is not set at all.
+     */
+    public readonly setSubjectKeyId!: pulumi.Output<boolean | undefined>;
     /**
      * The subject for which a certificate is being requested.
      * This is a nested configuration block whose structure matches the
      * corresponding block for `tls..CertRequest`.
      */
     public readonly subjects!: pulumi.Output<outputs.SelfSignedCertSubject[]>;
+    /**
+     * List of URIs for which a certificate is being requested.
+     */
+    public readonly uris!: pulumi.Output<string[] | undefined>;
     /**
      * The time until which the certificate is invalid, as an
      * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -114,7 +125,10 @@ export class SelfSignedCert extends pulumi.CustomResource {
             inputs["isCaCertificate"] = state ? state.isCaCertificate : undefined;
             inputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
             inputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
+            inputs["readyForRenewal"] = state ? state.readyForRenewal : undefined;
+            inputs["setSubjectKeyId"] = state ? state.setSubjectKeyId : undefined;
             inputs["subjects"] = state ? state.subjects : undefined;
+            inputs["uris"] = state ? state.uris : undefined;
             inputs["validityEndTime"] = state ? state.validityEndTime : undefined;
             inputs["validityPeriodHours"] = state ? state.validityPeriodHours : undefined;
             inputs["validityStartTime"] = state ? state.validityStartTime : undefined;
@@ -142,9 +156,12 @@ export class SelfSignedCert extends pulumi.CustomResource {
             inputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
             inputs["keyAlgorithm"] = args ? args.keyAlgorithm : undefined;
             inputs["privateKeyPem"] = args ? args.privateKeyPem : undefined;
+            inputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
             inputs["subjects"] = args ? args.subjects : undefined;
+            inputs["uris"] = args ? args.uris : undefined;
             inputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
             inputs["certPem"] = undefined /*out*/;
+            inputs["readyForRenewal"] = undefined /*out*/;
             inputs["validityEndTime"] = undefined /*out*/;
             inputs["validityStartTime"] = undefined /*out*/;
         }
@@ -199,12 +216,23 @@ export interface SelfSignedCertState {
      * PEM-encoded private key that the certificate will belong to
      */
     readonly privateKeyPem?: pulumi.Input<string>;
+    readonly readyForRenewal?: pulumi.Input<boolean>;
+    /**
+     * If `true`, the certificate will include
+     * the subject key identifier. Defaults to `false`, in which case the subject
+     * key identifier is not set at all.
+     */
+    readonly setSubjectKeyId?: pulumi.Input<boolean>;
     /**
      * The subject for which a certificate is being requested.
      * This is a nested configuration block whose structure matches the
      * corresponding block for `tls..CertRequest`.
      */
     readonly subjects?: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
+    /**
+     * List of URIs for which a certificate is being requested.
+     */
+    readonly uris?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The time until which the certificate is invalid, as an
      * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -259,11 +287,21 @@ export interface SelfSignedCertArgs {
      */
     readonly privateKeyPem: pulumi.Input<string>;
     /**
+     * If `true`, the certificate will include
+     * the subject key identifier. Defaults to `false`, in which case the subject
+     * key identifier is not set at all.
+     */
+    readonly setSubjectKeyId?: pulumi.Input<boolean>;
+    /**
      * The subject for which a certificate is being requested.
      * This is a nested configuration block whose structure matches the
      * corresponding block for `tls..CertRequest`.
      */
     readonly subjects: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
+    /**
+     * List of URIs for which a certificate is being requested.
+     */
+    readonly uris?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The number of hours after initial issuing that the
      * certificate will become invalid.

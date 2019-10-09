@@ -43,6 +43,7 @@ func NewLocallySignedCert(ctx *pulumi.Context,
 		inputs["certRequestPem"] = nil
 		inputs["earlyRenewalHours"] = nil
 		inputs["isCaCertificate"] = nil
+		inputs["setSubjectKeyId"] = nil
 		inputs["validityPeriodHours"] = nil
 	} else {
 		inputs["allowedUses"] = args.AllowedUses
@@ -52,9 +53,11 @@ func NewLocallySignedCert(ctx *pulumi.Context,
 		inputs["certRequestPem"] = args.CertRequestPem
 		inputs["earlyRenewalHours"] = args.EarlyRenewalHours
 		inputs["isCaCertificate"] = args.IsCaCertificate
+		inputs["setSubjectKeyId"] = args.SetSubjectKeyId
 		inputs["validityPeriodHours"] = args.ValidityPeriodHours
 	}
 	inputs["certPem"] = nil
+	inputs["readyForRenewal"] = nil
 	inputs["validityEndTime"] = nil
 	inputs["validityStartTime"] = nil
 	s, err := ctx.RegisterResource("tls:index/locallySignedCert:LocallySignedCert", name, true, inputs, opts...)
@@ -78,6 +81,8 @@ func GetLocallySignedCert(ctx *pulumi.Context,
 		inputs["certRequestPem"] = state.CertRequestPem
 		inputs["earlyRenewalHours"] = state.EarlyRenewalHours
 		inputs["isCaCertificate"] = state.IsCaCertificate
+		inputs["readyForRenewal"] = state.ReadyForRenewal
+		inputs["setSubjectKeyId"] = state.SetSubjectKeyId
 		inputs["validityEndTime"] = state.ValidityEndTime
 		inputs["validityPeriodHours"] = state.ValidityPeriodHours
 		inputs["validityStartTime"] = state.ValidityStartTime
@@ -145,6 +150,17 @@ func (r *LocallySignedCert) IsCaCertificate() *pulumi.BoolOutput {
 	return (*pulumi.BoolOutput)(r.s.State["isCaCertificate"])
 }
 
+func (r *LocallySignedCert) ReadyForRenewal() *pulumi.BoolOutput {
+	return (*pulumi.BoolOutput)(r.s.State["readyForRenewal"])
+}
+
+// If `true`, the certificate will include
+// the subject key identifier. Defaults to `false`, in which case the subject
+// key identifier is not set at all.
+func (r *LocallySignedCert) SetSubjectKeyId() *pulumi.BoolOutput {
+	return (*pulumi.BoolOutput)(r.s.State["setSubjectKeyId"])
+}
+
 // The time until which the certificate is invalid, as an
 // [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
 func (r *LocallySignedCert) ValidityEndTime() *pulumi.StringOutput {
@@ -187,6 +203,11 @@ type LocallySignedCertState struct {
 	// generated certificate. Defaults to `false`, meaning that the certificate does not represent
 	// a certificate authority.
 	IsCaCertificate interface{}
+	ReadyForRenewal interface{}
+	// If `true`, the certificate will include
+	// the subject key identifier. Defaults to `false`, in which case the subject
+	// key identifier is not set at all.
+	SetSubjectKeyId interface{}
 	// The time until which the certificate is invalid, as an
 	// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
 	ValidityEndTime interface{}
@@ -220,6 +241,10 @@ type LocallySignedCertArgs struct {
 	// generated certificate. Defaults to `false`, meaning that the certificate does not represent
 	// a certificate authority.
 	IsCaCertificate interface{}
+	// If `true`, the certificate will include
+	// the subject key identifier. Defaults to `false`, in which case the subject
+	// key identifier is not set at all.
+	SetSubjectKeyId interface{}
 	// The number of hours after initial issuing that the
 	// certificate will become invalid.
 	ValidityPeriodHours interface{}
