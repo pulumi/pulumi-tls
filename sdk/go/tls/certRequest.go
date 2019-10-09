@@ -32,12 +32,14 @@ func NewCertRequest(ctx *pulumi.Context,
 		inputs["keyAlgorithm"] = nil
 		inputs["privateKeyPem"] = nil
 		inputs["subjects"] = nil
+		inputs["uris"] = nil
 	} else {
 		inputs["dnsNames"] = args.DnsNames
 		inputs["ipAddresses"] = args.IpAddresses
 		inputs["keyAlgorithm"] = args.KeyAlgorithm
 		inputs["privateKeyPem"] = args.PrivateKeyPem
 		inputs["subjects"] = args.Subjects
+		inputs["uris"] = args.Uris
 	}
 	inputs["certRequestPem"] = nil
 	s, err := ctx.RegisterResource("tls:index/certRequest:CertRequest", name, true, inputs, opts...)
@@ -59,6 +61,7 @@ func GetCertRequest(ctx *pulumi.Context,
 		inputs["keyAlgorithm"] = state.KeyAlgorithm
 		inputs["privateKeyPem"] = state.PrivateKeyPem
 		inputs["subjects"] = state.Subjects
+		inputs["uris"] = state.Uris
 	}
 	s, err := ctx.ReadResource("tls:index/certRequest:CertRequest", name, id, inputs, opts...)
 	if err != nil {
@@ -109,6 +112,11 @@ func (r *CertRequest) Subjects() *pulumi.ArrayOutput {
 	return (*pulumi.ArrayOutput)(r.s.State["subjects"])
 }
 
+// List of URIs for which a certificate is being requested.
+func (r *CertRequest) Uris() *pulumi.ArrayOutput {
+	return (*pulumi.ArrayOutput)(r.s.State["uris"])
+}
+
 // Input properties used for looking up and filtering CertRequest resources.
 type CertRequestState struct {
 	// The certificate request data in PEM format.
@@ -125,6 +133,8 @@ type CertRequestState struct {
 	// The subject for which a certificate is being requested. This is
 	// a nested configuration block whose structure is described below.
 	Subjects interface{}
+	// List of URIs for which a certificate is being requested.
+	Uris interface{}
 }
 
 // The set of arguments for constructing a CertRequest resource.
@@ -141,4 +151,6 @@ type CertRequestArgs struct {
 	// The subject for which a certificate is being requested. This is
 	// a nested configuration block whose structure is described below.
 	Subjects interface{}
+	// List of URIs for which a certificate is being requested.
+	Uris interface{}
 }
