@@ -7,38 +7,42 @@ import (
 	"path"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/pulumi/pulumi/pkg/testing/integration"
 )
 
-func TestExamples(t *testing.T) {
+func TestAccPrivateKey(t *testing.T) {
+	test := getJSBaseOptions(t).
+		With(integration.ProgramTestOptions{
+			Dir: path.Join(getCwd(t), "private-key"),
+		})
+
+	integration.ProgramTest(t, &test)
+}
+
+func getCwd(t *testing.T) string {
 	cwd, err := os.Getwd()
-	if !assert.NoError(t, err, "expected a valid working directory: %v", err) {
-		return
+	if err != nil {
+		t.FailNow()
 	}
 
-	base := integration.ProgramTestOptions{
+	return cwd
+}
+
+func getBaseOptions() integration.ProgramTestOptions {
+	return integration.ProgramTestOptions{
+		ExpectRefreshChanges: true,
+		SkipRefresh:          true,
+		Quick:                true,
+	}
+}
+
+func getJSBaseOptions(t *testing.T) integration.ProgramTestOptions {
+	base := getBaseOptions()
+	baseJS := base.With(integration.ProgramTestOptions{
 		Dependencies: []string{
 			"@pulumi/tls",
 		},
-	}
+	})
 
-	shortTests := []integration.ProgramTestOptions{
-		base.With(integration.ProgramTestOptions{Dir: path.Join(cwd, "private-key")}),
-	}
-
-	longTests := []integration.ProgramTestOptions{}
-
-	tests := shortTests
-	if !testing.Short() {
-		tests = append(tests, longTests...)
-	}
-
-	for _, ex := range tests {
-		example := ex
-		t.Run(example.Dir, func(t *testing.T) {
-			integration.ProgramTest(t, &example)
-		})
-	}
+	return baseJS
 }
