@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Add a **preview** .NET SDK
+_(none)_
 
 ---
+
+## 1.1.0 (2019-11-12)
+* Add a **preview** .NET SDK
 
 ## 1.0.0 (2019-10-09)
 * Upgrade to v2.1.1 of the TLS Terraform Provider
