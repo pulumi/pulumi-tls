@@ -20,6 +20,9 @@ else
 	DOTNET_VERSION := $(strip ${DOTNET_PREFIX})-preview-$(strip ${DOTNET_SUFFIX})
 endif
 
+# Set NOPROXY to true to skip GOPROXY on 'ensure'
+NOPROXY := false
+
 TESTPARALLELISM := 4
 
 # NOTE: Since the plugin is published using the nodejs style semver version
