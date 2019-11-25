@@ -95,88 +95,88 @@ func GetLocallySignedCert(ctx *pulumi.Context,
 }
 
 // URN is this resource's unique name assigned by Pulumi.
-func (r *LocallySignedCert) URN() *pulumi.URNOutput {
+func (r *LocallySignedCert) URN() pulumi.URNOutput {
 	return r.s.URN()
 }
 
 // ID is this resource's unique identifier assigned by its provider.
-func (r *LocallySignedCert) ID() *pulumi.IDOutput {
+func (r *LocallySignedCert) ID() pulumi.IDOutput {
 	return r.s.ID()
 }
 
 // List of keywords each describing a use that is permitted
 // for the issued certificate. The valid keywords are listed below.
-func (r *LocallySignedCert) AllowedUses() *pulumi.ArrayOutput {
-	return (*pulumi.ArrayOutput)(r.s.State["allowedUses"])
+func (r *LocallySignedCert) AllowedUses() pulumi.ArrayOutput {
+	return (pulumi.ArrayOutput)(r.s.State["allowedUses"])
 }
 
 // PEM-encoded certificate data for the CA.
-func (r *LocallySignedCert) CaCertPem() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["caCertPem"])
+func (r *LocallySignedCert) CaCertPem() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["caCertPem"])
 }
 
 // The name of the algorithm for the key provided
 // in `caPrivateKeyPem`.
-func (r *LocallySignedCert) CaKeyAlgorithm() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["caKeyAlgorithm"])
+func (r *LocallySignedCert) CaKeyAlgorithm() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["caKeyAlgorithm"])
 }
 
 // PEM-encoded private key data for the CA.
 // This can be read from a separate file using the ``file`` interpolation
 // function.
-func (r *LocallySignedCert) CaPrivateKeyPem() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["caPrivateKeyPem"])
+func (r *LocallySignedCert) CaPrivateKeyPem() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["caPrivateKeyPem"])
 }
 
 // The certificate data in PEM format.
-func (r *LocallySignedCert) CertPem() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["certPem"])
+func (r *LocallySignedCert) CertPem() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["certPem"])
 }
 
 // PEM-encoded request certificate data.
-func (r *LocallySignedCert) CertRequestPem() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["certRequestPem"])
+func (r *LocallySignedCert) CertRequestPem() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["certRequestPem"])
 }
 
 // Number of hours before the certificates expiry when a new certificate will be generated
-func (r *LocallySignedCert) EarlyRenewalHours() *pulumi.IntOutput {
-	return (*pulumi.IntOutput)(r.s.State["earlyRenewalHours"])
+func (r *LocallySignedCert) EarlyRenewalHours() pulumi.IntOutput {
+	return (pulumi.IntOutput)(r.s.State["earlyRenewalHours"])
 }
 
 // Boolean controlling whether the CA flag will be set in the
 // generated certificate. Defaults to `false`, meaning that the certificate does not represent
 // a certificate authority.
-func (r *LocallySignedCert) IsCaCertificate() *pulumi.BoolOutput {
-	return (*pulumi.BoolOutput)(r.s.State["isCaCertificate"])
+func (r *LocallySignedCert) IsCaCertificate() pulumi.BoolOutput {
+	return (pulumi.BoolOutput)(r.s.State["isCaCertificate"])
 }
 
-func (r *LocallySignedCert) ReadyForRenewal() *pulumi.BoolOutput {
-	return (*pulumi.BoolOutput)(r.s.State["readyForRenewal"])
+func (r *LocallySignedCert) ReadyForRenewal() pulumi.BoolOutput {
+	return (pulumi.BoolOutput)(r.s.State["readyForRenewal"])
 }
 
 // If `true`, the certificate will include
 // the subject key identifier. Defaults to `false`, in which case the subject
 // key identifier is not set at all.
-func (r *LocallySignedCert) SetSubjectKeyId() *pulumi.BoolOutput {
-	return (*pulumi.BoolOutput)(r.s.State["setSubjectKeyId"])
+func (r *LocallySignedCert) SetSubjectKeyId() pulumi.BoolOutput {
+	return (pulumi.BoolOutput)(r.s.State["setSubjectKeyId"])
 }
 
 // The time until which the certificate is invalid, as an
 // [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-func (r *LocallySignedCert) ValidityEndTime() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["validityEndTime"])
+func (r *LocallySignedCert) ValidityEndTime() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["validityEndTime"])
 }
 
 // The number of hours after initial issuing that the
 // certificate will become invalid.
-func (r *LocallySignedCert) ValidityPeriodHours() *pulumi.IntOutput {
-	return (*pulumi.IntOutput)(r.s.State["validityPeriodHours"])
+func (r *LocallySignedCert) ValidityPeriodHours() pulumi.IntOutput {
+	return (pulumi.IntOutput)(r.s.State["validityPeriodHours"])
 }
 
 // The time after which the certificate is valid, as an
 // [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-func (r *LocallySignedCert) ValidityStartTime() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["validityStartTime"])
+func (r *LocallySignedCert) ValidityStartTime() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["validityStartTime"])
 }
 
 // Input properties used for looking up and filtering LocallySignedCert resources.

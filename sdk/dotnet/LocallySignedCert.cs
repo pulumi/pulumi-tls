@@ -107,7 +107,7 @@ namespace Pulumi.Tls
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public LocallySignedCert(string name, LocallySignedCertArgs args, CustomResourceOptions? options = null)
-            : base("tls:index/locallySignedCert:LocallySignedCert", name, args, MakeResourceOptions(options, ""))
+            : base("tls:index/locallySignedCert:LocallySignedCert", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
         {
         }
 
