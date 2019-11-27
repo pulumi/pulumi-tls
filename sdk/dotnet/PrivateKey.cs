@@ -74,7 +74,7 @@ namespace Pulumi.Tls
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public PrivateKey(string name, PrivateKeyArgs args, CustomResourceOptions? options = null)
-            : base("tls:index/privateKey:PrivateKey", name, args, MakeResourceOptions(options, ""))
+            : base("tls:index/privateKey:PrivateKey", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
         {
         }
 

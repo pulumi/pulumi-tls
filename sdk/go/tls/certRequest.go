@@ -71,50 +71,50 @@ func GetCertRequest(ctx *pulumi.Context,
 }
 
 // URN is this resource's unique name assigned by Pulumi.
-func (r *CertRequest) URN() *pulumi.URNOutput {
+func (r *CertRequest) URN() pulumi.URNOutput {
 	return r.s.URN()
 }
 
 // ID is this resource's unique identifier assigned by its provider.
-func (r *CertRequest) ID() *pulumi.IDOutput {
+func (r *CertRequest) ID() pulumi.IDOutput {
 	return r.s.ID()
 }
 
 // The certificate request data in PEM format.
-func (r *CertRequest) CertRequestPem() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["certRequestPem"])
+func (r *CertRequest) CertRequestPem() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["certRequestPem"])
 }
 
 // List of DNS names for which a certificate is being requested.
-func (r *CertRequest) DnsNames() *pulumi.ArrayOutput {
-	return (*pulumi.ArrayOutput)(r.s.State["dnsNames"])
+func (r *CertRequest) DnsNames() pulumi.ArrayOutput {
+	return (pulumi.ArrayOutput)(r.s.State["dnsNames"])
 }
 
 // List of IP addresses for which a certificate is being requested.
-func (r *CertRequest) IpAddresses() *pulumi.ArrayOutput {
-	return (*pulumi.ArrayOutput)(r.s.State["ipAddresses"])
+func (r *CertRequest) IpAddresses() pulumi.ArrayOutput {
+	return (pulumi.ArrayOutput)(r.s.State["ipAddresses"])
 }
 
 // The name of the algorithm for the key provided
 // in `privateKeyPem`.
-func (r *CertRequest) KeyAlgorithm() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["keyAlgorithm"])
+func (r *CertRequest) KeyAlgorithm() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["keyAlgorithm"])
 }
 
 // PEM-encoded private key that the certificate will belong to
-func (r *CertRequest) PrivateKeyPem() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["privateKeyPem"])
+func (r *CertRequest) PrivateKeyPem() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["privateKeyPem"])
 }
 
 // The subject for which a certificate is being requested. This is
 // a nested configuration block whose structure is described below.
-func (r *CertRequest) Subjects() *pulumi.ArrayOutput {
-	return (*pulumi.ArrayOutput)(r.s.State["subjects"])
+func (r *CertRequest) Subjects() pulumi.ArrayOutput {
+	return (pulumi.ArrayOutput)(r.s.State["subjects"])
 }
 
 // List of URIs for which a certificate is being requested.
-func (r *CertRequest) Uris() *pulumi.ArrayOutput {
-	return (*pulumi.ArrayOutput)(r.s.State["uris"])
+func (r *CertRequest) Uris() pulumi.ArrayOutput {
+	return (pulumi.ArrayOutput)(r.s.State["uris"])
 }
 
 // Input properties used for looking up and filtering CertRequest resources.

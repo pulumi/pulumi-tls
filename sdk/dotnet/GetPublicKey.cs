@@ -16,7 +16,7 @@ namespace Pulumi.Tls
         /// &gt; This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.markdown.
         /// </summary>
         public static Task<GetPublicKeyResult> GetPublicKey(GetPublicKeyArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args, options.WithVersion());
+            => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? ResourceArgs.Empty, options.WithVersion());
     }
 
     public sealed class GetPublicKeyArgs : Pulumi.ResourceArgs

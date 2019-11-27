@@ -62,39 +62,39 @@ func GetPrivateKey(ctx *pulumi.Context,
 }
 
 // URN is this resource's unique name assigned by Pulumi.
-func (r *PrivateKey) URN() *pulumi.URNOutput {
+func (r *PrivateKey) URN() pulumi.URNOutput {
 	return r.s.URN()
 }
 
 // ID is this resource's unique identifier assigned by its provider.
-func (r *PrivateKey) ID() *pulumi.IDOutput {
+func (r *PrivateKey) ID() pulumi.IDOutput {
 	return r.s.ID()
 }
 
 // The name of the algorithm to use for
 // the key. Currently-supported values are "RSA" and "ECDSA".
-func (r *PrivateKey) Algorithm() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["algorithm"])
+func (r *PrivateKey) Algorithm() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["algorithm"])
 }
 
 // When `algorithm` is "ECDSA", the name of the elliptic
 // curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
 // default.
-func (r *PrivateKey) EcdsaCurve() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["ecdsaCurve"])
+func (r *PrivateKey) EcdsaCurve() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["ecdsaCurve"])
 }
 
 // The private key data in PEM format.
-func (r *PrivateKey) PrivateKeyPem() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["privateKeyPem"])
+func (r *PrivateKey) PrivateKeyPem() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["privateKeyPem"])
 }
 
 // The md5 hash of the public key data in
 // OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
 // selected private key format is compatible, as per the rules for
 // `publicKeyOpenssh`.
-func (r *PrivateKey) PublicKeyFingerprintMd5() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["publicKeyFingerprintMd5"])
+func (r *PrivateKey) PublicKeyFingerprintMd5() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["publicKeyFingerprintMd5"])
 }
 
 // The public key data in OpenSSH `authorizedKeys`
@@ -102,19 +102,19 @@ func (r *PrivateKey) PublicKeyFingerprintMd5() *pulumi.StringOutput {
 // are supported, and ECDSA keys with curves "P256", "P384" and "P521"
 // are supported. This attribute is empty if an incompatible ECDSA curve
 // is selected.
-func (r *PrivateKey) PublicKeyOpenssh() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["publicKeyOpenssh"])
+func (r *PrivateKey) PublicKeyOpenssh() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["publicKeyOpenssh"])
 }
 
 // The public key data in PEM format.
-func (r *PrivateKey) PublicKeyPem() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["publicKeyPem"])
+func (r *PrivateKey) PublicKeyPem() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["publicKeyPem"])
 }
 
 // When `algorithm` is "RSA", the size of the generated
 // RSA key in bits. Defaults to 2048.
-func (r *PrivateKey) RsaBits() *pulumi.IntOutput {
-	return (*pulumi.IntOutput)(r.s.State["rsaBits"])
+func (r *PrivateKey) RsaBits() pulumi.IntOutput {
+	return (pulumi.IntOutput)(r.s.State["rsaBits"])
 }
 
 // Input properties used for looking up and filtering PrivateKey resources.

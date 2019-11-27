@@ -98,98 +98,98 @@ func GetSelfSignedCert(ctx *pulumi.Context,
 }
 
 // URN is this resource's unique name assigned by Pulumi.
-func (r *SelfSignedCert) URN() *pulumi.URNOutput {
+func (r *SelfSignedCert) URN() pulumi.URNOutput {
 	return r.s.URN()
 }
 
 // ID is this resource's unique identifier assigned by its provider.
-func (r *SelfSignedCert) ID() *pulumi.IDOutput {
+func (r *SelfSignedCert) ID() pulumi.IDOutput {
 	return r.s.ID()
 }
 
 // List of keywords each describing a use that is permitted
 // for the issued certificate. The valid keywords are listed below.
-func (r *SelfSignedCert) AllowedUses() *pulumi.ArrayOutput {
-	return (*pulumi.ArrayOutput)(r.s.State["allowedUses"])
+func (r *SelfSignedCert) AllowedUses() pulumi.ArrayOutput {
+	return (pulumi.ArrayOutput)(r.s.State["allowedUses"])
 }
 
 // The certificate data in PEM format.
-func (r *SelfSignedCert) CertPem() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["certPem"])
+func (r *SelfSignedCert) CertPem() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["certPem"])
 }
 
 // List of DNS names for which a certificate is being requested.
-func (r *SelfSignedCert) DnsNames() *pulumi.ArrayOutput {
-	return (*pulumi.ArrayOutput)(r.s.State["dnsNames"])
+func (r *SelfSignedCert) DnsNames() pulumi.ArrayOutput {
+	return (pulumi.ArrayOutput)(r.s.State["dnsNames"])
 }
 
 // Number of hours before the certificates expiry when a new certificate will be generated
-func (r *SelfSignedCert) EarlyRenewalHours() *pulumi.IntOutput {
-	return (*pulumi.IntOutput)(r.s.State["earlyRenewalHours"])
+func (r *SelfSignedCert) EarlyRenewalHours() pulumi.IntOutput {
+	return (pulumi.IntOutput)(r.s.State["earlyRenewalHours"])
 }
 
 // List of IP addresses for which a certificate is being requested.
-func (r *SelfSignedCert) IpAddresses() *pulumi.ArrayOutput {
-	return (*pulumi.ArrayOutput)(r.s.State["ipAddresses"])
+func (r *SelfSignedCert) IpAddresses() pulumi.ArrayOutput {
+	return (pulumi.ArrayOutput)(r.s.State["ipAddresses"])
 }
 
 // Boolean controlling whether the CA flag will be set in the
 // generated certificate. Defaults to `false`, meaning that the certificate does not represent
 // a certificate authority.
-func (r *SelfSignedCert) IsCaCertificate() *pulumi.BoolOutput {
-	return (*pulumi.BoolOutput)(r.s.State["isCaCertificate"])
+func (r *SelfSignedCert) IsCaCertificate() pulumi.BoolOutput {
+	return (pulumi.BoolOutput)(r.s.State["isCaCertificate"])
 }
 
 // The name of the algorithm for the key provided
 // in `privateKeyPem`.
-func (r *SelfSignedCert) KeyAlgorithm() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["keyAlgorithm"])
+func (r *SelfSignedCert) KeyAlgorithm() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["keyAlgorithm"])
 }
 
 // PEM-encoded private key that the certificate will belong to
-func (r *SelfSignedCert) PrivateKeyPem() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["privateKeyPem"])
+func (r *SelfSignedCert) PrivateKeyPem() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["privateKeyPem"])
 }
 
-func (r *SelfSignedCert) ReadyForRenewal() *pulumi.BoolOutput {
-	return (*pulumi.BoolOutput)(r.s.State["readyForRenewal"])
+func (r *SelfSignedCert) ReadyForRenewal() pulumi.BoolOutput {
+	return (pulumi.BoolOutput)(r.s.State["readyForRenewal"])
 }
 
 // If `true`, the certificate will include
 // the subject key identifier. Defaults to `false`, in which case the subject
 // key identifier is not set at all.
-func (r *SelfSignedCert) SetSubjectKeyId() *pulumi.BoolOutput {
-	return (*pulumi.BoolOutput)(r.s.State["setSubjectKeyId"])
+func (r *SelfSignedCert) SetSubjectKeyId() pulumi.BoolOutput {
+	return (pulumi.BoolOutput)(r.s.State["setSubjectKeyId"])
 }
 
 // The subject for which a certificate is being requested.
 // This is a nested configuration block whose structure matches the
 // corresponding block for `.CertRequest`.
-func (r *SelfSignedCert) Subjects() *pulumi.ArrayOutput {
-	return (*pulumi.ArrayOutput)(r.s.State["subjects"])
+func (r *SelfSignedCert) Subjects() pulumi.ArrayOutput {
+	return (pulumi.ArrayOutput)(r.s.State["subjects"])
 }
 
 // List of URIs for which a certificate is being requested.
-func (r *SelfSignedCert) Uris() *pulumi.ArrayOutput {
-	return (*pulumi.ArrayOutput)(r.s.State["uris"])
+func (r *SelfSignedCert) Uris() pulumi.ArrayOutput {
+	return (pulumi.ArrayOutput)(r.s.State["uris"])
 }
 
 // The time until which the certificate is invalid, as an
 // [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-func (r *SelfSignedCert) ValidityEndTime() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["validityEndTime"])
+func (r *SelfSignedCert) ValidityEndTime() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["validityEndTime"])
 }
 
 // The number of hours after initial issuing that the
 // certificate will become invalid.
-func (r *SelfSignedCert) ValidityPeriodHours() *pulumi.IntOutput {
-	return (*pulumi.IntOutput)(r.s.State["validityPeriodHours"])
+func (r *SelfSignedCert) ValidityPeriodHours() pulumi.IntOutput {
+	return (pulumi.IntOutput)(r.s.State["validityPeriodHours"])
 }
 
 // The time after which the certificate is valid, as an
 // [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-func (r *SelfSignedCert) ValidityStartTime() *pulumi.StringOutput {
-	return (*pulumi.StringOutput)(r.s.State["validityStartTime"])
+func (r *SelfSignedCert) ValidityStartTime() pulumi.StringOutput {
+	return (pulumi.StringOutput)(r.s.State["validityStartTime"])
 }
 
 // Input properties used for looking up and filtering SelfSignedCert resources.
