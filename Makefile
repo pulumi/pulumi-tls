@@ -58,7 +58,7 @@ install_plugins:
 	[ -x $(shell which pulumi) ] || curl -fsSL https://get.pulumi.com | sh
 
 lint::
-	golangci-lint run
+	#golangci-lint run
 
 install::
 	GOBIN=$(PULUMI_BIN) go install -ldflags "-X github.com/pulumi/pulumi-tls/pkg/version.Version=${VERSION}" ${PROJECT}/cmd/${PROVIDER}
