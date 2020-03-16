@@ -52,7 +52,6 @@ class PrivateKey(pulumi.CustomResource):
     def __init__(__self__, resource_name, opts=None, algorithm=None, ecdsa_curve=None, rsa_bits=None, __props__=None, __name__=None, __opts__=None):
         """
         Create a PrivateKey resource with the given unique name, props, and options.
-        
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] algorithm: The name of the algorithm to use for
@@ -62,8 +61,6 @@ class PrivateKey(pulumi.CustomResource):
                default.
         :param pulumi.Input[float] rsa_bits: When `algorithm` is "RSA", the size of the generated
                RSA key in bits. Defaults to 2048.
-
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/r/private_key.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -102,7 +99,7 @@ class PrivateKey(pulumi.CustomResource):
         """
         Get an existing PrivateKey resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -124,12 +121,11 @@ class PrivateKey(pulumi.CustomResource):
         :param pulumi.Input[str] public_key_pem: The public key data in PEM format.
         :param pulumi.Input[float] rsa_bits: When `algorithm` is "RSA", the size of the generated
                RSA key in bits. Defaults to 2048.
-
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/r/private_key.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["algorithm"] = algorithm
         __props__["ecdsa_curve"] = ecdsa_curve
         __props__["private_key_pem"] = private_key_pem

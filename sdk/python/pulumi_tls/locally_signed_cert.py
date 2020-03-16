@@ -39,6 +39,9 @@ class LocallySignedCert(pulumi.CustomResource):
     PEM-encoded request certificate data.
     """
     early_renewal_hours: pulumi.Output[float]
+    """
+    Number of hours before the certificates expiry when a new certificate will be generated
+    """
     is_ca_certificate: pulumi.Output[bool]
     """
     Boolean controlling whether the CA flag will be set in the
@@ -70,7 +73,6 @@ class LocallySignedCert(pulumi.CustomResource):
     def __init__(__self__, resource_name, opts=None, allowed_uses=None, ca_cert_pem=None, ca_key_algorithm=None, ca_private_key_pem=None, cert_request_pem=None, early_renewal_hours=None, is_ca_certificate=None, set_subject_key_id=None, validity_period_hours=None, __props__=None, __name__=None, __opts__=None):
         """
         Create a LocallySignedCert resource with the given unique name, props, and options.
-        
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[list] allowed_uses: List of keywords each describing a use that is permitted
@@ -82,6 +84,7 @@ class LocallySignedCert(pulumi.CustomResource):
                This can be read from a separate file using the ``file`` interpolation
                function.
         :param pulumi.Input[str] cert_request_pem: PEM-encoded request certificate data.
+        :param pulumi.Input[float] early_renewal_hours: Number of hours before the certificates expiry when a new certificate will be generated
         :param pulumi.Input[bool] is_ca_certificate: Boolean controlling whether the CA flag will be set in the
                generated certificate. Defaults to `false`, meaning that the certificate does not represent
                a certificate authority.
@@ -90,8 +93,6 @@ class LocallySignedCert(pulumi.CustomResource):
                key identifier is not set at all.
         :param pulumi.Input[float] validity_period_hours: The number of hours after initial issuing that the
                certificate will become invalid.
-
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/r/locally_signed_cert.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -146,7 +147,7 @@ class LocallySignedCert(pulumi.CustomResource):
         """
         Get an existing LocallySignedCert resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -160,6 +161,7 @@ class LocallySignedCert(pulumi.CustomResource):
                function.
         :param pulumi.Input[str] cert_pem: The certificate data in PEM format.
         :param pulumi.Input[str] cert_request_pem: PEM-encoded request certificate data.
+        :param pulumi.Input[float] early_renewal_hours: Number of hours before the certificates expiry when a new certificate will be generated
         :param pulumi.Input[bool] is_ca_certificate: Boolean controlling whether the CA flag will be set in the
                generated certificate. Defaults to `false`, meaning that the certificate does not represent
                a certificate authority.
@@ -172,12 +174,11 @@ class LocallySignedCert(pulumi.CustomResource):
                certificate will become invalid.
         :param pulumi.Input[str] validity_start_time: The time after which the certificate is valid, as an
                [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/r/locally_signed_cert.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["allowed_uses"] = allowed_uses
         __props__["ca_cert_pem"] = ca_cert_pem
         __props__["ca_key_algorithm"] = ca_key_algorithm

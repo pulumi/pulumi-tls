@@ -13,10 +13,16 @@ class GetPublicKeyResult:
     """
     A collection of values returned by getPublicKey.
     """
-    def __init__(__self__, algorithm=None, private_key_pem=None, public_key_fingerprint_md5=None, public_key_openssh=None, public_key_pem=None, id=None):
+    def __init__(__self__, algorithm=None, id=None, private_key_pem=None, public_key_fingerprint_md5=None, public_key_openssh=None, public_key_pem=None):
         if algorithm and not isinstance(algorithm, str):
             raise TypeError("Expected argument 'algorithm' to be a str")
         __self__.algorithm = algorithm
+        if id and not isinstance(id, str):
+            raise TypeError("Expected argument 'id' to be a str")
+        __self__.id = id
+        """
+        id is the provider-assigned unique ID for this managed resource.
+        """
         if private_key_pem and not isinstance(private_key_pem, str):
             raise TypeError("Expected argument 'private_key_pem' to be a str")
         __self__.private_key_pem = private_key_pem
@@ -48,12 +54,6 @@ class GetPublicKeyResult:
         """
         The public key data in PEM format.
         """
-        if id and not isinstance(id, str):
-            raise TypeError("Expected argument 'id' to be a str")
-        __self__.id = id
-        """
-        id is the provider-assigned unique ID for this managed resource.
-        """
 class AwaitableGetPublicKeyResult(GetPublicKeyResult):
     # pylint: disable=using-constant-test
     def __await__(self):
@@ -61,22 +61,24 @@ class AwaitableGetPublicKeyResult(GetPublicKeyResult):
             yield self
         return GetPublicKeyResult(
             algorithm=self.algorithm,
+            id=self.id,
             private_key_pem=self.private_key_pem,
             public_key_fingerprint_md5=self.public_key_fingerprint_md5,
             public_key_openssh=self.public_key_openssh,
-            public_key_pem=self.public_key_pem,
-            id=self.id)
+            public_key_pem=self.public_key_pem)
 
 def get_public_key(private_key_pem=None,opts=None):
     """
     Use this data source to get the public key from a PEM-encoded private key for use in other
     resources.
-    
-    :param str private_key_pem: The private key to use. Currently-supported key types are "RSA" or "ECDSA".
 
-    > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.markdown.
+    > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.md.
+
+
+    :param str private_key_pem: The private key to use. Currently-supported key types are "RSA" or "ECDSA".
     """
     __args__ = dict()
+
 
     __args__['privateKeyPem'] = private_key_pem
     if opts is None:
@@ -87,8 +89,8 @@ def get_public_key(private_key_pem=None,opts=None):
 
     return AwaitableGetPublicKeyResult(
         algorithm=__ret__.get('algorithm'),
+        id=__ret__.get('id'),
         private_key_pem=__ret__.get('privateKeyPem'),
         public_key_fingerprint_md5=__ret__.get('publicKeyFingerprintMd5'),
         public_key_openssh=__ret__.get('publicKeyOpenssh'),
-        public_key_pem=__ret__.get('publicKeyPem'),
-        id=__ret__.get('id'))
+        public_key_pem=__ret__.get('publicKeyPem'))
