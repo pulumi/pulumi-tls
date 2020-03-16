@@ -11,7 +11,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/go/pulumi"
 )
 
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/r/private_key.html.markdown.
 type PrivateKey struct {
 	pulumi.CustomResourceState
 

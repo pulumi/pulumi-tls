@@ -24,6 +24,9 @@ class SelfSignedCert(pulumi.CustomResource):
     List of DNS names for which a certificate is being requested.
     """
     early_renewal_hours: pulumi.Output[float]
+    """
+    Number of hours before the certificates expiry when a new certificate will be generated
+    """
     ip_addresses: pulumi.Output[list]
     """
     List of IP addresses for which a certificate is being requested.
@@ -40,6 +43,9 @@ class SelfSignedCert(pulumi.CustomResource):
     in `private_key_pem`.
     """
     private_key_pem: pulumi.Output[str]
+    """
+    PEM-encoded private key that the certificate will belong to
+    """
     ready_for_renewal: pulumi.Output[bool]
     set_subject_key_id: pulumi.Output[bool]
     """
@@ -52,7 +58,7 @@ class SelfSignedCert(pulumi.CustomResource):
     The subject for which a certificate is being requested.
     This is a nested configuration block whose structure matches the
     corresponding block for `.CertRequest`.
-    
+
       * `commonName` (`str`)
       * `country` (`str`)
       * `locality` (`str`)
@@ -85,18 +91,19 @@ class SelfSignedCert(pulumi.CustomResource):
     def __init__(__self__, resource_name, opts=None, allowed_uses=None, dns_names=None, early_renewal_hours=None, ip_addresses=None, is_ca_certificate=None, key_algorithm=None, private_key_pem=None, set_subject_key_id=None, subjects=None, uris=None, validity_period_hours=None, __props__=None, __name__=None, __opts__=None):
         """
         Create a SelfSignedCert resource with the given unique name, props, and options.
-        
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[list] allowed_uses: List of keywords each describing a use that is permitted
                for the issued certificate. The valid keywords are listed below.
         :param pulumi.Input[list] dns_names: List of DNS names for which a certificate is being requested.
+        :param pulumi.Input[float] early_renewal_hours: Number of hours before the certificates expiry when a new certificate will be generated
         :param pulumi.Input[list] ip_addresses: List of IP addresses for which a certificate is being requested.
         :param pulumi.Input[bool] is_ca_certificate: Boolean controlling whether the CA flag will be set in the
                generated certificate. Defaults to `false`, meaning that the certificate does not represent
                a certificate authority.
         :param pulumi.Input[str] key_algorithm: The name of the algorithm for the key provided
                in `private_key_pem`.
+        :param pulumi.Input[str] private_key_pem: PEM-encoded private key that the certificate will belong to
         :param pulumi.Input[bool] set_subject_key_id: If `true`, the certificate will include
                the subject key identifier. Defaults to `false`, in which case the subject
                key identifier is not set at all.
@@ -106,9 +113,9 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.Input[list] uris: List of URIs for which a certificate is being requested.
         :param pulumi.Input[float] validity_period_hours: The number of hours after initial issuing that the
                certificate will become invalid.
-        
+
         The **subjects** object supports the following:
-        
+
           * `commonName` (`pulumi.Input[str]`)
           * `country` (`pulumi.Input[str]`)
           * `locality` (`pulumi.Input[str]`)
@@ -118,8 +125,6 @@ class SelfSignedCert(pulumi.CustomResource):
           * `province` (`pulumi.Input[str]`)
           * `serialNumber` (`pulumi.Input[str]`)
           * `streetAddresses` (`pulumi.Input[list]`)
-
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/r/self_signed_cert.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -174,7 +179,7 @@ class SelfSignedCert(pulumi.CustomResource):
         """
         Get an existing SelfSignedCert resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -182,12 +187,14 @@ class SelfSignedCert(pulumi.CustomResource):
                for the issued certificate. The valid keywords are listed below.
         :param pulumi.Input[str] cert_pem: The certificate data in PEM format.
         :param pulumi.Input[list] dns_names: List of DNS names for which a certificate is being requested.
+        :param pulumi.Input[float] early_renewal_hours: Number of hours before the certificates expiry when a new certificate will be generated
         :param pulumi.Input[list] ip_addresses: List of IP addresses for which a certificate is being requested.
         :param pulumi.Input[bool] is_ca_certificate: Boolean controlling whether the CA flag will be set in the
                generated certificate. Defaults to `false`, meaning that the certificate does not represent
                a certificate authority.
         :param pulumi.Input[str] key_algorithm: The name of the algorithm for the key provided
                in `private_key_pem`.
+        :param pulumi.Input[str] private_key_pem: PEM-encoded private key that the certificate will belong to
         :param pulumi.Input[bool] set_subject_key_id: If `true`, the certificate will include
                the subject key identifier. Defaults to `false`, in which case the subject
                key identifier is not set at all.
@@ -201,9 +208,9 @@ class SelfSignedCert(pulumi.CustomResource):
                certificate will become invalid.
         :param pulumi.Input[str] validity_start_time: The time after which the certificate is valid, as an
                [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-        
+
         The **subjects** object supports the following:
-        
+
           * `commonName` (`pulumi.Input[str]`)
           * `country` (`pulumi.Input[str]`)
           * `locality` (`pulumi.Input[str]`)
@@ -213,12 +220,11 @@ class SelfSignedCert(pulumi.CustomResource):
           * `province` (`pulumi.Input[str]`)
           * `serialNumber` (`pulumi.Input[str]`)
           * `streetAddresses` (`pulumi.Input[list]`)
-
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/r/self_signed_cert.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["allowed_uses"] = allowed_uses
         __props__["cert_pem"] = cert_pem
         __props__["dns_names"] = dns_names
