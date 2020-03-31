@@ -12,15 +12,15 @@ import (
 )
 
 type CertRequestSubject struct {
-	CommonName *string `pulumi:"commonName"`
-	Country *string `pulumi:"country"`
-	Locality *string `pulumi:"locality"`
-	Organization *string `pulumi:"organization"`
-	OrganizationalUnit *string `pulumi:"organizationalUnit"`
-	PostalCode *string `pulumi:"postalCode"`
-	Province *string `pulumi:"province"`
-	SerialNumber *string `pulumi:"serialNumber"`
-	StreetAddresses []string `pulumi:"streetAddresses"`
+	CommonName         *string  `pulumi:"commonName"`
+	Country            *string  `pulumi:"country"`
+	Locality           *string  `pulumi:"locality"`
+	Organization       *string  `pulumi:"organization"`
+	OrganizationalUnit *string  `pulumi:"organizationalUnit"`
+	PostalCode         *string  `pulumi:"postalCode"`
+	Province           *string  `pulumi:"province"`
+	SerialNumber       *string  `pulumi:"serialNumber"`
+	StreetAddresses    []string `pulumi:"streetAddresses"`
 }
 
 type CertRequestSubjectInput interface {
@@ -31,15 +31,15 @@ type CertRequestSubjectInput interface {
 }
 
 type CertRequestSubjectArgs struct {
-	CommonName pulumi.StringPtrInput `pulumi:"commonName"`
-	Country pulumi.StringPtrInput `pulumi:"country"`
-	Locality pulumi.StringPtrInput `pulumi:"locality"`
-	Organization pulumi.StringPtrInput `pulumi:"organization"`
-	OrganizationalUnit pulumi.StringPtrInput `pulumi:"organizationalUnit"`
-	PostalCode pulumi.StringPtrInput `pulumi:"postalCode"`
-	Province pulumi.StringPtrInput `pulumi:"province"`
-	SerialNumber pulumi.StringPtrInput `pulumi:"serialNumber"`
-	StreetAddresses pulumi.StringArrayInput `pulumi:"streetAddresses"`
+	CommonName         pulumi.StringPtrInput   `pulumi:"commonName"`
+	Country            pulumi.StringPtrInput   `pulumi:"country"`
+	Locality           pulumi.StringPtrInput   `pulumi:"locality"`
+	Organization       pulumi.StringPtrInput   `pulumi:"organization"`
+	OrganizationalUnit pulumi.StringPtrInput   `pulumi:"organizationalUnit"`
+	PostalCode         pulumi.StringPtrInput   `pulumi:"postalCode"`
+	Province           pulumi.StringPtrInput   `pulumi:"province"`
+	SerialNumber       pulumi.StringPtrInput   `pulumi:"serialNumber"`
+	StreetAddresses    pulumi.StringArrayInput `pulumi:"streetAddresses"`
 }
 
 func (CertRequestSubjectArgs) ElementType() reflect.Type {
@@ -75,7 +75,7 @@ func (i CertRequestSubjectArray) ToCertRequestSubjectArrayOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(CertRequestSubjectArrayOutput)
 }
 
-type CertRequestSubjectOutput struct { *pulumi.OutputState }
+type CertRequestSubjectOutput struct{ *pulumi.OutputState }
 
 func (CertRequestSubjectOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*CertRequestSubject)(nil)).Elem()
@@ -90,42 +90,42 @@ func (o CertRequestSubjectOutput) ToCertRequestSubjectOutputWithContext(ctx cont
 }
 
 func (o CertRequestSubjectOutput) CommonName() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v CertRequestSubject) *string { return v.CommonName }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v CertRequestSubject) *string { return v.CommonName }).(pulumi.StringPtrOutput)
 }
 
 func (o CertRequestSubjectOutput) Country() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v CertRequestSubject) *string { return v.Country }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v CertRequestSubject) *string { return v.Country }).(pulumi.StringPtrOutput)
 }
 
 func (o CertRequestSubjectOutput) Locality() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v CertRequestSubject) *string { return v.Locality }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v CertRequestSubject) *string { return v.Locality }).(pulumi.StringPtrOutput)
 }
 
 func (o CertRequestSubjectOutput) Organization() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v CertRequestSubject) *string { return v.Organization }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v CertRequestSubject) *string { return v.Organization }).(pulumi.StringPtrOutput)
 }
 
 func (o CertRequestSubjectOutput) OrganizationalUnit() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v CertRequestSubject) *string { return v.OrganizationalUnit }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v CertRequestSubject) *string { return v.OrganizationalUnit }).(pulumi.StringPtrOutput)
 }
 
 func (o CertRequestSubjectOutput) PostalCode() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v CertRequestSubject) *string { return v.PostalCode }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v CertRequestSubject) *string { return v.PostalCode }).(pulumi.StringPtrOutput)
 }
 
 func (o CertRequestSubjectOutput) Province() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v CertRequestSubject) *string { return v.Province }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v CertRequestSubject) *string { return v.Province }).(pulumi.StringPtrOutput)
 }
 
 func (o CertRequestSubjectOutput) SerialNumber() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v CertRequestSubject) *string { return v.SerialNumber }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v CertRequestSubject) *string { return v.SerialNumber }).(pulumi.StringPtrOutput)
 }
 
 func (o CertRequestSubjectOutput) StreetAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v CertRequestSubject) []string { return v.StreetAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v CertRequestSubject) []string { return v.StreetAddresses }).(pulumi.StringArrayOutput)
 }
 
-type CertRequestSubjectArrayOutput struct { *pulumi.OutputState}
+type CertRequestSubjectArrayOutput struct{ *pulumi.OutputState }
 
 func (CertRequestSubjectArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]CertRequestSubject)(nil)).Elem()
@@ -140,21 +140,21 @@ func (o CertRequestSubjectArrayOutput) ToCertRequestSubjectArrayOutputWithContex
 }
 
 func (o CertRequestSubjectArrayOutput) Index(i pulumi.IntInput) CertRequestSubjectOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) CertRequestSubject {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CertRequestSubject {
 		return vs[0].([]CertRequestSubject)[vs[1].(int)]
 	}).(CertRequestSubjectOutput)
 }
 
 type SelfSignedCertSubject struct {
-	CommonName *string `pulumi:"commonName"`
-	Country *string `pulumi:"country"`
-	Locality *string `pulumi:"locality"`
-	Organization *string `pulumi:"organization"`
-	OrganizationalUnit *string `pulumi:"organizationalUnit"`
-	PostalCode *string `pulumi:"postalCode"`
-	Province *string `pulumi:"province"`
-	SerialNumber *string `pulumi:"serialNumber"`
-	StreetAddresses []string `pulumi:"streetAddresses"`
+	CommonName         *string  `pulumi:"commonName"`
+	Country            *string  `pulumi:"country"`
+	Locality           *string  `pulumi:"locality"`
+	Organization       *string  `pulumi:"organization"`
+	OrganizationalUnit *string  `pulumi:"organizationalUnit"`
+	PostalCode         *string  `pulumi:"postalCode"`
+	Province           *string  `pulumi:"province"`
+	SerialNumber       *string  `pulumi:"serialNumber"`
+	StreetAddresses    []string `pulumi:"streetAddresses"`
 }
 
 type SelfSignedCertSubjectInput interface {
@@ -165,15 +165,15 @@ type SelfSignedCertSubjectInput interface {
 }
 
 type SelfSignedCertSubjectArgs struct {
-	CommonName pulumi.StringPtrInput `pulumi:"commonName"`
-	Country pulumi.StringPtrInput `pulumi:"country"`
-	Locality pulumi.StringPtrInput `pulumi:"locality"`
-	Organization pulumi.StringPtrInput `pulumi:"organization"`
-	OrganizationalUnit pulumi.StringPtrInput `pulumi:"organizationalUnit"`
-	PostalCode pulumi.StringPtrInput `pulumi:"postalCode"`
-	Province pulumi.StringPtrInput `pulumi:"province"`
-	SerialNumber pulumi.StringPtrInput `pulumi:"serialNumber"`
-	StreetAddresses pulumi.StringArrayInput `pulumi:"streetAddresses"`
+	CommonName         pulumi.StringPtrInput   `pulumi:"commonName"`
+	Country            pulumi.StringPtrInput   `pulumi:"country"`
+	Locality           pulumi.StringPtrInput   `pulumi:"locality"`
+	Organization       pulumi.StringPtrInput   `pulumi:"organization"`
+	OrganizationalUnit pulumi.StringPtrInput   `pulumi:"organizationalUnit"`
+	PostalCode         pulumi.StringPtrInput   `pulumi:"postalCode"`
+	Province           pulumi.StringPtrInput   `pulumi:"province"`
+	SerialNumber       pulumi.StringPtrInput   `pulumi:"serialNumber"`
+	StreetAddresses    pulumi.StringArrayInput `pulumi:"streetAddresses"`
 }
 
 func (SelfSignedCertSubjectArgs) ElementType() reflect.Type {
@@ -209,7 +209,7 @@ func (i SelfSignedCertSubjectArray) ToSelfSignedCertSubjectArrayOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertSubjectArrayOutput)
 }
 
-type SelfSignedCertSubjectOutput struct { *pulumi.OutputState }
+type SelfSignedCertSubjectOutput struct{ *pulumi.OutputState }
 
 func (SelfSignedCertSubjectOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*SelfSignedCertSubject)(nil)).Elem()
@@ -224,42 +224,42 @@ func (o SelfSignedCertSubjectOutput) ToSelfSignedCertSubjectOutputWithContext(ct
 }
 
 func (o SelfSignedCertSubjectOutput) CommonName() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SelfSignedCertSubject) *string { return v.CommonName }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.CommonName }).(pulumi.StringPtrOutput)
 }
 
 func (o SelfSignedCertSubjectOutput) Country() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SelfSignedCertSubject) *string { return v.Country }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.Country }).(pulumi.StringPtrOutput)
 }
 
 func (o SelfSignedCertSubjectOutput) Locality() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SelfSignedCertSubject) *string { return v.Locality }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.Locality }).(pulumi.StringPtrOutput)
 }
 
 func (o SelfSignedCertSubjectOutput) Organization() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SelfSignedCertSubject) *string { return v.Organization }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.Organization }).(pulumi.StringPtrOutput)
 }
 
 func (o SelfSignedCertSubjectOutput) OrganizationalUnit() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SelfSignedCertSubject) *string { return v.OrganizationalUnit }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.OrganizationalUnit }).(pulumi.StringPtrOutput)
 }
 
 func (o SelfSignedCertSubjectOutput) PostalCode() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SelfSignedCertSubject) *string { return v.PostalCode }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.PostalCode }).(pulumi.StringPtrOutput)
 }
 
 func (o SelfSignedCertSubjectOutput) Province() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SelfSignedCertSubject) *string { return v.Province }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.Province }).(pulumi.StringPtrOutput)
 }
 
 func (o SelfSignedCertSubjectOutput) SerialNumber() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SelfSignedCertSubject) *string { return v.SerialNumber }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.SerialNumber }).(pulumi.StringPtrOutput)
 }
 
 func (o SelfSignedCertSubjectOutput) StreetAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v SelfSignedCertSubject) []string { return v.StreetAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v SelfSignedCertSubject) []string { return v.StreetAddresses }).(pulumi.StringArrayOutput)
 }
 
-type SelfSignedCertSubjectArrayOutput struct { *pulumi.OutputState}
+type SelfSignedCertSubjectArrayOutput struct{ *pulumi.OutputState }
 
 func (SelfSignedCertSubjectArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]SelfSignedCertSubject)(nil)).Elem()
@@ -274,7 +274,7 @@ func (o SelfSignedCertSubjectArrayOutput) ToSelfSignedCertSubjectArrayOutputWith
 }
 
 func (o SelfSignedCertSubjectArrayOutput) Index(i pulumi.IntInput) SelfSignedCertSubjectOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) SelfSignedCertSubject {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SelfSignedCertSubject {
 		return vs[0].([]SelfSignedCertSubject)[vs[1].(int)]
 	}).(SelfSignedCertSubjectOutput)
 }

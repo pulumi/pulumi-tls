@@ -36,7 +36,7 @@ type LocallySignedCert struct {
 	// generated certificate. Defaults to `false`, meaning that the certificate does not represent
 	// a certificate authority.
 	IsCaCertificate pulumi.BoolPtrOutput `pulumi:"isCaCertificate"`
-	ReadyForRenewal pulumi.BoolOutput `pulumi:"readyForRenewal"`
+	ReadyForRenewal pulumi.BoolOutput    `pulumi:"readyForRenewal"`
 	// If `true`, the certificate will include
 	// the subject key identifier. Defaults to `false`, in which case the subject
 	// key identifier is not set at all.
@@ -243,4 +243,3 @@ type LocallySignedCertArgs struct {
 func (LocallySignedCertArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*locallySignedCertArgs)(nil)).Elem()
 }
-

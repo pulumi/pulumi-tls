@@ -33,8 +33,8 @@ type SelfSignedCert struct {
 	// in `privateKeyPem`.
 	KeyAlgorithm pulumi.StringOutput `pulumi:"keyAlgorithm"`
 	// PEM-encoded private key that the certificate will belong to
-	PrivateKeyPem pulumi.StringOutput `pulumi:"privateKeyPem"`
-	ReadyForRenewal pulumi.BoolOutput `pulumi:"readyForRenewal"`
+	PrivateKeyPem   pulumi.StringOutput `pulumi:"privateKeyPem"`
+	ReadyForRenewal pulumi.BoolOutput   `pulumi:"readyForRenewal"`
 	// If `true`, the certificate will include
 	// the subject key identifier. Defaults to `false`, in which case the subject
 	// key identifier is not set at all.
@@ -118,8 +118,8 @@ type selfSignedCertState struct {
 	// in `privateKeyPem`.
 	KeyAlgorithm *string `pulumi:"keyAlgorithm"`
 	// PEM-encoded private key that the certificate will belong to
-	PrivateKeyPem *string `pulumi:"privateKeyPem"`
-	ReadyForRenewal *bool `pulumi:"readyForRenewal"`
+	PrivateKeyPem   *string `pulumi:"privateKeyPem"`
+	ReadyForRenewal *bool   `pulumi:"readyForRenewal"`
 	// If `true`, the certificate will include
 	// the subject key identifier. Defaults to `false`, in which case the subject
 	// key identifier is not set at all.
@@ -161,7 +161,7 @@ type SelfSignedCertState struct {
 	// in `privateKeyPem`.
 	KeyAlgorithm pulumi.StringPtrInput
 	// PEM-encoded private key that the certificate will belong to
-	PrivateKeyPem pulumi.StringPtrInput
+	PrivateKeyPem   pulumi.StringPtrInput
 	ReadyForRenewal pulumi.BoolPtrInput
 	// If `true`, the certificate will include
 	// the subject key identifier. Defaults to `false`, in which case the subject
@@ -260,4 +260,3 @@ type SelfSignedCertArgs struct {
 func (SelfSignedCertArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*selfSignedCertArgs)(nil)).Elem()
 }
-

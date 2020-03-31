@@ -161,4 +161,3 @@ type PrivateKeyArgs struct {
 func (PrivateKeyArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*privateKeyArgs)(nil)).Elem()
 }
-
