@@ -4,6 +4,7 @@
 **/obj/
 Pulumi.*.yaml
 yarn.lock
+**/pulumiManifest.go
 
 **/command-output/
 

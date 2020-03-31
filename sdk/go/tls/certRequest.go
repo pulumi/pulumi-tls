@@ -148,4 +148,3 @@ type CertRequestArgs struct {
 func (CertRequestArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*certRequestArgs)(nil)).Elem()
 }
-

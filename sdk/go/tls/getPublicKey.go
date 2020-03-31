@@ -27,7 +27,6 @@ type GetPublicKeyArgs struct {
 	PrivateKeyPem string `pulumi:"privateKeyPem"`
 }
 
-
 // A collection of values returned by getPublicKey.
 type GetPublicKeyResult struct {
 	Algorithm string `pulumi:"algorithm"`
@@ -49,4 +48,3 @@ type GetPublicKeyResult struct {
 	// The public key data in PEM format.
 	PublicKeyPem string `pulumi:"publicKeyPem"`
 }
-

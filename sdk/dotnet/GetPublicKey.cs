@@ -17,7 +17,19 @@ namespace Pulumi.Tls
         /// 
         /// &gt; This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.md.
         /// </summary>
+        [Obsolete("Use GetPublicKey.InvokeAsync() instead")]
         public static Task<GetPublicKeyResult> GetPublicKey(GetPublicKeyArgs args, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? InvokeArgs.Empty, options.WithVersion());
+    }
+    public static class GetPublicKey
+    {
+        /// <summary>
+        /// Use this data source to get the public key from a PEM-encoded private key for use in other
+        /// resources.
+        /// 
+        /// &gt; This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.md.
+        /// </summary>
+        public static Task<GetPublicKeyResult> InvokeAsync(GetPublicKeyArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? InvokeArgs.Empty, options.WithVersion());
     }
 
