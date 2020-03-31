@@ -2,11 +2,13 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
+_(none)_
+
+---
+## 1.6.0 (2020-03-31)
 * Convert to go modules
 * Upgrade to Pulumi v1.13.1
 * Upgrade to pulumi-terraform-bridge 1.8.4
-
----
 
 ## 1.5.0 (2020-03-16)
 * Upgrade to Pulumi v1.12.1
