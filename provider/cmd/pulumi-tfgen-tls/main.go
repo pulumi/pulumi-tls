@@ -12,17 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:generate go run ./generate.go
-
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform-bridge/pkg/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/pkg/tfgen"
 
-	"github.com/pulumi/pulumi-tls"
-	"github.com/pulumi/pulumi-tls/pkg/version"
+	tls "github.com/pulumi/pulumi-tls/provider"
+	"github.com/pulumi/pulumi-tls/provider/pkg/version"
 )
 
 func main() {
-	tfbridge.Main("tls", version.Version, tls.Provider(), pulumiSchema)
+	tfgen.Main("tls", version.Version, tls.Provider())
 }

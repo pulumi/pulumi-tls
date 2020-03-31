@@ -2,7 +2,9 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Convert to go modules
+* Upgrade to Pulumi v1.13.1
+* Upgrade to pulumi-terraform-bridge 1.8.4
 
 ---
 
