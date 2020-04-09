@@ -12,6 +12,8 @@ import * as utilities from "./utilities";
  * 
  * ## Example Usage
  * 
+ * 
+ * 
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as fs from "fs";
@@ -24,7 +26,7 @@ import * as utilities from "./utilities";
  *
  * > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.md.
  */
-export function getPublicKey(args: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> & GetPublicKeyResult {
+export function getPublicKey(args: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
     if (!opts) {
         opts = {}
     }
@@ -32,11 +34,9 @@ export function getPublicKey(args: GetPublicKeyArgs, opts?: pulumi.InvokeOptions
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetPublicKeyResult> = pulumi.runtime.invoke("tls:index/getPublicKey:getPublicKey", {
+    return pulumi.runtime.invoke("tls:index/getPublicKey:getPublicKey", {
         "privateKeyPem": args.privateKeyPem,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**

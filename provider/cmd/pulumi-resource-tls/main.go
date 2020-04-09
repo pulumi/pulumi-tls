@@ -17,10 +17,9 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform-bridge/pkg/tfbridge"
-
-	tls "github.com/pulumi/pulumi-tls/provider"
-	"github.com/pulumi/pulumi-tls/provider/pkg/version"
+	"github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfbridge"
+	tls "github.com/pulumi/pulumi-tls/provider/v2"
+	"github.com/pulumi/pulumi-tls/provider/v2/pkg/version"
 )
 
 func main() {
