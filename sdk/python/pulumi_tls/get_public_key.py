@@ -74,8 +74,6 @@ def get_public_key(private_key_pem=None,opts=None):
 
 
 
-    > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.md.
-
 
     :param str private_key_pem: The private key to use. Currently-supported key types are "RSA" or "ECDSA".
     """
