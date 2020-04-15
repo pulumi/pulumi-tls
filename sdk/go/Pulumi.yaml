@@ -1,3 +1,0 @@
-name: tls
-description: A Pulumi resource provider for tls.
-language: go
