@@ -17,7 +17,7 @@ if [ "$(go env GOOS)" = "windows" ]; then
 fi
 
 (cd "${ROOT}/provider" && go build \
-   -ldflags "-X github.com/pulumi/pulumi-tls/provider/pkg/version.Version=${VERSION}" \
+   -ldflags "-X github.com/pulumi/pulumi-tls/provider/v2/pkg/version.Version=${VERSION}" \
    -o "${WORK_PATH}/pulumi-resource-tls${BIN_SUFFIX}" \
    "${ROOT}/cmd/pulumi-resource-tls")
 

@@ -9,29 +9,19 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tls
 {
-    public static partial class Invokes
-    {
-        /// <summary>
-        /// Use this data source to get the public key from a PEM-encoded private key for use in other
-        /// resources.
-        /// 
-        /// &gt; This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.md.
-        /// </summary>
-        [Obsolete("Use GetPublicKey.InvokeAsync() instead")]
-        public static Task<GetPublicKeyResult> GetPublicKey(GetPublicKeyArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? InvokeArgs.Empty, options.WithVersion());
-    }
     public static class GetPublicKey
     {
         /// <summary>
         /// Use this data source to get the public key from a PEM-encoded private key for use in other
         /// resources.
         /// 
-        /// &gt; This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.md.
+        /// {{% examples %}}
+        /// {{% /examples %}}
         /// </summary>
         public static Task<GetPublicKeyResult> InvokeAsync(GetPublicKeyArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? InvokeArgs.Empty, options.WithVersion());
+            => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyArgs(), options.WithVersion());
     }
+
 
     public sealed class GetPublicKeyArgs : Pulumi.InvokeArgs
     {
@@ -46,10 +36,15 @@ namespace Pulumi.Tls
         }
     }
 
+
     [OutputType]
     public sealed class GetPublicKeyResult
     {
         public readonly string Algorithm;
+        /// <summary>
+        /// id is the provider-assigned unique ID for this managed resource.
+        /// </summary>
+        public readonly string Id;
         /// <summary>
         /// The private key data in PEM format.
         /// </summary>
@@ -73,26 +68,27 @@ namespace Pulumi.Tls
         /// The public key data in PEM format.
         /// </summary>
         public readonly string PublicKeyPem;
-        /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
-        /// </summary>
-        public readonly string Id;
 
         [OutputConstructor]
         private GetPublicKeyResult(
             string algorithm,
+
+            string id,
+
             string privateKeyPem,
+
             string publicKeyFingerprintMd5,
+
             string publicKeyOpenssh,
-            string publicKeyPem,
-            string id)
+
+            string publicKeyPem)
         {
             Algorithm = algorithm;
+            Id = id;
             PrivateKeyPem = privateKeyPem;
             PublicKeyFingerprintMd5 = publicKeyFingerprintMd5;
             PublicKeyOpenssh = publicKeyOpenssh;
             PublicKeyPem = publicKeyPem;
-            Id = id;
         }
     }
 }

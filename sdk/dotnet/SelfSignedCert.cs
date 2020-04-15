@@ -80,7 +80,7 @@ namespace Pulumi.Tls
         /// corresponding block for `tls..CertRequest`.
         /// </summary>
         [Output("subjects")]
-        public Output<ImmutableArray<Outputs.SelfSignedCertSubjects>> Subjects { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.SelfSignedCertSubject>> Subjects { get; private set; } = null!;
 
         /// <summary>
         /// List of URIs for which a certificate is being requested.
@@ -118,7 +118,7 @@ namespace Pulumi.Tls
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public SelfSignedCert(string name, SelfSignedCertArgs args, CustomResourceOptions? options = null)
-            : base("tls:index/selfSignedCert:SelfSignedCert", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("tls:index/selfSignedCert:SelfSignedCert", name, args ?? new SelfSignedCertArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -228,16 +228,16 @@ namespace Pulumi.Tls
         public Input<bool>? SetSubjectKeyId { get; set; }
 
         [Input("subjects", required: true)]
-        private InputList<Inputs.SelfSignedCertSubjectsArgs>? _subjects;
+        private InputList<Inputs.SelfSignedCertSubjectArgs>? _subjects;
 
         /// <summary>
         /// The subject for which a certificate is being requested.
         /// This is a nested configuration block whose structure matches the
         /// corresponding block for `tls..CertRequest`.
         /// </summary>
-        public InputList<Inputs.SelfSignedCertSubjectsArgs> Subjects
+        public InputList<Inputs.SelfSignedCertSubjectArgs> Subjects
         {
-            get => _subjects ?? (_subjects = new InputList<Inputs.SelfSignedCertSubjectsArgs>());
+            get => _subjects ?? (_subjects = new InputList<Inputs.SelfSignedCertSubjectArgs>());
             set => _subjects = value;
         }
 
@@ -349,16 +349,16 @@ namespace Pulumi.Tls
         public Input<bool>? SetSubjectKeyId { get; set; }
 
         [Input("subjects")]
-        private InputList<Inputs.SelfSignedCertSubjectsGetArgs>? _subjects;
+        private InputList<Inputs.SelfSignedCertSubjectGetArgs>? _subjects;
 
         /// <summary>
         /// The subject for which a certificate is being requested.
         /// This is a nested configuration block whose structure matches the
         /// corresponding block for `tls..CertRequest`.
         /// </summary>
-        public InputList<Inputs.SelfSignedCertSubjectsGetArgs> Subjects
+        public InputList<Inputs.SelfSignedCertSubjectGetArgs> Subjects
         {
-            get => _subjects ?? (_subjects = new InputList<Inputs.SelfSignedCertSubjectsGetArgs>());
+            get => _subjects ?? (_subjects = new InputList<Inputs.SelfSignedCertSubjectGetArgs>());
             set => _subjects = value;
         }
 
@@ -398,128 +398,5 @@ namespace Pulumi.Tls
         public SelfSignedCertState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class SelfSignedCertSubjectsArgs : Pulumi.ResourceArgs
-    {
-        [Input("commonName")]
-        public Input<string>? CommonName { get; set; }
-
-        [Input("country")]
-        public Input<string>? Country { get; set; }
-
-        [Input("locality")]
-        public Input<string>? Locality { get; set; }
-
-        [Input("organization")]
-        public Input<string>? Organization { get; set; }
-
-        [Input("organizationalUnit")]
-        public Input<string>? OrganizationalUnit { get; set; }
-
-        [Input("postalCode")]
-        public Input<string>? PostalCode { get; set; }
-
-        [Input("province")]
-        public Input<string>? Province { get; set; }
-
-        [Input("serialNumber")]
-        public Input<string>? SerialNumber { get; set; }
-
-        [Input("streetAddresses")]
-        private InputList<string>? _streetAddresses;
-        public InputList<string> StreetAddresses
-        {
-            get => _streetAddresses ?? (_streetAddresses = new InputList<string>());
-            set => _streetAddresses = value;
-        }
-
-        public SelfSignedCertSubjectsArgs()
-        {
-        }
-    }
-
-    public sealed class SelfSignedCertSubjectsGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("commonName")]
-        public Input<string>? CommonName { get; set; }
-
-        [Input("country")]
-        public Input<string>? Country { get; set; }
-
-        [Input("locality")]
-        public Input<string>? Locality { get; set; }
-
-        [Input("organization")]
-        public Input<string>? Organization { get; set; }
-
-        [Input("organizationalUnit")]
-        public Input<string>? OrganizationalUnit { get; set; }
-
-        [Input("postalCode")]
-        public Input<string>? PostalCode { get; set; }
-
-        [Input("province")]
-        public Input<string>? Province { get; set; }
-
-        [Input("serialNumber")]
-        public Input<string>? SerialNumber { get; set; }
-
-        [Input("streetAddresses")]
-        private InputList<string>? _streetAddresses;
-        public InputList<string> StreetAddresses
-        {
-            get => _streetAddresses ?? (_streetAddresses = new InputList<string>());
-            set => _streetAddresses = value;
-        }
-
-        public SelfSignedCertSubjectsGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class SelfSignedCertSubjects
-    {
-        public readonly string? CommonName;
-        public readonly string? Country;
-        public readonly string? Locality;
-        public readonly string? Organization;
-        public readonly string? OrganizationalUnit;
-        public readonly string? PostalCode;
-        public readonly string? Province;
-        public readonly string? SerialNumber;
-        public readonly ImmutableArray<string> StreetAddresses;
-
-        [OutputConstructor]
-        private SelfSignedCertSubjects(
-            string? commonName,
-            string? country,
-            string? locality,
-            string? organization,
-            string? organizationalUnit,
-            string? postalCode,
-            string? province,
-            string? serialNumber,
-            ImmutableArray<string> streetAddresses)
-        {
-            CommonName = commonName;
-            Country = country;
-            Locality = locality;
-            Organization = organization;
-            OrganizationalUnit = organizationalUnit;
-            PostalCode = postalCode;
-            Province = province;
-            SerialNumber = serialNumber;
-            StreetAddresses = streetAddresses;
-        }
-    }
     }
 }
