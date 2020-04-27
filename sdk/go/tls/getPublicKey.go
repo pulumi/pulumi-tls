@@ -27,7 +27,7 @@ type GetPublicKeyArgs struct {
 // A collection of values returned by getPublicKey.
 type GetPublicKeyResult struct {
 	Algorithm string `pulumi:"algorithm"`
-	// id is the provider-assigned unique ID for this managed resource.
+	// The provider-assigned unique ID for this managed resource.
 	Id string `pulumi:"id"`
 	// The private key data in PEM format.
 	PrivateKeyPem string `pulumi:"privateKeyPem"`
