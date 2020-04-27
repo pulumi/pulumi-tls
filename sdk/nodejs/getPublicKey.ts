@@ -19,9 +19,9 @@ import * as utilities from "./utilities";
  * import * as fs from "fs";
  * import * as tls from "@pulumi/tls";
  * 
- * const example = tls.getPublicKey({
+ * const example = pulumi.output(tls.getPublicKey({
  *     privateKeyPem: fs.readFileSync("~/.ssh/id_rsa", "utf-8"),
- * });
+ * }, { async: true }));
  * ```
  *
  * > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.md.
@@ -78,7 +78,7 @@ export interface GetPublicKeyResult {
      */
     readonly publicKeyPem: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
 }

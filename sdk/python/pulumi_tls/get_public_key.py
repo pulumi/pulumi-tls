@@ -21,7 +21,7 @@ class GetPublicKeyResult:
             raise TypeError("Expected argument 'id' to be a str")
         __self__.id = id
         """
-        id is the provider-assigned unique ID for this managed resource.
+        The provider-assigned unique ID for this managed resource.
         """
         if private_key_pem and not isinstance(private_key_pem, str):
             raise TypeError("Expected argument 'private_key_pem' to be a str")
