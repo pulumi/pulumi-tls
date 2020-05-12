@@ -72,6 +72,16 @@ def get_public_key(private_key_pem=None,opts=None):
     Use this data source to get the public key from a PEM-encoded private key for use in other
     resources.
 
+    ## Example Usage
+
+
+
+    ```python
+    import pulumi
+    import pulumi_tls as tls
+
+    example = tls.get_public_key(private_key_pem=(lambda path: open(path).read())("~/.ssh/id_rsa"))
+    ```
 
 
 

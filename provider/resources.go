@@ -75,7 +75,6 @@ func Provider() tfbridge.ProviderInfo {
 			"tls_public_key": {Tok: tlsDataSource(tlsMod, "getPublicKey")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
-			AsyncDataSources: true,
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^2.0.0",
 			},
