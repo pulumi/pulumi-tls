@@ -31,6 +31,12 @@ To use from Go, use `go get` to grab the latest version of the library
 
     $ go get github.com/pulumi/pulumi-tls/sdk/go/...
 
+### .NET
+
+To use from .NET, install using `dotnet add package`:
+
+    $ dotnet add package Pulumi.Tls
+
 ## Concepts
 
 The `@pulumi/tls` package provides a strongly-typed means to build cloud applications that create
@@ -38,5 +44,5 @@ and interact closely with TLS resources.
 
 ## Reference
 
-For detailed reference documentation, please visit [the API docs](
-https://pulumi.io/reference/pkg/nodejs/@pulumi/tls/index.html).
+
+For further information, please visit [the TLS provider docs](https://www.pulumi.com/docs/intro/cloud-providers/tls) or for detailed reference documentation, please visit [the API docs](https://www.pulumi.com/docs/reference/pkg/tls).
