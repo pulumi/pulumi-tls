@@ -9,22 +9,20 @@ import * as utilities from "./utilities";
 /**
  * Use this data source to get the public key from a PEM-encoded private key for use in other
  * resources.
- * 
+ *
  * ## Example Usage
- * 
- * 
- * 
+ *
+ *
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as fs from "fs";
  * import * as tls from "@pulumi/tls";
- * 
+ *
  * const example = pulumi.output(tls.getPublicKey({
  *     privateKeyPem: fs.readFileSync("~/.ssh/id_rsa", "utf-8"),
  * }, { async: true }));
  * ```
- *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-tls/blob/master/website/docs/d/public_key.html.md.
  */
 export function getPublicKey(args: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
     if (!opts) {
