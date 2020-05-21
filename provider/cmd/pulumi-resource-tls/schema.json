@@ -1,0 +1,910 @@
+{
+    "name": "tls",
+    "description": "A Pulumi package to create TLS resources in Pulumi programs.",
+    "keywords": [
+        "pulumi",
+        "tls"
+    ],
+    "homepage": "https://pulumi.io",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`tls` Terraform Provider](https://github.com/terraform-providers/terraform-provider-tls).",
+    "repository": "https://github.com/pulumi/pulumi-tls",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "config": {},
+    "types": {
+        "tls:/CertRequestSubject:CertRequestSubject": {
+            "properties": {
+                "commonName": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "country": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "locality": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "organization": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "organizationalUnit": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "postalCode": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "province": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "serialNumber": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "streetAddresses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "tls:/SelfSignedCertSubject:SelfSignedCertSubject": {
+            "properties": {
+                "commonName": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "country": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "locality": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "organization": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "organizationalUnit": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "postalCode": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "province": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "serialNumber": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "streetAddresses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        }
+    },
+    "provider": {
+        "description": "The provider type for the tls package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n"
+    },
+    "resources": {
+        "tls:index/certRequest:CertRequest": {
+            "properties": {
+                "certRequestPem": {
+                    "type": "string",
+                    "description": "The certificate request data in PEM format.\n"
+                },
+                "dnsNames": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of DNS names for which a certificate is being requested.\n"
+                },
+                "ipAddresses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of IP addresses for which a certificate is being requested.\n"
+                },
+                "keyAlgorithm": {
+                    "type": "string",
+                    "description": "The name of the algorithm for the key provided\nin `private_key_pem`.\n"
+                },
+                "privateKeyPem": {
+                    "type": "string",
+                    "description": "PEM-encoded private key that the certificate will belong to\n"
+                },
+                "subjects": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/tls:/CertRequestSubject:CertRequestSubject"
+                    },
+                    "description": "The subject for which a certificate is being requested. This is\na nested configuration block whose structure is described below.\n"
+                },
+                "uris": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of URIs for which a certificate is being requested.\n"
+                }
+            },
+            "required": [
+                "certRequestPem",
+                "keyAlgorithm",
+                "privateKeyPem",
+                "subjects"
+            ],
+            "inputProperties": {
+                "dnsNames": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of DNS names for which a certificate is being requested.\n"
+                },
+                "ipAddresses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of IP addresses for which a certificate is being requested.\n"
+                },
+                "keyAlgorithm": {
+                    "type": "string",
+                    "description": "The name of the algorithm for the key provided\nin `private_key_pem`.\n"
+                },
+                "privateKeyPem": {
+                    "type": "string",
+                    "description": "PEM-encoded private key that the certificate will belong to\n"
+                },
+                "subjects": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/tls:/CertRequestSubject:CertRequestSubject"
+                    },
+                    "description": "The subject for which a certificate is being requested. This is\na nested configuration block whose structure is described below.\n"
+                },
+                "uris": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of URIs for which a certificate is being requested.\n"
+                }
+            },
+            "requiredInputs": [
+                "keyAlgorithm",
+                "privateKeyPem",
+                "subjects"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering CertRequest resources.\n",
+                "properties": {
+                    "certRequestPem": {
+                        "type": "string",
+                        "description": "The certificate request data in PEM format.\n"
+                    },
+                    "dnsNames": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of DNS names for which a certificate is being requested.\n"
+                    },
+                    "ipAddresses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of IP addresses for which a certificate is being requested.\n"
+                    },
+                    "keyAlgorithm": {
+                        "type": "string",
+                        "description": "The name of the algorithm for the key provided\nin `private_key_pem`.\n"
+                    },
+                    "privateKeyPem": {
+                        "type": "string",
+                        "description": "PEM-encoded private key that the certificate will belong to\n"
+                    },
+                    "subjects": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/tls:/CertRequestSubject:CertRequestSubject"
+                        },
+                        "description": "The subject for which a certificate is being requested. This is\na nested configuration block whose structure is described below.\n"
+                    },
+                    "uris": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of URIs for which a certificate is being requested.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "tls:index/locallySignedCert:LocallySignedCert": {
+            "properties": {
+                "allowedUses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of keywords each describing a use that is permitted\nfor the issued certificate. The valid keywords are listed below.\n"
+                },
+                "caCertPem": {
+                    "type": "string",
+                    "description": "PEM-encoded certificate data for the CA.\n"
+                },
+                "caKeyAlgorithm": {
+                    "type": "string",
+                    "description": "The name of the algorithm for the key provided\nin `ca_private_key_pem`.\n"
+                },
+                "caPrivateKeyPem": {
+                    "type": "string",
+                    "description": "PEM-encoded private key data for the CA.\nThis can be read from a separate file using the ``file`` interpolation\nfunction.\n"
+                },
+                "certPem": {
+                    "type": "string",
+                    "description": "The certificate data in PEM format.\n"
+                },
+                "certRequestPem": {
+                    "type": "string",
+                    "description": "PEM-encoded request certificate data.\n"
+                },
+                "earlyRenewalHours": {
+                    "type": "integer",
+                    "description": "Number of hours before the certificates expiry when a new certificate will be generated\n"
+                },
+                "isCaCertificate": {
+                    "type": "boolean",
+                    "description": "Boolean controlling whether the CA flag will be set in the\ngenerated certificate. Defaults to `false`, meaning that the certificate does not represent\na certificate authority.\n"
+                },
+                "readyForRenewal": {
+                    "type": "boolean"
+                },
+                "setSubjectKeyId": {
+                    "type": "boolean",
+                    "description": "If `true`, the certificate will include\nthe subject key identifier. Defaults to `false`, in which case the subject\nkey identifier is not set at all.\n"
+                },
+                "validityEndTime": {
+                    "type": "string",
+                    "description": "The time until which the certificate is invalid, as an\n[RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                },
+                "validityPeriodHours": {
+                    "type": "integer",
+                    "description": "The number of hours after initial issuing that the\ncertificate will become invalid.\n"
+                },
+                "validityStartTime": {
+                    "type": "string",
+                    "description": "The time after which the certificate is valid, as an\n[RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                }
+            },
+            "required": [
+                "allowedUses",
+                "caCertPem",
+                "caKeyAlgorithm",
+                "caPrivateKeyPem",
+                "certPem",
+                "certRequestPem",
+                "readyForRenewal",
+                "validityEndTime",
+                "validityPeriodHours",
+                "validityStartTime"
+            ],
+            "inputProperties": {
+                "allowedUses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of keywords each describing a use that is permitted\nfor the issued certificate. The valid keywords are listed below.\n"
+                },
+                "caCertPem": {
+                    "type": "string",
+                    "description": "PEM-encoded certificate data for the CA.\n"
+                },
+                "caKeyAlgorithm": {
+                    "type": "string",
+                    "description": "The name of the algorithm for the key provided\nin `ca_private_key_pem`.\n"
+                },
+                "caPrivateKeyPem": {
+                    "type": "string",
+                    "description": "PEM-encoded private key data for the CA.\nThis can be read from a separate file using the ``file`` interpolation\nfunction.\n"
+                },
+                "certRequestPem": {
+                    "type": "string",
+                    "description": "PEM-encoded request certificate data.\n"
+                },
+                "earlyRenewalHours": {
+                    "type": "integer",
+                    "description": "Number of hours before the certificates expiry when a new certificate will be generated\n"
+                },
+                "isCaCertificate": {
+                    "type": "boolean",
+                    "description": "Boolean controlling whether the CA flag will be set in the\ngenerated certificate. Defaults to `false`, meaning that the certificate does not represent\na certificate authority.\n"
+                },
+                "setSubjectKeyId": {
+                    "type": "boolean",
+                    "description": "If `true`, the certificate will include\nthe subject key identifier. Defaults to `false`, in which case the subject\nkey identifier is not set at all.\n"
+                },
+                "validityPeriodHours": {
+                    "type": "integer",
+                    "description": "The number of hours after initial issuing that the\ncertificate will become invalid.\n"
+                }
+            },
+            "requiredInputs": [
+                "allowedUses",
+                "caCertPem",
+                "caKeyAlgorithm",
+                "caPrivateKeyPem",
+                "certRequestPem",
+                "validityPeriodHours"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering LocallySignedCert resources.\n",
+                "properties": {
+                    "allowedUses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of keywords each describing a use that is permitted\nfor the issued certificate. The valid keywords are listed below.\n"
+                    },
+                    "caCertPem": {
+                        "type": "string",
+                        "description": "PEM-encoded certificate data for the CA.\n"
+                    },
+                    "caKeyAlgorithm": {
+                        "type": "string",
+                        "description": "The name of the algorithm for the key provided\nin `ca_private_key_pem`.\n"
+                    },
+                    "caPrivateKeyPem": {
+                        "type": "string",
+                        "description": "PEM-encoded private key data for the CA.\nThis can be read from a separate file using the ``file`` interpolation\nfunction.\n"
+                    },
+                    "certPem": {
+                        "type": "string",
+                        "description": "The certificate data in PEM format.\n"
+                    },
+                    "certRequestPem": {
+                        "type": "string",
+                        "description": "PEM-encoded request certificate data.\n"
+                    },
+                    "earlyRenewalHours": {
+                        "type": "integer",
+                        "description": "Number of hours before the certificates expiry when a new certificate will be generated\n"
+                    },
+                    "isCaCertificate": {
+                        "type": "boolean",
+                        "description": "Boolean controlling whether the CA flag will be set in the\ngenerated certificate. Defaults to `false`, meaning that the certificate does not represent\na certificate authority.\n"
+                    },
+                    "readyForRenewal": {
+                        "type": "boolean"
+                    },
+                    "setSubjectKeyId": {
+                        "type": "boolean",
+                        "description": "If `true`, the certificate will include\nthe subject key identifier. Defaults to `false`, in which case the subject\nkey identifier is not set at all.\n"
+                    },
+                    "validityEndTime": {
+                        "type": "string",
+                        "description": "The time until which the certificate is invalid, as an\n[RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                    },
+                    "validityPeriodHours": {
+                        "type": "integer",
+                        "description": "The number of hours after initial issuing that the\ncertificate will become invalid.\n"
+                    },
+                    "validityStartTime": {
+                        "type": "string",
+                        "description": "The time after which the certificate is valid, as an\n[RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "tls:index/privateKey:PrivateKey": {
+            "properties": {
+                "algorithm": {
+                    "type": "string",
+                    "description": "The name of the algorithm to use for\nthe key. Currently-supported values are \"RSA\" and \"ECDSA\".\n"
+                },
+                "ecdsaCurve": {
+                    "type": "string",
+                    "description": "When `algorithm` is \"ECDSA\", the name of the elliptic\ncurve to use. May be any one of \"P224\", \"P256\", \"P384\" or \"P521\", with \"P224\" as the\ndefault.\n"
+                },
+                "privateKeyPem": {
+                    "type": "string",
+                    "description": "The private key data in PEM format.\n"
+                },
+                "publicKeyFingerprintMd5": {
+                    "type": "string",
+                    "description": "The md5 hash of the public key data in\nOpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the\nselected private key format is compatible, as per the rules for\n`public_key_openssh`.\n"
+                },
+                "publicKeyOpenssh": {
+                    "type": "string",
+                    "description": "The public key data in OpenSSH `authorized_keys`\nformat, if the selected private key format is compatible. All RSA keys\nare supported, and ECDSA keys with curves \"P256\", \"P384\" and \"P521\"\nare supported. This attribute is empty if an incompatible ECDSA curve\nis selected.\n"
+                },
+                "publicKeyPem": {
+                    "type": "string",
+                    "description": "The public key data in PEM format.\n"
+                },
+                "rsaBits": {
+                    "type": "integer",
+                    "description": "When `algorithm` is \"RSA\", the size of the generated\nRSA key in bits. Defaults to 2048.\n"
+                }
+            },
+            "required": [
+                "algorithm",
+                "privateKeyPem",
+                "publicKeyFingerprintMd5",
+                "publicKeyOpenssh",
+                "publicKeyPem"
+            ],
+            "inputProperties": {
+                "algorithm": {
+                    "type": "string",
+                    "description": "The name of the algorithm to use for\nthe key. Currently-supported values are \"RSA\" and \"ECDSA\".\n"
+                },
+                "ecdsaCurve": {
+                    "type": "string",
+                    "description": "When `algorithm` is \"ECDSA\", the name of the elliptic\ncurve to use. May be any one of \"P224\", \"P256\", \"P384\" or \"P521\", with \"P224\" as the\ndefault.\n"
+                },
+                "rsaBits": {
+                    "type": "integer",
+                    "description": "When `algorithm` is \"RSA\", the size of the generated\nRSA key in bits. Defaults to 2048.\n"
+                }
+            },
+            "requiredInputs": [
+                "algorithm"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering PrivateKey resources.\n",
+                "properties": {
+                    "algorithm": {
+                        "type": "string",
+                        "description": "The name of the algorithm to use for\nthe key. Currently-supported values are \"RSA\" and \"ECDSA\".\n"
+                    },
+                    "ecdsaCurve": {
+                        "type": "string",
+                        "description": "When `algorithm` is \"ECDSA\", the name of the elliptic\ncurve to use. May be any one of \"P224\", \"P256\", \"P384\" or \"P521\", with \"P224\" as the\ndefault.\n"
+                    },
+                    "privateKeyPem": {
+                        "type": "string",
+                        "description": "The private key data in PEM format.\n"
+                    },
+                    "publicKeyFingerprintMd5": {
+                        "type": "string",
+                        "description": "The md5 hash of the public key data in\nOpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the\nselected private key format is compatible, as per the rules for\n`public_key_openssh`.\n"
+                    },
+                    "publicKeyOpenssh": {
+                        "type": "string",
+                        "description": "The public key data in OpenSSH `authorized_keys`\nformat, if the selected private key format is compatible. All RSA keys\nare supported, and ECDSA keys with curves \"P256\", \"P384\" and \"P521\"\nare supported. This attribute is empty if an incompatible ECDSA curve\nis selected.\n"
+                    },
+                    "publicKeyPem": {
+                        "type": "string",
+                        "description": "The public key data in PEM format.\n"
+                    },
+                    "rsaBits": {
+                        "type": "integer",
+                        "description": "When `algorithm` is \"RSA\", the size of the generated\nRSA key in bits. Defaults to 2048.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "tls:index/selfSignedCert:SelfSignedCert": {
+            "properties": {
+                "allowedUses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of keywords each describing a use that is permitted\nfor the issued certificate. The valid keywords are listed below.\n"
+                },
+                "certPem": {
+                    "type": "string",
+                    "description": "The certificate data in PEM format.\n"
+                },
+                "dnsNames": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of DNS names for which a certificate is being requested.\n"
+                },
+                "earlyRenewalHours": {
+                    "type": "integer",
+                    "description": "Number of hours before the certificates expiry when a new certificate will be generated\n"
+                },
+                "ipAddresses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of IP addresses for which a certificate is being requested.\n"
+                },
+                "isCaCertificate": {
+                    "type": "boolean",
+                    "description": "Boolean controlling whether the CA flag will be set in the\ngenerated certificate. Defaults to `false`, meaning that the certificate does not represent\na certificate authority.\n"
+                },
+                "keyAlgorithm": {
+                    "type": "string",
+                    "description": "The name of the algorithm for the key provided\nin `private_key_pem`.\n"
+                },
+                "privateKeyPem": {
+                    "type": "string",
+                    "description": "PEM-encoded private key that the certificate will belong to\n"
+                },
+                "readyForRenewal": {
+                    "type": "boolean"
+                },
+                "setSubjectKeyId": {
+                    "type": "boolean",
+                    "description": "If `true`, the certificate will include\nthe subject key identifier. Defaults to `false`, in which case the subject\nkey identifier is not set at all.\n"
+                },
+                "subjects": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/tls:/SelfSignedCertSubject:SelfSignedCertSubject"
+                    },
+                    "description": "The subject for which a certificate is being requested.\nThis is a nested configuration block whose structure matches the\ncorresponding block for `tls..CertRequest`.\n"
+                },
+                "uris": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of URIs for which a certificate is being requested.\n"
+                },
+                "validityEndTime": {
+                    "type": "string",
+                    "description": "The time until which the certificate is invalid, as an\n[RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                },
+                "validityPeriodHours": {
+                    "type": "integer",
+                    "description": "The number of hours after initial issuing that the\ncertificate will become invalid.\n"
+                },
+                "validityStartTime": {
+                    "type": "string",
+                    "description": "The time after which the certificate is valid, as an\n[RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                }
+            },
+            "required": [
+                "allowedUses",
+                "certPem",
+                "keyAlgorithm",
+                "privateKeyPem",
+                "readyForRenewal",
+                "subjects",
+                "validityEndTime",
+                "validityPeriodHours",
+                "validityStartTime"
+            ],
+            "inputProperties": {
+                "allowedUses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of keywords each describing a use that is permitted\nfor the issued certificate. The valid keywords are listed below.\n"
+                },
+                "dnsNames": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of DNS names for which a certificate is being requested.\n"
+                },
+                "earlyRenewalHours": {
+                    "type": "integer",
+                    "description": "Number of hours before the certificates expiry when a new certificate will be generated\n"
+                },
+                "ipAddresses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of IP addresses for which a certificate is being requested.\n"
+                },
+                "isCaCertificate": {
+                    "type": "boolean",
+                    "description": "Boolean controlling whether the CA flag will be set in the\ngenerated certificate. Defaults to `false`, meaning that the certificate does not represent\na certificate authority.\n"
+                },
+                "keyAlgorithm": {
+                    "type": "string",
+                    "description": "The name of the algorithm for the key provided\nin `private_key_pem`.\n"
+                },
+                "privateKeyPem": {
+                    "type": "string",
+                    "description": "PEM-encoded private key that the certificate will belong to\n"
+                },
+                "setSubjectKeyId": {
+                    "type": "boolean",
+                    "description": "If `true`, the certificate will include\nthe subject key identifier. Defaults to `false`, in which case the subject\nkey identifier is not set at all.\n"
+                },
+                "subjects": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/tls:/SelfSignedCertSubject:SelfSignedCertSubject"
+                    },
+                    "description": "The subject for which a certificate is being requested.\nThis is a nested configuration block whose structure matches the\ncorresponding block for `tls..CertRequest`.\n"
+                },
+                "uris": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of URIs for which a certificate is being requested.\n"
+                },
+                "validityPeriodHours": {
+                    "type": "integer",
+                    "description": "The number of hours after initial issuing that the\ncertificate will become invalid.\n"
+                }
+            },
+            "requiredInputs": [
+                "allowedUses",
+                "keyAlgorithm",
+                "privateKeyPem",
+                "subjects",
+                "validityPeriodHours"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering SelfSignedCert resources.\n",
+                "properties": {
+                    "allowedUses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of keywords each describing a use that is permitted\nfor the issued certificate. The valid keywords are listed below.\n"
+                    },
+                    "certPem": {
+                        "type": "string",
+                        "description": "The certificate data in PEM format.\n"
+                    },
+                    "dnsNames": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of DNS names for which a certificate is being requested.\n"
+                    },
+                    "earlyRenewalHours": {
+                        "type": "integer",
+                        "description": "Number of hours before the certificates expiry when a new certificate will be generated\n"
+                    },
+                    "ipAddresses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of IP addresses for which a certificate is being requested.\n"
+                    },
+                    "isCaCertificate": {
+                        "type": "boolean",
+                        "description": "Boolean controlling whether the CA flag will be set in the\ngenerated certificate. Defaults to `false`, meaning that the certificate does not represent\na certificate authority.\n"
+                    },
+                    "keyAlgorithm": {
+                        "type": "string",
+                        "description": "The name of the algorithm for the key provided\nin `private_key_pem`.\n"
+                    },
+                    "privateKeyPem": {
+                        "type": "string",
+                        "description": "PEM-encoded private key that the certificate will belong to\n"
+                    },
+                    "readyForRenewal": {
+                        "type": "boolean"
+                    },
+                    "setSubjectKeyId": {
+                        "type": "boolean",
+                        "description": "If `true`, the certificate will include\nthe subject key identifier. Defaults to `false`, in which case the subject\nkey identifier is not set at all.\n"
+                    },
+                    "subjects": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/tls:/SelfSignedCertSubject:SelfSignedCertSubject"
+                        },
+                        "description": "The subject for which a certificate is being requested.\nThis is a nested configuration block whose structure matches the\ncorresponding block for `tls..CertRequest`.\n"
+                    },
+                    "uris": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of URIs for which a certificate is being requested.\n"
+                    },
+                    "validityEndTime": {
+                        "type": "string",
+                        "description": "The time until which the certificate is invalid, as an\n[RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                    },
+                    "validityPeriodHours": {
+                        "type": "integer",
+                        "description": "The number of hours after initial issuing that the\ncertificate will become invalid.\n"
+                    },
+                    "validityStartTime": {
+                        "type": "string",
+                        "description": "The time after which the certificate is valid, as an\n[RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "tls:index/getPublicKey:getPublicKey": {
+            "description": "Use this data source to get the public key from a PEM-encoded private key for use in other\nresources.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as fs from \"fs\";\nimport * as tls from \"@pulumi/tls\";\n\nconst example = pulumi.output(tls.getPublicKey({\n    privateKeyPem: fs.readFileSync(\"~/.ssh/id_rsa\", \"utf-8\"),\n}, { async: true }));\n```\n```python\nimport pulumi\nimport pulumi_tls as tls\n\nexample = tls.get_public_key(private_key_pem=(lambda path: open(path).read())(\"~/.ssh/id_rsa\"))\n```\n\n{{% /example %}}\n{{% /examples %}}\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getPublicKey.\n",
+                "properties": {
+                    "privateKeyPem": {
+                        "type": "string",
+                        "description": "The private key to use. Currently-supported key types are \"RSA\" or \"ECDSA\".\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "privateKeyPem"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getPublicKey.\n",
+                "properties": {
+                    "algorithm": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "privateKeyPem": {
+                        "type": "string",
+                        "description": "The private key data in PEM format.\n"
+                    },
+                    "publicKeyFingerprintMd5": {
+                        "type": "string",
+                        "description": "The md5 hash of the public key data in\nOpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the\nselected private key format is compatible, as per the rules for\n`public_key_openssh`.\n"
+                    },
+                    "publicKeyOpenssh": {
+                        "type": "string",
+                        "description": "The public key data in OpenSSH `authorized_keys`\nformat, if the selected private key format is compatible. All RSA keys\nare supported, and ECDSA keys with curves \"P256\", \"P384\" and \"P521\"\nare supported. This attribute is empty if an incompatible ECDSA curve\nis selected.\n"
+                    },
+                    "publicKeyPem": {
+                        "type": "string",
+                        "description": "The public key data in PEM format.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "algorithm",
+                    "privateKeyPem",
+                    "publicKeyFingerprintMd5",
+                    "publicKeyOpenssh",
+                    "publicKeyPem",
+                    "id"
+                ]
+            }
+        }
+    },
+    "language": {
+        "csharp": {
+            "namespaces": {
+                "tls": "Tls"
+            },
+            "packageReferences": {
+                "Pulumi": "2.*",
+                "System.Collections.Immutable": "1.6.0"
+            }
+        },
+        "nodejs": {
+            "dependencies": {
+                "@pulumi/pulumi": "^2.0.0"
+            },
+            "devDependencies": {
+                "@types/node": "^8.0.25"
+            },
+            "packageDescription": "A Pulumi package to create TLS resources in Pulumi programs.",
+            "packageName": "",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "requires": {
+                "pulumi": "\u003e=2.0.0,\u003c3.0.0"
+            }
+        }
+    }
+}
