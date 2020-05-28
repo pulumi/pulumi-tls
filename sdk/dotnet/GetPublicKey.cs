@@ -16,6 +16,28 @@ namespace Pulumi.Tls
         /// resources.
         /// 
         /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.IO;
+        /// using Pulumi;
+        /// using Tls = Pulumi.Tls;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var example = Output.Create(Tls.GetPublicKey.InvokeAsync(new Tls.GetPublicKeyArgs
+        ///         {
+        ///             PrivateKeyPem = File.ReadAllText("~/.ssh/id_rsa"),
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// 
+        /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetPublicKeyResult> InvokeAsync(GetPublicKeyArgs args, InvokeOptions? options = null)
