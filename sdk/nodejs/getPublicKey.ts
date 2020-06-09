@@ -53,6 +53,10 @@ export interface GetPublicKeyArgs {
 export interface GetPublicKeyResult {
     readonly algorithm: string;
     /**
+     * The provider-assigned unique ID for this managed resource.
+     */
+    readonly id: string;
+    /**
      * The private key data in PEM format.
      */
     readonly privateKeyPem: string;
@@ -75,8 +79,4 @@ export interface GetPublicKeyResult {
      * The public key data in PEM format.
      */
     readonly publicKeyPem: string;
-    /**
-     * The provider-assigned unique ID for this managed resource.
-     */
-    readonly id: string;
 }
