@@ -80,7 +80,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
     /**
      * The subject for which a certificate is being requested.
      * This is a nested configuration block whose structure matches the
-     * corresponding block for `tls..CertRequest`.
+     * corresponding block for `tls.CertRequest`.
      */
     public readonly subjects!: pulumi.Output<outputs.SelfSignedCertSubject[]>;
     /**
@@ -224,7 +224,7 @@ export interface SelfSignedCertState {
     /**
      * The subject for which a certificate is being requested.
      * This is a nested configuration block whose structure matches the
-     * corresponding block for `tls..CertRequest`.
+     * corresponding block for `tls.CertRequest`.
      */
     readonly subjects?: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
     /**
@@ -293,7 +293,7 @@ export interface SelfSignedCertArgs {
     /**
      * The subject for which a certificate is being requested.
      * This is a nested configuration block whose structure matches the
-     * corresponding block for `tls..CertRequest`.
+     * corresponding block for `tls.CertRequest`.
      */
     readonly subjects: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
     /**

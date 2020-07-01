@@ -40,7 +40,7 @@ type SelfSignedCert struct {
 	SetSubjectKeyId pulumi.BoolPtrOutput `pulumi:"setSubjectKeyId"`
 	// The subject for which a certificate is being requested.
 	// This is a nested configuration block whose structure matches the
-	// corresponding block for `.CertRequest`.
+	// corresponding block for `CertRequest`.
 	Subjects SelfSignedCertSubjectArrayOutput `pulumi:"subjects"`
 	// List of URIs for which a certificate is being requested.
 	Uris pulumi.StringArrayOutput `pulumi:"uris"`
@@ -125,7 +125,7 @@ type selfSignedCertState struct {
 	SetSubjectKeyId *bool `pulumi:"setSubjectKeyId"`
 	// The subject for which a certificate is being requested.
 	// This is a nested configuration block whose structure matches the
-	// corresponding block for `.CertRequest`.
+	// corresponding block for `CertRequest`.
 	Subjects []SelfSignedCertSubject `pulumi:"subjects"`
 	// List of URIs for which a certificate is being requested.
 	Uris []string `pulumi:"uris"`
@@ -168,7 +168,7 @@ type SelfSignedCertState struct {
 	SetSubjectKeyId pulumi.BoolPtrInput
 	// The subject for which a certificate is being requested.
 	// This is a nested configuration block whose structure matches the
-	// corresponding block for `.CertRequest`.
+	// corresponding block for `CertRequest`.
 	Subjects SelfSignedCertSubjectArrayInput
 	// List of URIs for which a certificate is being requested.
 	Uris pulumi.StringArrayInput
@@ -212,7 +212,7 @@ type selfSignedCertArgs struct {
 	SetSubjectKeyId *bool `pulumi:"setSubjectKeyId"`
 	// The subject for which a certificate is being requested.
 	// This is a nested configuration block whose structure matches the
-	// corresponding block for `.CertRequest`.
+	// corresponding block for `CertRequest`.
 	Subjects []SelfSignedCertSubject `pulumi:"subjects"`
 	// List of URIs for which a certificate is being requested.
 	Uris []string `pulumi:"uris"`
@@ -247,7 +247,7 @@ type SelfSignedCertArgs struct {
 	SetSubjectKeyId pulumi.BoolPtrInput
 	// The subject for which a certificate is being requested.
 	// This is a nested configuration block whose structure matches the
-	// corresponding block for `.CertRequest`.
+	// corresponding block for `CertRequest`.
 	Subjects SelfSignedCertSubjectArrayInput
 	// List of URIs for which a certificate is being requested.
 	Uris pulumi.StringArrayInput

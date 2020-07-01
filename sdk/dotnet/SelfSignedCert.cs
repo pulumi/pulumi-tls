@@ -77,7 +77,7 @@ namespace Pulumi.Tls
         /// <summary>
         /// The subject for which a certificate is being requested.
         /// This is a nested configuration block whose structure matches the
-        /// corresponding block for `tls..CertRequest`.
+        /// corresponding block for `tls.CertRequest`.
         /// </summary>
         [Output("subjects")]
         public Output<ImmutableArray<Outputs.SelfSignedCertSubject>> Subjects { get; private set; } = null!;
@@ -233,7 +233,7 @@ namespace Pulumi.Tls
         /// <summary>
         /// The subject for which a certificate is being requested.
         /// This is a nested configuration block whose structure matches the
-        /// corresponding block for `tls..CertRequest`.
+        /// corresponding block for `tls.CertRequest`.
         /// </summary>
         public InputList<Inputs.SelfSignedCertSubjectArgs> Subjects
         {
@@ -354,7 +354,7 @@ namespace Pulumi.Tls
         /// <summary>
         /// The subject for which a certificate is being requested.
         /// This is a nested configuration block whose structure matches the
-        /// corresponding block for `tls..CertRequest`.
+        /// corresponding block for `tls.CertRequest`.
         /// </summary>
         public InputList<Inputs.SelfSignedCertSubjectGetArgs> Subjects
         {

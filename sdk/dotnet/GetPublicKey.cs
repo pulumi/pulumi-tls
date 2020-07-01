@@ -36,7 +36,6 @@ namespace Pulumi.Tls
         /// 
         /// }
         /// ```
-        /// 
         /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
