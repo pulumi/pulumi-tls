@@ -642,7 +642,7 @@
                     "items": {
                         "$ref": "#/types/tls:/SelfSignedCertSubject:SelfSignedCertSubject"
                     },
-                    "description": "The subject for which a certificate is being requested.\nThis is a nested configuration block whose structure matches the\ncorresponding block for `tls..CertRequest`.\n"
+                    "description": "The subject for which a certificate is being requested.\nThis is a nested configuration block whose structure matches the\ncorresponding block for `tls.CertRequest`.\n"
                 },
                 "uris": {
                     "type": "array",
@@ -722,7 +722,7 @@
                     "items": {
                         "$ref": "#/types/tls:/SelfSignedCertSubject:SelfSignedCertSubject"
                     },
-                    "description": "The subject for which a certificate is being requested.\nThis is a nested configuration block whose structure matches the\ncorresponding block for `tls..CertRequest`.\n"
+                    "description": "The subject for which a certificate is being requested.\nThis is a nested configuration block whose structure matches the\ncorresponding block for `tls.CertRequest`.\n"
                 },
                 "uris": {
                     "type": "array",
@@ -799,7 +799,7 @@
                         "items": {
                             "$ref": "#/types/tls:/SelfSignedCertSubject:SelfSignedCertSubject"
                         },
-                        "description": "The subject for which a certificate is being requested.\nThis is a nested configuration block whose structure matches the\ncorresponding block for `tls..CertRequest`.\n"
+                        "description": "The subject for which a certificate is being requested.\nThis is a nested configuration block whose structure matches the\ncorresponding block for `tls.CertRequest`.\n"
                     },
                     "uris": {
                         "type": "array",
@@ -827,7 +827,7 @@
     },
     "functions": {
         "tls:index/getPublicKey:getPublicKey": {
-            "description": "Use this data source to get the public key from a PEM-encoded private key for use in other\nresources.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as fs from \"fs\";\nimport * as tls from \"@pulumi/tls\";\n\nconst example = pulumi.output(tls.getPublicKey({\n    privateKeyPem: fs.readFileSync(\"~/.ssh/id_rsa\", \"utf-8\"),\n}, { async: true }));\n```\n```python\nimport pulumi\nimport pulumi_tls as tls\n\nexample = tls.get_public_key(private_key_pem=(lambda path: open(path).read())(\"~/.ssh/id_rsa\"))\n```\n```csharp\nusing System.IO;\nusing Pulumi;\nusing Tls = Pulumi.Tls;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var example = Output.Create(Tls.GetPublicKey.InvokeAsync(new Tls.GetPublicKeyArgs\n        {\n            PrivateKeyPem = File.ReadAllText(\"~/.ssh/id_rsa\"),\n        }));\n    }\n\n}\n```\n\n{{% /example %}}\n{{% /examples %}}\n",
+            "description": "Use this data source to get the public key from a PEM-encoded private key for use in other\nresources.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as fs from \"fs\";\nimport * as tls from \"@pulumi/tls\";\n\nconst example = pulumi.output(tls.getPublicKey({\n    privateKeyPem: fs.readFileSync(\"~/.ssh/id_rsa\", \"utf-8\"),\n}, { async: true }));\n```\n```python\nimport pulumi\nimport pulumi_tls as tls\n\nexample = tls.get_public_key(private_key_pem=(lambda path: open(path).read())(\"~/.ssh/id_rsa\"))\n```\n```csharp\nusing System.IO;\nusing Pulumi;\nusing Tls = Pulumi.Tls;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var example = Output.Create(Tls.GetPublicKey.InvokeAsync(new Tls.GetPublicKeyArgs\n        {\n            PrivateKeyPem = File.ReadAllText(\"~/.ssh/id_rsa\"),\n        }));\n    }\n\n}\n```\n{{% /example %}}\n{{% /examples %}}",
             "inputs": {
                 "description": "A collection of arguments for invoking getPublicKey.\n",
                 "properties": {
@@ -904,6 +904,7 @@
             "typescriptVersion": ""
         },
         "python": {
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-tls)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-tls` repo](https://github.com/pulumi/pulumi-tls/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-providers/terraform-provider-tls` repo](https://github.com/terraform-providers/terraform-provider-tls/issues).",
             "requires": {
                 "pulumi": "\u003e=2.0.0,\u003c3.0.0"
             }

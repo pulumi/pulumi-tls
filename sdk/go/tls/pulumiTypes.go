@@ -25,8 +25,7 @@ type CertRequestSubject struct {
 // CertRequestSubjectInput is an input type that accepts CertRequestSubjectArgs and CertRequestSubjectOutput values.
 // You can construct a concrete instance of `CertRequestSubjectInput` via:
 //
-// 		 CertRequestSubjectArgs{...}
-//
+//          CertRequestSubjectArgs{...}
 type CertRequestSubjectInput interface {
 	pulumi.Input
 
@@ -61,8 +60,7 @@ func (i CertRequestSubjectArgs) ToCertRequestSubjectOutputWithContext(ctx contex
 // CertRequestSubjectArrayInput is an input type that accepts CertRequestSubjectArray and CertRequestSubjectArrayOutput values.
 // You can construct a concrete instance of `CertRequestSubjectArrayInput` via:
 //
-// 		 CertRequestSubjectArray{ CertRequestSubjectArgs{...} }
-//
+//          CertRequestSubjectArray{ CertRequestSubjectArgs{...} }
 type CertRequestSubjectArrayInput interface {
 	pulumi.Input
 
@@ -169,8 +167,7 @@ type SelfSignedCertSubject struct {
 // SelfSignedCertSubjectInput is an input type that accepts SelfSignedCertSubjectArgs and SelfSignedCertSubjectOutput values.
 // You can construct a concrete instance of `SelfSignedCertSubjectInput` via:
 //
-// 		 SelfSignedCertSubjectArgs{...}
-//
+//          SelfSignedCertSubjectArgs{...}
 type SelfSignedCertSubjectInput interface {
 	pulumi.Input
 
@@ -205,8 +202,7 @@ func (i SelfSignedCertSubjectArgs) ToSelfSignedCertSubjectOutputWithContext(ctx 
 // SelfSignedCertSubjectArrayInput is an input type that accepts SelfSignedCertSubjectArray and SelfSignedCertSubjectArrayOutput values.
 // You can construct a concrete instance of `SelfSignedCertSubjectArrayInput` via:
 //
-// 		 SelfSignedCertSubjectArray{ SelfSignedCertSubjectArgs{...} }
-//
+//          SelfSignedCertSubjectArray{ SelfSignedCertSubjectArgs{...} }
 type SelfSignedCertSubjectArrayInput interface {
 	pulumi.Input
 
