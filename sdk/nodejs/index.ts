@@ -3,6 +3,7 @@
 
 // Export members:
 export * from "./certRequest";
+export * from "./getCertificate";
 export * from "./getPublicKey";
 export * from "./locallySignedCert";
 export * from "./privateKey";

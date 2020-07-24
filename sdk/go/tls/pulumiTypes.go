@@ -294,9 +294,159 @@ func (o SelfSignedCertSubjectArrayOutput) Index(i pulumi.IntInput) SelfSignedCer
 	}).(SelfSignedCertSubjectOutput)
 }
 
+type GetCertificateCertificate struct {
+	IsCa               bool   `pulumi:"isCa"`
+	Issuer             string `pulumi:"issuer"`
+	NotAfter           string `pulumi:"notAfter"`
+	NotBefore          string `pulumi:"notBefore"`
+	PublicKeyAlgorithm string `pulumi:"publicKeyAlgorithm"`
+	SerialNumber       string `pulumi:"serialNumber"`
+	Sha1Fingerprint    string `pulumi:"sha1Fingerprint"`
+	SignatureAlgorithm string `pulumi:"signatureAlgorithm"`
+	Subject            string `pulumi:"subject"`
+	Version            int    `pulumi:"version"`
+}
+
+// GetCertificateCertificateInput is an input type that accepts GetCertificateCertificateArgs and GetCertificateCertificateOutput values.
+// You can construct a concrete instance of `GetCertificateCertificateInput` via:
+//
+//          GetCertificateCertificateArgs{...}
+type GetCertificateCertificateInput interface {
+	pulumi.Input
+
+	ToGetCertificateCertificateOutput() GetCertificateCertificateOutput
+	ToGetCertificateCertificateOutputWithContext(context.Context) GetCertificateCertificateOutput
+}
+
+type GetCertificateCertificateArgs struct {
+	IsCa               pulumi.BoolInput   `pulumi:"isCa"`
+	Issuer             pulumi.StringInput `pulumi:"issuer"`
+	NotAfter           pulumi.StringInput `pulumi:"notAfter"`
+	NotBefore          pulumi.StringInput `pulumi:"notBefore"`
+	PublicKeyAlgorithm pulumi.StringInput `pulumi:"publicKeyAlgorithm"`
+	SerialNumber       pulumi.StringInput `pulumi:"serialNumber"`
+	Sha1Fingerprint    pulumi.StringInput `pulumi:"sha1Fingerprint"`
+	SignatureAlgorithm pulumi.StringInput `pulumi:"signatureAlgorithm"`
+	Subject            pulumi.StringInput `pulumi:"subject"`
+	Version            pulumi.IntInput    `pulumi:"version"`
+}
+
+func (GetCertificateCertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateCertificate)(nil)).Elem()
+}
+
+func (i GetCertificateCertificateArgs) ToGetCertificateCertificateOutput() GetCertificateCertificateOutput {
+	return i.ToGetCertificateCertificateOutputWithContext(context.Background())
+}
+
+func (i GetCertificateCertificateArgs) ToGetCertificateCertificateOutputWithContext(ctx context.Context) GetCertificateCertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateCertificateOutput)
+}
+
+// GetCertificateCertificateArrayInput is an input type that accepts GetCertificateCertificateArray and GetCertificateCertificateArrayOutput values.
+// You can construct a concrete instance of `GetCertificateCertificateArrayInput` via:
+//
+//          GetCertificateCertificateArray{ GetCertificateCertificateArgs{...} }
+type GetCertificateCertificateArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateCertificateArrayOutput() GetCertificateCertificateArrayOutput
+	ToGetCertificateCertificateArrayOutputWithContext(context.Context) GetCertificateCertificateArrayOutput
+}
+
+type GetCertificateCertificateArray []GetCertificateCertificateInput
+
+func (GetCertificateCertificateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateCertificate)(nil)).Elem()
+}
+
+func (i GetCertificateCertificateArray) ToGetCertificateCertificateArrayOutput() GetCertificateCertificateArrayOutput {
+	return i.ToGetCertificateCertificateArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateCertificateArray) ToGetCertificateCertificateArrayOutputWithContext(ctx context.Context) GetCertificateCertificateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateCertificateArrayOutput)
+}
+
+type GetCertificateCertificateOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateCertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateCertificate)(nil)).Elem()
+}
+
+func (o GetCertificateCertificateOutput) ToGetCertificateCertificateOutput() GetCertificateCertificateOutput {
+	return o
+}
+
+func (o GetCertificateCertificateOutput) ToGetCertificateCertificateOutputWithContext(ctx context.Context) GetCertificateCertificateOutput {
+	return o
+}
+
+func (o GetCertificateCertificateOutput) IsCa() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetCertificateCertificate) bool { return v.IsCa }).(pulumi.BoolOutput)
+}
+
+func (o GetCertificateCertificateOutput) Issuer() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateCertificate) string { return v.Issuer }).(pulumi.StringOutput)
+}
+
+func (o GetCertificateCertificateOutput) NotAfter() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateCertificate) string { return v.NotAfter }).(pulumi.StringOutput)
+}
+
+func (o GetCertificateCertificateOutput) NotBefore() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateCertificate) string { return v.NotBefore }).(pulumi.StringOutput)
+}
+
+func (o GetCertificateCertificateOutput) PublicKeyAlgorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateCertificate) string { return v.PublicKeyAlgorithm }).(pulumi.StringOutput)
+}
+
+func (o GetCertificateCertificateOutput) SerialNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateCertificate) string { return v.SerialNumber }).(pulumi.StringOutput)
+}
+
+func (o GetCertificateCertificateOutput) Sha1Fingerprint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateCertificate) string { return v.Sha1Fingerprint }).(pulumi.StringOutput)
+}
+
+func (o GetCertificateCertificateOutput) SignatureAlgorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateCertificate) string { return v.SignatureAlgorithm }).(pulumi.StringOutput)
+}
+
+func (o GetCertificateCertificateOutput) Subject() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateCertificate) string { return v.Subject }).(pulumi.StringOutput)
+}
+
+func (o GetCertificateCertificateOutput) Version() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateCertificate) int { return v.Version }).(pulumi.IntOutput)
+}
+
+type GetCertificateCertificateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateCertificateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateCertificate)(nil)).Elem()
+}
+
+func (o GetCertificateCertificateArrayOutput) ToGetCertificateCertificateArrayOutput() GetCertificateCertificateArrayOutput {
+	return o
+}
+
+func (o GetCertificateCertificateArrayOutput) ToGetCertificateCertificateArrayOutputWithContext(ctx context.Context) GetCertificateCertificateArrayOutput {
+	return o
+}
+
+func (o GetCertificateCertificateArrayOutput) Index(i pulumi.IntInput) GetCertificateCertificateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateCertificate {
+		return vs[0].([]GetCertificateCertificate)[vs[1].(int)]
+	}).(GetCertificateCertificateOutput)
+}
+
 func init() {
 	pulumi.RegisterOutputType(CertRequestSubjectOutput{})
 	pulumi.RegisterOutputType(CertRequestSubjectArrayOutput{})
 	pulumi.RegisterOutputType(SelfSignedCertSubjectOutput{})
 	pulumi.RegisterOutputType(SelfSignedCertSubjectArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateCertificateOutput{})
+	pulumi.RegisterOutputType(GetCertificateCertificateArrayOutput{})
 }

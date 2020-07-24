@@ -14,6 +14,7 @@
     },
     "files": [
         "certRequest.ts",
+        "getCertificate.ts",
         "getPublicKey.ts",
         "index.ts",
         "locallySignedCert.ts",

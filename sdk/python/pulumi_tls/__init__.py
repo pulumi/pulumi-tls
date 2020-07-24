@@ -4,6 +4,7 @@
 
 # Export this package's modules as members:
 from .cert_request import *
+from .get_certificate import *
 from .get_public_key import *
 from .locally_signed_cert import *
 from .private_key import *

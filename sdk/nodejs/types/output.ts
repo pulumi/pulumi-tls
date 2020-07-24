@@ -17,6 +17,19 @@ export interface CertRequestSubject {
     streetAddresses?: string[];
 }
 
+export interface GetCertificateCertificate {
+    isCa: boolean;
+    issuer: string;
+    notAfter: string;
+    notBefore: string;
+    publicKeyAlgorithm: string;
+    serialNumber: string;
+    sha1Fingerprint: string;
+    signatureAlgorithm: string;
+    subject: string;
+    version: number;
+}
+
 export interface SelfSignedCertSubject {
     commonName?: string;
     country?: string;
