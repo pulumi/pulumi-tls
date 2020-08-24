@@ -5,9 +5,17 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Union
-from . import utilities, tables
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from . import _utilities, _tables
+from . import outputs
 
+__all__ = [
+    'GetCertificateResult',
+    'AwaitableGetCertificateResult',
+    'get_certificate',
+]
+
+@pulumi.output_type
 class GetCertificateResult:
     """
     A collection of values returned by getCertificate.
@@ -15,7 +23,20 @@ class GetCertificateResult:
     def __init__(__self__, certificates=None, id=None, url=None, verify_chain=None):
         if certificates and not isinstance(certificates, list):
             raise TypeError("Expected argument 'certificates' to be a list")
-        __self__.certificates = certificates
+        pulumi.set(__self__, "certificates", certificates)
+        if id and not isinstance(id, str):
+            raise TypeError("Expected argument 'id' to be a str")
+        pulumi.set(__self__, "id", id)
+        if url and not isinstance(url, str):
+            raise TypeError("Expected argument 'url' to be a str")
+        pulumi.set(__self__, "url", url)
+        if verify_chain and not isinstance(verify_chain, bool):
+            raise TypeError("Expected argument 'verify_chain' to be a bool")
+        pulumi.set(__self__, "verify_chain", verify_chain)
+
+    @property
+    @pulumi.getter
+    def certificates(self) -> List['outputs.GetCertificateCertificateResult']:
         """
         The certificates protecting the site, with the root of the chain first.
         * `certificates.#.not_after` - The time until which the certificate is invalid, as an
@@ -34,18 +55,27 @@ class GetCertificateResult:
         [RFC2253](https://tools.ietf.org/html/rfc2253).
         * `certificates.#.version` - The version the certificate is in.
         """
-        if id and not isinstance(id, str):
-            raise TypeError("Expected argument 'id' to be a str")
-        __self__.id = id
+        return pulumi.get(self, "certificates")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
         """
         The provider-assigned unique ID for this managed resource.
         """
-        if url and not isinstance(url, str):
-            raise TypeError("Expected argument 'url' to be a str")
-        __self__.url = url
-        if verify_chain and not isinstance(verify_chain, bool):
-            raise TypeError("Expected argument 'verify_chain' to be a bool")
-        __self__.verify_chain = verify_chain
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def url(self) -> str:
+        return pulumi.get(self, "url")
+
+    @property
+    @pulumi.getter(name="verifyChain")
+    def verify_chain(self) -> Optional[bool]:
+        return pulumi.get(self, "verify_chain")
+
+
 class AwaitableGetCertificateResult(GetCertificateResult):
     # pylint: disable=using-constant-test
     def __await__(self):
@@ -57,28 +87,44 @@ class AwaitableGetCertificateResult(GetCertificateResult):
             url=self.url,
             verify_chain=self.verify_chain)
 
-def get_certificate(url=None,verify_chain=None,opts=None):
+
+def get_certificate(url: Optional[str] = None,
+                    verify_chain: Optional[bool] = None,
+                    opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetCertificateResult:
     """
     Use this data source to get information, such as SHA1 fingerprint or serial number, about the TLS certificates that
     protect an HTTPS website. Note that the certificate chain isn't verified.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_aws as aws
+    import pulumi_tls as tls
+
+    example_cluster = aws.eks.Cluster("exampleCluster")
+    example_certificate = example_cluster.identities.apply(lambda identities: tls.get_certificate(url=identities[0]["oidcs"][0]["issuer"]))
+    example_open_id_connect_provider = aws.iam.OpenIdConnectProvider("exampleOpenIdConnectProvider",
+        client_id_lists=["sts.amazonaws.com"],
+        thumbprint_lists=[example_certificate.certificates[0].sha1_fingerprint],
+        url=example_cluster.identities[0]["oidcs"][0]["issuer"])
+    ```
 
 
     :param str url: The URL of the website to get the certificates from.
     :param bool verify_chain: Whether to verify the certificate chain while parsing it or not
     """
     __args__ = dict()
-
-
     __args__['url'] = url
     __args__['verifyChain'] = verify_chain
     if opts is None:
         opts = pulumi.InvokeOptions()
     if opts.version is None:
-        opts.version = utilities.get_version()
-    __ret__ = pulumi.runtime.invoke('tls:index/getCertificate:getCertificate', __args__, opts=opts).value
+        opts.version = _utilities.get_version()
+    __ret__ = pulumi.runtime.invoke('tls:index/getCertificate:getCertificate', __args__, opts=opts, typ=GetCertificateResult).value
 
     return AwaitableGetCertificateResult(
-        certificates=__ret__.get('certificates'),
-        id=__ret__.get('id'),
-        url=__ret__.get('url'),
-        verify_chain=__ret__.get('verifyChain'))
+        certificates=__ret__.certificates,
+        id=__ret__.id,
+        url=__ret__.url,
+        verify_chain=__ret__.verify_chain)

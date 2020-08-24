@@ -9,6 +9,24 @@ import * as utilities from "./utilities";
 /**
  * Use this data source to get information, such as SHA1 fingerprint or serial number, about the TLS certificates that
  * protect an HTTPS website. Note that the certificate chain isn't verified.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as aws from "@pulumi/aws";
+ * import * as tls from "@pulumi/tls";
+ *
+ * const exampleCluster = new aws.eks.Cluster("example", {});
+ * const exampleCertificate = exampleCluster.identities.apply(identities => tls.getCertificate({
+ *     url: identities[0].oidcs[0].issuer,
+ * }, { async: true }));
+ * const exampleOpenIdConnectProvider = new aws.iam.OpenIdConnectProvider("example", {
+ *     clientIdLists: ["sts.amazonaws.com"],
+ *     thumbprintLists: [exampleCertificate.certificates[0].sha1Fingerprint],
+ *     url: exampleCluster.identities[0].oidcs[0].issuer,
+ * });
+ * ```
  */
 export function getCertificate(args: GetCertificateArgs, opts?: pulumi.InvokeOptions): Promise<GetCertificateResult> {
     if (!opts) {

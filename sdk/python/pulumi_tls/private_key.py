@@ -5,51 +5,22 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Union
-from . import utilities, tables
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from . import _utilities, _tables
+
+__all__ = ['PrivateKey']
 
 
 class PrivateKey(pulumi.CustomResource):
-    algorithm: pulumi.Output[str]
-    """
-    The name of the algorithm to use for
-    the key. Currently-supported values are "RSA" and "ECDSA".
-    """
-    ecdsa_curve: pulumi.Output[str]
-    """
-    When `algorithm` is "ECDSA", the name of the elliptic
-    curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
-    default.
-    """
-    private_key_pem: pulumi.Output[str]
-    """
-    The private key data in PEM format.
-    """
-    public_key_fingerprint_md5: pulumi.Output[str]
-    """
-    The md5 hash of the public key data in
-    OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
-    selected private key format is compatible, as per the rules for
-    `public_key_openssh`.
-    """
-    public_key_openssh: pulumi.Output[str]
-    """
-    The public key data in OpenSSH `authorized_keys`
-    format, if the selected private key format is compatible. All RSA keys
-    are supported, and ECDSA keys with curves "P256", "P384" and "P521"
-    are supported. This attribute is empty if an incompatible ECDSA curve
-    is selected.
-    """
-    public_key_pem: pulumi.Output[str]
-    """
-    The public key data in PEM format.
-    """
-    rsa_bits: pulumi.Output[float]
-    """
-    When `algorithm` is "RSA", the size of the generated
-    RSA key in bits. Defaults to 2048.
-    """
-    def __init__(__self__, resource_name, opts=None, algorithm=None, ecdsa_curve=None, rsa_bits=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__,
+                 resource_name,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 algorithm: Optional[pulumi.Input[str]] = None,
+                 ecdsa_curve: Optional[pulumi.Input[str]] = None,
+                 rsa_bits: Optional[pulumi.Input[float]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         """
         Create a PrivateKey resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
@@ -73,7 +44,7 @@ class PrivateKey(pulumi.CustomResource):
         if not isinstance(opts, pulumi.ResourceOptions):
             raise TypeError('Expected resource options to be a ResourceOptions instance')
         if opts.version is None:
-            opts.version = utilities.get_version()
+            opts.version = _utilities.get_version()
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
@@ -95,13 +66,22 @@ class PrivateKey(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, algorithm=None, ecdsa_curve=None, private_key_pem=None, public_key_fingerprint_md5=None, public_key_openssh=None, public_key_pem=None, rsa_bits=None):
+    def get(resource_name: str,
+            id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            algorithm: Optional[pulumi.Input[str]] = None,
+            ecdsa_curve: Optional[pulumi.Input[str]] = None,
+            private_key_pem: Optional[pulumi.Input[str]] = None,
+            public_key_fingerprint_md5: Optional[pulumi.Input[str]] = None,
+            public_key_openssh: Optional[pulumi.Input[str]] = None,
+            public_key_pem: Optional[pulumi.Input[str]] = None,
+            rsa_bits: Optional[pulumi.Input[float]] = None) -> 'PrivateKey':
         """
         Get an existing PrivateKey resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
-        :param str id: The unique provider ID of the resource to lookup.
+        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] algorithm: The name of the algorithm to use for
                the key. Currently-supported values are "RSA" and "ECDSA".
@@ -135,8 +115,76 @@ class PrivateKey(pulumi.CustomResource):
         __props__["rsa_bits"] = rsa_bits
         return PrivateKey(resource_name, opts=opts, __props__=__props__)
 
+    @property
+    @pulumi.getter
+    def algorithm(self) -> str:
+        """
+        The name of the algorithm to use for
+        the key. Currently-supported values are "RSA" and "ECDSA".
+        """
+        return pulumi.get(self, "algorithm")
+
+    @property
+    @pulumi.getter(name="ecdsaCurve")
+    def ecdsa_curve(self) -> Optional[str]:
+        """
+        When `algorithm` is "ECDSA", the name of the elliptic
+        curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
+        default.
+        """
+        return pulumi.get(self, "ecdsa_curve")
+
+    @property
+    @pulumi.getter(name="privateKeyPem")
+    def private_key_pem(self) -> str:
+        """
+        The private key data in PEM format.
+        """
+        return pulumi.get(self, "private_key_pem")
+
+    @property
+    @pulumi.getter(name="publicKeyFingerprintMd5")
+    def public_key_fingerprint_md5(self) -> str:
+        """
+        The md5 hash of the public key data in
+        OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
+        selected private key format is compatible, as per the rules for
+        `public_key_openssh`.
+        """
+        return pulumi.get(self, "public_key_fingerprint_md5")
+
+    @property
+    @pulumi.getter(name="publicKeyOpenssh")
+    def public_key_openssh(self) -> str:
+        """
+        The public key data in OpenSSH `authorized_keys`
+        format, if the selected private key format is compatible. All RSA keys
+        are supported, and ECDSA keys with curves "P256", "P384" and "P521"
+        are supported. This attribute is empty if an incompatible ECDSA curve
+        is selected.
+        """
+        return pulumi.get(self, "public_key_openssh")
+
+    @property
+    @pulumi.getter(name="publicKeyPem")
+    def public_key_pem(self) -> str:
+        """
+        The public key data in PEM format.
+        """
+        return pulumi.get(self, "public_key_pem")
+
+    @property
+    @pulumi.getter(name="rsaBits")
+    def rsa_bits(self) -> Optional[float]:
+        """
+        When `algorithm` is "RSA", the size of the generated
+        RSA key in bits. Defaults to 2048.
+        """
+        return pulumi.get(self, "rsa_bits")
+
     def translate_output_property(self, prop):
-        return tables._CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
     def translate_input_property(self, prop):
-        return tables._SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
+        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
+

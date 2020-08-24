@@ -5,9 +5,16 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Union
-from . import utilities, tables
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from . import _utilities, _tables
 
+__all__ = [
+    'GetPublicKeyResult',
+    'AwaitableGetPublicKeyResult',
+    'get_public_key',
+]
+
+@pulumi.output_type
 class GetPublicKeyResult:
     """
     A collection of values returned by getPublicKey.
@@ -15,31 +22,58 @@ class GetPublicKeyResult:
     def __init__(__self__, algorithm=None, id=None, private_key_pem=None, public_key_fingerprint_md5=None, public_key_openssh=None, public_key_pem=None):
         if algorithm and not isinstance(algorithm, str):
             raise TypeError("Expected argument 'algorithm' to be a str")
-        __self__.algorithm = algorithm
+        pulumi.set(__self__, "algorithm", algorithm)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
-        __self__.id = id
+        pulumi.set(__self__, "id", id)
+        if private_key_pem and not isinstance(private_key_pem, str):
+            raise TypeError("Expected argument 'private_key_pem' to be a str")
+        pulumi.set(__self__, "private_key_pem", private_key_pem)
+        if public_key_fingerprint_md5 and not isinstance(public_key_fingerprint_md5, str):
+            raise TypeError("Expected argument 'public_key_fingerprint_md5' to be a str")
+        pulumi.set(__self__, "public_key_fingerprint_md5", public_key_fingerprint_md5)
+        if public_key_openssh and not isinstance(public_key_openssh, str):
+            raise TypeError("Expected argument 'public_key_openssh' to be a str")
+        pulumi.set(__self__, "public_key_openssh", public_key_openssh)
+        if public_key_pem and not isinstance(public_key_pem, str):
+            raise TypeError("Expected argument 'public_key_pem' to be a str")
+        pulumi.set(__self__, "public_key_pem", public_key_pem)
+
+    @property
+    @pulumi.getter
+    def algorithm(self) -> str:
+        return pulumi.get(self, "algorithm")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
         """
         The provider-assigned unique ID for this managed resource.
         """
-        if private_key_pem and not isinstance(private_key_pem, str):
-            raise TypeError("Expected argument 'private_key_pem' to be a str")
-        __self__.private_key_pem = private_key_pem
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="privateKeyPem")
+    def private_key_pem(self) -> str:
         """
         The private key data in PEM format.
         """
-        if public_key_fingerprint_md5 and not isinstance(public_key_fingerprint_md5, str):
-            raise TypeError("Expected argument 'public_key_fingerprint_md5' to be a str")
-        __self__.public_key_fingerprint_md5 = public_key_fingerprint_md5
+        return pulumi.get(self, "private_key_pem")
+
+    @property
+    @pulumi.getter(name="publicKeyFingerprintMd5")
+    def public_key_fingerprint_md5(self) -> str:
         """
         The md5 hash of the public key data in
         OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
         selected private key format is compatible, as per the rules for
         `public_key_openssh`.
         """
-        if public_key_openssh and not isinstance(public_key_openssh, str):
-            raise TypeError("Expected argument 'public_key_openssh' to be a str")
-        __self__.public_key_openssh = public_key_openssh
+        return pulumi.get(self, "public_key_fingerprint_md5")
+
+    @property
+    @pulumi.getter(name="publicKeyOpenssh")
+    def public_key_openssh(self) -> str:
         """
         The public key data in OpenSSH `authorized_keys`
         format, if the selected private key format is compatible. All RSA keys
@@ -47,12 +81,17 @@ class GetPublicKeyResult:
         are supported. This attribute is empty if an incompatible ECDSA curve
         is selected.
         """
-        if public_key_pem and not isinstance(public_key_pem, str):
-            raise TypeError("Expected argument 'public_key_pem' to be a str")
-        __self__.public_key_pem = public_key_pem
+        return pulumi.get(self, "public_key_openssh")
+
+    @property
+    @pulumi.getter(name="publicKeyPem")
+    def public_key_pem(self) -> str:
         """
         The public key data in PEM format.
         """
+        return pulumi.get(self, "public_key_pem")
+
+
 class AwaitableGetPublicKeyResult(GetPublicKeyResult):
     # pylint: disable=using-constant-test
     def __await__(self):
@@ -66,7 +105,9 @@ class AwaitableGetPublicKeyResult(GetPublicKeyResult):
             public_key_openssh=self.public_key_openssh,
             public_key_pem=self.public_key_pem)
 
-def get_public_key(private_key_pem=None,opts=None):
+
+def get_public_key(private_key_pem: Optional[str] = None,
+                   opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetPublicKeyResult:
     """
     Use this data source to get the public key from a PEM-encoded private key for use in other
     resources.
@@ -84,19 +125,17 @@ def get_public_key(private_key_pem=None,opts=None):
     :param str private_key_pem: The private key to use. Currently-supported key types are "RSA" or "ECDSA".
     """
     __args__ = dict()
-
-
     __args__['privateKeyPem'] = private_key_pem
     if opts is None:
         opts = pulumi.InvokeOptions()
     if opts.version is None:
-        opts.version = utilities.get_version()
-    __ret__ = pulumi.runtime.invoke('tls:index/getPublicKey:getPublicKey', __args__, opts=opts).value
+        opts.version = _utilities.get_version()
+    __ret__ = pulumi.runtime.invoke('tls:index/getPublicKey:getPublicKey', __args__, opts=opts, typ=GetPublicKeyResult).value
 
     return AwaitableGetPublicKeyResult(
-        algorithm=__ret__.get('algorithm'),
-        id=__ret__.get('id'),
-        private_key_pem=__ret__.get('privateKeyPem'),
-        public_key_fingerprint_md5=__ret__.get('publicKeyFingerprintMd5'),
-        public_key_openssh=__ret__.get('publicKeyOpenssh'),
-        public_key_pem=__ret__.get('publicKeyPem'))
+        algorithm=__ret__.algorithm,
+        id=__ret__.id,
+        private_key_pem=__ret__.private_key_pem,
+        public_key_fingerprint_md5=__ret__.public_key_fingerprint_md5,
+        public_key_openssh=__ret__.public_key_openssh,
+        public_key_pem=__ret__.public_key_pem)

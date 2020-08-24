@@ -5,76 +5,39 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Union
-from . import utilities, tables
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from . import _utilities, _tables
+from . import outputs
+from ._inputs import *
+
+__all__ = ['CertRequest']
 
 
 class CertRequest(pulumi.CustomResource):
-    cert_request_pem: pulumi.Output[str]
-    """
-    The certificate request data in PEM format.
-    """
-    dns_names: pulumi.Output[list]
-    """
-    List of DNS names for which a certificate is being requested.
-    """
-    ip_addresses: pulumi.Output[list]
-    """
-    List of IP addresses for which a certificate is being requested.
-    """
-    key_algorithm: pulumi.Output[str]
-    """
-    The name of the algorithm for the key provided
-    in `private_key_pem`.
-    """
-    private_key_pem: pulumi.Output[str]
-    """
-    PEM-encoded private key that the certificate will belong to
-    """
-    subjects: pulumi.Output[list]
-    """
-    The subject for which a certificate is being requested. This is
-    a nested configuration block whose structure is described below.
-
-      * `commonName` (`str`)
-      * `country` (`str`)
-      * `locality` (`str`)
-      * `organization` (`str`)
-      * `organizationalUnit` (`str`)
-      * `postalCode` (`str`)
-      * `province` (`str`)
-      * `serialNumber` (`str`)
-      * `streetAddresses` (`list`)
-    """
-    uris: pulumi.Output[list]
-    """
-    List of URIs for which a certificate is being requested.
-    """
-    def __init__(__self__, resource_name, opts=None, dns_names=None, ip_addresses=None, key_algorithm=None, private_key_pem=None, subjects=None, uris=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__,
+                 resource_name,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 dns_names: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+                 ip_addresses: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+                 key_algorithm: Optional[pulumi.Input[str]] = None,
+                 private_key_pem: Optional[pulumi.Input[str]] = None,
+                 subjects: Optional[pulumi.Input[List[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]]]] = None,
+                 uris: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         """
         Create a CertRequest resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[list] dns_names: List of DNS names for which a certificate is being requested.
-        :param pulumi.Input[list] ip_addresses: List of IP addresses for which a certificate is being requested.
+        :param pulumi.Input[List[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested.
+        :param pulumi.Input[List[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested.
         :param pulumi.Input[str] key_algorithm: The name of the algorithm for the key provided
                in `private_key_pem`.
         :param pulumi.Input[str] private_key_pem: PEM-encoded private key that the certificate will belong to
-        :param pulumi.Input[list] subjects: The subject for which a certificate is being requested. This is
+        :param pulumi.Input[List[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]]] subjects: The subject for which a certificate is being requested. This is
                a nested configuration block whose structure is described below.
-        :param pulumi.Input[list] uris: List of URIs for which a certificate is being requested.
-
-        The **subjects** object supports the following:
-
-          * `commonName` (`pulumi.Input[str]`)
-          * `country` (`pulumi.Input[str]`)
-          * `locality` (`pulumi.Input[str]`)
-          * `organization` (`pulumi.Input[str]`)
-          * `organizationalUnit` (`pulumi.Input[str]`)
-          * `postalCode` (`pulumi.Input[str]`)
-          * `province` (`pulumi.Input[str]`)
-          * `serialNumber` (`pulumi.Input[str]`)
-          * `streetAddresses` (`pulumi.Input[list]`)
+        :param pulumi.Input[List[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -87,7 +50,7 @@ class CertRequest(pulumi.CustomResource):
         if not isinstance(opts, pulumi.ResourceOptions):
             raise TypeError('Expected resource options to be a ResourceOptions instance')
         if opts.version is None:
-            opts.version = utilities.get_version()
+            opts.version = _utilities.get_version()
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
@@ -113,35 +76,32 @@ class CertRequest(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, cert_request_pem=None, dns_names=None, ip_addresses=None, key_algorithm=None, private_key_pem=None, subjects=None, uris=None):
+    def get(resource_name: str,
+            id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            cert_request_pem: Optional[pulumi.Input[str]] = None,
+            dns_names: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+            ip_addresses: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+            key_algorithm: Optional[pulumi.Input[str]] = None,
+            private_key_pem: Optional[pulumi.Input[str]] = None,
+            subjects: Optional[pulumi.Input[List[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]]]] = None,
+            uris: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None) -> 'CertRequest':
         """
         Get an existing CertRequest resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
-        :param str id: The unique provider ID of the resource to lookup.
+        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cert_request_pem: The certificate request data in PEM format.
-        :param pulumi.Input[list] dns_names: List of DNS names for which a certificate is being requested.
-        :param pulumi.Input[list] ip_addresses: List of IP addresses for which a certificate is being requested.
+        :param pulumi.Input[List[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested.
+        :param pulumi.Input[List[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested.
         :param pulumi.Input[str] key_algorithm: The name of the algorithm for the key provided
                in `private_key_pem`.
         :param pulumi.Input[str] private_key_pem: PEM-encoded private key that the certificate will belong to
-        :param pulumi.Input[list] subjects: The subject for which a certificate is being requested. This is
+        :param pulumi.Input[List[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]]] subjects: The subject for which a certificate is being requested. This is
                a nested configuration block whose structure is described below.
-        :param pulumi.Input[list] uris: List of URIs for which a certificate is being requested.
-
-        The **subjects** object supports the following:
-
-          * `commonName` (`pulumi.Input[str]`)
-          * `country` (`pulumi.Input[str]`)
-          * `locality` (`pulumi.Input[str]`)
-          * `organization` (`pulumi.Input[str]`)
-          * `organizationalUnit` (`pulumi.Input[str]`)
-          * `postalCode` (`pulumi.Input[str]`)
-          * `province` (`pulumi.Input[str]`)
-          * `serialNumber` (`pulumi.Input[str]`)
-          * `streetAddresses` (`pulumi.Input[list]`)
+        :param pulumi.Input[List[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -156,8 +116,67 @@ class CertRequest(pulumi.CustomResource):
         __props__["uris"] = uris
         return CertRequest(resource_name, opts=opts, __props__=__props__)
 
+    @property
+    @pulumi.getter(name="certRequestPem")
+    def cert_request_pem(self) -> str:
+        """
+        The certificate request data in PEM format.
+        """
+        return pulumi.get(self, "cert_request_pem")
+
+    @property
+    @pulumi.getter(name="dnsNames")
+    def dns_names(self) -> Optional[List[str]]:
+        """
+        List of DNS names for which a certificate is being requested.
+        """
+        return pulumi.get(self, "dns_names")
+
+    @property
+    @pulumi.getter(name="ipAddresses")
+    def ip_addresses(self) -> Optional[List[str]]:
+        """
+        List of IP addresses for which a certificate is being requested.
+        """
+        return pulumi.get(self, "ip_addresses")
+
+    @property
+    @pulumi.getter(name="keyAlgorithm")
+    def key_algorithm(self) -> str:
+        """
+        The name of the algorithm for the key provided
+        in `private_key_pem`.
+        """
+        return pulumi.get(self, "key_algorithm")
+
+    @property
+    @pulumi.getter(name="privateKeyPem")
+    def private_key_pem(self) -> str:
+        """
+        PEM-encoded private key that the certificate will belong to
+        """
+        return pulumi.get(self, "private_key_pem")
+
+    @property
+    @pulumi.getter
+    def subjects(self) -> List['outputs.CertRequestSubject']:
+        """
+        The subject for which a certificate is being requested. This is
+        a nested configuration block whose structure is described below.
+        """
+        return pulumi.get(self, "subjects")
+
+    @property
+    @pulumi.getter
+    def uris(self) -> Optional[List[str]]:
+        """
+        List of URIs for which a certificate is being requested.
+        """
+        return pulumi.get(self, "uris")
+
     def translate_output_property(self, prop):
-        return tables._CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
     def translate_input_property(self, prop):
-        return tables._SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
+        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
+
