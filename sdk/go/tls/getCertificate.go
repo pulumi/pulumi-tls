@@ -9,6 +9,45 @@ import (
 
 // Use this data source to get information, such as SHA1 fingerprint or serial number, about the TLS certificates that
 // protect an HTTPS website. Note that the certificate chain isn't verified.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/eks"
+// 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
+// 	"github.com/pulumi/pulumi-tls/sdk/v2/go/tls"
+// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		exampleCluster, err := eks.NewCluster(ctx, "exampleCluster", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = iam.NewOpenIdConnectProvider(ctx, "exampleOpenIdConnectProvider", &iam.OpenIdConnectProviderArgs{
+// 			ClientIdLists: pulumi.StringArray{
+// 				pulumi.String("sts.amazonaws.com"),
+// 			},
+// 			ThumbprintLists: pulumi.StringArray{
+// 				exampleCertificate.ApplyT(func(exampleCertificate tls.GetCertificateResult) (string, error) {
+// 					return exampleCertificate.Certificates[0].Sha1Fingerprint, nil
+// 				}).(pulumi.StringOutput),
+// 			},
+// 			Url: pulumi.String(exampleCluster.Identities.ApplyT(func(identities []eks.ClusterIdentity) (string, error) {
+// 				return identities[0].Oidcs[0].Issuer, nil
+// 			}).(pulumi.StringOutput)),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 func GetCertificate(ctx *pulumi.Context, args *GetCertificateArgs, opts ...pulumi.InvokeOption) (*GetCertificateResult, error) {
 	var rv GetCertificateResult
 	err := ctx.Invoke("tls:index/getCertificate:getCertificate", args, &rv, opts...)
