@@ -13,7 +13,7 @@ __all__ = ['PrivateKey']
 
 class PrivateKey(pulumi.CustomResource):
     def __init__(__self__,
-                 resource_name,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  algorithm: Optional[pulumi.Input[str]] = None,
                  ecdsa_curve: Optional[pulumi.Input[str]] = None,
@@ -117,7 +117,7 @@ class PrivateKey(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def algorithm(self) -> str:
+    def algorithm(self) -> pulumi.Output[str]:
         """
         The name of the algorithm to use for
         the key. Currently-supported values are "RSA" and "ECDSA".
@@ -126,7 +126,7 @@ class PrivateKey(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="ecdsaCurve")
-    def ecdsa_curve(self) -> Optional[str]:
+    def ecdsa_curve(self) -> pulumi.Output[Optional[str]]:
         """
         When `algorithm` is "ECDSA", the name of the elliptic
         curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
@@ -136,7 +136,7 @@ class PrivateKey(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="privateKeyPem")
-    def private_key_pem(self) -> str:
+    def private_key_pem(self) -> pulumi.Output[str]:
         """
         The private key data in PEM format.
         """
@@ -144,7 +144,7 @@ class PrivateKey(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="publicKeyFingerprintMd5")
-    def public_key_fingerprint_md5(self) -> str:
+    def public_key_fingerprint_md5(self) -> pulumi.Output[str]:
         """
         The md5 hash of the public key data in
         OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
@@ -155,7 +155,7 @@ class PrivateKey(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="publicKeyOpenssh")
-    def public_key_openssh(self) -> str:
+    def public_key_openssh(self) -> pulumi.Output[str]:
         """
         The public key data in OpenSSH `authorized_keys`
         format, if the selected private key format is compatible. All RSA keys
@@ -167,7 +167,7 @@ class PrivateKey(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="publicKeyPem")
-    def public_key_pem(self) -> str:
+    def public_key_pem(self) -> pulumi.Output[str]:
         """
         The public key data in PEM format.
         """
@@ -175,7 +175,7 @@ class PrivateKey(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="rsaBits")
-    def rsa_bits(self) -> Optional[float]:
+    def rsa_bits(self) -> pulumi.Output[Optional[float]]:
         """
         When `algorithm` is "RSA", the size of the generated
         RSA key in bits. Defaults to 2048.
