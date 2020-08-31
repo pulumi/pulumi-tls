@@ -15,7 +15,7 @@ __all__ = ['CertRequest']
 
 class CertRequest(pulumi.CustomResource):
     def __init__(__self__,
-                 resource_name,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  dns_names: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
                  ip_addresses: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
@@ -118,7 +118,7 @@ class CertRequest(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="certRequestPem")
-    def cert_request_pem(self) -> str:
+    def cert_request_pem(self) -> pulumi.Output[str]:
         """
         The certificate request data in PEM format.
         """
@@ -126,7 +126,7 @@ class CertRequest(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="dnsNames")
-    def dns_names(self) -> Optional[List[str]]:
+    def dns_names(self) -> pulumi.Output[Optional[List[str]]]:
         """
         List of DNS names for which a certificate is being requested.
         """
@@ -134,7 +134,7 @@ class CertRequest(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="ipAddresses")
-    def ip_addresses(self) -> Optional[List[str]]:
+    def ip_addresses(self) -> pulumi.Output[Optional[List[str]]]:
         """
         List of IP addresses for which a certificate is being requested.
         """
@@ -142,7 +142,7 @@ class CertRequest(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="keyAlgorithm")
-    def key_algorithm(self) -> str:
+    def key_algorithm(self) -> pulumi.Output[str]:
         """
         The name of the algorithm for the key provided
         in `private_key_pem`.
@@ -151,7 +151,7 @@ class CertRequest(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="privateKeyPem")
-    def private_key_pem(self) -> str:
+    def private_key_pem(self) -> pulumi.Output[str]:
         """
         PEM-encoded private key that the certificate will belong to
         """
@@ -159,7 +159,7 @@ class CertRequest(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def subjects(self) -> List['outputs.CertRequestSubject']:
+    def subjects(self) -> pulumi.Output[List['outputs.CertRequestSubject']]:
         """
         The subject for which a certificate is being requested. This is
         a nested configuration block whose structure is described below.
@@ -168,7 +168,7 @@ class CertRequest(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def uris(self) -> Optional[List[str]]:
+    def uris(self) -> pulumi.Output[Optional[List[str]]]:
         """
         List of URIs for which a certificate is being requested.
         """
