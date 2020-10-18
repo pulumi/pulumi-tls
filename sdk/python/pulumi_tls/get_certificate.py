@@ -5,7 +5,7 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 from . import outputs
 
@@ -36,7 +36,7 @@ class GetCertificateResult:
 
     @property
     @pulumi.getter
-    def certificates(self) -> List['outputs.GetCertificateCertificateResult']:
+    def certificates(self) -> Sequence['outputs.GetCertificateCertificateResult']:
         """
         The certificates protecting the site, with the root of the chain first.
         * `certificates.#.not_after` - The time until which the certificate is invalid, as an

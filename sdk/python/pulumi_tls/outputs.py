@@ -5,7 +5,7 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 
 __all__ = [
@@ -25,7 +25,7 @@ class CertRequestSubject(dict):
                  postal_code: Optional[str] = None,
                  province: Optional[str] = None,
                  serial_number: Optional[str] = None,
-                 street_addresses: Optional[List[str]] = None):
+                 street_addresses: Optional[Sequence[str]] = None):
         if common_name is not None:
             pulumi.set(__self__, "common_name", common_name)
         if country is not None:
@@ -87,7 +87,7 @@ class CertRequestSubject(dict):
 
     @property
     @pulumi.getter(name="streetAddresses")
-    def street_addresses(self) -> Optional[List[str]]:
+    def street_addresses(self) -> Optional[Sequence[str]]:
         return pulumi.get(self, "street_addresses")
 
     def _translate_property(self, prop):
@@ -105,7 +105,7 @@ class SelfSignedCertSubject(dict):
                  postal_code: Optional[str] = None,
                  province: Optional[str] = None,
                  serial_number: Optional[str] = None,
-                 street_addresses: Optional[List[str]] = None):
+                 street_addresses: Optional[Sequence[str]] = None):
         if common_name is not None:
             pulumi.set(__self__, "common_name", common_name)
         if country is not None:
@@ -167,7 +167,7 @@ class SelfSignedCertSubject(dict):
 
     @property
     @pulumi.getter(name="streetAddresses")
-    def street_addresses(self) -> Optional[List[str]]:
+    def street_addresses(self) -> Optional[Sequence[str]]:
         return pulumi.get(self, "street_addresses")
 
     def _translate_property(self, prop):
@@ -186,7 +186,7 @@ class GetCertificateCertificateResult(dict):
                  sha1_fingerprint: str,
                  signature_algorithm: str,
                  subject: str,
-                 version: float):
+                 version: int):
         pulumi.set(__self__, "is_ca", is_ca)
         pulumi.set(__self__, "issuer", issuer)
         pulumi.set(__self__, "not_after", not_after)
@@ -245,7 +245,7 @@ class GetCertificateCertificateResult(dict):
 
     @property
     @pulumi.getter
-    def version(self) -> float:
+    def version(self) -> int:
         return pulumi.get(self, "version")
 
 

@@ -19,6 +19,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfbridge"
+	shimv1 "github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfshim/sdk-v1"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/terraform-providers/terraform-provider-tls/tls"
 )
@@ -58,7 +59,7 @@ func tlsResource(mod string, res string) tokens.Type {
 // Provider returns additional overlaid schema and metadata associated with the tls package.
 func Provider() tfbridge.ProviderInfo {
 	return tfbridge.ProviderInfo{
-		P:           tls.Provider().(*schema.Provider),
+		P:           shimv1.NewProvider(tls.Provider().(*schema.Provider)),
 		Name:        "tls",
 		Description: "A Pulumi package to create TLS resources in Pulumi programs.",
 		Keywords:    []string{"pulumi", "tls"},

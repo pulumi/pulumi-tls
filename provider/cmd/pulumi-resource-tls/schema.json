@@ -14,7 +14,7 @@
     },
     "config": {},
     "types": {
-        "tls:/CertRequestSubject:CertRequestSubject": {
+        "tls:index/CertRequestSubject:CertRequestSubject": {
             "properties": {
                 "commonName": {
                     "type": "string",
@@ -94,7 +94,7 @@
             },
             "type": "object"
         },
-        "tls:/SelfSignedCertSubject:SelfSignedCertSubject": {
+        "tls:index/SelfSignedCertSubject:SelfSignedCertSubject": {
             "properties": {
                 "commonName": {
                     "type": "string",
@@ -174,7 +174,7 @@
             },
             "type": "object"
         },
-        "tls:/getCertificateCertificate:getCertificateCertificate": {
+        "tls:index/getCertificateCertificate:getCertificateCertificate": {
             "properties": {
                 "isCa": {
                     "type": "boolean",
@@ -312,7 +312,7 @@
                 "subjects": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/tls:/CertRequestSubject:CertRequestSubject"
+                        "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject"
                     },
                     "description": "The subject for which a certificate is being requested. This is\na nested configuration block whose structure is described below.\n"
                 },
@@ -356,7 +356,7 @@
                 "subjects": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/tls:/CertRequestSubject:CertRequestSubject"
+                        "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject"
                     },
                     "description": "The subject for which a certificate is being requested. This is\na nested configuration block whose structure is described below.\n"
                 },
@@ -405,7 +405,7 @@
                     "subjects": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/types/tls:/CertRequestSubject:CertRequestSubject"
+                            "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject"
                         },
                         "description": "The subject for which a certificate is being requested. This is\na nested configuration block whose structure is described below.\n"
                     },
@@ -742,7 +742,7 @@
                 "subjects": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/tls:/SelfSignedCertSubject:SelfSignedCertSubject"
+                        "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject"
                     },
                     "description": "The subject for which a certificate is being requested.\nThis is a nested configuration block whose structure matches the\ncorresponding block for `tls.CertRequest`.\n"
                 },
@@ -822,7 +822,7 @@
                 "subjects": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/tls:/SelfSignedCertSubject:SelfSignedCertSubject"
+                        "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject"
                     },
                     "description": "The subject for which a certificate is being requested.\nThis is a nested configuration block whose structure matches the\ncorresponding block for `tls.CertRequest`.\n"
                 },
@@ -899,7 +899,7 @@
                     "subjects": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/types/tls:/SelfSignedCertSubject:SelfSignedCertSubject"
+                            "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject"
                         },
                         "description": "The subject for which a certificate is being requested.\nThis is a nested configuration block whose structure matches the\ncorresponding block for `tls.CertRequest`.\n"
                     },
@@ -953,7 +953,7 @@
                     "certificates": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/types/tls:/getCertificateCertificate:getCertificateCertificate"
+                            "$ref": "#/types/tls:index/getCertificateCertificate:getCertificateCertificate"
                         },
                         "description": "The certificates protecting the site, with the root of the chain first.\n* `certificates.#.not_after` - The time until which the certificate is invalid, as an\n[RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n* `certificates.#.not_before` - The time after which the certificate is valid, as an\n[RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n* `certificates.#.is_ca` - `true` if this certificate is a ca certificate.\n* `certificates.#.issuer` - Who verified and signed the certificate, roughly following\n[RFC2253](https://tools.ietf.org/html/rfc2253).\n* `certificates.#.public_key_algorithm` - The algorithm used to create the certificate.\n* `certificates.#.serial_number` - Number that uniquely identifies the certificate with the CA's system. The `format`\nfunction can be used to convert this base 10 number into other bases, such as hex.\n* `certificates.#.sha1_fingerprint` - The SHA1 fingerprint of the public key of the certificate.\n* `certificates.#.signature_algorithm` - The algorithm used to sign the certificate.\n* `certificates.#.subject` - The entity the certificate belongs to, roughly following\n[RFC2253](https://tools.ietf.org/html/rfc2253).\n* `certificates.#.version` - The version the certificate is in.\n"
                     },

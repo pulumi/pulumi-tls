@@ -5,7 +5,7 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 
 __all__ = [
@@ -24,7 +24,7 @@ class CertRequestSubjectArgs:
                  postal_code: Optional[pulumi.Input[str]] = None,
                  province: Optional[pulumi.Input[str]] = None,
                  serial_number: Optional[pulumi.Input[str]] = None,
-                 street_addresses: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None):
+                 street_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         if common_name is not None:
             pulumi.set(__self__, "common_name", common_name)
         if country is not None:
@@ -118,11 +118,11 @@ class CertRequestSubjectArgs:
 
     @property
     @pulumi.getter(name="streetAddresses")
-    def street_addresses(self) -> Optional[pulumi.Input[List[pulumi.Input[str]]]]:
+    def street_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         return pulumi.get(self, "street_addresses")
 
     @street_addresses.setter
-    def street_addresses(self, value: Optional[pulumi.Input[List[pulumi.Input[str]]]]):
+    def street_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "street_addresses", value)
 
 
@@ -137,7 +137,7 @@ class SelfSignedCertSubjectArgs:
                  postal_code: Optional[pulumi.Input[str]] = None,
                  province: Optional[pulumi.Input[str]] = None,
                  serial_number: Optional[pulumi.Input[str]] = None,
-                 street_addresses: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None):
+                 street_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         if common_name is not None:
             pulumi.set(__self__, "common_name", common_name)
         if country is not None:
@@ -231,11 +231,11 @@ class SelfSignedCertSubjectArgs:
 
     @property
     @pulumi.getter(name="streetAddresses")
-    def street_addresses(self) -> Optional[pulumi.Input[List[pulumi.Input[str]]]]:
+    def street_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         return pulumi.get(self, "street_addresses")
 
     @street_addresses.setter
-    def street_addresses(self, value: Optional[pulumi.Input[List[pulumi.Input[str]]]]):
+    def street_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "street_addresses", value)
 
 

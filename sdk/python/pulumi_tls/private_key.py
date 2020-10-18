@@ -5,7 +5,7 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 
 __all__ = ['PrivateKey']
@@ -17,7 +17,7 @@ class PrivateKey(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  algorithm: Optional[pulumi.Input[str]] = None,
                  ecdsa_curve: Optional[pulumi.Input[str]] = None,
-                 rsa_bits: Optional[pulumi.Input[float]] = None,
+                 rsa_bits: Optional[pulumi.Input[int]] = None,
                  __props__=None,
                  __name__=None,
                  __opts__=None):
@@ -30,7 +30,7 @@ class PrivateKey(pulumi.CustomResource):
         :param pulumi.Input[str] ecdsa_curve: When `algorithm` is "ECDSA", the name of the elliptic
                curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
                default.
-        :param pulumi.Input[float] rsa_bits: When `algorithm` is "RSA", the size of the generated
+        :param pulumi.Input[int] rsa_bits: When `algorithm` is "RSA", the size of the generated
                RSA key in bits. Defaults to 2048.
         """
         if __name__ is not None:
@@ -75,7 +75,7 @@ class PrivateKey(pulumi.CustomResource):
             public_key_fingerprint_md5: Optional[pulumi.Input[str]] = None,
             public_key_openssh: Optional[pulumi.Input[str]] = None,
             public_key_pem: Optional[pulumi.Input[str]] = None,
-            rsa_bits: Optional[pulumi.Input[float]] = None) -> 'PrivateKey':
+            rsa_bits: Optional[pulumi.Input[int]] = None) -> 'PrivateKey':
         """
         Get an existing PrivateKey resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -99,7 +99,7 @@ class PrivateKey(pulumi.CustomResource):
                are supported. This attribute is empty if an incompatible ECDSA curve
                is selected.
         :param pulumi.Input[str] public_key_pem: The public key data in PEM format.
-        :param pulumi.Input[float] rsa_bits: When `algorithm` is "RSA", the size of the generated
+        :param pulumi.Input[int] rsa_bits: When `algorithm` is "RSA", the size of the generated
                RSA key in bits. Defaults to 2048.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -175,7 +175,7 @@ class PrivateKey(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="rsaBits")
-    def rsa_bits(self) -> pulumi.Output[Optional[float]]:
+    def rsa_bits(self) -> pulumi.Output[Optional[int]]:
         """
         When `algorithm` is "RSA", the size of the generated
         RSA key in bits. Defaults to 2048.

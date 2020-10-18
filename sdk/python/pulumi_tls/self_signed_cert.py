@@ -5,7 +5,7 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 from . import outputs
 from ._inputs import *
@@ -17,17 +17,17 @@ class SelfSignedCert(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 allowed_uses: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
-                 dns_names: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
-                 early_renewal_hours: Optional[pulumi.Input[float]] = None,
-                 ip_addresses: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+                 allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 early_renewal_hours: Optional[pulumi.Input[int]] = None,
+                 ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  is_ca_certificate: Optional[pulumi.Input[bool]] = None,
                  key_algorithm: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-                 subjects: Optional[pulumi.Input[List[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]]] = None,
-                 uris: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
-                 validity_period_hours: Optional[pulumi.Input[float]] = None,
+                 subjects: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]]] = None,
+                 uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 validity_period_hours: Optional[pulumi.Input[int]] = None,
                  __props__=None,
                  __name__=None,
                  __opts__=None):
@@ -35,11 +35,11 @@ class SelfSignedCert(pulumi.CustomResource):
         Create a SelfSignedCert resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[List[pulumi.Input[str]]] allowed_uses: List of keywords each describing a use that is permitted
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_uses: List of keywords each describing a use that is permitted
                for the issued certificate. The valid keywords are listed below.
-        :param pulumi.Input[List[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested.
-        :param pulumi.Input[float] early_renewal_hours: Number of hours before the certificates expiry when a new certificate will be generated
-        :param pulumi.Input[List[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested.
+        :param pulumi.Input[int] early_renewal_hours: Number of hours before the certificates expiry when a new certificate will be generated
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested.
         :param pulumi.Input[bool] is_ca_certificate: Boolean controlling whether the CA flag will be set in the
                generated certificate. Defaults to `false`, meaning that the certificate does not represent
                a certificate authority.
@@ -49,11 +49,11 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.Input[bool] set_subject_key_id: If `true`, the certificate will include
                the subject key identifier. Defaults to `false`, in which case the subject
                key identifier is not set at all.
-        :param pulumi.Input[List[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]] subjects: The subject for which a certificate is being requested.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]] subjects: The subject for which a certificate is being requested.
                This is a nested configuration block whose structure matches the
                corresponding block for `CertRequest`.
-        :param pulumi.Input[List[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested.
-        :param pulumi.Input[float] validity_period_hours: The number of hours after initial issuing that the
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested.
+        :param pulumi.Input[int] validity_period_hours: The number of hours after initial issuing that the
                certificate will become invalid.
         """
         if __name__ is not None:
@@ -108,20 +108,20 @@ class SelfSignedCert(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            allowed_uses: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+            allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             cert_pem: Optional[pulumi.Input[str]] = None,
-            dns_names: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
-            early_renewal_hours: Optional[pulumi.Input[float]] = None,
-            ip_addresses: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+            dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            early_renewal_hours: Optional[pulumi.Input[int]] = None,
+            ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             is_ca_certificate: Optional[pulumi.Input[bool]] = None,
             key_algorithm: Optional[pulumi.Input[str]] = None,
             private_key_pem: Optional[pulumi.Input[str]] = None,
             ready_for_renewal: Optional[pulumi.Input[bool]] = None,
             set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-            subjects: Optional[pulumi.Input[List[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]]] = None,
-            uris: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+            subjects: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]]] = None,
+            uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             validity_end_time: Optional[pulumi.Input[str]] = None,
-            validity_period_hours: Optional[pulumi.Input[float]] = None,
+            validity_period_hours: Optional[pulumi.Input[int]] = None,
             validity_start_time: Optional[pulumi.Input[str]] = None) -> 'SelfSignedCert':
         """
         Get an existing SelfSignedCert resource's state with the given name, id, and optional extra
@@ -130,12 +130,12 @@ class SelfSignedCert(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[List[pulumi.Input[str]]] allowed_uses: List of keywords each describing a use that is permitted
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_uses: List of keywords each describing a use that is permitted
                for the issued certificate. The valid keywords are listed below.
         :param pulumi.Input[str] cert_pem: The certificate data in PEM format.
-        :param pulumi.Input[List[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested.
-        :param pulumi.Input[float] early_renewal_hours: Number of hours before the certificates expiry when a new certificate will be generated
-        :param pulumi.Input[List[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested.
+        :param pulumi.Input[int] early_renewal_hours: Number of hours before the certificates expiry when a new certificate will be generated
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested.
         :param pulumi.Input[bool] is_ca_certificate: Boolean controlling whether the CA flag will be set in the
                generated certificate. Defaults to `false`, meaning that the certificate does not represent
                a certificate authority.
@@ -145,13 +145,13 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.Input[bool] set_subject_key_id: If `true`, the certificate will include
                the subject key identifier. Defaults to `false`, in which case the subject
                key identifier is not set at all.
-        :param pulumi.Input[List[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]] subjects: The subject for which a certificate is being requested.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]] subjects: The subject for which a certificate is being requested.
                This is a nested configuration block whose structure matches the
                corresponding block for `CertRequest`.
-        :param pulumi.Input[List[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested.
         :param pulumi.Input[str] validity_end_time: The time until which the certificate is invalid, as an
                [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-        :param pulumi.Input[float] validity_period_hours: The number of hours after initial issuing that the
+        :param pulumi.Input[int] validity_period_hours: The number of hours after initial issuing that the
                certificate will become invalid.
         :param pulumi.Input[str] validity_start_time: The time after which the certificate is valid, as an
                [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -179,7 +179,7 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="allowedUses")
-    def allowed_uses(self) -> pulumi.Output[List[str]]:
+    def allowed_uses(self) -> pulumi.Output[Sequence[str]]:
         """
         List of keywords each describing a use that is permitted
         for the issued certificate. The valid keywords are listed below.
@@ -196,7 +196,7 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="dnsNames")
-    def dns_names(self) -> pulumi.Output[Optional[List[str]]]:
+    def dns_names(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
         List of DNS names for which a certificate is being requested.
         """
@@ -204,7 +204,7 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="earlyRenewalHours")
-    def early_renewal_hours(self) -> pulumi.Output[Optional[float]]:
+    def early_renewal_hours(self) -> pulumi.Output[Optional[int]]:
         """
         Number of hours before the certificates expiry when a new certificate will be generated
         """
@@ -212,7 +212,7 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="ipAddresses")
-    def ip_addresses(self) -> pulumi.Output[Optional[List[str]]]:
+    def ip_addresses(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
         List of IP addresses for which a certificate is being requested.
         """
@@ -262,7 +262,7 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def subjects(self) -> pulumi.Output[List['outputs.SelfSignedCertSubject']]:
+    def subjects(self) -> pulumi.Output[Sequence['outputs.SelfSignedCertSubject']]:
         """
         The subject for which a certificate is being requested.
         This is a nested configuration block whose structure matches the
@@ -272,7 +272,7 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def uris(self) -> pulumi.Output[Optional[List[str]]]:
+    def uris(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
         List of URIs for which a certificate is being requested.
         """
@@ -289,7 +289,7 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="validityPeriodHours")
-    def validity_period_hours(self) -> pulumi.Output[float]:
+    def validity_period_hours(self) -> pulumi.Output[int]:
         """
         The number of hours after initial issuing that the
         certificate will become invalid.
