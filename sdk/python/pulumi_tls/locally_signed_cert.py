@@ -5,7 +5,7 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
+from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 
 __all__ = ['LocallySignedCert']
@@ -15,15 +15,15 @@ class LocallySignedCert(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 allowed_uses: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+                 allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ca_cert_pem: Optional[pulumi.Input[str]] = None,
                  ca_key_algorithm: Optional[pulumi.Input[str]] = None,
                  ca_private_key_pem: Optional[pulumi.Input[str]] = None,
                  cert_request_pem: Optional[pulumi.Input[str]] = None,
-                 early_renewal_hours: Optional[pulumi.Input[float]] = None,
+                 early_renewal_hours: Optional[pulumi.Input[int]] = None,
                  is_ca_certificate: Optional[pulumi.Input[bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-                 validity_period_hours: Optional[pulumi.Input[float]] = None,
+                 validity_period_hours: Optional[pulumi.Input[int]] = None,
                  __props__=None,
                  __name__=None,
                  __opts__=None):
@@ -31,7 +31,7 @@ class LocallySignedCert(pulumi.CustomResource):
         Create a LocallySignedCert resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[List[pulumi.Input[str]]] allowed_uses: List of keywords each describing a use that is permitted
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_uses: List of keywords each describing a use that is permitted
                for the issued certificate. The valid keywords are listed below.
         :param pulumi.Input[str] ca_cert_pem: PEM-encoded certificate data for the CA.
         :param pulumi.Input[str] ca_key_algorithm: The name of the algorithm for the key provided
@@ -40,14 +40,14 @@ class LocallySignedCert(pulumi.CustomResource):
                This can be read from a separate file using the ``file`` interpolation
                function.
         :param pulumi.Input[str] cert_request_pem: PEM-encoded request certificate data.
-        :param pulumi.Input[float] early_renewal_hours: Number of hours before the certificates expiry when a new certificate will be generated
+        :param pulumi.Input[int] early_renewal_hours: Number of hours before the certificates expiry when a new certificate will be generated
         :param pulumi.Input[bool] is_ca_certificate: Boolean controlling whether the CA flag will be set in the
                generated certificate. Defaults to `false`, meaning that the certificate does not represent
                a certificate authority.
         :param pulumi.Input[bool] set_subject_key_id: If `true`, the certificate will include
                the subject key identifier. Defaults to `false`, in which case the subject
                key identifier is not set at all.
-        :param pulumi.Input[float] validity_period_hours: The number of hours after initial issuing that the
+        :param pulumi.Input[int] validity_period_hours: The number of hours after initial issuing that the
                certificate will become invalid.
         """
         if __name__ is not None:
@@ -102,18 +102,18 @@ class LocallySignedCert(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            allowed_uses: Optional[pulumi.Input[List[pulumi.Input[str]]]] = None,
+            allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             ca_cert_pem: Optional[pulumi.Input[str]] = None,
             ca_key_algorithm: Optional[pulumi.Input[str]] = None,
             ca_private_key_pem: Optional[pulumi.Input[str]] = None,
             cert_pem: Optional[pulumi.Input[str]] = None,
             cert_request_pem: Optional[pulumi.Input[str]] = None,
-            early_renewal_hours: Optional[pulumi.Input[float]] = None,
+            early_renewal_hours: Optional[pulumi.Input[int]] = None,
             is_ca_certificate: Optional[pulumi.Input[bool]] = None,
             ready_for_renewal: Optional[pulumi.Input[bool]] = None,
             set_subject_key_id: Optional[pulumi.Input[bool]] = None,
             validity_end_time: Optional[pulumi.Input[str]] = None,
-            validity_period_hours: Optional[pulumi.Input[float]] = None,
+            validity_period_hours: Optional[pulumi.Input[int]] = None,
             validity_start_time: Optional[pulumi.Input[str]] = None) -> 'LocallySignedCert':
         """
         Get an existing LocallySignedCert resource's state with the given name, id, and optional extra
@@ -122,7 +122,7 @@ class LocallySignedCert(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[List[pulumi.Input[str]]] allowed_uses: List of keywords each describing a use that is permitted
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_uses: List of keywords each describing a use that is permitted
                for the issued certificate. The valid keywords are listed below.
         :param pulumi.Input[str] ca_cert_pem: PEM-encoded certificate data for the CA.
         :param pulumi.Input[str] ca_key_algorithm: The name of the algorithm for the key provided
@@ -132,7 +132,7 @@ class LocallySignedCert(pulumi.CustomResource):
                function.
         :param pulumi.Input[str] cert_pem: The certificate data in PEM format.
         :param pulumi.Input[str] cert_request_pem: PEM-encoded request certificate data.
-        :param pulumi.Input[float] early_renewal_hours: Number of hours before the certificates expiry when a new certificate will be generated
+        :param pulumi.Input[int] early_renewal_hours: Number of hours before the certificates expiry when a new certificate will be generated
         :param pulumi.Input[bool] is_ca_certificate: Boolean controlling whether the CA flag will be set in the
                generated certificate. Defaults to `false`, meaning that the certificate does not represent
                a certificate authority.
@@ -141,7 +141,7 @@ class LocallySignedCert(pulumi.CustomResource):
                key identifier is not set at all.
         :param pulumi.Input[str] validity_end_time: The time until which the certificate is invalid, as an
                [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-        :param pulumi.Input[float] validity_period_hours: The number of hours after initial issuing that the
+        :param pulumi.Input[int] validity_period_hours: The number of hours after initial issuing that the
                certificate will become invalid.
         :param pulumi.Input[str] validity_start_time: The time after which the certificate is valid, as an
                [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -167,7 +167,7 @@ class LocallySignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="allowedUses")
-    def allowed_uses(self) -> pulumi.Output[List[str]]:
+    def allowed_uses(self) -> pulumi.Output[Sequence[str]]:
         """
         List of keywords each describing a use that is permitted
         for the issued certificate. The valid keywords are listed below.
@@ -219,7 +219,7 @@ class LocallySignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="earlyRenewalHours")
-    def early_renewal_hours(self) -> pulumi.Output[Optional[float]]:
+    def early_renewal_hours(self) -> pulumi.Output[Optional[int]]:
         """
         Number of hours before the certificates expiry when a new certificate will be generated
         """
@@ -261,7 +261,7 @@ class LocallySignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="validityPeriodHours")
-    def validity_period_hours(self) -> pulumi.Output[float]:
+    def validity_period_hours(self) -> pulumi.Output[int]:
         """
         The number of hours after initial issuing that the
         certificate will become invalid.
