@@ -4,6 +4,7 @@
 package tls
 
 import (
+	"context"
 	"reflect"
 
 	"github.com/pkg/errors"
@@ -146,4 +147,43 @@ type CertRequestArgs struct {
 
 func (CertRequestArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*certRequestArgs)(nil)).Elem()
+}
+
+type CertRequestInput interface {
+	pulumi.Input
+
+	ToCertRequestOutput() CertRequestOutput
+	ToCertRequestOutputWithContext(ctx context.Context) CertRequestOutput
+}
+
+func (CertRequest) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertRequest)(nil)).Elem()
+}
+
+func (i CertRequest) ToCertRequestOutput() CertRequestOutput {
+	return i.ToCertRequestOutputWithContext(context.Background())
+}
+
+func (i CertRequest) ToCertRequestOutputWithContext(ctx context.Context) CertRequestOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertRequestOutput)
+}
+
+type CertRequestOutput struct {
+	*pulumi.OutputState
+}
+
+func (CertRequestOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertRequestOutput)(nil)).Elem()
+}
+
+func (o CertRequestOutput) ToCertRequestOutput() CertRequestOutput {
+	return o
+}
+
+func (o CertRequestOutput) ToCertRequestOutputWithContext(ctx context.Context) CertRequestOutput {
+	return o
+}
+
+func init() {
+	pulumi.RegisterOutputType(CertRequestOutput{})
 }
