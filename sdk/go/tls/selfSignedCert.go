@@ -4,6 +4,7 @@
 package tls
 
 import (
+	"context"
 	"reflect"
 
 	"github.com/pkg/errors"
@@ -258,4 +259,43 @@ type SelfSignedCertArgs struct {
 
 func (SelfSignedCertArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*selfSignedCertArgs)(nil)).Elem()
+}
+
+type SelfSignedCertInput interface {
+	pulumi.Input
+
+	ToSelfSignedCertOutput() SelfSignedCertOutput
+	ToSelfSignedCertOutputWithContext(ctx context.Context) SelfSignedCertOutput
+}
+
+func (SelfSignedCert) ElementType() reflect.Type {
+	return reflect.TypeOf((*SelfSignedCert)(nil)).Elem()
+}
+
+func (i SelfSignedCert) ToSelfSignedCertOutput() SelfSignedCertOutput {
+	return i.ToSelfSignedCertOutputWithContext(context.Background())
+}
+
+func (i SelfSignedCert) ToSelfSignedCertOutputWithContext(ctx context.Context) SelfSignedCertOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertOutput)
+}
+
+type SelfSignedCertOutput struct {
+	*pulumi.OutputState
+}
+
+func (SelfSignedCertOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SelfSignedCertOutput)(nil)).Elem()
+}
+
+func (o SelfSignedCertOutput) ToSelfSignedCertOutput() SelfSignedCertOutput {
+	return o
+}
+
+func (o SelfSignedCertOutput) ToSelfSignedCertOutputWithContext(ctx context.Context) SelfSignedCertOutput {
+	return o
+}
+
+func init() {
+	pulumi.RegisterOutputType(SelfSignedCertOutput{})
 }

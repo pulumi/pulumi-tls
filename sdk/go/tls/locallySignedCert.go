@@ -4,6 +4,7 @@
 package tls
 
 import (
+	"context"
 	"reflect"
 
 	"github.com/pkg/errors"
@@ -241,4 +242,43 @@ type LocallySignedCertArgs struct {
 
 func (LocallySignedCertArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*locallySignedCertArgs)(nil)).Elem()
+}
+
+type LocallySignedCertInput interface {
+	pulumi.Input
+
+	ToLocallySignedCertOutput() LocallySignedCertOutput
+	ToLocallySignedCertOutputWithContext(ctx context.Context) LocallySignedCertOutput
+}
+
+func (LocallySignedCert) ElementType() reflect.Type {
+	return reflect.TypeOf((*LocallySignedCert)(nil)).Elem()
+}
+
+func (i LocallySignedCert) ToLocallySignedCertOutput() LocallySignedCertOutput {
+	return i.ToLocallySignedCertOutputWithContext(context.Background())
+}
+
+func (i LocallySignedCert) ToLocallySignedCertOutputWithContext(ctx context.Context) LocallySignedCertOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LocallySignedCertOutput)
+}
+
+type LocallySignedCertOutput struct {
+	*pulumi.OutputState
+}
+
+func (LocallySignedCertOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LocallySignedCertOutput)(nil)).Elem()
+}
+
+func (o LocallySignedCertOutput) ToLocallySignedCertOutput() LocallySignedCertOutput {
+	return o
+}
+
+func (o LocallySignedCertOutput) ToLocallySignedCertOutputWithContext(ctx context.Context) LocallySignedCertOutput {
+	return o
+}
+
+func init() {
+	pulumi.RegisterOutputType(LocallySignedCertOutput{})
 }

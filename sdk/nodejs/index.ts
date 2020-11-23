@@ -12,4 +12,7 @@ export * from "./selfSignedCert";
 
 // Export sub-modules:
 import * as types from "./types";
-export {types};
+
+export {
+    types,
+};

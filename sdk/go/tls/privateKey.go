@@ -4,6 +4,7 @@
 package tls
 
 import (
+	"context"
 	"reflect"
 
 	"github.com/pkg/errors"
@@ -159,4 +160,43 @@ type PrivateKeyArgs struct {
 
 func (PrivateKeyArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*privateKeyArgs)(nil)).Elem()
+}
+
+type PrivateKeyInput interface {
+	pulumi.Input
+
+	ToPrivateKeyOutput() PrivateKeyOutput
+	ToPrivateKeyOutputWithContext(ctx context.Context) PrivateKeyOutput
+}
+
+func (PrivateKey) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateKey)(nil)).Elem()
+}
+
+func (i PrivateKey) ToPrivateKeyOutput() PrivateKeyOutput {
+	return i.ToPrivateKeyOutputWithContext(context.Background())
+}
+
+func (i PrivateKey) ToPrivateKeyOutputWithContext(ctx context.Context) PrivateKeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateKeyOutput)
+}
+
+type PrivateKeyOutput struct {
+	*pulumi.OutputState
+}
+
+func (PrivateKeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateKeyOutput)(nil)).Elem()
+}
+
+func (o PrivateKeyOutput) ToPrivateKeyOutput() PrivateKeyOutput {
+	return o
+}
+
+func (o PrivateKeyOutput) ToPrivateKeyOutputWithContext(ctx context.Context) PrivateKeyOutput {
+	return o
+}
+
+func init() {
+	pulumi.RegisterOutputType(PrivateKeyOutput{})
 }
