@@ -59,23 +59,24 @@ type SelfSignedCert struct {
 // NewSelfSignedCert registers a new resource with the given unique name, arguments, and options.
 func NewSelfSignedCert(ctx *pulumi.Context,
 	name string, args *SelfSignedCertArgs, opts ...pulumi.ResourceOption) (*SelfSignedCert, error) {
-	if args == nil || args.AllowedUses == nil {
-		return nil, errors.New("missing required argument 'AllowedUses'")
-	}
-	if args == nil || args.KeyAlgorithm == nil {
-		return nil, errors.New("missing required argument 'KeyAlgorithm'")
-	}
-	if args == nil || args.PrivateKeyPem == nil {
-		return nil, errors.New("missing required argument 'PrivateKeyPem'")
-	}
-	if args == nil || args.Subjects == nil {
-		return nil, errors.New("missing required argument 'Subjects'")
-	}
-	if args == nil || args.ValidityPeriodHours == nil {
-		return nil, errors.New("missing required argument 'ValidityPeriodHours'")
-	}
 	if args == nil {
-		args = &SelfSignedCertArgs{}
+		return nil, errors.New("missing one or more required arguments")
+	}
+
+	if args.AllowedUses == nil {
+		return nil, errors.New("invalid value for required argument 'AllowedUses'")
+	}
+	if args.KeyAlgorithm == nil {
+		return nil, errors.New("invalid value for required argument 'KeyAlgorithm'")
+	}
+	if args.PrivateKeyPem == nil {
+		return nil, errors.New("invalid value for required argument 'PrivateKeyPem'")
+	}
+	if args.Subjects == nil {
+		return nil, errors.New("invalid value for required argument 'Subjects'")
+	}
+	if args.ValidityPeriodHours == nil {
+		return nil, errors.New("invalid value for required argument 'ValidityPeriodHours'")
 	}
 	var resource SelfSignedCert
 	err := ctx.RegisterResource("tls:index/selfSignedCert:SelfSignedCert", name, args, &resource, opts...)

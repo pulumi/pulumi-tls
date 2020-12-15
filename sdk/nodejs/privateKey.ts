@@ -93,7 +93,7 @@ export class PrivateKey extends pulumi.CustomResource {
             inputs["rsaBits"] = state ? state.rsaBits : undefined;
         } else {
             const args = argsOrState as PrivateKeyArgs | undefined;
-            if (!args || args.algorithm === undefined) {
+            if ((!args || args.algorithm === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'algorithm'");
             }
             inputs["algorithm"] = args ? args.algorithm : undefined;

@@ -55,26 +55,27 @@ type LocallySignedCert struct {
 // NewLocallySignedCert registers a new resource with the given unique name, arguments, and options.
 func NewLocallySignedCert(ctx *pulumi.Context,
 	name string, args *LocallySignedCertArgs, opts ...pulumi.ResourceOption) (*LocallySignedCert, error) {
-	if args == nil || args.AllowedUses == nil {
-		return nil, errors.New("missing required argument 'AllowedUses'")
-	}
-	if args == nil || args.CaCertPem == nil {
-		return nil, errors.New("missing required argument 'CaCertPem'")
-	}
-	if args == nil || args.CaKeyAlgorithm == nil {
-		return nil, errors.New("missing required argument 'CaKeyAlgorithm'")
-	}
-	if args == nil || args.CaPrivateKeyPem == nil {
-		return nil, errors.New("missing required argument 'CaPrivateKeyPem'")
-	}
-	if args == nil || args.CertRequestPem == nil {
-		return nil, errors.New("missing required argument 'CertRequestPem'")
-	}
-	if args == nil || args.ValidityPeriodHours == nil {
-		return nil, errors.New("missing required argument 'ValidityPeriodHours'")
-	}
 	if args == nil {
-		args = &LocallySignedCertArgs{}
+		return nil, errors.New("missing one or more required arguments")
+	}
+
+	if args.AllowedUses == nil {
+		return nil, errors.New("invalid value for required argument 'AllowedUses'")
+	}
+	if args.CaCertPem == nil {
+		return nil, errors.New("invalid value for required argument 'CaCertPem'")
+	}
+	if args.CaKeyAlgorithm == nil {
+		return nil, errors.New("invalid value for required argument 'CaKeyAlgorithm'")
+	}
+	if args.CaPrivateKeyPem == nil {
+		return nil, errors.New("invalid value for required argument 'CaPrivateKeyPem'")
+	}
+	if args.CertRequestPem == nil {
+		return nil, errors.New("invalid value for required argument 'CertRequestPem'")
+	}
+	if args.ValidityPeriodHours == nil {
+		return nil, errors.New("invalid value for required argument 'ValidityPeriodHours'")
 	}
 	var resource LocallySignedCert
 	err := ctx.RegisterResource("tls:index/locallySignedCert:LocallySignedCert", name, args, &resource, opts...)

@@ -67,25 +67,25 @@ class LocallySignedCert(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
-            if allowed_uses is None:
+            if allowed_uses is None and not opts.urn:
                 raise TypeError("Missing required property 'allowed_uses'")
             __props__['allowed_uses'] = allowed_uses
-            if ca_cert_pem is None:
+            if ca_cert_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'ca_cert_pem'")
             __props__['ca_cert_pem'] = ca_cert_pem
-            if ca_key_algorithm is None:
+            if ca_key_algorithm is None and not opts.urn:
                 raise TypeError("Missing required property 'ca_key_algorithm'")
             __props__['ca_key_algorithm'] = ca_key_algorithm
-            if ca_private_key_pem is None:
+            if ca_private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'ca_private_key_pem'")
             __props__['ca_private_key_pem'] = ca_private_key_pem
-            if cert_request_pem is None:
+            if cert_request_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'cert_request_pem'")
             __props__['cert_request_pem'] = cert_request_pem
             __props__['early_renewal_hours'] = early_renewal_hours
             __props__['is_ca_certificate'] = is_ca_certificate
             __props__['set_subject_key_id'] = set_subject_key_id
-            if validity_period_hours is None:
+            if validity_period_hours is None and not opts.urn:
                 raise TypeError("Missing required property 'validity_period_hours'")
             __props__['validity_period_hours'] = validity_period_hours
             __props__['cert_pem'] = None

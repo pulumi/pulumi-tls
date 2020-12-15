@@ -85,13 +85,13 @@ export class CertRequest extends pulumi.CustomResource {
             inputs["uris"] = state ? state.uris : undefined;
         } else {
             const args = argsOrState as CertRequestArgs | undefined;
-            if (!args || args.keyAlgorithm === undefined) {
+            if ((!args || args.keyAlgorithm === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'keyAlgorithm'");
             }
-            if (!args || args.privateKeyPem === undefined) {
+            if ((!args || args.privateKeyPem === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'privateKeyPem'");
             }
-            if (!args || args.subjects === undefined) {
+            if ((!args || args.subjects === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'subjects'");
             }
             inputs["dnsNames"] = args ? args.dnsNames : undefined;

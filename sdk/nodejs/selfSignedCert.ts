@@ -131,19 +131,19 @@ export class SelfSignedCert extends pulumi.CustomResource {
             inputs["validityStartTime"] = state ? state.validityStartTime : undefined;
         } else {
             const args = argsOrState as SelfSignedCertArgs | undefined;
-            if (!args || args.allowedUses === undefined) {
+            if ((!args || args.allowedUses === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'allowedUses'");
             }
-            if (!args || args.keyAlgorithm === undefined) {
+            if ((!args || args.keyAlgorithm === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'keyAlgorithm'");
             }
-            if (!args || args.privateKeyPem === undefined) {
+            if ((!args || args.privateKeyPem === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'privateKeyPem'");
             }
-            if (!args || args.subjects === undefined) {
+            if ((!args || args.subjects === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'subjects'");
             }
-            if (!args || args.validityPeriodHours === undefined) {
+            if ((!args || args.validityPeriodHours === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'validityPeriodHours'");
             }
             inputs["allowedUses"] = args ? args.allowedUses : undefined;

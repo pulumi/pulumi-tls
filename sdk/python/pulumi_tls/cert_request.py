@@ -58,13 +58,13 @@ class CertRequest(pulumi.CustomResource):
 
             __props__['dns_names'] = dns_names
             __props__['ip_addresses'] = ip_addresses
-            if key_algorithm is None:
+            if key_algorithm is None and not opts.urn:
                 raise TypeError("Missing required property 'key_algorithm'")
             __props__['key_algorithm'] = key_algorithm
-            if private_key_pem is None:
+            if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
             __props__['private_key_pem'] = private_key_pem
-            if subjects is None:
+            if subjects is None and not opts.urn:
                 raise TypeError("Missing required property 'subjects'")
             __props__['subjects'] = subjects
             __props__['uris'] = uris

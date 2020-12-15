@@ -35,17 +35,18 @@ type CertRequest struct {
 // NewCertRequest registers a new resource with the given unique name, arguments, and options.
 func NewCertRequest(ctx *pulumi.Context,
 	name string, args *CertRequestArgs, opts ...pulumi.ResourceOption) (*CertRequest, error) {
-	if args == nil || args.KeyAlgorithm == nil {
-		return nil, errors.New("missing required argument 'KeyAlgorithm'")
-	}
-	if args == nil || args.PrivateKeyPem == nil {
-		return nil, errors.New("missing required argument 'PrivateKeyPem'")
-	}
-	if args == nil || args.Subjects == nil {
-		return nil, errors.New("missing required argument 'Subjects'")
-	}
 	if args == nil {
-		args = &CertRequestArgs{}
+		return nil, errors.New("missing one or more required arguments")
+	}
+
+	if args.KeyAlgorithm == nil {
+		return nil, errors.New("invalid value for required argument 'KeyAlgorithm'")
+	}
+	if args.PrivateKeyPem == nil {
+		return nil, errors.New("invalid value for required argument 'PrivateKeyPem'")
+	}
+	if args.Subjects == nil {
+		return nil, errors.New("invalid value for required argument 'Subjects'")
 	}
 	var resource CertRequest
 	err := ctx.RegisterResource("tls:index/certRequest:CertRequest", name, args, &resource, opts...)

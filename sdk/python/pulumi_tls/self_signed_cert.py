@@ -73,25 +73,25 @@ class SelfSignedCert(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
-            if allowed_uses is None:
+            if allowed_uses is None and not opts.urn:
                 raise TypeError("Missing required property 'allowed_uses'")
             __props__['allowed_uses'] = allowed_uses
             __props__['dns_names'] = dns_names
             __props__['early_renewal_hours'] = early_renewal_hours
             __props__['ip_addresses'] = ip_addresses
             __props__['is_ca_certificate'] = is_ca_certificate
-            if key_algorithm is None:
+            if key_algorithm is None and not opts.urn:
                 raise TypeError("Missing required property 'key_algorithm'")
             __props__['key_algorithm'] = key_algorithm
-            if private_key_pem is None:
+            if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
             __props__['private_key_pem'] = private_key_pem
             __props__['set_subject_key_id'] = set_subject_key_id
-            if subjects is None:
+            if subjects is None and not opts.urn:
                 raise TypeError("Missing required property 'subjects'")
             __props__['subjects'] = subjects
             __props__['uris'] = uris
-            if validity_period_hours is None:
+            if validity_period_hours is None and not opts.urn:
                 raise TypeError("Missing required property 'validity_period_hours'")
             __props__['validity_period_hours'] = validity_period_hours
             __props__['cert_pem'] = None
