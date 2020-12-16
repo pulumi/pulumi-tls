@@ -2,7 +2,8 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Upgrade to v2.16.0 of pulumi-terraform-bridge
+    * Preserve unknowns during provider preview
 
 ---
 

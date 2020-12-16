@@ -120,22 +120,22 @@ export class LocallySignedCert extends pulumi.CustomResource {
             inputs["validityStartTime"] = state ? state.validityStartTime : undefined;
         } else {
             const args = argsOrState as LocallySignedCertArgs | undefined;
-            if (!args || args.allowedUses === undefined) {
+            if ((!args || args.allowedUses === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'allowedUses'");
             }
-            if (!args || args.caCertPem === undefined) {
+            if ((!args || args.caCertPem === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'caCertPem'");
             }
-            if (!args || args.caKeyAlgorithm === undefined) {
+            if ((!args || args.caKeyAlgorithm === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'caKeyAlgorithm'");
             }
-            if (!args || args.caPrivateKeyPem === undefined) {
+            if ((!args || args.caPrivateKeyPem === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'caPrivateKeyPem'");
             }
-            if (!args || args.certRequestPem === undefined) {
+            if ((!args || args.certRequestPem === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'certRequestPem'");
             }
-            if (!args || args.validityPeriodHours === undefined) {
+            if ((!args || args.validityPeriodHours === undefined) && !(opts && opts.urn)) {
                 throw new Error("Missing required property 'validityPeriodHours'");
             }
             inputs["allowedUses"] = args ? args.allowedUses : undefined;

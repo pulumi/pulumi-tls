@@ -44,11 +44,12 @@ type PrivateKey struct {
 // NewPrivateKey registers a new resource with the given unique name, arguments, and options.
 func NewPrivateKey(ctx *pulumi.Context,
 	name string, args *PrivateKeyArgs, opts ...pulumi.ResourceOption) (*PrivateKey, error) {
-	if args == nil || args.Algorithm == nil {
-		return nil, errors.New("missing required argument 'Algorithm'")
-	}
 	if args == nil {
-		args = &PrivateKeyArgs{}
+		return nil, errors.New("missing one or more required arguments")
+	}
+
+	if args.Algorithm == nil {
+		return nil, errors.New("invalid value for required argument 'Algorithm'")
 	}
 	var resource PrivateKey
 	err := ctx.RegisterResource("tls:index/privateKey:PrivateKey", name, args, &resource, opts...)
