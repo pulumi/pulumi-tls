@@ -412,7 +412,6 @@ jobs:
         - "3.7"
 name: master
 "on":
-  workflow_dispatch: {}
   push:
     branches:
     - master
@@ -422,3 +421,4 @@ name: master
     - v*
     - sdk/*
     - '**'
+  workflow_dispatch: {}
