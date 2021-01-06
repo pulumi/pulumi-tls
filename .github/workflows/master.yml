@@ -412,6 +412,7 @@ jobs:
         - "3.7"
 name: master
 "on":
+  workflow_dispatch: {}
   push:
     branches:
     - master
