@@ -9,6 +9,7 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tls
 {
+    [TlsResourceType("tls:index/certRequest:CertRequest")]
     public partial class CertRequest : Pulumi.CustomResource
     {
         /// <summary>

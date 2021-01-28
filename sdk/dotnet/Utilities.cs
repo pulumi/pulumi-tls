@@ -77,4 +77,11 @@ namespace Pulumi.Tls
             }
         }
     }
+
+    internal sealed class TlsResourceTypeAttribute : Pulumi.ResourceTypeAttribute
+    {
+        public TlsResourceTypeAttribute(string type) : base(type, Utilities.Version)
+        {
+        }
+    }
 }

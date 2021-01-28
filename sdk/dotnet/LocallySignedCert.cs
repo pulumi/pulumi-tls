@@ -9,6 +9,7 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tls
 {
+    [TlsResourceType("tls:index/locallySignedCert:LocallySignedCert")]
     public partial class LocallySignedCert : Pulumi.CustomResource
     {
         /// <summary>
