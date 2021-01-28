@@ -157,15 +157,15 @@ type CertRequestInput interface {
 	ToCertRequestOutputWithContext(ctx context.Context) CertRequestOutput
 }
 
-func (CertRequest) ElementType() reflect.Type {
-	return reflect.TypeOf((*CertRequest)(nil)).Elem()
+func (*CertRequest) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertRequest)(nil))
 }
 
-func (i CertRequest) ToCertRequestOutput() CertRequestOutput {
+func (i *CertRequest) ToCertRequestOutput() CertRequestOutput {
 	return i.ToCertRequestOutputWithContext(context.Background())
 }
 
-func (i CertRequest) ToCertRequestOutputWithContext(ctx context.Context) CertRequestOutput {
+func (i *CertRequest) ToCertRequestOutputWithContext(ctx context.Context) CertRequestOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(CertRequestOutput)
 }
 
@@ -174,7 +174,7 @@ type CertRequestOutput struct {
 }
 
 func (CertRequestOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CertRequestOutput)(nil)).Elem()
+	return reflect.TypeOf((*CertRequest)(nil))
 }
 
 func (o CertRequestOutput) ToCertRequestOutput() CertRequestOutput {

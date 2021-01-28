@@ -170,15 +170,15 @@ type PrivateKeyInput interface {
 	ToPrivateKeyOutputWithContext(ctx context.Context) PrivateKeyOutput
 }
 
-func (PrivateKey) ElementType() reflect.Type {
-	return reflect.TypeOf((*PrivateKey)(nil)).Elem()
+func (*PrivateKey) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateKey)(nil))
 }
 
-func (i PrivateKey) ToPrivateKeyOutput() PrivateKeyOutput {
+func (i *PrivateKey) ToPrivateKeyOutput() PrivateKeyOutput {
 	return i.ToPrivateKeyOutputWithContext(context.Background())
 }
 
-func (i PrivateKey) ToPrivateKeyOutputWithContext(ctx context.Context) PrivateKeyOutput {
+func (i *PrivateKey) ToPrivateKeyOutputWithContext(ctx context.Context) PrivateKeyOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PrivateKeyOutput)
 }
 
@@ -187,7 +187,7 @@ type PrivateKeyOutput struct {
 }
 
 func (PrivateKeyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*PrivateKeyOutput)(nil)).Elem()
+	return reflect.TypeOf((*PrivateKey)(nil))
 }
 
 func (o PrivateKeyOutput) ToPrivateKeyOutput() PrivateKeyOutput {

@@ -15,10 +15,13 @@
 package tls
 
 import (
+	"fmt"
+	"path/filepath"
 	"unicode"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfbridge"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfshim/sdk-v2"
+	"github.com/pulumi/pulumi-tls/provider/v3/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/terraform-providers/terraform-provider-tls/shim"
 )
@@ -87,7 +90,15 @@ func Provider() tfbridge.ProviderInfo {
 			Requires: map[string]string{
 				"pulumi": ">=2.15.0,<3.0.0",
 			},
-			UsesIOClasses: true,
+		},
+		Golang: &tfbridge.GolangInfo{
+			ImportBasePath: filepath.Join(
+				fmt.Sprintf("github.com/pulumi/pulumi-%[1]s/sdk/", tlsPkg),
+				tfbridge.GetModuleMajorVersion(version.Version),
+				"go",
+				tlsPkg,
+			),
+			GenerateResourceContainerTypes: true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
 			PackageReferences: map[string]string{

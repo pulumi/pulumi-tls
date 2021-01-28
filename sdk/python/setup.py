@@ -48,7 +48,7 @@ setup(name='pulumi_tls',
       packages=find_packages(),
       package_data={
           'pulumi_tls': [
-              'py.typed'
+              'py.typed',
           ]
       },
       install_requires=[

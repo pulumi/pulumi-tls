@@ -9,6 +9,7 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tls
 {
+    [TlsResourceType("tls:index/privateKey:PrivateKey")]
     public partial class PrivateKey : Pulumi.CustomResource
     {
         /// <summary>

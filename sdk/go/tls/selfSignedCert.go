@@ -269,15 +269,15 @@ type SelfSignedCertInput interface {
 	ToSelfSignedCertOutputWithContext(ctx context.Context) SelfSignedCertOutput
 }
 
-func (SelfSignedCert) ElementType() reflect.Type {
-	return reflect.TypeOf((*SelfSignedCert)(nil)).Elem()
+func (*SelfSignedCert) ElementType() reflect.Type {
+	return reflect.TypeOf((*SelfSignedCert)(nil))
 }
 
-func (i SelfSignedCert) ToSelfSignedCertOutput() SelfSignedCertOutput {
+func (i *SelfSignedCert) ToSelfSignedCertOutput() SelfSignedCertOutput {
 	return i.ToSelfSignedCertOutputWithContext(context.Background())
 }
 
-func (i SelfSignedCert) ToSelfSignedCertOutputWithContext(ctx context.Context) SelfSignedCertOutput {
+func (i *SelfSignedCert) ToSelfSignedCertOutputWithContext(ctx context.Context) SelfSignedCertOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertOutput)
 }
 
@@ -286,7 +286,7 @@ type SelfSignedCertOutput struct {
 }
 
 func (SelfSignedCertOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SelfSignedCertOutput)(nil)).Elem()
+	return reflect.TypeOf((*SelfSignedCert)(nil))
 }
 
 func (o SelfSignedCertOutput) ToSelfSignedCertOutput() SelfSignedCertOutput {
