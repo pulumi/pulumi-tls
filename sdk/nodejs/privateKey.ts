@@ -82,7 +82,8 @@ export class PrivateKey extends pulumi.CustomResource {
     constructor(name: string, args: PrivateKeyArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: PrivateKeyArgs | PrivateKeyState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as PrivateKeyState | undefined;
             inputs["algorithm"] = state ? state.algorithm : undefined;
             inputs["ecdsaCurve"] = state ? state.ecdsaCurve : undefined;
@@ -93,7 +94,7 @@ export class PrivateKey extends pulumi.CustomResource {
             inputs["rsaBits"] = state ? state.rsaBits : undefined;
         } else {
             const args = argsOrState as PrivateKeyArgs | undefined;
-            if ((!args || args.algorithm === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.algorithm === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'algorithm'");
             }
             inputs["algorithm"] = args ? args.algorithm : undefined;
@@ -104,12 +105,8 @@ export class PrivateKey extends pulumi.CustomResource {
             inputs["publicKeyOpenssh"] = undefined /*out*/;
             inputs["publicKeyPem"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(PrivateKey.__pulumiType, name, inputs, opts);
     }
