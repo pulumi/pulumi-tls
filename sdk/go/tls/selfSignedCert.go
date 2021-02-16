@@ -281,6 +281,85 @@ func (i *SelfSignedCert) ToSelfSignedCertOutputWithContext(ctx context.Context) 
 	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertOutput)
 }
 
+func (i *SelfSignedCert) ToSelfSignedCertPtrOutput() SelfSignedCertPtrOutput {
+	return i.ToSelfSignedCertPtrOutputWithContext(context.Background())
+}
+
+func (i *SelfSignedCert) ToSelfSignedCertPtrOutputWithContext(ctx context.Context) SelfSignedCertPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertPtrOutput)
+}
+
+type SelfSignedCertPtrInput interface {
+	pulumi.Input
+
+	ToSelfSignedCertPtrOutput() SelfSignedCertPtrOutput
+	ToSelfSignedCertPtrOutputWithContext(ctx context.Context) SelfSignedCertPtrOutput
+}
+
+type selfSignedCertPtrType SelfSignedCertArgs
+
+func (*selfSignedCertPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SelfSignedCert)(nil))
+}
+
+func (i *selfSignedCertPtrType) ToSelfSignedCertPtrOutput() SelfSignedCertPtrOutput {
+	return i.ToSelfSignedCertPtrOutputWithContext(context.Background())
+}
+
+func (i *selfSignedCertPtrType) ToSelfSignedCertPtrOutputWithContext(ctx context.Context) SelfSignedCertPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertPtrOutput)
+}
+
+// SelfSignedCertArrayInput is an input type that accepts SelfSignedCertArray and SelfSignedCertArrayOutput values.
+// You can construct a concrete instance of `SelfSignedCertArrayInput` via:
+//
+//          SelfSignedCertArray{ SelfSignedCertArgs{...} }
+type SelfSignedCertArrayInput interface {
+	pulumi.Input
+
+	ToSelfSignedCertArrayOutput() SelfSignedCertArrayOutput
+	ToSelfSignedCertArrayOutputWithContext(context.Context) SelfSignedCertArrayOutput
+}
+
+type SelfSignedCertArray []SelfSignedCertInput
+
+func (SelfSignedCertArray) ElementType() reflect.Type {
+	return reflect.TypeOf(([]*SelfSignedCert)(nil))
+}
+
+func (i SelfSignedCertArray) ToSelfSignedCertArrayOutput() SelfSignedCertArrayOutput {
+	return i.ToSelfSignedCertArrayOutputWithContext(context.Background())
+}
+
+func (i SelfSignedCertArray) ToSelfSignedCertArrayOutputWithContext(ctx context.Context) SelfSignedCertArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertArrayOutput)
+}
+
+// SelfSignedCertMapInput is an input type that accepts SelfSignedCertMap and SelfSignedCertMapOutput values.
+// You can construct a concrete instance of `SelfSignedCertMapInput` via:
+//
+//          SelfSignedCertMap{ "key": SelfSignedCertArgs{...} }
+type SelfSignedCertMapInput interface {
+	pulumi.Input
+
+	ToSelfSignedCertMapOutput() SelfSignedCertMapOutput
+	ToSelfSignedCertMapOutputWithContext(context.Context) SelfSignedCertMapOutput
+}
+
+type SelfSignedCertMap map[string]SelfSignedCertInput
+
+func (SelfSignedCertMap) ElementType() reflect.Type {
+	return reflect.TypeOf((map[string]*SelfSignedCert)(nil))
+}
+
+func (i SelfSignedCertMap) ToSelfSignedCertMapOutput() SelfSignedCertMapOutput {
+	return i.ToSelfSignedCertMapOutputWithContext(context.Background())
+}
+
+func (i SelfSignedCertMap) ToSelfSignedCertMapOutputWithContext(ctx context.Context) SelfSignedCertMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertMapOutput)
+}
+
 type SelfSignedCertOutput struct {
 	*pulumi.OutputState
 }
@@ -297,6 +376,75 @@ func (o SelfSignedCertOutput) ToSelfSignedCertOutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o SelfSignedCertOutput) ToSelfSignedCertPtrOutput() SelfSignedCertPtrOutput {
+	return o.ToSelfSignedCertPtrOutputWithContext(context.Background())
+}
+
+func (o SelfSignedCertOutput) ToSelfSignedCertPtrOutputWithContext(ctx context.Context) SelfSignedCertPtrOutput {
+	return o.ApplyT(func(v SelfSignedCert) *SelfSignedCert {
+		return &v
+	}).(SelfSignedCertPtrOutput)
+}
+
+type SelfSignedCertPtrOutput struct {
+	*pulumi.OutputState
+}
+
+func (SelfSignedCertPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SelfSignedCert)(nil))
+}
+
+func (o SelfSignedCertPtrOutput) ToSelfSignedCertPtrOutput() SelfSignedCertPtrOutput {
+	return o
+}
+
+func (o SelfSignedCertPtrOutput) ToSelfSignedCertPtrOutputWithContext(ctx context.Context) SelfSignedCertPtrOutput {
+	return o
+}
+
+type SelfSignedCertArrayOutput struct{ *pulumi.OutputState }
+
+func (SelfSignedCertArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SelfSignedCert)(nil))
+}
+
+func (o SelfSignedCertArrayOutput) ToSelfSignedCertArrayOutput() SelfSignedCertArrayOutput {
+	return o
+}
+
+func (o SelfSignedCertArrayOutput) ToSelfSignedCertArrayOutputWithContext(ctx context.Context) SelfSignedCertArrayOutput {
+	return o
+}
+
+func (o SelfSignedCertArrayOutput) Index(i pulumi.IntInput) SelfSignedCertOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SelfSignedCert {
+		return vs[0].([]SelfSignedCert)[vs[1].(int)]
+	}).(SelfSignedCertOutput)
+}
+
+type SelfSignedCertMapOutput struct{ *pulumi.OutputState }
+
+func (SelfSignedCertMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]SelfSignedCert)(nil))
+}
+
+func (o SelfSignedCertMapOutput) ToSelfSignedCertMapOutput() SelfSignedCertMapOutput {
+	return o
+}
+
+func (o SelfSignedCertMapOutput) ToSelfSignedCertMapOutputWithContext(ctx context.Context) SelfSignedCertMapOutput {
+	return o
+}
+
+func (o SelfSignedCertMapOutput) MapIndex(k pulumi.StringInput) SelfSignedCertOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) SelfSignedCert {
+		return vs[0].(map[string]SelfSignedCert)[vs[1].(string)]
+	}).(SelfSignedCertOutput)
+}
+
 func init() {
 	pulumi.RegisterOutputType(SelfSignedCertOutput{})
+	pulumi.RegisterOutputType(SelfSignedCertPtrOutput{})
+	pulumi.RegisterOutputType(SelfSignedCertArrayOutput{})
+	pulumi.RegisterOutputType(SelfSignedCertMapOutput{})
 }

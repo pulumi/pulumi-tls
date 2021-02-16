@@ -169,6 +169,85 @@ func (i *CertRequest) ToCertRequestOutputWithContext(ctx context.Context) CertRe
 	return pulumi.ToOutputWithContext(ctx, i).(CertRequestOutput)
 }
 
+func (i *CertRequest) ToCertRequestPtrOutput() CertRequestPtrOutput {
+	return i.ToCertRequestPtrOutputWithContext(context.Background())
+}
+
+func (i *CertRequest) ToCertRequestPtrOutputWithContext(ctx context.Context) CertRequestPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertRequestPtrOutput)
+}
+
+type CertRequestPtrInput interface {
+	pulumi.Input
+
+	ToCertRequestPtrOutput() CertRequestPtrOutput
+	ToCertRequestPtrOutputWithContext(ctx context.Context) CertRequestPtrOutput
+}
+
+type certRequestPtrType CertRequestArgs
+
+func (*certRequestPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CertRequest)(nil))
+}
+
+func (i *certRequestPtrType) ToCertRequestPtrOutput() CertRequestPtrOutput {
+	return i.ToCertRequestPtrOutputWithContext(context.Background())
+}
+
+func (i *certRequestPtrType) ToCertRequestPtrOutputWithContext(ctx context.Context) CertRequestPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertRequestPtrOutput)
+}
+
+// CertRequestArrayInput is an input type that accepts CertRequestArray and CertRequestArrayOutput values.
+// You can construct a concrete instance of `CertRequestArrayInput` via:
+//
+//          CertRequestArray{ CertRequestArgs{...} }
+type CertRequestArrayInput interface {
+	pulumi.Input
+
+	ToCertRequestArrayOutput() CertRequestArrayOutput
+	ToCertRequestArrayOutputWithContext(context.Context) CertRequestArrayOutput
+}
+
+type CertRequestArray []CertRequestInput
+
+func (CertRequestArray) ElementType() reflect.Type {
+	return reflect.TypeOf(([]*CertRequest)(nil))
+}
+
+func (i CertRequestArray) ToCertRequestArrayOutput() CertRequestArrayOutput {
+	return i.ToCertRequestArrayOutputWithContext(context.Background())
+}
+
+func (i CertRequestArray) ToCertRequestArrayOutputWithContext(ctx context.Context) CertRequestArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertRequestArrayOutput)
+}
+
+// CertRequestMapInput is an input type that accepts CertRequestMap and CertRequestMapOutput values.
+// You can construct a concrete instance of `CertRequestMapInput` via:
+//
+//          CertRequestMap{ "key": CertRequestArgs{...} }
+type CertRequestMapInput interface {
+	pulumi.Input
+
+	ToCertRequestMapOutput() CertRequestMapOutput
+	ToCertRequestMapOutputWithContext(context.Context) CertRequestMapOutput
+}
+
+type CertRequestMap map[string]CertRequestInput
+
+func (CertRequestMap) ElementType() reflect.Type {
+	return reflect.TypeOf((map[string]*CertRequest)(nil))
+}
+
+func (i CertRequestMap) ToCertRequestMapOutput() CertRequestMapOutput {
+	return i.ToCertRequestMapOutputWithContext(context.Background())
+}
+
+func (i CertRequestMap) ToCertRequestMapOutputWithContext(ctx context.Context) CertRequestMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertRequestMapOutput)
+}
+
 type CertRequestOutput struct {
 	*pulumi.OutputState
 }
@@ -185,6 +264,75 @@ func (o CertRequestOutput) ToCertRequestOutputWithContext(ctx context.Context) C
 	return o
 }
 
+func (o CertRequestOutput) ToCertRequestPtrOutput() CertRequestPtrOutput {
+	return o.ToCertRequestPtrOutputWithContext(context.Background())
+}
+
+func (o CertRequestOutput) ToCertRequestPtrOutputWithContext(ctx context.Context) CertRequestPtrOutput {
+	return o.ApplyT(func(v CertRequest) *CertRequest {
+		return &v
+	}).(CertRequestPtrOutput)
+}
+
+type CertRequestPtrOutput struct {
+	*pulumi.OutputState
+}
+
+func (CertRequestPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CertRequest)(nil))
+}
+
+func (o CertRequestPtrOutput) ToCertRequestPtrOutput() CertRequestPtrOutput {
+	return o
+}
+
+func (o CertRequestPtrOutput) ToCertRequestPtrOutputWithContext(ctx context.Context) CertRequestPtrOutput {
+	return o
+}
+
+type CertRequestArrayOutput struct{ *pulumi.OutputState }
+
+func (CertRequestArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CertRequest)(nil))
+}
+
+func (o CertRequestArrayOutput) ToCertRequestArrayOutput() CertRequestArrayOutput {
+	return o
+}
+
+func (o CertRequestArrayOutput) ToCertRequestArrayOutputWithContext(ctx context.Context) CertRequestArrayOutput {
+	return o
+}
+
+func (o CertRequestArrayOutput) Index(i pulumi.IntInput) CertRequestOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CertRequest {
+		return vs[0].([]CertRequest)[vs[1].(int)]
+	}).(CertRequestOutput)
+}
+
+type CertRequestMapOutput struct{ *pulumi.OutputState }
+
+func (CertRequestMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]CertRequest)(nil))
+}
+
+func (o CertRequestMapOutput) ToCertRequestMapOutput() CertRequestMapOutput {
+	return o
+}
+
+func (o CertRequestMapOutput) ToCertRequestMapOutputWithContext(ctx context.Context) CertRequestMapOutput {
+	return o
+}
+
+func (o CertRequestMapOutput) MapIndex(k pulumi.StringInput) CertRequestOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) CertRequest {
+		return vs[0].(map[string]CertRequest)[vs[1].(string)]
+	}).(CertRequestOutput)
+}
+
 func init() {
 	pulumi.RegisterOutputType(CertRequestOutput{})
+	pulumi.RegisterOutputType(CertRequestPtrOutput{})
+	pulumi.RegisterOutputType(CertRequestArrayOutput{})
+	pulumi.RegisterOutputType(CertRequestMapOutput{})
 }

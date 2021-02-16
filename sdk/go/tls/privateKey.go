@@ -182,6 +182,85 @@ func (i *PrivateKey) ToPrivateKeyOutputWithContext(ctx context.Context) PrivateK
 	return pulumi.ToOutputWithContext(ctx, i).(PrivateKeyOutput)
 }
 
+func (i *PrivateKey) ToPrivateKeyPtrOutput() PrivateKeyPtrOutput {
+	return i.ToPrivateKeyPtrOutputWithContext(context.Background())
+}
+
+func (i *PrivateKey) ToPrivateKeyPtrOutputWithContext(ctx context.Context) PrivateKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateKeyPtrOutput)
+}
+
+type PrivateKeyPtrInput interface {
+	pulumi.Input
+
+	ToPrivateKeyPtrOutput() PrivateKeyPtrOutput
+	ToPrivateKeyPtrOutputWithContext(ctx context.Context) PrivateKeyPtrOutput
+}
+
+type privateKeyPtrType PrivateKeyArgs
+
+func (*privateKeyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**PrivateKey)(nil))
+}
+
+func (i *privateKeyPtrType) ToPrivateKeyPtrOutput() PrivateKeyPtrOutput {
+	return i.ToPrivateKeyPtrOutputWithContext(context.Background())
+}
+
+func (i *privateKeyPtrType) ToPrivateKeyPtrOutputWithContext(ctx context.Context) PrivateKeyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateKeyPtrOutput)
+}
+
+// PrivateKeyArrayInput is an input type that accepts PrivateKeyArray and PrivateKeyArrayOutput values.
+// You can construct a concrete instance of `PrivateKeyArrayInput` via:
+//
+//          PrivateKeyArray{ PrivateKeyArgs{...} }
+type PrivateKeyArrayInput interface {
+	pulumi.Input
+
+	ToPrivateKeyArrayOutput() PrivateKeyArrayOutput
+	ToPrivateKeyArrayOutputWithContext(context.Context) PrivateKeyArrayOutput
+}
+
+type PrivateKeyArray []PrivateKeyInput
+
+func (PrivateKeyArray) ElementType() reflect.Type {
+	return reflect.TypeOf(([]*PrivateKey)(nil))
+}
+
+func (i PrivateKeyArray) ToPrivateKeyArrayOutput() PrivateKeyArrayOutput {
+	return i.ToPrivateKeyArrayOutputWithContext(context.Background())
+}
+
+func (i PrivateKeyArray) ToPrivateKeyArrayOutputWithContext(ctx context.Context) PrivateKeyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateKeyArrayOutput)
+}
+
+// PrivateKeyMapInput is an input type that accepts PrivateKeyMap and PrivateKeyMapOutput values.
+// You can construct a concrete instance of `PrivateKeyMapInput` via:
+//
+//          PrivateKeyMap{ "key": PrivateKeyArgs{...} }
+type PrivateKeyMapInput interface {
+	pulumi.Input
+
+	ToPrivateKeyMapOutput() PrivateKeyMapOutput
+	ToPrivateKeyMapOutputWithContext(context.Context) PrivateKeyMapOutput
+}
+
+type PrivateKeyMap map[string]PrivateKeyInput
+
+func (PrivateKeyMap) ElementType() reflect.Type {
+	return reflect.TypeOf((map[string]*PrivateKey)(nil))
+}
+
+func (i PrivateKeyMap) ToPrivateKeyMapOutput() PrivateKeyMapOutput {
+	return i.ToPrivateKeyMapOutputWithContext(context.Background())
+}
+
+func (i PrivateKeyMap) ToPrivateKeyMapOutputWithContext(ctx context.Context) PrivateKeyMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateKeyMapOutput)
+}
+
 type PrivateKeyOutput struct {
 	*pulumi.OutputState
 }
@@ -198,6 +277,75 @@ func (o PrivateKeyOutput) ToPrivateKeyOutputWithContext(ctx context.Context) Pri
 	return o
 }
 
+func (o PrivateKeyOutput) ToPrivateKeyPtrOutput() PrivateKeyPtrOutput {
+	return o.ToPrivateKeyPtrOutputWithContext(context.Background())
+}
+
+func (o PrivateKeyOutput) ToPrivateKeyPtrOutputWithContext(ctx context.Context) PrivateKeyPtrOutput {
+	return o.ApplyT(func(v PrivateKey) *PrivateKey {
+		return &v
+	}).(PrivateKeyPtrOutput)
+}
+
+type PrivateKeyPtrOutput struct {
+	*pulumi.OutputState
+}
+
+func (PrivateKeyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**PrivateKey)(nil))
+}
+
+func (o PrivateKeyPtrOutput) ToPrivateKeyPtrOutput() PrivateKeyPtrOutput {
+	return o
+}
+
+func (o PrivateKeyPtrOutput) ToPrivateKeyPtrOutputWithContext(ctx context.Context) PrivateKeyPtrOutput {
+	return o
+}
+
+type PrivateKeyArrayOutput struct{ *pulumi.OutputState }
+
+func (PrivateKeyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]PrivateKey)(nil))
+}
+
+func (o PrivateKeyArrayOutput) ToPrivateKeyArrayOutput() PrivateKeyArrayOutput {
+	return o
+}
+
+func (o PrivateKeyArrayOutput) ToPrivateKeyArrayOutputWithContext(ctx context.Context) PrivateKeyArrayOutput {
+	return o
+}
+
+func (o PrivateKeyArrayOutput) Index(i pulumi.IntInput) PrivateKeyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PrivateKey {
+		return vs[0].([]PrivateKey)[vs[1].(int)]
+	}).(PrivateKeyOutput)
+}
+
+type PrivateKeyMapOutput struct{ *pulumi.OutputState }
+
+func (PrivateKeyMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]PrivateKey)(nil))
+}
+
+func (o PrivateKeyMapOutput) ToPrivateKeyMapOutput() PrivateKeyMapOutput {
+	return o
+}
+
+func (o PrivateKeyMapOutput) ToPrivateKeyMapOutputWithContext(ctx context.Context) PrivateKeyMapOutput {
+	return o
+}
+
+func (o PrivateKeyMapOutput) MapIndex(k pulumi.StringInput) PrivateKeyOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) PrivateKey {
+		return vs[0].(map[string]PrivateKey)[vs[1].(string)]
+	}).(PrivateKeyOutput)
+}
+
 func init() {
 	pulumi.RegisterOutputType(PrivateKeyOutput{})
+	pulumi.RegisterOutputType(PrivateKeyPtrOutput{})
+	pulumi.RegisterOutputType(PrivateKeyArrayOutput{})
+	pulumi.RegisterOutputType(PrivateKeyMapOutput{})
 }

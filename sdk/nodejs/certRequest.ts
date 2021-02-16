@@ -74,7 +74,8 @@ export class CertRequest extends pulumi.CustomResource {
     constructor(name: string, args: CertRequestArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: CertRequestArgs | CertRequestState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as CertRequestState | undefined;
             inputs["certRequestPem"] = state ? state.certRequestPem : undefined;
             inputs["dnsNames"] = state ? state.dnsNames : undefined;
@@ -85,13 +86,13 @@ export class CertRequest extends pulumi.CustomResource {
             inputs["uris"] = state ? state.uris : undefined;
         } else {
             const args = argsOrState as CertRequestArgs | undefined;
-            if ((!args || args.keyAlgorithm === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.keyAlgorithm === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'keyAlgorithm'");
             }
-            if ((!args || args.privateKeyPem === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.privateKeyPem === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'privateKeyPem'");
             }
-            if ((!args || args.subjects === undefined) && !(opts && opts.urn)) {
+            if ((!args || args.subjects === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'subjects'");
             }
             inputs["dnsNames"] = args ? args.dnsNames : undefined;
@@ -102,12 +103,8 @@ export class CertRequest extends pulumi.CustomResource {
             inputs["uris"] = args ? args.uris : undefined;
             inputs["certRequestPem"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(CertRequest.__pulumiType, name, inputs, opts);
     }
