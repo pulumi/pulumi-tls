@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Upgrade to v3.1.0 of the TLS Terraform Provider
+_(none)_
 
 ---
+
+## 3.2.0 (2021-02-22)
+* Upgrade to v3.1.0 of the TLS Terraform Provider
 
 ## 3.1.1 (2021-02-16)
 * Upgrade to pulumi-terraform-bridge v2.19.0  
