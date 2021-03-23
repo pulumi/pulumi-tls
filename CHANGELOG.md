@@ -2,10 +2,14 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Upgrade to pulumi-terraform-bridge v2.21.0
-* Release macOS arm64 binary
+* Upgrade to pulumi-terraform-bridge v2.22.1  
+  **Please Note:** This includes a bug fix to the refresh operation regarding arrays
 
 ---
+
+## 3.3.0 (2021-03-23)
+* Upgrade to pulumi-terraform-bridge v2.21.0
+* Release macOS arm64 binary
 
 ## 3.2.0 (2021-02-22)
 * Upgrade to v3.1.0 of the TLS Terraform Provider
