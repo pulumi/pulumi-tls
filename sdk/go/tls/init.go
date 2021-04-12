@@ -21,17 +21,18 @@ func (m *module) Version() semver.Version {
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
 	case "tls:index/certRequest:CertRequest":
-		r, err = NewCertRequest(ctx, name, nil, pulumi.URN_(urn))
+		r = &CertRequest{}
 	case "tls:index/locallySignedCert:LocallySignedCert":
-		r, err = NewLocallySignedCert(ctx, name, nil, pulumi.URN_(urn))
+		r = &LocallySignedCert{}
 	case "tls:index/privateKey:PrivateKey":
-		r, err = NewPrivateKey(ctx, name, nil, pulumi.URN_(urn))
+		r = &PrivateKey{}
 	case "tls:index/selfSignedCert:SelfSignedCert":
-		r, err = NewSelfSignedCert(ctx, name, nil, pulumi.URN_(urn))
+		r = &SelfSignedCert{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
 
+	err = ctx.RegisterResource(typ, name, nil, r, pulumi.URN_(urn))
 	return
 }
 
@@ -48,7 +49,9 @@ func (p *pkg) ConstructProvider(ctx *pulumi.Context, name, typ, urn string) (pul
 		return nil, fmt.Errorf("unknown provider type: %s", typ)
 	}
 
-	return NewProvider(ctx, name, nil, pulumi.URN_(urn))
+	r := &Provider{}
+	err := ctx.RegisterResource(typ, name, nil, r, pulumi.URN_(urn))
+	return r, err
 }
 
 func init() {
