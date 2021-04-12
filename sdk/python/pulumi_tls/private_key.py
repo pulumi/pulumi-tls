@@ -5,13 +5,76 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities, _tables
 
-__all__ = ['PrivateKey']
+__all__ = ['PrivateKeyArgs', 'PrivateKey']
+
+@pulumi.input_type
+class PrivateKeyArgs:
+    def __init__(__self__, *,
+                 algorithm: pulumi.Input[str],
+                 ecdsa_curve: Optional[pulumi.Input[str]] = None,
+                 rsa_bits: Optional[pulumi.Input[int]] = None):
+        """
+        The set of arguments for constructing a PrivateKey resource.
+        :param pulumi.Input[str] algorithm: The name of the algorithm to use for
+               the key. Currently-supported values are "RSA" and "ECDSA".
+        :param pulumi.Input[str] ecdsa_curve: When `algorithm` is "ECDSA", the name of the elliptic
+               curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
+               default.
+        :param pulumi.Input[int] rsa_bits: When `algorithm` is "RSA", the size of the generated
+               RSA key in bits. Defaults to 2048.
+        """
+        pulumi.set(__self__, "algorithm", algorithm)
+        if ecdsa_curve is not None:
+            pulumi.set(__self__, "ecdsa_curve", ecdsa_curve)
+        if rsa_bits is not None:
+            pulumi.set(__self__, "rsa_bits", rsa_bits)
+
+    @property
+    @pulumi.getter
+    def algorithm(self) -> pulumi.Input[str]:
+        """
+        The name of the algorithm to use for
+        the key. Currently-supported values are "RSA" and "ECDSA".
+        """
+        return pulumi.get(self, "algorithm")
+
+    @algorithm.setter
+    def algorithm(self, value: pulumi.Input[str]):
+        pulumi.set(self, "algorithm", value)
+
+    @property
+    @pulumi.getter(name="ecdsaCurve")
+    def ecdsa_curve(self) -> Optional[pulumi.Input[str]]:
+        """
+        When `algorithm` is "ECDSA", the name of the elliptic
+        curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
+        default.
+        """
+        return pulumi.get(self, "ecdsa_curve")
+
+    @ecdsa_curve.setter
+    def ecdsa_curve(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ecdsa_curve", value)
+
+    @property
+    @pulumi.getter(name="rsaBits")
+    def rsa_bits(self) -> Optional[pulumi.Input[int]]:
+        """
+        When `algorithm` is "RSA", the size of the generated
+        RSA key in bits. Defaults to 2048.
+        """
+        return pulumi.get(self, "rsa_bits")
+
+    @rsa_bits.setter
+    def rsa_bits(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "rsa_bits", value)
 
 
 class PrivateKey(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -33,6 +96,35 @@ class PrivateKey(pulumi.CustomResource):
         :param pulumi.Input[int] rsa_bits: When `algorithm` is "RSA", the size of the generated
                RSA key in bits. Defaults to 2048.
         """
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: PrivateKeyArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Create a PrivateKey resource with the given unique name, props, and options.
+        :param str resource_name: The name of the resource.
+        :param PrivateKeyArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(PrivateKeyArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 algorithm: Optional[pulumi.Input[str]] = None,
+                 ecdsa_curve: Optional[pulumi.Input[str]] = None,
+                 rsa_bits: Optional[pulumi.Input[int]] = None,
+                 __props__=None,
+                 __name__=None,
+                 __opts__=None):
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
             resource_name = __name__
