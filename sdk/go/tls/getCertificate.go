@@ -4,7 +4,7 @@
 package tls
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Use this data source to get information, such as SHA1 fingerprint or serial number, about the TLS certificates that
@@ -18,8 +18,8 @@ import (
 // import (
 // 	"github.com/pulumi/pulumi-aws/sdk/v3/go/aws/eks"
 // 	"github.com/pulumi/pulumi-aws/sdk/v3/go/aws/iam"
-// 	"github.com/pulumi/pulumi-tls/sdk/v3/go/tls"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {

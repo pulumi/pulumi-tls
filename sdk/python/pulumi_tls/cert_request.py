@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -117,6 +117,130 @@ class CertRequestArgs:
         pulumi.set(self, "uris", value)
 
 
+@pulumi.input_type
+class _CertRequestState:
+    def __init__(__self__, *,
+                 cert_request_pem: Optional[pulumi.Input[str]] = None,
+                 dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 key_algorithm: Optional[pulumi.Input[str]] = None,
+                 private_key_pem: Optional[pulumi.Input[str]] = None,
+                 subjects: Optional[pulumi.Input[Sequence[pulumi.Input['CertRequestSubjectArgs']]]] = None,
+                 uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        Input properties used for looking up and filtering CertRequest resources.
+        :param pulumi.Input[str] cert_request_pem: The certificate request data in PEM format.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested.
+        :param pulumi.Input[str] key_algorithm: The name of the algorithm for the key provided
+               in `private_key_pem`.
+        :param pulumi.Input[str] private_key_pem: PEM-encoded private key that the certificate will belong to
+        :param pulumi.Input[Sequence[pulumi.Input['CertRequestSubjectArgs']]] subjects: The subject for which a certificate is being requested. This is
+               a nested configuration block whose structure is described below.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested.
+        """
+        if cert_request_pem is not None:
+            pulumi.set(__self__, "cert_request_pem", cert_request_pem)
+        if dns_names is not None:
+            pulumi.set(__self__, "dns_names", dns_names)
+        if ip_addresses is not None:
+            pulumi.set(__self__, "ip_addresses", ip_addresses)
+        if key_algorithm is not None:
+            pulumi.set(__self__, "key_algorithm", key_algorithm)
+        if private_key_pem is not None:
+            pulumi.set(__self__, "private_key_pem", private_key_pem)
+        if subjects is not None:
+            pulumi.set(__self__, "subjects", subjects)
+        if uris is not None:
+            pulumi.set(__self__, "uris", uris)
+
+    @property
+    @pulumi.getter(name="certRequestPem")
+    def cert_request_pem(self) -> Optional[pulumi.Input[str]]:
+        """
+        The certificate request data in PEM format.
+        """
+        return pulumi.get(self, "cert_request_pem")
+
+    @cert_request_pem.setter
+    def cert_request_pem(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cert_request_pem", value)
+
+    @property
+    @pulumi.getter(name="dnsNames")
+    def dns_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of DNS names for which a certificate is being requested.
+        """
+        return pulumi.get(self, "dns_names")
+
+    @dns_names.setter
+    def dns_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "dns_names", value)
+
+    @property
+    @pulumi.getter(name="ipAddresses")
+    def ip_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of IP addresses for which a certificate is being requested.
+        """
+        return pulumi.get(self, "ip_addresses")
+
+    @ip_addresses.setter
+    def ip_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "ip_addresses", value)
+
+    @property
+    @pulumi.getter(name="keyAlgorithm")
+    def key_algorithm(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the algorithm for the key provided
+        in `private_key_pem`.
+        """
+        return pulumi.get(self, "key_algorithm")
+
+    @key_algorithm.setter
+    def key_algorithm(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_algorithm", value)
+
+    @property
+    @pulumi.getter(name="privateKeyPem")
+    def private_key_pem(self) -> Optional[pulumi.Input[str]]:
+        """
+        PEM-encoded private key that the certificate will belong to
+        """
+        return pulumi.get(self, "private_key_pem")
+
+    @private_key_pem.setter
+    def private_key_pem(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "private_key_pem", value)
+
+    @property
+    @pulumi.getter
+    def subjects(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CertRequestSubjectArgs']]]]:
+        """
+        The subject for which a certificate is being requested. This is
+        a nested configuration block whose structure is described below.
+        """
+        return pulumi.get(self, "subjects")
+
+    @subjects.setter
+    def subjects(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CertRequestSubjectArgs']]]]):
+        pulumi.set(self, "subjects", value)
+
+    @property
+    @pulumi.getter
+    def uris(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of URIs for which a certificate is being requested.
+        """
+        return pulumi.get(self, "uris")
+
+    @uris.setter
+    def uris(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "uris", value)
+
+
 class CertRequest(pulumi.CustomResource):
     @overload
     def __init__(__self__,
@@ -191,21 +315,21 @@ class CertRequest(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = CertRequestArgs.__new__(CertRequestArgs)
 
-            __props__['dns_names'] = dns_names
-            __props__['ip_addresses'] = ip_addresses
+            __props__.__dict__["dns_names"] = dns_names
+            __props__.__dict__["ip_addresses"] = ip_addresses
             if key_algorithm is None and not opts.urn:
                 raise TypeError("Missing required property 'key_algorithm'")
-            __props__['key_algorithm'] = key_algorithm
+            __props__.__dict__["key_algorithm"] = key_algorithm
             if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
-            __props__['private_key_pem'] = private_key_pem
+            __props__.__dict__["private_key_pem"] = private_key_pem
             if subjects is None and not opts.urn:
                 raise TypeError("Missing required property 'subjects'")
-            __props__['subjects'] = subjects
-            __props__['uris'] = uris
-            __props__['cert_request_pem'] = None
+            __props__.__dict__["subjects"] = subjects
+            __props__.__dict__["uris"] = uris
+            __props__.__dict__["cert_request_pem"] = None
         super(CertRequest, __self__).__init__(
             'tls:index/certRequest:CertRequest',
             resource_name,
@@ -242,15 +366,15 @@ class CertRequest(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _CertRequestState.__new__(_CertRequestState)
 
-        __props__["cert_request_pem"] = cert_request_pem
-        __props__["dns_names"] = dns_names
-        __props__["ip_addresses"] = ip_addresses
-        __props__["key_algorithm"] = key_algorithm
-        __props__["private_key_pem"] = private_key_pem
-        __props__["subjects"] = subjects
-        __props__["uris"] = uris
+        __props__.__dict__["cert_request_pem"] = cert_request_pem
+        __props__.__dict__["dns_names"] = dns_names
+        __props__.__dict__["ip_addresses"] = ip_addresses
+        __props__.__dict__["key_algorithm"] = key_algorithm
+        __props__.__dict__["private_key_pem"] = private_key_pem
+        __props__.__dict__["subjects"] = subjects
+        __props__.__dict__["uris"] = uris
         return CertRequest(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -310,10 +434,4 @@ class CertRequest(pulumi.CustomResource):
         List of URIs for which a certificate is being requested.
         """
         return pulumi.get(self, "uris")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

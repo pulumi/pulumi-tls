@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
-from . import _utilities, _tables
+from . import _utilities
 
 __all__ = [
     'CertRequestSubject',
@@ -16,6 +16,31 @@ __all__ = [
 
 @pulumi.output_type
 class CertRequestSubject(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "commonName":
+            suggest = "common_name"
+        elif key == "organizationalUnit":
+            suggest = "organizational_unit"
+        elif key == "postalCode":
+            suggest = "postal_code"
+        elif key == "serialNumber":
+            suggest = "serial_number"
+        elif key == "streetAddresses":
+            suggest = "street_addresses"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CertRequestSubject. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CertRequestSubject.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CertRequestSubject.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  common_name: Optional[str] = None,
                  country: Optional[str] = None,
@@ -89,13 +114,35 @@ class CertRequestSubject(dict):
     @pulumi.getter(name="streetAddresses")
     def street_addresses(self) -> Optional[Sequence[str]]:
         return pulumi.get(self, "street_addresses")
-
-    def _translate_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
 
 @pulumi.output_type
 class SelfSignedCertSubject(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "commonName":
+            suggest = "common_name"
+        elif key == "organizationalUnit":
+            suggest = "organizational_unit"
+        elif key == "postalCode":
+            suggest = "postal_code"
+        elif key == "serialNumber":
+            suggest = "serial_number"
+        elif key == "streetAddresses":
+            suggest = "street_addresses"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SelfSignedCertSubject. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SelfSignedCertSubject.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SelfSignedCertSubject.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  common_name: Optional[str] = None,
                  country: Optional[str] = None,
@@ -169,9 +216,6 @@ class SelfSignedCertSubject(dict):
     @pulumi.getter(name="streetAddresses")
     def street_addresses(self) -> Optional[Sequence[str]]:
         return pulumi.get(self, "street_addresses")
-
-    def _translate_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
 
 @pulumi.output_type
