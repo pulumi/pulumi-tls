@@ -3,7 +3,7 @@
 [![NPM version](https://badge.fury.io/js/%40pulumi%2Ftls.svg)](https://www.npmjs.com/package/@pulumi/tls)
 [![Python version](https://badge.fury.io/py/pulumi-tls.svg)](https://pypi.org/project/pulumi-tls)
 [![NuGet version](https://badge.fury.io/nu/pulumi.tls.svg)](https://badge.fury.io/nu/pulumi.tls)
-[![PkgGoDev](https://pkg.go.dev/badge/github.com/pulumi/pulumi-tls/sdk/v2/go)](https://pkg.go.dev/github.com/pulumi/pulumi-tls/sdk/v2/go)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/pulumi/pulumi-tls/sdk/v4/go)](https://pkg.go.dev/github.com/pulumi/pulumi-tls/sdk/v4/go)
 [![License](https://img.shields.io/npm/l/%40pulumi%2Fpulumi.svg)](https://github.com/pulumi/pulumi-tls/blob/master/LICENSE)
 
 # TLS Resource Provider
@@ -35,7 +35,7 @@ To use from Python, install using `pip`:
 
 To use from Go, use `go get` to grab the latest version of the library
 
-    $ go get github.com/pulumi/pulumi-tls/sdk/v2/go/...
+    $ go get github.com/pulumi/pulumi-tls/sdk/v4/go/...
 
 ### .NET
 
