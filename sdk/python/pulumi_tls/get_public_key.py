@@ -12,6 +12,7 @@ __all__ = [
     'GetPublicKeyResult',
     'AwaitableGetPublicKeyResult',
     'get_public_key',
+    'get_public_key_output',
 ]
 
 @pulumi.output_type
@@ -139,3 +140,25 @@ def get_public_key(private_key_pem: Optional[str] = None,
         public_key_fingerprint_md5=__ret__.public_key_fingerprint_md5,
         public_key_openssh=__ret__.public_key_openssh,
         public_key_pem=__ret__.public_key_pem)
+
+
+@_utilities.lift_output_func(get_public_key)
+def get_public_key_output(private_key_pem: Optional[pulumi.Input[str]] = None,
+                          opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPublicKeyResult]:
+    """
+    Use this data source to get the public key from a PEM-encoded private key for use in other
+    resources.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_tls as tls
+
+    example = tls.get_public_key(private_key_pem=(lambda path: open(path).read())("~/.ssh/id_rsa"))
+    ```
+
+
+    :param str private_key_pem: The private key to use. Currently-supported key types are "RSA" or "ECDSA".
+    """
+    ...

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi.Utilities;
 
 namespace Pulumi.Tls
 {
@@ -43,7 +44,7 @@ namespace Pulumi.Tls
         ///             },
         ///             ThumbprintLists = 
         ///             {
-        ///                 exampleCertificate.Apply(exampleCertificate =&gt; exampleCertificate.Certificates[0].Sha1Fingerprint),
+        ///                 exampleCertificate.Apply(exampleCertificate =&gt; exampleCertificate.Certificates?[0]?.Sha1Fingerprint),
         ///             },
         ///             Url = exampleCluster.Identities.Apply(identities =&gt; identities[0].Oidcs?[0]?.Issuer),
         ///         });
@@ -56,6 +57,52 @@ namespace Pulumi.Tls
         /// </summary>
         public static Task<GetCertificateResult> InvokeAsync(GetCertificateArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetCertificateResult>("tls:index/getCertificate:getCertificate", args ?? new GetCertificateArgs(), options.WithVersion());
+
+        /// <summary>
+        /// Use this data source to get information, such as SHA1 fingerprint or serial number, about the TLS certificates that
+        /// protect an HTTPS website. Note that the certificate chain isn't verified.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Aws = Pulumi.Aws;
+        /// using Tls = Pulumi.Tls;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var exampleCluster = new Aws.Eks.Cluster("exampleCluster", new Aws.Eks.ClusterArgs
+        ///         {
+        ///         });
+        ///         var exampleCertificate = exampleCluster.Identities.Apply(identities =&gt; Tls.GetCertificate.InvokeAsync(new Tls.GetCertificateArgs
+        ///         {
+        ///             Url = identities[0].Oidcs?[0]?.Issuer,
+        ///         }));
+        ///         var exampleOpenIdConnectProvider = new Aws.Iam.OpenIdConnectProvider("exampleOpenIdConnectProvider", new Aws.Iam.OpenIdConnectProviderArgs
+        ///         {
+        ///             ClientIdLists = 
+        ///             {
+        ///                 "sts.amazonaws.com",
+        ///             },
+        ///             ThumbprintLists = 
+        ///             {
+        ///                 exampleCertificate.Apply(exampleCertificate =&gt; exampleCertificate.Certificates?[0]?.Sha1Fingerprint),
+        ///             },
+        ///             Url = exampleCluster.Identities.Apply(identities =&gt; identities[0].Oidcs?[0]?.Issuer),
+        ///         });
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Output<GetCertificateResult> Invoke(GetCertificateInvokeArgs args, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.Invoke<GetCertificateResult>("tls:index/getCertificate:getCertificate", args ?? new GetCertificateInvokeArgs(), options.WithVersion());
     }
 
 
@@ -74,6 +121,25 @@ namespace Pulumi.Tls
         public bool? VerifyChain { get; set; }
 
         public GetCertificateArgs()
+        {
+        }
+    }
+
+    public sealed class GetCertificateInvokeArgs : Pulumi.InvokeArgs
+    {
+        /// <summary>
+        /// The URL of the website to get the certificates from.
+        /// </summary>
+        [Input("url", required: true)]
+        public Input<string> Url { get; set; } = null!;
+
+        /// <summary>
+        /// Whether to verify the certificate chain while parsing it or not
+        /// </summary>
+        [Input("verifyChain")]
+        public Input<bool>? VerifyChain { get; set; }
+
+        public GetCertificateInvokeArgs()
         {
         }
     }

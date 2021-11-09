@@ -117,33 +117,33 @@ export interface CertRequestState {
     /**
      * The certificate request data in PEM format.
      */
-    readonly certRequestPem?: pulumi.Input<string>;
+    certRequestPem?: pulumi.Input<string>;
     /**
      * List of DNS names for which a certificate is being requested.
      */
-    readonly dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
+    dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * List of IP addresses for which a certificate is being requested.
      */
-    readonly ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of the algorithm for the key provided
      * in `privateKeyPem`.
      */
-    readonly keyAlgorithm?: pulumi.Input<string>;
+    keyAlgorithm?: pulumi.Input<string>;
     /**
      * PEM-encoded private key that the certificate will belong to
      */
-    readonly privateKeyPem?: pulumi.Input<string>;
+    privateKeyPem?: pulumi.Input<string>;
     /**
      * The subject for which a certificate is being requested. This is
      * a nested configuration block whose structure is described below.
      */
-    readonly subjects?: pulumi.Input<pulumi.Input<inputs.CertRequestSubject>[]>;
+    subjects?: pulumi.Input<pulumi.Input<inputs.CertRequestSubject>[]>;
     /**
      * List of URIs for which a certificate is being requested.
      */
-    readonly uris?: pulumi.Input<pulumi.Input<string>[]>;
+    uris?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -153,27 +153,27 @@ export interface CertRequestArgs {
     /**
      * List of DNS names for which a certificate is being requested.
      */
-    readonly dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
+    dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * List of IP addresses for which a certificate is being requested.
      */
-    readonly ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of the algorithm for the key provided
      * in `privateKeyPem`.
      */
-    readonly keyAlgorithm: pulumi.Input<string>;
+    keyAlgorithm: pulumi.Input<string>;
     /**
      * PEM-encoded private key that the certificate will belong to
      */
-    readonly privateKeyPem: pulumi.Input<string>;
+    privateKeyPem: pulumi.Input<string>;
     /**
      * The subject for which a certificate is being requested. This is
      * a nested configuration block whose structure is described below.
      */
-    readonly subjects: pulumi.Input<pulumi.Input<inputs.CertRequestSubject>[]>;
+    subjects: pulumi.Input<pulumi.Input<inputs.CertRequestSubject>[]>;
     /**
      * List of URIs for which a certificate is being requested.
      */
-    readonly uris?: pulumi.Input<pulumi.Input<string>[]>;
+    uris?: pulumi.Input<pulumi.Input<string>[]>;
 }

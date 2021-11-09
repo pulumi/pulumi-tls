@@ -2,7 +2,6 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
 /**
@@ -18,7 +17,7 @@ import * as utilities from "./utilities";
  *
  * const example = pulumi.output(tls.getPublicKey({
  *     privateKeyPem: fs.readFileSync("~/.ssh/id_rsa", "utf-8"),
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getPublicKey(args: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
@@ -41,7 +40,7 @@ export interface GetPublicKeyArgs {
     /**
      * The private key to use. Currently-supported key types are "RSA" or "ECDSA".
      */
-    readonly privateKeyPem: string;
+    privateKeyPem: string;
 }
 
 /**
@@ -76,4 +75,18 @@ export interface GetPublicKeyResult {
      * The public key data in PEM format.
      */
     readonly publicKeyPem: string;
+}
+
+export function getPublicKeyOutput(args: GetPublicKeyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublicKeyResult> {
+    return pulumi.output(args).apply(a => getPublicKey(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getPublicKey.
+ */
+export interface GetPublicKeyOutputArgs {
+    /**
+     * The private key to use. Currently-supported key types are "RSA" or "ECDSA".
+     */
+    privateKeyPem: pulumi.Input<string>;
 }

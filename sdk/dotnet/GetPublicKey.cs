@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi.Utilities;
 
 namespace Pulumi.Tls
 {
@@ -41,6 +42,37 @@ namespace Pulumi.Tls
         /// </summary>
         public static Task<GetPublicKeyResult> InvokeAsync(GetPublicKeyArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyArgs(), options.WithVersion());
+
+        /// <summary>
+        /// Use this data source to get the public key from a PEM-encoded private key for use in other
+        /// resources.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using System.IO;
+        /// using Pulumi;
+        /// using Tls = Pulumi.Tls;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var example = Output.Create(Tls.GetPublicKey.InvokeAsync(new Tls.GetPublicKeyArgs
+        ///         {
+        ///             PrivateKeyPem = File.ReadAllText("~/.ssh/id_rsa"),
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Output<GetPublicKeyResult> Invoke(GetPublicKeyInvokeArgs args, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.Invoke<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyInvokeArgs(), options.WithVersion());
     }
 
 
@@ -53,6 +85,19 @@ namespace Pulumi.Tls
         public string PrivateKeyPem { get; set; } = null!;
 
         public GetPublicKeyArgs()
+        {
+        }
+    }
+
+    public sealed class GetPublicKeyInvokeArgs : Pulumi.InvokeArgs
+    {
+        /// <summary>
+        /// The private key to use. Currently-supported key types are "RSA" or "ECDSA".
+        /// </summary>
+        [Input("privateKeyPem", required: true)]
+        public Input<string> PrivateKeyPem { get; set; } = null!;
+
+        public GetPublicKeyInvokeArgs()
         {
         }
     }

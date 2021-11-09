@@ -225,7 +225,7 @@ type PrivateKeyArrayInput interface {
 type PrivateKeyArray []PrivateKeyInput
 
 func (PrivateKeyArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*PrivateKey)(nil))
+	return reflect.TypeOf((*[]*PrivateKey)(nil)).Elem()
 }
 
 func (i PrivateKeyArray) ToPrivateKeyArrayOutput() PrivateKeyArrayOutput {
@@ -250,7 +250,7 @@ type PrivateKeyMapInput interface {
 type PrivateKeyMap map[string]PrivateKeyInput
 
 func (PrivateKeyMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*PrivateKey)(nil))
+	return reflect.TypeOf((*map[string]*PrivateKey)(nil)).Elem()
 }
 
 func (i PrivateKeyMap) ToPrivateKeyMapOutput() PrivateKeyMapOutput {
@@ -261,9 +261,7 @@ func (i PrivateKeyMap) ToPrivateKeyMapOutputWithContext(ctx context.Context) Pri
 	return pulumi.ToOutputWithContext(ctx, i).(PrivateKeyMapOutput)
 }
 
-type PrivateKeyOutput struct {
-	*pulumi.OutputState
-}
+type PrivateKeyOutput struct{ *pulumi.OutputState }
 
 func (PrivateKeyOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*PrivateKey)(nil))
@@ -282,14 +280,12 @@ func (o PrivateKeyOutput) ToPrivateKeyPtrOutput() PrivateKeyPtrOutput {
 }
 
 func (o PrivateKeyOutput) ToPrivateKeyPtrOutputWithContext(ctx context.Context) PrivateKeyPtrOutput {
-	return o.ApplyT(func(v PrivateKey) *PrivateKey {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v PrivateKey) *PrivateKey {
 		return &v
 	}).(PrivateKeyPtrOutput)
 }
 
-type PrivateKeyPtrOutput struct {
-	*pulumi.OutputState
-}
+type PrivateKeyPtrOutput struct{ *pulumi.OutputState }
 
 func (PrivateKeyPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**PrivateKey)(nil))
@@ -301,6 +297,16 @@ func (o PrivateKeyPtrOutput) ToPrivateKeyPtrOutput() PrivateKeyPtrOutput {
 
 func (o PrivateKeyPtrOutput) ToPrivateKeyPtrOutputWithContext(ctx context.Context) PrivateKeyPtrOutput {
 	return o
+}
+
+func (o PrivateKeyPtrOutput) Elem() PrivateKeyOutput {
+	return o.ApplyT(func(v *PrivateKey) PrivateKey {
+		if v != nil {
+			return *v
+		}
+		var ret PrivateKey
+		return ret
+	}).(PrivateKeyOutput)
 }
 
 type PrivateKeyArrayOutput struct{ *pulumi.OutputState }
@@ -344,6 +350,10 @@ func (o PrivateKeyMapOutput) MapIndex(k pulumi.StringInput) PrivateKeyOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateKeyInput)(nil)).Elem(), &PrivateKey{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateKeyPtrInput)(nil)).Elem(), &PrivateKey{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateKeyArrayInput)(nil)).Elem(), PrivateKeyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateKeyMapInput)(nil)).Elem(), PrivateKeyMap{})
 	pulumi.RegisterOutputType(PrivateKeyOutput{})
 	pulumi.RegisterOutputType(PrivateKeyPtrOutput{})
 	pulumi.RegisterOutputType(PrivateKeyArrayOutput{})

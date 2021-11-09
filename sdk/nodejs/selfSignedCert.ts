@@ -178,70 +178,70 @@ export interface SelfSignedCertState {
      * List of keywords each describing a use that is permitted
      * for the issued certificate. The valid keywords are listed below.
      */
-    readonly allowedUses?: pulumi.Input<pulumi.Input<string>[]>;
+    allowedUses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The certificate data in PEM format.
      */
-    readonly certPem?: pulumi.Input<string>;
+    certPem?: pulumi.Input<string>;
     /**
      * List of DNS names for which a certificate is being requested.
      */
-    readonly dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
+    dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Number of hours before the certificates expiry when a new certificate will be generated
      */
-    readonly earlyRenewalHours?: pulumi.Input<number>;
+    earlyRenewalHours?: pulumi.Input<number>;
     /**
      * List of IP addresses for which a certificate is being requested.
      */
-    readonly ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Boolean controlling whether the CA flag will be set in the
      * generated certificate. Defaults to `false`, meaning that the certificate does not represent
      * a certificate authority.
      */
-    readonly isCaCertificate?: pulumi.Input<boolean>;
+    isCaCertificate?: pulumi.Input<boolean>;
     /**
      * The name of the algorithm for the key provided
      * in `privateKeyPem`.
      */
-    readonly keyAlgorithm?: pulumi.Input<string>;
+    keyAlgorithm?: pulumi.Input<string>;
     /**
      * PEM-encoded private key that the certificate will belong to
      */
-    readonly privateKeyPem?: pulumi.Input<string>;
-    readonly readyForRenewal?: pulumi.Input<boolean>;
+    privateKeyPem?: pulumi.Input<string>;
+    readyForRenewal?: pulumi.Input<boolean>;
     /**
      * If `true`, the certificate will include
      * the subject key identifier. Defaults to `false`, in which case the subject
      * key identifier is not set at all.
      */
-    readonly setSubjectKeyId?: pulumi.Input<boolean>;
+    setSubjectKeyId?: pulumi.Input<boolean>;
     /**
      * The subject for which a certificate is being requested.
      * This is a nested configuration block whose structure matches the
      * corresponding block for `tls.CertRequest`.
      */
-    readonly subjects?: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
+    subjects?: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
     /**
      * List of URIs for which a certificate is being requested.
      */
-    readonly uris?: pulumi.Input<pulumi.Input<string>[]>;
+    uris?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The time until which the certificate is invalid, as an
      * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      */
-    readonly validityEndTime?: pulumi.Input<string>;
+    validityEndTime?: pulumi.Input<string>;
     /**
      * The number of hours after initial issuing that the
      * certificate will become invalid.
      */
-    readonly validityPeriodHours?: pulumi.Input<number>;
+    validityPeriodHours?: pulumi.Input<number>;
     /**
      * The time after which the certificate is valid, as an
      * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      */
-    readonly validityStartTime?: pulumi.Input<string>;
+    validityStartTime?: pulumi.Input<string>;
 }
 
 /**
@@ -252,53 +252,53 @@ export interface SelfSignedCertArgs {
      * List of keywords each describing a use that is permitted
      * for the issued certificate. The valid keywords are listed below.
      */
-    readonly allowedUses: pulumi.Input<pulumi.Input<string>[]>;
+    allowedUses: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * List of DNS names for which a certificate is being requested.
      */
-    readonly dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
+    dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Number of hours before the certificates expiry when a new certificate will be generated
      */
-    readonly earlyRenewalHours?: pulumi.Input<number>;
+    earlyRenewalHours?: pulumi.Input<number>;
     /**
      * List of IP addresses for which a certificate is being requested.
      */
-    readonly ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Boolean controlling whether the CA flag will be set in the
      * generated certificate. Defaults to `false`, meaning that the certificate does not represent
      * a certificate authority.
      */
-    readonly isCaCertificate?: pulumi.Input<boolean>;
+    isCaCertificate?: pulumi.Input<boolean>;
     /**
      * The name of the algorithm for the key provided
      * in `privateKeyPem`.
      */
-    readonly keyAlgorithm: pulumi.Input<string>;
+    keyAlgorithm: pulumi.Input<string>;
     /**
      * PEM-encoded private key that the certificate will belong to
      */
-    readonly privateKeyPem: pulumi.Input<string>;
+    privateKeyPem: pulumi.Input<string>;
     /**
      * If `true`, the certificate will include
      * the subject key identifier. Defaults to `false`, in which case the subject
      * key identifier is not set at all.
      */
-    readonly setSubjectKeyId?: pulumi.Input<boolean>;
+    setSubjectKeyId?: pulumi.Input<boolean>;
     /**
      * The subject for which a certificate is being requested.
      * This is a nested configuration block whose structure matches the
      * corresponding block for `tls.CertRequest`.
      */
-    readonly subjects: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
+    subjects: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
     /**
      * List of URIs for which a certificate is being requested.
      */
-    readonly uris?: pulumi.Input<pulumi.Input<string>[]>;
+    uris?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The number of hours after initial issuing that the
      * certificate will become invalid.
      */
-    readonly validityPeriodHours: pulumi.Input<number>;
+    validityPeriodHours: pulumi.Input<number>;
 }
