@@ -4,11 +4,47 @@
 package tls
 
 import (
+	"context"
+	"reflect"
+
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Use this data source to get the public key from a PEM-encoded private key for use in other
 // resources.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"io/ioutil"
+//
+// 	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func readFileOrPanic(path string) pulumi.StringPtrInput {
+// 	data, err := ioutil.ReadFile(path)
+// 	if err != nil {
+// 		panic(err.Error())
+// 	}
+// 	return pulumi.String(string(data))
+// }
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := tls.GetPublicKey(ctx, &GetPublicKeyArgs{
+// 			PrivateKeyPem: readFileOrPanic("~/.ssh/id_rsa"),
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 func GetPublicKey(ctx *pulumi.Context, args *GetPublicKeyArgs, opts ...pulumi.InvokeOption) (*GetPublicKeyResult, error) {
 	var rv GetPublicKeyResult
 	err := ctx.Invoke("tls:index/getPublicKey:getPublicKey", args, &rv, opts...)
@@ -44,4 +80,78 @@ type GetPublicKeyResult struct {
 	PublicKeyOpenssh string `pulumi:"publicKeyOpenssh"`
 	// The public key data in PEM format.
 	PublicKeyPem string `pulumi:"publicKeyPem"`
+}
+
+func GetPublicKeyOutput(ctx *pulumi.Context, args GetPublicKeyOutputArgs, opts ...pulumi.InvokeOption) GetPublicKeyResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (GetPublicKeyResult, error) {
+			args := v.(GetPublicKeyArgs)
+			r, err := GetPublicKey(ctx, &args, opts...)
+			return *r, err
+		}).(GetPublicKeyResultOutput)
+}
+
+// A collection of arguments for invoking getPublicKey.
+type GetPublicKeyOutputArgs struct {
+	// The private key to use. Currently-supported key types are "RSA" or "ECDSA".
+	PrivateKeyPem pulumi.StringInput `pulumi:"privateKeyPem"`
+}
+
+func (GetPublicKeyOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublicKeyArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getPublicKey.
+type GetPublicKeyResultOutput struct{ *pulumi.OutputState }
+
+func (GetPublicKeyResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPublicKeyResult)(nil)).Elem()
+}
+
+func (o GetPublicKeyResultOutput) ToGetPublicKeyResultOutput() GetPublicKeyResultOutput {
+	return o
+}
+
+func (o GetPublicKeyResultOutput) ToGetPublicKeyResultOutputWithContext(ctx context.Context) GetPublicKeyResultOutput {
+	return o
+}
+
+func (o GetPublicKeyResultOutput) Algorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicKeyResult) string { return v.Algorithm }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o GetPublicKeyResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicKeyResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The private key data in PEM format.
+func (o GetPublicKeyResultOutput) PrivateKeyPem() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicKeyResult) string { return v.PrivateKeyPem }).(pulumi.StringOutput)
+}
+
+// The md5 hash of the public key data in
+// OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
+// selected private key format is compatible, as per the rules for
+// `publicKeyOpenssh`.
+func (o GetPublicKeyResultOutput) PublicKeyFingerprintMd5() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicKeyResult) string { return v.PublicKeyFingerprintMd5 }).(pulumi.StringOutput)
+}
+
+// The public key data in OpenSSH `authorizedKeys`
+// format, if the selected private key format is compatible. All RSA keys
+// are supported, and ECDSA keys with curves "P256", "P384" and "P521"
+// are supported. This attribute is empty if an incompatible ECDSA curve
+// is selected.
+func (o GetPublicKeyResultOutput) PublicKeyOpenssh() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicKeyResult) string { return v.PublicKeyOpenssh }).(pulumi.StringOutput)
+}
+
+// The public key data in PEM format.
+func (o GetPublicKeyResultOutput) PublicKeyPem() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicKeyResult) string { return v.PublicKeyPem }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(GetPublicKeyResultOutput{})
 }

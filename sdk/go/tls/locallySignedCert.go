@@ -307,7 +307,7 @@ type LocallySignedCertArrayInput interface {
 type LocallySignedCertArray []LocallySignedCertInput
 
 func (LocallySignedCertArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*LocallySignedCert)(nil))
+	return reflect.TypeOf((*[]*LocallySignedCert)(nil)).Elem()
 }
 
 func (i LocallySignedCertArray) ToLocallySignedCertArrayOutput() LocallySignedCertArrayOutput {
@@ -332,7 +332,7 @@ type LocallySignedCertMapInput interface {
 type LocallySignedCertMap map[string]LocallySignedCertInput
 
 func (LocallySignedCertMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*LocallySignedCert)(nil))
+	return reflect.TypeOf((*map[string]*LocallySignedCert)(nil)).Elem()
 }
 
 func (i LocallySignedCertMap) ToLocallySignedCertMapOutput() LocallySignedCertMapOutput {
@@ -343,9 +343,7 @@ func (i LocallySignedCertMap) ToLocallySignedCertMapOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(LocallySignedCertMapOutput)
 }
 
-type LocallySignedCertOutput struct {
-	*pulumi.OutputState
-}
+type LocallySignedCertOutput struct{ *pulumi.OutputState }
 
 func (LocallySignedCertOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*LocallySignedCert)(nil))
@@ -364,14 +362,12 @@ func (o LocallySignedCertOutput) ToLocallySignedCertPtrOutput() LocallySignedCer
 }
 
 func (o LocallySignedCertOutput) ToLocallySignedCertPtrOutputWithContext(ctx context.Context) LocallySignedCertPtrOutput {
-	return o.ApplyT(func(v LocallySignedCert) *LocallySignedCert {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LocallySignedCert) *LocallySignedCert {
 		return &v
 	}).(LocallySignedCertPtrOutput)
 }
 
-type LocallySignedCertPtrOutput struct {
-	*pulumi.OutputState
-}
+type LocallySignedCertPtrOutput struct{ *pulumi.OutputState }
 
 func (LocallySignedCertPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**LocallySignedCert)(nil))
@@ -383,6 +379,16 @@ func (o LocallySignedCertPtrOutput) ToLocallySignedCertPtrOutput() LocallySigned
 
 func (o LocallySignedCertPtrOutput) ToLocallySignedCertPtrOutputWithContext(ctx context.Context) LocallySignedCertPtrOutput {
 	return o
+}
+
+func (o LocallySignedCertPtrOutput) Elem() LocallySignedCertOutput {
+	return o.ApplyT(func(v *LocallySignedCert) LocallySignedCert {
+		if v != nil {
+			return *v
+		}
+		var ret LocallySignedCert
+		return ret
+	}).(LocallySignedCertOutput)
 }
 
 type LocallySignedCertArrayOutput struct{ *pulumi.OutputState }
@@ -426,6 +432,10 @@ func (o LocallySignedCertMapOutput) MapIndex(k pulumi.StringInput) LocallySigned
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*LocallySignedCertInput)(nil)).Elem(), &LocallySignedCert{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocallySignedCertPtrInput)(nil)).Elem(), &LocallySignedCert{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocallySignedCertArrayInput)(nil)).Elem(), LocallySignedCertArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocallySignedCertMapInput)(nil)).Elem(), LocallySignedCertMap{})
 	pulumi.RegisterOutputType(LocallySignedCertOutput{})
 	pulumi.RegisterOutputType(LocallySignedCertPtrOutput{})
 	pulumi.RegisterOutputType(LocallySignedCertArrayOutput{})

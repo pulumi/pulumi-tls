@@ -40,3 +40,4 @@ export interface SelfSignedCertSubject {
     serialNumber?: string;
     streetAddresses?: string[];
 }
+

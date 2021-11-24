@@ -120,24 +120,24 @@ export interface PrivateKeyState {
      * The name of the algorithm to use for
      * the key. Currently-supported values are "RSA" and "ECDSA".
      */
-    readonly algorithm?: pulumi.Input<string>;
+    algorithm?: pulumi.Input<string>;
     /**
      * When `algorithm` is "ECDSA", the name of the elliptic
      * curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
      * default.
      */
-    readonly ecdsaCurve?: pulumi.Input<string>;
+    ecdsaCurve?: pulumi.Input<string>;
     /**
      * The private key data in PEM format.
      */
-    readonly privateKeyPem?: pulumi.Input<string>;
+    privateKeyPem?: pulumi.Input<string>;
     /**
      * The md5 hash of the public key data in
      * OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
      * selected private key format is compatible, as per the rules for
      * `publicKeyOpenssh`.
      */
-    readonly publicKeyFingerprintMd5?: pulumi.Input<string>;
+    publicKeyFingerprintMd5?: pulumi.Input<string>;
     /**
      * The public key data in OpenSSH `authorizedKeys`
      * format, if the selected private key format is compatible. All RSA keys
@@ -145,16 +145,16 @@ export interface PrivateKeyState {
      * are supported. This attribute is empty if an incompatible ECDSA curve
      * is selected.
      */
-    readonly publicKeyOpenssh?: pulumi.Input<string>;
+    publicKeyOpenssh?: pulumi.Input<string>;
     /**
      * The public key data in PEM format.
      */
-    readonly publicKeyPem?: pulumi.Input<string>;
+    publicKeyPem?: pulumi.Input<string>;
     /**
      * When `algorithm` is "RSA", the size of the generated
      * RSA key in bits. Defaults to 2048.
      */
-    readonly rsaBits?: pulumi.Input<number>;
+    rsaBits?: pulumi.Input<number>;
 }
 
 /**
@@ -165,16 +165,16 @@ export interface PrivateKeyArgs {
      * The name of the algorithm to use for
      * the key. Currently-supported values are "RSA" and "ECDSA".
      */
-    readonly algorithm: pulumi.Input<string>;
+    algorithm: pulumi.Input<string>;
     /**
      * When `algorithm` is "ECDSA", the name of the elliptic
      * curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
      * default.
      */
-    readonly ecdsaCurve?: pulumi.Input<string>;
+    ecdsaCurve?: pulumi.Input<string>;
     /**
      * When `algorithm` is "RSA", the size of the generated
      * RSA key in bits. Defaults to 2048.
      */
-    readonly rsaBits?: pulumi.Input<number>;
+    rsaBits?: pulumi.Input<number>;
 }

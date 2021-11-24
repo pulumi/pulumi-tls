@@ -19,7 +19,7 @@ import * as utilities from "./utilities";
  * const exampleCluster = new aws.eks.Cluster("example", {});
  * const exampleCertificate = exampleCluster.identities.apply(identities => tls.getCertificate({
  *     url: identities[0].oidcs[0].issuer,
- * }, { async: true }));
+ * }));
  * const exampleOpenIdConnectProvider = new aws.iam.OpenIdConnectProvider("example", {
  *     clientIdLists: ["sts.amazonaws.com"],
  *     thumbprintLists: [exampleCertificate.certificates[0].sha1Fingerprint],
@@ -48,11 +48,11 @@ export interface GetCertificateArgs {
     /**
      * The URL of the website to get the certificates from.
      */
-    readonly url: string;
+    url: string;
     /**
      * Whether to verify the certificate chain while parsing it or not
      */
-    readonly verifyChain?: boolean;
+    verifyChain?: boolean;
 }
 
 /**
@@ -84,4 +84,22 @@ export interface GetCertificateResult {
     readonly id: string;
     readonly url: string;
     readonly verifyChain?: boolean;
+}
+
+export function getCertificateOutput(args: GetCertificateOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCertificateResult> {
+    return pulumi.output(args).apply(a => getCertificate(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getCertificate.
+ */
+export interface GetCertificateOutputArgs {
+    /**
+     * The URL of the website to get the certificates from.
+     */
+    url: pulumi.Input<string>;
+    /**
+     * Whether to verify the certificate chain while parsing it or not
+     */
+    verifyChain?: pulumi.Input<boolean>;
 }

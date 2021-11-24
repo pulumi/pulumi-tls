@@ -168,62 +168,62 @@ export interface LocallySignedCertState {
      * List of keywords each describing a use that is permitted
      * for the issued certificate. The valid keywords are listed below.
      */
-    readonly allowedUses?: pulumi.Input<pulumi.Input<string>[]>;
+    allowedUses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * PEM-encoded certificate data for the CA.
      */
-    readonly caCertPem?: pulumi.Input<string>;
+    caCertPem?: pulumi.Input<string>;
     /**
      * The name of the algorithm for the key provided
      * in `caPrivateKeyPem`.
      */
-    readonly caKeyAlgorithm?: pulumi.Input<string>;
+    caKeyAlgorithm?: pulumi.Input<string>;
     /**
      * PEM-encoded private key data for the CA.
      * This can be read from a separate file using the ``file`` interpolation
      * function.
      */
-    readonly caPrivateKeyPem?: pulumi.Input<string>;
+    caPrivateKeyPem?: pulumi.Input<string>;
     /**
      * The certificate data in PEM format.
      */
-    readonly certPem?: pulumi.Input<string>;
+    certPem?: pulumi.Input<string>;
     /**
      * PEM-encoded request certificate data.
      */
-    readonly certRequestPem?: pulumi.Input<string>;
+    certRequestPem?: pulumi.Input<string>;
     /**
      * Number of hours before the certificates expiry when a new certificate will be generated
      */
-    readonly earlyRenewalHours?: pulumi.Input<number>;
+    earlyRenewalHours?: pulumi.Input<number>;
     /**
      * Boolean controlling whether the CA flag will be set in the
      * generated certificate. Defaults to `false`, meaning that the certificate does not represent
      * a certificate authority.
      */
-    readonly isCaCertificate?: pulumi.Input<boolean>;
-    readonly readyForRenewal?: pulumi.Input<boolean>;
+    isCaCertificate?: pulumi.Input<boolean>;
+    readyForRenewal?: pulumi.Input<boolean>;
     /**
      * If `true`, the certificate will include
      * the subject key identifier. Defaults to `false`, in which case the subject
      * key identifier is not set at all.
      */
-    readonly setSubjectKeyId?: pulumi.Input<boolean>;
+    setSubjectKeyId?: pulumi.Input<boolean>;
     /**
      * The time until which the certificate is invalid, as an
      * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      */
-    readonly validityEndTime?: pulumi.Input<string>;
+    validityEndTime?: pulumi.Input<string>;
     /**
      * The number of hours after initial issuing that the
      * certificate will become invalid.
      */
-    readonly validityPeriodHours?: pulumi.Input<number>;
+    validityPeriodHours?: pulumi.Input<number>;
     /**
      * The time after which the certificate is valid, as an
      * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      */
-    readonly validityStartTime?: pulumi.Input<string>;
+    validityStartTime?: pulumi.Input<string>;
 }
 
 /**
@@ -234,45 +234,45 @@ export interface LocallySignedCertArgs {
      * List of keywords each describing a use that is permitted
      * for the issued certificate. The valid keywords are listed below.
      */
-    readonly allowedUses: pulumi.Input<pulumi.Input<string>[]>;
+    allowedUses: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * PEM-encoded certificate data for the CA.
      */
-    readonly caCertPem: pulumi.Input<string>;
+    caCertPem: pulumi.Input<string>;
     /**
      * The name of the algorithm for the key provided
      * in `caPrivateKeyPem`.
      */
-    readonly caKeyAlgorithm: pulumi.Input<string>;
+    caKeyAlgorithm: pulumi.Input<string>;
     /**
      * PEM-encoded private key data for the CA.
      * This can be read from a separate file using the ``file`` interpolation
      * function.
      */
-    readonly caPrivateKeyPem: pulumi.Input<string>;
+    caPrivateKeyPem: pulumi.Input<string>;
     /**
      * PEM-encoded request certificate data.
      */
-    readonly certRequestPem: pulumi.Input<string>;
+    certRequestPem: pulumi.Input<string>;
     /**
      * Number of hours before the certificates expiry when a new certificate will be generated
      */
-    readonly earlyRenewalHours?: pulumi.Input<number>;
+    earlyRenewalHours?: pulumi.Input<number>;
     /**
      * Boolean controlling whether the CA flag will be set in the
      * generated certificate. Defaults to `false`, meaning that the certificate does not represent
      * a certificate authority.
      */
-    readonly isCaCertificate?: pulumi.Input<boolean>;
+    isCaCertificate?: pulumi.Input<boolean>;
     /**
      * If `true`, the certificate will include
      * the subject key identifier. Defaults to `false`, in which case the subject
      * key identifier is not set at all.
      */
-    readonly setSubjectKeyId?: pulumi.Input<boolean>;
+    setSubjectKeyId?: pulumi.Input<boolean>;
     /**
      * The number of hours after initial issuing that the
      * certificate will become invalid.
      */
-    readonly validityPeriodHours: pulumi.Input<number>;
+    validityPeriodHours: pulumi.Input<number>;
 }
