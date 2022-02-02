@@ -81,34 +81,32 @@ export class PrivateKey extends pulumi.CustomResource {
      */
     constructor(name: string, args: PrivateKeyArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: PrivateKeyArgs | PrivateKeyState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as PrivateKeyState | undefined;
-            inputs["algorithm"] = state ? state.algorithm : undefined;
-            inputs["ecdsaCurve"] = state ? state.ecdsaCurve : undefined;
-            inputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
-            inputs["publicKeyFingerprintMd5"] = state ? state.publicKeyFingerprintMd5 : undefined;
-            inputs["publicKeyOpenssh"] = state ? state.publicKeyOpenssh : undefined;
-            inputs["publicKeyPem"] = state ? state.publicKeyPem : undefined;
-            inputs["rsaBits"] = state ? state.rsaBits : undefined;
+            resourceInputs["algorithm"] = state ? state.algorithm : undefined;
+            resourceInputs["ecdsaCurve"] = state ? state.ecdsaCurve : undefined;
+            resourceInputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
+            resourceInputs["publicKeyFingerprintMd5"] = state ? state.publicKeyFingerprintMd5 : undefined;
+            resourceInputs["publicKeyOpenssh"] = state ? state.publicKeyOpenssh : undefined;
+            resourceInputs["publicKeyPem"] = state ? state.publicKeyPem : undefined;
+            resourceInputs["rsaBits"] = state ? state.rsaBits : undefined;
         } else {
             const args = argsOrState as PrivateKeyArgs | undefined;
             if ((!args || args.algorithm === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'algorithm'");
             }
-            inputs["algorithm"] = args ? args.algorithm : undefined;
-            inputs["ecdsaCurve"] = args ? args.ecdsaCurve : undefined;
-            inputs["rsaBits"] = args ? args.rsaBits : undefined;
-            inputs["privateKeyPem"] = undefined /*out*/;
-            inputs["publicKeyFingerprintMd5"] = undefined /*out*/;
-            inputs["publicKeyOpenssh"] = undefined /*out*/;
-            inputs["publicKeyPem"] = undefined /*out*/;
+            resourceInputs["algorithm"] = args ? args.algorithm : undefined;
+            resourceInputs["ecdsaCurve"] = args ? args.ecdsaCurve : undefined;
+            resourceInputs["rsaBits"] = args ? args.rsaBits : undefined;
+            resourceInputs["privateKeyPem"] = undefined /*out*/;
+            resourceInputs["publicKeyFingerprintMd5"] = undefined /*out*/;
+            resourceInputs["publicKeyOpenssh"] = undefined /*out*/;
+            resourceInputs["publicKeyPem"] = undefined /*out*/;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(PrivateKey.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(PrivateKey.__pulumiType, name, resourceInputs, opts);
     }
 }
 

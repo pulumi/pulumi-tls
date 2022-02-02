@@ -55,6 +55,7 @@ setup(name='pulumi_tls',
       package_data={
           'pulumi_tls': [
               'py.typed',
+              'pulumi-plugin.json',
           ]
       },
       install_requires=[

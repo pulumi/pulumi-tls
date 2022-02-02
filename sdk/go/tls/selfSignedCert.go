@@ -270,7 +270,7 @@ type SelfSignedCertInput interface {
 }
 
 func (*SelfSignedCert) ElementType() reflect.Type {
-	return reflect.TypeOf((*SelfSignedCert)(nil))
+	return reflect.TypeOf((**SelfSignedCert)(nil)).Elem()
 }
 
 func (i *SelfSignedCert) ToSelfSignedCertOutput() SelfSignedCertOutput {
@@ -279,35 +279,6 @@ func (i *SelfSignedCert) ToSelfSignedCertOutput() SelfSignedCertOutput {
 
 func (i *SelfSignedCert) ToSelfSignedCertOutputWithContext(ctx context.Context) SelfSignedCertOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertOutput)
-}
-
-func (i *SelfSignedCert) ToSelfSignedCertPtrOutput() SelfSignedCertPtrOutput {
-	return i.ToSelfSignedCertPtrOutputWithContext(context.Background())
-}
-
-func (i *SelfSignedCert) ToSelfSignedCertPtrOutputWithContext(ctx context.Context) SelfSignedCertPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertPtrOutput)
-}
-
-type SelfSignedCertPtrInput interface {
-	pulumi.Input
-
-	ToSelfSignedCertPtrOutput() SelfSignedCertPtrOutput
-	ToSelfSignedCertPtrOutputWithContext(ctx context.Context) SelfSignedCertPtrOutput
-}
-
-type selfSignedCertPtrType SelfSignedCertArgs
-
-func (*selfSignedCertPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**SelfSignedCert)(nil))
-}
-
-func (i *selfSignedCertPtrType) ToSelfSignedCertPtrOutput() SelfSignedCertPtrOutput {
-	return i.ToSelfSignedCertPtrOutputWithContext(context.Background())
-}
-
-func (i *selfSignedCertPtrType) ToSelfSignedCertPtrOutputWithContext(ctx context.Context) SelfSignedCertPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertPtrOutput)
 }
 
 // SelfSignedCertArrayInput is an input type that accepts SelfSignedCertArray and SelfSignedCertArrayOutput values.
@@ -363,7 +334,7 @@ func (i SelfSignedCertMap) ToSelfSignedCertMapOutputWithContext(ctx context.Cont
 type SelfSignedCertOutput struct{ *pulumi.OutputState }
 
 func (SelfSignedCertOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SelfSignedCert)(nil))
+	return reflect.TypeOf((**SelfSignedCert)(nil)).Elem()
 }
 
 func (o SelfSignedCertOutput) ToSelfSignedCertOutput() SelfSignedCertOutput {
@@ -374,44 +345,10 @@ func (o SelfSignedCertOutput) ToSelfSignedCertOutputWithContext(ctx context.Cont
 	return o
 }
 
-func (o SelfSignedCertOutput) ToSelfSignedCertPtrOutput() SelfSignedCertPtrOutput {
-	return o.ToSelfSignedCertPtrOutputWithContext(context.Background())
-}
-
-func (o SelfSignedCertOutput) ToSelfSignedCertPtrOutputWithContext(ctx context.Context) SelfSignedCertPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SelfSignedCert) *SelfSignedCert {
-		return &v
-	}).(SelfSignedCertPtrOutput)
-}
-
-type SelfSignedCertPtrOutput struct{ *pulumi.OutputState }
-
-func (SelfSignedCertPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SelfSignedCert)(nil))
-}
-
-func (o SelfSignedCertPtrOutput) ToSelfSignedCertPtrOutput() SelfSignedCertPtrOutput {
-	return o
-}
-
-func (o SelfSignedCertPtrOutput) ToSelfSignedCertPtrOutputWithContext(ctx context.Context) SelfSignedCertPtrOutput {
-	return o
-}
-
-func (o SelfSignedCertPtrOutput) Elem() SelfSignedCertOutput {
-	return o.ApplyT(func(v *SelfSignedCert) SelfSignedCert {
-		if v != nil {
-			return *v
-		}
-		var ret SelfSignedCert
-		return ret
-	}).(SelfSignedCertOutput)
-}
-
 type SelfSignedCertArrayOutput struct{ *pulumi.OutputState }
 
 func (SelfSignedCertArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SelfSignedCert)(nil))
+	return reflect.TypeOf((*[]*SelfSignedCert)(nil)).Elem()
 }
 
 func (o SelfSignedCertArrayOutput) ToSelfSignedCertArrayOutput() SelfSignedCertArrayOutput {
@@ -423,15 +360,15 @@ func (o SelfSignedCertArrayOutput) ToSelfSignedCertArrayOutputWithContext(ctx co
 }
 
 func (o SelfSignedCertArrayOutput) Index(i pulumi.IntInput) SelfSignedCertOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SelfSignedCert {
-		return vs[0].([]SelfSignedCert)[vs[1].(int)]
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *SelfSignedCert {
+		return vs[0].([]*SelfSignedCert)[vs[1].(int)]
 	}).(SelfSignedCertOutput)
 }
 
 type SelfSignedCertMapOutput struct{ *pulumi.OutputState }
 
 func (SelfSignedCertMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]SelfSignedCert)(nil))
+	return reflect.TypeOf((*map[string]*SelfSignedCert)(nil)).Elem()
 }
 
 func (o SelfSignedCertMapOutput) ToSelfSignedCertMapOutput() SelfSignedCertMapOutput {
@@ -443,18 +380,16 @@ func (o SelfSignedCertMapOutput) ToSelfSignedCertMapOutputWithContext(ctx contex
 }
 
 func (o SelfSignedCertMapOutput) MapIndex(k pulumi.StringInput) SelfSignedCertOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) SelfSignedCert {
-		return vs[0].(map[string]SelfSignedCert)[vs[1].(string)]
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *SelfSignedCert {
+		return vs[0].(map[string]*SelfSignedCert)[vs[1].(string)]
 	}).(SelfSignedCertOutput)
 }
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SelfSignedCertInput)(nil)).Elem(), &SelfSignedCert{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SelfSignedCertPtrInput)(nil)).Elem(), &SelfSignedCert{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SelfSignedCertArrayInput)(nil)).Elem(), SelfSignedCertArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SelfSignedCertMapInput)(nil)).Elem(), SelfSignedCertMap{})
 	pulumi.RegisterOutputType(SelfSignedCertOutput{})
-	pulumi.RegisterOutputType(SelfSignedCertPtrOutput{})
 	pulumi.RegisterOutputType(SelfSignedCertArrayOutput{})
 	pulumi.RegisterOutputType(SelfSignedCertMapOutput{})
 }

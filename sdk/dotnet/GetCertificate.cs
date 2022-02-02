@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
-using Pulumi.Utilities;
 
 namespace Pulumi.Tls
 {
@@ -32,7 +31,7 @@ namespace Pulumi.Tls
         ///         var exampleCluster = new Aws.Eks.Cluster("exampleCluster", new Aws.Eks.ClusterArgs
         ///         {
         ///         });
-        ///         var exampleCertificate = exampleCluster.Identities.Apply(identities =&gt; Tls.GetCertificate.InvokeAsync(new Tls.GetCertificateArgs
+        ///         var exampleCertificate = exampleCluster.Identities.Apply(identities =&gt; Tls.GetCertificate.Invoke(new Tls.GetCertificateInvokeArgs
         ///         {
         ///             Url = identities[0].Oidcs?[0]?.Issuer,
         ///         }));
@@ -56,7 +55,7 @@ namespace Pulumi.Tls
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetCertificateResult> InvokeAsync(GetCertificateArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCertificateResult>("tls:index/getCertificate:getCertificate", args ?? new GetCertificateArgs(), options.WithVersion());
+            => Pulumi.Deployment.Instance.InvokeAsync<GetCertificateResult>("tls:index/getCertificate:getCertificate", args ?? new GetCertificateArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to get information, such as SHA1 fingerprint or serial number, about the TLS certificates that
@@ -78,7 +77,7 @@ namespace Pulumi.Tls
         ///         var exampleCluster = new Aws.Eks.Cluster("exampleCluster", new Aws.Eks.ClusterArgs
         ///         {
         ///         });
-        ///         var exampleCertificate = exampleCluster.Identities.Apply(identities =&gt; Tls.GetCertificate.InvokeAsync(new Tls.GetCertificateArgs
+        ///         var exampleCertificate = exampleCluster.Identities.Apply(identities =&gt; Tls.GetCertificate.Invoke(new Tls.GetCertificateInvokeArgs
         ///         {
         ///             Url = identities[0].Oidcs?[0]?.Issuer,
         ///         }));
@@ -102,7 +101,7 @@ namespace Pulumi.Tls
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetCertificateResult> Invoke(GetCertificateInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCertificateResult>("tls:index/getCertificate:getCertificate", args ?? new GetCertificateInvokeArgs(), options.WithVersion());
+            => Pulumi.Deployment.Instance.Invoke<GetCertificateResult>("tls:index/getCertificate:getCertificate", args ?? new GetCertificateInvokeArgs(), options.WithDefaults());
     }
 
 

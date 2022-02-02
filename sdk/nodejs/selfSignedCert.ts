@@ -111,25 +111,25 @@ export class SelfSignedCert extends pulumi.CustomResource {
      */
     constructor(name: string, args: SelfSignedCertArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: SelfSignedCertArgs | SelfSignedCertState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SelfSignedCertState | undefined;
-            inputs["allowedUses"] = state ? state.allowedUses : undefined;
-            inputs["certPem"] = state ? state.certPem : undefined;
-            inputs["dnsNames"] = state ? state.dnsNames : undefined;
-            inputs["earlyRenewalHours"] = state ? state.earlyRenewalHours : undefined;
-            inputs["ipAddresses"] = state ? state.ipAddresses : undefined;
-            inputs["isCaCertificate"] = state ? state.isCaCertificate : undefined;
-            inputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
-            inputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
-            inputs["readyForRenewal"] = state ? state.readyForRenewal : undefined;
-            inputs["setSubjectKeyId"] = state ? state.setSubjectKeyId : undefined;
-            inputs["subjects"] = state ? state.subjects : undefined;
-            inputs["uris"] = state ? state.uris : undefined;
-            inputs["validityEndTime"] = state ? state.validityEndTime : undefined;
-            inputs["validityPeriodHours"] = state ? state.validityPeriodHours : undefined;
-            inputs["validityStartTime"] = state ? state.validityStartTime : undefined;
+            resourceInputs["allowedUses"] = state ? state.allowedUses : undefined;
+            resourceInputs["certPem"] = state ? state.certPem : undefined;
+            resourceInputs["dnsNames"] = state ? state.dnsNames : undefined;
+            resourceInputs["earlyRenewalHours"] = state ? state.earlyRenewalHours : undefined;
+            resourceInputs["ipAddresses"] = state ? state.ipAddresses : undefined;
+            resourceInputs["isCaCertificate"] = state ? state.isCaCertificate : undefined;
+            resourceInputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
+            resourceInputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
+            resourceInputs["readyForRenewal"] = state ? state.readyForRenewal : undefined;
+            resourceInputs["setSubjectKeyId"] = state ? state.setSubjectKeyId : undefined;
+            resourceInputs["subjects"] = state ? state.subjects : undefined;
+            resourceInputs["uris"] = state ? state.uris : undefined;
+            resourceInputs["validityEndTime"] = state ? state.validityEndTime : undefined;
+            resourceInputs["validityPeriodHours"] = state ? state.validityPeriodHours : undefined;
+            resourceInputs["validityStartTime"] = state ? state.validityStartTime : undefined;
         } else {
             const args = argsOrState as SelfSignedCertArgs | undefined;
             if ((!args || args.allowedUses === undefined) && !opts.urn) {
@@ -147,26 +147,24 @@ export class SelfSignedCert extends pulumi.CustomResource {
             if ((!args || args.validityPeriodHours === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'validityPeriodHours'");
             }
-            inputs["allowedUses"] = args ? args.allowedUses : undefined;
-            inputs["dnsNames"] = args ? args.dnsNames : undefined;
-            inputs["earlyRenewalHours"] = args ? args.earlyRenewalHours : undefined;
-            inputs["ipAddresses"] = args ? args.ipAddresses : undefined;
-            inputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
-            inputs["keyAlgorithm"] = args ? args.keyAlgorithm : undefined;
-            inputs["privateKeyPem"] = args ? args.privateKeyPem : undefined;
-            inputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
-            inputs["subjects"] = args ? args.subjects : undefined;
-            inputs["uris"] = args ? args.uris : undefined;
-            inputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
-            inputs["certPem"] = undefined /*out*/;
-            inputs["readyForRenewal"] = undefined /*out*/;
-            inputs["validityEndTime"] = undefined /*out*/;
-            inputs["validityStartTime"] = undefined /*out*/;
+            resourceInputs["allowedUses"] = args ? args.allowedUses : undefined;
+            resourceInputs["dnsNames"] = args ? args.dnsNames : undefined;
+            resourceInputs["earlyRenewalHours"] = args ? args.earlyRenewalHours : undefined;
+            resourceInputs["ipAddresses"] = args ? args.ipAddresses : undefined;
+            resourceInputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
+            resourceInputs["keyAlgorithm"] = args ? args.keyAlgorithm : undefined;
+            resourceInputs["privateKeyPem"] = args ? args.privateKeyPem : undefined;
+            resourceInputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
+            resourceInputs["subjects"] = args ? args.subjects : undefined;
+            resourceInputs["uris"] = args ? args.uris : undefined;
+            resourceInputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
+            resourceInputs["certPem"] = undefined /*out*/;
+            resourceInputs["readyForRenewal"] = undefined /*out*/;
+            resourceInputs["validityEndTime"] = undefined /*out*/;
+            resourceInputs["validityStartTime"] = undefined /*out*/;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(SelfSignedCert.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(SelfSignedCert.__pulumiType, name, resourceInputs, opts);
     }
 }
 
