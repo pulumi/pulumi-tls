@@ -102,23 +102,23 @@ export class LocallySignedCert extends pulumi.CustomResource {
      */
     constructor(name: string, args: LocallySignedCertArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: LocallySignedCertArgs | LocallySignedCertState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as LocallySignedCertState | undefined;
-            inputs["allowedUses"] = state ? state.allowedUses : undefined;
-            inputs["caCertPem"] = state ? state.caCertPem : undefined;
-            inputs["caKeyAlgorithm"] = state ? state.caKeyAlgorithm : undefined;
-            inputs["caPrivateKeyPem"] = state ? state.caPrivateKeyPem : undefined;
-            inputs["certPem"] = state ? state.certPem : undefined;
-            inputs["certRequestPem"] = state ? state.certRequestPem : undefined;
-            inputs["earlyRenewalHours"] = state ? state.earlyRenewalHours : undefined;
-            inputs["isCaCertificate"] = state ? state.isCaCertificate : undefined;
-            inputs["readyForRenewal"] = state ? state.readyForRenewal : undefined;
-            inputs["setSubjectKeyId"] = state ? state.setSubjectKeyId : undefined;
-            inputs["validityEndTime"] = state ? state.validityEndTime : undefined;
-            inputs["validityPeriodHours"] = state ? state.validityPeriodHours : undefined;
-            inputs["validityStartTime"] = state ? state.validityStartTime : undefined;
+            resourceInputs["allowedUses"] = state ? state.allowedUses : undefined;
+            resourceInputs["caCertPem"] = state ? state.caCertPem : undefined;
+            resourceInputs["caKeyAlgorithm"] = state ? state.caKeyAlgorithm : undefined;
+            resourceInputs["caPrivateKeyPem"] = state ? state.caPrivateKeyPem : undefined;
+            resourceInputs["certPem"] = state ? state.certPem : undefined;
+            resourceInputs["certRequestPem"] = state ? state.certRequestPem : undefined;
+            resourceInputs["earlyRenewalHours"] = state ? state.earlyRenewalHours : undefined;
+            resourceInputs["isCaCertificate"] = state ? state.isCaCertificate : undefined;
+            resourceInputs["readyForRenewal"] = state ? state.readyForRenewal : undefined;
+            resourceInputs["setSubjectKeyId"] = state ? state.setSubjectKeyId : undefined;
+            resourceInputs["validityEndTime"] = state ? state.validityEndTime : undefined;
+            resourceInputs["validityPeriodHours"] = state ? state.validityPeriodHours : undefined;
+            resourceInputs["validityStartTime"] = state ? state.validityStartTime : undefined;
         } else {
             const args = argsOrState as LocallySignedCertArgs | undefined;
             if ((!args || args.allowedUses === undefined) && !opts.urn) {
@@ -139,24 +139,22 @@ export class LocallySignedCert extends pulumi.CustomResource {
             if ((!args || args.validityPeriodHours === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'validityPeriodHours'");
             }
-            inputs["allowedUses"] = args ? args.allowedUses : undefined;
-            inputs["caCertPem"] = args ? args.caCertPem : undefined;
-            inputs["caKeyAlgorithm"] = args ? args.caKeyAlgorithm : undefined;
-            inputs["caPrivateKeyPem"] = args ? args.caPrivateKeyPem : undefined;
-            inputs["certRequestPem"] = args ? args.certRequestPem : undefined;
-            inputs["earlyRenewalHours"] = args ? args.earlyRenewalHours : undefined;
-            inputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
-            inputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
-            inputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
-            inputs["certPem"] = undefined /*out*/;
-            inputs["readyForRenewal"] = undefined /*out*/;
-            inputs["validityEndTime"] = undefined /*out*/;
-            inputs["validityStartTime"] = undefined /*out*/;
+            resourceInputs["allowedUses"] = args ? args.allowedUses : undefined;
+            resourceInputs["caCertPem"] = args ? args.caCertPem : undefined;
+            resourceInputs["caKeyAlgorithm"] = args ? args.caKeyAlgorithm : undefined;
+            resourceInputs["caPrivateKeyPem"] = args ? args.caPrivateKeyPem : undefined;
+            resourceInputs["certRequestPem"] = args ? args.certRequestPem : undefined;
+            resourceInputs["earlyRenewalHours"] = args ? args.earlyRenewalHours : undefined;
+            resourceInputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
+            resourceInputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
+            resourceInputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
+            resourceInputs["certPem"] = undefined /*out*/;
+            resourceInputs["readyForRenewal"] = undefined /*out*/;
+            resourceInputs["validityEndTime"] = undefined /*out*/;
+            resourceInputs["validityStartTime"] = undefined /*out*/;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(LocallySignedCert.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(LocallySignedCert.__pulumiType, name, resourceInputs, opts);
     }
 }
 

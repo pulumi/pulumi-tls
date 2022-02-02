@@ -73,17 +73,17 @@ export class CertRequest extends pulumi.CustomResource {
      */
     constructor(name: string, args: CertRequestArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: CertRequestArgs | CertRequestState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as CertRequestState | undefined;
-            inputs["certRequestPem"] = state ? state.certRequestPem : undefined;
-            inputs["dnsNames"] = state ? state.dnsNames : undefined;
-            inputs["ipAddresses"] = state ? state.ipAddresses : undefined;
-            inputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
-            inputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
-            inputs["subjects"] = state ? state.subjects : undefined;
-            inputs["uris"] = state ? state.uris : undefined;
+            resourceInputs["certRequestPem"] = state ? state.certRequestPem : undefined;
+            resourceInputs["dnsNames"] = state ? state.dnsNames : undefined;
+            resourceInputs["ipAddresses"] = state ? state.ipAddresses : undefined;
+            resourceInputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
+            resourceInputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
+            resourceInputs["subjects"] = state ? state.subjects : undefined;
+            resourceInputs["uris"] = state ? state.uris : undefined;
         } else {
             const args = argsOrState as CertRequestArgs | undefined;
             if ((!args || args.keyAlgorithm === undefined) && !opts.urn) {
@@ -95,18 +95,16 @@ export class CertRequest extends pulumi.CustomResource {
             if ((!args || args.subjects === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'subjects'");
             }
-            inputs["dnsNames"] = args ? args.dnsNames : undefined;
-            inputs["ipAddresses"] = args ? args.ipAddresses : undefined;
-            inputs["keyAlgorithm"] = args ? args.keyAlgorithm : undefined;
-            inputs["privateKeyPem"] = args ? args.privateKeyPem : undefined;
-            inputs["subjects"] = args ? args.subjects : undefined;
-            inputs["uris"] = args ? args.uris : undefined;
-            inputs["certRequestPem"] = undefined /*out*/;
+            resourceInputs["dnsNames"] = args ? args.dnsNames : undefined;
+            resourceInputs["ipAddresses"] = args ? args.ipAddresses : undefined;
+            resourceInputs["keyAlgorithm"] = args ? args.keyAlgorithm : undefined;
+            resourceInputs["privateKeyPem"] = args ? args.privateKeyPem : undefined;
+            resourceInputs["subjects"] = args ? args.subjects : undefined;
+            resourceInputs["uris"] = args ? args.uris : undefined;
+            resourceInputs["certRequestPem"] = undefined /*out*/;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(CertRequest.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(CertRequest.__pulumiType, name, resourceInputs, opts);
     }
 }
 

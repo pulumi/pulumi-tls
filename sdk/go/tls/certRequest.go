@@ -158,7 +158,7 @@ type CertRequestInput interface {
 }
 
 func (*CertRequest) ElementType() reflect.Type {
-	return reflect.TypeOf((*CertRequest)(nil))
+	return reflect.TypeOf((**CertRequest)(nil)).Elem()
 }
 
 func (i *CertRequest) ToCertRequestOutput() CertRequestOutput {
@@ -167,35 +167,6 @@ func (i *CertRequest) ToCertRequestOutput() CertRequestOutput {
 
 func (i *CertRequest) ToCertRequestOutputWithContext(ctx context.Context) CertRequestOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(CertRequestOutput)
-}
-
-func (i *CertRequest) ToCertRequestPtrOutput() CertRequestPtrOutput {
-	return i.ToCertRequestPtrOutputWithContext(context.Background())
-}
-
-func (i *CertRequest) ToCertRequestPtrOutputWithContext(ctx context.Context) CertRequestPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertRequestPtrOutput)
-}
-
-type CertRequestPtrInput interface {
-	pulumi.Input
-
-	ToCertRequestPtrOutput() CertRequestPtrOutput
-	ToCertRequestPtrOutputWithContext(ctx context.Context) CertRequestPtrOutput
-}
-
-type certRequestPtrType CertRequestArgs
-
-func (*certRequestPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CertRequest)(nil))
-}
-
-func (i *certRequestPtrType) ToCertRequestPtrOutput() CertRequestPtrOutput {
-	return i.ToCertRequestPtrOutputWithContext(context.Background())
-}
-
-func (i *certRequestPtrType) ToCertRequestPtrOutputWithContext(ctx context.Context) CertRequestPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertRequestPtrOutput)
 }
 
 // CertRequestArrayInput is an input type that accepts CertRequestArray and CertRequestArrayOutput values.
@@ -251,7 +222,7 @@ func (i CertRequestMap) ToCertRequestMapOutputWithContext(ctx context.Context) C
 type CertRequestOutput struct{ *pulumi.OutputState }
 
 func (CertRequestOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CertRequest)(nil))
+	return reflect.TypeOf((**CertRequest)(nil)).Elem()
 }
 
 func (o CertRequestOutput) ToCertRequestOutput() CertRequestOutput {
@@ -262,44 +233,10 @@ func (o CertRequestOutput) ToCertRequestOutputWithContext(ctx context.Context) C
 	return o
 }
 
-func (o CertRequestOutput) ToCertRequestPtrOutput() CertRequestPtrOutput {
-	return o.ToCertRequestPtrOutputWithContext(context.Background())
-}
-
-func (o CertRequestOutput) ToCertRequestPtrOutputWithContext(ctx context.Context) CertRequestPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CertRequest) *CertRequest {
-		return &v
-	}).(CertRequestPtrOutput)
-}
-
-type CertRequestPtrOutput struct{ *pulumi.OutputState }
-
-func (CertRequestPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CertRequest)(nil))
-}
-
-func (o CertRequestPtrOutput) ToCertRequestPtrOutput() CertRequestPtrOutput {
-	return o
-}
-
-func (o CertRequestPtrOutput) ToCertRequestPtrOutputWithContext(ctx context.Context) CertRequestPtrOutput {
-	return o
-}
-
-func (o CertRequestPtrOutput) Elem() CertRequestOutput {
-	return o.ApplyT(func(v *CertRequest) CertRequest {
-		if v != nil {
-			return *v
-		}
-		var ret CertRequest
-		return ret
-	}).(CertRequestOutput)
-}
-
 type CertRequestArrayOutput struct{ *pulumi.OutputState }
 
 func (CertRequestArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CertRequest)(nil))
+	return reflect.TypeOf((*[]*CertRequest)(nil)).Elem()
 }
 
 func (o CertRequestArrayOutput) ToCertRequestArrayOutput() CertRequestArrayOutput {
@@ -311,15 +248,15 @@ func (o CertRequestArrayOutput) ToCertRequestArrayOutputWithContext(ctx context.
 }
 
 func (o CertRequestArrayOutput) Index(i pulumi.IntInput) CertRequestOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CertRequest {
-		return vs[0].([]CertRequest)[vs[1].(int)]
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *CertRequest {
+		return vs[0].([]*CertRequest)[vs[1].(int)]
 	}).(CertRequestOutput)
 }
 
 type CertRequestMapOutput struct{ *pulumi.OutputState }
 
 func (CertRequestMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*map[string]CertRequest)(nil))
+	return reflect.TypeOf((*map[string]*CertRequest)(nil)).Elem()
 }
 
 func (o CertRequestMapOutput) ToCertRequestMapOutput() CertRequestMapOutput {
@@ -331,18 +268,16 @@ func (o CertRequestMapOutput) ToCertRequestMapOutputWithContext(ctx context.Cont
 }
 
 func (o CertRequestMapOutput) MapIndex(k pulumi.StringInput) CertRequestOutput {
-	return pulumi.All(o, k).ApplyT(func(vs []interface{}) CertRequest {
-		return vs[0].(map[string]CertRequest)[vs[1].(string)]
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) *CertRequest {
+		return vs[0].(map[string]*CertRequest)[vs[1].(string)]
 	}).(CertRequestOutput)
 }
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CertRequestInput)(nil)).Elem(), &CertRequest{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CertRequestPtrInput)(nil)).Elem(), &CertRequest{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CertRequestArrayInput)(nil)).Elem(), CertRequestArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CertRequestMapInput)(nil)).Elem(), CertRequestMap{})
 	pulumi.RegisterOutputType(CertRequestOutput{})
-	pulumi.RegisterOutputType(CertRequestPtrOutput{})
 	pulumi.RegisterOutputType(CertRequestArrayOutput{})
 	pulumi.RegisterOutputType(CertRequestMapOutput{})
 }

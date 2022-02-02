@@ -104,7 +104,7 @@ def get_certificate(url: Optional[str] = None,
     import pulumi_tls as tls
 
     example_cluster = aws.eks.Cluster("exampleCluster")
-    example_certificate = example_cluster.identities.apply(lambda identities: tls.get_certificate(url=identities[0].oidcs[0].issuer))
+    example_certificate = example_cluster.identities.apply(lambda identities: tls.get_certificate_output(url=identities[0].oidcs[0].issuer))
     example_open_id_connect_provider = aws.iam.OpenIdConnectProvider("exampleOpenIdConnectProvider",
         client_id_lists=["sts.amazonaws.com"],
         thumbprint_lists=[example_certificate.certificates[0].sha1_fingerprint],
@@ -147,7 +147,7 @@ def get_certificate_output(url: Optional[pulumi.Input[str]] = None,
     import pulumi_tls as tls
 
     example_cluster = aws.eks.Cluster("exampleCluster")
-    example_certificate = example_cluster.identities.apply(lambda identities: tls.get_certificate(url=identities[0].oidcs[0].issuer))
+    example_certificate = example_cluster.identities.apply(lambda identities: tls.get_certificate_output(url=identities[0].oidcs[0].issuer))
     example_open_id_connect_provider = aws.iam.OpenIdConnectProvider("exampleOpenIdConnectProvider",
         client_id_lists=["sts.amazonaws.com"],
         thumbprint_lists=[example_certificate.certificates[0].sha1_fingerprint],

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
-using Pulumi.Utilities;
 
 namespace Pulumi.Tls
 {
@@ -41,7 +40,7 @@ namespace Pulumi.Tls
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetPublicKeyResult> InvokeAsync(GetPublicKeyArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyArgs(), options.WithVersion());
+            => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to get the public key from a PEM-encoded private key for use in other
@@ -72,7 +71,7 @@ namespace Pulumi.Tls
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetPublicKeyResult> Invoke(GetPublicKeyInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyInvokeArgs(), options.WithVersion());
+            => Pulumi.Deployment.Instance.Invoke<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyInvokeArgs(), options.WithDefaults());
     }
 
 
