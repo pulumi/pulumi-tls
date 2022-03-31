@@ -11,6 +11,45 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"io/ioutil"
+//
+// 	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func readFileOrPanic(path string) pulumi.StringPtrInput {
+// 	data, err := ioutil.ReadFile(path)
+// 	if err != nil {
+// 		panic(err.Error())
+// 	}
+// 	return pulumi.String(string(data))
+// }
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := tls.NewCertRequest(ctx, "example", &tls.CertRequestArgs{
+// 			KeyAlgorithm:  pulumi.String("ECDSA"),
+// 			PrivateKeyPem: readFileOrPanic("private_key.pem"),
+// 			Subjects: CertRequestSubjectArray{
+// 				&CertRequestSubjectArgs{
+// 					CommonName:   pulumi.String("example.com"),
+// 					Organization: pulumi.String("ACME Examples, Inc"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type CertRequest struct {
 	pulumi.CustomResourceState
 

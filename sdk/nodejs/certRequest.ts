@@ -5,6 +5,24 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as fs from "fs";
+ * import * as tls from "@pulumi/tls";
+ *
+ * const example = new tls.CertRequest("example", {
+ *     keyAlgorithm: "ECDSA",
+ *     privateKeyPem: fs.readFileSync("private_key.pem", "utf-8"),
+ *     subjects: [{
+ *         commonName: "example.com",
+ *         organization: "ACME Examples, Inc",
+ *     }],
+ * });
+ * ```
+ */
 export class CertRequest extends pulumi.CustomResource {
     /**
      * Get an existing CertRequest resource's state with the given name, ID, and optional extra

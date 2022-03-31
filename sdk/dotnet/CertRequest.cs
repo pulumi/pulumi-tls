@@ -9,6 +9,36 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tls
 {
+    /// <summary>
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.IO;
+    /// using Pulumi;
+    /// using Tls = Pulumi.Tls;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var example = new Tls.CertRequest("example", new Tls.CertRequestArgs
+    ///         {
+    ///             KeyAlgorithm = "ECDSA",
+    ///             PrivateKeyPem = File.ReadAllText("private_key.pem"),
+    ///             Subjects = 
+    ///             {
+    ///                 new Tls.Inputs.CertRequestSubjectArgs
+    ///                 {
+    ///                     CommonName = "example.com",
+    ///                     Organization = "ACME Examples, Inc",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [TlsResourceType("tls:index/certRequest:CertRequest")]
     public partial class CertRequest : Pulumi.CustomResource
     {

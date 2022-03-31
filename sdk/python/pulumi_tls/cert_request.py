@@ -254,7 +254,21 @@ class CertRequest(pulumi.CustomResource):
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Create a CertRequest resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tls as tls
+
+        example = tls.CertRequest("example",
+            key_algorithm="ECDSA",
+            private_key_pem=(lambda path: open(path).read())("private_key.pem"),
+            subjects=[tls.CertRequestSubjectArgs(
+                common_name="example.com",
+                organization="ACME Examples, Inc",
+            )])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested.
@@ -273,7 +287,21 @@ class CertRequest(pulumi.CustomResource):
                  args: CertRequestArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a CertRequest resource with the given unique name, props, and options.
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_tls as tls
+
+        example = tls.CertRequest("example",
+            key_algorithm="ECDSA",
+            private_key_pem=(lambda path: open(path).read())("private_key.pem"),
+            subjects=[tls.CertRequestSubjectArgs(
+                common_name="example.com",
+                organization="ACME Examples, Inc",
+            )])
+        ```
+
         :param str resource_name: The name of the resource.
         :param CertRequestArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
