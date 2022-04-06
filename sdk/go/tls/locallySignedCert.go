@@ -14,41 +14,52 @@ import (
 type LocallySignedCert struct {
 	pulumi.CustomResourceState
 
-	// List of keywords each describing a use that is permitted
-	// for the issued certificate. The valid keywords are listed below.
+	// List of key usages allowed for the issued certificate. Values are defined in [RFC
+	// 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
+	// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
+	// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
+	// `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
+	// `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
+	// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
+	// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
 	AllowedUses pulumi.StringArrayOutput `pulumi:"allowedUses"`
-	// PEM-encoded certificate data for the CA.
+	// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421)
+	// format.
 	CaCertPem pulumi.StringOutput `pulumi:"caCertPem"`
-	// The name of the algorithm for the key provided
-	// in `caPrivateKeyPem`.
+	// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is
+	// deprecated and ignored, as the key algorithm is now inferred from the key.
+	//
+	// Deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
 	CaKeyAlgorithm pulumi.StringOutput `pulumi:"caKeyAlgorithm"`
-	// PEM-encoded private key data for the CA.
-	// This can be read from a separate file using the ``file`` interpolation
-	// function.
+	// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC
+	// 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaPrivateKeyPem pulumi.StringOutput `pulumi:"caPrivateKeyPem"`
-	// The certificate data in PEM format.
+	// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CertPem pulumi.StringOutput `pulumi:"certPem"`
-	// PEM-encoded request certificate data.
+	// Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CertRequestPem pulumi.StringOutput `pulumi:"certRequestPem"`
-	// Number of hours before the certificates expiry when a new certificate will be generated
+	// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
+	// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
+	// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
+	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
+	// early renewal period. (default: `0`)
 	EarlyRenewalHours pulumi.IntPtrOutput `pulumi:"earlyRenewalHours"`
-	// Boolean controlling whether the CA flag will be set in the
-	// generated certificate. Defaults to `false`, meaning that the certificate does not represent
-	// a certificate authority.
+	// Unique identifier for this resource: the certificate serial number.
+	Id pulumi.StringOutput `pulumi:"id"`
+	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate pulumi.BoolPtrOutput `pulumi:"isCaCertificate"`
-	ReadyForRenewal pulumi.BoolOutput    `pulumi:"readyForRenewal"`
-	// If `true`, the certificate will include
-	// the subject key identifier. Defaults to `false`, in which case the subject
-	// key identifier is not set at all.
+	// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
+	// the `early_renewal_hours`)?
+	ReadyForRenewal pulumi.BoolOutput `pulumi:"readyForRenewal"`
+	// Should the generated certificate include a [subject key
+	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 	SetSubjectKeyId pulumi.BoolPtrOutput `pulumi:"setSubjectKeyId"`
-	// The time until which the certificate is invalid, as an
-	// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+	// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
+	// timestamp.
 	ValidityEndTime pulumi.StringOutput `pulumi:"validityEndTime"`
-	// The number of hours after initial issuing that the
-	// certificate will become invalid.
+	// Number of hours, after initial issuing, that the certificate will remain valid for.
 	ValidityPeriodHours pulumi.IntOutput `pulumi:"validityPeriodHours"`
-	// The time after which the certificate is valid, as an
-	// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+	// The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
 	ValidityStartTime pulumi.StringOutput `pulumi:"validityStartTime"`
 }
 
@@ -64,9 +75,6 @@ func NewLocallySignedCert(ctx *pulumi.Context,
 	}
 	if args.CaCertPem == nil {
 		return nil, errors.New("invalid value for required argument 'CaCertPem'")
-	}
-	if args.CaKeyAlgorithm == nil {
-		return nil, errors.New("invalid value for required argument 'CaKeyAlgorithm'")
 	}
 	if args.CaPrivateKeyPem == nil {
 		return nil, errors.New("invalid value for required argument 'CaPrivateKeyPem'")
@@ -99,80 +107,102 @@ func GetLocallySignedCert(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering LocallySignedCert resources.
 type locallySignedCertState struct {
-	// List of keywords each describing a use that is permitted
-	// for the issued certificate. The valid keywords are listed below.
+	// List of key usages allowed for the issued certificate. Values are defined in [RFC
+	// 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
+	// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
+	// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
+	// `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
+	// `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
+	// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
+	// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
 	AllowedUses []string `pulumi:"allowedUses"`
-	// PEM-encoded certificate data for the CA.
+	// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421)
+	// format.
 	CaCertPem *string `pulumi:"caCertPem"`
-	// The name of the algorithm for the key provided
-	// in `caPrivateKeyPem`.
+	// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is
+	// deprecated and ignored, as the key algorithm is now inferred from the key.
+	//
+	// Deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
 	CaKeyAlgorithm *string `pulumi:"caKeyAlgorithm"`
-	// PEM-encoded private key data for the CA.
-	// This can be read from a separate file using the ``file`` interpolation
-	// function.
+	// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC
+	// 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaPrivateKeyPem *string `pulumi:"caPrivateKeyPem"`
-	// The certificate data in PEM format.
+	// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CertPem *string `pulumi:"certPem"`
-	// PEM-encoded request certificate data.
+	// Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CertRequestPem *string `pulumi:"certRequestPem"`
-	// Number of hours before the certificates expiry when a new certificate will be generated
+	// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
+	// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
+	// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
+	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
+	// early renewal period. (default: `0`)
 	EarlyRenewalHours *int `pulumi:"earlyRenewalHours"`
-	// Boolean controlling whether the CA flag will be set in the
-	// generated certificate. Defaults to `false`, meaning that the certificate does not represent
-	// a certificate authority.
+	// Unique identifier for this resource: the certificate serial number.
+	Id *string `pulumi:"id"`
+	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate *bool `pulumi:"isCaCertificate"`
+	// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
+	// the `early_renewal_hours`)?
 	ReadyForRenewal *bool `pulumi:"readyForRenewal"`
-	// If `true`, the certificate will include
-	// the subject key identifier. Defaults to `false`, in which case the subject
-	// key identifier is not set at all.
+	// Should the generated certificate include a [subject key
+	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 	SetSubjectKeyId *bool `pulumi:"setSubjectKeyId"`
-	// The time until which the certificate is invalid, as an
-	// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+	// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
+	// timestamp.
 	ValidityEndTime *string `pulumi:"validityEndTime"`
-	// The number of hours after initial issuing that the
-	// certificate will become invalid.
+	// Number of hours, after initial issuing, that the certificate will remain valid for.
 	ValidityPeriodHours *int `pulumi:"validityPeriodHours"`
-	// The time after which the certificate is valid, as an
-	// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+	// The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
 	ValidityStartTime *string `pulumi:"validityStartTime"`
 }
 
 type LocallySignedCertState struct {
-	// List of keywords each describing a use that is permitted
-	// for the issued certificate. The valid keywords are listed below.
+	// List of key usages allowed for the issued certificate. Values are defined in [RFC
+	// 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
+	// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
+	// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
+	// `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
+	// `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
+	// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
+	// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
 	AllowedUses pulumi.StringArrayInput
-	// PEM-encoded certificate data for the CA.
+	// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421)
+	// format.
 	CaCertPem pulumi.StringPtrInput
-	// The name of the algorithm for the key provided
-	// in `caPrivateKeyPem`.
+	// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is
+	// deprecated and ignored, as the key algorithm is now inferred from the key.
+	//
+	// Deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
 	CaKeyAlgorithm pulumi.StringPtrInput
-	// PEM-encoded private key data for the CA.
-	// This can be read from a separate file using the ``file`` interpolation
-	// function.
+	// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC
+	// 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaPrivateKeyPem pulumi.StringPtrInput
-	// The certificate data in PEM format.
+	// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CertPem pulumi.StringPtrInput
-	// PEM-encoded request certificate data.
+	// Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CertRequestPem pulumi.StringPtrInput
-	// Number of hours before the certificates expiry when a new certificate will be generated
+	// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
+	// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
+	// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
+	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
+	// early renewal period. (default: `0`)
 	EarlyRenewalHours pulumi.IntPtrInput
-	// Boolean controlling whether the CA flag will be set in the
-	// generated certificate. Defaults to `false`, meaning that the certificate does not represent
-	// a certificate authority.
+	// Unique identifier for this resource: the certificate serial number.
+	Id pulumi.StringPtrInput
+	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate pulumi.BoolPtrInput
+	// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
+	// the `early_renewal_hours`)?
 	ReadyForRenewal pulumi.BoolPtrInput
-	// If `true`, the certificate will include
-	// the subject key identifier. Defaults to `false`, in which case the subject
-	// key identifier is not set at all.
+	// Should the generated certificate include a [subject key
+	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 	SetSubjectKeyId pulumi.BoolPtrInput
-	// The time until which the certificate is invalid, as an
-	// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+	// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
+	// timestamp.
 	ValidityEndTime pulumi.StringPtrInput
-	// The number of hours after initial issuing that the
-	// certificate will become invalid.
+	// Number of hours, after initial issuing, that the certificate will remain valid for.
 	ValidityPeriodHours pulumi.IntPtrInput
-	// The time after which the certificate is valid, as an
-	// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+	// The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
 	ValidityStartTime pulumi.StringPtrInput
 }
 
@@ -181,63 +211,79 @@ func (LocallySignedCertState) ElementType() reflect.Type {
 }
 
 type locallySignedCertArgs struct {
-	// List of keywords each describing a use that is permitted
-	// for the issued certificate. The valid keywords are listed below.
+	// List of key usages allowed for the issued certificate. Values are defined in [RFC
+	// 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
+	// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
+	// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
+	// `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
+	// `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
+	// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
+	// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
 	AllowedUses []string `pulumi:"allowedUses"`
-	// PEM-encoded certificate data for the CA.
+	// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421)
+	// format.
 	CaCertPem string `pulumi:"caCertPem"`
-	// The name of the algorithm for the key provided
-	// in `caPrivateKeyPem`.
-	CaKeyAlgorithm string `pulumi:"caKeyAlgorithm"`
-	// PEM-encoded private key data for the CA.
-	// This can be read from a separate file using the ``file`` interpolation
-	// function.
+	// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is
+	// deprecated and ignored, as the key algorithm is now inferred from the key.
+	//
+	// Deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+	CaKeyAlgorithm *string `pulumi:"caKeyAlgorithm"`
+	// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC
+	// 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaPrivateKeyPem string `pulumi:"caPrivateKeyPem"`
-	// PEM-encoded request certificate data.
+	// Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CertRequestPem string `pulumi:"certRequestPem"`
-	// Number of hours before the certificates expiry when a new certificate will be generated
+	// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
+	// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
+	// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
+	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
+	// early renewal period. (default: `0`)
 	EarlyRenewalHours *int `pulumi:"earlyRenewalHours"`
-	// Boolean controlling whether the CA flag will be set in the
-	// generated certificate. Defaults to `false`, meaning that the certificate does not represent
-	// a certificate authority.
+	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate *bool `pulumi:"isCaCertificate"`
-	// If `true`, the certificate will include
-	// the subject key identifier. Defaults to `false`, in which case the subject
-	// key identifier is not set at all.
+	// Should the generated certificate include a [subject key
+	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 	SetSubjectKeyId *bool `pulumi:"setSubjectKeyId"`
-	// The number of hours after initial issuing that the
-	// certificate will become invalid.
+	// Number of hours, after initial issuing, that the certificate will remain valid for.
 	ValidityPeriodHours int `pulumi:"validityPeriodHours"`
 }
 
 // The set of arguments for constructing a LocallySignedCert resource.
 type LocallySignedCertArgs struct {
-	// List of keywords each describing a use that is permitted
-	// for the issued certificate. The valid keywords are listed below.
+	// List of key usages allowed for the issued certificate. Values are defined in [RFC
+	// 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
+	// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
+	// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
+	// `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
+	// `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
+	// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
+	// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
 	AllowedUses pulumi.StringArrayInput
-	// PEM-encoded certificate data for the CA.
+	// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421)
+	// format.
 	CaCertPem pulumi.StringInput
-	// The name of the algorithm for the key provided
-	// in `caPrivateKeyPem`.
-	CaKeyAlgorithm pulumi.StringInput
-	// PEM-encoded private key data for the CA.
-	// This can be read from a separate file using the ``file`` interpolation
-	// function.
+	// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is
+	// deprecated and ignored, as the key algorithm is now inferred from the key.
+	//
+	// Deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+	CaKeyAlgorithm pulumi.StringPtrInput
+	// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC
+	// 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaPrivateKeyPem pulumi.StringInput
-	// PEM-encoded request certificate data.
+	// Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CertRequestPem pulumi.StringInput
-	// Number of hours before the certificates expiry when a new certificate will be generated
+	// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
+	// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
+	// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
+	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
+	// early renewal period. (default: `0`)
 	EarlyRenewalHours pulumi.IntPtrInput
-	// Boolean controlling whether the CA flag will be set in the
-	// generated certificate. Defaults to `false`, meaning that the certificate does not represent
-	// a certificate authority.
+	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate pulumi.BoolPtrInput
-	// If `true`, the certificate will include
-	// the subject key identifier. Defaults to `false`, in which case the subject
-	// key identifier is not set at all.
+	// Should the generated certificate include a [subject key
+	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 	SetSubjectKeyId pulumi.BoolPtrInput
-	// The number of hours after initial issuing that the
-	// certificate will become invalid.
+	// Number of hours, after initial issuing, that the certificate will remain valid for.
 	ValidityPeriodHours pulumi.IntInput
 }
 

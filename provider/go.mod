@@ -9,6 +9,7 @@ require (
 )
 
 replace (
+	github.com/hashicorp/terraform-exec => github.com/hashicorp/terraform-exec v0.15.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20211019194827-62530c6537a4
 	github.com/terraform-providers/terraform-provider-tls/shim => ./shim
 )

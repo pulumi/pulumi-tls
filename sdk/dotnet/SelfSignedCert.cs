@@ -13,99 +13,115 @@ namespace Pulumi.Tls
     public partial class SelfSignedCert : Pulumi.CustomResource
     {
         /// <summary>
-        /// List of keywords each describing a use that is permitted
-        /// for the issued certificate. The valid keywords are listed below.
+        /// List of key usages allowed for the issued certificate. Values are defined in [RFC
+        /// 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
+        /// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
+        /// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
+        /// `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
+        /// `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
+        /// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
+        /// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         /// </summary>
         [Output("allowedUses")]
         public Output<ImmutableArray<string>> AllowedUses { get; private set; } = null!;
 
         /// <summary>
-        /// The certificate data in PEM format.
+        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Output("certPem")]
         public Output<string> CertPem { get; private set; } = null!;
 
         /// <summary>
-        /// List of DNS names for which a certificate is being requested.
+        /// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         [Output("dnsNames")]
         public Output<ImmutableArray<string>> DnsNames { get; private set; } = null!;
 
         /// <summary>
-        /// Number of hours before the certificates expiry when a new certificate will be generated
+        /// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
+        /// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
+        /// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
+        /// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
+        /// early renewal period. (default: `0`)
         /// </summary>
         [Output("earlyRenewalHours")]
         public Output<int?> EarlyRenewalHours { get; private set; } = null!;
 
         /// <summary>
-        /// List of IP addresses for which a certificate is being requested.
+        /// Unique identifier for this resource: the certificate serial number.
+        /// </summary>
+        [Output("id")]
+        public Output<string> Id { get; private set; } = null!;
+
+        /// <summary>
+        /// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         [Output("ipAddresses")]
         public Output<ImmutableArray<string>> IpAddresses { get; private set; } = null!;
 
         /// <summary>
-        /// Boolean controlling whether the CA flag will be set in the
-        /// generated certificate. Defaults to `false`, meaning that the certificate does not represent
-        /// a certificate authority.
+        /// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         /// </summary>
         [Output("isCaCertificate")]
         public Output<bool?> IsCaCertificate { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the algorithm for the key provided
-        /// in `private_key_pem`.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+        /// and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Output("keyAlgorithm")]
         public Output<string> KeyAlgorithm { get; private set; } = null!;
 
         /// <summary>
-        /// PEM-encoded private key that the certificate will belong to
+        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+        /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+        /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         /// </summary>
         [Output("privateKeyPem")]
         public Output<string> PrivateKeyPem { get; private set; } = null!;
 
+        /// <summary>
+        /// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
+        /// the `early_renewal_hours`)?
+        /// </summary>
         [Output("readyForRenewal")]
         public Output<bool> ReadyForRenewal { get; private set; } = null!;
 
         /// <summary>
-        /// If `true`, the certificate will include
-        /// the subject key identifier. Defaults to `false`, in which case the subject
-        /// key identifier is not set at all.
+        /// Should the generated certificate include a [subject key
+        /// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Output("setSubjectKeyId")]
         public Output<bool?> SetSubjectKeyId { get; private set; } = null!;
 
         /// <summary>
-        /// The subject for which a certificate is being requested.
-        /// This is a nested configuration block whose structure matches the
-        /// corresponding block for `tls.CertRequest`.
+        /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
         [Output("subjects")]
         public Output<ImmutableArray<Outputs.SelfSignedCertSubject>> Subjects { get; private set; } = null!;
 
         /// <summary>
-        /// List of URIs for which a certificate is being requested.
+        /// List of URIs for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         [Output("uris")]
         public Output<ImmutableArray<string>> Uris { get; private set; } = null!;
 
         /// <summary>
-        /// The time until which the certificate is invalid, as an
-        /// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+        /// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
+        /// timestamp.
         /// </summary>
         [Output("validityEndTime")]
         public Output<string> ValidityEndTime { get; private set; } = null!;
 
         /// <summary>
-        /// The number of hours after initial issuing that the
-        /// certificate will become invalid.
+        /// Number of hours, after initial issuing, that the certificate will remain valid for.
         /// </summary>
         [Output("validityPeriodHours")]
         public Output<int> ValidityPeriodHours { get; private set; } = null!;
 
         /// <summary>
-        /// The time after which the certificate is valid, as an
-        /// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+        /// The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         /// </summary>
         [Output("validityStartTime")]
         public Output<string> ValidityStartTime { get; private set; } = null!;
@@ -160,8 +176,14 @@ namespace Pulumi.Tls
         private InputList<string>? _allowedUses;
 
         /// <summary>
-        /// List of keywords each describing a use that is permitted
-        /// for the issued certificate. The valid keywords are listed below.
+        /// List of key usages allowed for the issued certificate. Values are defined in [RFC
+        /// 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
+        /// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
+        /// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
+        /// `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
+        /// `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
+        /// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
+        /// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         /// </summary>
         public InputList<string> AllowedUses
         {
@@ -173,7 +195,7 @@ namespace Pulumi.Tls
         private InputList<string>? _dnsNames;
 
         /// <summary>
-        /// List of DNS names for which a certificate is being requested.
+        /// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         public InputList<string> DnsNames
         {
@@ -182,7 +204,11 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// Number of hours before the certificates expiry when a new certificate will be generated
+        /// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
+        /// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
+        /// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
+        /// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
+        /// early renewal period. (default: `0`)
         /// </summary>
         [Input("earlyRenewalHours")]
         public Input<int>? EarlyRenewalHours { get; set; }
@@ -191,7 +217,7 @@ namespace Pulumi.Tls
         private InputList<string>? _ipAddresses;
 
         /// <summary>
-        /// List of IP addresses for which a certificate is being requested.
+        /// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         public InputList<string> IpAddresses
         {
@@ -200,30 +226,29 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// Boolean controlling whether the CA flag will be set in the
-        /// generated certificate. Defaults to `false`, meaning that the certificate does not represent
-        /// a certificate authority.
+        /// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         /// </summary>
         [Input("isCaCertificate")]
         public Input<bool>? IsCaCertificate { get; set; }
 
         /// <summary>
-        /// The name of the algorithm for the key provided
-        /// in `private_key_pem`.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+        /// and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
-        [Input("keyAlgorithm", required: true)]
-        public Input<string> KeyAlgorithm { get; set; } = null!;
+        [Input("keyAlgorithm")]
+        public Input<string>? KeyAlgorithm { get; set; }
 
         /// <summary>
-        /// PEM-encoded private key that the certificate will belong to
+        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+        /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+        /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         /// </summary>
         [Input("privateKeyPem", required: true)]
         public Input<string> PrivateKeyPem { get; set; } = null!;
 
         /// <summary>
-        /// If `true`, the certificate will include
-        /// the subject key identifier. Defaults to `false`, in which case the subject
-        /// key identifier is not set at all.
+        /// Should the generated certificate include a [subject key
+        /// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Input("setSubjectKeyId")]
         public Input<bool>? SetSubjectKeyId { get; set; }
@@ -232,9 +257,8 @@ namespace Pulumi.Tls
         private InputList<Inputs.SelfSignedCertSubjectArgs>? _subjects;
 
         /// <summary>
-        /// The subject for which a certificate is being requested.
-        /// This is a nested configuration block whose structure matches the
-        /// corresponding block for `tls.CertRequest`.
+        /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
         public InputList<Inputs.SelfSignedCertSubjectArgs> Subjects
         {
@@ -246,7 +270,7 @@ namespace Pulumi.Tls
         private InputList<string>? _uris;
 
         /// <summary>
-        /// List of URIs for which a certificate is being requested.
+        /// List of URIs for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         public InputList<string> Uris
         {
@@ -255,8 +279,7 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// The number of hours after initial issuing that the
-        /// certificate will become invalid.
+        /// Number of hours, after initial issuing, that the certificate will remain valid for.
         /// </summary>
         [Input("validityPeriodHours", required: true)]
         public Input<int> ValidityPeriodHours { get; set; } = null!;
@@ -272,8 +295,14 @@ namespace Pulumi.Tls
         private InputList<string>? _allowedUses;
 
         /// <summary>
-        /// List of keywords each describing a use that is permitted
-        /// for the issued certificate. The valid keywords are listed below.
+        /// List of key usages allowed for the issued certificate. Values are defined in [RFC
+        /// 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
+        /// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
+        /// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
+        /// `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
+        /// `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
+        /// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
+        /// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         /// </summary>
         public InputList<string> AllowedUses
         {
@@ -282,7 +311,7 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// The certificate data in PEM format.
+        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Input("certPem")]
         public Input<string>? CertPem { get; set; }
@@ -291,7 +320,7 @@ namespace Pulumi.Tls
         private InputList<string>? _dnsNames;
 
         /// <summary>
-        /// List of DNS names for which a certificate is being requested.
+        /// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         public InputList<string> DnsNames
         {
@@ -300,16 +329,26 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// Number of hours before the certificates expiry when a new certificate will be generated
+        /// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
+        /// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
+        /// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
+        /// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
+        /// early renewal period. (default: `0`)
         /// </summary>
         [Input("earlyRenewalHours")]
         public Input<int>? EarlyRenewalHours { get; set; }
+
+        /// <summary>
+        /// Unique identifier for this resource: the certificate serial number.
+        /// </summary>
+        [Input("id")]
+        public Input<string>? Id { get; set; }
 
         [Input("ipAddresses")]
         private InputList<string>? _ipAddresses;
 
         /// <summary>
-        /// List of IP addresses for which a certificate is being requested.
+        /// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         public InputList<string> IpAddresses
         {
@@ -318,33 +357,36 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// Boolean controlling whether the CA flag will be set in the
-        /// generated certificate. Defaults to `false`, meaning that the certificate does not represent
-        /// a certificate authority.
+        /// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         /// </summary>
         [Input("isCaCertificate")]
         public Input<bool>? IsCaCertificate { get; set; }
 
         /// <summary>
-        /// The name of the algorithm for the key provided
-        /// in `private_key_pem`.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+        /// and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Input("keyAlgorithm")]
         public Input<string>? KeyAlgorithm { get; set; }
 
         /// <summary>
-        /// PEM-encoded private key that the certificate will belong to
+        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+        /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+        /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         /// </summary>
         [Input("privateKeyPem")]
         public Input<string>? PrivateKeyPem { get; set; }
 
+        /// <summary>
+        /// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
+        /// the `early_renewal_hours`)?
+        /// </summary>
         [Input("readyForRenewal")]
         public Input<bool>? ReadyForRenewal { get; set; }
 
         /// <summary>
-        /// If `true`, the certificate will include
-        /// the subject key identifier. Defaults to `false`, in which case the subject
-        /// key identifier is not set at all.
+        /// Should the generated certificate include a [subject key
+        /// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Input("setSubjectKeyId")]
         public Input<bool>? SetSubjectKeyId { get; set; }
@@ -353,9 +395,8 @@ namespace Pulumi.Tls
         private InputList<Inputs.SelfSignedCertSubjectGetArgs>? _subjects;
 
         /// <summary>
-        /// The subject for which a certificate is being requested.
-        /// This is a nested configuration block whose structure matches the
-        /// corresponding block for `tls.CertRequest`.
+        /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
         public InputList<Inputs.SelfSignedCertSubjectGetArgs> Subjects
         {
@@ -367,7 +408,7 @@ namespace Pulumi.Tls
         private InputList<string>? _uris;
 
         /// <summary>
-        /// List of URIs for which a certificate is being requested.
+        /// List of URIs for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         public InputList<string> Uris
         {
@@ -376,22 +417,20 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// The time until which the certificate is invalid, as an
-        /// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+        /// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
+        /// timestamp.
         /// </summary>
         [Input("validityEndTime")]
         public Input<string>? ValidityEndTime { get; set; }
 
         /// <summary>
-        /// The number of hours after initial issuing that the
-        /// certificate will become invalid.
+        /// Number of hours, after initial issuing, that the certificate will remain valid for.
         /// </summary>
         [Input("validityPeriodHours")]
         public Input<int>? ValidityPeriodHours { get; set; }
 
         /// <summary>
-        /// The time after which the certificate is valid, as an
-        /// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+        /// The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         /// </summary>
         [Input("validityStartTime")]
         public Input<string>? ValidityStartTime { get; set; }

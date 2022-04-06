@@ -23,7 +23,6 @@ namespace Pulumi.Tls
     ///     {
     ///         var example = new Tls.CertRequest("example", new Tls.CertRequestArgs
     ///         {
-    ///             KeyAlgorithm = "ECDSA",
     ///             PrivateKeyPem = File.ReadAllText("private_key.pem"),
     ///             Subjects = 
     ///             {
@@ -43,45 +42,53 @@ namespace Pulumi.Tls
     public partial class CertRequest : Pulumi.CustomResource
     {
         /// <summary>
-        /// The certificate request data in PEM format.
+        /// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Output("certRequestPem")]
         public Output<string> CertRequestPem { get; private set; } = null!;
 
         /// <summary>
-        /// List of DNS names for which a certificate is being requested.
+        /// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         [Output("dnsNames")]
         public Output<ImmutableArray<string>> DnsNames { get; private set; } = null!;
 
         /// <summary>
-        /// List of IP addresses for which a certificate is being requested.
+        /// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
+        /// </summary>
+        [Output("id")]
+        public Output<string> Id { get; private set; } = null!;
+
+        /// <summary>
+        /// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         [Output("ipAddresses")]
         public Output<ImmutableArray<string>> IpAddresses { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the algorithm for the key provided
-        /// in `private_key_pem`.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+        /// and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Output("keyAlgorithm")]
         public Output<string> KeyAlgorithm { get; private set; } = null!;
 
         /// <summary>
-        /// PEM-encoded private key that the certificate will belong to
+        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+        /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+        /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         /// </summary>
         [Output("privateKeyPem")]
         public Output<string> PrivateKeyPem { get; private set; } = null!;
 
         /// <summary>
-        /// The subject for which a certificate is being requested. This is
-        /// a nested configuration block whose structure is described below.
+        /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
         [Output("subjects")]
         public Output<ImmutableArray<Outputs.CertRequestSubject>> Subjects { get; private set; } = null!;
 
         /// <summary>
-        /// List of URIs for which a certificate is being requested.
+        /// List of URIs for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         [Output("uris")]
         public Output<ImmutableArray<string>> Uris { get; private set; } = null!;
@@ -136,7 +143,7 @@ namespace Pulumi.Tls
         private InputList<string>? _dnsNames;
 
         /// <summary>
-        /// List of DNS names for which a certificate is being requested.
+        /// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         public InputList<string> DnsNames
         {
@@ -148,7 +155,7 @@ namespace Pulumi.Tls
         private InputList<string>? _ipAddresses;
 
         /// <summary>
-        /// List of IP addresses for which a certificate is being requested.
+        /// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         public InputList<string> IpAddresses
         {
@@ -157,14 +164,16 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// The name of the algorithm for the key provided
-        /// in `private_key_pem`.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+        /// and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
-        [Input("keyAlgorithm", required: true)]
-        public Input<string> KeyAlgorithm { get; set; } = null!;
+        [Input("keyAlgorithm")]
+        public Input<string>? KeyAlgorithm { get; set; }
 
         /// <summary>
-        /// PEM-encoded private key that the certificate will belong to
+        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+        /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+        /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         /// </summary>
         [Input("privateKeyPem", required: true)]
         public Input<string> PrivateKeyPem { get; set; } = null!;
@@ -173,8 +182,8 @@ namespace Pulumi.Tls
         private InputList<Inputs.CertRequestSubjectArgs>? _subjects;
 
         /// <summary>
-        /// The subject for which a certificate is being requested. This is
-        /// a nested configuration block whose structure is described below.
+        /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
         public InputList<Inputs.CertRequestSubjectArgs> Subjects
         {
@@ -186,7 +195,7 @@ namespace Pulumi.Tls
         private InputList<string>? _uris;
 
         /// <summary>
-        /// List of URIs for which a certificate is being requested.
+        /// List of URIs for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         public InputList<string> Uris
         {
@@ -202,7 +211,7 @@ namespace Pulumi.Tls
     public sealed class CertRequestState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The certificate request data in PEM format.
+        /// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Input("certRequestPem")]
         public Input<string>? CertRequestPem { get; set; }
@@ -211,7 +220,7 @@ namespace Pulumi.Tls
         private InputList<string>? _dnsNames;
 
         /// <summary>
-        /// List of DNS names for which a certificate is being requested.
+        /// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         public InputList<string> DnsNames
         {
@@ -219,11 +228,17 @@ namespace Pulumi.Tls
             set => _dnsNames = value;
         }
 
+        /// <summary>
+        /// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
+        /// </summary>
+        [Input("id")]
+        public Input<string>? Id { get; set; }
+
         [Input("ipAddresses")]
         private InputList<string>? _ipAddresses;
 
         /// <summary>
-        /// List of IP addresses for which a certificate is being requested.
+        /// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         public InputList<string> IpAddresses
         {
@@ -232,14 +247,16 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// The name of the algorithm for the key provided
-        /// in `private_key_pem`.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+        /// and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Input("keyAlgorithm")]
         public Input<string>? KeyAlgorithm { get; set; }
 
         /// <summary>
-        /// PEM-encoded private key that the certificate will belong to
+        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+        /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+        /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         /// </summary>
         [Input("privateKeyPem")]
         public Input<string>? PrivateKeyPem { get; set; }
@@ -248,8 +265,8 @@ namespace Pulumi.Tls
         private InputList<Inputs.CertRequestSubjectGetArgs>? _subjects;
 
         /// <summary>
-        /// The subject for which a certificate is being requested. This is
-        /// a nested configuration block whose structure is described below.
+        /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
         public InputList<Inputs.CertRequestSubjectGetArgs> Subjects
         {
@@ -261,7 +278,7 @@ namespace Pulumi.Tls
         private InputList<string>? _uris;
 
         /// <summary>
-        /// List of URIs for which a certificate is being requested.
+        /// List of URIs for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         public InputList<string> Uris
         {

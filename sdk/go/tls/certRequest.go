@@ -34,7 +34,6 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := tls.NewCertRequest(ctx, "example", &tls.CertRequestArgs{
-// 			KeyAlgorithm:  pulumi.String("ECDSA"),
 // 			PrivateKeyPem: readFileOrPanic("private_key.pem"),
 // 			Subjects: CertRequestSubjectArray{
 // 				&CertRequestSubjectArgs{
@@ -53,21 +52,27 @@ import (
 type CertRequest struct {
 	pulumi.CustomResourceState
 
-	// The certificate request data in PEM format.
+	// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CertRequestPem pulumi.StringOutput `pulumi:"certRequestPem"`
-	// List of DNS names for which a certificate is being requested.
+	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames pulumi.StringArrayOutput `pulumi:"dnsNames"`
-	// List of IP addresses for which a certificate is being requested.
+	// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
+	Id pulumi.StringOutput `pulumi:"id"`
+	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayOutput `pulumi:"ipAddresses"`
-	// The name of the algorithm for the key provided
-	// in `privateKeyPem`.
+	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+	// and ignored, as the key algorithm is now inferred from the key.
+	//
+	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
 	KeyAlgorithm pulumi.StringOutput `pulumi:"keyAlgorithm"`
-	// PEM-encoded private key that the certificate will belong to
+	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
 	PrivateKeyPem pulumi.StringOutput `pulumi:"privateKeyPem"`
-	// The subject for which a certificate is being requested. This is
-	// a nested configuration block whose structure is described below.
+	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subjects CertRequestSubjectArrayOutput `pulumi:"subjects"`
-	// List of URIs for which a certificate is being requested.
+	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris pulumi.StringArrayOutput `pulumi:"uris"`
 }
 
@@ -78,9 +83,6 @@ func NewCertRequest(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.KeyAlgorithm == nil {
-		return nil, errors.New("invalid value for required argument 'KeyAlgorithm'")
-	}
 	if args.PrivateKeyPem == nil {
 		return nil, errors.New("invalid value for required argument 'PrivateKeyPem'")
 	}
@@ -109,40 +111,52 @@ func GetCertRequest(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering CertRequest resources.
 type certRequestState struct {
-	// The certificate request data in PEM format.
+	// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CertRequestPem *string `pulumi:"certRequestPem"`
-	// List of DNS names for which a certificate is being requested.
+	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames []string `pulumi:"dnsNames"`
-	// List of IP addresses for which a certificate is being requested.
+	// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
+	Id *string `pulumi:"id"`
+	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses []string `pulumi:"ipAddresses"`
-	// The name of the algorithm for the key provided
-	// in `privateKeyPem`.
+	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+	// and ignored, as the key algorithm is now inferred from the key.
+	//
+	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
 	KeyAlgorithm *string `pulumi:"keyAlgorithm"`
-	// PEM-encoded private key that the certificate will belong to
+	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
 	PrivateKeyPem *string `pulumi:"privateKeyPem"`
-	// The subject for which a certificate is being requested. This is
-	// a nested configuration block whose structure is described below.
+	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subjects []CertRequestSubject `pulumi:"subjects"`
-	// List of URIs for which a certificate is being requested.
+	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris []string `pulumi:"uris"`
 }
 
 type CertRequestState struct {
-	// The certificate request data in PEM format.
+	// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CertRequestPem pulumi.StringPtrInput
-	// List of DNS names for which a certificate is being requested.
+	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames pulumi.StringArrayInput
-	// List of IP addresses for which a certificate is being requested.
+	// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
+	Id pulumi.StringPtrInput
+	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayInput
-	// The name of the algorithm for the key provided
-	// in `privateKeyPem`.
+	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+	// and ignored, as the key algorithm is now inferred from the key.
+	//
+	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
 	KeyAlgorithm pulumi.StringPtrInput
-	// PEM-encoded private key that the certificate will belong to
+	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
 	PrivateKeyPem pulumi.StringPtrInput
-	// The subject for which a certificate is being requested. This is
-	// a nested configuration block whose structure is described below.
+	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subjects CertRequestSubjectArrayInput
-	// List of URIs for which a certificate is being requested.
+	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris pulumi.StringArrayInput
 }
 
@@ -151,37 +165,45 @@ func (CertRequestState) ElementType() reflect.Type {
 }
 
 type certRequestArgs struct {
-	// List of DNS names for which a certificate is being requested.
+	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames []string `pulumi:"dnsNames"`
-	// List of IP addresses for which a certificate is being requested.
+	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses []string `pulumi:"ipAddresses"`
-	// The name of the algorithm for the key provided
-	// in `privateKeyPem`.
-	KeyAlgorithm string `pulumi:"keyAlgorithm"`
-	// PEM-encoded private key that the certificate will belong to
+	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+	// and ignored, as the key algorithm is now inferred from the key.
+	//
+	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+	KeyAlgorithm *string `pulumi:"keyAlgorithm"`
+	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
 	PrivateKeyPem string `pulumi:"privateKeyPem"`
-	// The subject for which a certificate is being requested. This is
-	// a nested configuration block whose structure is described below.
+	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subjects []CertRequestSubject `pulumi:"subjects"`
-	// List of URIs for which a certificate is being requested.
+	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris []string `pulumi:"uris"`
 }
 
 // The set of arguments for constructing a CertRequest resource.
 type CertRequestArgs struct {
-	// List of DNS names for which a certificate is being requested.
+	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames pulumi.StringArrayInput
-	// List of IP addresses for which a certificate is being requested.
+	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayInput
-	// The name of the algorithm for the key provided
-	// in `privateKeyPem`.
-	KeyAlgorithm pulumi.StringInput
-	// PEM-encoded private key that the certificate will belong to
+	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+	// and ignored, as the key algorithm is now inferred from the key.
+	//
+	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+	KeyAlgorithm pulumi.StringPtrInput
+	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
 	PrivateKeyPem pulumi.StringInput
-	// The subject for which a certificate is being requested. This is
-	// a nested configuration block whose structure is described below.
+	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subjects CertRequestSubjectArrayInput
-	// List of URIs for which a certificate is being requested.
+	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris pulumi.StringArrayInput
 }
 

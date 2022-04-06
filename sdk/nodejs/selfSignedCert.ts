@@ -34,71 +34,87 @@ export class SelfSignedCert extends pulumi.CustomResource {
     }
 
     /**
-     * List of keywords each describing a use that is permitted
-     * for the issued certificate. The valid keywords are listed below.
+     * List of key usages allowed for the issued certificate. Values are defined in [RFC
+     * 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
+     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
+     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
+     * `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
+     * `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
+     * `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
+     * `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
      */
     public readonly allowedUses!: pulumi.Output<string[]>;
     /**
-     * The certificate data in PEM format.
+     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
     public /*out*/ readonly certPem!: pulumi.Output<string>;
     /**
-     * List of DNS names for which a certificate is being requested.
+     * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      */
     public readonly dnsNames!: pulumi.Output<string[] | undefined>;
     /**
-     * Number of hours before the certificates expiry when a new certificate will be generated
+     * The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
+     * can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
+     * certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
+     * revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
+     * early renewal period. (default: `0`)
      */
     public readonly earlyRenewalHours!: pulumi.Output<number | undefined>;
     /**
-     * List of IP addresses for which a certificate is being requested.
+     * Unique identifier for this resource: the certificate serial number.
+     */
+    public /*out*/ readonly id!: pulumi.Output<string>;
+    /**
+     * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */
     public readonly ipAddresses!: pulumi.Output<string[] | undefined>;
     /**
-     * Boolean controlling whether the CA flag will be set in the
-     * generated certificate. Defaults to `false`, meaning that the certificate does not represent
-     * a certificate authority.
+     * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      */
     public readonly isCaCertificate!: pulumi.Output<boolean | undefined>;
     /**
-     * The name of the algorithm for the key provided
-     * in `privateKeyPem`.
+     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+     * and ignored, as the key algorithm is now inferred from the key.
+     *
+     * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
      */
     public readonly keyAlgorithm!: pulumi.Output<string>;
     /**
-     * PEM-encoded private key that the certificate will belong to
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+     * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+     * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
      */
     public readonly privateKeyPem!: pulumi.Output<string>;
+    /**
+     * Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
+     * the `early_renewal_hours`)?
+     */
     public /*out*/ readonly readyForRenewal!: pulumi.Output<boolean>;
     /**
-     * If `true`, the certificate will include
-     * the subject key identifier. Defaults to `false`, in which case the subject
-     * key identifier is not set at all.
+     * Should the generated certificate include a [subject key
+     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
     public readonly setSubjectKeyId!: pulumi.Output<boolean | undefined>;
     /**
-     * The subject for which a certificate is being requested.
-     * This is a nested configuration block whose structure matches the
-     * corresponding block for `tls.CertRequest`.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
     public readonly subjects!: pulumi.Output<outputs.SelfSignedCertSubject[]>;
     /**
-     * List of URIs for which a certificate is being requested.
+     * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */
     public readonly uris!: pulumi.Output<string[] | undefined>;
     /**
-     * The time until which the certificate is invalid, as an
-     * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+     * The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
+     * timestamp.
      */
     public /*out*/ readonly validityEndTime!: pulumi.Output<string>;
     /**
-     * The number of hours after initial issuing that the
-     * certificate will become invalid.
+     * Number of hours, after initial issuing, that the certificate will remain valid for.
      */
     public readonly validityPeriodHours!: pulumi.Output<number>;
     /**
-     * The time after which the certificate is valid, as an
-     * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+     * The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      */
     public /*out*/ readonly validityStartTime!: pulumi.Output<string>;
 
@@ -119,6 +135,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["certPem"] = state ? state.certPem : undefined;
             resourceInputs["dnsNames"] = state ? state.dnsNames : undefined;
             resourceInputs["earlyRenewalHours"] = state ? state.earlyRenewalHours : undefined;
+            resourceInputs["id"] = state ? state.id : undefined;
             resourceInputs["ipAddresses"] = state ? state.ipAddresses : undefined;
             resourceInputs["isCaCertificate"] = state ? state.isCaCertificate : undefined;
             resourceInputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
@@ -134,9 +151,6 @@ export class SelfSignedCert extends pulumi.CustomResource {
             const args = argsOrState as SelfSignedCertArgs | undefined;
             if ((!args || args.allowedUses === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'allowedUses'");
-            }
-            if ((!args || args.keyAlgorithm === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'keyAlgorithm'");
             }
             if ((!args || args.privateKeyPem === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'privateKeyPem'");
@@ -159,6 +173,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["uris"] = args ? args.uris : undefined;
             resourceInputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
             resourceInputs["certPem"] = undefined /*out*/;
+            resourceInputs["id"] = undefined /*out*/;
             resourceInputs["readyForRenewal"] = undefined /*out*/;
             resourceInputs["validityEndTime"] = undefined /*out*/;
             resourceInputs["validityStartTime"] = undefined /*out*/;
@@ -173,71 +188,87 @@ export class SelfSignedCert extends pulumi.CustomResource {
  */
 export interface SelfSignedCertState {
     /**
-     * List of keywords each describing a use that is permitted
-     * for the issued certificate. The valid keywords are listed below.
+     * List of key usages allowed for the issued certificate. Values are defined in [RFC
+     * 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
+     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
+     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
+     * `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
+     * `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
+     * `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
+     * `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
      */
     allowedUses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The certificate data in PEM format.
+     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
     certPem?: pulumi.Input<string>;
     /**
-     * List of DNS names for which a certificate is being requested.
+     * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      */
     dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Number of hours before the certificates expiry when a new certificate will be generated
+     * The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
+     * can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
+     * certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
+     * revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
+     * early renewal period. (default: `0`)
      */
     earlyRenewalHours?: pulumi.Input<number>;
     /**
-     * List of IP addresses for which a certificate is being requested.
+     * Unique identifier for this resource: the certificate serial number.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */
     ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Boolean controlling whether the CA flag will be set in the
-     * generated certificate. Defaults to `false`, meaning that the certificate does not represent
-     * a certificate authority.
+     * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      */
     isCaCertificate?: pulumi.Input<boolean>;
     /**
-     * The name of the algorithm for the key provided
-     * in `privateKeyPem`.
+     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+     * and ignored, as the key algorithm is now inferred from the key.
+     *
+     * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
      */
     keyAlgorithm?: pulumi.Input<string>;
     /**
-     * PEM-encoded private key that the certificate will belong to
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+     * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+     * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
      */
     privateKeyPem?: pulumi.Input<string>;
+    /**
+     * Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
+     * the `early_renewal_hours`)?
+     */
     readyForRenewal?: pulumi.Input<boolean>;
     /**
-     * If `true`, the certificate will include
-     * the subject key identifier. Defaults to `false`, in which case the subject
-     * key identifier is not set at all.
+     * Should the generated certificate include a [subject key
+     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
     setSubjectKeyId?: pulumi.Input<boolean>;
     /**
-     * The subject for which a certificate is being requested.
-     * This is a nested configuration block whose structure matches the
-     * corresponding block for `tls.CertRequest`.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
     subjects?: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
     /**
-     * List of URIs for which a certificate is being requested.
+     * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */
     uris?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The time until which the certificate is invalid, as an
-     * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+     * The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
+     * timestamp.
      */
     validityEndTime?: pulumi.Input<string>;
     /**
-     * The number of hours after initial issuing that the
-     * certificate will become invalid.
+     * Number of hours, after initial issuing, that the certificate will remain valid for.
      */
     validityPeriodHours?: pulumi.Input<number>;
     /**
-     * The time after which the certificate is valid, as an
-     * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+     * The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      */
     validityStartTime?: pulumi.Input<string>;
 }
@@ -247,56 +278,65 @@ export interface SelfSignedCertState {
  */
 export interface SelfSignedCertArgs {
     /**
-     * List of keywords each describing a use that is permitted
-     * for the issued certificate. The valid keywords are listed below.
+     * List of key usages allowed for the issued certificate. Values are defined in [RFC
+     * 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
+     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
+     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
+     * `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
+     * `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
+     * `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
+     * `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
      */
     allowedUses: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * List of DNS names for which a certificate is being requested.
+     * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      */
     dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Number of hours before the certificates expiry when a new certificate will be generated
+     * The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
+     * can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
+     * certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
+     * revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
+     * early renewal period. (default: `0`)
      */
     earlyRenewalHours?: pulumi.Input<number>;
     /**
-     * List of IP addresses for which a certificate is being requested.
+     * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */
     ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Boolean controlling whether the CA flag will be set in the
-     * generated certificate. Defaults to `false`, meaning that the certificate does not represent
-     * a certificate authority.
+     * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      */
     isCaCertificate?: pulumi.Input<boolean>;
     /**
-     * The name of the algorithm for the key provided
-     * in `privateKeyPem`.
+     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+     * and ignored, as the key algorithm is now inferred from the key.
+     *
+     * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
      */
-    keyAlgorithm: pulumi.Input<string>;
+    keyAlgorithm?: pulumi.Input<string>;
     /**
-     * PEM-encoded private key that the certificate will belong to
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+     * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+     * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
      */
     privateKeyPem: pulumi.Input<string>;
     /**
-     * If `true`, the certificate will include
-     * the subject key identifier. Defaults to `false`, in which case the subject
-     * key identifier is not set at all.
+     * Should the generated certificate include a [subject key
+     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
     setSubjectKeyId?: pulumi.Input<boolean>;
     /**
-     * The subject for which a certificate is being requested.
-     * This is a nested configuration block whose structure matches the
-     * corresponding block for `tls.CertRequest`.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
     subjects: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
     /**
-     * List of URIs for which a certificate is being requested.
+     * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */
     uris?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The number of hours after initial issuing that the
-     * certificate will become invalid.
+     * Number of hours, after initial issuing, that the certificate will remain valid for.
      */
     validityPeriodHours: pulumi.Input<number>;
 }

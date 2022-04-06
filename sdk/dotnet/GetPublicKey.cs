@@ -12,8 +12,9 @@ namespace Pulumi.Tls
     public static class GetPublicKey
     {
         /// <summary>
-        /// Use this data source to get the public key from a PEM-encoded private key for use in other
-        /// resources.
+        /// Get a public key from a PEM-encoded private key.
+        /// 
+        /// Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
         /// 
         /// {{% examples %}}
         /// ## Example Usage
@@ -28,9 +29,17 @@ namespace Pulumi.Tls
         /// {
         ///     public MyStack()
         ///     {
-        ///         var example = Output.Create(Tls.GetPublicKey.InvokeAsync(new Tls.GetPublicKeyArgs
+        ///         var ed25519_example = new Tls.PrivateKey("ed25519-example", new Tls.PrivateKeyArgs
         ///         {
-        ///             PrivateKeyPem = File.ReadAllText("~/.ssh/id_rsa"),
+        ///             Algorithm = "ED25519",
+        ///         });
+        ///         var privateKeyPem_example = Tls.GetPublicKey.Invoke(new Tls.GetPublicKeyInvokeArgs
+        ///         {
+        ///             PrivateKeyPem = ed25519_example.PrivateKeyPem,
+        ///         });
+        ///         var privateKeyOpenssh_example = Output.Create(Tls.GetPublicKey.InvokeAsync(new Tls.GetPublicKeyArgs
+        ///         {
+        ///             PrivateKeyOpenssh = File.ReadAllText("~/.ssh/id_rsa_rfc4716"),
         ///         }));
         ///     }
         /// 
@@ -39,12 +48,13 @@ namespace Pulumi.Tls
         /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
-        public static Task<GetPublicKeyResult> InvokeAsync(GetPublicKeyArgs args, InvokeOptions? options = null)
+        public static Task<GetPublicKeyResult> InvokeAsync(GetPublicKeyArgs? args = null, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to get the public key from a PEM-encoded private key for use in other
-        /// resources.
+        /// Get a public key from a PEM-encoded private key.
+        /// 
+        /// Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
         /// 
         /// {{% examples %}}
         /// ## Example Usage
@@ -59,9 +69,17 @@ namespace Pulumi.Tls
         /// {
         ///     public MyStack()
         ///     {
-        ///         var example = Output.Create(Tls.GetPublicKey.InvokeAsync(new Tls.GetPublicKeyArgs
+        ///         var ed25519_example = new Tls.PrivateKey("ed25519-example", new Tls.PrivateKeyArgs
         ///         {
-        ///             PrivateKeyPem = File.ReadAllText("~/.ssh/id_rsa"),
+        ///             Algorithm = "ED25519",
+        ///         });
+        ///         var privateKeyPem_example = Tls.GetPublicKey.Invoke(new Tls.GetPublicKeyInvokeArgs
+        ///         {
+        ///             PrivateKeyPem = ed25519_example.PrivateKeyPem,
+        ///         });
+        ///         var privateKeyOpenssh_example = Output.Create(Tls.GetPublicKey.InvokeAsync(new Tls.GetPublicKeyArgs
+        ///         {
+        ///             PrivateKeyOpenssh = File.ReadAllText("~/.ssh/id_rsa_rfc4716"),
         ///         }));
         ///     }
         /// 
@@ -70,18 +88,18 @@ namespace Pulumi.Tls
         /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
-        public static Output<GetPublicKeyResult> Invoke(GetPublicKeyInvokeArgs args, InvokeOptions? options = null)
+        public static Output<GetPublicKeyResult> Invoke(GetPublicKeyInvokeArgs? args = null, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.Invoke<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetPublicKeyArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The private key to use. Currently-supported key types are "RSA" or "ECDSA".
-        /// </summary>
-        [Input("privateKeyPem", required: true)]
-        public string PrivateKeyPem { get; set; } = null!;
+        [Input("privateKeyOpenssh")]
+        public string? PrivateKeyOpenssh { get; set; }
+
+        [Input("privateKeyPem")]
+        public string? PrivateKeyPem { get; set; }
 
         public GetPublicKeyArgs()
         {
@@ -90,11 +108,11 @@ namespace Pulumi.Tls
 
     public sealed class GetPublicKeyInvokeArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The private key to use. Currently-supported key types are "RSA" or "ECDSA".
-        /// </summary>
-        [Input("privateKeyPem", required: true)]
-        public Input<string> PrivateKeyPem { get; set; } = null!;
+        [Input("privateKeyOpenssh")]
+        public Input<string>? PrivateKeyOpenssh { get; set; }
+
+        [Input("privateKeyPem")]
+        public Input<string>? PrivateKeyPem { get; set; }
 
         public GetPublicKeyInvokeArgs()
         {
@@ -106,32 +124,12 @@ namespace Pulumi.Tls
     public sealed class GetPublicKeyResult
     {
         public readonly string Algorithm;
-        /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
-        /// </summary>
         public readonly string Id;
-        /// <summary>
-        /// The private key data in PEM format.
-        /// </summary>
-        public readonly string PrivateKeyPem;
-        /// <summary>
-        /// The md5 hash of the public key data in
-        /// OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
-        /// selected private key format is compatible, as per the rules for
-        /// `public_key_openssh`.
-        /// </summary>
+        public readonly string? PrivateKeyOpenssh;
+        public readonly string? PrivateKeyPem;
         public readonly string PublicKeyFingerprintMd5;
-        /// <summary>
-        /// The public key data in OpenSSH `authorized_keys`
-        /// format, if the selected private key format is compatible. All RSA keys
-        /// are supported, and ECDSA keys with curves "P256", "P384" and "P521"
-        /// are supported. This attribute is empty if an incompatible ECDSA curve
-        /// is selected.
-        /// </summary>
+        public readonly string PublicKeyFingerprintSha256;
         public readonly string PublicKeyOpenssh;
-        /// <summary>
-        /// The public key data in PEM format.
-        /// </summary>
         public readonly string PublicKeyPem;
 
         [OutputConstructor]
@@ -140,9 +138,13 @@ namespace Pulumi.Tls
 
             string id,
 
-            string privateKeyPem,
+            string? privateKeyOpenssh,
+
+            string? privateKeyPem,
 
             string publicKeyFingerprintMd5,
+
+            string publicKeyFingerprintSha256,
 
             string publicKeyOpenssh,
 
@@ -150,8 +152,10 @@ namespace Pulumi.Tls
         {
             Algorithm = algorithm;
             Id = id;
+            PrivateKeyOpenssh = privateKeyOpenssh;
             PrivateKeyPem = privateKeyPem;
             PublicKeyFingerprintMd5 = publicKeyFingerprintMd5;
+            PublicKeyFingerprintSha256 = publicKeyFingerprintSha256;
             PublicKeyOpenssh = publicKeyOpenssh;
             PublicKeyPem = publicKeyPem;
         }

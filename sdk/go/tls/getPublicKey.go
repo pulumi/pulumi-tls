@@ -10,8 +10,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Use this data source to get the public key from a PEM-encoded private key for use in other
-// resources.
+// Get a public key from a PEM-encoded private key.
+//
+// Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
 //
 // ## Example Usage
 //
@@ -35,8 +36,17 @@ import (
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := tls.GetPublicKey(ctx, &GetPublicKeyArgs{
-// 			PrivateKeyPem: readFileOrPanic("~/.ssh/id_rsa"),
+// 		_, err := tls.NewPrivateKey(ctx, "ed25519-example", &tls.PrivateKeyArgs{
+// 			Algorithm: pulumi.String("ED25519"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_ = tls.GetPublicKeyOutput(ctx, GetPublicKeyOutputArgs{
+// 			PrivateKeyPem: ed25519_example.PrivateKeyPem,
+// 		}, nil)
+// 		_, err = tls.GetPublicKey(ctx, &GetPublicKeyArgs{
+// 			PrivateKeyOpenssh: pulumi.StringRef(readFileOrPanic("~/.ssh/id_rsa_rfc4716")),
 // 		}, nil)
 // 		if err != nil {
 // 			return err
@@ -56,30 +66,20 @@ func GetPublicKey(ctx *pulumi.Context, args *GetPublicKeyArgs, opts ...pulumi.In
 
 // A collection of arguments for invoking getPublicKey.
 type GetPublicKeyArgs struct {
-	// The private key to use. Currently-supported key types are "RSA" or "ECDSA".
-	PrivateKeyPem string `pulumi:"privateKeyPem"`
+	PrivateKeyOpenssh *string `pulumi:"privateKeyOpenssh"`
+	PrivateKeyPem     *string `pulumi:"privateKeyPem"`
 }
 
 // A collection of values returned by getPublicKey.
 type GetPublicKeyResult struct {
-	Algorithm string `pulumi:"algorithm"`
-	// The provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	// The private key data in PEM format.
-	PrivateKeyPem string `pulumi:"privateKeyPem"`
-	// The md5 hash of the public key data in
-	// OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
-	// selected private key format is compatible, as per the rules for
-	// `publicKeyOpenssh`.
-	PublicKeyFingerprintMd5 string `pulumi:"publicKeyFingerprintMd5"`
-	// The public key data in OpenSSH `authorizedKeys`
-	// format, if the selected private key format is compatible. All RSA keys
-	// are supported, and ECDSA keys with curves "P256", "P384" and "P521"
-	// are supported. This attribute is empty if an incompatible ECDSA curve
-	// is selected.
-	PublicKeyOpenssh string `pulumi:"publicKeyOpenssh"`
-	// The public key data in PEM format.
-	PublicKeyPem string `pulumi:"publicKeyPem"`
+	Algorithm                  string  `pulumi:"algorithm"`
+	Id                         string  `pulumi:"id"`
+	PrivateKeyOpenssh          *string `pulumi:"privateKeyOpenssh"`
+	PrivateKeyPem              *string `pulumi:"privateKeyPem"`
+	PublicKeyFingerprintMd5    string  `pulumi:"publicKeyFingerprintMd5"`
+	PublicKeyFingerprintSha256 string  `pulumi:"publicKeyFingerprintSha256"`
+	PublicKeyOpenssh           string  `pulumi:"publicKeyOpenssh"`
+	PublicKeyPem               string  `pulumi:"publicKeyPem"`
 }
 
 func GetPublicKeyOutput(ctx *pulumi.Context, args GetPublicKeyOutputArgs, opts ...pulumi.InvokeOption) GetPublicKeyResultOutput {
@@ -93,8 +93,8 @@ func GetPublicKeyOutput(ctx *pulumi.Context, args GetPublicKeyOutputArgs, opts .
 
 // A collection of arguments for invoking getPublicKey.
 type GetPublicKeyOutputArgs struct {
-	// The private key to use. Currently-supported key types are "RSA" or "ECDSA".
-	PrivateKeyPem pulumi.StringInput `pulumi:"privateKeyPem"`
+	PrivateKeyOpenssh pulumi.StringPtrInput `pulumi:"privateKeyOpenssh"`
+	PrivateKeyPem     pulumi.StringPtrInput `pulumi:"privateKeyPem"`
 }
 
 func (GetPublicKeyOutputArgs) ElementType() reflect.Type {
@@ -120,34 +120,30 @@ func (o GetPublicKeyResultOutput) Algorithm() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPublicKeyResult) string { return v.Algorithm }).(pulumi.StringOutput)
 }
 
-// The provider-assigned unique ID for this managed resource.
 func (o GetPublicKeyResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPublicKeyResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-// The private key data in PEM format.
-func (o GetPublicKeyResultOutput) PrivateKeyPem() pulumi.StringOutput {
-	return o.ApplyT(func(v GetPublicKeyResult) string { return v.PrivateKeyPem }).(pulumi.StringOutput)
+func (o GetPublicKeyResultOutput) PrivateKeyOpenssh() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetPublicKeyResult) *string { return v.PrivateKeyOpenssh }).(pulumi.StringPtrOutput)
 }
 
-// The md5 hash of the public key data in
-// OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
-// selected private key format is compatible, as per the rules for
-// `publicKeyOpenssh`.
+func (o GetPublicKeyResultOutput) PrivateKeyPem() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetPublicKeyResult) *string { return v.PrivateKeyPem }).(pulumi.StringPtrOutput)
+}
+
 func (o GetPublicKeyResultOutput) PublicKeyFingerprintMd5() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPublicKeyResult) string { return v.PublicKeyFingerprintMd5 }).(pulumi.StringOutput)
 }
 
-// The public key data in OpenSSH `authorizedKeys`
-// format, if the selected private key format is compatible. All RSA keys
-// are supported, and ECDSA keys with curves "P256", "P384" and "P521"
-// are supported. This attribute is empty if an incompatible ECDSA curve
-// is selected.
+func (o GetPublicKeyResultOutput) PublicKeyFingerprintSha256() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPublicKeyResult) string { return v.PublicKeyFingerprintSha256 }).(pulumi.StringOutput)
+}
+
 func (o GetPublicKeyResultOutput) PublicKeyOpenssh() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPublicKeyResult) string { return v.PublicKeyOpenssh }).(pulumi.StringOutput)
 }
 
-// The public key data in PEM format.
 func (o GetPublicKeyResultOutput) PublicKeyPem() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPublicKeyResult) string { return v.PublicKeyPem }).(pulumi.StringOutput)
 }

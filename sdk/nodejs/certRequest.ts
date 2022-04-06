@@ -10,12 +10,11 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as fs from "fs";
  * import * as tls from "@pulumi/tls";
+ * import * from "fs";
  *
  * const example = new tls.CertRequest("example", {
- *     keyAlgorithm: "ECDSA",
- *     privateKeyPem: fs.readFileSync("private_key.pem", "utf-8"),
+ *     privateKeyPem: fs.readFileSync("private_key.pem"),
  *     subjects: [{
  *         commonName: "example.com",
  *         organization: "ACME Examples, Inc",
@@ -52,33 +51,41 @@ export class CertRequest extends pulumi.CustomResource {
     }
 
     /**
-     * The certificate request data in PEM format.
+     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
     public /*out*/ readonly certRequestPem!: pulumi.Output<string>;
     /**
-     * List of DNS names for which a certificate is being requested.
+     * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      */
     public readonly dnsNames!: pulumi.Output<string[] | undefined>;
     /**
-     * List of IP addresses for which a certificate is being requested.
+     * Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
+     */
+    public /*out*/ readonly id!: pulumi.Output<string>;
+    /**
+     * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */
     public readonly ipAddresses!: pulumi.Output<string[] | undefined>;
     /**
-     * The name of the algorithm for the key provided
-     * in `privateKeyPem`.
+     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+     * and ignored, as the key algorithm is now inferred from the key.
+     *
+     * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
      */
     public readonly keyAlgorithm!: pulumi.Output<string>;
     /**
-     * PEM-encoded private key that the certificate will belong to
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+     * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+     * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
      */
     public readonly privateKeyPem!: pulumi.Output<string>;
     /**
-     * The subject for which a certificate is being requested. This is
-     * a nested configuration block whose structure is described below.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
     public readonly subjects!: pulumi.Output<outputs.CertRequestSubject[]>;
     /**
-     * List of URIs for which a certificate is being requested.
+     * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */
     public readonly uris!: pulumi.Output<string[] | undefined>;
 
@@ -97,6 +104,7 @@ export class CertRequest extends pulumi.CustomResource {
             const state = argsOrState as CertRequestState | undefined;
             resourceInputs["certRequestPem"] = state ? state.certRequestPem : undefined;
             resourceInputs["dnsNames"] = state ? state.dnsNames : undefined;
+            resourceInputs["id"] = state ? state.id : undefined;
             resourceInputs["ipAddresses"] = state ? state.ipAddresses : undefined;
             resourceInputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
             resourceInputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
@@ -104,9 +112,6 @@ export class CertRequest extends pulumi.CustomResource {
             resourceInputs["uris"] = state ? state.uris : undefined;
         } else {
             const args = argsOrState as CertRequestArgs | undefined;
-            if ((!args || args.keyAlgorithm === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'keyAlgorithm'");
-            }
             if ((!args || args.privateKeyPem === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'privateKeyPem'");
             }
@@ -120,6 +125,7 @@ export class CertRequest extends pulumi.CustomResource {
             resourceInputs["subjects"] = args ? args.subjects : undefined;
             resourceInputs["uris"] = args ? args.uris : undefined;
             resourceInputs["certRequestPem"] = undefined /*out*/;
+            resourceInputs["id"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(CertRequest.__pulumiType, name, resourceInputs, opts);
@@ -131,33 +137,41 @@ export class CertRequest extends pulumi.CustomResource {
  */
 export interface CertRequestState {
     /**
-     * The certificate request data in PEM format.
+     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
     certRequestPem?: pulumi.Input<string>;
     /**
-     * List of DNS names for which a certificate is being requested.
+     * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      */
     dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * List of IP addresses for which a certificate is being requested.
+     * Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */
     ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of the algorithm for the key provided
-     * in `privateKeyPem`.
+     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+     * and ignored, as the key algorithm is now inferred from the key.
+     *
+     * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
      */
     keyAlgorithm?: pulumi.Input<string>;
     /**
-     * PEM-encoded private key that the certificate will belong to
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+     * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+     * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
      */
     privateKeyPem?: pulumi.Input<string>;
     /**
-     * The subject for which a certificate is being requested. This is
-     * a nested configuration block whose structure is described below.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
     subjects?: pulumi.Input<pulumi.Input<inputs.CertRequestSubject>[]>;
     /**
-     * List of URIs for which a certificate is being requested.
+     * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */
     uris?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -167,29 +181,33 @@ export interface CertRequestState {
  */
 export interface CertRequestArgs {
     /**
-     * List of DNS names for which a certificate is being requested.
+     * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      */
     dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * List of IP addresses for which a certificate is being requested.
+     * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */
     ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of the algorithm for the key provided
-     * in `privateKeyPem`.
+     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+     * and ignored, as the key algorithm is now inferred from the key.
+     *
+     * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
      */
-    keyAlgorithm: pulumi.Input<string>;
+    keyAlgorithm?: pulumi.Input<string>;
     /**
-     * PEM-encoded private key that the certificate will belong to
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+     * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+     * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
      */
     privateKeyPem: pulumi.Input<string>;
     /**
-     * The subject for which a certificate is being requested. This is
-     * a nested configuration block whose structure is described below.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
     subjects: pulumi.Input<pulumi.Input<inputs.CertRequestSubject>[]>;
     /**
-     * List of URIs for which a certificate is being requested.
+     * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */
     uris?: pulumi.Input<pulumi.Input<string>[]>;
 }
