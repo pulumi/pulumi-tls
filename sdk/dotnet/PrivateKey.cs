@@ -13,54 +13,70 @@ namespace Pulumi.Tls
     public partial class PrivateKey : Pulumi.CustomResource
     {
         /// <summary>
-        /// The name of the algorithm to use for
-        /// the key. Currently-supported values are "RSA" and "ECDSA".
+        /// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
+        /// `ED25519`.
         /// </summary>
         [Output("algorithm")]
         public Output<string> Algorithm { get; private set; } = null!;
 
         /// <summary>
-        /// When `algorithm` is "ECDSA", the name of the elliptic
-        /// curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
-        /// default.
+        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
+        /// `P384` or `P521` (default: `P224`).
         /// </summary>
         [Output("ecdsaCurve")]
         public Output<string?> EcdsaCurve { get; private set; } = null!;
 
         /// <summary>
-        /// The private key data in PEM format.
+        /// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
+        /// </summary>
+        [Output("id")]
+        public Output<string> Id { get; private set; } = null!;
+
+        /// <summary>
+        /// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
+        /// </summary>
+        [Output("privateKeyOpenssh")]
+        public Output<string> PrivateKeyOpenssh { get; private set; } = null!;
+
+        /// <summary>
+        /// Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Output("privateKeyPem")]
         public Output<string> PrivateKeyPem { get; private set; } = null!;
 
         /// <summary>
-        /// The md5 hash of the public key data in
-        /// OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
-        /// selected private key format is compatible, as per the rules for
-        /// `public_key_openssh`.
+        /// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
+        /// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
+        /// limitations](../../#limitations).
         /// </summary>
         [Output("publicKeyFingerprintMd5")]
         public Output<string> PublicKeyFingerprintMd5 { get; private set; } = null!;
 
         /// <summary>
-        /// The public key data in OpenSSH `authorized_keys`
-        /// format, if the selected private key format is compatible. All RSA keys
-        /// are supported, and ECDSA keys with curves "P256", "P384" and "P521"
-        /// are supported. This attribute is empty if an incompatible ECDSA curve
-        /// is selected.
+        /// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
+        /// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
+        /// limitations](../../#limitations).
+        /// </summary>
+        [Output("publicKeyFingerprintSha256")]
+        public Output<string> PublicKeyFingerprintSha256 { get; private set; } = null!;
+
+        /// <summary>
+        /// The public key data in ["Authorized
+        /// Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
+        /// populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
+        /// `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not supported](../../#limitations).
         /// </summary>
         [Output("publicKeyOpenssh")]
         public Output<string> PublicKeyOpenssh { get; private set; } = null!;
 
         /// <summary>
-        /// The public key data in PEM format.
+        /// Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Output("publicKeyPem")]
         public Output<string> PublicKeyPem { get; private set; } = null!;
 
         /// <summary>
-        /// When `algorithm` is "RSA", the size of the generated
-        /// RSA key in bits. Defaults to 2048.
+        /// When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
         /// </summary>
         [Output("rsaBits")]
         public Output<int?> RsaBits { get; private set; } = null!;
@@ -112,23 +128,21 @@ namespace Pulumi.Tls
     public sealed class PrivateKeyArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The name of the algorithm to use for
-        /// the key. Currently-supported values are "RSA" and "ECDSA".
+        /// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
+        /// `ED25519`.
         /// </summary>
         [Input("algorithm", required: true)]
         public Input<string> Algorithm { get; set; } = null!;
 
         /// <summary>
-        /// When `algorithm` is "ECDSA", the name of the elliptic
-        /// curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
-        /// default.
+        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
+        /// `P384` or `P521` (default: `P224`).
         /// </summary>
         [Input("ecdsaCurve")]
         public Input<string>? EcdsaCurve { get; set; }
 
         /// <summary>
-        /// When `algorithm` is "RSA", the size of the generated
-        /// RSA key in bits. Defaults to 2048.
+        /// When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
         /// </summary>
         [Input("rsaBits")]
         public Input<int>? RsaBits { get; set; }
@@ -141,54 +155,70 @@ namespace Pulumi.Tls
     public sealed class PrivateKeyState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The name of the algorithm to use for
-        /// the key. Currently-supported values are "RSA" and "ECDSA".
+        /// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
+        /// `ED25519`.
         /// </summary>
         [Input("algorithm")]
         public Input<string>? Algorithm { get; set; }
 
         /// <summary>
-        /// When `algorithm` is "ECDSA", the name of the elliptic
-        /// curve to use. May be any one of "P224", "P256", "P384" or "P521", with "P224" as the
-        /// default.
+        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
+        /// `P384` or `P521` (default: `P224`).
         /// </summary>
         [Input("ecdsaCurve")]
         public Input<string>? EcdsaCurve { get; set; }
 
         /// <summary>
-        /// The private key data in PEM format.
+        /// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
+        /// </summary>
+        [Input("id")]
+        public Input<string>? Id { get; set; }
+
+        /// <summary>
+        /// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
+        /// </summary>
+        [Input("privateKeyOpenssh")]
+        public Input<string>? PrivateKeyOpenssh { get; set; }
+
+        /// <summary>
+        /// Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Input("privateKeyPem")]
         public Input<string>? PrivateKeyPem { get; set; }
 
         /// <summary>
-        /// The md5 hash of the public key data in
-        /// OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
-        /// selected private key format is compatible, as per the rules for
-        /// `public_key_openssh`.
+        /// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
+        /// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
+        /// limitations](../../#limitations).
         /// </summary>
         [Input("publicKeyFingerprintMd5")]
         public Input<string>? PublicKeyFingerprintMd5 { get; set; }
 
         /// <summary>
-        /// The public key data in OpenSSH `authorized_keys`
-        /// format, if the selected private key format is compatible. All RSA keys
-        /// are supported, and ECDSA keys with curves "P256", "P384" and "P521"
-        /// are supported. This attribute is empty if an incompatible ECDSA curve
-        /// is selected.
+        /// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
+        /// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
+        /// limitations](../../#limitations).
+        /// </summary>
+        [Input("publicKeyFingerprintSha256")]
+        public Input<string>? PublicKeyFingerprintSha256 { get; set; }
+
+        /// <summary>
+        /// The public key data in ["Authorized
+        /// Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
+        /// populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
+        /// `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not supported](../../#limitations).
         /// </summary>
         [Input("publicKeyOpenssh")]
         public Input<string>? PublicKeyOpenssh { get; set; }
 
         /// <summary>
-        /// The public key data in PEM format.
+        /// Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Input("publicKeyPem")]
         public Input<string>? PublicKeyPem { get; set; }
 
         /// <summary>
-        /// When `algorithm` is "RSA", the size of the generated
-        /// RSA key in bits. Defaults to 2048.
+        /// When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
         /// </summary>
         [Input("rsaBits")]
         public Input<int>? RsaBits { get; set; }

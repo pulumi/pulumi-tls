@@ -20,19 +20,25 @@ class GetPublicKeyResult:
     """
     A collection of values returned by getPublicKey.
     """
-    def __init__(__self__, algorithm=None, id=None, private_key_pem=None, public_key_fingerprint_md5=None, public_key_openssh=None, public_key_pem=None):
+    def __init__(__self__, algorithm=None, id=None, private_key_openssh=None, private_key_pem=None, public_key_fingerprint_md5=None, public_key_fingerprint_sha256=None, public_key_openssh=None, public_key_pem=None):
         if algorithm and not isinstance(algorithm, str):
             raise TypeError("Expected argument 'algorithm' to be a str")
         pulumi.set(__self__, "algorithm", algorithm)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
+        if private_key_openssh and not isinstance(private_key_openssh, str):
+            raise TypeError("Expected argument 'private_key_openssh' to be a str")
+        pulumi.set(__self__, "private_key_openssh", private_key_openssh)
         if private_key_pem and not isinstance(private_key_pem, str):
             raise TypeError("Expected argument 'private_key_pem' to be a str")
         pulumi.set(__self__, "private_key_pem", private_key_pem)
         if public_key_fingerprint_md5 and not isinstance(public_key_fingerprint_md5, str):
             raise TypeError("Expected argument 'public_key_fingerprint_md5' to be a str")
         pulumi.set(__self__, "public_key_fingerprint_md5", public_key_fingerprint_md5)
+        if public_key_fingerprint_sha256 and not isinstance(public_key_fingerprint_sha256, str):
+            raise TypeError("Expected argument 'public_key_fingerprint_sha256' to be a str")
+        pulumi.set(__self__, "public_key_fingerprint_sha256", public_key_fingerprint_sha256)
         if public_key_openssh and not isinstance(public_key_openssh, str):
             raise TypeError("Expected argument 'public_key_openssh' to be a str")
         pulumi.set(__self__, "public_key_openssh", public_key_openssh)
@@ -48,48 +54,36 @@ class GetPublicKeyResult:
     @property
     @pulumi.getter
     def id(self) -> str:
-        """
-        The provider-assigned unique ID for this managed resource.
-        """
         return pulumi.get(self, "id")
 
     @property
+    @pulumi.getter(name="privateKeyOpenssh")
+    def private_key_openssh(self) -> Optional[str]:
+        return pulumi.get(self, "private_key_openssh")
+
+    @property
     @pulumi.getter(name="privateKeyPem")
-    def private_key_pem(self) -> str:
-        """
-        The private key data in PEM format.
-        """
+    def private_key_pem(self) -> Optional[str]:
         return pulumi.get(self, "private_key_pem")
 
     @property
     @pulumi.getter(name="publicKeyFingerprintMd5")
     def public_key_fingerprint_md5(self) -> str:
-        """
-        The md5 hash of the public key data in
-        OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
-        selected private key format is compatible, as per the rules for
-        `public_key_openssh`.
-        """
         return pulumi.get(self, "public_key_fingerprint_md5")
+
+    @property
+    @pulumi.getter(name="publicKeyFingerprintSha256")
+    def public_key_fingerprint_sha256(self) -> str:
+        return pulumi.get(self, "public_key_fingerprint_sha256")
 
     @property
     @pulumi.getter(name="publicKeyOpenssh")
     def public_key_openssh(self) -> str:
-        """
-        The public key data in OpenSSH `authorized_keys`
-        format, if the selected private key format is compatible. All RSA keys
-        are supported, and ECDSA keys with curves "P256", "P384" and "P521"
-        are supported. This attribute is empty if an incompatible ECDSA curve
-        is selected.
-        """
         return pulumi.get(self, "public_key_openssh")
 
     @property
     @pulumi.getter(name="publicKeyPem")
     def public_key_pem(self) -> str:
-        """
-        The public key data in PEM format.
-        """
         return pulumi.get(self, "public_key_pem")
 
 
@@ -101,17 +95,21 @@ class AwaitableGetPublicKeyResult(GetPublicKeyResult):
         return GetPublicKeyResult(
             algorithm=self.algorithm,
             id=self.id,
+            private_key_openssh=self.private_key_openssh,
             private_key_pem=self.private_key_pem,
             public_key_fingerprint_md5=self.public_key_fingerprint_md5,
+            public_key_fingerprint_sha256=self.public_key_fingerprint_sha256,
             public_key_openssh=self.public_key_openssh,
             public_key_pem=self.public_key_pem)
 
 
-def get_public_key(private_key_pem: Optional[str] = None,
+def get_public_key(private_key_openssh: Optional[str] = None,
+                   private_key_pem: Optional[str] = None,
                    opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetPublicKeyResult:
     """
-    Use this data source to get the public key from a PEM-encoded private key for use in other
-    resources.
+    Get a public key from a PEM-encoded private key.
+
+    Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
 
     ## Example Usage
 
@@ -119,13 +117,13 @@ def get_public_key(private_key_pem: Optional[str] = None,
     import pulumi
     import pulumi_tls as tls
 
-    example = tls.get_public_key(private_key_pem=(lambda path: open(path).read())("~/.ssh/id_rsa"))
+    ed25519_example = tls.PrivateKey("ed25519-example", algorithm="ED25519")
+    private_key_pem_example = tls.get_public_key_output(private_key_pem=ed25519_example.private_key_pem)
+    private_key_openssh_example = tls.get_public_key(private_key_openssh=(lambda path: open(path).read())("~/.ssh/id_rsa_rfc4716"))
     ```
-
-
-    :param str private_key_pem: The private key to use. Currently-supported key types are "RSA" or "ECDSA".
     """
     __args__ = dict()
+    __args__['privateKeyOpenssh'] = private_key_openssh
     __args__['privateKeyPem'] = private_key_pem
     if opts is None:
         opts = pulumi.InvokeOptions()
@@ -136,18 +134,22 @@ def get_public_key(private_key_pem: Optional[str] = None,
     return AwaitableGetPublicKeyResult(
         algorithm=__ret__.algorithm,
         id=__ret__.id,
+        private_key_openssh=__ret__.private_key_openssh,
         private_key_pem=__ret__.private_key_pem,
         public_key_fingerprint_md5=__ret__.public_key_fingerprint_md5,
+        public_key_fingerprint_sha256=__ret__.public_key_fingerprint_sha256,
         public_key_openssh=__ret__.public_key_openssh,
         public_key_pem=__ret__.public_key_pem)
 
 
 @_utilities.lift_output_func(get_public_key)
-def get_public_key_output(private_key_pem: Optional[pulumi.Input[str]] = None,
+def get_public_key_output(private_key_openssh: Optional[pulumi.Input[Optional[str]]] = None,
+                          private_key_pem: Optional[pulumi.Input[Optional[str]]] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPublicKeyResult]:
     """
-    Use this data source to get the public key from a PEM-encoded private key for use in other
-    resources.
+    Get a public key from a PEM-encoded private key.
+
+    Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
 
     ## Example Usage
 
@@ -155,10 +157,9 @@ def get_public_key_output(private_key_pem: Optional[pulumi.Input[str]] = None,
     import pulumi
     import pulumi_tls as tls
 
-    example = tls.get_public_key(private_key_pem=(lambda path: open(path).read())("~/.ssh/id_rsa"))
+    ed25519_example = tls.PrivateKey("ed25519-example", algorithm="ED25519")
+    private_key_pem_example = tls.get_public_key_output(private_key_pem=ed25519_example.private_key_pem)
+    private_key_openssh_example = tls.get_public_key(private_key_openssh=(lambda path: open(path).read())("~/.ssh/id_rsa_rfc4716"))
     ```
-
-
-    :param str private_key_pem: The private key to use. Currently-supported key types are "RSA" or "ECDSA".
     """
     ...

@@ -11,95 +11,9 @@ namespace Pulumi.Tls
 {
     public static class GetCertificate
     {
-        /// <summary>
-        /// Use this data source to get information, such as SHA1 fingerprint or serial number, about the TLS certificates that
-        /// protect an HTTPS website. Note that the certificate chain isn't verified.
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Aws = Pulumi.Aws;
-        /// using Tls = Pulumi.Tls;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var exampleCluster = new Aws.Eks.Cluster("exampleCluster", new Aws.Eks.ClusterArgs
-        ///         {
-        ///         });
-        ///         var exampleCertificate = exampleCluster.Identities.Apply(identities =&gt; Tls.GetCertificate.Invoke(new Tls.GetCertificateInvokeArgs
-        ///         {
-        ///             Url = identities[0].Oidcs?[0]?.Issuer,
-        ///         }));
-        ///         var exampleOpenIdConnectProvider = new Aws.Iam.OpenIdConnectProvider("exampleOpenIdConnectProvider", new Aws.Iam.OpenIdConnectProviderArgs
-        ///         {
-        ///             ClientIdLists = 
-        ///             {
-        ///                 "sts.amazonaws.com",
-        ///             },
-        ///             ThumbprintLists = 
-        ///             {
-        ///                 exampleCertificate.Apply(exampleCertificate =&gt; exampleCertificate.Certificates?[0]?.Sha1Fingerprint),
-        ///             },
-        ///             Url = exampleCluster.Identities.Apply(identities =&gt; identities[0].Oidcs?[0]?.Issuer),
-        ///         });
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
-        /// </summary>
         public static Task<GetCertificateResult> InvokeAsync(GetCertificateArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetCertificateResult>("tls:index/getCertificate:getCertificate", args ?? new GetCertificateArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Use this data source to get information, such as SHA1 fingerprint or serial number, about the TLS certificates that
-        /// protect an HTTPS website. Note that the certificate chain isn't verified.
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Aws = Pulumi.Aws;
-        /// using Tls = Pulumi.Tls;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var exampleCluster = new Aws.Eks.Cluster("exampleCluster", new Aws.Eks.ClusterArgs
-        ///         {
-        ///         });
-        ///         var exampleCertificate = exampleCluster.Identities.Apply(identities =&gt; Tls.GetCertificate.Invoke(new Tls.GetCertificateInvokeArgs
-        ///         {
-        ///             Url = identities[0].Oidcs?[0]?.Issuer,
-        ///         }));
-        ///         var exampleOpenIdConnectProvider = new Aws.Iam.OpenIdConnectProvider("exampleOpenIdConnectProvider", new Aws.Iam.OpenIdConnectProviderArgs
-        ///         {
-        ///             ClientIdLists = 
-        ///             {
-        ///                 "sts.amazonaws.com",
-        ///             },
-        ///             ThumbprintLists = 
-        ///             {
-        ///                 exampleCertificate.Apply(exampleCertificate =&gt; exampleCertificate.Certificates?[0]?.Sha1Fingerprint),
-        ///             },
-        ///             Url = exampleCluster.Identities.Apply(identities =&gt; identities[0].Oidcs?[0]?.Issuer),
-        ///         });
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
-        /// </summary>
         public static Output<GetCertificateResult> Invoke(GetCertificateInvokeArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.Invoke<GetCertificateResult>("tls:index/getCertificate:getCertificate", args ?? new GetCertificateInvokeArgs(), options.WithDefaults());
     }
@@ -107,15 +21,9 @@ namespace Pulumi.Tls
 
     public sealed class GetCertificateArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The URL of the website to get the certificates from.
-        /// </summary>
         [Input("url", required: true)]
         public string Url { get; set; } = null!;
 
-        /// <summary>
-        /// Whether to verify the certificate chain while parsing it or not
-        /// </summary>
         [Input("verifyChain")]
         public bool? VerifyChain { get; set; }
 
@@ -126,15 +34,9 @@ namespace Pulumi.Tls
 
     public sealed class GetCertificateInvokeArgs : Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The URL of the website to get the certificates from.
-        /// </summary>
         [Input("url", required: true)]
         public Input<string> Url { get; set; } = null!;
 
-        /// <summary>
-        /// Whether to verify the certificate chain while parsing it or not
-        /// </summary>
         [Input("verifyChain")]
         public Input<bool>? VerifyChain { get; set; }
 
@@ -147,28 +49,7 @@ namespace Pulumi.Tls
     [OutputType]
     public sealed class GetCertificateResult
     {
-        /// <summary>
-        /// The certificates protecting the site, with the root of the chain first.
-        /// * `certificates.#.not_after` - The time until which the certificate is invalid, as an
-        /// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-        /// * `certificates.#.not_before` - The time after which the certificate is valid, as an
-        /// [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-        /// * `certificates.#.is_ca` - `true` if this certificate is a ca certificate.
-        /// * `certificates.#.issuer` - Who verified and signed the certificate, roughly following
-        /// [RFC2253](https://tools.ietf.org/html/rfc2253).
-        /// * `certificates.#.public_key_algorithm` - The algorithm used to create the certificate.
-        /// * `certificates.#.serial_number` - Number that uniquely identifies the certificate with the CA's system. The `format`
-        /// function can be used to convert this base 10 number into other bases, such as hex.
-        /// * `certificates.#.sha1_fingerprint` - The SHA1 fingerprint of the public key of the certificate.
-        /// * `certificates.#.signature_algorithm` - The algorithm used to sign the certificate.
-        /// * `certificates.#.subject` - The entity the certificate belongs to, roughly following
-        /// [RFC2253](https://tools.ietf.org/html/rfc2253).
-        /// * `certificates.#.version` - The version the certificate is in.
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetCertificateCertificateResult> Certificates;
-        /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
-        /// </summary>
         public readonly string Id;
         public readonly string Url;
         public readonly bool? VerifyChain;

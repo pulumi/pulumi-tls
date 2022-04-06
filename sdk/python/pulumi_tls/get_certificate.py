@@ -38,32 +38,11 @@ class GetCertificateResult:
     @property
     @pulumi.getter
     def certificates(self) -> Sequence['outputs.GetCertificateCertificateResult']:
-        """
-        The certificates protecting the site, with the root of the chain first.
-        * `certificates.#.not_after` - The time until which the certificate is invalid, as an
-        [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-        * `certificates.#.not_before` - The time after which the certificate is valid, as an
-        [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-        * `certificates.#.is_ca` - `true` if this certificate is a ca certificate.
-        * `certificates.#.issuer` - Who verified and signed the certificate, roughly following
-        [RFC2253](https://tools.ietf.org/html/rfc2253).
-        * `certificates.#.public_key_algorithm` - The algorithm used to create the certificate.
-        * `certificates.#.serial_number` - Number that uniquely identifies the certificate with the CA's system. The `format`
-        function can be used to convert this base 10 number into other bases, such as hex.
-        * `certificates.#.sha1_fingerprint` - The SHA1 fingerprint of the public key of the certificate.
-        * `certificates.#.signature_algorithm` - The algorithm used to sign the certificate.
-        * `certificates.#.subject` - The entity the certificate belongs to, roughly following
-        [RFC2253](https://tools.ietf.org/html/rfc2253).
-        * `certificates.#.version` - The version the certificate is in.
-        """
         return pulumi.get(self, "certificates")
 
     @property
     @pulumi.getter
     def id(self) -> str:
-        """
-        The provider-assigned unique ID for this managed resource.
-        """
         return pulumi.get(self, "id")
 
     @property
@@ -93,27 +72,7 @@ def get_certificate(url: Optional[str] = None,
                     verify_chain: Optional[bool] = None,
                     opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetCertificateResult:
     """
-    Use this data source to get information, such as SHA1 fingerprint or serial number, about the TLS certificates that
-    protect an HTTPS website. Note that the certificate chain isn't verified.
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_aws as aws
-    import pulumi_tls as tls
-
-    example_cluster = aws.eks.Cluster("exampleCluster")
-    example_certificate = example_cluster.identities.apply(lambda identities: tls.get_certificate_output(url=identities[0].oidcs[0].issuer))
-    example_open_id_connect_provider = aws.iam.OpenIdConnectProvider("exampleOpenIdConnectProvider",
-        client_id_lists=["sts.amazonaws.com"],
-        thumbprint_lists=[example_certificate.certificates[0].sha1_fingerprint],
-        url=example_cluster.identities[0].oidcs[0].issuer)
-    ```
-
-
-    :param str url: The URL of the website to get the certificates from.
-    :param bool verify_chain: Whether to verify the certificate chain while parsing it or not
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
     __args__['url'] = url
@@ -136,26 +95,6 @@ def get_certificate_output(url: Optional[pulumi.Input[str]] = None,
                            verify_chain: Optional[pulumi.Input[Optional[bool]]] = None,
                            opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetCertificateResult]:
     """
-    Use this data source to get information, such as SHA1 fingerprint or serial number, about the TLS certificates that
-    protect an HTTPS website. Note that the certificate chain isn't verified.
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_aws as aws
-    import pulumi_tls as tls
-
-    example_cluster = aws.eks.Cluster("exampleCluster")
-    example_certificate = example_cluster.identities.apply(lambda identities: tls.get_certificate_output(url=identities[0].oidcs[0].issuer))
-    example_open_id_connect_provider = aws.iam.OpenIdConnectProvider("exampleOpenIdConnectProvider",
-        client_id_lists=["sts.amazonaws.com"],
-        thumbprint_lists=[example_certificate.certificates[0].sha1_fingerprint],
-        url=example_cluster.identities[0].oidcs[0].issuer)
-    ```
-
-
-    :param str url: The URL of the website to get the certificates from.
-    :param bool verify_chain: Whether to verify the certificate chain while parsing it or not
+    Use this data source to access information about an existing resource.
     """
     ...

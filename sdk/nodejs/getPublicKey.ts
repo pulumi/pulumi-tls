@@ -5,28 +5,35 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Use this data source to get the public key from a PEM-encoded private key for use in other
- * resources.
+ * Get a public key from a PEM-encoded private key.
+ *
+ * Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
  *
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as fs from "fs";
  * import * as tls from "@pulumi/tls";
+ * import * from "fs";
  *
- * const example = pulumi.output(tls.getPublicKey({
- *     privateKeyPem: fs.readFileSync("~/.ssh/id_rsa", "utf-8"),
- * }));
+ * const ed25519_example = new tls.PrivateKey("ed25519-example", {algorithm: "ED25519"});
+ * const privateKeyPem-example = tls.getPublicKeyOutput({
+ *     privateKeyPem: ed25519_example.privateKeyPem,
+ * });
+ * const privateKeyOpenssh-example = tls.getPublicKey({
+ *     privateKeyOpenssh: fs.readFileSync("~/.ssh/id_rsa_rfc4716"),
+ * });
  * ```
  */
-export function getPublicKey(args: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
+export function getPublicKey(args?: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
+    args = args || {};
     if (!opts) {
         opts = {}
     }
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
     return pulumi.runtime.invoke("tls:index/getPublicKey:getPublicKey", {
+        "privateKeyOpenssh": args.privateKeyOpenssh,
         "privateKeyPem": args.privateKeyPem,
     }, opts);
 }
@@ -35,10 +42,8 @@ export function getPublicKey(args: GetPublicKeyArgs, opts?: pulumi.InvokeOptions
  * A collection of arguments for invoking getPublicKey.
  */
 export interface GetPublicKeyArgs {
-    /**
-     * The private key to use. Currently-supported key types are "RSA" or "ECDSA".
-     */
-    privateKeyPem: string;
+    privateKeyOpenssh?: string;
+    privateKeyPem?: string;
 }
 
 /**
@@ -46,36 +51,16 @@ export interface GetPublicKeyArgs {
  */
 export interface GetPublicKeyResult {
     readonly algorithm: string;
-    /**
-     * The provider-assigned unique ID for this managed resource.
-     */
     readonly id: string;
-    /**
-     * The private key data in PEM format.
-     */
-    readonly privateKeyPem: string;
-    /**
-     * The md5 hash of the public key data in
-     * OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the
-     * selected private key format is compatible, as per the rules for
-     * `publicKeyOpenssh`.
-     */
+    readonly privateKeyOpenssh?: string;
+    readonly privateKeyPem?: string;
     readonly publicKeyFingerprintMd5: string;
-    /**
-     * The public key data in OpenSSH `authorizedKeys`
-     * format, if the selected private key format is compatible. All RSA keys
-     * are supported, and ECDSA keys with curves "P256", "P384" and "P521"
-     * are supported. This attribute is empty if an incompatible ECDSA curve
-     * is selected.
-     */
+    readonly publicKeyFingerprintSha256: string;
     readonly publicKeyOpenssh: string;
-    /**
-     * The public key data in PEM format.
-     */
     readonly publicKeyPem: string;
 }
 
-export function getPublicKeyOutput(args: GetPublicKeyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublicKeyResult> {
+export function getPublicKeyOutput(args?: GetPublicKeyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublicKeyResult> {
     return pulumi.output(args).apply(a => getPublicKey(a, opts))
 }
 
@@ -83,8 +68,6 @@ export function getPublicKeyOutput(args: GetPublicKeyOutputArgs, opts?: pulumi.I
  * A collection of arguments for invoking getPublicKey.
  */
 export interface GetPublicKeyOutputArgs {
-    /**
-     * The private key to use. Currently-supported key types are "RSA" or "ECDSA".
-     */
-    privateKeyPem: pulumi.Input<string>;
+    privateKeyOpenssh?: pulumi.Input<string>;
+    privateKeyPem?: pulumi.Input<string>;
 }

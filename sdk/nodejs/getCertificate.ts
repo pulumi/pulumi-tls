@@ -5,28 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to get information, such as SHA1 fingerprint or serial number, about the TLS certificates that
- * protect an HTTPS website. Note that the certificate chain isn't verified.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as aws from "@pulumi/aws";
- * import * as tls from "@pulumi/tls";
- *
- * const exampleCluster = new aws.eks.Cluster("example", {});
- * const exampleCertificate = exampleCluster.identities.apply(identities => tls.getCertificate({
- *     url: identities[0].oidcs[0].issuer,
- * }));
- * const exampleOpenIdConnectProvider = new aws.iam.OpenIdConnectProvider("example", {
- *     clientIdLists: ["sts.amazonaws.com"],
- *     thumbprintLists: [exampleCertificate.certificates[0].sha1Fingerprint],
- *     url: exampleCluster.identities[0].oidcs[0].issuer,
- * });
- * ```
- */
 export function getCertificate(args: GetCertificateArgs, opts?: pulumi.InvokeOptions): Promise<GetCertificateResult> {
     if (!opts) {
         opts = {}
@@ -43,13 +21,7 @@ export function getCertificate(args: GetCertificateArgs, opts?: pulumi.InvokeOpt
  * A collection of arguments for invoking getCertificate.
  */
 export interface GetCertificateArgs {
-    /**
-     * The URL of the website to get the certificates from.
-     */
     url: string;
-    /**
-     * Whether to verify the certificate chain while parsing it or not
-     */
     verifyChain?: boolean;
 }
 
@@ -57,28 +29,7 @@ export interface GetCertificateArgs {
  * A collection of values returned by getCertificate.
  */
 export interface GetCertificateResult {
-    /**
-     * The certificates protecting the site, with the root of the chain first.
-     * * `certificates.#.not_after` - The time until which the certificate is invalid, as an
-     * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-     * * `certificates.#.not_before` - The time after which the certificate is valid, as an
-     * [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
-     * * `certificates.#.is_ca` - `true` if this certificate is a ca certificate.
-     * * `certificates.#.issuer` - Who verified and signed the certificate, roughly following
-     * [RFC2253](https://tools.ietf.org/html/rfc2253).
-     * * `certificates.#.public_key_algorithm` - The algorithm used to create the certificate.
-     * * `certificates.#.serial_number` - Number that uniquely identifies the certificate with the CA's system. The `format`
-     * function can be used to convert this base 10 number into other bases, such as hex.
-     * * `certificates.#.sha1_fingerprint` - The SHA1 fingerprint of the public key of the certificate.
-     * * `certificates.#.signature_algorithm` - The algorithm used to sign the certificate.
-     * * `certificates.#.subject` - The entity the certificate belongs to, roughly following
-     * [RFC2253](https://tools.ietf.org/html/rfc2253).
-     * * `certificates.#.version` - The version the certificate is in.
-     */
     readonly certificates: outputs.GetCertificateCertificate[];
-    /**
-     * The provider-assigned unique ID for this managed resource.
-     */
     readonly id: string;
     readonly url: string;
     readonly verifyChain?: boolean;
@@ -92,12 +43,6 @@ export function getCertificateOutput(args: GetCertificateOutputArgs, opts?: pulu
  * A collection of arguments for invoking getCertificate.
  */
 export interface GetCertificateOutputArgs {
-    /**
-     * The URL of the website to get the certificates from.
-     */
     url: pulumi.Input<string>;
-    /**
-     * Whether to verify the certificate chain while parsing it or not
-     */
     verifyChain?: pulumi.Input<boolean>;
 }
