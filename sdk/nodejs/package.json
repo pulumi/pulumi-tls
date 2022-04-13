@@ -14,7 +14,7 @@
         "install": "node scripts/install-pulumi-plugin.js resource tls ${VERSION}"
     },
     "dependencies": {
-        "@pulumi/pulumi": "^3.0.0-alpha.0"
+        "@pulumi/pulumi": "^3.0.0"
     },
     "devDependencies": {
         "@types/node": "^10.0.0",
