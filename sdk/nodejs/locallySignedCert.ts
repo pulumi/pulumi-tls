@@ -77,10 +77,6 @@ export class LocallySignedCert extends pulumi.CustomResource {
      */
     public readonly earlyRenewalHours!: pulumi.Output<number | undefined>;
     /**
-     * Unique identifier for this resource: the certificate serial number.
-     */
-    public /*out*/ readonly id!: pulumi.Output<string>;
-    /**
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      */
     public readonly isCaCertificate!: pulumi.Output<boolean | undefined>;
@@ -128,7 +124,6 @@ export class LocallySignedCert extends pulumi.CustomResource {
             resourceInputs["certPem"] = state ? state.certPem : undefined;
             resourceInputs["certRequestPem"] = state ? state.certRequestPem : undefined;
             resourceInputs["earlyRenewalHours"] = state ? state.earlyRenewalHours : undefined;
-            resourceInputs["id"] = state ? state.id : undefined;
             resourceInputs["isCaCertificate"] = state ? state.isCaCertificate : undefined;
             resourceInputs["readyForRenewal"] = state ? state.readyForRenewal : undefined;
             resourceInputs["setSubjectKeyId"] = state ? state.setSubjectKeyId : undefined;
@@ -162,7 +157,6 @@ export class LocallySignedCert extends pulumi.CustomResource {
             resourceInputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
             resourceInputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
             resourceInputs["certPem"] = undefined /*out*/;
-            resourceInputs["id"] = undefined /*out*/;
             resourceInputs["readyForRenewal"] = undefined /*out*/;
             resourceInputs["validityEndTime"] = undefined /*out*/;
             resourceInputs["validityStartTime"] = undefined /*out*/;
@@ -220,10 +214,6 @@ export interface LocallySignedCertState {
      * early renewal period. (default: `0`)
      */
     earlyRenewalHours?: pulumi.Input<number>;
-    /**
-     * Unique identifier for this resource: the certificate serial number.
-     */
-    id?: pulumi.Input<string>;
     /**
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      */

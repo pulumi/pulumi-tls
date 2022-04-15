@@ -130,7 +130,6 @@ class _CertRequestState:
     def __init__(__self__, *,
                  cert_request_pem: Optional[pulumi.Input[str]] = None,
                  dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 id: Optional[pulumi.Input[str]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  key_algorithm: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
@@ -140,7 +139,6 @@ class _CertRequestState:
         Input properties used for looking up and filtering CertRequest resources.
         :param pulumi.Input[str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
-        :param pulumi.Input[str] id: Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
                and ignored, as the key algorithm is now inferred from the key.
@@ -155,8 +153,6 @@ class _CertRequestState:
             pulumi.set(__self__, "cert_request_pem", cert_request_pem)
         if dns_names is not None:
             pulumi.set(__self__, "dns_names", dns_names)
-        if id is not None:
-            pulumi.set(__self__, "id", id)
         if ip_addresses is not None:
             pulumi.set(__self__, "ip_addresses", ip_addresses)
         if key_algorithm is not None:
@@ -194,18 +190,6 @@ class _CertRequestState:
     @dns_names.setter
     def dns_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "dns_names", value)
-
-    @property
-    @pulumi.getter
-    def id(self) -> Optional[pulumi.Input[str]]:
-        """
-        Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-        """
-        return pulumi.get(self, "id")
-
-    @id.setter
-    def id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "id", value)
 
     @property
     @pulumi.getter(name="ipAddresses")
@@ -380,7 +364,6 @@ class CertRequest(pulumi.CustomResource):
             __props__.__dict__["subjects"] = subjects
             __props__.__dict__["uris"] = uris
             __props__.__dict__["cert_request_pem"] = None
-            __props__.__dict__["id"] = None
         super(CertRequest, __self__).__init__(
             'tls:index/certRequest:CertRequest',
             resource_name,
@@ -393,7 +376,6 @@ class CertRequest(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             cert_request_pem: Optional[pulumi.Input[str]] = None,
             dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-            id: Optional[pulumi.Input[str]] = None,
             ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             key_algorithm: Optional[pulumi.Input[str]] = None,
             private_key_pem: Optional[pulumi.Input[str]] = None,
@@ -408,7 +390,6 @@ class CertRequest(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
-        :param pulumi.Input[str] id: Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
                and ignored, as the key algorithm is now inferred from the key.
@@ -425,7 +406,6 @@ class CertRequest(pulumi.CustomResource):
 
         __props__.__dict__["cert_request_pem"] = cert_request_pem
         __props__.__dict__["dns_names"] = dns_names
-        __props__.__dict__["id"] = id
         __props__.__dict__["ip_addresses"] = ip_addresses
         __props__.__dict__["key_algorithm"] = key_algorithm
         __props__.__dict__["private_key_pem"] = private_key_pem
@@ -448,14 +428,6 @@ class CertRequest(pulumi.CustomResource):
         List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "dns_names")
-
-    @property
-    @pulumi.getter
-    def id(self) -> pulumi.Output[str]:
-        """
-        Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-        """
-        return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="ipAddresses")

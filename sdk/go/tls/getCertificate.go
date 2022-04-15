@@ -38,7 +38,11 @@ func GetCertificateOutput(ctx *pulumi.Context, args GetCertificateOutputArgs, op
 		ApplyT(func(v interface{}) (GetCertificateResult, error) {
 			args := v.(GetCertificateArgs)
 			r, err := GetCertificate(ctx, &args, opts...)
-			return *r, err
+			var s GetCertificateResult
+			if r != nil {
+				s = *r
+			}
+			return s, err
 		}).(GetCertificateResultOutput)
 }
 

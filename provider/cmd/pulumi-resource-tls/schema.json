@@ -295,10 +295,6 @@
                     },
                     "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects).\n"
                 },
-                "id": {
-                    "type": "string",
-                    "description": "Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.\n"
-                },
                 "ipAddresses": {
                     "type": "array",
                     "items": {
@@ -332,7 +328,6 @@
             },
             "required": [
                 "certRequestPem",
-                "id",
                 "keyAlgorithm",
                 "privateKeyPem",
                 "subjects"
@@ -393,10 +388,6 @@
                             "type": "string"
                         },
                         "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects).\n"
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.\n"
                     },
                     "ipAddresses": {
                         "type": "array",
@@ -466,10 +457,6 @@
                     "type": "integer",
                     "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This\ncan be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old\ncertificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate\nrevocation. Also, this advance update can only be performed should the Terraform configuration be applied during the\nearly renewal period. (default: `0`)\n"
                 },
-                "id": {
-                    "type": "string",
-                    "description": "Unique identifier for this resource: the certificate serial number.\n"
-                },
                 "isCaCertificate": {
                     "type": "boolean",
                     "description": "Is the generated certificate representing a Certificate Authority (CA) (default: `false`).\n"
@@ -502,7 +489,6 @@
                 "caPrivateKeyPem",
                 "certPem",
                 "certRequestPem",
-                "id",
                 "readyForRenewal",
                 "validityEndTime",
                 "validityPeriodHours",
@@ -592,10 +578,6 @@
                         "type": "integer",
                         "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This\ncan be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old\ncertificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate\nrevocation. Also, this advance update can only be performed should the Terraform configuration be applied during the\nearly renewal period. (default: `0`)\n"
                     },
-                    "id": {
-                        "type": "string",
-                        "description": "Unique identifier for this resource: the certificate serial number.\n"
-                    },
                     "isCaCertificate": {
                         "type": "boolean",
                         "description": "Is the generated certificate representing a Certificate Authority (CA) (default: `false`).\n"
@@ -634,10 +616,6 @@
                     "type": "string",
                     "description": "When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,\n`P384` or `P521` (default: `P224`).\n"
                 },
-                "id": {
-                    "type": "string",
-                    "description": "Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.\n"
-                },
                 "privateKeyOpenssh": {
                     "type": "string",
                     "description": "Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.\n"
@@ -669,7 +647,6 @@
             },
             "required": [
                 "algorithm",
-                "id",
                 "privateKeyOpenssh",
                 "privateKeyPem",
                 "publicKeyFingerprintMd5",
@@ -704,10 +681,6 @@
                     "ecdsaCurve": {
                         "type": "string",
                         "description": "When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,\n`P384` or `P521` (default: `P224`).\n"
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.\n"
                     },
                     "privateKeyOpenssh": {
                         "type": "string",
@@ -764,10 +737,6 @@
                 "earlyRenewalHours": {
                     "type": "integer",
                     "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This\ncan be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old\ncertificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate\nrevocation. Also, this advance update can only be performed should the Terraform configuration be applied during the\nearly renewal period. (default: `0`)\n"
-                },
-                "id": {
-                    "type": "string",
-                    "description": "Unique identifier for this resource: the certificate serial number.\n"
                 },
                 "ipAddresses": {
                     "type": "array",
@@ -827,7 +796,6 @@
             "required": [
                 "allowedUses",
                 "certPem",
-                "id",
                 "keyAlgorithm",
                 "privateKeyPem",
                 "readyForRenewal",
@@ -928,10 +896,6 @@
                     "earlyRenewalHours": {
                         "type": "integer",
                         "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This\ncan be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old\ncertificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate\nrevocation. Also, this advance update can only be performed should the Terraform configuration be applied during the\nearly renewal period. (default: `0`)\n"
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "Unique identifier for this resource: the certificate serial number.\n"
                     },
                     "ipAddresses": {
                         "type": "array",

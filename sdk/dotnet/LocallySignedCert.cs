@@ -69,12 +69,6 @@ namespace Pulumi.Tls
         public Output<int?> EarlyRenewalHours { get; private set; } = null!;
 
         /// <summary>
-        /// Unique identifier for this resource: the certificate serial number.
-        /// </summary>
-        [Output("id")]
-        public Output<string> Id { get; private set; } = null!;
-
-        /// <summary>
         /// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         /// </summary>
         [Output("isCaCertificate")]
@@ -302,12 +296,6 @@ namespace Pulumi.Tls
         /// </summary>
         [Input("earlyRenewalHours")]
         public Input<int>? EarlyRenewalHours { get; set; }
-
-        /// <summary>
-        /// Unique identifier for this resource: the certificate serial number.
-        /// </summary>
-        [Input("id")]
-        public Input<string>? Id { get; set; }
 
         /// <summary>
         /// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).

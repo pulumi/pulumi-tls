@@ -44,8 +44,6 @@ type LocallySignedCert struct {
 	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
 	// early renewal period. (default: `0`)
 	EarlyRenewalHours pulumi.IntPtrOutput `pulumi:"earlyRenewalHours"`
-	// Unique identifier for this resource: the certificate serial number.
-	Id pulumi.StringOutput `pulumi:"id"`
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate pulumi.BoolPtrOutput `pulumi:"isCaCertificate"`
 	// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
@@ -137,8 +135,6 @@ type locallySignedCertState struct {
 	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
 	// early renewal period. (default: `0`)
 	EarlyRenewalHours *int `pulumi:"earlyRenewalHours"`
-	// Unique identifier for this resource: the certificate serial number.
-	Id *string `pulumi:"id"`
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate *bool `pulumi:"isCaCertificate"`
 	// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
@@ -187,8 +183,6 @@ type LocallySignedCertState struct {
 	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
 	// early renewal period. (default: `0`)
 	EarlyRenewalHours pulumi.IntPtrInput
-	// Unique identifier for this resource: the certificate serial number.
-	Id pulumi.StringPtrInput
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate pulumi.BoolPtrInput
 	// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within

@@ -54,12 +54,6 @@ namespace Pulumi.Tls
         public Output<ImmutableArray<string>> DnsNames { get; private set; } = null!;
 
         /// <summary>
-        /// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-        /// </summary>
-        [Output("id")]
-        public Output<string> Id { get; private set; } = null!;
-
-        /// <summary>
         /// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         [Output("ipAddresses")]
@@ -227,12 +221,6 @@ namespace Pulumi.Tls
             get => _dnsNames ?? (_dnsNames = new InputList<string>());
             set => _dnsNames = value;
         }
-
-        /// <summary>
-        /// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-        /// </summary>
-        [Input("id")]
-        public Input<string>? Id { get; set; }
 
         [Input("ipAddresses")]
         private InputList<string>? _ipAddresses;

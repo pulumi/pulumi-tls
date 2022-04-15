@@ -43,10 +43,6 @@ export class PrivateKey extends pulumi.CustomResource {
      */
     public readonly ecdsaCurve!: pulumi.Output<string | undefined>;
     /**
-     * Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-     */
-    public /*out*/ readonly id!: pulumi.Output<string>;
-    /**
      * Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
      */
     public /*out*/ readonly privateKeyOpenssh!: pulumi.Output<string>;
@@ -97,7 +93,6 @@ export class PrivateKey extends pulumi.CustomResource {
             const state = argsOrState as PrivateKeyState | undefined;
             resourceInputs["algorithm"] = state ? state.algorithm : undefined;
             resourceInputs["ecdsaCurve"] = state ? state.ecdsaCurve : undefined;
-            resourceInputs["id"] = state ? state.id : undefined;
             resourceInputs["privateKeyOpenssh"] = state ? state.privateKeyOpenssh : undefined;
             resourceInputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
             resourceInputs["publicKeyFingerprintMd5"] = state ? state.publicKeyFingerprintMd5 : undefined;
@@ -113,7 +108,6 @@ export class PrivateKey extends pulumi.CustomResource {
             resourceInputs["algorithm"] = args ? args.algorithm : undefined;
             resourceInputs["ecdsaCurve"] = args ? args.ecdsaCurve : undefined;
             resourceInputs["rsaBits"] = args ? args.rsaBits : undefined;
-            resourceInputs["id"] = undefined /*out*/;
             resourceInputs["privateKeyOpenssh"] = undefined /*out*/;
             resourceInputs["privateKeyPem"] = undefined /*out*/;
             resourceInputs["publicKeyFingerprintMd5"] = undefined /*out*/;
@@ -140,10 +134,6 @@ export interface PrivateKeyState {
      * `P384` or `P521` (default: `P224`).
      */
     ecdsaCurve?: pulumi.Input<string>;
-    /**
-     * Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-     */
-    id?: pulumi.Input<string>;
     /**
      * Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
      */

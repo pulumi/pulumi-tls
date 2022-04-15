@@ -33,8 +33,6 @@ type SelfSignedCert struct {
 	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
 	// early renewal period. (default: `0`)
 	EarlyRenewalHours pulumi.IntPtrOutput `pulumi:"earlyRenewalHours"`
-	// Unique identifier for this resource: the certificate serial number.
-	Id pulumi.StringOutput `pulumi:"id"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayOutput `pulumi:"ipAddresses"`
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
@@ -128,8 +126,6 @@ type selfSignedCertState struct {
 	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
 	// early renewal period. (default: `0`)
 	EarlyRenewalHours *int `pulumi:"earlyRenewalHours"`
-	// Unique identifier for this resource: the certificate serial number.
-	Id *string `pulumi:"id"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses []string `pulumi:"ipAddresses"`
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
@@ -183,8 +179,6 @@ type SelfSignedCertState struct {
 	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
 	// early renewal period. (default: `0`)
 	EarlyRenewalHours pulumi.IntPtrInput
-	// Unique identifier for this resource: the certificate serial number.
-	Id pulumi.StringPtrInput
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayInput
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
