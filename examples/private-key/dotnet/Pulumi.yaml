@@ -1,3 +1,3 @@
-name: private-key-tls
-runtime: nodejs
+name: private-key-tls-dotnet
+runtime: dotnet
 description: A simple example of generating a TLS private key.
