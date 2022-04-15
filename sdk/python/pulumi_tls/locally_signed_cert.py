@@ -200,7 +200,6 @@ class _LocallySignedCertState:
                  cert_pem: Optional[pulumi.Input[str]] = None,
                  cert_request_pem: Optional[pulumi.Input[str]] = None,
                  early_renewal_hours: Optional[pulumi.Input[int]] = None,
-                 id: Optional[pulumi.Input[str]] = None,
                  is_ca_certificate: Optional[pulumi.Input[bool]] = None,
                  ready_for_renewal: Optional[pulumi.Input[bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None,
@@ -230,7 +229,6 @@ class _LocallySignedCertState:
                certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
                revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
                early renewal period. (default: `0`)
-        :param pulumi.Input[str] id: Unique identifier for this resource: the certificate serial number.
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
                the `early_renewal_hours`)?
@@ -258,8 +256,6 @@ class _LocallySignedCertState:
             pulumi.set(__self__, "cert_request_pem", cert_request_pem)
         if early_renewal_hours is not None:
             pulumi.set(__self__, "early_renewal_hours", early_renewal_hours)
-        if id is not None:
-            pulumi.set(__self__, "id", id)
         if is_ca_certificate is not None:
             pulumi.set(__self__, "is_ca_certificate", is_ca_certificate)
         if ready_for_renewal is not None:
@@ -370,18 +366,6 @@ class _LocallySignedCertState:
     @early_renewal_hours.setter
     def early_renewal_hours(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "early_renewal_hours", value)
-
-    @property
-    @pulumi.getter
-    def id(self) -> Optional[pulumi.Input[str]]:
-        """
-        Unique identifier for this resource: the certificate serial number.
-        """
-        return pulumi.get(self, "id")
-
-    @id.setter
-    def id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "id", value)
 
     @property
     @pulumi.getter(name="isCaCertificate")
@@ -570,7 +554,6 @@ class LocallySignedCert(pulumi.CustomResource):
                 raise TypeError("Missing required property 'validity_period_hours'")
             __props__.__dict__["validity_period_hours"] = validity_period_hours
             __props__.__dict__["cert_pem"] = None
-            __props__.__dict__["id"] = None
             __props__.__dict__["ready_for_renewal"] = None
             __props__.__dict__["validity_end_time"] = None
             __props__.__dict__["validity_start_time"] = None
@@ -591,7 +574,6 @@ class LocallySignedCert(pulumi.CustomResource):
             cert_pem: Optional[pulumi.Input[str]] = None,
             cert_request_pem: Optional[pulumi.Input[str]] = None,
             early_renewal_hours: Optional[pulumi.Input[int]] = None,
-            id: Optional[pulumi.Input[str]] = None,
             is_ca_certificate: Optional[pulumi.Input[bool]] = None,
             ready_for_renewal: Optional[pulumi.Input[bool]] = None,
             set_subject_key_id: Optional[pulumi.Input[bool]] = None,
@@ -626,7 +608,6 @@ class LocallySignedCert(pulumi.CustomResource):
                certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
                revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
                early renewal period. (default: `0`)
-        :param pulumi.Input[str] id: Unique identifier for this resource: the certificate serial number.
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
                the `early_renewal_hours`)?
@@ -648,7 +629,6 @@ class LocallySignedCert(pulumi.CustomResource):
         __props__.__dict__["cert_pem"] = cert_pem
         __props__.__dict__["cert_request_pem"] = cert_request_pem
         __props__.__dict__["early_renewal_hours"] = early_renewal_hours
-        __props__.__dict__["id"] = id
         __props__.__dict__["is_ca_certificate"] = is_ca_certificate
         __props__.__dict__["ready_for_renewal"] = ready_for_renewal
         __props__.__dict__["set_subject_key_id"] = set_subject_key_id
@@ -726,14 +706,6 @@ class LocallySignedCert(pulumi.CustomResource):
         early renewal period. (default: `0`)
         """
         return pulumi.get(self, "early_renewal_hours")
-
-    @property
-    @pulumi.getter
-    def id(self) -> pulumi.Output[str]:
-        """
-        Unique identifier for this resource: the certificate serial number.
-        """
-        return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="isCaCertificate")

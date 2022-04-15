@@ -234,7 +234,6 @@ class _SelfSignedCertState:
                  cert_pem: Optional[pulumi.Input[str]] = None,
                  dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  early_renewal_hours: Optional[pulumi.Input[int]] = None,
-                 id: Optional[pulumi.Input[str]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  is_ca_certificate: Optional[pulumi.Input[bool]] = None,
                  key_algorithm: Optional[pulumi.Input[str]] = None,
@@ -263,7 +262,6 @@ class _SelfSignedCertState:
                certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
                revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
                early renewal period. (default: `0`)
-        :param pulumi.Input[str] id: Unique identifier for this resource: the certificate serial number.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
@@ -291,8 +289,6 @@ class _SelfSignedCertState:
             pulumi.set(__self__, "dns_names", dns_names)
         if early_renewal_hours is not None:
             pulumi.set(__self__, "early_renewal_hours", early_renewal_hours)
-        if id is not None:
-            pulumi.set(__self__, "id", id)
         if ip_addresses is not None:
             pulumi.set(__self__, "ip_addresses", ip_addresses)
         if is_ca_certificate is not None:
@@ -377,18 +373,6 @@ class _SelfSignedCertState:
     @early_renewal_hours.setter
     def early_renewal_hours(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "early_renewal_hours", value)
-
-    @property
-    @pulumi.getter
-    def id(self) -> Optional[pulumi.Input[str]]:
-        """
-        Unique identifier for this resource: the certificate serial number.
-        """
-        return pulumi.get(self, "id")
-
-    @id.setter
-    def id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "id", value)
 
     @property
     @pulumi.getter(name="ipAddresses")
@@ -648,7 +632,6 @@ class SelfSignedCert(pulumi.CustomResource):
                 raise TypeError("Missing required property 'validity_period_hours'")
             __props__.__dict__["validity_period_hours"] = validity_period_hours
             __props__.__dict__["cert_pem"] = None
-            __props__.__dict__["id"] = None
             __props__.__dict__["ready_for_renewal"] = None
             __props__.__dict__["validity_end_time"] = None
             __props__.__dict__["validity_start_time"] = None
@@ -666,7 +649,6 @@ class SelfSignedCert(pulumi.CustomResource):
             cert_pem: Optional[pulumi.Input[str]] = None,
             dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             early_renewal_hours: Optional[pulumi.Input[int]] = None,
-            id: Optional[pulumi.Input[str]] = None,
             ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             is_ca_certificate: Optional[pulumi.Input[bool]] = None,
             key_algorithm: Optional[pulumi.Input[str]] = None,
@@ -700,7 +682,6 @@ class SelfSignedCert(pulumi.CustomResource):
                certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
                revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
                early renewal period. (default: `0`)
-        :param pulumi.Input[str] id: Unique identifier for this resource: the certificate serial number.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
@@ -728,7 +709,6 @@ class SelfSignedCert(pulumi.CustomResource):
         __props__.__dict__["cert_pem"] = cert_pem
         __props__.__dict__["dns_names"] = dns_names
         __props__.__dict__["early_renewal_hours"] = early_renewal_hours
-        __props__.__dict__["id"] = id
         __props__.__dict__["ip_addresses"] = ip_addresses
         __props__.__dict__["is_ca_certificate"] = is_ca_certificate
         __props__.__dict__["key_algorithm"] = key_algorithm
@@ -784,14 +764,6 @@ class SelfSignedCert(pulumi.CustomResource):
         early renewal period. (default: `0`)
         """
         return pulumi.get(self, "early_renewal_hours")
-
-    @property
-    @pulumi.getter
-    def id(self) -> pulumi.Output[str]:
-        """
-        Unique identifier for this resource: the certificate serial number.
-        """
-        return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="ipAddresses")

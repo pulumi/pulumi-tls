@@ -87,7 +87,11 @@ func GetPublicKeyOutput(ctx *pulumi.Context, args GetPublicKeyOutputArgs, opts .
 		ApplyT(func(v interface{}) (GetPublicKeyResult, error) {
 			args := v.(GetPublicKeyArgs)
 			r, err := GetPublicKey(ctx, &args, opts...)
-			return *r, err
+			var s GetPublicKeyResult
+			if r != nil {
+				s = *r
+			}
+			return s, err
 		}).(GetPublicKeyResultOutput)
 }
 

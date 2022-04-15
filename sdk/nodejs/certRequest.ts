@@ -59,10 +59,6 @@ export class CertRequest extends pulumi.CustomResource {
      */
     public readonly dnsNames!: pulumi.Output<string[] | undefined>;
     /**
-     * Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-     */
-    public /*out*/ readonly id!: pulumi.Output<string>;
-    /**
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */
     public readonly ipAddresses!: pulumi.Output<string[] | undefined>;
@@ -104,7 +100,6 @@ export class CertRequest extends pulumi.CustomResource {
             const state = argsOrState as CertRequestState | undefined;
             resourceInputs["certRequestPem"] = state ? state.certRequestPem : undefined;
             resourceInputs["dnsNames"] = state ? state.dnsNames : undefined;
-            resourceInputs["id"] = state ? state.id : undefined;
             resourceInputs["ipAddresses"] = state ? state.ipAddresses : undefined;
             resourceInputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
             resourceInputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
@@ -125,7 +120,6 @@ export class CertRequest extends pulumi.CustomResource {
             resourceInputs["subjects"] = args ? args.subjects : undefined;
             resourceInputs["uris"] = args ? args.uris : undefined;
             resourceInputs["certRequestPem"] = undefined /*out*/;
-            resourceInputs["id"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(CertRequest.__pulumiType, name, resourceInputs, opts);
@@ -144,10 +138,6 @@ export interface CertRequestState {
      * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      */
     dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-     */
-    id?: pulumi.Input<string>;
     /**
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */

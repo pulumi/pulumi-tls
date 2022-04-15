@@ -74,7 +74,6 @@ class _PrivateKeyState:
     def __init__(__self__, *,
                  algorithm: Optional[pulumi.Input[str]] = None,
                  ecdsa_curve: Optional[pulumi.Input[str]] = None,
-                 id: Optional[pulumi.Input[str]] = None,
                  private_key_openssh: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
                  public_key_fingerprint_md5: Optional[pulumi.Input[str]] = None,
@@ -88,7 +87,6 @@ class _PrivateKeyState:
                `ED25519`.
         :param pulumi.Input[str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
                `P384` or `P521` (default: `P224`).
-        :param pulumi.Input[str] id: Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
         :param pulumi.Input[str] private_key_openssh: Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
         :param pulumi.Input[str] private_key_pem: Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[str] public_key_fingerprint_md5: The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
@@ -108,8 +106,6 @@ class _PrivateKeyState:
             pulumi.set(__self__, "algorithm", algorithm)
         if ecdsa_curve is not None:
             pulumi.set(__self__, "ecdsa_curve", ecdsa_curve)
-        if id is not None:
-            pulumi.set(__self__, "id", id)
         if private_key_openssh is not None:
             pulumi.set(__self__, "private_key_openssh", private_key_openssh)
         if private_key_pem is not None:
@@ -150,18 +146,6 @@ class _PrivateKeyState:
     @ecdsa_curve.setter
     def ecdsa_curve(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "ecdsa_curve", value)
-
-    @property
-    @pulumi.getter
-    def id(self) -> Optional[pulumi.Input[str]]:
-        """
-        Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-        """
-        return pulumi.get(self, "id")
-
-    @id.setter
-    def id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "id", value)
 
     @property
     @pulumi.getter(name="privateKeyOpenssh")
@@ -317,7 +301,6 @@ class PrivateKey(pulumi.CustomResource):
             __props__.__dict__["algorithm"] = algorithm
             __props__.__dict__["ecdsa_curve"] = ecdsa_curve
             __props__.__dict__["rsa_bits"] = rsa_bits
-            __props__.__dict__["id"] = None
             __props__.__dict__["private_key_openssh"] = None
             __props__.__dict__["private_key_pem"] = None
             __props__.__dict__["public_key_fingerprint_md5"] = None
@@ -336,7 +319,6 @@ class PrivateKey(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             algorithm: Optional[pulumi.Input[str]] = None,
             ecdsa_curve: Optional[pulumi.Input[str]] = None,
-            id: Optional[pulumi.Input[str]] = None,
             private_key_openssh: Optional[pulumi.Input[str]] = None,
             private_key_pem: Optional[pulumi.Input[str]] = None,
             public_key_fingerprint_md5: Optional[pulumi.Input[str]] = None,
@@ -355,7 +337,6 @@ class PrivateKey(pulumi.CustomResource):
                `ED25519`.
         :param pulumi.Input[str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
                `P384` or `P521` (default: `P224`).
-        :param pulumi.Input[str] id: Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
         :param pulumi.Input[str] private_key_openssh: Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
         :param pulumi.Input[str] private_key_pem: Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[str] public_key_fingerprint_md5: The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
@@ -377,7 +358,6 @@ class PrivateKey(pulumi.CustomResource):
 
         __props__.__dict__["algorithm"] = algorithm
         __props__.__dict__["ecdsa_curve"] = ecdsa_curve
-        __props__.__dict__["id"] = id
         __props__.__dict__["private_key_openssh"] = private_key_openssh
         __props__.__dict__["private_key_pem"] = private_key_pem
         __props__.__dict__["public_key_fingerprint_md5"] = public_key_fingerprint_md5
@@ -404,14 +384,6 @@ class PrivateKey(pulumi.CustomResource):
         `P384` or `P521` (default: `P224`).
         """
         return pulumi.get(self, "ecdsa_curve")
-
-    @property
-    @pulumi.getter
-    def id(self) -> pulumi.Output[str]:
-        """
-        Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-        """
-        return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="privateKeyOpenssh")

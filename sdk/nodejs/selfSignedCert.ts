@@ -61,10 +61,6 @@ export class SelfSignedCert extends pulumi.CustomResource {
      */
     public readonly earlyRenewalHours!: pulumi.Output<number | undefined>;
     /**
-     * Unique identifier for this resource: the certificate serial number.
-     */
-    public /*out*/ readonly id!: pulumi.Output<string>;
-    /**
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */
     public readonly ipAddresses!: pulumi.Output<string[] | undefined>;
@@ -135,7 +131,6 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["certPem"] = state ? state.certPem : undefined;
             resourceInputs["dnsNames"] = state ? state.dnsNames : undefined;
             resourceInputs["earlyRenewalHours"] = state ? state.earlyRenewalHours : undefined;
-            resourceInputs["id"] = state ? state.id : undefined;
             resourceInputs["ipAddresses"] = state ? state.ipAddresses : undefined;
             resourceInputs["isCaCertificate"] = state ? state.isCaCertificate : undefined;
             resourceInputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
@@ -173,7 +168,6 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["uris"] = args ? args.uris : undefined;
             resourceInputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
             resourceInputs["certPem"] = undefined /*out*/;
-            resourceInputs["id"] = undefined /*out*/;
             resourceInputs["readyForRenewal"] = undefined /*out*/;
             resourceInputs["validityEndTime"] = undefined /*out*/;
             resourceInputs["validityStartTime"] = undefined /*out*/;
@@ -214,10 +208,6 @@ export interface SelfSignedCertState {
      * early renewal period. (default: `0`)
      */
     earlyRenewalHours?: pulumi.Input<number>;
-    /**
-     * Unique identifier for this resource: the certificate serial number.
-     */
-    id?: pulumi.Input<string>;
     /**
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */

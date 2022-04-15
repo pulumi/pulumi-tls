@@ -48,12 +48,6 @@ namespace Pulumi.Tls
         public Output<int?> EarlyRenewalHours { get; private set; } = null!;
 
         /// <summary>
-        /// Unique identifier for this resource: the certificate serial number.
-        /// </summary>
-        [Output("id")]
-        public Output<string> Id { get; private set; } = null!;
-
-        /// <summary>
         /// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         /// </summary>
         [Output("ipAddresses")]
@@ -337,12 +331,6 @@ namespace Pulumi.Tls
         /// </summary>
         [Input("earlyRenewalHours")]
         public Input<int>? EarlyRenewalHours { get; set; }
-
-        /// <summary>
-        /// Unique identifier for this resource: the certificate serial number.
-        /// </summary>
-        [Input("id")]
-        public Input<string>? Id { get; set; }
 
         [Input("ipAddresses")]
         private InputList<string>? _ipAddresses;

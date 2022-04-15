@@ -20,8 +20,6 @@ type PrivateKey struct {
 	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
 	// `P384` or `P521` (default: `P224`).
 	EcdsaCurve pulumi.StringPtrOutput `pulumi:"ecdsaCurve"`
-	// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-	Id pulumi.StringOutput `pulumi:"id"`
 	// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
 	PrivateKeyOpenssh pulumi.StringOutput `pulumi:"privateKeyOpenssh"`
 	// Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
@@ -83,8 +81,6 @@ type privateKeyState struct {
 	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
 	// `P384` or `P521` (default: `P224`).
 	EcdsaCurve *string `pulumi:"ecdsaCurve"`
-	// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-	Id *string `pulumi:"id"`
 	// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
 	PrivateKeyOpenssh *string `pulumi:"privateKeyOpenssh"`
 	// Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
@@ -115,8 +111,6 @@ type PrivateKeyState struct {
 	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
 	// `P384` or `P521` (default: `P224`).
 	EcdsaCurve pulumi.StringPtrInput
-	// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-	Id pulumi.StringPtrInput
 	// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
 	PrivateKeyOpenssh pulumi.StringPtrInput
 	// Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.

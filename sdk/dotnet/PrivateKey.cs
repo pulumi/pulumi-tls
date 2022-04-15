@@ -27,12 +27,6 @@ namespace Pulumi.Tls
         public Output<string?> EcdsaCurve { get; private set; } = null!;
 
         /// <summary>
-        /// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-        /// </summary>
-        [Output("id")]
-        public Output<string> Id { get; private set; } = null!;
-
-        /// <summary>
         /// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
         /// </summary>
         [Output("privateKeyOpenssh")]
@@ -167,12 +161,6 @@ namespace Pulumi.Tls
         /// </summary>
         [Input("ecdsaCurve")]
         public Input<string>? EcdsaCurve { get; set; }
-
-        /// <summary>
-        /// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-        /// </summary>
-        [Input("id")]
-        public Input<string>? Id { get; set; }
 
         /// <summary>
         /// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.

@@ -56,8 +56,6 @@ type CertRequest struct {
 	CertRequestPem pulumi.StringOutput `pulumi:"certRequestPem"`
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames pulumi.StringArrayOutput `pulumi:"dnsNames"`
-	// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-	Id pulumi.StringOutput `pulumi:"id"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayOutput `pulumi:"ipAddresses"`
 	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
@@ -115,8 +113,6 @@ type certRequestState struct {
 	CertRequestPem *string `pulumi:"certRequestPem"`
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames []string `pulumi:"dnsNames"`
-	// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-	Id *string `pulumi:"id"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses []string `pulumi:"ipAddresses"`
 	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
@@ -140,8 +136,6 @@ type CertRequestState struct {
 	CertRequestPem pulumi.StringPtrInput
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames pulumi.StringArrayInput
-	// Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource.
-	Id pulumi.StringPtrInput
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayInput
 	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
