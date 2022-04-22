@@ -3,8 +3,8 @@ module github.com/pulumi/pulumi-tls/provider/v4
 go 1.16
 
 require (
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.20.1-0.20220415111455-5c2d9875a867
-	github.com/pulumi/pulumi/sdk/v3 v3.28.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.21.0
+	github.com/pulumi/pulumi/sdk/v3 v3.30.0
 	github.com/terraform-providers/terraform-provider-tls/shim v0.0.0
 )
 
