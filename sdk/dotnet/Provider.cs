@@ -45,6 +45,12 @@ namespace Pulumi.Tls
 
     public sealed class ProviderArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Proxy used by resources and data sources that connect to external endpoints.
+        /// </summary>
+        [Input("proxy", json: true)]
+        public Input<Inputs.ProviderProxyArgs>? Proxy { get; set; }
+
         public ProviderArgs()
         {
         }

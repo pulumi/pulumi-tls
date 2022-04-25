@@ -14,6 +14,14 @@ from .provider import *
 from .self_signed_cert import *
 from ._inputs import *
 from . import outputs
+
+# Make subpackages available:
+if typing.TYPE_CHECKING:
+    import pulumi_tls.config as __config
+    config = __config
+else:
+    config = _utilities.lazy_import('pulumi_tls.config')
+
 _utilities.register(
     resource_modules="""
 [

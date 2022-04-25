@@ -7,16 +7,32 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
+from ._inputs import *
 
 __all__ = ['ProviderArgs', 'Provider']
 
 @pulumi.input_type
 class ProviderArgs:
-    def __init__(__self__):
+    def __init__(__self__, *,
+                 proxy: Optional[pulumi.Input['ProviderProxyArgs']] = None):
         """
         The set of arguments for constructing a Provider resource.
+        :param pulumi.Input['ProviderProxyArgs'] proxy: Proxy used by resources and data sources that connect to external endpoints.
         """
-        pass
+        if proxy is not None:
+            pulumi.set(__self__, "proxy", proxy)
+
+    @property
+    @pulumi.getter
+    def proxy(self) -> Optional[pulumi.Input['ProviderProxyArgs']]:
+        """
+        Proxy used by resources and data sources that connect to external endpoints.
+        """
+        return pulumi.get(self, "proxy")
+
+    @proxy.setter
+    def proxy(self, value: Optional[pulumi.Input['ProviderProxyArgs']]):
+        pulumi.set(self, "proxy", value)
 
 
 class Provider(pulumi.ProviderResource):
@@ -24,6 +40,7 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 proxy: Optional[pulumi.Input[pulumi.InputType['ProviderProxyArgs']]] = None,
                  __props__=None):
         """
         The provider type for the tls package. By default, resources use package-wide configuration
@@ -33,6 +50,7 @@ class Provider(pulumi.ProviderResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[pulumi.InputType['ProviderProxyArgs']] proxy: Proxy used by resources and data sources that connect to external endpoints.
         """
         ...
     @overload
@@ -61,6 +79,7 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 proxy: Optional[pulumi.Input[pulumi.InputType['ProviderProxyArgs']]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -73,6 +92,7 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
+            __props__.__dict__["proxy"] = pulumi.Output.from_input(proxy).apply(pulumi.runtime.to_json) if proxy is not None else None
         super(Provider, __self__).__init__(
             'tls',
             resource_name,

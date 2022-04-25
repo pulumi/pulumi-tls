@@ -34,10 +34,14 @@ func NewProvider(ctx *pulumi.Context,
 }
 
 type providerArgs struct {
+	// Proxy used by resources and data sources that connect to external endpoints.
+	Proxy *ProviderProxy `pulumi:"proxy"`
 }
 
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
+	// Proxy used by resources and data sources that connect to external endpoints.
+	Proxy ProviderProxyPtrInput
 }
 
 func (ProviderArgs) ElementType() reflect.Type {
