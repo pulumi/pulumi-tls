@@ -10,6 +10,7 @@ from . import _utilities
 
 __all__ = [
     'CertRequestSubjectArgs',
+    'ProviderProxyArgs',
     'SelfSignedCertSubjectArgs',
 ]
 
@@ -124,6 +125,59 @@ class CertRequestSubjectArgs:
     @street_addresses.setter
     def street_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "street_addresses", value)
+
+
+@pulumi.input_type
+class ProviderProxyArgs:
+    def __init__(__self__, *,
+                 from_env: Optional[pulumi.Input[bool]] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 url: Optional[pulumi.Input[str]] = None,
+                 username: Optional[pulumi.Input[str]] = None):
+        if from_env is not None:
+            pulumi.set(__self__, "from_env", from_env)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if url is not None:
+            pulumi.set(__self__, "url", url)
+        if username is not None:
+            pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter(name="fromEnv")
+    def from_env(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "from_env")
+
+    @from_env.setter
+    def from_env(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "from_env", value)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def url(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "url", value)
+
+    @property
+    @pulumi.getter
+    def username(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "username")
+
+    @username.setter
+    def username(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "username", value)
 
 
 @pulumi.input_type

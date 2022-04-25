@@ -223,6 +223,10 @@ github.com/docker/go-units v0.4.0/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDD
 github.com/dustin/go-humanize v0.0.0-20171111073723-bb3d318650d4/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25KnS6fMYU6eOk=
 github.com/dustin/go-humanize v1.0.0 h1:VSnTsYCnlFHaM2/igO1h6X3HA71jcobQuxemgkq4zYo=
 github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25KnS6fMYU6eOk=
+github.com/elazarl/goproxy v0.0.0-20220328115640-894aeddb713e h1:99KFda6F/mw8xSfceY2JEVCrYWX7l+Ms6BcO5wEct+Q=
+github.com/elazarl/goproxy v0.0.0-20220328115640-894aeddb713e/go.mod h1:Ro8st/ElPeALwNFlcTpWmkr6IoMFfkjXAvTHpevnDsM=
+github.com/elazarl/goproxy/ext v0.0.0-20190711103511-473e67f1d7d2 h1:dWB6v3RcOy03t/bUadywsbyrQwCqZeNIEX6M1OtSZOM=
+github.com/elazarl/goproxy/ext v0.0.0-20190711103511-473e67f1d7d2/go.mod h1:gNh8nYJoAm43RfaxurUnxr+N1PwuFV3ZMl/efxlIlY8=
 github.com/emirpasic/gods v1.12.0 h1:QAUIPSaCu4G+POclxeqb3F+WPpdKqFGlw36+yOzGlrg=
 github.com/emirpasic/gods v1.12.0/go.mod h1:YfzfFFoVP/catgzJb4IKIqXjX78Ha8FMSDh3ymbK86o=
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
@@ -715,6 +719,7 @@ github.com/rivo/uniseg v0.2.0/go.mod h1:J6wj4VEh+S6ZtnVlnTBMWIodfgj8LQOQFoIToxlJ
 github.com/rjeczalik/notify v0.9.2 h1:MiTWrPj55mNDHEiIX5YUSKefw/+lCQVoAFmD6oQm5w8=
 github.com/rjeczalik/notify v0.9.2/go.mod h1:aErll2f0sUX9PXZnVNyeiObbmTlk5jnMoCa4QEjJeqM=
 github.com/rogpeppe/fastuuid v1.2.0/go.mod h1:jVj6XXZzXRy/MSR5jhDC/2q6DgLz+nrA6LYCDYWNEvQ=
+github.com/rogpeppe/go-charset v0.0.0-20180617210344-2471d30d28b4/go.mod h1:qgYeAmZ5ZIpBWTGllZSQnw97Dj+woV0toclVaRGI8pc=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
 github.com/rogpeppe/go-internal v1.8.1 h1:geMPLpDpQOgVyCg5z5GoRwLHepNdb71NXb67XFkP+Eg=
 github.com/rogpeppe/go-internal v1.8.1/go.mod h1:JeRgkft04UBgHMgCIwADu4Pn6Mtm5d4nPKWu0nJ5d+o=
@@ -771,8 +776,8 @@ github.com/terraform-providers/terraform-provider-archive v1.3.0 h1:8WzDXMwTdTd4
 github.com/terraform-providers/terraform-provider-archive v1.3.0/go.mod h1:7oAwNW55F65KauS++/XmAnrXhLfQRTYt549eYs4zU0w=
 github.com/terraform-providers/terraform-provider-http v1.2.0 h1:pOP/SNlLjB18CydtTJJwzkZGkHYX3LWzIoQpYQuBdyw=
 github.com/terraform-providers/terraform-provider-http v1.2.0/go.mod h1:2Iot921OkLVSZr8FbIkvRN84ZV3w+oFKb7RlmPTQQAQ=
-github.com/terraform-providers/terraform-provider-tls v1.2.1-0.20220405190324-45b31f5acdad h1:1tOMGKRmCCcLDz2WDupLoAE+qytEU0v83OIRFlDFO+o=
-github.com/terraform-providers/terraform-provider-tls v1.2.1-0.20220405190324-45b31f5acdad/go.mod h1:Jmac2TXPqX6VPS7n4aYizo1MUi0Mlrbdg5TQ4/KsEMU=
+github.com/terraform-providers/terraform-provider-tls v1.2.1-0.20220407180048-b6b050b00bfe h1:sTU1UcAZYlEPq6yF+p2Qj+g+cvaMXVPghlNEpPDji3w=
+github.com/terraform-providers/terraform-provider-tls v1.2.1-0.20220407180048-b6b050b00bfe/go.mod h1:sRbYfoiLvDzWe0afZ7osIFKsHXi4BQGbyNgrZD87sF8=
 github.com/texttheater/golang-levenshtein v0.0.0-20191208221605-eb6844b05fc6 h1:9VTskZOIRf2vKF3UL8TuWElry5pgUpV1tFSe/e/0m/E=
 github.com/texttheater/golang-levenshtein v0.0.0-20191208221605-eb6844b05fc6/go.mod h1:XDKHRm5ThF8YJjx001LtgelzsoaEcvnA7lVWz9EeX3g=
 github.com/tklauser/go-sysconf v0.3.10/go.mod h1:C8XykCvCb+Gn0oNCWPIlcb0RuglQTYaQ2hGm7jmxEFk=

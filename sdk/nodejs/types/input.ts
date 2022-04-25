@@ -16,6 +16,13 @@ export interface CertRequestSubject {
     streetAddresses?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
+export interface ProviderProxy {
+    fromEnv?: pulumi.Input<boolean>;
+    password?: pulumi.Input<string>;
+    url?: pulumi.Input<string>;
+    username?: pulumi.Input<string>;
+}
+
 export interface SelfSignedCertSubject {
     commonName?: pulumi.Input<string>;
     country?: pulumi.Input<string>;
@@ -26,4 +33,6 @@ export interface SelfSignedCertSubject {
     province?: pulumi.Input<string>;
     serialNumber?: pulumi.Input<string>;
     streetAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+}
+export namespace config {
 }

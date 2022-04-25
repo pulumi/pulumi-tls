@@ -152,6 +152,184 @@ func (o CertRequestSubjectArrayOutput) Index(i pulumi.IntInput) CertRequestSubje
 	}).(CertRequestSubjectOutput)
 }
 
+type ProviderProxy struct {
+	FromEnv  *bool   `pulumi:"fromEnv"`
+	Password *string `pulumi:"password"`
+	Url      *string `pulumi:"url"`
+	Username *string `pulumi:"username"`
+}
+
+// ProviderProxyInput is an input type that accepts ProviderProxyArgs and ProviderProxyOutput values.
+// You can construct a concrete instance of `ProviderProxyInput` via:
+//
+//          ProviderProxyArgs{...}
+type ProviderProxyInput interface {
+	pulumi.Input
+
+	ToProviderProxyOutput() ProviderProxyOutput
+	ToProviderProxyOutputWithContext(context.Context) ProviderProxyOutput
+}
+
+type ProviderProxyArgs struct {
+	FromEnv  pulumi.BoolPtrInput   `pulumi:"fromEnv"`
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	Url      pulumi.StringPtrInput `pulumi:"url"`
+	Username pulumi.StringPtrInput `pulumi:"username"`
+}
+
+func (ProviderProxyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderProxy)(nil)).Elem()
+}
+
+func (i ProviderProxyArgs) ToProviderProxyOutput() ProviderProxyOutput {
+	return i.ToProviderProxyOutputWithContext(context.Background())
+}
+
+func (i ProviderProxyArgs) ToProviderProxyOutputWithContext(ctx context.Context) ProviderProxyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderProxyOutput)
+}
+
+func (i ProviderProxyArgs) ToProviderProxyPtrOutput() ProviderProxyPtrOutput {
+	return i.ToProviderProxyPtrOutputWithContext(context.Background())
+}
+
+func (i ProviderProxyArgs) ToProviderProxyPtrOutputWithContext(ctx context.Context) ProviderProxyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderProxyOutput).ToProviderProxyPtrOutputWithContext(ctx)
+}
+
+// ProviderProxyPtrInput is an input type that accepts ProviderProxyArgs, ProviderProxyPtr and ProviderProxyPtrOutput values.
+// You can construct a concrete instance of `ProviderProxyPtrInput` via:
+//
+//          ProviderProxyArgs{...}
+//
+//  or:
+//
+//          nil
+type ProviderProxyPtrInput interface {
+	pulumi.Input
+
+	ToProviderProxyPtrOutput() ProviderProxyPtrOutput
+	ToProviderProxyPtrOutputWithContext(context.Context) ProviderProxyPtrOutput
+}
+
+type providerProxyPtrType ProviderProxyArgs
+
+func ProviderProxyPtr(v *ProviderProxyArgs) ProviderProxyPtrInput {
+	return (*providerProxyPtrType)(v)
+}
+
+func (*providerProxyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderProxy)(nil)).Elem()
+}
+
+func (i *providerProxyPtrType) ToProviderProxyPtrOutput() ProviderProxyPtrOutput {
+	return i.ToProviderProxyPtrOutputWithContext(context.Background())
+}
+
+func (i *providerProxyPtrType) ToProviderProxyPtrOutputWithContext(ctx context.Context) ProviderProxyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderProxyPtrOutput)
+}
+
+type ProviderProxyOutput struct{ *pulumi.OutputState }
+
+func (ProviderProxyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderProxy)(nil)).Elem()
+}
+
+func (o ProviderProxyOutput) ToProviderProxyOutput() ProviderProxyOutput {
+	return o
+}
+
+func (o ProviderProxyOutput) ToProviderProxyOutputWithContext(ctx context.Context) ProviderProxyOutput {
+	return o
+}
+
+func (o ProviderProxyOutput) ToProviderProxyPtrOutput() ProviderProxyPtrOutput {
+	return o.ToProviderProxyPtrOutputWithContext(context.Background())
+}
+
+func (o ProviderProxyOutput) ToProviderProxyPtrOutputWithContext(ctx context.Context) ProviderProxyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProviderProxy) *ProviderProxy {
+		return &v
+	}).(ProviderProxyPtrOutput)
+}
+
+func (o ProviderProxyOutput) FromEnv() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ProviderProxy) *bool { return v.FromEnv }).(pulumi.BoolPtrOutput)
+}
+
+func (o ProviderProxyOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProviderProxy) *string { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+func (o ProviderProxyOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProviderProxy) *string { return v.Url }).(pulumi.StringPtrOutput)
+}
+
+func (o ProviderProxyOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProviderProxy) *string { return v.Username }).(pulumi.StringPtrOutput)
+}
+
+type ProviderProxyPtrOutput struct{ *pulumi.OutputState }
+
+func (ProviderProxyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderProxy)(nil)).Elem()
+}
+
+func (o ProviderProxyPtrOutput) ToProviderProxyPtrOutput() ProviderProxyPtrOutput {
+	return o
+}
+
+func (o ProviderProxyPtrOutput) ToProviderProxyPtrOutputWithContext(ctx context.Context) ProviderProxyPtrOutput {
+	return o
+}
+
+func (o ProviderProxyPtrOutput) Elem() ProviderProxyOutput {
+	return o.ApplyT(func(v *ProviderProxy) ProviderProxy {
+		if v != nil {
+			return *v
+		}
+		var ret ProviderProxy
+		return ret
+	}).(ProviderProxyOutput)
+}
+
+func (o ProviderProxyPtrOutput) FromEnv() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProviderProxy) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.FromEnv
+	}).(pulumi.BoolPtrOutput)
+}
+
+func (o ProviderProxyPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderProxy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o ProviderProxyPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderProxy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o ProviderProxyPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderProxy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
 type SelfSignedCertSubject struct {
 	CommonName         *string  `pulumi:"commonName"`
 	Country            *string  `pulumi:"country"`
@@ -445,12 +623,16 @@ func (o GetCertificateCertificateArrayOutput) Index(i pulumi.IntInput) GetCertif
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CertRequestSubjectInput)(nil)).Elem(), CertRequestSubjectArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CertRequestSubjectArrayInput)(nil)).Elem(), CertRequestSubjectArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderProxyInput)(nil)).Elem(), ProviderProxyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderProxyPtrInput)(nil)).Elem(), ProviderProxyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SelfSignedCertSubjectInput)(nil)).Elem(), SelfSignedCertSubjectArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SelfSignedCertSubjectArrayInput)(nil)).Elem(), SelfSignedCertSubjectArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateCertificateInput)(nil)).Elem(), GetCertificateCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateCertificateArrayInput)(nil)).Elem(), GetCertificateCertificateArray{})
 	pulumi.RegisterOutputType(CertRequestSubjectOutput{})
 	pulumi.RegisterOutputType(CertRequestSubjectArrayOutput{})
+	pulumi.RegisterOutputType(ProviderProxyOutput{})
+	pulumi.RegisterOutputType(ProviderProxyPtrOutput{})
 	pulumi.RegisterOutputType(SelfSignedCertSubjectOutput{})
 	pulumi.RegisterOutputType(SelfSignedCertSubjectArrayOutput{})
 	pulumi.RegisterOutputType(GetCertificateCertificateOutput{})

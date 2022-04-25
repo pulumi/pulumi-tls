@@ -12,8 +12,32 @@
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
     },
-    "config": {},
+    "config": {
+        "variables": {
+            "proxy": {
+                "$ref": "#/types/tls:config/proxy:proxy",
+                "description": "Proxy used by resources and data sources that connect to external endpoints.\n"
+            }
+        }
+    },
     "types": {
+        "tls:config/proxy:proxy": {
+            "properties": {
+                "fromEnv": {
+                    "type": "boolean"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "tls:index/CertRequestSubject:CertRequestSubject": {
             "properties": {
                 "commonName": {
@@ -85,6 +109,43 @@
                     "items": {
                         "type": "string"
                     },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "tls:index/ProviderProxy:ProviderProxy": {
+            "properties": {
+                "fromEnv": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "password": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "url": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "username": {
+                    "type": "string",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -278,7 +339,19 @@
         }
     },
     "provider": {
-        "description": "The provider type for the tls package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n"
+        "description": "The provider type for the tls package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "proxy": {
+                "$ref": "#/types/tls:index/ProviderProxy:ProviderProxy",
+                "description": "Proxy used by resources and data sources that connect to external endpoints.\n"
+            }
+        },
+        "inputProperties": {
+            "proxy": {
+                "$ref": "#/types/tls:index/ProviderProxy:ProviderProxy",
+                "description": "Proxy used by resources and data sources that connect to external endpoints.\n"
+            }
+        }
     },
     "resources": {
         "tls:index/certRequest:CertRequest": {

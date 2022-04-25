@@ -41,3 +41,12 @@ export interface SelfSignedCertSubject {
     streetAddresses?: string[];
 }
 
+export namespace config {
+    export interface Proxy {
+        fromEnv?: boolean;
+        password?: string;
+        url?: string;
+        username?: string;
+    }
+
+}

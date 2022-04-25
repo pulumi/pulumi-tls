@@ -2,6 +2,7 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
 /**
@@ -37,6 +38,7 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
+            resourceInputs["proxy"] = pulumi.output(args ? args.proxy : undefined).apply(JSON.stringify);
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
@@ -47,4 +49,8 @@ export class Provider extends pulumi.ProviderResource {
  * The set of arguments for constructing a Provider resource.
  */
 export interface ProviderArgs {
+    /**
+     * Proxy used by resources and data sources that connect to external endpoints.
+     */
+    proxy?: pulumi.Input<inputs.ProviderProxy>;
 }
