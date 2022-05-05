@@ -20,6 +20,15 @@ func TestAccPrivateKeyTs(t *testing.T) {
 	integration.ProgramTest(t, &test)
 }
 
+func TestAccSelfSignedCert(t *testing.T) {
+	test := getJSBaseOptions(t).
+		With(integration.ProgramTestOptions{
+			Dir: path.Join(getCwd(t), "self-signed-cert", "ts"),
+		})
+
+	integration.ProgramTest(t, &test)
+}
+
 func getJSBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	baseJS := base.With(integration.ProgramTestOptions{
