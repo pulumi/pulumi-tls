@@ -390,6 +390,101 @@ func (o SelfSignedCertOutput) ToSelfSignedCertOutputWithContext(ctx context.Cont
 	return o
 }
 
+// List of key usages allowed for the issued certificate. Values are defined in [RFC
+// 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
+// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
+// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
+// `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
+// `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
+// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
+// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+func (o SelfSignedCertOutput) AllowedUses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringArrayOutput { return v.AllowedUses }).(pulumi.StringArrayOutput)
+}
+
+// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+func (o SelfSignedCertOutput) CertPem() pulumi.StringOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringOutput { return v.CertPem }).(pulumi.StringOutput)
+}
+
+// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
+func (o SelfSignedCertOutput) DnsNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringArrayOutput { return v.DnsNames }).(pulumi.StringArrayOutput)
+}
+
+// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
+// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
+// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
+// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
+// early renewal period. (default: `0`)
+func (o SelfSignedCertOutput) EarlyRenewalHours() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.IntPtrOutput { return v.EarlyRenewalHours }).(pulumi.IntPtrOutput)
+}
+
+// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
+func (o SelfSignedCertOutput) IpAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringArrayOutput { return v.IpAddresses }).(pulumi.StringArrayOutput)
+}
+
+// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
+func (o SelfSignedCertOutput) IsCaCertificate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.BoolPtrOutput { return v.IsCaCertificate }).(pulumi.BoolPtrOutput)
+}
+
+// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+// and ignored, as the key algorithm is now inferred from the key.
+//
+// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+func (o SelfSignedCertOutput) KeyAlgorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringOutput { return v.KeyAlgorithm }).(pulumi.StringOutput)
+}
+
+// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+func (o SelfSignedCertOutput) PrivateKeyPem() pulumi.StringOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringOutput { return v.PrivateKeyPem }).(pulumi.StringOutput)
+}
+
+// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
+// the `early_renewal_hours`)?
+func (o SelfSignedCertOutput) ReadyForRenewal() pulumi.BoolOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.BoolOutput { return v.ReadyForRenewal }).(pulumi.BoolOutput)
+}
+
+// Should the generated certificate include a [subject key
+// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+func (o SelfSignedCertOutput) SetSubjectKeyId() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.BoolPtrOutput { return v.SetSubjectKeyId }).(pulumi.BoolPtrOutput)
+}
+
+// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+func (o SelfSignedCertOutput) Subjects() SelfSignedCertSubjectArrayOutput {
+	return o.ApplyT(func(v *SelfSignedCert) SelfSignedCertSubjectArrayOutput { return v.Subjects }).(SelfSignedCertSubjectArrayOutput)
+}
+
+// List of URIs for which a certificate is being requested (i.e. certificate subjects).
+func (o SelfSignedCertOutput) Uris() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringArrayOutput { return v.Uris }).(pulumi.StringArrayOutput)
+}
+
+// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
+// timestamp.
+func (o SelfSignedCertOutput) ValidityEndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringOutput { return v.ValidityEndTime }).(pulumi.StringOutput)
+}
+
+// Number of hours, after initial issuing, that the certificate will remain valid for.
+func (o SelfSignedCertOutput) ValidityPeriodHours() pulumi.IntOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.IntOutput { return v.ValidityPeriodHours }).(pulumi.IntOutput)
+}
+
+// The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+func (o SelfSignedCertOutput) ValidityStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringOutput { return v.ValidityStartTime }).(pulumi.StringOutput)
+}
+
 type SelfSignedCertArrayOutput struct{ *pulumi.OutputState }
 
 func (SelfSignedCertArrayOutput) ElementType() reflect.Type {

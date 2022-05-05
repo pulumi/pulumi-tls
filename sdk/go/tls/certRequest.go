@@ -288,6 +288,47 @@ func (o CertRequestOutput) ToCertRequestOutputWithContext(ctx context.Context) C
 	return o
 }
 
+// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+func (o CertRequestOutput) CertRequestPem() pulumi.StringOutput {
+	return o.ApplyT(func(v *CertRequest) pulumi.StringOutput { return v.CertRequestPem }).(pulumi.StringOutput)
+}
+
+// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
+func (o CertRequestOutput) DnsNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CertRequest) pulumi.StringArrayOutput { return v.DnsNames }).(pulumi.StringArrayOutput)
+}
+
+// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
+func (o CertRequestOutput) IpAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CertRequest) pulumi.StringArrayOutput { return v.IpAddresses }).(pulumi.StringArrayOutput)
+}
+
+// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
+// and ignored, as the key algorithm is now inferred from the key.
+//
+// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+func (o CertRequestOutput) KeyAlgorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v *CertRequest) pulumi.StringOutput { return v.KeyAlgorithm }).(pulumi.StringOutput)
+}
+
+// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
+// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
+// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+func (o CertRequestOutput) PrivateKeyPem() pulumi.StringOutput {
+	return o.ApplyT(func(v *CertRequest) pulumi.StringOutput { return v.PrivateKeyPem }).(pulumi.StringOutput)
+}
+
+// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+func (o CertRequestOutput) Subjects() CertRequestSubjectArrayOutput {
+	return o.ApplyT(func(v *CertRequest) CertRequestSubjectArrayOutput { return v.Subjects }).(CertRequestSubjectArrayOutput)
+}
+
+// List of URIs for which a certificate is being requested (i.e. certificate subjects).
+func (o CertRequestOutput) Uris() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CertRequest) pulumi.StringArrayOutput { return v.Uris }).(pulumi.StringArrayOutput)
+}
+
 type CertRequestArrayOutput struct{ *pulumi.OutputState }
 
 func (CertRequestArrayOutput) ElementType() reflect.Type {
