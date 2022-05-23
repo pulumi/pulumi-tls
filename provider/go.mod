@@ -10,7 +10,7 @@ require (
 
 replace (
 	github.com/hashicorp/terraform-exec => github.com/hashicorp/terraform-exec v0.15.0
-	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20220505215311-795430389fa7
+	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20220523144019-a9dc436975cc
 	github.com/pulumi/pulumi/pkg/v3 => github.com/pulumi/pulumi/pkg/v3 v3.32.1
 	github.com/terraform-providers/terraform-provider-tls/shim => ./shim
 )
