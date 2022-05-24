@@ -237,6 +237,14 @@
         },
         "tls:index/getCertificateCertificate:getCertificateCertificate": {
             "properties": {
+                "certPem": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
                 "isCa": {
                     "type": "boolean",
                     "language": {
@@ -320,6 +328,7 @@
             },
             "type": "object",
             "required": [
+                "certPem",
                 "isCa",
                 "issuer",
                 "notAfter",
@@ -355,11 +364,11 @@
     },
     "resources": {
         "tls:index/certRequest:CertRequest": {
-            "description": "{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as tls from \"@pulumi/tls\";\nimport * from \"fs\";\n\nconst example = new tls.CertRequest(\"example\", {\n    privateKeyPem: fs.readFileSync(\"private_key.pem\"),\n    subjects: [{\n        commonName: \"example.com\",\n        organization: \"ACME Examples, Inc\",\n    }],\n});\n```\n```python\nimport pulumi\nimport pulumi_tls as tls\n\nexample = tls.CertRequest(\"example\",\n    private_key_pem=(lambda path: open(path).read())(\"private_key.pem\"),\n    subjects=[tls.CertRequestSubjectArgs(\n        common_name=\"example.com\",\n        organization=\"ACME Examples, Inc\",\n    )])\n```\n```csharp\nusing System.IO;\nusing Pulumi;\nusing Tls = Pulumi.Tls;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var example = new Tls.CertRequest(\"example\", new Tls.CertRequestArgs\n        {\n            PrivateKeyPem = File.ReadAllText(\"private_key.pem\"),\n            Subjects = \n            {\n                new Tls.Inputs.CertRequestSubjectArgs\n                {\n                    CommonName = \"example.com\",\n                    Organization = \"ACME Examples, Inc\",\n                },\n            },\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"io/ioutil\"\n\n\t\"github.com/pulumi/pulumi-tls/sdk/v4/go/tls\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc readFileOrPanic(path string) pulumi.StringPtrInput {\n\tdata, err := ioutil.ReadFile(path)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\treturn pulumi.String(string(data))\n}\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := tls.NewCertRequest(ctx, \"example\", \u0026tls.CertRequestArgs{\n\t\t\tPrivateKeyPem: readFileOrPanic(\"private_key.pem\"),\n\t\t\tSubjects: CertRequestSubjectArray{\n\t\t\t\t\u0026CertRequestSubjectArgs{\n\t\t\t\t\tCommonName:   pulumi.String(\"example.com\"),\n\t\t\t\t\tOrganization: pulumi.String(\"ACME Examples, Inc\"),\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport java.util.*;\nimport java.io.*;\nimport java.nio.*;\nimport com.pulumi.*;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new CertRequest(\"example\", CertRequestArgs.builder()        \n            .privateKeyPem(Files.readString(\"private_key.pem\"))\n            .subjects(CertRequestSubject.builder()\n                .commonName(\"example.com\")\n                .organization(\"ACME Examples, Inc\")\n                .build())\n            .build());\n\n        }\n}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "description": "{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as tls from \"@pulumi/tls\";\nimport * from \"fs\";\n\nconst example = new tls.CertRequest(\"example\", {\n    privateKeyPem: fs.readFileSync(\"private_key.pem\"),\n    subject: {\n        commonName: \"example.com\",\n        organization: \"ACME Examples, Inc\",\n    },\n});\n```\n```python\nimport pulumi\nimport pulumi_tls as tls\n\nexample = tls.CertRequest(\"example\",\n    private_key_pem=(lambda path: open(path).read())(\"private_key.pem\"),\n    subject=tls.CertRequestSubjectArgs(\n        common_name=\"example.com\",\n        organization=\"ACME Examples, Inc\",\n    ))\n```\n```csharp\nusing System.IO;\nusing Pulumi;\nusing Tls = Pulumi.Tls;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var example = new Tls.CertRequest(\"example\", new Tls.CertRequestArgs\n        {\n            PrivateKeyPem = File.ReadAllText(\"private_key.pem\"),\n            Subject = new Tls.Inputs.CertRequestSubjectArgs\n            {\n                CommonName = \"example.com\",\n                Organization = \"ACME Examples, Inc\",\n            },\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"io/ioutil\"\n\n\t\"github.com/pulumi/pulumi-tls/sdk/v4/go/tls\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc readFileOrPanic(path string) pulumi.StringPtrInput {\n\tdata, err := ioutil.ReadFile(path)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\treturn pulumi.String(string(data))\n}\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := tls.NewCertRequest(ctx, \"example\", \u0026tls.CertRequestArgs{\n\t\t\tPrivateKeyPem: readFileOrPanic(\"private_key.pem\"),\n\t\t\tSubject: \u0026CertRequestSubjectArgs{\n\t\t\t\tCommonName:   pulumi.String(\"example.com\"),\n\t\t\t\tOrganization: pulumi.String(\"ACME Examples, Inc\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport java.util.*;\nimport java.io.*;\nimport java.nio.*;\nimport com.pulumi.*;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new CertRequest(\"example\", CertRequestArgs.builder()        \n            .privateKeyPem(Files.readString(\"private_key.pem\"))\n            .subject(CertRequestSubject.builder()\n                .commonName(\"example.com\")\n                .organization(\"ACME Examples, Inc\")\n                .build())\n            .build());\n\n        }\n}\n```\n{{% /example %}}\n{{% /examples %}}",
             "properties": {
                 "certRequestPem": {
                     "type": "string",
-                    "description": "The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n"
+                    "description": "The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the\n[underlying](https://pkg.go.dev/encoding/pem#Encode)\n[libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at\nthe end of the PEM. In case this disrupts your use case, we recommend using\n[`trimspace()`](https://www.terraform.io/language/functions/trimspace).\n"
                 },
                 "dnsNames": {
                     "type": "array",
@@ -384,11 +393,8 @@
                     "type": "string",
                     "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n"
                 },
-                "subjects": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject"
-                    },
+                "subject": {
+                    "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject",
                     "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is\nbased upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
                 },
                 "uris": {
@@ -402,8 +408,7 @@
             "required": [
                 "certRequestPem",
                 "keyAlgorithm",
-                "privateKeyPem",
-                "subjects"
+                "privateKeyPem"
             ],
             "inputProperties": {
                 "dnsNames": {
@@ -429,11 +434,8 @@
                     "type": "string",
                     "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n"
                 },
-                "subjects": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject"
-                    },
+                "subject": {
+                    "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject",
                     "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is\nbased upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
                 },
                 "uris": {
@@ -445,15 +447,14 @@
                 }
             },
             "requiredInputs": [
-                "privateKeyPem",
-                "subjects"
+                "privateKeyPem"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering CertRequest resources.\n",
                 "properties": {
                     "certRequestPem": {
                         "type": "string",
-                        "description": "The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n"
+                        "description": "The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the\n[underlying](https://pkg.go.dev/encoding/pem#Encode)\n[libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at\nthe end of the PEM. In case this disrupts your use case, we recommend using\n[`trimspace()`](https://www.terraform.io/language/functions/trimspace).\n"
                     },
                     "dnsNames": {
                         "type": "array",
@@ -478,11 +479,8 @@
                         "type": "string",
                         "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n"
                     },
-                    "subjects": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject"
-                        },
+                    "subject": {
+                        "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject",
                         "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is\nbased upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
                     },
                     "uris": {
@@ -520,7 +518,7 @@
                 },
                 "certPem": {
                     "type": "string",
-                    "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n"
+                    "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the\n[underlying](https://pkg.go.dev/encoding/pem#Encode)\n[libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at\nthe end of the PEM. In case this disrupts your use case, we recommend using\n[`trimspace()`](https://www.terraform.io/language/functions/trimspace).\n"
                 },
                 "certRequestPem": {
                     "type": "string",
@@ -641,7 +639,7 @@
                     },
                     "certPem": {
                         "type": "string",
-                        "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n"
+                        "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the\n[underlying](https://pkg.go.dev/encoding/pem#Encode)\n[libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at\nthe end of the PEM. In case this disrupts your use case, we recommend using\n[`trimspace()`](https://www.terraform.io/language/functions/trimspace).\n"
                     },
                     "certRequestPem": {
                         "type": "string",
@@ -699,19 +697,19 @@
                 },
                 "publicKeyFingerprintMd5": {
                     "type": "string",
-                    "description": "The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected\nprivate key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224\nlimitations](../../#limitations).\n"
+                    "description": "The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected\nprivate key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224\nlimitations](../../docs#limitations).\n"
                 },
                 "publicKeyFingerprintSha256": {
                     "type": "string",
-                    "description": "The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected\nprivate key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224\nlimitations](../../#limitations).\n"
+                    "description": "The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected\nprivate key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224\nlimitations](../../docs#limitations).\n"
                 },
                 "publicKeyOpenssh": {
                     "type": "string",
-                    "description": "The public key data in [\"Authorized\nKeys\"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is\npopulated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as\n`ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not supported](../../#limitations).\n"
+                    "description": "The public key data in [\"Authorized\nKeys\"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is\npopulated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as\n`ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not\nsupported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)\n[libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at\nthe end of the PEM. In case this disrupts your use case, we recommend using\n[`trimspace()`](https://www.terraform.io/language/functions/trimspace).\n"
                 },
                 "publicKeyPem": {
                     "type": "string",
-                    "description": "Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n"
+                    "description": "Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the\n[underlying](https://pkg.go.dev/encoding/pem#Encode)\n[libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at\nthe end of the PEM. In case this disrupts your use case, we recommend using\n[`trimspace()`](https://www.terraform.io/language/functions/trimspace).\n"
                 },
                 "rsaBits": {
                     "type": "integer",
@@ -765,19 +763,19 @@
                     },
                     "publicKeyFingerprintMd5": {
                         "type": "string",
-                        "description": "The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected\nprivate key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224\nlimitations](../../#limitations).\n"
+                        "description": "The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected\nprivate key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224\nlimitations](../../docs#limitations).\n"
                     },
                     "publicKeyFingerprintSha256": {
                         "type": "string",
-                        "description": "The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected\nprivate key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224\nlimitations](../../#limitations).\n"
+                        "description": "The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected\nprivate key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224\nlimitations](../../docs#limitations).\n"
                     },
                     "publicKeyOpenssh": {
                         "type": "string",
-                        "description": "The public key data in [\"Authorized\nKeys\"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is\npopulated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as\n`ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not supported](../../#limitations).\n"
+                        "description": "The public key data in [\"Authorized\nKeys\"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is\npopulated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as\n`ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not\nsupported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)\n[libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at\nthe end of the PEM. In case this disrupts your use case, we recommend using\n[`trimspace()`](https://www.terraform.io/language/functions/trimspace).\n"
                     },
                     "publicKeyPem": {
                         "type": "string",
-                        "description": "Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n"
+                        "description": "Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the\n[underlying](https://pkg.go.dev/encoding/pem#Encode)\n[libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at\nthe end of the PEM. In case this disrupts your use case, we recommend using\n[`trimspace()`](https://www.terraform.io/language/functions/trimspace).\n"
                     },
                     "rsaBits": {
                         "type": "integer",
@@ -798,7 +796,7 @@
                 },
                 "certPem": {
                     "type": "string",
-                    "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n"
+                    "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the\n[underlying](https://pkg.go.dev/encoding/pem#Encode)\n[libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at\nthe end of the PEM. In case this disrupts your use case, we recommend using\n[`trimspace()`](https://www.terraform.io/language/functions/trimspace).\n"
                 },
                 "dnsNames": {
                     "type": "array",
@@ -835,15 +833,16 @@
                     "type": "boolean",
                     "description": "Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within\nthe `early_renewal_hours`)?\n"
                 },
+                "setAuthorityKeyId": {
+                    "type": "boolean",
+                    "description": "Should the generated certificate include an [authority key\nidentifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the\nsame value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:\n`false`).\n"
+                },
                 "setSubjectKeyId": {
                     "type": "boolean",
                     "description": "Should the generated certificate include a [subject key\nidentifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).\n"
                 },
-                "subjects": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject"
-                    },
+                "subject": {
+                    "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject",
                     "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is\nbased upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
                 },
                 "uris": {
@@ -872,7 +871,6 @@
                 "keyAlgorithm",
                 "privateKeyPem",
                 "readyForRenewal",
-                "subjects",
                 "validityEndTime",
                 "validityPeriodHours",
                 "validityStartTime"
@@ -916,15 +914,16 @@
                     "type": "string",
                     "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n"
                 },
+                "setAuthorityKeyId": {
+                    "type": "boolean",
+                    "description": "Should the generated certificate include an [authority key\nidentifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the\nsame value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:\n`false`).\n"
+                },
                 "setSubjectKeyId": {
                     "type": "boolean",
                     "description": "Should the generated certificate include a [subject key\nidentifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).\n"
                 },
-                "subjects": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject"
-                    },
+                "subject": {
+                    "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject",
                     "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is\nbased upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
                 },
                 "uris": {
@@ -942,7 +941,6 @@
             "requiredInputs": [
                 "allowedUses",
                 "privateKeyPem",
-                "subjects",
                 "validityPeriodHours"
             ],
             "stateInputs": {
@@ -957,7 +955,7 @@
                     },
                     "certPem": {
                         "type": "string",
-                        "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n"
+                        "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the\n[underlying](https://pkg.go.dev/encoding/pem#Encode)\n[libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at\nthe end of the PEM. In case this disrupts your use case, we recommend using\n[`trimspace()`](https://www.terraform.io/language/functions/trimspace).\n"
                     },
                     "dnsNames": {
                         "type": "array",
@@ -994,15 +992,16 @@
                         "type": "boolean",
                         "description": "Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within\nthe `early_renewal_hours`)?\n"
                     },
+                    "setAuthorityKeyId": {
+                        "type": "boolean",
+                        "description": "Should the generated certificate include an [authority key\nidentifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the\nsame value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:\n`false`).\n"
+                    },
                     "setSubjectKeyId": {
                         "type": "boolean",
                         "description": "Should the generated certificate include a [subject key\nidentifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).\n"
                     },
-                    "subjects": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject"
-                        },
+                    "subject": {
+                        "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject",
                         "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is\nbased upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
                     },
                     "uris": {
@@ -1034,6 +1033,9 @@
             "inputs": {
                 "description": "A collection of arguments for invoking getCertificate.\n",
                 "properties": {
+                    "content": {
+                        "type": "string"
+                    },
                     "url": {
                         "type": "string"
                     },
@@ -1041,10 +1043,7 @@
                         "type": "boolean"
                     }
                 },
-                "type": "object",
-                "required": [
-                    "url"
-                ]
+                "type": "object"
             },
             "outputs": {
                 "description": "A collection of values returned by getCertificate.\n",
@@ -1054,6 +1053,9 @@
                         "items": {
                             "$ref": "#/types/tls:index/getCertificateCertificate:getCertificateCertificate"
                         }
+                    },
+                    "content": {
+                        "type": "string"
                     },
                     "id": {
                         "type": "string"
@@ -1068,8 +1070,7 @@
                 "type": "object",
                 "required": [
                     "certificates",
-                    "id",
-                    "url"
+                    "id"
                 ]
             }
         },

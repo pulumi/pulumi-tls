@@ -16,26 +16,25 @@ __all__ = ['CertRequestArgs', 'CertRequest']
 class CertRequestArgs:
     def __init__(__self__, *,
                  private_key_pem: pulumi.Input[str],
-                 subjects: pulumi.Input[Sequence[pulumi.Input['CertRequestSubjectArgs']]],
                  dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  key_algorithm: Optional[pulumi.Input[str]] = None,
+                 subject: Optional[pulumi.Input['CertRequestSubjectArgs']] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a CertRequest resource.
         :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
                to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
-        :param pulumi.Input[Sequence[pulumi.Input['CertRequestSubjectArgs']]] subjects: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-               based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
                and ignored, as the key algorithm is now inferred from the key.
+        :param pulumi.Input['CertRequestSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+               based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
         pulumi.set(__self__, "private_key_pem", private_key_pem)
-        pulumi.set(__self__, "subjects", subjects)
         if dns_names is not None:
             pulumi.set(__self__, "dns_names", dns_names)
         if ip_addresses is not None:
@@ -45,6 +44,8 @@ class CertRequestArgs:
             pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
         if key_algorithm is not None:
             pulumi.set(__self__, "key_algorithm", key_algorithm)
+        if subject is not None:
+            pulumi.set(__self__, "subject", subject)
         if uris is not None:
             pulumi.set(__self__, "uris", uris)
 
@@ -61,19 +62,6 @@ class CertRequestArgs:
     @private_key_pem.setter
     def private_key_pem(self, value: pulumi.Input[str]):
         pulumi.set(self, "private_key_pem", value)
-
-    @property
-    @pulumi.getter
-    def subjects(self) -> pulumi.Input[Sequence[pulumi.Input['CertRequestSubjectArgs']]]:
-        """
-        The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-        based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-        """
-        return pulumi.get(self, "subjects")
-
-    @subjects.setter
-    def subjects(self, value: pulumi.Input[Sequence[pulumi.Input['CertRequestSubjectArgs']]]):
-        pulumi.set(self, "subjects", value)
 
     @property
     @pulumi.getter(name="dnsNames")
@@ -114,6 +102,19 @@ class CertRequestArgs:
 
     @property
     @pulumi.getter
+    def subject(self) -> Optional[pulumi.Input['CertRequestSubjectArgs']]:
+        """
+        The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+        """
+        return pulumi.get(self, "subject")
+
+    @subject.setter
+    def subject(self, value: Optional[pulumi.Input['CertRequestSubjectArgs']]):
+        pulumi.set(self, "subject", value)
+
+    @property
+    @pulumi.getter
     def uris(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
         List of URIs for which a certificate is being requested (i.e. certificate subjects).
@@ -133,11 +134,15 @@ class _CertRequestState:
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  key_algorithm: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
-                 subjects: Optional[pulumi.Input[Sequence[pulumi.Input['CertRequestSubjectArgs']]]] = None,
+                 subject: Optional[pulumi.Input['CertRequestSubjectArgs']] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering CertRequest resources.
-        :param pulumi.Input[str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        :param pulumi.Input[str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+               [underlying](https://pkg.go.dev/encoding/pem#Encode)
+               [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+               the end of the PEM. In case this disrupts your use case, we recommend using
+               [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
@@ -145,7 +150,7 @@ class _CertRequestState:
         :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
                to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
-        :param pulumi.Input[Sequence[pulumi.Input['CertRequestSubjectArgs']]] subjects: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        :param pulumi.Input['CertRequestSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
                based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
@@ -162,8 +167,8 @@ class _CertRequestState:
             pulumi.set(__self__, "key_algorithm", key_algorithm)
         if private_key_pem is not None:
             pulumi.set(__self__, "private_key_pem", private_key_pem)
-        if subjects is not None:
-            pulumi.set(__self__, "subjects", subjects)
+        if subject is not None:
+            pulumi.set(__self__, "subject", subject)
         if uris is not None:
             pulumi.set(__self__, "uris", uris)
 
@@ -171,7 +176,11 @@ class _CertRequestState:
     @pulumi.getter(name="certRequestPem")
     def cert_request_pem(self) -> Optional[pulumi.Input[str]]:
         """
-        The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+        [underlying](https://pkg.go.dev/encoding/pem#Encode)
+        [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+        the end of the PEM. In case this disrupts your use case, we recommend using
+        [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         """
         return pulumi.get(self, "cert_request_pem")
 
@@ -232,16 +241,16 @@ class _CertRequestState:
 
     @property
     @pulumi.getter
-    def subjects(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CertRequestSubjectArgs']]]]:
+    def subject(self) -> Optional[pulumi.Input['CertRequestSubjectArgs']]:
         """
         The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
         based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         """
-        return pulumi.get(self, "subjects")
+        return pulumi.get(self, "subject")
 
-    @subjects.setter
-    def subjects(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CertRequestSubjectArgs']]]]):
-        pulumi.set(self, "subjects", value)
+    @subject.setter
+    def subject(self, value: Optional[pulumi.Input['CertRequestSubjectArgs']]):
+        pulumi.set(self, "subject", value)
 
     @property
     @pulumi.getter
@@ -265,7 +274,7 @@ class CertRequest(pulumi.CustomResource):
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  key_algorithm: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
-                 subjects: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]]]] = None,
+                 subject: Optional[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
@@ -277,10 +286,10 @@ class CertRequest(pulumi.CustomResource):
 
         example = tls.CertRequest("example",
             private_key_pem=(lambda path: open(path).read())("private_key.pem"),
-            subjects=[tls.CertRequestSubjectArgs(
+            subject=tls.CertRequestSubjectArgs(
                 common_name="example.com",
                 organization="ACME Examples, Inc",
-            )])
+            ))
         ```
 
         :param str resource_name: The name of the resource.
@@ -292,7 +301,7 @@ class CertRequest(pulumi.CustomResource):
         :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
                to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]]] subjects: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        :param pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
                based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
@@ -311,10 +320,10 @@ class CertRequest(pulumi.CustomResource):
 
         example = tls.CertRequest("example",
             private_key_pem=(lambda path: open(path).read())("private_key.pem"),
-            subjects=[tls.CertRequestSubjectArgs(
+            subject=tls.CertRequestSubjectArgs(
                 common_name="example.com",
                 organization="ACME Examples, Inc",
-            )])
+            ))
         ```
 
         :param str resource_name: The name of the resource.
@@ -336,7 +345,7 @@ class CertRequest(pulumi.CustomResource):
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  key_algorithm: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
-                 subjects: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]]]] = None,
+                 subject: Optional[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         if opts is None:
@@ -359,9 +368,7 @@ class CertRequest(pulumi.CustomResource):
             if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
             __props__.__dict__["private_key_pem"] = private_key_pem
-            if subjects is None and not opts.urn:
-                raise TypeError("Missing required property 'subjects'")
-            __props__.__dict__["subjects"] = subjects
+            __props__.__dict__["subject"] = subject
             __props__.__dict__["uris"] = uris
             __props__.__dict__["cert_request_pem"] = None
         super(CertRequest, __self__).__init__(
@@ -379,7 +386,7 @@ class CertRequest(pulumi.CustomResource):
             ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             key_algorithm: Optional[pulumi.Input[str]] = None,
             private_key_pem: Optional[pulumi.Input[str]] = None,
-            subjects: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]]]] = None,
+            subject: Optional[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]] = None,
             uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'CertRequest':
         """
         Get an existing CertRequest resource's state with the given name, id, and optional extra
@@ -388,7 +395,11 @@ class CertRequest(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        :param pulumi.Input[str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+               [underlying](https://pkg.go.dev/encoding/pem#Encode)
+               [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+               the end of the PEM. In case this disrupts your use case, we recommend using
+               [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
@@ -396,7 +407,7 @@ class CertRequest(pulumi.CustomResource):
         :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
                to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]]] subjects: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        :param pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
                based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
@@ -409,7 +420,7 @@ class CertRequest(pulumi.CustomResource):
         __props__.__dict__["ip_addresses"] = ip_addresses
         __props__.__dict__["key_algorithm"] = key_algorithm
         __props__.__dict__["private_key_pem"] = private_key_pem
-        __props__.__dict__["subjects"] = subjects
+        __props__.__dict__["subject"] = subject
         __props__.__dict__["uris"] = uris
         return CertRequest(resource_name, opts=opts, __props__=__props__)
 
@@ -417,7 +428,11 @@ class CertRequest(pulumi.CustomResource):
     @pulumi.getter(name="certRequestPem")
     def cert_request_pem(self) -> pulumi.Output[str]:
         """
-        The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+        [underlying](https://pkg.go.dev/encoding/pem#Encode)
+        [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+        the end of the PEM. In case this disrupts your use case, we recommend using
+        [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         """
         return pulumi.get(self, "cert_request_pem")
 
@@ -458,12 +473,12 @@ class CertRequest(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def subjects(self) -> pulumi.Output[Sequence['outputs.CertRequestSubject']]:
+    def subject(self) -> pulumi.Output[Optional['outputs.CertRequestSubject']]:
         """
         The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
         based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         """
-        return pulumi.get(self, "subjects")
+        return pulumi.get(self, "subject")
 
     @property
     @pulumi.getter

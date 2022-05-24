@@ -13,6 +13,7 @@ namespace Pulumi.Tls.Outputs
     [OutputType]
     public sealed class GetCertificateCertificateResult
     {
+        public readonly string CertPem;
         public readonly bool IsCa;
         public readonly string Issuer;
         public readonly string NotAfter;
@@ -26,6 +27,8 @@ namespace Pulumi.Tls.Outputs
 
         [OutputConstructor]
         private GetCertificateCertificateResult(
+            string certPem,
+
             bool isCa,
 
             string issuer,
@@ -46,6 +49,7 @@ namespace Pulumi.Tls.Outputs
 
             int version)
         {
+            CertPem = certPem;
             IsCa = isCa;
             Issuer = issuer;
             NotAfter = notAfter;

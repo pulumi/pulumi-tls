@@ -17,6 +17,7 @@ export interface CertRequestSubject {
 }
 
 export interface GetCertificateCertificate {
+    certPem: string;
     isCa: boolean;
     issuer: string;
     notAfter: string;

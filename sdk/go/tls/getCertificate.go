@@ -21,15 +21,17 @@ func GetCertificate(ctx *pulumi.Context, args *GetCertificateArgs, opts ...pulum
 
 // A collection of arguments for invoking getCertificate.
 type GetCertificateArgs struct {
-	Url         string `pulumi:"url"`
-	VerifyChain *bool  `pulumi:"verifyChain"`
+	Content     *string `pulumi:"content"`
+	Url         *string `pulumi:"url"`
+	VerifyChain *bool   `pulumi:"verifyChain"`
 }
 
 // A collection of values returned by getCertificate.
 type GetCertificateResult struct {
 	Certificates []GetCertificateCertificate `pulumi:"certificates"`
+	Content      *string                     `pulumi:"content"`
 	Id           string                      `pulumi:"id"`
-	Url          string                      `pulumi:"url"`
+	Url          *string                     `pulumi:"url"`
 	VerifyChain  *bool                       `pulumi:"verifyChain"`
 }
 
@@ -48,8 +50,9 @@ func GetCertificateOutput(ctx *pulumi.Context, args GetCertificateOutputArgs, op
 
 // A collection of arguments for invoking getCertificate.
 type GetCertificateOutputArgs struct {
-	Url         pulumi.StringInput  `pulumi:"url"`
-	VerifyChain pulumi.BoolPtrInput `pulumi:"verifyChain"`
+	Content     pulumi.StringPtrInput `pulumi:"content"`
+	Url         pulumi.StringPtrInput `pulumi:"url"`
+	VerifyChain pulumi.BoolPtrInput   `pulumi:"verifyChain"`
 }
 
 func (GetCertificateOutputArgs) ElementType() reflect.Type {
@@ -75,12 +78,16 @@ func (o GetCertificateResultOutput) Certificates() GetCertificateCertificateArra
 	return o.ApplyT(func(v GetCertificateResult) []GetCertificateCertificate { return v.Certificates }).(GetCertificateCertificateArrayOutput)
 }
 
+func (o GetCertificateResultOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetCertificateResult) *string { return v.Content }).(pulumi.StringPtrOutput)
+}
+
 func (o GetCertificateResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificateResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o GetCertificateResultOutput) Url() pulumi.StringOutput {
-	return o.ApplyT(func(v GetCertificateResult) string { return v.Url }).(pulumi.StringOutput)
+func (o GetCertificateResultOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetCertificateResult) *string { return v.Url }).(pulumi.StringPtrOutput)
 }
 
 func (o GetCertificateResultOutput) VerifyChain() pulumi.BoolPtrOutput {

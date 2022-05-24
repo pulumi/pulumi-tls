@@ -221,6 +221,7 @@ class SelfSignedCertSubject(dict):
 @pulumi.output_type
 class GetCertificateCertificateResult(dict):
     def __init__(__self__, *,
+                 cert_pem: str,
                  is_ca: bool,
                  issuer: str,
                  not_after: str,
@@ -231,6 +232,7 @@ class GetCertificateCertificateResult(dict):
                  signature_algorithm: str,
                  subject: str,
                  version: int):
+        pulumi.set(__self__, "cert_pem", cert_pem)
         pulumi.set(__self__, "is_ca", is_ca)
         pulumi.set(__self__, "issuer", issuer)
         pulumi.set(__self__, "not_after", not_after)
@@ -241,6 +243,11 @@ class GetCertificateCertificateResult(dict):
         pulumi.set(__self__, "signature_algorithm", signature_algorithm)
         pulumi.set(__self__, "subject", subject)
         pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="certPem")
+    def cert_pem(self) -> str:
+        return pulumi.get(self, "cert_pem")
 
     @property
     @pulumi.getter(name="isCa")

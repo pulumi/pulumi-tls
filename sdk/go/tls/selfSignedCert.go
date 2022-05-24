@@ -23,7 +23,11 @@ type SelfSignedCert struct {
 	// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
 	// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
 	AllowedUses pulumi.StringArrayOutput `pulumi:"allowedUses"`
-	// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+	// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+	// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+	// the end of the PEM. In case this disrupts your use case, we recommend using
+	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 	CertPem pulumi.StringOutput `pulumi:"certPem"`
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames pulumi.StringArrayOutput `pulumi:"dnsNames"`
@@ -49,12 +53,17 @@ type SelfSignedCert struct {
 	// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
 	// the `early_renewal_hours`)?
 	ReadyForRenewal pulumi.BoolOutput `pulumi:"readyForRenewal"`
+	// Should the generated certificate include an [authority key
+	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+	// same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+	// `false`).
+	SetAuthorityKeyId pulumi.BoolPtrOutput `pulumi:"setAuthorityKeyId"`
 	// Should the generated certificate include a [subject key
 	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 	SetSubjectKeyId pulumi.BoolPtrOutput `pulumi:"setSubjectKeyId"`
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
 	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-	Subjects SelfSignedCertSubjectArrayOutput `pulumi:"subjects"`
+	Subject SelfSignedCertSubjectPtrOutput `pulumi:"subject"`
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris pulumi.StringArrayOutput `pulumi:"uris"`
 	// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
@@ -78,9 +87,6 @@ func NewSelfSignedCert(ctx *pulumi.Context,
 	}
 	if args.PrivateKeyPem == nil {
 		return nil, errors.New("invalid value for required argument 'PrivateKeyPem'")
-	}
-	if args.Subjects == nil {
-		return nil, errors.New("invalid value for required argument 'Subjects'")
 	}
 	if args.ValidityPeriodHours == nil {
 		return nil, errors.New("invalid value for required argument 'ValidityPeriodHours'")
@@ -116,7 +122,11 @@ type selfSignedCertState struct {
 	// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
 	// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
 	AllowedUses []string `pulumi:"allowedUses"`
-	// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+	// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+	// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+	// the end of the PEM. In case this disrupts your use case, we recommend using
+	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 	CertPem *string `pulumi:"certPem"`
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames []string `pulumi:"dnsNames"`
@@ -142,12 +152,17 @@ type selfSignedCertState struct {
 	// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
 	// the `early_renewal_hours`)?
 	ReadyForRenewal *bool `pulumi:"readyForRenewal"`
+	// Should the generated certificate include an [authority key
+	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+	// same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+	// `false`).
+	SetAuthorityKeyId *bool `pulumi:"setAuthorityKeyId"`
 	// Should the generated certificate include a [subject key
 	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 	SetSubjectKeyId *bool `pulumi:"setSubjectKeyId"`
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
 	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-	Subjects []SelfSignedCertSubject `pulumi:"subjects"`
+	Subject *SelfSignedCertSubject `pulumi:"subject"`
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris []string `pulumi:"uris"`
 	// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
@@ -169,7 +184,11 @@ type SelfSignedCertState struct {
 	// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
 	// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
 	AllowedUses pulumi.StringArrayInput
-	// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+	// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+	// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+	// the end of the PEM. In case this disrupts your use case, we recommend using
+	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 	CertPem pulumi.StringPtrInput
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames pulumi.StringArrayInput
@@ -195,12 +214,17 @@ type SelfSignedCertState struct {
 	// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
 	// the `early_renewal_hours`)?
 	ReadyForRenewal pulumi.BoolPtrInput
+	// Should the generated certificate include an [authority key
+	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+	// same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+	// `false`).
+	SetAuthorityKeyId pulumi.BoolPtrInput
 	// Should the generated certificate include a [subject key
 	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 	SetSubjectKeyId pulumi.BoolPtrInput
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
 	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-	Subjects SelfSignedCertSubjectArrayInput
+	Subject SelfSignedCertSubjectPtrInput
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris pulumi.StringArrayInput
 	// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
@@ -247,12 +271,17 @@ type selfSignedCertArgs struct {
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
 	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
 	PrivateKeyPem string `pulumi:"privateKeyPem"`
+	// Should the generated certificate include an [authority key
+	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+	// same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+	// `false`).
+	SetAuthorityKeyId *bool `pulumi:"setAuthorityKeyId"`
 	// Should the generated certificate include a [subject key
 	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 	SetSubjectKeyId *bool `pulumi:"setSubjectKeyId"`
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
 	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-	Subjects []SelfSignedCertSubject `pulumi:"subjects"`
+	Subject *SelfSignedCertSubject `pulumi:"subject"`
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris []string `pulumi:"uris"`
 	// Number of hours, after initial issuing, that the certificate will remain valid for.
@@ -291,12 +320,17 @@ type SelfSignedCertArgs struct {
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
 	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
 	PrivateKeyPem pulumi.StringInput
+	// Should the generated certificate include an [authority key
+	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+	// same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+	// `false`).
+	SetAuthorityKeyId pulumi.BoolPtrInput
 	// Should the generated certificate include a [subject key
 	// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 	SetSubjectKeyId pulumi.BoolPtrInput
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
 	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-	Subjects SelfSignedCertSubjectArrayInput
+	Subject SelfSignedCertSubjectPtrInput
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris pulumi.StringArrayInput
 	// Number of hours, after initial issuing, that the certificate will remain valid for.
@@ -402,7 +436,11 @@ func (o SelfSignedCertOutput) AllowedUses() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringArrayOutput { return v.AllowedUses }).(pulumi.StringArrayOutput)
 }
 
-// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+// the end of the PEM. In case this disrupts your use case, we recommend using
+// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 func (o SelfSignedCertOutput) CertPem() pulumi.StringOutput {
 	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringOutput { return v.CertPem }).(pulumi.StringOutput)
 }
@@ -452,6 +490,14 @@ func (o SelfSignedCertOutput) ReadyForRenewal() pulumi.BoolOutput {
 	return o.ApplyT(func(v *SelfSignedCert) pulumi.BoolOutput { return v.ReadyForRenewal }).(pulumi.BoolOutput)
 }
 
+// Should the generated certificate include an [authority key
+// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+// same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+// `false`).
+func (o SelfSignedCertOutput) SetAuthorityKeyId() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.BoolPtrOutput { return v.SetAuthorityKeyId }).(pulumi.BoolPtrOutput)
+}
+
 // Should the generated certificate include a [subject key
 // identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 func (o SelfSignedCertOutput) SetSubjectKeyId() pulumi.BoolPtrOutput {
@@ -460,8 +506,8 @@ func (o SelfSignedCertOutput) SetSubjectKeyId() pulumi.BoolPtrOutput {
 
 // The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
 // based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-func (o SelfSignedCertOutput) Subjects() SelfSignedCertSubjectArrayOutput {
-	return o.ApplyT(func(v *SelfSignedCert) SelfSignedCertSubjectArrayOutput { return v.Subjects }).(SelfSignedCertSubjectArrayOutput)
+func (o SelfSignedCertOutput) Subject() SelfSignedCertSubjectPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCert) SelfSignedCertSubjectPtrOutput { return v.Subject }).(SelfSignedCertSubjectPtrOutput)
 }
 
 // List of URIs for which a certificate is being requested (i.e. certificate subjects).

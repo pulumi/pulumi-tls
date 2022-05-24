@@ -45,7 +45,11 @@ export class SelfSignedCert extends pulumi.CustomResource {
      */
     public readonly allowedUses!: pulumi.Output<string[]>;
     /**
-     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
+     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+     * the end of the PEM. In case this disrupts your use case, we recommend using
+     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
      */
     public /*out*/ readonly certPem!: pulumi.Output<string>;
     /**
@@ -87,6 +91,13 @@ export class SelfSignedCert extends pulumi.CustomResource {
      */
     public /*out*/ readonly readyForRenewal!: pulumi.Output<boolean>;
     /**
+     * Should the generated certificate include an [authority key
+     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+     * same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+     * `false`).
+     */
+    public readonly setAuthorityKeyId!: pulumi.Output<boolean | undefined>;
+    /**
      * Should the generated certificate include a [subject key
      * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
@@ -95,7 +106,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
      * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
-    public readonly subjects!: pulumi.Output<outputs.SelfSignedCertSubject[]>;
+    public readonly subject!: pulumi.Output<outputs.SelfSignedCertSubject | undefined>;
     /**
      * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */
@@ -136,8 +147,9 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
             resourceInputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
             resourceInputs["readyForRenewal"] = state ? state.readyForRenewal : undefined;
+            resourceInputs["setAuthorityKeyId"] = state ? state.setAuthorityKeyId : undefined;
             resourceInputs["setSubjectKeyId"] = state ? state.setSubjectKeyId : undefined;
-            resourceInputs["subjects"] = state ? state.subjects : undefined;
+            resourceInputs["subject"] = state ? state.subject : undefined;
             resourceInputs["uris"] = state ? state.uris : undefined;
             resourceInputs["validityEndTime"] = state ? state.validityEndTime : undefined;
             resourceInputs["validityPeriodHours"] = state ? state.validityPeriodHours : undefined;
@@ -150,9 +162,6 @@ export class SelfSignedCert extends pulumi.CustomResource {
             if ((!args || args.privateKeyPem === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'privateKeyPem'");
             }
-            if ((!args || args.subjects === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'subjects'");
-            }
             if ((!args || args.validityPeriodHours === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'validityPeriodHours'");
             }
@@ -163,8 +172,9 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
             resourceInputs["keyAlgorithm"] = args ? args.keyAlgorithm : undefined;
             resourceInputs["privateKeyPem"] = args ? args.privateKeyPem : undefined;
+            resourceInputs["setAuthorityKeyId"] = args ? args.setAuthorityKeyId : undefined;
             resourceInputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
-            resourceInputs["subjects"] = args ? args.subjects : undefined;
+            resourceInputs["subject"] = args ? args.subject : undefined;
             resourceInputs["uris"] = args ? args.uris : undefined;
             resourceInputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
             resourceInputs["certPem"] = undefined /*out*/;
@@ -193,7 +203,11 @@ export interface SelfSignedCertState {
      */
     allowedUses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
+     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+     * the end of the PEM. In case this disrupts your use case, we recommend using
+     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
      */
     certPem?: pulumi.Input<string>;
     /**
@@ -235,6 +249,13 @@ export interface SelfSignedCertState {
      */
     readyForRenewal?: pulumi.Input<boolean>;
     /**
+     * Should the generated certificate include an [authority key
+     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+     * same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+     * `false`).
+     */
+    setAuthorityKeyId?: pulumi.Input<boolean>;
+    /**
      * Should the generated certificate include a [subject key
      * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
@@ -243,7 +264,7 @@ export interface SelfSignedCertState {
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
      * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
-    subjects?: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
+    subject?: pulumi.Input<inputs.SelfSignedCertSubject>;
     /**
      * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */
@@ -312,6 +333,13 @@ export interface SelfSignedCertArgs {
      */
     privateKeyPem: pulumi.Input<string>;
     /**
+     * Should the generated certificate include an [authority key
+     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+     * same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+     * `false`).
+     */
+    setAuthorityKeyId?: pulumi.Input<boolean>;
+    /**
      * Should the generated certificate include a [subject key
      * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
@@ -320,7 +348,7 @@ export interface SelfSignedCertArgs {
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
      * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
-    subjects: pulumi.Input<pulumi.Input<inputs.SelfSignedCertSubject>[]>;
+    subject?: pulumi.Input<inputs.SelfSignedCertSubject>;
     /**
      * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */

@@ -11,18 +11,21 @@ namespace Pulumi.Tls
 {
     public static class GetCertificate
     {
-        public static Task<GetCertificateResult> InvokeAsync(GetCertificateArgs args, InvokeOptions? options = null)
+        public static Task<GetCertificateResult> InvokeAsync(GetCertificateArgs? args = null, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetCertificateResult>("tls:index/getCertificate:getCertificate", args ?? new GetCertificateArgs(), options.WithDefaults());
 
-        public static Output<GetCertificateResult> Invoke(GetCertificateInvokeArgs args, InvokeOptions? options = null)
+        public static Output<GetCertificateResult> Invoke(GetCertificateInvokeArgs? args = null, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.Invoke<GetCertificateResult>("tls:index/getCertificate:getCertificate", args ?? new GetCertificateInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetCertificateArgs : Pulumi.InvokeArgs
     {
-        [Input("url", required: true)]
-        public string Url { get; set; } = null!;
+        [Input("content")]
+        public string? Content { get; set; }
+
+        [Input("url")]
+        public string? Url { get; set; }
 
         [Input("verifyChain")]
         public bool? VerifyChain { get; set; }
@@ -34,8 +37,11 @@ namespace Pulumi.Tls
 
     public sealed class GetCertificateInvokeArgs : Pulumi.InvokeArgs
     {
-        [Input("url", required: true)]
-        public Input<string> Url { get; set; } = null!;
+        [Input("content")]
+        public Input<string>? Content { get; set; }
+
+        [Input("url")]
+        public Input<string>? Url { get; set; }
 
         [Input("verifyChain")]
         public Input<bool>? VerifyChain { get; set; }
@@ -50,21 +56,25 @@ namespace Pulumi.Tls
     public sealed class GetCertificateResult
     {
         public readonly ImmutableArray<Outputs.GetCertificateCertificateResult> Certificates;
+        public readonly string? Content;
         public readonly string Id;
-        public readonly string Url;
+        public readonly string? Url;
         public readonly bool? VerifyChain;
 
         [OutputConstructor]
         private GetCertificateResult(
             ImmutableArray<Outputs.GetCertificateCertificateResult> certificates,
 
+            string? content,
+
             string id,
 
-            string url,
+            string? url,
 
             bool? verifyChain)
         {
             Certificates = certificates;
+            Content = content;
             Id = id;
             Url = url;
             VerifyChain = verifyChain;

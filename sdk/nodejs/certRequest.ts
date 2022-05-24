@@ -15,10 +15,10 @@ import * as utilities from "./utilities";
  *
  * const example = new tls.CertRequest("example", {
  *     privateKeyPem: fs.readFileSync("private_key.pem"),
- *     subjects: [{
+ *     subject: {
  *         commonName: "example.com",
  *         organization: "ACME Examples, Inc",
- *     }],
+ *     },
  * });
  * ```
  */
@@ -51,7 +51,11 @@ export class CertRequest extends pulumi.CustomResource {
     }
 
     /**
-     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
+     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+     * the end of the PEM. In case this disrupts your use case, we recommend using
+     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
      */
     public /*out*/ readonly certRequestPem!: pulumi.Output<string>;
     /**
@@ -79,7 +83,7 @@ export class CertRequest extends pulumi.CustomResource {
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
      * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
-    public readonly subjects!: pulumi.Output<outputs.CertRequestSubject[]>;
+    public readonly subject!: pulumi.Output<outputs.CertRequestSubject | undefined>;
     /**
      * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */
@@ -103,21 +107,18 @@ export class CertRequest extends pulumi.CustomResource {
             resourceInputs["ipAddresses"] = state ? state.ipAddresses : undefined;
             resourceInputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
             resourceInputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
-            resourceInputs["subjects"] = state ? state.subjects : undefined;
+            resourceInputs["subject"] = state ? state.subject : undefined;
             resourceInputs["uris"] = state ? state.uris : undefined;
         } else {
             const args = argsOrState as CertRequestArgs | undefined;
             if ((!args || args.privateKeyPem === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'privateKeyPem'");
             }
-            if ((!args || args.subjects === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'subjects'");
-            }
             resourceInputs["dnsNames"] = args ? args.dnsNames : undefined;
             resourceInputs["ipAddresses"] = args ? args.ipAddresses : undefined;
             resourceInputs["keyAlgorithm"] = args ? args.keyAlgorithm : undefined;
             resourceInputs["privateKeyPem"] = args ? args.privateKeyPem : undefined;
-            resourceInputs["subjects"] = args ? args.subjects : undefined;
+            resourceInputs["subject"] = args ? args.subject : undefined;
             resourceInputs["uris"] = args ? args.uris : undefined;
             resourceInputs["certRequestPem"] = undefined /*out*/;
         }
@@ -131,7 +132,11 @@ export class CertRequest extends pulumi.CustomResource {
  */
 export interface CertRequestState {
     /**
-     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
+     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+     * the end of the PEM. In case this disrupts your use case, we recommend using
+     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
      */
     certRequestPem?: pulumi.Input<string>;
     /**
@@ -159,7 +164,7 @@ export interface CertRequestState {
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
      * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
-    subjects?: pulumi.Input<pulumi.Input<inputs.CertRequestSubject>[]>;
+    subject?: pulumi.Input<inputs.CertRequestSubject>;
     /**
      * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */
@@ -195,7 +200,7 @@ export interface CertRequestArgs {
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
      * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
-    subjects: pulumi.Input<pulumi.Input<inputs.CertRequestSubject>[]>;
+    subject?: pulumi.Input<inputs.CertRequestSubject>;
     /**
      * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */

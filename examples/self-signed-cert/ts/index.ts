@@ -19,9 +19,9 @@ const ssoPrivateKey = new tls.PrivateKey("ssoPrivateKey", { algorithm: "RSA", rs
 new tls.SelfSignedCert("ssoCert", {
     allowedUses: ["cert_signing"],
     privateKeyPem: ssoPrivateKey.privateKeyPem,
-    subjects: [
-        {commonName: `api.example.com`}
-    ],
-    validityPeriodHours: (365*24)
+    subject: {
+        commonName: `api.example.com`,
+    },
+    validityPeriodHours: (365*24),
 })
 

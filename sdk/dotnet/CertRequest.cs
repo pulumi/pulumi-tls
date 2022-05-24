@@ -24,13 +24,10 @@ namespace Pulumi.Tls
     ///         var example = new Tls.CertRequest("example", new Tls.CertRequestArgs
     ///         {
     ///             PrivateKeyPem = File.ReadAllText("private_key.pem"),
-    ///             Subjects = 
+    ///             Subject = new Tls.Inputs.CertRequestSubjectArgs
     ///             {
-    ///                 new Tls.Inputs.CertRequestSubjectArgs
-    ///                 {
-    ///                     CommonName = "example.com",
-    ///                     Organization = "ACME Examples, Inc",
-    ///                 },
+    ///                 CommonName = "example.com",
+    ///                 Organization = "ACME Examples, Inc",
     ///             },
     ///         });
     ///     }
@@ -42,7 +39,11 @@ namespace Pulumi.Tls
     public partial class CertRequest : Pulumi.CustomResource
     {
         /// <summary>
-        /// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        /// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+        /// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+        /// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+        /// the end of the PEM. In case this disrupts your use case, we recommend using
+        /// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         /// </summary>
         [Output("certRequestPem")]
         public Output<string> CertRequestPem { get; private set; } = null!;
@@ -78,8 +79,8 @@ namespace Pulumi.Tls
         /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
         /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
-        [Output("subjects")]
-        public Output<ImmutableArray<Outputs.CertRequestSubject>> Subjects { get; private set; } = null!;
+        [Output("subject")]
+        public Output<Outputs.CertRequestSubject?> Subject { get; private set; } = null!;
 
         /// <summary>
         /// List of URIs for which a certificate is being requested (i.e. certificate subjects).
@@ -172,18 +173,12 @@ namespace Pulumi.Tls
         [Input("privateKeyPem", required: true)]
         public Input<string> PrivateKeyPem { get; set; } = null!;
 
-        [Input("subjects", required: true)]
-        private InputList<Inputs.CertRequestSubjectArgs>? _subjects;
-
         /// <summary>
         /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
         /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
-        public InputList<Inputs.CertRequestSubjectArgs> Subjects
-        {
-            get => _subjects ?? (_subjects = new InputList<Inputs.CertRequestSubjectArgs>());
-            set => _subjects = value;
-        }
+        [Input("subject")]
+        public Input<Inputs.CertRequestSubjectArgs>? Subject { get; set; }
 
         [Input("uris")]
         private InputList<string>? _uris;
@@ -205,7 +200,11 @@ namespace Pulumi.Tls
     public sealed class CertRequestState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        /// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+        /// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+        /// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+        /// the end of the PEM. In case this disrupts your use case, we recommend using
+        /// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         /// </summary>
         [Input("certRequestPem")]
         public Input<string>? CertRequestPem { get; set; }
@@ -249,18 +248,12 @@ namespace Pulumi.Tls
         [Input("privateKeyPem")]
         public Input<string>? PrivateKeyPem { get; set; }
 
-        [Input("subjects")]
-        private InputList<Inputs.CertRequestSubjectGetArgs>? _subjects;
-
         /// <summary>
         /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
         /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
-        public InputList<Inputs.CertRequestSubjectGetArgs> Subjects
-        {
-            get => _subjects ?? (_subjects = new InputList<Inputs.CertRequestSubjectGetArgs>());
-            set => _subjects = value;
-        }
+        [Input("subject")]
+        public Input<Inputs.CertRequestSubjectGetArgs>? Subject { get; set; }
 
         [Input("uris")]
         private InputList<string>? _uris;
