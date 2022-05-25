@@ -26,7 +26,11 @@ namespace Pulumi.Tls
         public Output<ImmutableArray<string>> AllowedUses { get; private set; } = null!;
 
         /// <summary>
-        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+        /// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+        /// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+        /// the end of the PEM. In case this disrupts your use case, we recommend using
+        /// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         /// </summary>
         [Output("certPem")]
         public Output<string> CertPem { get; private set; } = null!;
@@ -82,6 +86,15 @@ namespace Pulumi.Tls
         public Output<bool> ReadyForRenewal { get; private set; } = null!;
 
         /// <summary>
+        /// Should the generated certificate include an [authority key
+        /// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+        /// same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+        /// `false`).
+        /// </summary>
+        [Output("setAuthorityKeyId")]
+        public Output<bool?> SetAuthorityKeyId { get; private set; } = null!;
+
+        /// <summary>
         /// Should the generated certificate include a [subject key
         /// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
@@ -92,8 +105,8 @@ namespace Pulumi.Tls
         /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
         /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
-        [Output("subjects")]
-        public Output<ImmutableArray<Outputs.SelfSignedCertSubject>> Subjects { get; private set; } = null!;
+        [Output("subject")]
+        public Output<Outputs.SelfSignedCertSubject?> Subject { get; private set; } = null!;
 
         /// <summary>
         /// List of URIs for which a certificate is being requested (i.e. certificate subjects).
@@ -241,24 +254,27 @@ namespace Pulumi.Tls
         public Input<string> PrivateKeyPem { get; set; } = null!;
 
         /// <summary>
+        /// Should the generated certificate include an [authority key
+        /// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+        /// same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+        /// `false`).
+        /// </summary>
+        [Input("setAuthorityKeyId")]
+        public Input<bool>? SetAuthorityKeyId { get; set; }
+
+        /// <summary>
         /// Should the generated certificate include a [subject key
         /// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Input("setSubjectKeyId")]
         public Input<bool>? SetSubjectKeyId { get; set; }
 
-        [Input("subjects", required: true)]
-        private InputList<Inputs.SelfSignedCertSubjectArgs>? _subjects;
-
         /// <summary>
         /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
         /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
-        public InputList<Inputs.SelfSignedCertSubjectArgs> Subjects
-        {
-            get => _subjects ?? (_subjects = new InputList<Inputs.SelfSignedCertSubjectArgs>());
-            set => _subjects = value;
-        }
+        [Input("subject")]
+        public Input<Inputs.SelfSignedCertSubjectArgs>? Subject { get; set; }
 
         [Input("uris")]
         private InputList<string>? _uris;
@@ -305,7 +321,11 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+        /// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+        /// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+        /// the end of the PEM. In case this disrupts your use case, we recommend using
+        /// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         /// </summary>
         [Input("certPem")]
         public Input<string>? CertPem { get; set; }
@@ -373,24 +393,27 @@ namespace Pulumi.Tls
         public Input<bool>? ReadyForRenewal { get; set; }
 
         /// <summary>
+        /// Should the generated certificate include an [authority key
+        /// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+        /// same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+        /// `false`).
+        /// </summary>
+        [Input("setAuthorityKeyId")]
+        public Input<bool>? SetAuthorityKeyId { get; set; }
+
+        /// <summary>
         /// Should the generated certificate include a [subject key
         /// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Input("setSubjectKeyId")]
         public Input<bool>? SetSubjectKeyId { get; set; }
 
-        [Input("subjects")]
-        private InputList<Inputs.SelfSignedCertSubjectGetArgs>? _subjects;
-
         /// <summary>
         /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
         /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
-        public InputList<Inputs.SelfSignedCertSubjectGetArgs> Subjects
-        {
-            get => _subjects ?? (_subjects = new InputList<Inputs.SelfSignedCertSubjectGetArgs>());
-            set => _subjects = value;
-        }
+        [Input("subject")]
+        public Input<Inputs.SelfSignedCertSubjectGetArgs>? Subject { get; set; }
 
         [Input("uris")]
         private InputList<string>? _uris;

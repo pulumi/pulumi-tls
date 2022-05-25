@@ -21,10 +21,13 @@ class GetCertificateResult:
     """
     A collection of values returned by getCertificate.
     """
-    def __init__(__self__, certificates=None, id=None, url=None, verify_chain=None):
+    def __init__(__self__, certificates=None, content=None, id=None, url=None, verify_chain=None):
         if certificates and not isinstance(certificates, list):
             raise TypeError("Expected argument 'certificates' to be a list")
         pulumi.set(__self__, "certificates", certificates)
+        if content and not isinstance(content, str):
+            raise TypeError("Expected argument 'content' to be a str")
+        pulumi.set(__self__, "content", content)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
@@ -42,12 +45,17 @@ class GetCertificateResult:
 
     @property
     @pulumi.getter
+    def content(self) -> Optional[str]:
+        return pulumi.get(self, "content")
+
+    @property
+    @pulumi.getter
     def id(self) -> str:
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
-    def url(self) -> str:
+    def url(self) -> Optional[str]:
         return pulumi.get(self, "url")
 
     @property
@@ -63,18 +71,21 @@ class AwaitableGetCertificateResult(GetCertificateResult):
             yield self
         return GetCertificateResult(
             certificates=self.certificates,
+            content=self.content,
             id=self.id,
             url=self.url,
             verify_chain=self.verify_chain)
 
 
-def get_certificate(url: Optional[str] = None,
+def get_certificate(content: Optional[str] = None,
+                    url: Optional[str] = None,
                     verify_chain: Optional[bool] = None,
                     opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetCertificateResult:
     """
     Use this data source to access information about an existing resource.
     """
     __args__ = dict()
+    __args__['content'] = content
     __args__['url'] = url
     __args__['verifyChain'] = verify_chain
     if opts is None:
@@ -85,13 +96,15 @@ def get_certificate(url: Optional[str] = None,
 
     return AwaitableGetCertificateResult(
         certificates=__ret__.certificates,
+        content=__ret__.content,
         id=__ret__.id,
         url=__ret__.url,
         verify_chain=__ret__.verify_chain)
 
 
 @_utilities.lift_output_func(get_certificate)
-def get_certificate_output(url: Optional[pulumi.Input[str]] = None,
+def get_certificate_output(content: Optional[pulumi.Input[Optional[str]]] = None,
+                           url: Optional[pulumi.Input[Optional[str]]] = None,
                            verify_chain: Optional[pulumi.Input[Optional[bool]]] = None,
                            opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetCertificateResult]:
     """

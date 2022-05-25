@@ -35,11 +35,9 @@ import (
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := tls.NewCertRequest(ctx, "example", &tls.CertRequestArgs{
 // 			PrivateKeyPem: readFileOrPanic("private_key.pem"),
-// 			Subjects: CertRequestSubjectArray{
-// 				&CertRequestSubjectArgs{
-// 					CommonName:   pulumi.String("example.com"),
-// 					Organization: pulumi.String("ACME Examples, Inc"),
-// 				},
+// 			Subject: &CertRequestSubjectArgs{
+// 				CommonName:   pulumi.String("example.com"),
+// 				Organization: pulumi.String("ACME Examples, Inc"),
 // 			},
 // 		})
 // 		if err != nil {
@@ -52,7 +50,11 @@ import (
 type CertRequest struct {
 	pulumi.CustomResourceState
 
-	// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+	// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+	// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+	// the end of the PEM. In case this disrupts your use case, we recommend using
+	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 	CertRequestPem pulumi.StringOutput `pulumi:"certRequestPem"`
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames pulumi.StringArrayOutput `pulumi:"dnsNames"`
@@ -69,7 +71,7 @@ type CertRequest struct {
 	PrivateKeyPem pulumi.StringOutput `pulumi:"privateKeyPem"`
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
 	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-	Subjects CertRequestSubjectArrayOutput `pulumi:"subjects"`
+	Subject CertRequestSubjectPtrOutput `pulumi:"subject"`
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris pulumi.StringArrayOutput `pulumi:"uris"`
 }
@@ -83,9 +85,6 @@ func NewCertRequest(ctx *pulumi.Context,
 
 	if args.PrivateKeyPem == nil {
 		return nil, errors.New("invalid value for required argument 'PrivateKeyPem'")
-	}
-	if args.Subjects == nil {
-		return nil, errors.New("invalid value for required argument 'Subjects'")
 	}
 	var resource CertRequest
 	err := ctx.RegisterResource("tls:index/certRequest:CertRequest", name, args, &resource, opts...)
@@ -109,7 +108,11 @@ func GetCertRequest(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering CertRequest resources.
 type certRequestState struct {
-	// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+	// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+	// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+	// the end of the PEM. In case this disrupts your use case, we recommend using
+	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 	CertRequestPem *string `pulumi:"certRequestPem"`
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames []string `pulumi:"dnsNames"`
@@ -126,13 +129,17 @@ type certRequestState struct {
 	PrivateKeyPem *string `pulumi:"privateKeyPem"`
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
 	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-	Subjects []CertRequestSubject `pulumi:"subjects"`
+	Subject *CertRequestSubject `pulumi:"subject"`
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris []string `pulumi:"uris"`
 }
 
 type CertRequestState struct {
-	// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+	// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+	// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+	// the end of the PEM. In case this disrupts your use case, we recommend using
+	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 	CertRequestPem pulumi.StringPtrInput
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames pulumi.StringArrayInput
@@ -149,7 +156,7 @@ type CertRequestState struct {
 	PrivateKeyPem pulumi.StringPtrInput
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
 	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-	Subjects CertRequestSubjectArrayInput
+	Subject CertRequestSubjectPtrInput
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris pulumi.StringArrayInput
 }
@@ -174,7 +181,7 @@ type certRequestArgs struct {
 	PrivateKeyPem string `pulumi:"privateKeyPem"`
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
 	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-	Subjects []CertRequestSubject `pulumi:"subjects"`
+	Subject *CertRequestSubject `pulumi:"subject"`
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris []string `pulumi:"uris"`
 }
@@ -196,7 +203,7 @@ type CertRequestArgs struct {
 	PrivateKeyPem pulumi.StringInput
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
 	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-	Subjects CertRequestSubjectArrayInput
+	Subject CertRequestSubjectPtrInput
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris pulumi.StringArrayInput
 }
@@ -288,7 +295,11 @@ func (o CertRequestOutput) ToCertRequestOutputWithContext(ctx context.Context) C
 	return o
 }
 
-// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+// the end of the PEM. In case this disrupts your use case, we recommend using
+// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 func (o CertRequestOutput) CertRequestPem() pulumi.StringOutput {
 	return o.ApplyT(func(v *CertRequest) pulumi.StringOutput { return v.CertRequestPem }).(pulumi.StringOutput)
 }
@@ -320,8 +331,8 @@ func (o CertRequestOutput) PrivateKeyPem() pulumi.StringOutput {
 
 // The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
 // based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-func (o CertRequestOutput) Subjects() CertRequestSubjectArrayOutput {
-	return o.ApplyT(func(v *CertRequest) CertRequestSubjectArrayOutput { return v.Subjects }).(CertRequestSubjectArrayOutput)
+func (o CertRequestOutput) Subject() CertRequestSubjectPtrOutput {
+	return o.ApplyT(func(v *CertRequest) CertRequestSubjectPtrOutput { return v.Subject }).(CertRequestSubjectPtrOutput)
 }
 
 // List of URIs for which a certificate is being requested (i.e. certificate subjects).

@@ -26,18 +26,26 @@ type PrivateKey struct {
 	PrivateKeyPem pulumi.StringOutput `pulumi:"privateKeyPem"`
 	// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
 	// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-	// limitations](../../#limitations).
+	// limitations](../../docs#limitations).
 	PublicKeyFingerprintMd5 pulumi.StringOutput `pulumi:"publicKeyFingerprintMd5"`
 	// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
 	// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-	// limitations](../../#limitations).
+	// limitations](../../docs#limitations).
 	PublicKeyFingerprintSha256 pulumi.StringOutput `pulumi:"publicKeyFingerprintSha256"`
 	// The public key data in ["Authorized
 	// Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
 	// populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-	// `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not supported](../../#limitations).
+	// `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
+	// supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
+	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+	// the end of the PEM. In case this disrupts your use case, we recommend using
+	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 	PublicKeyOpenssh pulumi.StringOutput `pulumi:"publicKeyOpenssh"`
-	// Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+	// Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+	// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+	// the end of the PEM. In case this disrupts your use case, we recommend using
+	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 	PublicKeyPem pulumi.StringOutput `pulumi:"publicKeyPem"`
 	// When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
 	RsaBits pulumi.IntPtrOutput `pulumi:"rsaBits"`
@@ -87,18 +95,26 @@ type privateKeyState struct {
 	PrivateKeyPem *string `pulumi:"privateKeyPem"`
 	// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
 	// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-	// limitations](../../#limitations).
+	// limitations](../../docs#limitations).
 	PublicKeyFingerprintMd5 *string `pulumi:"publicKeyFingerprintMd5"`
 	// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
 	// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-	// limitations](../../#limitations).
+	// limitations](../../docs#limitations).
 	PublicKeyFingerprintSha256 *string `pulumi:"publicKeyFingerprintSha256"`
 	// The public key data in ["Authorized
 	// Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
 	// populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-	// `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not supported](../../#limitations).
+	// `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
+	// supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
+	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+	// the end of the PEM. In case this disrupts your use case, we recommend using
+	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 	PublicKeyOpenssh *string `pulumi:"publicKeyOpenssh"`
-	// Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+	// Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+	// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+	// the end of the PEM. In case this disrupts your use case, we recommend using
+	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 	PublicKeyPem *string `pulumi:"publicKeyPem"`
 	// When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
 	RsaBits *int `pulumi:"rsaBits"`
@@ -117,18 +133,26 @@ type PrivateKeyState struct {
 	PrivateKeyPem pulumi.StringPtrInput
 	// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
 	// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-	// limitations](../../#limitations).
+	// limitations](../../docs#limitations).
 	PublicKeyFingerprintMd5 pulumi.StringPtrInput
 	// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
 	// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-	// limitations](../../#limitations).
+	// limitations](../../docs#limitations).
 	PublicKeyFingerprintSha256 pulumi.StringPtrInput
 	// The public key data in ["Authorized
 	// Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
 	// populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-	// `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not supported](../../#limitations).
+	// `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
+	// supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
+	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+	// the end of the PEM. In case this disrupts your use case, we recommend using
+	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 	PublicKeyOpenssh pulumi.StringPtrInput
-	// Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+	// Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+	// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+	// the end of the PEM. In case this disrupts your use case, we recommend using
+	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 	PublicKeyPem pulumi.StringPtrInput
 	// When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
 	RsaBits pulumi.IntPtrInput
@@ -272,14 +296,14 @@ func (o PrivateKeyOutput) PrivateKeyPem() pulumi.StringOutput {
 
 // The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
 // private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-// limitations](../../#limitations).
+// limitations](../../docs#limitations).
 func (o PrivateKeyOutput) PublicKeyFingerprintMd5() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateKey) pulumi.StringOutput { return v.PublicKeyFingerprintMd5 }).(pulumi.StringOutput)
 }
 
 // The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
 // private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-// limitations](../../#limitations).
+// limitations](../../docs#limitations).
 func (o PrivateKeyOutput) PublicKeyFingerprintSha256() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateKey) pulumi.StringOutput { return v.PublicKeyFingerprintSha256 }).(pulumi.StringOutput)
 }
@@ -287,12 +311,20 @@ func (o PrivateKeyOutput) PublicKeyFingerprintSha256() pulumi.StringOutput {
 // The public key data in ["Authorized
 // Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
 // populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-// `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not supported](../../#limitations).
+// `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
+// supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
+// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+// the end of the PEM. In case this disrupts your use case, we recommend using
+// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 func (o PrivateKeyOutput) PublicKeyOpenssh() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateKey) pulumi.StringOutput { return v.PublicKeyOpenssh }).(pulumi.StringOutput)
 }
 
-// Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+// Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+// [underlying](https://pkg.go.dev/encoding/pem#Encode)
+// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+// the end of the PEM. In case this disrupts your use case, we recommend using
+// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
 func (o PrivateKeyOutput) PublicKeyPem() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateKey) pulumi.StringOutput { return v.PublicKeyPem }).(pulumi.StringOutput)
 }

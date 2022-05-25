@@ -57,29 +57,45 @@ func (i CertRequestSubjectArgs) ToCertRequestSubjectOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(CertRequestSubjectOutput)
 }
 
-// CertRequestSubjectArrayInput is an input type that accepts CertRequestSubjectArray and CertRequestSubjectArrayOutput values.
-// You can construct a concrete instance of `CertRequestSubjectArrayInput` via:
+func (i CertRequestSubjectArgs) ToCertRequestSubjectPtrOutput() CertRequestSubjectPtrOutput {
+	return i.ToCertRequestSubjectPtrOutputWithContext(context.Background())
+}
+
+func (i CertRequestSubjectArgs) ToCertRequestSubjectPtrOutputWithContext(ctx context.Context) CertRequestSubjectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertRequestSubjectOutput).ToCertRequestSubjectPtrOutputWithContext(ctx)
+}
+
+// CertRequestSubjectPtrInput is an input type that accepts CertRequestSubjectArgs, CertRequestSubjectPtr and CertRequestSubjectPtrOutput values.
+// You can construct a concrete instance of `CertRequestSubjectPtrInput` via:
 //
-//          CertRequestSubjectArray{ CertRequestSubjectArgs{...} }
-type CertRequestSubjectArrayInput interface {
+//          CertRequestSubjectArgs{...}
+//
+//  or:
+//
+//          nil
+type CertRequestSubjectPtrInput interface {
 	pulumi.Input
 
-	ToCertRequestSubjectArrayOutput() CertRequestSubjectArrayOutput
-	ToCertRequestSubjectArrayOutputWithContext(context.Context) CertRequestSubjectArrayOutput
+	ToCertRequestSubjectPtrOutput() CertRequestSubjectPtrOutput
+	ToCertRequestSubjectPtrOutputWithContext(context.Context) CertRequestSubjectPtrOutput
 }
 
-type CertRequestSubjectArray []CertRequestSubjectInput
+type certRequestSubjectPtrType CertRequestSubjectArgs
 
-func (CertRequestSubjectArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CertRequestSubject)(nil)).Elem()
+func CertRequestSubjectPtr(v *CertRequestSubjectArgs) CertRequestSubjectPtrInput {
+	return (*certRequestSubjectPtrType)(v)
 }
 
-func (i CertRequestSubjectArray) ToCertRequestSubjectArrayOutput() CertRequestSubjectArrayOutput {
-	return i.ToCertRequestSubjectArrayOutputWithContext(context.Background())
+func (*certRequestSubjectPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CertRequestSubject)(nil)).Elem()
 }
 
-func (i CertRequestSubjectArray) ToCertRequestSubjectArrayOutputWithContext(ctx context.Context) CertRequestSubjectArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CertRequestSubjectArrayOutput)
+func (i *certRequestSubjectPtrType) ToCertRequestSubjectPtrOutput() CertRequestSubjectPtrOutput {
+	return i.ToCertRequestSubjectPtrOutputWithContext(context.Background())
+}
+
+func (i *certRequestSubjectPtrType) ToCertRequestSubjectPtrOutputWithContext(ctx context.Context) CertRequestSubjectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertRequestSubjectPtrOutput)
 }
 
 type CertRequestSubjectOutput struct{ *pulumi.OutputState }
@@ -94,6 +110,16 @@ func (o CertRequestSubjectOutput) ToCertRequestSubjectOutput() CertRequestSubjec
 
 func (o CertRequestSubjectOutput) ToCertRequestSubjectOutputWithContext(ctx context.Context) CertRequestSubjectOutput {
 	return o
+}
+
+func (o CertRequestSubjectOutput) ToCertRequestSubjectPtrOutput() CertRequestSubjectPtrOutput {
+	return o.ToCertRequestSubjectPtrOutputWithContext(context.Background())
+}
+
+func (o CertRequestSubjectOutput) ToCertRequestSubjectPtrOutputWithContext(ctx context.Context) CertRequestSubjectPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CertRequestSubject) *CertRequestSubject {
+		return &v
+	}).(CertRequestSubjectPtrOutput)
 }
 
 func (o CertRequestSubjectOutput) CommonName() pulumi.StringPtrOutput {
@@ -132,24 +158,109 @@ func (o CertRequestSubjectOutput) StreetAddresses() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v CertRequestSubject) []string { return v.StreetAddresses }).(pulumi.StringArrayOutput)
 }
 
-type CertRequestSubjectArrayOutput struct{ *pulumi.OutputState }
+type CertRequestSubjectPtrOutput struct{ *pulumi.OutputState }
 
-func (CertRequestSubjectArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CertRequestSubject)(nil)).Elem()
+func (CertRequestSubjectPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CertRequestSubject)(nil)).Elem()
 }
 
-func (o CertRequestSubjectArrayOutput) ToCertRequestSubjectArrayOutput() CertRequestSubjectArrayOutput {
+func (o CertRequestSubjectPtrOutput) ToCertRequestSubjectPtrOutput() CertRequestSubjectPtrOutput {
 	return o
 }
 
-func (o CertRequestSubjectArrayOutput) ToCertRequestSubjectArrayOutputWithContext(ctx context.Context) CertRequestSubjectArrayOutput {
+func (o CertRequestSubjectPtrOutput) ToCertRequestSubjectPtrOutputWithContext(ctx context.Context) CertRequestSubjectPtrOutput {
 	return o
 }
 
-func (o CertRequestSubjectArrayOutput) Index(i pulumi.IntInput) CertRequestSubjectOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CertRequestSubject {
-		return vs[0].([]CertRequestSubject)[vs[1].(int)]
+func (o CertRequestSubjectPtrOutput) Elem() CertRequestSubjectOutput {
+	return o.ApplyT(func(v *CertRequestSubject) CertRequestSubject {
+		if v != nil {
+			return *v
+		}
+		var ret CertRequestSubject
+		return ret
 	}).(CertRequestSubjectOutput)
+}
+
+func (o CertRequestSubjectPtrOutput) CommonName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CertRequestSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CommonName
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CertRequestSubjectPtrOutput) Country() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CertRequestSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Country
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CertRequestSubjectPtrOutput) Locality() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CertRequestSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Locality
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CertRequestSubjectPtrOutput) Organization() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CertRequestSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Organization
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CertRequestSubjectPtrOutput) OrganizationalUnit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CertRequestSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.OrganizationalUnit
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CertRequestSubjectPtrOutput) PostalCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CertRequestSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PostalCode
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CertRequestSubjectPtrOutput) Province() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CertRequestSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Province
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CertRequestSubjectPtrOutput) SerialNumber() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CertRequestSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SerialNumber
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o CertRequestSubjectPtrOutput) StreetAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CertRequestSubject) []string {
+		if v == nil {
+			return nil
+		}
+		return v.StreetAddresses
+	}).(pulumi.StringArrayOutput)
 }
 
 type ProviderProxy struct {
@@ -377,29 +488,45 @@ func (i SelfSignedCertSubjectArgs) ToSelfSignedCertSubjectOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertSubjectOutput)
 }
 
-// SelfSignedCertSubjectArrayInput is an input type that accepts SelfSignedCertSubjectArray and SelfSignedCertSubjectArrayOutput values.
-// You can construct a concrete instance of `SelfSignedCertSubjectArrayInput` via:
+func (i SelfSignedCertSubjectArgs) ToSelfSignedCertSubjectPtrOutput() SelfSignedCertSubjectPtrOutput {
+	return i.ToSelfSignedCertSubjectPtrOutputWithContext(context.Background())
+}
+
+func (i SelfSignedCertSubjectArgs) ToSelfSignedCertSubjectPtrOutputWithContext(ctx context.Context) SelfSignedCertSubjectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertSubjectOutput).ToSelfSignedCertSubjectPtrOutputWithContext(ctx)
+}
+
+// SelfSignedCertSubjectPtrInput is an input type that accepts SelfSignedCertSubjectArgs, SelfSignedCertSubjectPtr and SelfSignedCertSubjectPtrOutput values.
+// You can construct a concrete instance of `SelfSignedCertSubjectPtrInput` via:
 //
-//          SelfSignedCertSubjectArray{ SelfSignedCertSubjectArgs{...} }
-type SelfSignedCertSubjectArrayInput interface {
+//          SelfSignedCertSubjectArgs{...}
+//
+//  or:
+//
+//          nil
+type SelfSignedCertSubjectPtrInput interface {
 	pulumi.Input
 
-	ToSelfSignedCertSubjectArrayOutput() SelfSignedCertSubjectArrayOutput
-	ToSelfSignedCertSubjectArrayOutputWithContext(context.Context) SelfSignedCertSubjectArrayOutput
+	ToSelfSignedCertSubjectPtrOutput() SelfSignedCertSubjectPtrOutput
+	ToSelfSignedCertSubjectPtrOutputWithContext(context.Context) SelfSignedCertSubjectPtrOutput
 }
 
-type SelfSignedCertSubjectArray []SelfSignedCertSubjectInput
+type selfSignedCertSubjectPtrType SelfSignedCertSubjectArgs
 
-func (SelfSignedCertSubjectArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SelfSignedCertSubject)(nil)).Elem()
+func SelfSignedCertSubjectPtr(v *SelfSignedCertSubjectArgs) SelfSignedCertSubjectPtrInput {
+	return (*selfSignedCertSubjectPtrType)(v)
 }
 
-func (i SelfSignedCertSubjectArray) ToSelfSignedCertSubjectArrayOutput() SelfSignedCertSubjectArrayOutput {
-	return i.ToSelfSignedCertSubjectArrayOutputWithContext(context.Background())
+func (*selfSignedCertSubjectPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SelfSignedCertSubject)(nil)).Elem()
 }
 
-func (i SelfSignedCertSubjectArray) ToSelfSignedCertSubjectArrayOutputWithContext(ctx context.Context) SelfSignedCertSubjectArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertSubjectArrayOutput)
+func (i *selfSignedCertSubjectPtrType) ToSelfSignedCertSubjectPtrOutput() SelfSignedCertSubjectPtrOutput {
+	return i.ToSelfSignedCertSubjectPtrOutputWithContext(context.Background())
+}
+
+func (i *selfSignedCertSubjectPtrType) ToSelfSignedCertSubjectPtrOutputWithContext(ctx context.Context) SelfSignedCertSubjectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertSubjectPtrOutput)
 }
 
 type SelfSignedCertSubjectOutput struct{ *pulumi.OutputState }
@@ -414,6 +541,16 @@ func (o SelfSignedCertSubjectOutput) ToSelfSignedCertSubjectOutput() SelfSignedC
 
 func (o SelfSignedCertSubjectOutput) ToSelfSignedCertSubjectOutputWithContext(ctx context.Context) SelfSignedCertSubjectOutput {
 	return o
+}
+
+func (o SelfSignedCertSubjectOutput) ToSelfSignedCertSubjectPtrOutput() SelfSignedCertSubjectPtrOutput {
+	return o.ToSelfSignedCertSubjectPtrOutputWithContext(context.Background())
+}
+
+func (o SelfSignedCertSubjectOutput) ToSelfSignedCertSubjectPtrOutputWithContext(ctx context.Context) SelfSignedCertSubjectPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SelfSignedCertSubject) *SelfSignedCertSubject {
+		return &v
+	}).(SelfSignedCertSubjectPtrOutput)
 }
 
 func (o SelfSignedCertSubjectOutput) CommonName() pulumi.StringPtrOutput {
@@ -452,27 +589,113 @@ func (o SelfSignedCertSubjectOutput) StreetAddresses() pulumi.StringArrayOutput 
 	return o.ApplyT(func(v SelfSignedCertSubject) []string { return v.StreetAddresses }).(pulumi.StringArrayOutput)
 }
 
-type SelfSignedCertSubjectArrayOutput struct{ *pulumi.OutputState }
+type SelfSignedCertSubjectPtrOutput struct{ *pulumi.OutputState }
 
-func (SelfSignedCertSubjectArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]SelfSignedCertSubject)(nil)).Elem()
+func (SelfSignedCertSubjectPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SelfSignedCertSubject)(nil)).Elem()
 }
 
-func (o SelfSignedCertSubjectArrayOutput) ToSelfSignedCertSubjectArrayOutput() SelfSignedCertSubjectArrayOutput {
+func (o SelfSignedCertSubjectPtrOutput) ToSelfSignedCertSubjectPtrOutput() SelfSignedCertSubjectPtrOutput {
 	return o
 }
 
-func (o SelfSignedCertSubjectArrayOutput) ToSelfSignedCertSubjectArrayOutputWithContext(ctx context.Context) SelfSignedCertSubjectArrayOutput {
+func (o SelfSignedCertSubjectPtrOutput) ToSelfSignedCertSubjectPtrOutputWithContext(ctx context.Context) SelfSignedCertSubjectPtrOutput {
 	return o
 }
 
-func (o SelfSignedCertSubjectArrayOutput) Index(i pulumi.IntInput) SelfSignedCertSubjectOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SelfSignedCertSubject {
-		return vs[0].([]SelfSignedCertSubject)[vs[1].(int)]
+func (o SelfSignedCertSubjectPtrOutput) Elem() SelfSignedCertSubjectOutput {
+	return o.ApplyT(func(v *SelfSignedCertSubject) SelfSignedCertSubject {
+		if v != nil {
+			return *v
+		}
+		var ret SelfSignedCertSubject
+		return ret
 	}).(SelfSignedCertSubjectOutput)
 }
 
+func (o SelfSignedCertSubjectPtrOutput) CommonName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CommonName
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SelfSignedCertSubjectPtrOutput) Country() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Country
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SelfSignedCertSubjectPtrOutput) Locality() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Locality
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SelfSignedCertSubjectPtrOutput) Organization() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Organization
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SelfSignedCertSubjectPtrOutput) OrganizationalUnit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.OrganizationalUnit
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SelfSignedCertSubjectPtrOutput) PostalCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PostalCode
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SelfSignedCertSubjectPtrOutput) Province() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Province
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SelfSignedCertSubjectPtrOutput) SerialNumber() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SerialNumber
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SelfSignedCertSubjectPtrOutput) StreetAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SelfSignedCertSubject) []string {
+		if v == nil {
+			return nil
+		}
+		return v.StreetAddresses
+	}).(pulumi.StringArrayOutput)
+}
+
 type GetCertificateCertificate struct {
+	CertPem            string `pulumi:"certPem"`
 	IsCa               bool   `pulumi:"isCa"`
 	Issuer             string `pulumi:"issuer"`
 	NotAfter           string `pulumi:"notAfter"`
@@ -497,6 +720,7 @@ type GetCertificateCertificateInput interface {
 }
 
 type GetCertificateCertificateArgs struct {
+	CertPem            pulumi.StringInput `pulumi:"certPem"`
 	IsCa               pulumi.BoolInput   `pulumi:"isCa"`
 	Issuer             pulumi.StringInput `pulumi:"issuer"`
 	NotAfter           pulumi.StringInput `pulumi:"notAfter"`
@@ -558,6 +782,10 @@ func (o GetCertificateCertificateOutput) ToGetCertificateCertificateOutput() Get
 
 func (o GetCertificateCertificateOutput) ToGetCertificateCertificateOutputWithContext(ctx context.Context) GetCertificateCertificateOutput {
 	return o
+}
+
+func (o GetCertificateCertificateOutput) CertPem() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateCertificate) string { return v.CertPem }).(pulumi.StringOutput)
 }
 
 func (o GetCertificateCertificateOutput) IsCa() pulumi.BoolOutput {
@@ -622,19 +850,19 @@ func (o GetCertificateCertificateArrayOutput) Index(i pulumi.IntInput) GetCertif
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CertRequestSubjectInput)(nil)).Elem(), CertRequestSubjectArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CertRequestSubjectArrayInput)(nil)).Elem(), CertRequestSubjectArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertRequestSubjectPtrInput)(nil)).Elem(), CertRequestSubjectArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderProxyInput)(nil)).Elem(), ProviderProxyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderProxyPtrInput)(nil)).Elem(), ProviderProxyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SelfSignedCertSubjectInput)(nil)).Elem(), SelfSignedCertSubjectArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*SelfSignedCertSubjectArrayInput)(nil)).Elem(), SelfSignedCertSubjectArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SelfSignedCertSubjectPtrInput)(nil)).Elem(), SelfSignedCertSubjectArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateCertificateInput)(nil)).Elem(), GetCertificateCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateCertificateArrayInput)(nil)).Elem(), GetCertificateCertificateArray{})
 	pulumi.RegisterOutputType(CertRequestSubjectOutput{})
-	pulumi.RegisterOutputType(CertRequestSubjectArrayOutput{})
+	pulumi.RegisterOutputType(CertRequestSubjectPtrOutput{})
 	pulumi.RegisterOutputType(ProviderProxyOutput{})
 	pulumi.RegisterOutputType(ProviderProxyPtrOutput{})
 	pulumi.RegisterOutputType(SelfSignedCertSubjectOutput{})
-	pulumi.RegisterOutputType(SelfSignedCertSubjectArrayOutput{})
+	pulumi.RegisterOutputType(SelfSignedCertSubjectPtrOutput{})
 	pulumi.RegisterOutputType(GetCertificateCertificateOutput{})
 	pulumi.RegisterOutputType(GetCertificateCertificateArrayOutput{})
 }

@@ -5,13 +5,15 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getCertificate(args: GetCertificateArgs, opts?: pulumi.InvokeOptions): Promise<GetCertificateResult> {
+export function getCertificate(args?: GetCertificateArgs, opts?: pulumi.InvokeOptions): Promise<GetCertificateResult> {
+    args = args || {};
     if (!opts) {
         opts = {}
     }
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
     return pulumi.runtime.invoke("tls:index/getCertificate:getCertificate", {
+        "content": args.content,
         "url": args.url,
         "verifyChain": args.verifyChain,
     }, opts);
@@ -21,7 +23,8 @@ export function getCertificate(args: GetCertificateArgs, opts?: pulumi.InvokeOpt
  * A collection of arguments for invoking getCertificate.
  */
 export interface GetCertificateArgs {
-    url: string;
+    content?: string;
+    url?: string;
     verifyChain?: boolean;
 }
 
@@ -30,12 +33,13 @@ export interface GetCertificateArgs {
  */
 export interface GetCertificateResult {
     readonly certificates: outputs.GetCertificateCertificate[];
+    readonly content?: string;
     readonly id: string;
-    readonly url: string;
+    readonly url?: string;
     readonly verifyChain?: boolean;
 }
 
-export function getCertificateOutput(args: GetCertificateOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCertificateResult> {
+export function getCertificateOutput(args?: GetCertificateOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCertificateResult> {
     return pulumi.output(args).apply(a => getCertificate(a, opts))
 }
 
@@ -43,6 +47,7 @@ export function getCertificateOutput(args: GetCertificateOutputArgs, opts?: pulu
  * A collection of arguments for invoking getCertificate.
  */
 export interface GetCertificateOutputArgs {
-    url: pulumi.Input<string>;
+    content?: pulumi.Input<string>;
+    url?: pulumi.Input<string>;
     verifyChain?: pulumi.Input<boolean>;
 }

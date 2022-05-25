@@ -17,14 +17,15 @@ class SelfSignedCertArgs:
     def __init__(__self__, *,
                  allowed_uses: pulumi.Input[Sequence[pulumi.Input[str]]],
                  private_key_pem: pulumi.Input[str],
-                 subjects: pulumi.Input[Sequence[pulumi.Input['SelfSignedCertSubjectArgs']]],
                  validity_period_hours: pulumi.Input[int],
                  dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  early_renewal_hours: Optional[pulumi.Input[int]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  is_ca_certificate: Optional[pulumi.Input[bool]] = None,
                  key_algorithm: Optional[pulumi.Input[str]] = None,
+                 set_authority_key_id: Optional[pulumi.Input[bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None,
+                 subject: Optional[pulumi.Input['SelfSignedCertSubjectArgs']] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a SelfSignedCert resource.
@@ -39,8 +40,6 @@ class SelfSignedCertArgs:
         :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
                to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
-        :param pulumi.Input[Sequence[pulumi.Input['SelfSignedCertSubjectArgs']]] subjects: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-               based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
@@ -52,13 +51,18 @@ class SelfSignedCertArgs:
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
                and ignored, as the key algorithm is now inferred from the key.
+        :param pulumi.Input[bool] set_authority_key_id: Should the generated certificate include an [authority key
+               identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+               same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+               `false`).
         :param pulumi.Input[bool] set_subject_key_id: Should the generated certificate include a [subject key
                identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+        :param pulumi.Input['SelfSignedCertSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+               based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
         pulumi.set(__self__, "allowed_uses", allowed_uses)
         pulumi.set(__self__, "private_key_pem", private_key_pem)
-        pulumi.set(__self__, "subjects", subjects)
         pulumi.set(__self__, "validity_period_hours", validity_period_hours)
         if dns_names is not None:
             pulumi.set(__self__, "dns_names", dns_names)
@@ -73,8 +77,12 @@ class SelfSignedCertArgs:
             pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
         if key_algorithm is not None:
             pulumi.set(__self__, "key_algorithm", key_algorithm)
+        if set_authority_key_id is not None:
+            pulumi.set(__self__, "set_authority_key_id", set_authority_key_id)
         if set_subject_key_id is not None:
             pulumi.set(__self__, "set_subject_key_id", set_subject_key_id)
+        if subject is not None:
+            pulumi.set(__self__, "subject", subject)
         if uris is not None:
             pulumi.set(__self__, "uris", uris)
 
@@ -110,19 +118,6 @@ class SelfSignedCertArgs:
     @private_key_pem.setter
     def private_key_pem(self, value: pulumi.Input[str]):
         pulumi.set(self, "private_key_pem", value)
-
-    @property
-    @pulumi.getter
-    def subjects(self) -> pulumi.Input[Sequence[pulumi.Input['SelfSignedCertSubjectArgs']]]:
-        """
-        The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-        based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
-        """
-        return pulumi.get(self, "subjects")
-
-    @subjects.setter
-    def subjects(self, value: pulumi.Input[Sequence[pulumi.Input['SelfSignedCertSubjectArgs']]]):
-        pulumi.set(self, "subjects", value)
 
     @property
     @pulumi.getter(name="validityPeriodHours")
@@ -202,6 +197,21 @@ class SelfSignedCertArgs:
         pulumi.set(self, "key_algorithm", value)
 
     @property
+    @pulumi.getter(name="setAuthorityKeyId")
+    def set_authority_key_id(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Should the generated certificate include an [authority key
+        identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+        same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+        `false`).
+        """
+        return pulumi.get(self, "set_authority_key_id")
+
+    @set_authority_key_id.setter
+    def set_authority_key_id(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "set_authority_key_id", value)
+
+    @property
     @pulumi.getter(name="setSubjectKeyId")
     def set_subject_key_id(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -213,6 +223,19 @@ class SelfSignedCertArgs:
     @set_subject_key_id.setter
     def set_subject_key_id(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "set_subject_key_id", value)
+
+    @property
+    @pulumi.getter
+    def subject(self) -> Optional[pulumi.Input['SelfSignedCertSubjectArgs']]:
+        """
+        The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+        """
+        return pulumi.get(self, "subject")
+
+    @subject.setter
+    def subject(self, value: Optional[pulumi.Input['SelfSignedCertSubjectArgs']]):
+        pulumi.set(self, "subject", value)
 
     @property
     @pulumi.getter
@@ -239,8 +262,9 @@ class _SelfSignedCertState:
                  key_algorithm: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
                  ready_for_renewal: Optional[pulumi.Input[bool]] = None,
+                 set_authority_key_id: Optional[pulumi.Input[bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-                 subjects: Optional[pulumi.Input[Sequence[pulumi.Input['SelfSignedCertSubjectArgs']]]] = None,
+                 subject: Optional[pulumi.Input['SelfSignedCertSubjectArgs']] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  validity_end_time: Optional[pulumi.Input[str]] = None,
                  validity_period_hours: Optional[pulumi.Input[int]] = None,
@@ -255,7 +279,11 @@ class _SelfSignedCertState:
                `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
                `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
                `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
-        :param pulumi.Input[str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        :param pulumi.Input[str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+               [underlying](https://pkg.go.dev/encoding/pem#Encode)
+               [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+               the end of the PEM. In case this disrupts your use case, we recommend using
+               [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
                can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
@@ -271,9 +299,13 @@ class _SelfSignedCertState:
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         :param pulumi.Input[bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
                the `early_renewal_hours`)?
+        :param pulumi.Input[bool] set_authority_key_id: Should the generated certificate include an [authority key
+               identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+               same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+               `false`).
         :param pulumi.Input[bool] set_subject_key_id: Should the generated certificate include a [subject key
                identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
-        :param pulumi.Input[Sequence[pulumi.Input['SelfSignedCertSubjectArgs']]] subjects: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        :param pulumi.Input['SelfSignedCertSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
                based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] validity_end_time: The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
@@ -302,10 +334,12 @@ class _SelfSignedCertState:
             pulumi.set(__self__, "private_key_pem", private_key_pem)
         if ready_for_renewal is not None:
             pulumi.set(__self__, "ready_for_renewal", ready_for_renewal)
+        if set_authority_key_id is not None:
+            pulumi.set(__self__, "set_authority_key_id", set_authority_key_id)
         if set_subject_key_id is not None:
             pulumi.set(__self__, "set_subject_key_id", set_subject_key_id)
-        if subjects is not None:
-            pulumi.set(__self__, "subjects", subjects)
+        if subject is not None:
+            pulumi.set(__self__, "subject", subject)
         if uris is not None:
             pulumi.set(__self__, "uris", uris)
         if validity_end_time is not None:
@@ -338,7 +372,11 @@ class _SelfSignedCertState:
     @pulumi.getter(name="certPem")
     def cert_pem(self) -> Optional[pulumi.Input[str]]:
         """
-        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+        [underlying](https://pkg.go.dev/encoding/pem#Encode)
+        [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+        the end of the PEM. In case this disrupts your use case, we recommend using
+        [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         """
         return pulumi.get(self, "cert_pem")
 
@@ -439,6 +477,21 @@ class _SelfSignedCertState:
         pulumi.set(self, "ready_for_renewal", value)
 
     @property
+    @pulumi.getter(name="setAuthorityKeyId")
+    def set_authority_key_id(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Should the generated certificate include an [authority key
+        identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+        same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+        `false`).
+        """
+        return pulumi.get(self, "set_authority_key_id")
+
+    @set_authority_key_id.setter
+    def set_authority_key_id(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "set_authority_key_id", value)
+
+    @property
     @pulumi.getter(name="setSubjectKeyId")
     def set_subject_key_id(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -453,16 +506,16 @@ class _SelfSignedCertState:
 
     @property
     @pulumi.getter
-    def subjects(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SelfSignedCertSubjectArgs']]]]:
+    def subject(self) -> Optional[pulumi.Input['SelfSignedCertSubjectArgs']]:
         """
         The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
         based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         """
-        return pulumi.get(self, "subjects")
+        return pulumi.get(self, "subject")
 
-    @subjects.setter
-    def subjects(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['SelfSignedCertSubjectArgs']]]]):
-        pulumi.set(self, "subjects", value)
+    @subject.setter
+    def subject(self, value: Optional[pulumi.Input['SelfSignedCertSubjectArgs']]):
+        pulumi.set(self, "subject", value)
 
     @property
     @pulumi.getter
@@ -526,8 +579,9 @@ class SelfSignedCert(pulumi.CustomResource):
                  is_ca_certificate: Optional[pulumi.Input[bool]] = None,
                  key_algorithm: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
+                 set_authority_key_id: Optional[pulumi.Input[bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-                 subjects: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]]] = None,
+                 subject: Optional[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  validity_period_hours: Optional[pulumi.Input[int]] = None,
                  __props__=None):
@@ -556,9 +610,13 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
                to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+        :param pulumi.Input[bool] set_authority_key_id: Should the generated certificate include an [authority key
+               identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+               same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+               `false`).
         :param pulumi.Input[bool] set_subject_key_id: Should the generated certificate include a [subject key
                identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]] subjects: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        :param pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
                based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.
@@ -593,8 +651,9 @@ class SelfSignedCert(pulumi.CustomResource):
                  is_ca_certificate: Optional[pulumi.Input[bool]] = None,
                  key_algorithm: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
+                 set_authority_key_id: Optional[pulumi.Input[bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-                 subjects: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]]] = None,
+                 subject: Optional[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  validity_period_hours: Optional[pulumi.Input[int]] = None,
                  __props__=None):
@@ -623,10 +682,9 @@ class SelfSignedCert(pulumi.CustomResource):
             if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
             __props__.__dict__["private_key_pem"] = private_key_pem
+            __props__.__dict__["set_authority_key_id"] = set_authority_key_id
             __props__.__dict__["set_subject_key_id"] = set_subject_key_id
-            if subjects is None and not opts.urn:
-                raise TypeError("Missing required property 'subjects'")
-            __props__.__dict__["subjects"] = subjects
+            __props__.__dict__["subject"] = subject
             __props__.__dict__["uris"] = uris
             if validity_period_hours is None and not opts.urn:
                 raise TypeError("Missing required property 'validity_period_hours'")
@@ -654,8 +712,9 @@ class SelfSignedCert(pulumi.CustomResource):
             key_algorithm: Optional[pulumi.Input[str]] = None,
             private_key_pem: Optional[pulumi.Input[str]] = None,
             ready_for_renewal: Optional[pulumi.Input[bool]] = None,
+            set_authority_key_id: Optional[pulumi.Input[bool]] = None,
             set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-            subjects: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]]] = None,
+            subject: Optional[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]] = None,
             uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             validity_end_time: Optional[pulumi.Input[str]] = None,
             validity_period_hours: Optional[pulumi.Input[int]] = None,
@@ -675,7 +734,11 @@ class SelfSignedCert(pulumi.CustomResource):
                `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
                `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
                `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
-        :param pulumi.Input[str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        :param pulumi.Input[str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+               [underlying](https://pkg.go.dev/encoding/pem#Encode)
+               [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+               the end of the PEM. In case this disrupts your use case, we recommend using
+               [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
                can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
@@ -691,9 +754,13 @@ class SelfSignedCert(pulumi.CustomResource):
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         :param pulumi.Input[bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
                the `early_renewal_hours`)?
+        :param pulumi.Input[bool] set_authority_key_id: Should the generated certificate include an [authority key
+               identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+               same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+               `false`).
         :param pulumi.Input[bool] set_subject_key_id: Should the generated certificate include a [subject key
                identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]]] subjects: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
+        :param pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
                based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] validity_end_time: The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
@@ -714,8 +781,9 @@ class SelfSignedCert(pulumi.CustomResource):
         __props__.__dict__["key_algorithm"] = key_algorithm
         __props__.__dict__["private_key_pem"] = private_key_pem
         __props__.__dict__["ready_for_renewal"] = ready_for_renewal
+        __props__.__dict__["set_authority_key_id"] = set_authority_key_id
         __props__.__dict__["set_subject_key_id"] = set_subject_key_id
-        __props__.__dict__["subjects"] = subjects
+        __props__.__dict__["subject"] = subject
         __props__.__dict__["uris"] = uris
         __props__.__dict__["validity_end_time"] = validity_end_time
         __props__.__dict__["validity_period_hours"] = validity_period_hours
@@ -741,7 +809,11 @@ class SelfSignedCert(pulumi.CustomResource):
     @pulumi.getter(name="certPem")
     def cert_pem(self) -> pulumi.Output[str]:
         """
-        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
+        [underlying](https://pkg.go.dev/encoding/pem#Encode)
+        [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
+        the end of the PEM. In case this disrupts your use case, we recommend using
+        [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         """
         return pulumi.get(self, "cert_pem")
 
@@ -810,6 +882,17 @@ class SelfSignedCert(pulumi.CustomResource):
         return pulumi.get(self, "ready_for_renewal")
 
     @property
+    @pulumi.getter(name="setAuthorityKeyId")
+    def set_authority_key_id(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Should the generated certificate include an [authority key
+        identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
+        same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
+        `false`).
+        """
+        return pulumi.get(self, "set_authority_key_id")
+
+    @property
     @pulumi.getter(name="setSubjectKeyId")
     def set_subject_key_id(self) -> pulumi.Output[Optional[bool]]:
         """
@@ -820,12 +903,12 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def subjects(self) -> pulumi.Output[Sequence['outputs.SelfSignedCertSubject']]:
+    def subject(self) -> pulumi.Output[Optional['outputs.SelfSignedCertSubject']]:
         """
         The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
         based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         """
-        return pulumi.get(self, "subjects")
+        return pulumi.get(self, "subject")
 
     @property
     @pulumi.getter
