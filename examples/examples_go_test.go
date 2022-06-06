@@ -20,6 +20,16 @@ func TestAccPrivateKeyGo(t *testing.T) {
 	integration.ProgramTest(t, &test)
 }
 
+func TestAccSelfSignedCertGoForcesNewResource(t *testing.T) {
+	test := getGoBaseOptions(t).
+		With(integration.ProgramTestOptions{
+			Dir:                  path.Join(getCwd(t), "self-signed-cert", "go"),
+			ExpectRefreshChanges: true,
+		})
+
+	integration.ProgramTest(t, &test)
+}
+
 func getGoBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	baseGo := base.With(integration.ProgramTestOptions{
