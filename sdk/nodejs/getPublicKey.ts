@@ -8,22 +8,6 @@ import * as utilities from "./utilities";
  * Get a public key from a PEM-encoded private key.
  *
  * Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tls from "@pulumi/tls";
- * import * from "fs";
- *
- * const ed25519_example = new tls.PrivateKey("ed25519-example", {algorithm: "ED25519"});
- * const privateKeyPem-example = tls.getPublicKeyOutput({
- *     privateKeyPem: ed25519_example.privateKeyPem,
- * });
- * const privateKeyOpenssh-example = tls.getPublicKey({
- *     privateKeyOpenssh: fs.readFileSync("~/.ssh/id_rsa_rfc4716"),
- * });
- * ```
  */
 export function getPublicKey(args?: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
     args = args || {};
