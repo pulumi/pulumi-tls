@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Tls.Inputs
 {
 
-    public sealed class ProviderProxyArgs : Pulumi.ResourceArgs
+    public sealed class ProviderProxyArgs : global::Pulumi.ResourceArgs
     {
         [Input("fromEnv")]
         public Input<bool>? FromEnv { get; set; }
@@ -27,5 +27,6 @@ namespace Pulumi.Tls.Inputs
         public ProviderProxyArgs()
         {
         }
+        public static new ProviderProxyArgs Empty => new ProviderProxyArgs();
     }
 }

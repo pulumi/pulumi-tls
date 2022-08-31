@@ -13,14 +13,41 @@ namespace Pulumi.Tls.Outputs
     [OutputType]
     public sealed class CertRequestSubject
     {
+        /// <summary>
+        /// Distinguished name: `CN`
+        /// </summary>
         public readonly string? CommonName;
+        /// <summary>
+        /// Distinguished name: `C`
+        /// </summary>
         public readonly string? Country;
+        /// <summary>
+        /// Distinguished name: `L`
+        /// </summary>
         public readonly string? Locality;
+        /// <summary>
+        /// Distinguished name: `O`
+        /// </summary>
         public readonly string? Organization;
+        /// <summary>
+        /// Distinguished name: `OU`
+        /// </summary>
         public readonly string? OrganizationalUnit;
+        /// <summary>
+        /// Distinguished name: `PC`
+        /// </summary>
         public readonly string? PostalCode;
+        /// <summary>
+        /// Distinguished name: `ST`
+        /// </summary>
         public readonly string? Province;
+        /// <summary>
+        /// Distinguished name: `SERIALNUMBER`
+        /// </summary>
         public readonly string? SerialNumber;
+        /// <summary>
+        /// Distinguished name: `STREET`
+        /// </summary>
         public readonly ImmutableArray<string> StreetAddresses;
 
         [OutputConstructor]

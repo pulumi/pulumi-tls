@@ -10,38 +10,28 @@ using Pulumi.Serialization;
 namespace Pulumi.Tls
 {
     [TlsResourceType("tls:index/locallySignedCert:LocallySignedCert")]
-    public partial class LocallySignedCert : Pulumi.CustomResource
+    public partial class LocallySignedCert : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// List of key usages allowed for the issued certificate. Values are defined in [RFC
-        /// 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
-        /// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
-        /// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
-        /// `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
-        /// `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
-        /// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
-        /// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+        /// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         /// </summary>
         [Output("allowedUses")]
         public Output<ImmutableArray<string>> AllowedUses { get; private set; } = null!;
 
         /// <summary>
-        /// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421)
-        /// format.
+        /// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Output("caCertPem")]
         public Output<string> CaCertPem { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is
-        /// deprecated and ignored, as the key algorithm is now inferred from the key.
+        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Output("caKeyAlgorithm")]
         public Output<string> CaKeyAlgorithm { get; private set; } = null!;
 
         /// <summary>
-        /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC
-        /// 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Output("caPrivateKeyPem")]
         public Output<string> CaPrivateKeyPem { get; private set; } = null!;
@@ -79,22 +69,19 @@ namespace Pulumi.Tls
         public Output<bool?> IsCaCertificate { get; private set; } = null!;
 
         /// <summary>
-        /// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
-        /// the `early_renewal_hours`)?
+        /// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
         /// </summary>
         [Output("readyForRenewal")]
         public Output<bool> ReadyForRenewal { get; private set; } = null!;
 
         /// <summary>
-        /// Should the generated certificate include a [subject key
-        /// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+        /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Output("setSubjectKeyId")]
         public Output<bool?> SetSubjectKeyId { get; private set; } = null!;
 
         /// <summary>
-        /// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
-        /// timestamp.
+        /// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         /// </summary>
         [Output("validityEndTime")]
         public Output<string> ValidityEndTime { get; private set; } = null!;
@@ -155,20 +142,13 @@ namespace Pulumi.Tls
         }
     }
 
-    public sealed class LocallySignedCertArgs : Pulumi.ResourceArgs
+    public sealed class LocallySignedCertArgs : global::Pulumi.ResourceArgs
     {
         [Input("allowedUses", required: true)]
         private InputList<string>? _allowedUses;
 
         /// <summary>
-        /// List of key usages allowed for the issued certificate. Values are defined in [RFC
-        /// 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
-        /// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
-        /// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
-        /// `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
-        /// `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
-        /// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
-        /// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+        /// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         /// </summary>
         public InputList<string> AllowedUses
         {
@@ -177,22 +157,19 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421)
-        /// format.
+        /// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Input("caCertPem", required: true)]
         public Input<string> CaCertPem { get; set; } = null!;
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is
-        /// deprecated and ignored, as the key algorithm is now inferred from the key.
+        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Input("caKeyAlgorithm")]
         public Input<string>? CaKeyAlgorithm { get; set; }
 
         /// <summary>
-        /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC
-        /// 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Input("caPrivateKeyPem", required: true)]
         public Input<string> CaPrivateKeyPem { get; set; } = null!;
@@ -220,8 +197,7 @@ namespace Pulumi.Tls
         public Input<bool>? IsCaCertificate { get; set; }
 
         /// <summary>
-        /// Should the generated certificate include a [subject key
-        /// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+        /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Input("setSubjectKeyId")]
         public Input<bool>? SetSubjectKeyId { get; set; }
@@ -235,22 +211,16 @@ namespace Pulumi.Tls
         public LocallySignedCertArgs()
         {
         }
+        public static new LocallySignedCertArgs Empty => new LocallySignedCertArgs();
     }
 
-    public sealed class LocallySignedCertState : Pulumi.ResourceArgs
+    public sealed class LocallySignedCertState : global::Pulumi.ResourceArgs
     {
         [Input("allowedUses")]
         private InputList<string>? _allowedUses;
 
         /// <summary>
-        /// List of key usages allowed for the issued certificate. Values are defined in [RFC
-        /// 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
-        /// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
-        /// Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
-        /// `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
-        /// `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
-        /// `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
-        /// `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+        /// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         /// </summary>
         public InputList<string> AllowedUses
         {
@@ -259,22 +229,19 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421)
-        /// format.
+        /// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Input("caCertPem")]
         public Input<string>? CaCertPem { get; set; }
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is
-        /// deprecated and ignored, as the key algorithm is now inferred from the key.
+        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Input("caKeyAlgorithm")]
         public Input<string>? CaKeyAlgorithm { get; set; }
 
         /// <summary>
-        /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC
-        /// 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
         [Input("caPrivateKeyPem")]
         public Input<string>? CaPrivateKeyPem { get; set; }
@@ -312,22 +279,19 @@ namespace Pulumi.Tls
         public Input<bool>? IsCaCertificate { get; set; }
 
         /// <summary>
-        /// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
-        /// the `early_renewal_hours`)?
+        /// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
         /// </summary>
         [Input("readyForRenewal")]
         public Input<bool>? ReadyForRenewal { get; set; }
 
         /// <summary>
-        /// Should the generated certificate include a [subject key
-        /// identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+        /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Input("setSubjectKeyId")]
         public Input<bool>? SetSubjectKeyId { get; set; }
 
         /// <summary>
-        /// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
-        /// timestamp.
+        /// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         /// </summary>
         [Input("validityEndTime")]
         public Input<string>? ValidityEndTime { get; set; }
@@ -347,5 +311,6 @@ namespace Pulumi.Tls
         public LocallySignedCertState()
         {
         }
+        public static new LocallySignedCertState Empty => new LocallySignedCertState();
     }
 }

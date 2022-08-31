@@ -15,23 +15,47 @@ public final class GetCertificatePlainArgs extends com.pulumi.resources.InvokeAr
 
     public static final GetCertificatePlainArgs Empty = new GetCertificatePlainArgs();
 
+    /**
+     * The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+     * 
+     */
     @Import(name="content")
     private @Nullable String content;
 
+    /**
+     * @return The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+     * 
+     */
     public Optional<String> content() {
         return Optional.ofNullable(this.content);
     }
 
+    /**
+     * The URL of the website to get the certificates from. Cannot be used with `content`.
+     * 
+     */
     @Import(name="url")
     private @Nullable String url;
 
+    /**
+     * @return The URL of the website to get the certificates from. Cannot be used with `content`.
+     * 
+     */
     public Optional<String> url() {
         return Optional.ofNullable(this.url);
     }
 
+    /**
+     * Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+     * 
+     */
     @Import(name="verifyChain")
     private @Nullable Boolean verifyChain;
 
+    /**
+     * @return Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+     * 
+     */
     public Optional<Boolean> verifyChain() {
         return Optional.ofNullable(this.verifyChain);
     }
@@ -62,16 +86,34 @@ public final class GetCertificatePlainArgs extends com.pulumi.resources.InvokeAr
             $ = new GetCertificatePlainArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param content The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder content(@Nullable String content) {
             $.content = content;
             return this;
         }
 
+        /**
+         * @param url The URL of the website to get the certificates from. Cannot be used with `content`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder url(@Nullable String url) {
             $.url = url;
             return this;
         }
 
+        /**
+         * @param verifyChain Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder verifyChain(@Nullable Boolean verifyChain) {
             $.verifyChain = verifyChain;
             return this;

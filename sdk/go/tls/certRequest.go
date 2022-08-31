@@ -17,35 +17,38 @@ import (
 // package main
 //
 // import (
-// 	"io/ioutil"
 //
-// 	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"io/ioutil"
+//
+//	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func readFileOrPanic(path string) pulumi.StringPtrInput {
-// 	data, err := ioutil.ReadFile(path)
-// 	if err != nil {
-// 		panic(err.Error())
-// 	}
-// 	return pulumi.String(string(data))
-// }
+//	func readFileOrPanic(path string) pulumi.StringPtrInput {
+//		data, err := ioutil.ReadFile(path)
+//		if err != nil {
+//			panic(err.Error())
+//		}
+//		return pulumi.String(string(data))
+//	}
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := tls.NewCertRequest(ctx, "example", &tls.CertRequestArgs{
-// 			PrivateKeyPem: readFileOrPanic("private_key.pem"),
-// 			Subject: &CertRequestSubjectArgs{
-// 				CommonName:   pulumi.String("example.com"),
-// 				Organization: pulumi.String("ACME Examples, Inc"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := tls.NewCertRequest(ctx, "example", &tls.CertRequestArgs{
+//				PrivateKeyPem: readFileOrPanic("private_key.pem"),
+//				Subject: &CertRequestSubjectArgs{
+//					CommonName:   pulumi.String("example.com"),
+//					Organization: pulumi.String("ACME Examples, Inc"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type CertRequest struct {
 	pulumi.CustomResourceState
@@ -60,8 +63,7 @@ type CertRequest struct {
 	DnsNames pulumi.StringArrayOutput `pulumi:"dnsNames"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayOutput `pulumi:"ipAddresses"`
-	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-	// and ignored, as the key algorithm is now inferred from the key.
+	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
 	//
 	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
 	KeyAlgorithm pulumi.StringOutput `pulumi:"keyAlgorithm"`
@@ -69,8 +71,7 @@ type CertRequest struct {
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
 	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
 	PrivateKeyPem pulumi.StringOutput `pulumi:"privateKeyPem"`
-	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subject CertRequestSubjectPtrOutput `pulumi:"subject"`
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris pulumi.StringArrayOutput `pulumi:"uris"`
@@ -118,8 +119,7 @@ type certRequestState struct {
 	DnsNames []string `pulumi:"dnsNames"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses []string `pulumi:"ipAddresses"`
-	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-	// and ignored, as the key algorithm is now inferred from the key.
+	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
 	//
 	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
 	KeyAlgorithm *string `pulumi:"keyAlgorithm"`
@@ -127,8 +127,7 @@ type certRequestState struct {
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
 	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
 	PrivateKeyPem *string `pulumi:"privateKeyPem"`
-	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subject *CertRequestSubject `pulumi:"subject"`
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris []string `pulumi:"uris"`
@@ -145,8 +144,7 @@ type CertRequestState struct {
 	DnsNames pulumi.StringArrayInput
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayInput
-	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-	// and ignored, as the key algorithm is now inferred from the key.
+	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
 	//
 	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
 	KeyAlgorithm pulumi.StringPtrInput
@@ -154,8 +152,7 @@ type CertRequestState struct {
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
 	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
 	PrivateKeyPem pulumi.StringPtrInput
-	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subject CertRequestSubjectPtrInput
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris pulumi.StringArrayInput
@@ -170,8 +167,7 @@ type certRequestArgs struct {
 	DnsNames []string `pulumi:"dnsNames"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses []string `pulumi:"ipAddresses"`
-	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-	// and ignored, as the key algorithm is now inferred from the key.
+	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
 	//
 	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
 	KeyAlgorithm *string `pulumi:"keyAlgorithm"`
@@ -179,8 +175,7 @@ type certRequestArgs struct {
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
 	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
 	PrivateKeyPem string `pulumi:"privateKeyPem"`
-	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subject *CertRequestSubject `pulumi:"subject"`
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris []string `pulumi:"uris"`
@@ -192,8 +187,7 @@ type CertRequestArgs struct {
 	DnsNames pulumi.StringArrayInput
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayInput
-	// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-	// and ignored, as the key algorithm is now inferred from the key.
+	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
 	//
 	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
 	KeyAlgorithm pulumi.StringPtrInput
@@ -201,8 +195,7 @@ type CertRequestArgs struct {
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
 	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
 	PrivateKeyPem pulumi.StringInput
-	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-	// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subject CertRequestSubjectPtrInput
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
 	Uris pulumi.StringArrayInput
@@ -234,7 +227,7 @@ func (i *CertRequest) ToCertRequestOutputWithContext(ctx context.Context) CertRe
 // CertRequestArrayInput is an input type that accepts CertRequestArray and CertRequestArrayOutput values.
 // You can construct a concrete instance of `CertRequestArrayInput` via:
 //
-//          CertRequestArray{ CertRequestArgs{...} }
+//	CertRequestArray{ CertRequestArgs{...} }
 type CertRequestArrayInput interface {
 	pulumi.Input
 
@@ -259,7 +252,7 @@ func (i CertRequestArray) ToCertRequestArrayOutputWithContext(ctx context.Contex
 // CertRequestMapInput is an input type that accepts CertRequestMap and CertRequestMapOutput values.
 // You can construct a concrete instance of `CertRequestMapInput` via:
 //
-//          CertRequestMap{ "key": CertRequestArgs{...} }
+//	CertRequestMap{ "key": CertRequestArgs{...} }
 type CertRequestMapInput interface {
 	pulumi.Input
 
@@ -314,8 +307,7 @@ func (o CertRequestOutput) IpAddresses() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *CertRequest) pulumi.StringArrayOutput { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
-// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-// and ignored, as the key algorithm is now inferred from the key.
+// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
 //
 // Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
 func (o CertRequestOutput) KeyAlgorithm() pulumi.StringOutput {
@@ -329,8 +321,7 @@ func (o CertRequestOutput) PrivateKeyPem() pulumi.StringOutput {
 	return o.ApplyT(func(v *CertRequest) pulumi.StringOutput { return v.PrivateKeyPem }).(pulumi.StringOutput)
 }
 
-// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 func (o CertRequestOutput) Subject() CertRequestSubjectPtrOutput {
 	return o.ApplyT(func(v *CertRequest) CertRequestSubjectPtrOutput { return v.Subject }).(CertRequestSubjectPtrOutput)
 }

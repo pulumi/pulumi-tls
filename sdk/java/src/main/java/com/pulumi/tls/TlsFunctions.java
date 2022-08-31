@@ -44,10 +44,19 @@ public final class TlsFunctions {
      * ```java
      * package generated_program;
      * 
-     * import java.util.*;
-     * import java.io.*;
-     * import java.nio.*;
-     * import com.pulumi.*;
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.tls.PrivateKey;
+     * import com.pulumi.tls.PrivateKeyArgs;
+     * import com.pulumi.tls.TlsFunctions;
+     * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
      * 
      * public class App {
      *     public static void main(String[] args) {
@@ -63,9 +72,9 @@ public final class TlsFunctions {
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
      * 
-     *         final var privateKeyOpenssh-example = Output.of(TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
-     *             .privateKeyOpenssh(Files.readString(&#34;~/.ssh/id_rsa_rfc4716&#34;))
-     *             .build()));
+     *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyOpenssh(Files.readString(Paths.get(&#34;~/.ssh/id_rsa_rfc4716&#34;)))
+     *             .build());
      * 
      *     }
      * }
@@ -84,10 +93,19 @@ public final class TlsFunctions {
      * ```java
      * package generated_program;
      * 
-     * import java.util.*;
-     * import java.io.*;
-     * import java.nio.*;
-     * import com.pulumi.*;
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.tls.PrivateKey;
+     * import com.pulumi.tls.PrivateKeyArgs;
+     * import com.pulumi.tls.TlsFunctions;
+     * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
      * 
      * public class App {
      *     public static void main(String[] args) {
@@ -103,9 +121,9 @@ public final class TlsFunctions {
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
      * 
-     *         final var privateKeyOpenssh-example = Output.of(TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
-     *             .privateKeyOpenssh(Files.readString(&#34;~/.ssh/id_rsa_rfc4716&#34;))
-     *             .build()));
+     *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyOpenssh(Files.readString(Paths.get(&#34;~/.ssh/id_rsa_rfc4716&#34;)))
+     *             .build());
      * 
      *     }
      * }
@@ -124,10 +142,19 @@ public final class TlsFunctions {
      * ```java
      * package generated_program;
      * 
-     * import java.util.*;
-     * import java.io.*;
-     * import java.nio.*;
-     * import com.pulumi.*;
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.tls.PrivateKey;
+     * import com.pulumi.tls.PrivateKeyArgs;
+     * import com.pulumi.tls.TlsFunctions;
+     * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
      * 
      * public class App {
      *     public static void main(String[] args) {
@@ -143,9 +170,9 @@ public final class TlsFunctions {
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
      * 
-     *         final var privateKeyOpenssh-example = Output.of(TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
-     *             .privateKeyOpenssh(Files.readString(&#34;~/.ssh/id_rsa_rfc4716&#34;))
-     *             .build()));
+     *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyOpenssh(Files.readString(Paths.get(&#34;~/.ssh/id_rsa_rfc4716&#34;)))
+     *             .build());
      * 
      *     }
      * }
@@ -164,10 +191,19 @@ public final class TlsFunctions {
      * ```java
      * package generated_program;
      * 
-     * import java.util.*;
-     * import java.io.*;
-     * import java.nio.*;
-     * import com.pulumi.*;
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.tls.PrivateKey;
+     * import com.pulumi.tls.PrivateKeyArgs;
+     * import com.pulumi.tls.TlsFunctions;
+     * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
      * 
      * public class App {
      *     public static void main(String[] args) {
@@ -183,9 +219,9 @@ public final class TlsFunctions {
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
      * 
-     *         final var privateKeyOpenssh-example = Output.of(TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
-     *             .privateKeyOpenssh(Files.readString(&#34;~/.ssh/id_rsa_rfc4716&#34;))
-     *             .build()));
+     *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyOpenssh(Files.readString(Paths.get(&#34;~/.ssh/id_rsa_rfc4716&#34;)))
+     *             .build());
      * 
      *     }
      * }
@@ -204,10 +240,19 @@ public final class TlsFunctions {
      * ```java
      * package generated_program;
      * 
-     * import java.util.*;
-     * import java.io.*;
-     * import java.nio.*;
-     * import com.pulumi.*;
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.tls.PrivateKey;
+     * import com.pulumi.tls.PrivateKeyArgs;
+     * import com.pulumi.tls.TlsFunctions;
+     * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
      * 
      * public class App {
      *     public static void main(String[] args) {
@@ -223,9 +268,9 @@ public final class TlsFunctions {
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
      * 
-     *         final var privateKeyOpenssh-example = Output.of(TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
-     *             .privateKeyOpenssh(Files.readString(&#34;~/.ssh/id_rsa_rfc4716&#34;))
-     *             .build()));
+     *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyOpenssh(Files.readString(Paths.get(&#34;~/.ssh/id_rsa_rfc4716&#34;)))
+     *             .build());
      * 
      *     }
      * }
@@ -244,10 +289,19 @@ public final class TlsFunctions {
      * ```java
      * package generated_program;
      * 
-     * import java.util.*;
-     * import java.io.*;
-     * import java.nio.*;
-     * import com.pulumi.*;
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.tls.PrivateKey;
+     * import com.pulumi.tls.PrivateKeyArgs;
+     * import com.pulumi.tls.TlsFunctions;
+     * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
      * 
      * public class App {
      *     public static void main(String[] args) {
@@ -263,9 +317,9 @@ public final class TlsFunctions {
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
      * 
-     *         final var privateKeyOpenssh-example = Output.of(TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
-     *             .privateKeyOpenssh(Files.readString(&#34;~/.ssh/id_rsa_rfc4716&#34;))
-     *             .build()));
+     *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyOpenssh(Files.readString(Paths.get(&#34;~/.ssh/id_rsa_rfc4716&#34;)))
+     *             .build());
      * 
      *     }
      * }

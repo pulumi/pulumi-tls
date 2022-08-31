@@ -12,23 +12,12 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class Proxy {
-    private final @Nullable Boolean fromEnv;
-    private final @Nullable String password;
-    private final @Nullable String url;
-    private final @Nullable String username;
+    private @Nullable Boolean fromEnv;
+    private @Nullable String password;
+    private @Nullable String url;
+    private @Nullable String username;
 
-    @CustomType.Constructor
-    private Proxy(
-        @CustomType.Parameter("fromEnv") @Nullable Boolean fromEnv,
-        @CustomType.Parameter("password") @Nullable String password,
-        @CustomType.Parameter("url") @Nullable String url,
-        @CustomType.Parameter("username") @Nullable String username) {
-        this.fromEnv = fromEnv;
-        this.password = password;
-        this.url = url;
-        this.username = username;
-    }
-
+    private Proxy() {}
     public Optional<Boolean> fromEnv() {
         return Optional.ofNullable(this.fromEnv);
     }
@@ -49,17 +38,13 @@ public final class Proxy {
     public static Builder builder(Proxy defaults) {
         return new Builder(defaults);
     }
-
+    @CustomType.Builder
     public static final class Builder {
         private @Nullable Boolean fromEnv;
         private @Nullable String password;
         private @Nullable String url;
         private @Nullable String username;
-
-        public Builder() {
-    	      // Empty
-        }
-
+        public Builder() {}
         public Builder(Proxy defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.fromEnv = defaults.fromEnv;
@@ -68,23 +53,33 @@ public final class Proxy {
     	      this.username = defaults.username;
         }
 
+        @CustomType.Setter
         public Builder fromEnv(@Nullable Boolean fromEnv) {
             this.fromEnv = fromEnv;
             return this;
         }
+        @CustomType.Setter
         public Builder password(@Nullable String password) {
             this.password = password;
             return this;
         }
+        @CustomType.Setter
         public Builder url(@Nullable String url) {
             this.url = url;
             return this;
         }
+        @CustomType.Setter
         public Builder username(@Nullable String username) {
             this.username = username;
             return this;
-        }        public Proxy build() {
-            return new Proxy(fromEnv, password, url, username);
+        }
+        public Proxy build() {
+            final var o = new Proxy();
+            o.fromEnv = fromEnv;
+            o.password = password;
+            o.url = url;
+            o.username = username;
+            return o;
         }
     }
 }

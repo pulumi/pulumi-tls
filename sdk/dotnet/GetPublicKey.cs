@@ -21,29 +21,29 @@ namespace Pulumi.Tls
         /// {{% example %}}
         /// 
         /// ```csharp
+        /// using System.Collections.Generic;
         /// using System.IO;
         /// using Pulumi;
         /// using Tls = Pulumi.Tls;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var ed25519_example = new Tls.PrivateKey("ed25519-example", new()
         ///     {
-        ///         var ed25519_example = new Tls.PrivateKey("ed25519-example", new Tls.PrivateKeyArgs
-        ///         {
-        ///             Algorithm = "ED25519",
-        ///         });
-        ///         var privateKeyPem_example = Tls.GetPublicKey.Invoke(new Tls.GetPublicKeyInvokeArgs
-        ///         {
-        ///             PrivateKeyPem = ed25519_example.PrivateKeyPem,
-        ///         });
-        ///         var privateKeyOpenssh_example = Output.Create(Tls.GetPublicKey.InvokeAsync(new Tls.GetPublicKeyArgs
-        ///         {
-        ///             PrivateKeyOpenssh = File.ReadAllText("~/.ssh/id_rsa_rfc4716"),
-        ///         }));
-        ///     }
+        ///         Algorithm = "ED25519",
+        ///     });
         /// 
-        /// }
+        ///     var privateKeyPem_example = Tls.GetPublicKey.Invoke(new()
+        ///     {
+        ///         PrivateKeyPem = ed25519_example.PrivateKeyPem,
+        ///     });
+        /// 
+        ///     var privateKeyOpenssh_example = Tls.GetPublicKey.Invoke(new()
+        ///     {
+        ///         PrivateKeyOpenssh = File.ReadAllText("~/.ssh/id_rsa_rfc4716"),
+        ///     });
+        /// 
+        /// });
         /// ```
         /// {{% /example %}}
         /// {{% /examples %}}
@@ -61,29 +61,29 @@ namespace Pulumi.Tls
         /// {{% example %}}
         /// 
         /// ```csharp
+        /// using System.Collections.Generic;
         /// using System.IO;
         /// using Pulumi;
         /// using Tls = Pulumi.Tls;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var ed25519_example = new Tls.PrivateKey("ed25519-example", new()
         ///     {
-        ///         var ed25519_example = new Tls.PrivateKey("ed25519-example", new Tls.PrivateKeyArgs
-        ///         {
-        ///             Algorithm = "ED25519",
-        ///         });
-        ///         var privateKeyPem_example = Tls.GetPublicKey.Invoke(new Tls.GetPublicKeyInvokeArgs
-        ///         {
-        ///             PrivateKeyPem = ed25519_example.PrivateKeyPem,
-        ///         });
-        ///         var privateKeyOpenssh_example = Output.Create(Tls.GetPublicKey.InvokeAsync(new Tls.GetPublicKeyArgs
-        ///         {
-        ///             PrivateKeyOpenssh = File.ReadAllText("~/.ssh/id_rsa_rfc4716"),
-        ///         }));
-        ///     }
+        ///         Algorithm = "ED25519",
+        ///     });
         /// 
-        /// }
+        ///     var privateKeyPem_example = Tls.GetPublicKey.Invoke(new()
+        ///     {
+        ///         PrivateKeyPem = ed25519_example.PrivateKeyPem,
+        ///     });
+        /// 
+        ///     var privateKeyOpenssh_example = Tls.GetPublicKey.Invoke(new()
+        ///     {
+        ///         PrivateKeyOpenssh = File.ReadAllText("~/.ssh/id_rsa_rfc4716"),
+        ///     });
+        /// 
+        /// });
         /// ```
         /// {{% /example %}}
         /// {{% /examples %}}
@@ -93,41 +93,73 @@ namespace Pulumi.Tls
     }
 
 
-    public sealed class GetPublicKeyArgs : Pulumi.InvokeArgs
+    public sealed class GetPublicKeyArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_pem`.
+        /// </summary>
         [Input("privateKeyOpenssh")]
         public string? PrivateKeyOpenssh { get; set; }
 
+        /// <summary>
+        /// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_openssh`.
+        /// </summary>
         [Input("privateKeyPem")]
         public string? PrivateKeyPem { get; set; }
 
         public GetPublicKeyArgs()
         {
         }
+        public static new GetPublicKeyArgs Empty => new GetPublicKeyArgs();
     }
 
-    public sealed class GetPublicKeyInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPublicKeyInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_pem`.
+        /// </summary>
         [Input("privateKeyOpenssh")]
         public Input<string>? PrivateKeyOpenssh { get; set; }
 
+        /// <summary>
+        /// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_openssh`.
+        /// </summary>
         [Input("privateKeyPem")]
         public Input<string>? PrivateKeyPem { get; set; }
 
         public GetPublicKeyInvokeArgs()
         {
         }
+        public static new GetPublicKeyInvokeArgs Empty => new GetPublicKeyInvokeArgs();
     }
 
 
     [OutputType]
     public sealed class GetPublicKeyResult
     {
+        /// <summary>
+        /// The name of the algorithm used by the given private key. Possible values are: `RSA`, `ECDSA` and `ED25519`.
+        /// </summary>
         public readonly string Algorithm;
+        /// <summary>
+        /// Unique identifier for this data source: hexadecimal representation of the SHA1 checksum of the data source.
+        /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_pem`.
+        /// </summary>
         public readonly string? PrivateKeyOpenssh;
+        /// <summary>
+        /// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_openssh`.
+        /// </summary>
         public readonly string? PrivateKeyPem;
+        /// <summary>
+        /// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, as per the rules for `public_key_openssh` and ECDSA P224 limitations.
+        /// </summary>
         public readonly string PublicKeyFingerprintMd5;
+        /// <summary>
+        /// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, as per the rules for `public_key_openssh` and ECDSA P224 limitations.
+        /// </summary>
         public readonly string PublicKeyFingerprintSha256;
         public readonly string PublicKeyOpenssh;
         public readonly string PublicKeyPem;

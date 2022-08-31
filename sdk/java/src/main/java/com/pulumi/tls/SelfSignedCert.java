@@ -21,28 +21,14 @@ import javax.annotation.Nullable;
 @ResourceType(type="tls:index/selfSignedCert:SelfSignedCert")
 public class SelfSignedCert extends com.pulumi.resources.CustomResource {
     /**
-     * List of key usages allowed for the issued certificate. Values are defined in [RFC
-     * 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
-     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
-     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
-     * `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
-     * `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
-     * `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
-     * `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+     * List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
      * 
      */
     @Export(name="allowedUses", type=List.class, parameters={String.class})
     private Output<List<String>> allowedUses;
 
     /**
-     * @return List of key usages allowed for the issued certificate. Values are defined in [RFC
-     * 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
-     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
-     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
-     * `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
-     * `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
-     * `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
-     * `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+     * @return List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
      * 
      */
     public Output<List<String>> allowedUses() {
@@ -135,8 +121,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.isCaCertificate);
     }
     /**
-     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-     * and ignored, as the key algorithm is now inferred from the key.
+     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
      * 
      * @deprecated
      * This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
@@ -147,8 +132,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
     private Output<String> keyAlgorithm;
 
     /**
-     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-     * and ignored, as the key algorithm is now inferred from the key.
+     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
      * 
      */
     public Output<String> keyAlgorithm() {
@@ -173,68 +157,56 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
         return this.privateKeyPem;
     }
     /**
-     * Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
-     * the `early_renewal_hours`)?
+     * Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
      * 
      */
     @Export(name="readyForRenewal", type=Boolean.class, parameters={})
     private Output<Boolean> readyForRenewal;
 
     /**
-     * @return Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within
-     * the `early_renewal_hours`)?
+     * @return Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
      * 
      */
     public Output<Boolean> readyForRenewal() {
         return this.readyForRenewal;
     }
     /**
-     * Should the generated certificate include an [authority key
-     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
-     * same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
-     * `false`).
+     * Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
     @Export(name="setAuthorityKeyId", type=Boolean.class, parameters={})
     private Output</* @Nullable */ Boolean> setAuthorityKeyId;
 
     /**
-     * @return Should the generated certificate include an [authority key
-     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
-     * same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
-     * `false`).
+     * @return Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
     public Output<Optional<Boolean>> setAuthorityKeyId() {
         return Codegen.optional(this.setAuthorityKeyId);
     }
     /**
-     * Should the generated certificate include a [subject key
-     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+     * Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
     @Export(name="setSubjectKeyId", type=Boolean.class, parameters={})
     private Output</* @Nullable */ Boolean> setSubjectKeyId;
 
     /**
-     * @return Should the generated certificate include a [subject key
-     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+     * @return Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
     public Output<Optional<Boolean>> setSubjectKeyId() {
         return Codegen.optional(this.setSubjectKeyId);
     }
     /**
-     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      * 
      */
     @Export(name="subject", type=SelfSignedCertSubject.class, parameters={})
     private Output</* @Nullable */ SelfSignedCertSubject> subject;
 
     /**
-     * @return The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+     * @return The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      * 
      */
     public Output<Optional<SelfSignedCertSubject>> subject() {
@@ -255,16 +227,14 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.uris);
     }
     /**
-     * The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
-     * timestamp.
+     * The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      * 
      */
     @Export(name="validityEndTime", type=String.class, parameters={})
     private Output<String> validityEndTime;
 
     /**
-     * @return The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339)
-     * timestamp.
+     * @return The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      * 
      */
     public Output<String> validityEndTime() {

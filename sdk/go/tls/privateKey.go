@@ -14,23 +14,17 @@ import (
 type PrivateKey struct {
 	pulumi.CustomResourceState
 
-	// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
-	// `ED25519`.
+	// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
 	Algorithm pulumi.StringOutput `pulumi:"algorithm"`
-	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
-	// `P384` or `P521` (default: `P224`).
+	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
 	EcdsaCurve pulumi.StringPtrOutput `pulumi:"ecdsaCurve"`
 	// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
 	PrivateKeyOpenssh pulumi.StringOutput `pulumi:"privateKeyOpenssh"`
 	// Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	PrivateKeyPem pulumi.StringOutput `pulumi:"privateKeyPem"`
-	// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
-	// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-	// limitations](../../docs#limitations).
+	// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
 	PublicKeyFingerprintMd5 pulumi.StringOutput `pulumi:"publicKeyFingerprintMd5"`
-	// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
-	// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-	// limitations](../../docs#limitations).
+	// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
 	PublicKeyFingerprintSha256 pulumi.StringOutput `pulumi:"publicKeyFingerprintSha256"`
 	// The public key data in ["Authorized
 	// Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
@@ -83,23 +77,17 @@ func GetPrivateKey(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering PrivateKey resources.
 type privateKeyState struct {
-	// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
-	// `ED25519`.
+	// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
 	Algorithm *string `pulumi:"algorithm"`
-	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
-	// `P384` or `P521` (default: `P224`).
+	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
 	EcdsaCurve *string `pulumi:"ecdsaCurve"`
 	// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
 	PrivateKeyOpenssh *string `pulumi:"privateKeyOpenssh"`
 	// Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	PrivateKeyPem *string `pulumi:"privateKeyPem"`
-	// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
-	// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-	// limitations](../../docs#limitations).
+	// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
 	PublicKeyFingerprintMd5 *string `pulumi:"publicKeyFingerprintMd5"`
-	// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
-	// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-	// limitations](../../docs#limitations).
+	// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
 	PublicKeyFingerprintSha256 *string `pulumi:"publicKeyFingerprintSha256"`
 	// The public key data in ["Authorized
 	// Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
@@ -121,23 +109,17 @@ type privateKeyState struct {
 }
 
 type PrivateKeyState struct {
-	// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
-	// `ED25519`.
+	// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
 	Algorithm pulumi.StringPtrInput
-	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
-	// `P384` or `P521` (default: `P224`).
+	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
 	EcdsaCurve pulumi.StringPtrInput
 	// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
 	PrivateKeyOpenssh pulumi.StringPtrInput
 	// Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	PrivateKeyPem pulumi.StringPtrInput
-	// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
-	// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-	// limitations](../../docs#limitations).
+	// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
 	PublicKeyFingerprintMd5 pulumi.StringPtrInput
-	// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
-	// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-	// limitations](../../docs#limitations).
+	// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
 	PublicKeyFingerprintSha256 pulumi.StringPtrInput
 	// The public key data in ["Authorized
 	// Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
@@ -163,11 +145,9 @@ func (PrivateKeyState) ElementType() reflect.Type {
 }
 
 type privateKeyArgs struct {
-	// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
-	// `ED25519`.
+	// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
 	Algorithm string `pulumi:"algorithm"`
-	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
-	// `P384` or `P521` (default: `P224`).
+	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
 	EcdsaCurve *string `pulumi:"ecdsaCurve"`
 	// When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
 	RsaBits *int `pulumi:"rsaBits"`
@@ -175,11 +155,9 @@ type privateKeyArgs struct {
 
 // The set of arguments for constructing a PrivateKey resource.
 type PrivateKeyArgs struct {
-	// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
-	// `ED25519`.
+	// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
 	Algorithm pulumi.StringInput
-	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
-	// `P384` or `P521` (default: `P224`).
+	// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
 	EcdsaCurve pulumi.StringPtrInput
 	// When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
 	RsaBits pulumi.IntPtrInput
@@ -211,7 +189,7 @@ func (i *PrivateKey) ToPrivateKeyOutputWithContext(ctx context.Context) PrivateK
 // PrivateKeyArrayInput is an input type that accepts PrivateKeyArray and PrivateKeyArrayOutput values.
 // You can construct a concrete instance of `PrivateKeyArrayInput` via:
 //
-//          PrivateKeyArray{ PrivateKeyArgs{...} }
+//	PrivateKeyArray{ PrivateKeyArgs{...} }
 type PrivateKeyArrayInput interface {
 	pulumi.Input
 
@@ -236,7 +214,7 @@ func (i PrivateKeyArray) ToPrivateKeyArrayOutputWithContext(ctx context.Context)
 // PrivateKeyMapInput is an input type that accepts PrivateKeyMap and PrivateKeyMapOutput values.
 // You can construct a concrete instance of `PrivateKeyMapInput` via:
 //
-//          PrivateKeyMap{ "key": PrivateKeyArgs{...} }
+//	PrivateKeyMap{ "key": PrivateKeyArgs{...} }
 type PrivateKeyMapInput interface {
 	pulumi.Input
 
@@ -272,14 +250,12 @@ func (o PrivateKeyOutput) ToPrivateKeyOutputWithContext(ctx context.Context) Pri
 	return o
 }
 
-// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
-// `ED25519`.
+// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
 func (o PrivateKeyOutput) Algorithm() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateKey) pulumi.StringOutput { return v.Algorithm }).(pulumi.StringOutput)
 }
 
-// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
-// `P384` or `P521` (default: `P224`).
+// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
 func (o PrivateKeyOutput) EcdsaCurve() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PrivateKey) pulumi.StringPtrOutput { return v.EcdsaCurve }).(pulumi.StringPtrOutput)
 }
@@ -294,16 +270,12 @@ func (o PrivateKeyOutput) PrivateKeyPem() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateKey) pulumi.StringOutput { return v.PrivateKeyPem }).(pulumi.StringOutput)
 }
 
-// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
-// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-// limitations](../../docs#limitations).
+// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
 func (o PrivateKeyOutput) PublicKeyFingerprintMd5() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateKey) pulumi.StringOutput { return v.PublicKeyFingerprintMd5 }).(pulumi.StringOutput)
 }
 
-// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
-// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-// limitations](../../docs#limitations).
+// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
 func (o PrivateKeyOutput) PublicKeyFingerprintSha256() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateKey) pulumi.StringOutput { return v.PublicKeyFingerprintSha256 }).(pulumi.StringOutput)
 }

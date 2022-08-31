@@ -16,23 +16,47 @@ public final class GetCertificateArgs extends com.pulumi.resources.InvokeArgs {
 
     public static final GetCertificateArgs Empty = new GetCertificateArgs();
 
+    /**
+     * The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+     * 
+     */
     @Import(name="content")
     private @Nullable Output<String> content;
 
+    /**
+     * @return The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+     * 
+     */
     public Optional<Output<String>> content() {
         return Optional.ofNullable(this.content);
     }
 
+    /**
+     * The URL of the website to get the certificates from. Cannot be used with `content`.
+     * 
+     */
     @Import(name="url")
     private @Nullable Output<String> url;
 
+    /**
+     * @return The URL of the website to get the certificates from. Cannot be used with `content`.
+     * 
+     */
     public Optional<Output<String>> url() {
         return Optional.ofNullable(this.url);
     }
 
+    /**
+     * Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+     * 
+     */
     @Import(name="verifyChain")
     private @Nullable Output<Boolean> verifyChain;
 
+    /**
+     * @return Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+     * 
+     */
     public Optional<Output<Boolean>> verifyChain() {
         return Optional.ofNullable(this.verifyChain);
     }
@@ -63,29 +87,65 @@ public final class GetCertificateArgs extends com.pulumi.resources.InvokeArgs {
             $ = new GetCertificateArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param content The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder content(@Nullable Output<String> content) {
             $.content = content;
             return this;
         }
 
+        /**
+         * @param content The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder content(String content) {
             return content(Output.of(content));
         }
 
+        /**
+         * @param url The URL of the website to get the certificates from. Cannot be used with `content`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder url(@Nullable Output<String> url) {
             $.url = url;
             return this;
         }
 
+        /**
+         * @param url The URL of the website to get the certificates from. Cannot be used with `content`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder url(String url) {
             return url(Output.of(url));
         }
 
+        /**
+         * @param verifyChain Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder verifyChain(@Nullable Output<Boolean> verifyChain) {
             $.verifyChain = verifyChain;
             return this;
         }
 
+        /**
+         * @param verifyChain Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder verifyChain(Boolean verifyChain) {
             return verifyChain(Output.of(verifyChain));
         }

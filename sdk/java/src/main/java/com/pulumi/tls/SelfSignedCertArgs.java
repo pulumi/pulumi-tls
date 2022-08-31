@@ -20,28 +20,14 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
     public static final SelfSignedCertArgs Empty = new SelfSignedCertArgs();
 
     /**
-     * List of key usages allowed for the issued certificate. Values are defined in [RFC
-     * 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
-     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
-     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
-     * `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
-     * `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
-     * `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
-     * `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+     * List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
      * 
      */
     @Import(name="allowedUses", required=true)
     private Output<List<String>> allowedUses;
 
     /**
-     * @return List of key usages allowed for the issued certificate. Values are defined in [RFC
-     * 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
-     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
-     * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
-     * `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
-     * `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
-     * `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
-     * `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+     * @return List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
      * 
      */
     public Output<List<String>> allowedUses() {
@@ -117,8 +103,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
     }
 
     /**
-     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-     * and ignored, as the key algorithm is now inferred from the key.
+     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
      * 
      * @deprecated
      * This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
@@ -129,8 +114,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
     private @Nullable Output<String> keyAlgorithm;
 
     /**
-     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-     * and ignored, as the key algorithm is now inferred from the key.
+     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
      * 
      * @deprecated
      * This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
@@ -161,20 +145,14 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
     }
 
     /**
-     * Should the generated certificate include an [authority key
-     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
-     * same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
-     * `false`).
+     * Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
     @Import(name="setAuthorityKeyId")
     private @Nullable Output<Boolean> setAuthorityKeyId;
 
     /**
-     * @return Should the generated certificate include an [authority key
-     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
-     * same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
-     * `false`).
+     * @return Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
     public Optional<Output<Boolean>> setAuthorityKeyId() {
@@ -182,16 +160,14 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
     }
 
     /**
-     * Should the generated certificate include a [subject key
-     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+     * Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
     @Import(name="setSubjectKeyId")
     private @Nullable Output<Boolean> setSubjectKeyId;
 
     /**
-     * @return Should the generated certificate include a [subject key
-     * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+     * @return Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
     public Optional<Output<Boolean>> setSubjectKeyId() {
@@ -199,16 +175,14 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
     }
 
     /**
-     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      * 
      */
     @Import(name="subject")
     private @Nullable Output<SelfSignedCertSubjectArgs> subject;
 
     /**
-     * @return The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+     * @return The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      * 
      */
     public Optional<Output<SelfSignedCertSubjectArgs>> subject() {
@@ -281,14 +255,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param allowedUses List of key usages allowed for the issued certificate. Values are defined in [RFC
-         * 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
-         * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
-         * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
-         * `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
-         * `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
-         * `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
-         * `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+         * @param allowedUses List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
          * 
          * @return builder
          * 
@@ -299,14 +266,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param allowedUses List of key usages allowed for the issued certificate. Values are defined in [RFC
-         * 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
-         * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
-         * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
-         * `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
-         * `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
-         * `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
-         * `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+         * @param allowedUses List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
          * 
          * @return builder
          * 
@@ -316,14 +276,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param allowedUses List of key usages allowed for the issued certificate. Values are defined in [RFC
-         * 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key
-         * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key
-         * Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`,
-         * `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`,
-         * `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`,
-         * `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`,
-         * `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+         * @param allowedUses List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
          * 
          * @return builder
          * 
@@ -445,8 +398,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-         * and ignored, as the key algorithm is now inferred from the key.
+         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
          * 
          * @return builder
          * 
@@ -461,8 +413,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-         * and ignored, as the key algorithm is now inferred from the key.
+         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
          * 
          * @return builder
          * 
@@ -501,10 +452,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param setAuthorityKeyId Should the generated certificate include an [authority key
-         * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
-         * same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
-         * `false`).
+         * @param setAuthorityKeyId Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
          * 
          * @return builder
          * 
@@ -515,10 +463,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param setAuthorityKeyId Should the generated certificate include an [authority key
-         * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the
-         * same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default:
-         * `false`).
+         * @param setAuthorityKeyId Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
          * 
          * @return builder
          * 
@@ -528,8 +473,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param setSubjectKeyId Should the generated certificate include a [subject key
-         * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+         * @param setSubjectKeyId Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
          * 
          * @return builder
          * 
@@ -540,8 +484,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param setSubjectKeyId Should the generated certificate include a [subject key
-         * identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+         * @param setSubjectKeyId Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
          * 
          * @return builder
          * 
@@ -551,8 +494,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param subject The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-         * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+         * @param subject The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
          * 
          * @return builder
          * 
@@ -563,8 +505,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param subject The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-         * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+         * @param subject The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
          * 
          * @return builder
          * 

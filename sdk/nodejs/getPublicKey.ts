@@ -13,8 +13,8 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as fs from "fs";
  * import * as tls from "@pulumi/tls";
- * import * from "fs";
  *
  * const ed25519_example = new tls.PrivateKey("ed25519-example", {algorithm: "ED25519"});
  * const privateKeyPem-example = tls.getPublicKeyOutput({
@@ -42,7 +42,13 @@ export function getPublicKey(args?: GetPublicKeyArgs, opts?: pulumi.InvokeOption
  * A collection of arguments for invoking getPublicKey.
  */
 export interface GetPublicKeyArgs {
+    /**
+     * The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyPem`.
+     */
     privateKeyOpenssh?: string;
+    /**
+     * The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyOpenssh`.
+     */
     privateKeyPem?: string;
 }
 
@@ -50,11 +56,29 @@ export interface GetPublicKeyArgs {
  * A collection of values returned by getPublicKey.
  */
 export interface GetPublicKeyResult {
+    /**
+     * The name of the algorithm used by the given private key. Possible values are: `RSA`, `ECDSA` and `ED25519`.
+     */
     readonly algorithm: string;
+    /**
+     * Unique identifier for this data source: hexadecimal representation of the SHA1 checksum of the data source.
+     */
     readonly id: string;
+    /**
+     * The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyPem`.
+     */
     readonly privateKeyOpenssh?: string;
+    /**
+     * The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyOpenssh`.
+     */
     readonly privateKeyPem?: string;
+    /**
+     * The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, as per the rules for `publicKeyOpenssh` and ECDSA P224 limitations.
+     */
     readonly publicKeyFingerprintMd5: string;
+    /**
+     * The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, as per the rules for `publicKeyOpenssh` and ECDSA P224 limitations.
+     */
     readonly publicKeyFingerprintSha256: string;
     readonly publicKeyOpenssh: string;
     readonly publicKeyPem: string;
@@ -68,6 +92,12 @@ export function getPublicKeyOutput(args?: GetPublicKeyOutputArgs, opts?: pulumi.
  * A collection of arguments for invoking getPublicKey.
  */
 export interface GetPublicKeyOutputArgs {
+    /**
+     * The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyPem`.
+     */
     privateKeyOpenssh?: pulumi.Input<string>;
+    /**
+     * The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyOpenssh`.
+     */
     privateKeyPem?: pulumi.Input<string>;
 }

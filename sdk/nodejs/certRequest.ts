@@ -10,8 +10,8 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as fs from "fs";
  * import * as tls from "@pulumi/tls";
- * import * from "fs";
  *
  * const example = new tls.CertRequest("example", {
  *     privateKeyPem: fs.readFileSync("private_key.pem"),
@@ -67,8 +67,7 @@ export class CertRequest extends pulumi.CustomResource {
      */
     public readonly ipAddresses!: pulumi.Output<string[] | undefined>;
     /**
-     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-     * and ignored, as the key algorithm is now inferred from the key.
+     * Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
      *
      * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
      */
@@ -80,8 +79,7 @@ export class CertRequest extends pulumi.CustomResource {
      */
     public readonly privateKeyPem!: pulumi.Output<string>;
     /**
-     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
     public readonly subject!: pulumi.Output<outputs.CertRequestSubject | undefined>;
     /**
@@ -148,8 +146,7 @@ export interface CertRequestState {
      */
     ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-     * and ignored, as the key algorithm is now inferred from the key.
+     * Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
      *
      * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
      */
@@ -161,8 +158,7 @@ export interface CertRequestState {
      */
     privateKeyPem?: pulumi.Input<string>;
     /**
-     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
     subject?: pulumi.Input<inputs.CertRequestSubject>;
     /**
@@ -184,8 +180,7 @@ export interface CertRequestArgs {
      */
     ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-     * and ignored, as the key algorithm is now inferred from the key.
+     * Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
      *
      * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
      */
@@ -197,8 +192,7 @@ export interface CertRequestArgs {
      */
     privateKeyPem: pulumi.Input<string>;
     /**
-     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
     subject?: pulumi.Input<inputs.CertRequestSubject>;
     /**

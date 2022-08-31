@@ -20,7 +20,7 @@ type Proxy struct {
 // ProxyInput is an input type that accepts ProxyArgs and ProxyOutput values.
 // You can construct a concrete instance of `ProxyInput` via:
 //
-//          ProxyArgs{...}
+//	ProxyArgs{...}
 type ProxyInput interface {
 	pulumi.Input
 

@@ -16,7 +16,7 @@ namespace Pulumi.Tls
     /// [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
     /// </summary>
     [TlsResourceType("pulumi:providers:tls")]
-    public partial class Provider : Pulumi.ProviderResource
+    public partial class Provider : global::Pulumi.ProviderResource
     {
         /// <summary>
         /// Create a Provider resource with the given unique name, arguments, and options.
@@ -43,7 +43,7 @@ namespace Pulumi.Tls
         }
     }
 
-    public sealed class ProviderArgs : Pulumi.ResourceArgs
+    public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Proxy used by resources and data sources that connect to external endpoints.
@@ -54,5 +54,6 @@ namespace Pulumi.Tls
         public ProviderArgs()
         {
         }
+        public static new ProviderArgs Empty => new ProviderArgs();
     }
 }

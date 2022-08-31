@@ -16,65 +16,137 @@ public final class SelfSignedCertSubjectArgs extends com.pulumi.resources.Resour
 
     public static final SelfSignedCertSubjectArgs Empty = new SelfSignedCertSubjectArgs();
 
+    /**
+     * Distinguished name: `CN`
+     * 
+     */
     @Import(name="commonName")
     private @Nullable Output<String> commonName;
 
+    /**
+     * @return Distinguished name: `CN`
+     * 
+     */
     public Optional<Output<String>> commonName() {
         return Optional.ofNullable(this.commonName);
     }
 
+    /**
+     * Distinguished name: `C`
+     * 
+     */
     @Import(name="country")
     private @Nullable Output<String> country;
 
+    /**
+     * @return Distinguished name: `C`
+     * 
+     */
     public Optional<Output<String>> country() {
         return Optional.ofNullable(this.country);
     }
 
+    /**
+     * Distinguished name: `L`
+     * 
+     */
     @Import(name="locality")
     private @Nullable Output<String> locality;
 
+    /**
+     * @return Distinguished name: `L`
+     * 
+     */
     public Optional<Output<String>> locality() {
         return Optional.ofNullable(this.locality);
     }
 
+    /**
+     * Distinguished name: `O`
+     * 
+     */
     @Import(name="organization")
     private @Nullable Output<String> organization;
 
+    /**
+     * @return Distinguished name: `O`
+     * 
+     */
     public Optional<Output<String>> organization() {
         return Optional.ofNullable(this.organization);
     }
 
+    /**
+     * Distinguished name: `OU`
+     * 
+     */
     @Import(name="organizationalUnit")
     private @Nullable Output<String> organizationalUnit;
 
+    /**
+     * @return Distinguished name: `OU`
+     * 
+     */
     public Optional<Output<String>> organizationalUnit() {
         return Optional.ofNullable(this.organizationalUnit);
     }
 
+    /**
+     * Distinguished name: `PC`
+     * 
+     */
     @Import(name="postalCode")
     private @Nullable Output<String> postalCode;
 
+    /**
+     * @return Distinguished name: `PC`
+     * 
+     */
     public Optional<Output<String>> postalCode() {
         return Optional.ofNullable(this.postalCode);
     }
 
+    /**
+     * Distinguished name: `ST`
+     * 
+     */
     @Import(name="province")
     private @Nullable Output<String> province;
 
+    /**
+     * @return Distinguished name: `ST`
+     * 
+     */
     public Optional<Output<String>> province() {
         return Optional.ofNullable(this.province);
     }
 
+    /**
+     * Distinguished name: `SERIALNUMBER`
+     * 
+     */
     @Import(name="serialNumber")
     private @Nullable Output<String> serialNumber;
 
+    /**
+     * @return Distinguished name: `SERIALNUMBER`
+     * 
+     */
     public Optional<Output<String>> serialNumber() {
         return Optional.ofNullable(this.serialNumber);
     }
 
+    /**
+     * Distinguished name: `STREET`
+     * 
+     */
     @Import(name="streetAddresses")
     private @Nullable Output<List<String>> streetAddresses;
 
+    /**
+     * @return Distinguished name: `STREET`
+     * 
+     */
     public Optional<Output<List<String>>> streetAddresses() {
         return Optional.ofNullable(this.streetAddresses);
     }
@@ -111,87 +183,201 @@ public final class SelfSignedCertSubjectArgs extends com.pulumi.resources.Resour
             $ = new SelfSignedCertSubjectArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param commonName Distinguished name: `CN`
+         * 
+         * @return builder
+         * 
+         */
         public Builder commonName(@Nullable Output<String> commonName) {
             $.commonName = commonName;
             return this;
         }
 
+        /**
+         * @param commonName Distinguished name: `CN`
+         * 
+         * @return builder
+         * 
+         */
         public Builder commonName(String commonName) {
             return commonName(Output.of(commonName));
         }
 
+        /**
+         * @param country Distinguished name: `C`
+         * 
+         * @return builder
+         * 
+         */
         public Builder country(@Nullable Output<String> country) {
             $.country = country;
             return this;
         }
 
+        /**
+         * @param country Distinguished name: `C`
+         * 
+         * @return builder
+         * 
+         */
         public Builder country(String country) {
             return country(Output.of(country));
         }
 
+        /**
+         * @param locality Distinguished name: `L`
+         * 
+         * @return builder
+         * 
+         */
         public Builder locality(@Nullable Output<String> locality) {
             $.locality = locality;
             return this;
         }
 
+        /**
+         * @param locality Distinguished name: `L`
+         * 
+         * @return builder
+         * 
+         */
         public Builder locality(String locality) {
             return locality(Output.of(locality));
         }
 
+        /**
+         * @param organization Distinguished name: `O`
+         * 
+         * @return builder
+         * 
+         */
         public Builder organization(@Nullable Output<String> organization) {
             $.organization = organization;
             return this;
         }
 
+        /**
+         * @param organization Distinguished name: `O`
+         * 
+         * @return builder
+         * 
+         */
         public Builder organization(String organization) {
             return organization(Output.of(organization));
         }
 
+        /**
+         * @param organizationalUnit Distinguished name: `OU`
+         * 
+         * @return builder
+         * 
+         */
         public Builder organizationalUnit(@Nullable Output<String> organizationalUnit) {
             $.organizationalUnit = organizationalUnit;
             return this;
         }
 
+        /**
+         * @param organizationalUnit Distinguished name: `OU`
+         * 
+         * @return builder
+         * 
+         */
         public Builder organizationalUnit(String organizationalUnit) {
             return organizationalUnit(Output.of(organizationalUnit));
         }
 
+        /**
+         * @param postalCode Distinguished name: `PC`
+         * 
+         * @return builder
+         * 
+         */
         public Builder postalCode(@Nullable Output<String> postalCode) {
             $.postalCode = postalCode;
             return this;
         }
 
+        /**
+         * @param postalCode Distinguished name: `PC`
+         * 
+         * @return builder
+         * 
+         */
         public Builder postalCode(String postalCode) {
             return postalCode(Output.of(postalCode));
         }
 
+        /**
+         * @param province Distinguished name: `ST`
+         * 
+         * @return builder
+         * 
+         */
         public Builder province(@Nullable Output<String> province) {
             $.province = province;
             return this;
         }
 
+        /**
+         * @param province Distinguished name: `ST`
+         * 
+         * @return builder
+         * 
+         */
         public Builder province(String province) {
             return province(Output.of(province));
         }
 
+        /**
+         * @param serialNumber Distinguished name: `SERIALNUMBER`
+         * 
+         * @return builder
+         * 
+         */
         public Builder serialNumber(@Nullable Output<String> serialNumber) {
             $.serialNumber = serialNumber;
             return this;
         }
 
+        /**
+         * @param serialNumber Distinguished name: `SERIALNUMBER`
+         * 
+         * @return builder
+         * 
+         */
         public Builder serialNumber(String serialNumber) {
             return serialNumber(Output.of(serialNumber));
         }
 
+        /**
+         * @param streetAddresses Distinguished name: `STREET`
+         * 
+         * @return builder
+         * 
+         */
         public Builder streetAddresses(@Nullable Output<List<String>> streetAddresses) {
             $.streetAddresses = streetAddresses;
             return this;
         }
 
+        /**
+         * @param streetAddresses Distinguished name: `STREET`
+         * 
+         * @return builder
+         * 
+         */
         public Builder streetAddresses(List<String> streetAddresses) {
             return streetAddresses(Output.of(streetAddresses));
         }
 
+        /**
+         * @param streetAddresses Distinguished name: `STREET`
+         * 
+         * @return builder
+         * 
+         */
         public Builder streetAddresses(String... streetAddresses) {
             return streetAddresses(List.of(streetAddresses));
         }

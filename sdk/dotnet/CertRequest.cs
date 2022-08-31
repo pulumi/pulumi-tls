@@ -13,30 +13,28 @@ namespace Pulumi.Tls
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
     /// using System.IO;
     /// using Pulumi;
     /// using Tls = Pulumi.Tls;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tls.CertRequest("example", new()
     ///     {
-    ///         var example = new Tls.CertRequest("example", new Tls.CertRequestArgs
+    ///         PrivateKeyPem = File.ReadAllText("private_key.pem"),
+    ///         Subject = new Tls.Inputs.CertRequestSubjectArgs
     ///         {
-    ///             PrivateKeyPem = File.ReadAllText("private_key.pem"),
-    ///             Subject = new Tls.Inputs.CertRequestSubjectArgs
-    ///             {
-    ///                 CommonName = "example.com",
-    ///                 Organization = "ACME Examples, Inc",
-    ///             },
-    ///         });
-    ///     }
+    ///             CommonName = "example.com",
+    ///             Organization = "ACME Examples, Inc",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
     /// </summary>
     [TlsResourceType("tls:index/certRequest:CertRequest")]
-    public partial class CertRequest : Pulumi.CustomResource
+    public partial class CertRequest : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
@@ -61,8 +59,7 @@ namespace Pulumi.Tls
         public Output<ImmutableArray<string>> IpAddresses { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-        /// and ignored, as the key algorithm is now inferred from the key.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Output("keyAlgorithm")]
         public Output<string> KeyAlgorithm { get; private set; } = null!;
@@ -76,8 +73,7 @@ namespace Pulumi.Tls
         public Output<string> PrivateKeyPem { get; private set; } = null!;
 
         /// <summary>
-        /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-        /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+        /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
         [Output("subject")]
         public Output<Outputs.CertRequestSubject?> Subject { get; private set; } = null!;
@@ -132,7 +128,7 @@ namespace Pulumi.Tls
         }
     }
 
-    public sealed class CertRequestArgs : Pulumi.ResourceArgs
+    public sealed class CertRequestArgs : global::Pulumi.ResourceArgs
     {
         [Input("dnsNames")]
         private InputList<string>? _dnsNames;
@@ -159,8 +155,7 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-        /// and ignored, as the key algorithm is now inferred from the key.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Input("keyAlgorithm")]
         public Input<string>? KeyAlgorithm { get; set; }
@@ -174,8 +169,7 @@ namespace Pulumi.Tls
         public Input<string> PrivateKeyPem { get; set; } = null!;
 
         /// <summary>
-        /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-        /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+        /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
         [Input("subject")]
         public Input<Inputs.CertRequestSubjectArgs>? Subject { get; set; }
@@ -195,9 +189,10 @@ namespace Pulumi.Tls
         public CertRequestArgs()
         {
         }
+        public static new CertRequestArgs Empty => new CertRequestArgs();
     }
 
-    public sealed class CertRequestState : Pulumi.ResourceArgs
+    public sealed class CertRequestState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
@@ -234,8 +229,7 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-        /// and ignored, as the key algorithm is now inferred from the key.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Input("keyAlgorithm")]
         public Input<string>? KeyAlgorithm { get; set; }
@@ -249,8 +243,7 @@ namespace Pulumi.Tls
         public Input<string>? PrivateKeyPem { get; set; }
 
         /// <summary>
-        /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-        /// based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+        /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         /// </summary>
         [Input("subject")]
         public Input<Inputs.CertRequestSubjectGetArgs>? Subject { get; set; }
@@ -270,5 +263,6 @@ namespace Pulumi.Tls
         public CertRequestState()
         {
         }
+        public static new CertRequestState Empty => new CertRequestState();
     }
 }
