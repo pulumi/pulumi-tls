@@ -23,8 +23,17 @@ export function getCertificate(args?: GetCertificateArgs, opts?: pulumi.InvokeOp
  * A collection of arguments for invoking getCertificate.
  */
 export interface GetCertificateArgs {
+    /**
+     * The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+     */
     content?: string;
+    /**
+     * The URL of the website to get the certificates from. Cannot be used with `content`.
+     */
     url?: string;
+    /**
+     * Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+     */
     verifyChain?: boolean;
 }
 
@@ -32,10 +41,25 @@ export interface GetCertificateArgs {
  * A collection of values returned by getCertificate.
  */
 export interface GetCertificateResult {
+    /**
+     * The certificates protecting the site, with the root of the chain first.
+     */
     readonly certificates: outputs.GetCertificateCertificate[];
+    /**
+     * The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+     */
     readonly content?: string;
+    /**
+     * Unique identifier of this data source: hashing of the certificates in the chain.
+     */
     readonly id: string;
+    /**
+     * The URL of the website to get the certificates from. Cannot be used with `content`.
+     */
     readonly url?: string;
+    /**
+     * Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+     */
     readonly verifyChain?: boolean;
 }
 
@@ -47,7 +71,16 @@ export function getCertificateOutput(args?: GetCertificateOutputArgs, opts?: pul
  * A collection of arguments for invoking getCertificate.
  */
 export interface GetCertificateOutputArgs {
+    /**
+     * The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+     */
     content?: pulumi.Input<string>;
+    /**
+     * The URL of the website to get the certificates from. Cannot be used with `content`.
+     */
     url?: pulumi.Input<string>;
+    /**
+     * Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+     */
     verifyChain?: pulumi.Input<boolean>;
 }

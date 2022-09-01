@@ -21,18 +21,26 @@ func GetCertificate(ctx *pulumi.Context, args *GetCertificateArgs, opts ...pulum
 
 // A collection of arguments for invoking getCertificate.
 type GetCertificateArgs struct {
-	Content     *string `pulumi:"content"`
-	Url         *string `pulumi:"url"`
-	VerifyChain *bool   `pulumi:"verifyChain"`
+	// The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+	Content *string `pulumi:"content"`
+	// The URL of the website to get the certificates from. Cannot be used with `content`.
+	Url *string `pulumi:"url"`
+	// Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+	VerifyChain *bool `pulumi:"verifyChain"`
 }
 
 // A collection of values returned by getCertificate.
 type GetCertificateResult struct {
+	// The certificates protecting the site, with the root of the chain first.
 	Certificates []GetCertificateCertificate `pulumi:"certificates"`
-	Content      *string                     `pulumi:"content"`
-	Id           string                      `pulumi:"id"`
-	Url          *string                     `pulumi:"url"`
-	VerifyChain  *bool                       `pulumi:"verifyChain"`
+	// The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+	Content *string `pulumi:"content"`
+	// Unique identifier of this data source: hashing of the certificates in the chain.
+	Id string `pulumi:"id"`
+	// The URL of the website to get the certificates from. Cannot be used with `content`.
+	Url *string `pulumi:"url"`
+	// Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+	VerifyChain *bool `pulumi:"verifyChain"`
 }
 
 func GetCertificateOutput(ctx *pulumi.Context, args GetCertificateOutputArgs, opts ...pulumi.InvokeOption) GetCertificateResultOutput {
@@ -50,9 +58,12 @@ func GetCertificateOutput(ctx *pulumi.Context, args GetCertificateOutputArgs, op
 
 // A collection of arguments for invoking getCertificate.
 type GetCertificateOutputArgs struct {
-	Content     pulumi.StringPtrInput `pulumi:"content"`
-	Url         pulumi.StringPtrInput `pulumi:"url"`
-	VerifyChain pulumi.BoolPtrInput   `pulumi:"verifyChain"`
+	// The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+	Content pulumi.StringPtrInput `pulumi:"content"`
+	// The URL of the website to get the certificates from. Cannot be used with `content`.
+	Url pulumi.StringPtrInput `pulumi:"url"`
+	// Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+	VerifyChain pulumi.BoolPtrInput `pulumi:"verifyChain"`
 }
 
 func (GetCertificateOutputArgs) ElementType() reflect.Type {
@@ -74,22 +85,27 @@ func (o GetCertificateResultOutput) ToGetCertificateResultOutputWithContext(ctx 
 	return o
 }
 
+// The certificates protecting the site, with the root of the chain first.
 func (o GetCertificateResultOutput) Certificates() GetCertificateCertificateArrayOutput {
 	return o.ApplyT(func(v GetCertificateResult) []GetCertificateCertificate { return v.Certificates }).(GetCertificateCertificateArrayOutput)
 }
 
+// The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
 func (o GetCertificateResultOutput) Content() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetCertificateResult) *string { return v.Content }).(pulumi.StringPtrOutput)
 }
 
+// Unique identifier of this data source: hashing of the certificates in the chain.
 func (o GetCertificateResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificateResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// The URL of the website to get the certificates from. Cannot be used with `content`.
 func (o GetCertificateResultOutput) Url() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetCertificateResult) *string { return v.Url }).(pulumi.StringPtrOutput)
 }
 
+// Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
 func (o GetCertificateResultOutput) VerifyChain() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v GetCertificateResult) *bool { return v.VerifyChain }).(pulumi.BoolPtrOutput)
 }

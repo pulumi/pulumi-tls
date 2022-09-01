@@ -5,7 +5,6 @@ env:
   NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
   PROVIDER: tls
   PUBLISH_REPO_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-  PUBLISH_REPO_URL: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
   PUBLISH_REPO_USERNAME: ${{ secrets.OSSRH_USERNAME }}
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
   PULUMI_API: https://api.pulumi-staging.io
@@ -37,7 +36,7 @@ jobs:
       with:
         go-version: ${{matrix.goversion}}
     - name: Install pulumictl
-      uses: jaxxstorm/action-install-gh-release@v1.2.0
+      uses: jaxxstorm/action-install-gh-release@v1.5.0
       with:
         repo: pulumi/pulumictl
     - name: Install Pulumi CLI
@@ -77,7 +76,7 @@ jobs:
     - name: Update path
       run: echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
     - name: Set PACKAGE_VERSION to Env
-      run: echo "PACKAGE_VERSION=v$(pulumictl get version --language generic)" >>
+      run: echo "PACKAGE_VERSION=$(pulumictl get version --language generic)" >>
         $GITHUB_ENV
     - name: Build SDK
       run: make build_${{ matrix.language }}
@@ -103,7 +102,7 @@ jobs:
         dotnetversion:
         - 3.1.301
         goversion:
-        - 1.18.x
+        - 1.19.x
         javaversion:
         - "11"
         language:
@@ -113,9 +112,9 @@ jobs:
         - go
         - java
         nodeversion:
-        - 14.x
+        - 16.x
         pythonversion:
-        - "3.7"
+        - "3.9"
   lint:
     container: golangci/golangci-lint:latest
     name: lint
@@ -135,7 +134,7 @@ jobs:
       with:
         go-version: ${{matrix.goversion}}
     - name: Install pulumictl
-      uses: jaxxstorm/action-install-gh-release@v1.2.0
+      uses: jaxxstorm/action-install-gh-release@v1.5.0
       with:
         repo: pulumi/pulumictl
     - name: Install Pulumi CLI
@@ -152,7 +151,7 @@ jobs:
       fail-fast: true
       matrix:
         goversion:
-        - 1.18.x
+        - 1.19.x
   lint_sdk:
     container: golangci/golangci-lint:latest
     name: lint-sdk
@@ -173,7 +172,7 @@ jobs:
       with:
         go-version: ${{matrix.goversion}}
     - name: Install pulumictl
-      uses: jaxxstorm/action-install-gh-release@v1.2.0
+      uses: jaxxstorm/action-install-gh-release@v1.5.0
       with:
         repo: pulumi/pulumictl
     - name: Install Pulumi CLI
@@ -190,7 +189,7 @@ jobs:
       fail-fast: true
       matrix:
         goversion:
-        - 1.18.x
+        - 1.19.x
   prerequisites:
     name: prerequisites
     runs-on: ubuntu-latest
@@ -209,14 +208,14 @@ jobs:
       with:
         go-version: ${{matrix.goversion}}
     - name: Install pulumictl
-      uses: jaxxstorm/action-install-gh-release@v1.2.0
+      uses: jaxxstorm/action-install-gh-release@v1.5.0
       with:
         repo: pulumi/pulumictl
     - name: Install Pulumi CLI
       uses: pulumi/action-install-pulumi-cli@v2
     - if: github.event_name == 'pull_request'
       name: Install Schema Tools
-      uses: jaxxstorm/action-install-gh-release@v1.2.0
+      uses: jaxxstorm/action-install-gh-release@v1.5.0
       with:
         repo: mikhailshilkov/schema-tools
     - name: Build tfgen & provider binaries
@@ -260,11 +259,11 @@ jobs:
         dotnetversion:
         - 3.1.301
         goversion:
-        - 1.18.x
+        - 1.19.x
         nodeversion:
-        - 14.x
+        - 16.x
         pythonversion:
-        - "3.7"
+        - "3.9"
   publish:
     name: publish
     needs: test
@@ -279,7 +278,7 @@ jobs:
       with:
         go-version: ${{matrix.goversion}}
     - name: Install pulumictl
-      uses: jaxxstorm/action-install-gh-release@v1.2.0
+      uses: jaxxstorm/action-install-gh-release@v1.5.0
       with:
         repo: pulumi/pulumictl
     - name: Install Pulumi CLI
@@ -316,11 +315,11 @@ jobs:
         dotnetversion:
         - 3.1.301
         goversion:
-        - 1.18.x
+        - 1.19.x
         nodeversion:
-        - 14.x
+        - 16.x
         pythonversion:
-        - "3.7"
+        - "3.9"
   publish_sdk:
     name: publish_sdk
     needs: publish
@@ -340,7 +339,7 @@ jobs:
       with:
         go-version: ${{matrix.goversion}}
     - name: Install pulumictl
-      uses: jaxxstorm/action-install-gh-release@v1.2.0
+      uses: jaxxstorm/action-install-gh-release@v1.5.0
       with:
         repo: pulumi/pulumictl
     - name: Install Pulumi CLI
@@ -402,12 +401,12 @@ jobs:
       name: Publish SDKs
       run: ./ci-scripts/ci/publish-tfgen-package ${{ github.workspace }}
     - name: Set PACKAGE_VERSION to Env
-      run: echo "PACKAGE_VERSION=v$(pulumictl get version --language generic)" >>
+      run: echo "PACKAGE_VERSION=$(pulumictl get version --language generic)" >>
         $GITHUB_ENV
     - name: Publish Java SDK
       uses: gradle/gradle-build-action@9b814496b50909128c6a52622b416c5ffa04db49
       with:
-        arguments: publish
+        arguments: publishToSonatype closeAndReleaseSonatypeStagingRepository
         build-root-directory: ./sdk/java
         gradle-version: 7.4.1
     - if: failure() && github.event_name == 'push'
@@ -423,13 +422,13 @@ jobs:
         dotnetversion:
         - 3.1.301
         goversion:
-        - 1.18.x
+        - 1.19.x
         javaversion:
         - "11"
         nodeversion:
-        - 14.x
+        - 16.x
         pythonversion:
-        - "3.7"
+        - "3.9"
   test:
     name: test
     needs: build_sdk
@@ -449,7 +448,7 @@ jobs:
       with:
         go-version: ${{matrix.goversion}}
     - name: Install pulumictl
-      uses: jaxxstorm/action-install-gh-release@v1.2.0
+      uses: jaxxstorm/action-install-gh-release@v1.5.0
       with:
         repo: pulumi/pulumictl
     - name: Install Pulumi CLI
@@ -502,7 +501,7 @@ jobs:
     - name: Install dependencies
       run: make install_${{ matrix.language}}_sdk
     - name: Install gotestfmt
-      uses: jaxxstorm/action-install-gh-release@v1.2.0
+      uses: jaxxstorm/action-install-gh-release@v1.5.0
       with:
         repo: haveyoudebuggedit/gotestfmt
     - name: Run tests
@@ -521,7 +520,7 @@ jobs:
         dotnetversion:
         - 3.1.301
         goversion:
-        - 1.18.x
+        - 1.19.x
         javaversion:
         - "11"
         language:
@@ -531,9 +530,9 @@ jobs:
         - go
         - java
         nodeversion:
-        - 14.x
+        - 16.x
         pythonversion:
-        - "3.7"
+        - "3.9"
 name: prerelease
 on:
   push:

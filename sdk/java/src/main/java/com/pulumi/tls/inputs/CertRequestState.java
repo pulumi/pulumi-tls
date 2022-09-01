@@ -71,8 +71,7 @@ public final class CertRequestState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-     * and ignored, as the key algorithm is now inferred from the key.
+     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
      * 
      * @deprecated
      * This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
@@ -83,8 +82,7 @@ public final class CertRequestState extends com.pulumi.resources.ResourceArgs {
     private @Nullable Output<String> keyAlgorithm;
 
     /**
-     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-     * and ignored, as the key algorithm is now inferred from the key.
+     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
      * 
      * @deprecated
      * This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
@@ -115,16 +113,14 @@ public final class CertRequestState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      * 
      */
     @Import(name="subject")
     private @Nullable Output<CertRequestSubjectArgs> subject;
 
     /**
-     * @return The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+     * @return The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      * 
      */
     public Optional<Output<CertRequestSubjectArgs>> subject() {
@@ -268,8 +264,7 @@ public final class CertRequestState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-         * and ignored, as the key algorithm is now inferred from the key.
+         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
          * 
          * @return builder
          * 
@@ -284,8 +279,7 @@ public final class CertRequestState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-         * and ignored, as the key algorithm is now inferred from the key.
+         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
          * 
          * @return builder
          * 
@@ -324,8 +318,7 @@ public final class CertRequestState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param subject The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-         * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+         * @param subject The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
          * 
          * @return builder
          * 
@@ -336,8 +329,7 @@ public final class CertRequestState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param subject The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-         * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+         * @param subject The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
          * 
          * @return builder
          * 

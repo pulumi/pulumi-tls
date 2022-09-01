@@ -11,21 +11,30 @@ import (
 )
 
 type CertRequestSubject struct {
-	CommonName         *string  `pulumi:"commonName"`
-	Country            *string  `pulumi:"country"`
-	Locality           *string  `pulumi:"locality"`
-	Organization       *string  `pulumi:"organization"`
-	OrganizationalUnit *string  `pulumi:"organizationalUnit"`
-	PostalCode         *string  `pulumi:"postalCode"`
-	Province           *string  `pulumi:"province"`
-	SerialNumber       *string  `pulumi:"serialNumber"`
-	StreetAddresses    []string `pulumi:"streetAddresses"`
+	// Distinguished name: `CN`
+	CommonName *string `pulumi:"commonName"`
+	// Distinguished name: `C`
+	Country *string `pulumi:"country"`
+	// Distinguished name: `L`
+	Locality *string `pulumi:"locality"`
+	// Distinguished name: `O`
+	Organization *string `pulumi:"organization"`
+	// Distinguished name: `OU`
+	OrganizationalUnit *string `pulumi:"organizationalUnit"`
+	// Distinguished name: `PC`
+	PostalCode *string `pulumi:"postalCode"`
+	// Distinguished name: `ST`
+	Province *string `pulumi:"province"`
+	// Distinguished name: `SERIALNUMBER`
+	SerialNumber *string `pulumi:"serialNumber"`
+	// Distinguished name: `STREET`
+	StreetAddresses []string `pulumi:"streetAddresses"`
 }
 
 // CertRequestSubjectInput is an input type that accepts CertRequestSubjectArgs and CertRequestSubjectOutput values.
 // You can construct a concrete instance of `CertRequestSubjectInput` via:
 //
-//          CertRequestSubjectArgs{...}
+//	CertRequestSubjectArgs{...}
 type CertRequestSubjectInput interface {
 	pulumi.Input
 
@@ -34,15 +43,24 @@ type CertRequestSubjectInput interface {
 }
 
 type CertRequestSubjectArgs struct {
-	CommonName         pulumi.StringPtrInput   `pulumi:"commonName"`
-	Country            pulumi.StringPtrInput   `pulumi:"country"`
-	Locality           pulumi.StringPtrInput   `pulumi:"locality"`
-	Organization       pulumi.StringPtrInput   `pulumi:"organization"`
-	OrganizationalUnit pulumi.StringPtrInput   `pulumi:"organizationalUnit"`
-	PostalCode         pulumi.StringPtrInput   `pulumi:"postalCode"`
-	Province           pulumi.StringPtrInput   `pulumi:"province"`
-	SerialNumber       pulumi.StringPtrInput   `pulumi:"serialNumber"`
-	StreetAddresses    pulumi.StringArrayInput `pulumi:"streetAddresses"`
+	// Distinguished name: `CN`
+	CommonName pulumi.StringPtrInput `pulumi:"commonName"`
+	// Distinguished name: `C`
+	Country pulumi.StringPtrInput `pulumi:"country"`
+	// Distinguished name: `L`
+	Locality pulumi.StringPtrInput `pulumi:"locality"`
+	// Distinguished name: `O`
+	Organization pulumi.StringPtrInput `pulumi:"organization"`
+	// Distinguished name: `OU`
+	OrganizationalUnit pulumi.StringPtrInput `pulumi:"organizationalUnit"`
+	// Distinguished name: `PC`
+	PostalCode pulumi.StringPtrInput `pulumi:"postalCode"`
+	// Distinguished name: `ST`
+	Province pulumi.StringPtrInput `pulumi:"province"`
+	// Distinguished name: `SERIALNUMBER`
+	SerialNumber pulumi.StringPtrInput `pulumi:"serialNumber"`
+	// Distinguished name: `STREET`
+	StreetAddresses pulumi.StringArrayInput `pulumi:"streetAddresses"`
 }
 
 func (CertRequestSubjectArgs) ElementType() reflect.Type {
@@ -68,11 +86,11 @@ func (i CertRequestSubjectArgs) ToCertRequestSubjectPtrOutputWithContext(ctx con
 // CertRequestSubjectPtrInput is an input type that accepts CertRequestSubjectArgs, CertRequestSubjectPtr and CertRequestSubjectPtrOutput values.
 // You can construct a concrete instance of `CertRequestSubjectPtrInput` via:
 //
-//          CertRequestSubjectArgs{...}
+//	        CertRequestSubjectArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type CertRequestSubjectPtrInput interface {
 	pulumi.Input
 
@@ -122,38 +140,47 @@ func (o CertRequestSubjectOutput) ToCertRequestSubjectPtrOutputWithContext(ctx c
 	}).(CertRequestSubjectPtrOutput)
 }
 
+// Distinguished name: `CN`
 func (o CertRequestSubjectOutput) CommonName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CertRequestSubject) *string { return v.CommonName }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `C`
 func (o CertRequestSubjectOutput) Country() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CertRequestSubject) *string { return v.Country }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `L`
 func (o CertRequestSubjectOutput) Locality() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CertRequestSubject) *string { return v.Locality }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `O`
 func (o CertRequestSubjectOutput) Organization() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CertRequestSubject) *string { return v.Organization }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `OU`
 func (o CertRequestSubjectOutput) OrganizationalUnit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CertRequestSubject) *string { return v.OrganizationalUnit }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `PC`
 func (o CertRequestSubjectOutput) PostalCode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CertRequestSubject) *string { return v.PostalCode }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `ST`
 func (o CertRequestSubjectOutput) Province() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CertRequestSubject) *string { return v.Province }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `SERIALNUMBER`
 func (o CertRequestSubjectOutput) SerialNumber() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CertRequestSubject) *string { return v.SerialNumber }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `STREET`
 func (o CertRequestSubjectOutput) StreetAddresses() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v CertRequestSubject) []string { return v.StreetAddresses }).(pulumi.StringArrayOutput)
 }
@@ -182,6 +209,7 @@ func (o CertRequestSubjectPtrOutput) Elem() CertRequestSubjectOutput {
 	}).(CertRequestSubjectOutput)
 }
 
+// Distinguished name: `CN`
 func (o CertRequestSubjectPtrOutput) CommonName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CertRequestSubject) *string {
 		if v == nil {
@@ -191,6 +219,7 @@ func (o CertRequestSubjectPtrOutput) CommonName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `C`
 func (o CertRequestSubjectPtrOutput) Country() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CertRequestSubject) *string {
 		if v == nil {
@@ -200,6 +229,7 @@ func (o CertRequestSubjectPtrOutput) Country() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `L`
 func (o CertRequestSubjectPtrOutput) Locality() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CertRequestSubject) *string {
 		if v == nil {
@@ -209,6 +239,7 @@ func (o CertRequestSubjectPtrOutput) Locality() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `O`
 func (o CertRequestSubjectPtrOutput) Organization() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CertRequestSubject) *string {
 		if v == nil {
@@ -218,6 +249,7 @@ func (o CertRequestSubjectPtrOutput) Organization() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `OU`
 func (o CertRequestSubjectPtrOutput) OrganizationalUnit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CertRequestSubject) *string {
 		if v == nil {
@@ -227,6 +259,7 @@ func (o CertRequestSubjectPtrOutput) OrganizationalUnit() pulumi.StringPtrOutput
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `PC`
 func (o CertRequestSubjectPtrOutput) PostalCode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CertRequestSubject) *string {
 		if v == nil {
@@ -236,6 +269,7 @@ func (o CertRequestSubjectPtrOutput) PostalCode() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `ST`
 func (o CertRequestSubjectPtrOutput) Province() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CertRequestSubject) *string {
 		if v == nil {
@@ -245,6 +279,7 @@ func (o CertRequestSubjectPtrOutput) Province() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `SERIALNUMBER`
 func (o CertRequestSubjectPtrOutput) SerialNumber() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CertRequestSubject) *string {
 		if v == nil {
@@ -254,6 +289,7 @@ func (o CertRequestSubjectPtrOutput) SerialNumber() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `STREET`
 func (o CertRequestSubjectPtrOutput) StreetAddresses() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *CertRequestSubject) []string {
 		if v == nil {
@@ -273,7 +309,7 @@ type ProviderProxy struct {
 // ProviderProxyInput is an input type that accepts ProviderProxyArgs and ProviderProxyOutput values.
 // You can construct a concrete instance of `ProviderProxyInput` via:
 //
-//          ProviderProxyArgs{...}
+//	ProviderProxyArgs{...}
 type ProviderProxyInput interface {
 	pulumi.Input
 
@@ -311,11 +347,11 @@ func (i ProviderProxyArgs) ToProviderProxyPtrOutputWithContext(ctx context.Conte
 // ProviderProxyPtrInput is an input type that accepts ProviderProxyArgs, ProviderProxyPtr and ProviderProxyPtrOutput values.
 // You can construct a concrete instance of `ProviderProxyPtrInput` via:
 //
-//          ProviderProxyArgs{...}
+//	        ProviderProxyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ProviderProxyPtrInput interface {
 	pulumi.Input
 
@@ -442,21 +478,30 @@ func (o ProviderProxyPtrOutput) Username() pulumi.StringPtrOutput {
 }
 
 type SelfSignedCertSubject struct {
-	CommonName         *string  `pulumi:"commonName"`
-	Country            *string  `pulumi:"country"`
-	Locality           *string  `pulumi:"locality"`
-	Organization       *string  `pulumi:"organization"`
-	OrganizationalUnit *string  `pulumi:"organizationalUnit"`
-	PostalCode         *string  `pulumi:"postalCode"`
-	Province           *string  `pulumi:"province"`
-	SerialNumber       *string  `pulumi:"serialNumber"`
-	StreetAddresses    []string `pulumi:"streetAddresses"`
+	// Distinguished name: `CN`
+	CommonName *string `pulumi:"commonName"`
+	// Distinguished name: `C`
+	Country *string `pulumi:"country"`
+	// Distinguished name: `L`
+	Locality *string `pulumi:"locality"`
+	// Distinguished name: `O`
+	Organization *string `pulumi:"organization"`
+	// Distinguished name: `OU`
+	OrganizationalUnit *string `pulumi:"organizationalUnit"`
+	// Distinguished name: `PC`
+	PostalCode *string `pulumi:"postalCode"`
+	// Distinguished name: `ST`
+	Province *string `pulumi:"province"`
+	// Distinguished name: `SERIALNUMBER`
+	SerialNumber *string `pulumi:"serialNumber"`
+	// Distinguished name: `STREET`
+	StreetAddresses []string `pulumi:"streetAddresses"`
 }
 
 // SelfSignedCertSubjectInput is an input type that accepts SelfSignedCertSubjectArgs and SelfSignedCertSubjectOutput values.
 // You can construct a concrete instance of `SelfSignedCertSubjectInput` via:
 //
-//          SelfSignedCertSubjectArgs{...}
+//	SelfSignedCertSubjectArgs{...}
 type SelfSignedCertSubjectInput interface {
 	pulumi.Input
 
@@ -465,15 +510,24 @@ type SelfSignedCertSubjectInput interface {
 }
 
 type SelfSignedCertSubjectArgs struct {
-	CommonName         pulumi.StringPtrInput   `pulumi:"commonName"`
-	Country            pulumi.StringPtrInput   `pulumi:"country"`
-	Locality           pulumi.StringPtrInput   `pulumi:"locality"`
-	Organization       pulumi.StringPtrInput   `pulumi:"organization"`
-	OrganizationalUnit pulumi.StringPtrInput   `pulumi:"organizationalUnit"`
-	PostalCode         pulumi.StringPtrInput   `pulumi:"postalCode"`
-	Province           pulumi.StringPtrInput   `pulumi:"province"`
-	SerialNumber       pulumi.StringPtrInput   `pulumi:"serialNumber"`
-	StreetAddresses    pulumi.StringArrayInput `pulumi:"streetAddresses"`
+	// Distinguished name: `CN`
+	CommonName pulumi.StringPtrInput `pulumi:"commonName"`
+	// Distinguished name: `C`
+	Country pulumi.StringPtrInput `pulumi:"country"`
+	// Distinguished name: `L`
+	Locality pulumi.StringPtrInput `pulumi:"locality"`
+	// Distinguished name: `O`
+	Organization pulumi.StringPtrInput `pulumi:"organization"`
+	// Distinguished name: `OU`
+	OrganizationalUnit pulumi.StringPtrInput `pulumi:"organizationalUnit"`
+	// Distinguished name: `PC`
+	PostalCode pulumi.StringPtrInput `pulumi:"postalCode"`
+	// Distinguished name: `ST`
+	Province pulumi.StringPtrInput `pulumi:"province"`
+	// Distinguished name: `SERIALNUMBER`
+	SerialNumber pulumi.StringPtrInput `pulumi:"serialNumber"`
+	// Distinguished name: `STREET`
+	StreetAddresses pulumi.StringArrayInput `pulumi:"streetAddresses"`
 }
 
 func (SelfSignedCertSubjectArgs) ElementType() reflect.Type {
@@ -499,11 +553,11 @@ func (i SelfSignedCertSubjectArgs) ToSelfSignedCertSubjectPtrOutputWithContext(c
 // SelfSignedCertSubjectPtrInput is an input type that accepts SelfSignedCertSubjectArgs, SelfSignedCertSubjectPtr and SelfSignedCertSubjectPtrOutput values.
 // You can construct a concrete instance of `SelfSignedCertSubjectPtrInput` via:
 //
-//          SelfSignedCertSubjectArgs{...}
+//	        SelfSignedCertSubjectArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SelfSignedCertSubjectPtrInput interface {
 	pulumi.Input
 
@@ -553,38 +607,47 @@ func (o SelfSignedCertSubjectOutput) ToSelfSignedCertSubjectPtrOutputWithContext
 	}).(SelfSignedCertSubjectPtrOutput)
 }
 
+// Distinguished name: `CN`
 func (o SelfSignedCertSubjectOutput) CommonName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.CommonName }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `C`
 func (o SelfSignedCertSubjectOutput) Country() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.Country }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `L`
 func (o SelfSignedCertSubjectOutput) Locality() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.Locality }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `O`
 func (o SelfSignedCertSubjectOutput) Organization() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.Organization }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `OU`
 func (o SelfSignedCertSubjectOutput) OrganizationalUnit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.OrganizationalUnit }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `PC`
 func (o SelfSignedCertSubjectOutput) PostalCode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.PostalCode }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `ST`
 func (o SelfSignedCertSubjectOutput) Province() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.Province }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `SERIALNUMBER`
 func (o SelfSignedCertSubjectOutput) SerialNumber() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SelfSignedCertSubject) *string { return v.SerialNumber }).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `STREET`
 func (o SelfSignedCertSubjectOutput) StreetAddresses() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v SelfSignedCertSubject) []string { return v.StreetAddresses }).(pulumi.StringArrayOutput)
 }
@@ -613,6 +676,7 @@ func (o SelfSignedCertSubjectPtrOutput) Elem() SelfSignedCertSubjectOutput {
 	}).(SelfSignedCertSubjectOutput)
 }
 
+// Distinguished name: `CN`
 func (o SelfSignedCertSubjectPtrOutput) CommonName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
 		if v == nil {
@@ -622,6 +686,7 @@ func (o SelfSignedCertSubjectPtrOutput) CommonName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `C`
 func (o SelfSignedCertSubjectPtrOutput) Country() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
 		if v == nil {
@@ -631,6 +696,7 @@ func (o SelfSignedCertSubjectPtrOutput) Country() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `L`
 func (o SelfSignedCertSubjectPtrOutput) Locality() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
 		if v == nil {
@@ -640,6 +706,7 @@ func (o SelfSignedCertSubjectPtrOutput) Locality() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `O`
 func (o SelfSignedCertSubjectPtrOutput) Organization() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
 		if v == nil {
@@ -649,6 +716,7 @@ func (o SelfSignedCertSubjectPtrOutput) Organization() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `OU`
 func (o SelfSignedCertSubjectPtrOutput) OrganizationalUnit() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
 		if v == nil {
@@ -658,6 +726,7 @@ func (o SelfSignedCertSubjectPtrOutput) OrganizationalUnit() pulumi.StringPtrOut
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `PC`
 func (o SelfSignedCertSubjectPtrOutput) PostalCode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
 		if v == nil {
@@ -667,6 +736,7 @@ func (o SelfSignedCertSubjectPtrOutput) PostalCode() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `ST`
 func (o SelfSignedCertSubjectPtrOutput) Province() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
 		if v == nil {
@@ -676,6 +746,7 @@ func (o SelfSignedCertSubjectPtrOutput) Province() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `SERIALNUMBER`
 func (o SelfSignedCertSubjectPtrOutput) SerialNumber() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SelfSignedCertSubject) *string {
 		if v == nil {
@@ -685,6 +756,7 @@ func (o SelfSignedCertSubjectPtrOutput) SerialNumber() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Distinguished name: `STREET`
 func (o SelfSignedCertSubjectPtrOutput) StreetAddresses() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *SelfSignedCertSubject) []string {
 		if v == nil {
@@ -695,23 +767,34 @@ func (o SelfSignedCertSubjectPtrOutput) StreetAddresses() pulumi.StringArrayOutp
 }
 
 type GetCertificateCertificate struct {
-	CertPem            string `pulumi:"certPem"`
-	IsCa               bool   `pulumi:"isCa"`
-	Issuer             string `pulumi:"issuer"`
-	NotAfter           string `pulumi:"notAfter"`
-	NotBefore          string `pulumi:"notBefore"`
+	CertPem string `pulumi:"certPem"`
+	// `true` if the certificate is of a CA (Certificate Authority).
+	IsCa bool `pulumi:"isCa"`
+	// Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
+	Issuer string `pulumi:"issuer"`
+	// The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+	NotAfter string `pulumi:"notAfter"`
+	// The time after which the certificate is valid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+	NotBefore string `pulumi:"notBefore"`
+	// The key algorithm used to create the certificate.
 	PublicKeyAlgorithm string `pulumi:"publicKeyAlgorithm"`
-	SerialNumber       string `pulumi:"serialNumber"`
-	Sha1Fingerprint    string `pulumi:"sha1Fingerprint"`
+	// Number that uniquely identifies the certificate with the CA's system.
+	// The `format` function can be used to convert this *base 10* number into other bases, such as hex.
+	SerialNumber string `pulumi:"serialNumber"`
+	// The SHA1 fingerprint of the public key of the certificate.
+	Sha1Fingerprint string `pulumi:"sha1Fingerprint"`
+	// The algorithm used to sign the certificate.
 	SignatureAlgorithm string `pulumi:"signatureAlgorithm"`
-	Subject            string `pulumi:"subject"`
-	Version            int    `pulumi:"version"`
+	// The entity the certificate belongs to, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
+	Subject string `pulumi:"subject"`
+	// The version the certificate is in.
+	Version int `pulumi:"version"`
 }
 
 // GetCertificateCertificateInput is an input type that accepts GetCertificateCertificateArgs and GetCertificateCertificateOutput values.
 // You can construct a concrete instance of `GetCertificateCertificateInput` via:
 //
-//          GetCertificateCertificateArgs{...}
+//	GetCertificateCertificateArgs{...}
 type GetCertificateCertificateInput interface {
 	pulumi.Input
 
@@ -720,17 +803,28 @@ type GetCertificateCertificateInput interface {
 }
 
 type GetCertificateCertificateArgs struct {
-	CertPem            pulumi.StringInput `pulumi:"certPem"`
-	IsCa               pulumi.BoolInput   `pulumi:"isCa"`
-	Issuer             pulumi.StringInput `pulumi:"issuer"`
-	NotAfter           pulumi.StringInput `pulumi:"notAfter"`
-	NotBefore          pulumi.StringInput `pulumi:"notBefore"`
+	CertPem pulumi.StringInput `pulumi:"certPem"`
+	// `true` if the certificate is of a CA (Certificate Authority).
+	IsCa pulumi.BoolInput `pulumi:"isCa"`
+	// Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
+	Issuer pulumi.StringInput `pulumi:"issuer"`
+	// The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+	NotAfter pulumi.StringInput `pulumi:"notAfter"`
+	// The time after which the certificate is valid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+	NotBefore pulumi.StringInput `pulumi:"notBefore"`
+	// The key algorithm used to create the certificate.
 	PublicKeyAlgorithm pulumi.StringInput `pulumi:"publicKeyAlgorithm"`
-	SerialNumber       pulumi.StringInput `pulumi:"serialNumber"`
-	Sha1Fingerprint    pulumi.StringInput `pulumi:"sha1Fingerprint"`
+	// Number that uniquely identifies the certificate with the CA's system.
+	// The `format` function can be used to convert this *base 10* number into other bases, such as hex.
+	SerialNumber pulumi.StringInput `pulumi:"serialNumber"`
+	// The SHA1 fingerprint of the public key of the certificate.
+	Sha1Fingerprint pulumi.StringInput `pulumi:"sha1Fingerprint"`
+	// The algorithm used to sign the certificate.
 	SignatureAlgorithm pulumi.StringInput `pulumi:"signatureAlgorithm"`
-	Subject            pulumi.StringInput `pulumi:"subject"`
-	Version            pulumi.IntInput    `pulumi:"version"`
+	// The entity the certificate belongs to, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
+	Subject pulumi.StringInput `pulumi:"subject"`
+	// The version the certificate is in.
+	Version pulumi.IntInput `pulumi:"version"`
 }
 
 func (GetCertificateCertificateArgs) ElementType() reflect.Type {
@@ -748,7 +842,7 @@ func (i GetCertificateCertificateArgs) ToGetCertificateCertificateOutputWithCont
 // GetCertificateCertificateArrayInput is an input type that accepts GetCertificateCertificateArray and GetCertificateCertificateArrayOutput values.
 // You can construct a concrete instance of `GetCertificateCertificateArrayInput` via:
 //
-//          GetCertificateCertificateArray{ GetCertificateCertificateArgs{...} }
+//	GetCertificateCertificateArray{ GetCertificateCertificateArgs{...} }
 type GetCertificateCertificateArrayInput interface {
 	pulumi.Input
 
@@ -788,42 +882,53 @@ func (o GetCertificateCertificateOutput) CertPem() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificateCertificate) string { return v.CertPem }).(pulumi.StringOutput)
 }
 
+// `true` if the certificate is of a CA (Certificate Authority).
 func (o GetCertificateCertificateOutput) IsCa() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetCertificateCertificate) bool { return v.IsCa }).(pulumi.BoolOutput)
 }
 
+// Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
 func (o GetCertificateCertificateOutput) Issuer() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificateCertificate) string { return v.Issuer }).(pulumi.StringOutput)
 }
 
+// The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
 func (o GetCertificateCertificateOutput) NotAfter() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificateCertificate) string { return v.NotAfter }).(pulumi.StringOutput)
 }
 
+// The time after which the certificate is valid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
 func (o GetCertificateCertificateOutput) NotBefore() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificateCertificate) string { return v.NotBefore }).(pulumi.StringOutput)
 }
 
+// The key algorithm used to create the certificate.
 func (o GetCertificateCertificateOutput) PublicKeyAlgorithm() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificateCertificate) string { return v.PublicKeyAlgorithm }).(pulumi.StringOutput)
 }
 
+// Number that uniquely identifies the certificate with the CA's system.
+// The `format` function can be used to convert this *base 10* number into other bases, such as hex.
 func (o GetCertificateCertificateOutput) SerialNumber() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificateCertificate) string { return v.SerialNumber }).(pulumi.StringOutput)
 }
 
+// The SHA1 fingerprint of the public key of the certificate.
 func (o GetCertificateCertificateOutput) Sha1Fingerprint() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificateCertificate) string { return v.Sha1Fingerprint }).(pulumi.StringOutput)
 }
 
+// The algorithm used to sign the certificate.
 func (o GetCertificateCertificateOutput) SignatureAlgorithm() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificateCertificate) string { return v.SignatureAlgorithm }).(pulumi.StringOutput)
 }
 
+// The entity the certificate belongs to, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
 func (o GetCertificateCertificateOutput) Subject() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificateCertificate) string { return v.Subject }).(pulumi.StringOutput)
 }
 
+// The version the certificate is in.
 func (o GetCertificateCertificateOutput) Version() pulumi.IntOutput {
 	return o.ApplyT(func(v GetCertificateCertificate) int { return v.Version }).(pulumi.IntOutput)
 }

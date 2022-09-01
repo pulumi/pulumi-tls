@@ -12,62 +12,113 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class SelfSignedCertSubject {
-    private final @Nullable String commonName;
-    private final @Nullable String country;
-    private final @Nullable String locality;
-    private final @Nullable String organization;
-    private final @Nullable String organizationalUnit;
-    private final @Nullable String postalCode;
-    private final @Nullable String province;
-    private final @Nullable String serialNumber;
-    private final @Nullable List<String> streetAddresses;
+    /**
+     * @return Distinguished name: `CN`
+     * 
+     */
+    private @Nullable String commonName;
+    /**
+     * @return Distinguished name: `C`
+     * 
+     */
+    private @Nullable String country;
+    /**
+     * @return Distinguished name: `L`
+     * 
+     */
+    private @Nullable String locality;
+    /**
+     * @return Distinguished name: `O`
+     * 
+     */
+    private @Nullable String organization;
+    /**
+     * @return Distinguished name: `OU`
+     * 
+     */
+    private @Nullable String organizationalUnit;
+    /**
+     * @return Distinguished name: `PC`
+     * 
+     */
+    private @Nullable String postalCode;
+    /**
+     * @return Distinguished name: `ST`
+     * 
+     */
+    private @Nullable String province;
+    /**
+     * @return Distinguished name: `SERIALNUMBER`
+     * 
+     */
+    private @Nullable String serialNumber;
+    /**
+     * @return Distinguished name: `STREET`
+     * 
+     */
+    private @Nullable List<String> streetAddresses;
 
-    @CustomType.Constructor
-    private SelfSignedCertSubject(
-        @CustomType.Parameter("commonName") @Nullable String commonName,
-        @CustomType.Parameter("country") @Nullable String country,
-        @CustomType.Parameter("locality") @Nullable String locality,
-        @CustomType.Parameter("organization") @Nullable String organization,
-        @CustomType.Parameter("organizationalUnit") @Nullable String organizationalUnit,
-        @CustomType.Parameter("postalCode") @Nullable String postalCode,
-        @CustomType.Parameter("province") @Nullable String province,
-        @CustomType.Parameter("serialNumber") @Nullable String serialNumber,
-        @CustomType.Parameter("streetAddresses") @Nullable List<String> streetAddresses) {
-        this.commonName = commonName;
-        this.country = country;
-        this.locality = locality;
-        this.organization = organization;
-        this.organizationalUnit = organizationalUnit;
-        this.postalCode = postalCode;
-        this.province = province;
-        this.serialNumber = serialNumber;
-        this.streetAddresses = streetAddresses;
-    }
-
+    private SelfSignedCertSubject() {}
+    /**
+     * @return Distinguished name: `CN`
+     * 
+     */
     public Optional<String> commonName() {
         return Optional.ofNullable(this.commonName);
     }
+    /**
+     * @return Distinguished name: `C`
+     * 
+     */
     public Optional<String> country() {
         return Optional.ofNullable(this.country);
     }
+    /**
+     * @return Distinguished name: `L`
+     * 
+     */
     public Optional<String> locality() {
         return Optional.ofNullable(this.locality);
     }
+    /**
+     * @return Distinguished name: `O`
+     * 
+     */
     public Optional<String> organization() {
         return Optional.ofNullable(this.organization);
     }
+    /**
+     * @return Distinguished name: `OU`
+     * 
+     */
     public Optional<String> organizationalUnit() {
         return Optional.ofNullable(this.organizationalUnit);
     }
+    /**
+     * @return Distinguished name: `PC`
+     * 
+     */
     public Optional<String> postalCode() {
         return Optional.ofNullable(this.postalCode);
     }
+    /**
+     * @return Distinguished name: `ST`
+     * 
+     */
     public Optional<String> province() {
         return Optional.ofNullable(this.province);
     }
+    /**
+     * @return Distinguished name: `SERIALNUMBER`
+     * 
+     */
     public Optional<String> serialNumber() {
         return Optional.ofNullable(this.serialNumber);
     }
+    /**
+     * @return Distinguished name: `STREET`
+     * 
+     */
     public List<String> streetAddresses() {
         return this.streetAddresses == null ? List.of() : this.streetAddresses;
     }
@@ -79,7 +130,7 @@ public final class SelfSignedCertSubject {
     public static Builder builder(SelfSignedCertSubject defaults) {
         return new Builder(defaults);
     }
-
+    @CustomType.Builder
     public static final class Builder {
         private @Nullable String commonName;
         private @Nullable String country;
@@ -90,11 +141,7 @@ public final class SelfSignedCertSubject {
         private @Nullable String province;
         private @Nullable String serialNumber;
         private @Nullable List<String> streetAddresses;
-
-        public Builder() {
-    	      // Empty
-        }
-
+        public Builder() {}
         public Builder(SelfSignedCertSubject defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.commonName = defaults.commonName;
@@ -108,46 +155,66 @@ public final class SelfSignedCertSubject {
     	      this.streetAddresses = defaults.streetAddresses;
         }
 
+        @CustomType.Setter
         public Builder commonName(@Nullable String commonName) {
             this.commonName = commonName;
             return this;
         }
+        @CustomType.Setter
         public Builder country(@Nullable String country) {
             this.country = country;
             return this;
         }
+        @CustomType.Setter
         public Builder locality(@Nullable String locality) {
             this.locality = locality;
             return this;
         }
+        @CustomType.Setter
         public Builder organization(@Nullable String organization) {
             this.organization = organization;
             return this;
         }
+        @CustomType.Setter
         public Builder organizationalUnit(@Nullable String organizationalUnit) {
             this.organizationalUnit = organizationalUnit;
             return this;
         }
+        @CustomType.Setter
         public Builder postalCode(@Nullable String postalCode) {
             this.postalCode = postalCode;
             return this;
         }
+        @CustomType.Setter
         public Builder province(@Nullable String province) {
             this.province = province;
             return this;
         }
+        @CustomType.Setter
         public Builder serialNumber(@Nullable String serialNumber) {
             this.serialNumber = serialNumber;
             return this;
         }
+        @CustomType.Setter
         public Builder streetAddresses(@Nullable List<String> streetAddresses) {
             this.streetAddresses = streetAddresses;
             return this;
         }
         public Builder streetAddresses(String... streetAddresses) {
             return streetAddresses(List.of(streetAddresses));
-        }        public SelfSignedCertSubject build() {
-            return new SelfSignedCertSubject(commonName, country, locality, organization, organizationalUnit, postalCode, province, serialNumber, streetAddresses);
+        }
+        public SelfSignedCertSubject build() {
+            final var o = new SelfSignedCertSubject();
+            o.commonName = commonName;
+            o.country = country;
+            o.locality = locality;
+            o.organization = organization;
+            o.organizationalUnit = organizationalUnit;
+            o.postalCode = postalCode;
+            o.province = province;
+            o.serialNumber = serialNumber;
+            o.streetAddresses = streetAddresses;
+            return o;
         }
     }
 }

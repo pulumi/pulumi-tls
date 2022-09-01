@@ -18,32 +18,28 @@ import javax.annotation.Nullable;
 @ResourceType(type="tls:index/privateKey:PrivateKey")
 public class PrivateKey extends com.pulumi.resources.CustomResource {
     /**
-     * Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
-     * `ED25519`.
+     * Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
      * 
      */
     @Export(name="algorithm", type=String.class, parameters={})
     private Output<String> algorithm;
 
     /**
-     * @return Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
-     * `ED25519`.
+     * @return Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
      * 
      */
     public Output<String> algorithm() {
         return this.algorithm;
     }
     /**
-     * When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
-     * `P384` or `P521` (default: `P224`).
+     * When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
      * 
      */
     @Export(name="ecdsaCurve", type=String.class, parameters={})
     private Output</* @Nullable */ String> ecdsaCurve;
 
     /**
-     * @return When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
-     * `P384` or `P521` (default: `P224`).
+     * @return When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
      * 
      */
     public Output<Optional<String>> ecdsaCurve() {
@@ -78,36 +74,28 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
         return this.privateKeyPem;
     }
     /**
-     * The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
-     * private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-     * limitations](../../docs#limitations).
+     * The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
      * 
      */
     @Export(name="publicKeyFingerprintMd5", type=String.class, parameters={})
     private Output<String> publicKeyFingerprintMd5;
 
     /**
-     * @return The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
-     * private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-     * limitations](../../docs#limitations).
+     * @return The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
      * 
      */
     public Output<String> publicKeyFingerprintMd5() {
         return this.publicKeyFingerprintMd5;
     }
     /**
-     * The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
-     * private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-     * limitations](../../docs#limitations).
+     * The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
      * 
      */
     @Export(name="publicKeyFingerprintSha256", type=String.class, parameters={})
     private Output<String> publicKeyFingerprintSha256;
 
     /**
-     * @return The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
-     * private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-     * limitations](../../docs#limitations).
+     * @return The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
      * 
      */
     public Output<String> publicKeyFingerprintSha256() {

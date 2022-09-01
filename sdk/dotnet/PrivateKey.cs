@@ -10,18 +10,16 @@ using Pulumi.Serialization;
 namespace Pulumi.Tls
 {
     [TlsResourceType("tls:index/privateKey:PrivateKey")]
-    public partial class PrivateKey : Pulumi.CustomResource
+    public partial class PrivateKey : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
-        /// `ED25519`.
+        /// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
         /// </summary>
         [Output("algorithm")]
         public Output<string> Algorithm { get; private set; } = null!;
 
         /// <summary>
-        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
-        /// `P384` or `P521` (default: `P224`).
+        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
         /// </summary>
         [Output("ecdsaCurve")]
         public Output<string?> EcdsaCurve { get; private set; } = null!;
@@ -39,17 +37,13 @@ namespace Pulumi.Tls
         public Output<string> PrivateKeyPem { get; private set; } = null!;
 
         /// <summary>
-        /// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
-        /// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-        /// limitations](../../docs#limitations).
+        /// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
         /// </summary>
         [Output("publicKeyFingerprintMd5")]
         public Output<string> PublicKeyFingerprintMd5 { get; private set; } = null!;
 
         /// <summary>
-        /// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
-        /// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-        /// limitations](../../docs#limitations).
+        /// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
         /// </summary>
         [Output("publicKeyFingerprintSha256")]
         public Output<string> PublicKeyFingerprintSha256 { get; private set; } = null!;
@@ -127,18 +121,16 @@ namespace Pulumi.Tls
         }
     }
 
-    public sealed class PrivateKeyArgs : Pulumi.ResourceArgs
+    public sealed class PrivateKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
-        /// `ED25519`.
+        /// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
         /// </summary>
         [Input("algorithm", required: true)]
         public Input<string> Algorithm { get; set; } = null!;
 
         /// <summary>
-        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
-        /// `P384` or `P521` (default: `P224`).
+        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
         /// </summary>
         [Input("ecdsaCurve")]
         public Input<string>? EcdsaCurve { get; set; }
@@ -152,20 +144,19 @@ namespace Pulumi.Tls
         public PrivateKeyArgs()
         {
         }
+        public static new PrivateKeyArgs Empty => new PrivateKeyArgs();
     }
 
-    public sealed class PrivateKeyState : Pulumi.ResourceArgs
+    public sealed class PrivateKeyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and
-        /// `ED25519`.
+        /// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
         /// </summary>
         [Input("algorithm")]
         public Input<string>? Algorithm { get; set; }
 
         /// <summary>
-        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`,
-        /// `P384` or `P521` (default: `P224`).
+        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
         /// </summary>
         [Input("ecdsaCurve")]
         public Input<string>? EcdsaCurve { get; set; }
@@ -183,17 +174,13 @@ namespace Pulumi.Tls
         public Input<string>? PrivateKeyPem { get; set; }
 
         /// <summary>
-        /// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected
-        /// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-        /// limitations](../../docs#limitations).
+        /// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
         /// </summary>
         [Input("publicKeyFingerprintMd5")]
         public Input<string>? PublicKeyFingerprintMd5 { get; set; }
 
         /// <summary>
-        /// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected
-        /// private key format is compatible, similarly to `public_key_openssh` and the [ECDSA P224
-        /// limitations](../../docs#limitations).
+        /// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
         /// </summary>
         [Input("publicKeyFingerprintSha256")]
         public Input<string>? PublicKeyFingerprintSha256 { get; set; }
@@ -230,5 +217,6 @@ namespace Pulumi.Tls
         public PrivateKeyState()
         {
         }
+        public static new PrivateKeyState Empty => new PrivateKeyState();
     }
 }

@@ -5,14 +5,41 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 
 export interface CertRequestSubject {
+    /**
+     * Distinguished name: `CN`
+     */
     commonName?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `C`
+     */
     country?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `L`
+     */
     locality?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `O`
+     */
     organization?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `OU`
+     */
     organizationalUnit?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `PC`
+     */
     postalCode?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `ST`
+     */
     province?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `SERIALNUMBER`
+     */
     serialNumber?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `STREET`
+     */
     streetAddresses?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
@@ -24,14 +51,41 @@ export interface ProviderProxy {
 }
 
 export interface SelfSignedCertSubject {
+    /**
+     * Distinguished name: `CN`
+     */
     commonName?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `C`
+     */
     country?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `L`
+     */
     locality?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `O`
+     */
     organization?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `OU`
+     */
     organizationalUnit?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `PC`
+     */
     postalCode?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `ST`
+     */
     province?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `SERIALNUMBER`
+     */
     serialNumber?: pulumi.Input<string>;
+    /**
+     * Distinguished name: `STREET`
+     */
     streetAddresses?: pulumi.Input<pulumi.Input<string>[]>;
 }
 export namespace config {

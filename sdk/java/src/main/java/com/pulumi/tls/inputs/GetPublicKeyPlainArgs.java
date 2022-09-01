@@ -14,16 +14,32 @@ public final class GetPublicKeyPlainArgs extends com.pulumi.resources.InvokeArgs
 
     public static final GetPublicKeyPlainArgs Empty = new GetPublicKeyPlainArgs();
 
+    /**
+     * The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_pem`.
+     * 
+     */
     @Import(name="privateKeyOpenssh")
     private @Nullable String privateKeyOpenssh;
 
+    /**
+     * @return The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_pem`.
+     * 
+     */
     public Optional<String> privateKeyOpenssh() {
         return Optional.ofNullable(this.privateKeyOpenssh);
     }
 
+    /**
+     * The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_openssh`.
+     * 
+     */
     @Import(name="privateKeyPem")
     private @Nullable String privateKeyPem;
 
+    /**
+     * @return The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_openssh`.
+     * 
+     */
     public Optional<String> privateKeyPem() {
         return Optional.ofNullable(this.privateKeyPem);
     }
@@ -53,11 +69,23 @@ public final class GetPublicKeyPlainArgs extends com.pulumi.resources.InvokeArgs
             $ = new GetPublicKeyPlainArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param privateKeyOpenssh The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_pem`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder privateKeyOpenssh(@Nullable String privateKeyOpenssh) {
             $.privateKeyOpenssh = privateKeyOpenssh;
             return this;
         }
 
+        /**
+         * @param privateKeyPem The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_openssh`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder privateKeyPem(@Nullable String privateKeyPem) {
             $.privateKeyPem = privateKeyPem;
             return this;

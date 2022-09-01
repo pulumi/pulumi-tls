@@ -10,34 +10,62 @@ using Pulumi.Serialization;
 namespace Pulumi.Tls.Inputs
 {
 
-    public sealed class CertRequestSubjectArgs : Pulumi.ResourceArgs
+    public sealed class CertRequestSubjectArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Distinguished name: `CN`
+        /// </summary>
         [Input("commonName")]
         public Input<string>? CommonName { get; set; }
 
+        /// <summary>
+        /// Distinguished name: `C`
+        /// </summary>
         [Input("country")]
         public Input<string>? Country { get; set; }
 
+        /// <summary>
+        /// Distinguished name: `L`
+        /// </summary>
         [Input("locality")]
         public Input<string>? Locality { get; set; }
 
+        /// <summary>
+        /// Distinguished name: `O`
+        /// </summary>
         [Input("organization")]
         public Input<string>? Organization { get; set; }
 
+        /// <summary>
+        /// Distinguished name: `OU`
+        /// </summary>
         [Input("organizationalUnit")]
         public Input<string>? OrganizationalUnit { get; set; }
 
+        /// <summary>
+        /// Distinguished name: `PC`
+        /// </summary>
         [Input("postalCode")]
         public Input<string>? PostalCode { get; set; }
 
+        /// <summary>
+        /// Distinguished name: `ST`
+        /// </summary>
         [Input("province")]
         public Input<string>? Province { get; set; }
 
+        /// <summary>
+        /// Distinguished name: `SERIALNUMBER`
+        /// </summary>
         [Input("serialNumber")]
         public Input<string>? SerialNumber { get; set; }
 
         [Input("streetAddresses")]
         private InputList<string>? _streetAddresses;
+
+        /// <summary>
+        /// Distinguished name: `STREET`
+        /// </summary>
         public InputList<string> StreetAddresses
         {
             get => _streetAddresses ?? (_streetAddresses = new InputList<string>());
@@ -47,5 +75,6 @@ namespace Pulumi.Tls.Inputs
         public CertRequestSubjectArgs()
         {
         }
+        public static new CertRequestSubjectArgs Empty => new CertRequestSubjectArgs();
     }
 }

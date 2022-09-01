@@ -5,40 +5,125 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 
 export interface CertRequestSubject {
+    /**
+     * Distinguished name: `CN`
+     */
     commonName?: string;
+    /**
+     * Distinguished name: `C`
+     */
     country?: string;
+    /**
+     * Distinguished name: `L`
+     */
     locality?: string;
+    /**
+     * Distinguished name: `O`
+     */
     organization?: string;
+    /**
+     * Distinguished name: `OU`
+     */
     organizationalUnit?: string;
+    /**
+     * Distinguished name: `PC`
+     */
     postalCode?: string;
+    /**
+     * Distinguished name: `ST`
+     */
     province?: string;
+    /**
+     * Distinguished name: `SERIALNUMBER`
+     */
     serialNumber?: string;
+    /**
+     * Distinguished name: `STREET`
+     */
     streetAddresses?: string[];
 }
 
 export interface GetCertificateCertificate {
     certPem: string;
+    /**
+     * `true` if the certificate is of a CA (Certificate Authority).
+     */
     isCa: boolean;
+    /**
+     * Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
+     */
     issuer: string;
+    /**
+     * The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+     */
     notAfter: string;
+    /**
+     * The time after which the certificate is valid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+     */
     notBefore: string;
+    /**
+     * The key algorithm used to create the certificate.
+     */
     publicKeyAlgorithm: string;
+    /**
+     * Number that uniquely identifies the certificate with the CA's system.
+     * The `format` function can be used to convert this *base 10* number into other bases, such as hex.
+     */
     serialNumber: string;
+    /**
+     * The SHA1 fingerprint of the public key of the certificate.
+     */
     sha1Fingerprint: string;
+    /**
+     * The algorithm used to sign the certificate.
+     */
     signatureAlgorithm: string;
+    /**
+     * The entity the certificate belongs to, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
+     */
     subject: string;
+    /**
+     * The version the certificate is in.
+     */
     version: number;
 }
 
 export interface SelfSignedCertSubject {
+    /**
+     * Distinguished name: `CN`
+     */
     commonName?: string;
+    /**
+     * Distinguished name: `C`
+     */
     country?: string;
+    /**
+     * Distinguished name: `L`
+     */
     locality?: string;
+    /**
+     * Distinguished name: `O`
+     */
     organization?: string;
+    /**
+     * Distinguished name: `OU`
+     */
     organizationalUnit?: string;
+    /**
+     * Distinguished name: `PC`
+     */
     postalCode?: string;
+    /**
+     * Distinguished name: `ST`
+     */
     province?: string;
+    /**
+     * Distinguished name: `SERIALNUMBER`
+     */
     serialNumber?: string;
+    /**
+     * Distinguished name: `STREET`
+     */
     streetAddresses?: string[];
 }
 

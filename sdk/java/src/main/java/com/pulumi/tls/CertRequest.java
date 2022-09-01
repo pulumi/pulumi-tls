@@ -21,10 +21,18 @@ import javax.annotation.Nullable;
  * ```java
  * package generated_program;
  * 
- * import java.util.*;
- * import java.io.*;
- * import java.nio.*;
- * import com.pulumi.*;
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.tls.CertRequest;
+ * import com.pulumi.tls.CertRequestArgs;
+ * import com.pulumi.tls.inputs.CertRequestSubjectArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
  * 
  * public class App {
  *     public static void main(String[] args) {
@@ -33,7 +41,7 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var example = new CertRequest(&#34;example&#34;, CertRequestArgs.builder()        
- *             .privateKeyPem(Files.readString(&#34;private_key.pem&#34;))
+ *             .privateKeyPem(Files.readString(Paths.get(&#34;private_key.pem&#34;)))
  *             .subject(CertRequestSubjectArgs.builder()
  *                 .commonName(&#34;example.com&#34;)
  *                 .organization(&#34;ACME Examples, Inc&#34;)
@@ -98,8 +106,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.ipAddresses);
     }
     /**
-     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-     * and ignored, as the key algorithm is now inferred from the key.
+     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
      * 
      * @deprecated
      * This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
@@ -110,8 +117,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
     private Output<String> keyAlgorithm;
 
     /**
-     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated
-     * and ignored, as the key algorithm is now inferred from the key.
+     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
      * 
      */
     public Output<String> keyAlgorithm() {
@@ -136,16 +142,14 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
         return this.privateKeyPem;
     }
     /**
-     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+     * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      * 
      */
     @Export(name="subject", type=CertRequestSubject.class, parameters={})
     private Output</* @Nullable */ CertRequestSubject> subject;
 
     /**
-     * @return The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is
-     * based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+     * @return The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      * 
      */
     public Output<Optional<CertRequestSubject>> subject() {

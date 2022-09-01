@@ -11,74 +11,131 @@ import java.util.Objects;
 
 @CustomType
 public final class GetCertificateCertificate {
-    private final String certPem;
-    private final Boolean isCa;
-    private final String issuer;
-    private final String notAfter;
-    private final String notBefore;
-    private final String publicKeyAlgorithm;
-    private final String serialNumber;
-    private final String sha1Fingerprint;
-    private final String signatureAlgorithm;
-    private final String subject;
-    private final Integer version;
+    private String certPem;
+    /**
+     * @return `true` if the certificate is of a CA (Certificate Authority).
+     * 
+     */
+    private Boolean isCa;
+    /**
+     * @return Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
+     * 
+     */
+    private String issuer;
+    /**
+     * @return The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+     * 
+     */
+    private String notAfter;
+    /**
+     * @return The time after which the certificate is valid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+     * 
+     */
+    private String notBefore;
+    /**
+     * @return The key algorithm used to create the certificate.
+     * 
+     */
+    private String publicKeyAlgorithm;
+    /**
+     * @return Number that uniquely identifies the certificate with the CA&#39;s system.
+     * The `format` function can be used to convert this *base 10* number into other bases, such as hex.
+     * 
+     */
+    private String serialNumber;
+    /**
+     * @return The SHA1 fingerprint of the public key of the certificate.
+     * 
+     */
+    private String sha1Fingerprint;
+    /**
+     * @return The algorithm used to sign the certificate.
+     * 
+     */
+    private String signatureAlgorithm;
+    /**
+     * @return The entity the certificate belongs to, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
+     * 
+     */
+    private String subject;
+    /**
+     * @return The version the certificate is in.
+     * 
+     */
+    private Integer version;
 
-    @CustomType.Constructor
-    private GetCertificateCertificate(
-        @CustomType.Parameter("certPem") String certPem,
-        @CustomType.Parameter("isCa") Boolean isCa,
-        @CustomType.Parameter("issuer") String issuer,
-        @CustomType.Parameter("notAfter") String notAfter,
-        @CustomType.Parameter("notBefore") String notBefore,
-        @CustomType.Parameter("publicKeyAlgorithm") String publicKeyAlgorithm,
-        @CustomType.Parameter("serialNumber") String serialNumber,
-        @CustomType.Parameter("sha1Fingerprint") String sha1Fingerprint,
-        @CustomType.Parameter("signatureAlgorithm") String signatureAlgorithm,
-        @CustomType.Parameter("subject") String subject,
-        @CustomType.Parameter("version") Integer version) {
-        this.certPem = certPem;
-        this.isCa = isCa;
-        this.issuer = issuer;
-        this.notAfter = notAfter;
-        this.notBefore = notBefore;
-        this.publicKeyAlgorithm = publicKeyAlgorithm;
-        this.serialNumber = serialNumber;
-        this.sha1Fingerprint = sha1Fingerprint;
-        this.signatureAlgorithm = signatureAlgorithm;
-        this.subject = subject;
-        this.version = version;
-    }
-
+    private GetCertificateCertificate() {}
     public String certPem() {
         return this.certPem;
     }
+    /**
+     * @return `true` if the certificate is of a CA (Certificate Authority).
+     * 
+     */
     public Boolean isCa() {
         return this.isCa;
     }
+    /**
+     * @return Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
+     * 
+     */
     public String issuer() {
         return this.issuer;
     }
+    /**
+     * @return The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+     * 
+     */
     public String notAfter() {
         return this.notAfter;
     }
+    /**
+     * @return The time after which the certificate is valid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
+     * 
+     */
     public String notBefore() {
         return this.notBefore;
     }
+    /**
+     * @return The key algorithm used to create the certificate.
+     * 
+     */
     public String publicKeyAlgorithm() {
         return this.publicKeyAlgorithm;
     }
+    /**
+     * @return Number that uniquely identifies the certificate with the CA&#39;s system.
+     * The `format` function can be used to convert this *base 10* number into other bases, such as hex.
+     * 
+     */
     public String serialNumber() {
         return this.serialNumber;
     }
+    /**
+     * @return The SHA1 fingerprint of the public key of the certificate.
+     * 
+     */
     public String sha1Fingerprint() {
         return this.sha1Fingerprint;
     }
+    /**
+     * @return The algorithm used to sign the certificate.
+     * 
+     */
     public String signatureAlgorithm() {
         return this.signatureAlgorithm;
     }
+    /**
+     * @return The entity the certificate belongs to, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
+     * 
+     */
     public String subject() {
         return this.subject;
     }
+    /**
+     * @return The version the certificate is in.
+     * 
+     */
     public Integer version() {
         return this.version;
     }
@@ -90,7 +147,7 @@ public final class GetCertificateCertificate {
     public static Builder builder(GetCertificateCertificate defaults) {
         return new Builder(defaults);
     }
-
+    @CustomType.Builder
     public static final class Builder {
         private String certPem;
         private Boolean isCa;
@@ -103,11 +160,7 @@ public final class GetCertificateCertificate {
         private String signatureAlgorithm;
         private String subject;
         private Integer version;
-
-        public Builder() {
-    	      // Empty
-        }
-
+        public Builder() {}
         public Builder(GetCertificateCertificate defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.certPem = defaults.certPem;
@@ -123,51 +176,75 @@ public final class GetCertificateCertificate {
     	      this.version = defaults.version;
         }
 
+        @CustomType.Setter
         public Builder certPem(String certPem) {
             this.certPem = Objects.requireNonNull(certPem);
             return this;
         }
+        @CustomType.Setter
         public Builder isCa(Boolean isCa) {
             this.isCa = Objects.requireNonNull(isCa);
             return this;
         }
+        @CustomType.Setter
         public Builder issuer(String issuer) {
             this.issuer = Objects.requireNonNull(issuer);
             return this;
         }
+        @CustomType.Setter
         public Builder notAfter(String notAfter) {
             this.notAfter = Objects.requireNonNull(notAfter);
             return this;
         }
+        @CustomType.Setter
         public Builder notBefore(String notBefore) {
             this.notBefore = Objects.requireNonNull(notBefore);
             return this;
         }
+        @CustomType.Setter
         public Builder publicKeyAlgorithm(String publicKeyAlgorithm) {
             this.publicKeyAlgorithm = Objects.requireNonNull(publicKeyAlgorithm);
             return this;
         }
+        @CustomType.Setter
         public Builder serialNumber(String serialNumber) {
             this.serialNumber = Objects.requireNonNull(serialNumber);
             return this;
         }
+        @CustomType.Setter
         public Builder sha1Fingerprint(String sha1Fingerprint) {
             this.sha1Fingerprint = Objects.requireNonNull(sha1Fingerprint);
             return this;
         }
+        @CustomType.Setter
         public Builder signatureAlgorithm(String signatureAlgorithm) {
             this.signatureAlgorithm = Objects.requireNonNull(signatureAlgorithm);
             return this;
         }
+        @CustomType.Setter
         public Builder subject(String subject) {
             this.subject = Objects.requireNonNull(subject);
             return this;
         }
+        @CustomType.Setter
         public Builder version(Integer version) {
             this.version = Objects.requireNonNull(version);
             return this;
-        }        public GetCertificateCertificate build() {
-            return new GetCertificateCertificate(certPem, isCa, issuer, notAfter, notBefore, publicKeyAlgorithm, serialNumber, sha1Fingerprint, signatureAlgorithm, subject, version);
+        }
+        public GetCertificateCertificate build() {
+            final var o = new GetCertificateCertificate();
+            o.certPem = certPem;
+            o.isCa = isCa;
+            o.issuer = issuer;
+            o.notAfter = notAfter;
+            o.notBefore = notBefore;
+            o.publicKeyAlgorithm = publicKeyAlgorithm;
+            o.serialNumber = serialNumber;
+            o.sha1Fingerprint = sha1Fingerprint;
+            o.signatureAlgorithm = signatureAlgorithm;
+            o.subject = subject;
+            o.version = version;
+            return o;
         }
     }
 }
