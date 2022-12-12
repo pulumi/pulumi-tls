@@ -19,7 +19,7 @@ package main
 import (
 	_ "embed"
 
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge"
 	tls "github.com/pulumi/pulumi-tls/provider/v4"
 	"github.com/pulumi/pulumi-tls/provider/v4/pkg/version"
 )
@@ -27,6 +27,9 @@ import (
 //go:embed schema-embed.json
 var pulumiSchema []byte
 
+//go:embed renames.json
+var pulumiRenames []byte
+
 func main() {
-	tfbridge.Main("tls", version.Version, tls.Provider(), pulumiSchema)
+	tfbridge.Main("tls", version.Version, tls.Provider(), pulumiSchema, pulumiRenames)
 }
