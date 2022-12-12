@@ -19,11 +19,12 @@ import (
 	"path/filepath"
 	"unicode"
 
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
+	"github.com/hashicorp/terraform-provider-tls/shim"
+
+	//tfpfbridge "github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge"
+	tfbridge "github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge/info"
 	"github.com/pulumi/pulumi-tls/provider/v4/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
-	"github.com/terraform-providers/terraform-provider-tls/shim"
 )
 
 // all of the tls token components used below.
@@ -61,7 +62,7 @@ func tlsResource(mod string, res string) tokens.Type {
 // Provider returns additional overlaid schema and metadata associated with the tls package.
 func Provider() tfbridge.ProviderInfo {
 	return tfbridge.ProviderInfo{
-		P:           shimv2.NewProvider(shim.NewProvider()),
+		P:           shim.NewProvider,
 		Name:        "tls",
 		Description: "A Pulumi package to create TLS resources in Pulumi programs.",
 		Keywords:    []string{"pulumi", "tls"},
@@ -74,10 +75,10 @@ func Provider() tfbridge.ProviderInfo {
 			"tls_private_key":         {Tok: tlsResource(tlsMod, "PrivateKey")},
 			"tls_self_signed_cert":    {Tok: tlsResource(tlsMod, "SelfSignedCert")},
 		},
-		DataSources: map[string]*tfbridge.DataSourceInfo{
-			"tls_public_key":  {Tok: tlsDataSource(tlsMod, "getPublicKey")},
-			"tls_certificate": {Tok: tlsDataSource(tlsMod, "getCertificate")},
-		},
+		// DataSources: map[string]*tfbridge.DataSourceInfo{
+		// 	"tls_public_key":  {Tok: tlsDataSource(tlsMod, "getPublicKey")},
+		// 	"tls_certificate": {Tok: tlsDataSource(tlsMod, "getCertificate")},
+		// },
 		JavaScript: &tfbridge.JavaScriptInfo{
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
