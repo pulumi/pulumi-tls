@@ -64,6 +64,7 @@ func Provider() tfbridge.ProviderInfo {
 	return tfbridge.ProviderInfo{
 		P:           shim.NewProvider,
 		Name:        "tls",
+		GitHubOrg:   "hashicorp",
 		Description: "A Pulumi package to create TLS resources in Pulumi programs.",
 		Keywords:    []string{"pulumi", "tls"},
 		License:     "Apache-2.0",
