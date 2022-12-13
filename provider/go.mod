@@ -12,8 +12,11 @@ replace (
 	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20220824175045-450992f2f5b9
 	github.com/hashicorp/terraform-provider-tls => github.com/hashicorp/terraform-provider-tls v0.0.0-20221117105107-1239aabb49af
 	github.com/hashicorp/terraform-provider-tls/shim => ./shim
-	github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge => github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge v0.0.0-20221212221642-82831d48549d
-	github.com/pulumi/pulumi-terraform-bridge/v3 => github.com/pulumi/pulumi-terraform-bridge/v3 v3.34.1-0.20221212221642-82831d48549d
+
+	github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge => github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge v0.0.0-20221213150851-0cc733148480
+	github.com/pulumi/pulumi-terraform-bridge/v3 => github.com/pulumi/pulumi-terraform-bridge/v3 v3.34.1-0.20221213150851-0cc733148480
+// github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge => ../../pulumi-terraform-bridge/pkg/tfpfbridge
+// github.com/pulumi/pulumi-terraform-bridge/v3 => ../../pulumi-terraform-bridge/
 )
 
 require (
