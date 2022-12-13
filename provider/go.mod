@@ -13,8 +13,8 @@ replace (
 	github.com/hashicorp/terraform-provider-tls => github.com/hashicorp/terraform-provider-tls v0.0.0-20221117105107-1239aabb49af
 	github.com/hashicorp/terraform-provider-tls/shim => ./shim
 
-	github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge => github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge v0.0.0-20221213155857-b42a6143d31a
-	github.com/pulumi/pulumi-terraform-bridge/v3 => github.com/pulumi/pulumi-terraform-bridge/v3 v3.34.1-0.20221213155857-b42a6143d31a
+	github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge => github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge v0.0.0-20221213203310-f9e254639930
+	github.com/pulumi/pulumi-terraform-bridge/v3 => github.com/pulumi/pulumi-terraform-bridge/v3 v3.34.1-0.20221213203310-f9e254639930
 // github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge => ../../pulumi-terraform-bridge/pkg/tfpfbridge
 // github.com/pulumi/pulumi-terraform-bridge/v3 => ../../pulumi-terraform-bridge/
 )
