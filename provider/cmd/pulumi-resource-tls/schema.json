@@ -55,10 +55,7 @@
                 "$ref": "#/types/tls:config/proxy:proxy",
                 "description": "Proxy used by resources and data sources that connect to external endpoints.\n"
             }
-        },
-        "defaults": [
-            "proxy"
-        ]
+        }
     },
     "types": {
         "tls:config/proxy:proxy": {
@@ -433,18 +430,12 @@
                 "description": "Proxy used by resources and data sources that connect to external endpoints.\n"
             }
         },
-        "required": [
-            "proxy"
-        ],
         "inputProperties": {
             "proxy": {
                 "$ref": "#/types/tls:index/ProviderProxy:ProviderProxy",
                 "description": "Proxy used by resources and data sources that connect to external endpoints.\n"
             }
-        },
-        "requiredInputs": [
-            "proxy"
-        ]
+        }
     },
     "resources": {
         "tls:index/certRequest:CertRequest": {
@@ -492,8 +483,7 @@
             "required": [
                 "certRequestPem",
                 "keyAlgorithm",
-                "privateKeyPem",
-                "subject"
+                "privateKeyPem"
             ],
             "inputProperties": {
                 "dnsNames": {
@@ -528,8 +518,7 @@
                 }
             },
             "requiredInputs": [
-                "privateKeyPem",
-                "subject"
+                "privateKeyPem"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering CertRequest resources.\n",
@@ -973,7 +962,6 @@
                 "readyForRenewal",
                 "setAuthorityKeyId",
                 "setSubjectKeyId",
-                "subject",
                 "validityEndTime",
                 "validityPeriodHours",
                 "validityStartTime"
@@ -1040,7 +1028,6 @@
             "requiredInputs": [
                 "allowedUses",
                 "privateKeyPem",
-                "subject",
                 "validityPeriodHours"
             ],
             "stateInputs": {
