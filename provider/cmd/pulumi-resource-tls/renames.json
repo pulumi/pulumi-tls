@@ -10,6 +10,26 @@
     "tls:index/getPublicKey:getPublicKey": "tls_public_key"
   },
   "renamedProperties": {
+    "tls:config/proxy:proxy": {
+      "fromEnv": "from_env"
+    },
+    "tls:index/CertRequestSubject:CertRequestSubject": {
+      "commonName": "common_name",
+      "organizationalUnit": "organizational_unit",
+      "postalCode": "postal_code",
+      "serialNumber": "serial_number",
+      "streetAddresses": "street_address"
+    },
+    "tls:index/ProviderProxy:ProviderProxy": {
+      "fromEnv": "from_env"
+    },
+    "tls:index/SelfSignedCertSubject:SelfSignedCertSubject": {
+      "commonName": "common_name",
+      "organizationalUnit": "organizational_unit",
+      "postalCode": "postal_code",
+      "serialNumber": "serial_number",
+      "streetAddresses": "street_address"
+    },
     "tls:index/certRequest:CertRequest": {
       "certRequestPem": "cert_request_pem",
       "dnsNames": "dns_names",

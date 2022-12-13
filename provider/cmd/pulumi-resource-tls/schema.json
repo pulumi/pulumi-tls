@@ -49,8 +49,260 @@
             }
         }
     },
-    "config": {},
+    "config": {
+        "variables": {
+            "proxy": {
+                "$ref": "#/types/tls:config/proxy:proxy",
+                "description": "Proxy used by resources and data sources that connect to external endpoints.\n"
+            }
+        },
+        "defaults": [
+            "proxy"
+        ]
+    },
     "types": {
+        "tls:config/proxy:proxy": {
+            "properties": {
+                "fromEnv": {
+                    "type": "boolean"
+                },
+                "password": {
+                    "type": "string",
+                    "secret": true
+                },
+                "url": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "fromEnv"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "tls:index/CertRequestSubject:CertRequestSubject": {
+            "properties": {
+                "commonName": {
+                    "type": "string",
+                    "description": "Distinguished name: `CN`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "country": {
+                    "type": "string",
+                    "description": "Distinguished name: `C`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "locality": {
+                    "type": "string",
+                    "description": "Distinguished name: `L`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "organization": {
+                    "type": "string",
+                    "description": "Distinguished name: `O`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "organizationalUnit": {
+                    "type": "string",
+                    "description": "Distinguished name: `OU`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "postalCode": {
+                    "type": "string",
+                    "description": "Distinguished name: `PC`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "province": {
+                    "type": "string",
+                    "description": "Distinguished name: `ST`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "serialNumber": {
+                    "type": "string",
+                    "description": "Distinguished name: `SERIALNUMBER`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "streetAddresses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Distinguished name: `STREET`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "tls:index/ProviderProxy:ProviderProxy": {
+            "properties": {
+                "fromEnv": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "password": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    },
+                    "secret": true
+                },
+                "url": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "username": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "tls:index/SelfSignedCertSubject:SelfSignedCertSubject": {
+            "properties": {
+                "commonName": {
+                    "type": "string",
+                    "description": "Distinguished name: `CN`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "country": {
+                    "type": "string",
+                    "description": "Distinguished name: `C`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "locality": {
+                    "type": "string",
+                    "description": "Distinguished name: `L`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "organization": {
+                    "type": "string",
+                    "description": "Distinguished name: `O`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "organizationalUnit": {
+                    "type": "string",
+                    "description": "Distinguished name: `OU`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "postalCode": {
+                    "type": "string",
+                    "description": "Distinguished name: `PC`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "province": {
+                    "type": "string",
+                    "description": "Distinguished name: `ST`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "serialNumber": {
+                    "type": "string",
+                    "description": "Distinguished name: `SERIALNUMBER`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "streetAddresses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Distinguished name: `STREET`\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
         "tls:index/getCertificateCertificate:getCertificateCertificate": {
             "properties": {
                 "certPem": {
@@ -174,11 +426,29 @@
         }
     },
     "provider": {
-        "description": "The provider type for the tls package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n"
+        "description": "The provider type for the tls package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "proxy": {
+                "$ref": "#/types/tls:index/ProviderProxy:ProviderProxy",
+                "description": "Proxy used by resources and data sources that connect to external endpoints.\n"
+            }
+        },
+        "required": [
+            "proxy"
+        ],
+        "inputProperties": {
+            "proxy": {
+                "$ref": "#/types/tls:index/ProviderProxy:ProviderProxy",
+                "description": "Proxy used by resources and data sources that connect to external endpoints.\n"
+            }
+        },
+        "requiredInputs": [
+            "proxy"
+        ]
     },
     "resources": {
         "tls:index/certRequest:CertRequest": {
-            "description": "{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.tls.CertRequest;\nimport com.pulumi.tls.CertRequestArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new CertRequest(\"example\", CertRequestArgs.builder()        \n            .privateKeyPem(Files.readString(Paths.get(\"private_key.pem\")))\n            .subject(%!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference))\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: tls:CertRequest\n    properties:\n      privateKeyPem:\n        fn::readFile: private_key.pem\n      subject:\n        - commonName: example.com\n          organization: ACME Examples, Inc\n```\n{{% /example %}}\n{{% /examples %}}",
+            "description": "{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as fs from \"fs\";\nimport * as tls from \"@pulumi/tls\";\n\nconst example = new tls.CertRequest(\"example\", {\n    privateKeyPem: fs.readFileSync(\"private_key.pem\"),\n    subject: {\n        commonName: \"example.com\",\n        organization: \"ACME Examples, Inc\",\n    },\n});\n```\n```python\nimport pulumi\nimport pulumi_tls as tls\n\nexample = tls.CertRequest(\"example\",\n    private_key_pem=(lambda path: open(path).read())(\"private_key.pem\"),\n    subject=tls.CertRequestSubjectArgs(\n        common_name=\"example.com\",\n        organization=\"ACME Examples, Inc\",\n    ))\n```\n```csharp\nusing System.Collections.Generic;\nusing System.IO;\nusing Pulumi;\nusing Tls = Pulumi.Tls;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Tls.CertRequest(\"example\", new()\n    {\n        PrivateKeyPem = File.ReadAllText(\"private_key.pem\"),\n        Subject = new Tls.Inputs.CertRequestSubjectArgs\n        {\n            CommonName = \"example.com\",\n            Organization = \"ACME Examples, Inc\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"io/ioutil\"\n\n\t\"github.com/pulumi/pulumi-tls/sdk/v4/go/tls\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc readFileOrPanic(path string) pulumi.StringPtrInput {\n\tdata, err := ioutil.ReadFile(path)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\treturn pulumi.String(string(data))\n}\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := tls.NewCertRequest(ctx, \"example\", \u0026tls.CertRequestArgs{\n\t\t\tPrivateKeyPem: readFileOrPanic(\"private_key.pem\"),\n\t\t\tSubject: \u0026tls.CertRequestSubjectArgs{\n\t\t\t\tCommonName:   pulumi.String(\"example.com\"),\n\t\t\t\tOrganization: pulumi.String(\"ACME Examples, Inc\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.tls.CertRequest;\nimport com.pulumi.tls.CertRequestArgs;\nimport com.pulumi.tls.inputs.CertRequestSubjectArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new CertRequest(\"example\", CertRequestArgs.builder()        \n            .privateKeyPem(Files.readString(Paths.get(\"private_key.pem\")))\n            .subject(CertRequestSubjectArgs.builder()\n                .commonName(\"example.com\")\n                .organization(\"ACME Examples, Inc\")\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: tls:CertRequest\n    properties:\n      privateKeyPem:\n        fn::readFile: private_key.pem\n      subject:\n        commonName: example.com\n        organization: ACME Examples, Inc\n```\n{{% /example %}}\n{{% /examples %}}",
             "properties": {
                 "certRequestPem": {
                     "type": "string",
@@ -207,6 +477,10 @@
                     "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n",
                     "secret": true
                 },
+                "subject": {
+                    "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject",
+                    "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
+                },
                 "uris": {
                     "type": "array",
                     "items": {
@@ -218,7 +492,8 @@
             "required": [
                 "certRequestPem",
                 "keyAlgorithm",
-                "privateKeyPem"
+                "privateKeyPem",
+                "subject"
             ],
             "inputProperties": {
                 "dnsNames": {
@@ -240,6 +515,10 @@
                     "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n",
                     "secret": true
                 },
+                "subject": {
+                    "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject",
+                    "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
+                },
                 "uris": {
                     "type": "array",
                     "items": {
@@ -249,7 +528,8 @@
                 }
             },
             "requiredInputs": [
-                "privateKeyPem"
+                "privateKeyPem",
+                "subject"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering CertRequest resources.\n",
@@ -280,6 +560,10 @@
                         "type": "string",
                         "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n",
                         "secret": true
+                    },
+                    "subject": {
+                        "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject",
+                        "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
                     },
                     "uris": {
                         "type": "array",
@@ -655,6 +939,10 @@
                     "type": "boolean",
                     "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).\n"
                 },
+                "subject": {
+                    "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject",
+                    "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
+                },
                 "uris": {
                     "type": "array",
                     "items": {
@@ -685,6 +973,7 @@
                 "readyForRenewal",
                 "setAuthorityKeyId",
                 "setSubjectKeyId",
+                "subject",
                 "validityEndTime",
                 "validityPeriodHours",
                 "validityStartTime"
@@ -732,6 +1021,10 @@
                     "type": "boolean",
                     "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).\n"
                 },
+                "subject": {
+                    "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject",
+                    "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
+                },
                 "uris": {
                     "type": "array",
                     "items": {
@@ -747,6 +1040,7 @@
             "requiredInputs": [
                 "allowedUses",
                 "privateKeyPem",
+                "subject",
                 "validityPeriodHours"
             ],
             "stateInputs": {
@@ -805,6 +1099,10 @@
                     "setSubjectKeyId": {
                         "type": "boolean",
                         "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).\n"
+                    },
+                    "subject": {
+                        "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject",
+                        "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
                     },
                     "uris": {
                         "type": "array",
