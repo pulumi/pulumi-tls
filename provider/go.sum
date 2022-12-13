@@ -1533,10 +1533,10 @@ github.com/prometheus/prometheus v0.37.0/go.mod h1:egARUgz+K93zwqsVIAneFlLZefyGO
 github.com/prometheus/tsdb v0.7.1/go.mod h1:qhTCs0VvXwvX/y3TZrWD7rabWM+ijKTux40TwIPHuXU=
 github.com/pulumi/pulumi-java/pkg v0.6.0 h1:haiSQJlhrQIBBcR0r0aQCIF8i69e4znzRnHpaNQUchE=
 github.com/pulumi/pulumi-java/pkg v0.6.0/go.mod h1:xSK2B792P8zjwYZTHYapMM1RJdue2BpRFQNYObWO0C8=
-github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge v0.0.0-20221213150851-0cc733148480 h1:hou0QSqvlST+nVMhX/iii42QmhRPk9lMNZTIJeHXP+4=
-github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge v0.0.0-20221213150851-0cc733148480/go.mod h1:yw6x3zMUqdl0HlsZB+aZrqpF/Wwp6M2T6Rnj3PhTWjg=
-github.com/pulumi/pulumi-terraform-bridge/v3 v3.34.1-0.20221213150851-0cc733148480 h1:rqzmozhh3kGQEk24FVcHetYUeuVkdwopHjBEoU4wyS8=
-github.com/pulumi/pulumi-terraform-bridge/v3 v3.34.1-0.20221213150851-0cc733148480/go.mod h1:sUftUyAk0U4HeqHpxIR6T5MjNE41sfY3e4tXDiv6QjA=
+github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge v0.0.0-20221213155857-b42a6143d31a h1:H07OP0kGo5EJEnCNrrFnD7pdSNdhetP3d7A6wjmzmfM=
+github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge v0.0.0-20221213155857-b42a6143d31a/go.mod h1:yw6x3zMUqdl0HlsZB+aZrqpF/Wwp6M2T6Rnj3PhTWjg=
+github.com/pulumi/pulumi-terraform-bridge/v3 v3.34.1-0.20221213155857-b42a6143d31a h1:kG9LhYZPZmz3p978OxNnABcyd2t25fVURtEJdXGLKuo=
+github.com/pulumi/pulumi-terraform-bridge/v3 v3.34.1-0.20221213155857-b42a6143d31a/go.mod h1:sUftUyAk0U4HeqHpxIR6T5MjNE41sfY3e4tXDiv6QjA=
 github.com/pulumi/pulumi-yaml v1.0.4 h1:p+989rW3AqkkxbzxtxccHKAN4xCJi3K2cRpvA2K84tw=
 github.com/pulumi/pulumi-yaml v1.0.4/go.mod h1:Szj8ud4Vqyq3oO1n3kzIUfaP3AiCjYZM4FYjOVWwJn8=
 github.com/pulumi/pulumi/pkg/v3 v3.49.1-0.20221210190028-cbf32d1940fa h1:mz0XaaXGaKJumG8vtK01p1lij7HBRXMXWBqZjfYM1wA=
