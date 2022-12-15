@@ -12,14 +12,14 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class Proxy {
-    private @Nullable Boolean fromEnv;
+    private Boolean fromEnv;
     private @Nullable String password;
     private @Nullable String url;
     private @Nullable String username;
 
     private Proxy() {}
-    public Optional<Boolean> fromEnv() {
-        return Optional.ofNullable(this.fromEnv);
+    public Boolean fromEnv() {
+        return this.fromEnv;
     }
     public Optional<String> password() {
         return Optional.ofNullable(this.password);
@@ -40,7 +40,7 @@ public final class Proxy {
     }
     @CustomType.Builder
     public static final class Builder {
-        private @Nullable Boolean fromEnv;
+        private Boolean fromEnv;
         private @Nullable String password;
         private @Nullable String url;
         private @Nullable String username;
@@ -54,8 +54,8 @@ public final class Proxy {
         }
 
         @CustomType.Setter
-        public Builder fromEnv(@Nullable Boolean fromEnv) {
-            this.fromEnv = fromEnv;
+        public Builder fromEnv(Boolean fromEnv) {
+            this.fromEnv = Objects.requireNonNull(fromEnv);
             return this;
         }
         @CustomType.Setter

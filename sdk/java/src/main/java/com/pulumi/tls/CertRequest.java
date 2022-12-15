@@ -106,18 +106,14 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.ipAddresses);
     }
     /**
-     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-     * 
-     * @deprecated
-     * This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+     * Name of the algorithm used when generating the private key provided in `private_key_pem`.
      * 
      */
-    @Deprecated /* This is now ignored, as the key algorithm is inferred from the `private_key_pem`. */
     @Export(name="keyAlgorithm", type=String.class, parameters={})
     private Output<String> keyAlgorithm;
 
     /**
-     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`.
      * 
      */
     public Output<String> keyAlgorithm() {
@@ -202,6 +198,9 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
     private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
+            .additionalSecretOutputs(List.of(
+                "privateKeyPem"
+            ))
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);
     }

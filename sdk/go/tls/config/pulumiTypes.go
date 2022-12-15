@@ -11,7 +11,7 @@ import (
 )
 
 type Proxy struct {
-	FromEnv  *bool   `pulumi:"fromEnv"`
+	FromEnv  bool    `pulumi:"fromEnv"`
 	Password *string `pulumi:"password"`
 	Url      *string `pulumi:"url"`
 	Username *string `pulumi:"username"`
@@ -29,7 +29,7 @@ type ProxyInput interface {
 }
 
 type ProxyArgs struct {
-	FromEnv  pulumi.BoolPtrInput   `pulumi:"fromEnv"`
+	FromEnv  pulumi.BoolInput      `pulumi:"fromEnv"`
 	Password pulumi.StringPtrInput `pulumi:"password"`
 	Url      pulumi.StringPtrInput `pulumi:"url"`
 	Username pulumi.StringPtrInput `pulumi:"username"`
@@ -61,8 +61,8 @@ func (o ProxyOutput) ToProxyOutputWithContext(ctx context.Context) ProxyOutput {
 	return o
 }
 
-func (o ProxyOutput) FromEnv() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v Proxy) *bool { return v.FromEnv }).(pulumi.BoolPtrOutput)
+func (o ProxyOutput) FromEnv() pulumi.BoolOutput {
+	return o.ApplyT(func(v Proxy) bool { return v.FromEnv }).(pulumi.BoolOutput)
 }
 
 func (o ProxyOutput) Password() pulumi.StringPtrOutput {

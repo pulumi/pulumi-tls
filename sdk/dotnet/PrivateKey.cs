@@ -13,16 +13,16 @@ namespace Pulumi.Tls
     public partial class PrivateKey : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
+        /// Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
         /// </summary>
         [Output("algorithm")]
         public Output<string> Algorithm { get; private set; } = null!;
 
         /// <summary>
-        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
         /// </summary>
         [Output("ecdsaCurve")]
-        public Output<string?> EcdsaCurve { get; private set; } = null!;
+        public Output<string> EcdsaCurve { get; private set; } = null!;
 
         /// <summary>
         /// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
@@ -35,6 +35,12 @@ namespace Pulumi.Tls
         /// </summary>
         [Output("privateKeyPem")]
         public Output<string> PrivateKeyPem { get; private set; } = null!;
+
+        /// <summary>
+        /// Private key data in [PKCS#8 PEM (RFC 5208)](https://datatracker.ietf.org/doc/html/rfc5208) format.
+        /// </summary>
+        [Output("privateKeyPemPkcs8")]
+        public Output<string> PrivateKeyPemPkcs8 { get; private set; } = null!;
 
         /// <summary>
         /// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
@@ -50,10 +56,9 @@ namespace Pulumi.Tls
 
         /// <summary>
         /// The public key data in ["Authorized
-        /// Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-        /// populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-        /// `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-        /// supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
+        /// Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not
+        /// populated for `ECDSA` with curve `P224`, as it is [not supported](../../docs#limitations). **NOTE**: the
+        /// [underlying](https://pkg.go.dev/encoding/pem#Encode)
         /// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
         /// the end of the PEM. In case this disrupts your use case, we recommend using
         /// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
@@ -75,7 +80,7 @@ namespace Pulumi.Tls
         /// When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
         /// </summary>
         [Output("rsaBits")]
-        public Output<int?> RsaBits { get; private set; } = null!;
+        public Output<int> RsaBits { get; private set; } = null!;
 
 
         /// <summary>
@@ -100,6 +105,12 @@ namespace Pulumi.Tls
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                AdditionalSecretOutputs =
+                {
+                    "privateKeyOpenssh",
+                    "privateKeyPem",
+                    "privateKeyPemPkcs8",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -124,13 +135,13 @@ namespace Pulumi.Tls
     public sealed class PrivateKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
+        /// Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
         /// </summary>
         [Input("algorithm", required: true)]
         public Input<string> Algorithm { get; set; } = null!;
 
         /// <summary>
-        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
         /// </summary>
         [Input("ecdsaCurve")]
         public Input<string>? EcdsaCurve { get; set; }
@@ -150,28 +161,64 @@ namespace Pulumi.Tls
     public sealed class PrivateKeyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
+        /// Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
         /// </summary>
         [Input("algorithm")]
         public Input<string>? Algorithm { get; set; }
 
         /// <summary>
-        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+        /// When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
         /// </summary>
         [Input("ecdsaCurve")]
         public Input<string>? EcdsaCurve { get; set; }
 
+        [Input("privateKeyOpenssh")]
+        private Input<string>? _privateKeyOpenssh;
+
         /// <summary>
         /// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
         /// </summary>
-        [Input("privateKeyOpenssh")]
-        public Input<string>? PrivateKeyOpenssh { get; set; }
+        public Input<string>? PrivateKeyOpenssh
+        {
+            get => _privateKeyOpenssh;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyOpenssh = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("privateKeyPem")]
+        private Input<string>? _privateKeyPem;
 
         /// <summary>
         /// Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
-        [Input("privateKeyPem")]
-        public Input<string>? PrivateKeyPem { get; set; }
+        public Input<string>? PrivateKeyPem
+        {
+            get => _privateKeyPem;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("privateKeyPemPkcs8")]
+        private Input<string>? _privateKeyPemPkcs8;
+
+        /// <summary>
+        /// Private key data in [PKCS#8 PEM (RFC 5208)](https://datatracker.ietf.org/doc/html/rfc5208) format.
+        /// </summary>
+        public Input<string>? PrivateKeyPemPkcs8
+        {
+            get => _privateKeyPemPkcs8;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyPemPkcs8 = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
@@ -187,10 +234,9 @@ namespace Pulumi.Tls
 
         /// <summary>
         /// The public key data in ["Authorized
-        /// Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-        /// populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-        /// `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-        /// supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
+        /// Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not
+        /// populated for `ECDSA` with curve `P224`, as it is [not supported](../../docs#limitations). **NOTE**: the
+        /// [underlying](https://pkg.go.dev/encoding/pem#Encode)
         /// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
         /// the end of the PEM. In case this disrupts your use case, we recommend using
         /// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).

@@ -2,16 +2,14 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 export function getCertificate(args?: GetCertificateArgs, opts?: pulumi.InvokeOptions): Promise<GetCertificateResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tls:index/getCertificate:getCertificate", {
         "content": args.content,
         "url": args.url,
@@ -62,9 +60,8 @@ export interface GetCertificateResult {
      */
     readonly verifyChain?: boolean;
 }
-
 export function getCertificateOutput(args?: GetCertificateOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCertificateResult> {
-    return pulumi.output(args).apply(a => getCertificate(a, opts))
+    return pulumi.output(args).apply((a: any) => getCertificate(a, opts))
 }
 
 /**

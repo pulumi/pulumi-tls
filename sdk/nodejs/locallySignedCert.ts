@@ -41,11 +41,9 @@ export class LocallySignedCert extends pulumi.CustomResource {
      */
     public readonly caCertPem!: pulumi.Output<string>;
     /**
-     * Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-     *
-     * @deprecated This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+     * Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`.
      */
-    public readonly caKeyAlgorithm!: pulumi.Output<string>;
+    public /*out*/ readonly caKeyAlgorithm!: pulumi.Output<string>;
     /**
      * Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
@@ -69,11 +67,11 @@ export class LocallySignedCert extends pulumi.CustomResource {
      * revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
      * early renewal period. (default: `0`)
      */
-    public readonly earlyRenewalHours!: pulumi.Output<number | undefined>;
+    public readonly earlyRenewalHours!: pulumi.Output<number>;
     /**
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      */
-    public readonly isCaCertificate!: pulumi.Output<boolean | undefined>;
+    public readonly isCaCertificate!: pulumi.Output<boolean>;
     /**
      * Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
      */
@@ -81,7 +79,7 @@ export class LocallySignedCert extends pulumi.CustomResource {
     /**
      * Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
-    public readonly setSubjectKeyId!: pulumi.Output<boolean | undefined>;
+    public readonly setSubjectKeyId!: pulumi.Output<boolean>;
     /**
      * The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      */
@@ -140,19 +138,21 @@ export class LocallySignedCert extends pulumi.CustomResource {
             }
             resourceInputs["allowedUses"] = args ? args.allowedUses : undefined;
             resourceInputs["caCertPem"] = args ? args.caCertPem : undefined;
-            resourceInputs["caKeyAlgorithm"] = args ? args.caKeyAlgorithm : undefined;
-            resourceInputs["caPrivateKeyPem"] = args ? args.caPrivateKeyPem : undefined;
+            resourceInputs["caPrivateKeyPem"] = args?.caPrivateKeyPem ? pulumi.secret(args.caPrivateKeyPem) : undefined;
             resourceInputs["certRequestPem"] = args ? args.certRequestPem : undefined;
             resourceInputs["earlyRenewalHours"] = args ? args.earlyRenewalHours : undefined;
             resourceInputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
             resourceInputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
             resourceInputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
+            resourceInputs["caKeyAlgorithm"] = undefined /*out*/;
             resourceInputs["certPem"] = undefined /*out*/;
             resourceInputs["readyForRenewal"] = undefined /*out*/;
             resourceInputs["validityEndTime"] = undefined /*out*/;
             resourceInputs["validityStartTime"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["caPrivateKeyPem"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(LocallySignedCert.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -170,9 +170,7 @@ export interface LocallySignedCertState {
      */
     caCertPem?: pulumi.Input<string>;
     /**
-     * Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-     *
-     * @deprecated This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+     * Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`.
      */
     caKeyAlgorithm?: pulumi.Input<string>;
     /**
@@ -237,12 +235,6 @@ export interface LocallySignedCertArgs {
      * Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
     caCertPem: pulumi.Input<string>;
-    /**
-     * Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-     *
-     * @deprecated This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
-     */
-    caKeyAlgorithm?: pulumi.Input<string>;
     /**
      * Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */

@@ -25,7 +25,7 @@ namespace Pulumi.Tls
         public Output<string> CaCertPem { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
         /// </summary>
         [Output("caKeyAlgorithm")]
         public Output<string> CaKeyAlgorithm { get; private set; } = null!;
@@ -60,13 +60,13 @@ namespace Pulumi.Tls
         /// early renewal period. (default: `0`)
         /// </summary>
         [Output("earlyRenewalHours")]
-        public Output<int?> EarlyRenewalHours { get; private set; } = null!;
+        public Output<int> EarlyRenewalHours { get; private set; } = null!;
 
         /// <summary>
         /// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         /// </summary>
         [Output("isCaCertificate")]
-        public Output<bool?> IsCaCertificate { get; private set; } = null!;
+        public Output<bool> IsCaCertificate { get; private set; } = null!;
 
         /// <summary>
         /// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
@@ -78,7 +78,7 @@ namespace Pulumi.Tls
         /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Output("setSubjectKeyId")]
-        public Output<bool?> SetSubjectKeyId { get; private set; } = null!;
+        public Output<bool> SetSubjectKeyId { get; private set; } = null!;
 
         /// <summary>
         /// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -121,6 +121,10 @@ namespace Pulumi.Tls
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                AdditionalSecretOutputs =
+                {
+                    "caPrivateKeyPem",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -162,17 +166,21 @@ namespace Pulumi.Tls
         [Input("caCertPem", required: true)]
         public Input<string> CaCertPem { get; set; } = null!;
 
-        /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-        /// </summary>
-        [Input("caKeyAlgorithm")]
-        public Input<string>? CaKeyAlgorithm { get; set; }
+        [Input("caPrivateKeyPem", required: true)]
+        private Input<string>? _caPrivateKeyPem;
 
         /// <summary>
         /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
-        [Input("caPrivateKeyPem", required: true)]
-        public Input<string> CaPrivateKeyPem { get; set; } = null!;
+        public Input<string>? CaPrivateKeyPem
+        {
+            get => _caPrivateKeyPem;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _caPrivateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
@@ -235,16 +243,26 @@ namespace Pulumi.Tls
         public Input<string>? CaCertPem { get; set; }
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
         /// </summary>
         [Input("caKeyAlgorithm")]
         public Input<string>? CaKeyAlgorithm { get; set; }
 
+        [Input("caPrivateKeyPem")]
+        private Input<string>? _caPrivateKeyPem;
+
         /// <summary>
         /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
-        [Input("caPrivateKeyPem")]
-        public Input<string>? CaPrivateKeyPem { get; set; }
+        public Input<string>? CaPrivateKeyPem
+        {
+            get => _caPrivateKeyPem;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _caPrivateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the

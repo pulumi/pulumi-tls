@@ -30,7 +30,7 @@ namespace Pulumi.Tls
             }
         }
 
-        private static readonly Pulumi.Config __config = new Pulumi.Config("tls");
+        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("tls");
 
         private static readonly __Value<Pulumi.Tls.Config.Types.Proxy?> _proxy = new __Value<Pulumi.Tls.Config.Types.Proxy?>(() => __config.GetObject<Pulumi.Tls.Config.Types.Proxy>("proxy"));
         /// <summary>
@@ -47,7 +47,7 @@ namespace Pulumi.Tls
 
              public class Proxy
              {
-                public bool? FromEnv { get; set; }
+                public bool FromEnv { get; set; }
                 public string? Password { get; set; } = null!;
                 public string? Url { get; set; } = null!;
                 public string? Username { get; set; } = null!;

@@ -19,7 +19,6 @@ class CertRequestArgs:
                  private_key_pem: pulumi.Input[str],
                  dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 key_algorithm: Optional[pulumi.Input[str]] = None,
                  subject: Optional[pulumi.Input['CertRequestSubjectArgs']] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
@@ -29,7 +28,6 @@ class CertRequestArgs:
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
-        :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         :param pulumi.Input['CertRequestSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
@@ -38,11 +36,6 @@ class CertRequestArgs:
             pulumi.set(__self__, "dns_names", dns_names)
         if ip_addresses is not None:
             pulumi.set(__self__, "ip_addresses", ip_addresses)
-        if key_algorithm is not None:
-            warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
-            pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
-        if key_algorithm is not None:
-            pulumi.set(__self__, "key_algorithm", key_algorithm)
         if subject is not None:
             pulumi.set(__self__, "subject", subject)
         if uris is not None:
@@ -85,18 +78,6 @@ class CertRequestArgs:
     @ip_addresses.setter
     def ip_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "ip_addresses", value)
-
-    @property
-    @pulumi.getter(name="keyAlgorithm")
-    def key_algorithm(self) -> Optional[pulumi.Input[str]]:
-        """
-        Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-        """
-        return pulumi.get(self, "key_algorithm")
-
-    @key_algorithm.setter
-    def key_algorithm(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "key_algorithm", value)
 
     @property
     @pulumi.getter
@@ -142,7 +123,7 @@ class _CertRequestState:
                [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
-        :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
         :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
                to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
@@ -155,9 +136,6 @@ class _CertRequestState:
             pulumi.set(__self__, "dns_names", dns_names)
         if ip_addresses is not None:
             pulumi.set(__self__, "ip_addresses", ip_addresses)
-        if key_algorithm is not None:
-            warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
-            pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
         if key_algorithm is not None:
             pulumi.set(__self__, "key_algorithm", key_algorithm)
         if private_key_pem is not None:
@@ -211,7 +189,7 @@ class _CertRequestState:
     @pulumi.getter(name="keyAlgorithm")
     def key_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        Name of the algorithm used when generating the private key provided in `private_key_pem`.
         """
         return pulumi.get(self, "key_algorithm")
 
@@ -265,7 +243,6 @@ class CertRequest(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 key_algorithm: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
                  subject: Optional[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -289,7 +266,6 @@ class CertRequest(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
-        :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
                to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
@@ -334,7 +310,6 @@ class CertRequest(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 key_algorithm: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
                  subject: Optional[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -349,16 +324,15 @@ class CertRequest(pulumi.CustomResource):
 
             __props__.__dict__["dns_names"] = dns_names
             __props__.__dict__["ip_addresses"] = ip_addresses
-            if key_algorithm is not None and not opts.urn:
-                warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
-                pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
-            __props__.__dict__["key_algorithm"] = key_algorithm
             if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
-            __props__.__dict__["private_key_pem"] = private_key_pem
+            __props__.__dict__["private_key_pem"] = None if private_key_pem is None else pulumi.Output.secret(private_key_pem)
             __props__.__dict__["subject"] = subject
             __props__.__dict__["uris"] = uris
             __props__.__dict__["cert_request_pem"] = None
+            __props__.__dict__["key_algorithm"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["privateKeyPem"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(CertRequest, __self__).__init__(
             'tls:index/certRequest:CertRequest',
             resource_name,
@@ -390,7 +364,7 @@ class CertRequest(pulumi.CustomResource):
                [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
-        :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
         :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
                to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
@@ -442,7 +416,7 @@ class CertRequest(pulumi.CustomResource):
     @pulumi.getter(name="keyAlgorithm")
     def key_algorithm(self) -> pulumi.Output[str]:
         """
-        Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        Name of the algorithm used when generating the private key provided in `private_key_pem`.
         """
         return pulumi.get(self, "key_algorithm")
 

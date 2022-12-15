@@ -42,7 +42,7 @@ namespace Pulumi.Tls
         /// early renewal period. (default: `0`)
         /// </summary>
         [Output("earlyRenewalHours")]
-        public Output<int?> EarlyRenewalHours { get; private set; } = null!;
+        public Output<int> EarlyRenewalHours { get; private set; } = null!;
 
         /// <summary>
         /// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
@@ -54,10 +54,10 @@ namespace Pulumi.Tls
         /// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         /// </summary>
         [Output("isCaCertificate")]
-        public Output<bool?> IsCaCertificate { get; private set; } = null!;
+        public Output<bool> IsCaCertificate { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`.
         /// </summary>
         [Output("keyAlgorithm")]
         public Output<string> KeyAlgorithm { get; private set; } = null!;
@@ -80,13 +80,13 @@ namespace Pulumi.Tls
         /// Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Output("setAuthorityKeyId")]
-        public Output<bool?> SetAuthorityKeyId { get; private set; } = null!;
+        public Output<bool> SetAuthorityKeyId { get; private set; } = null!;
 
         /// <summary>
         /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Output("setSubjectKeyId")]
-        public Output<bool?> SetSubjectKeyId { get; private set; } = null!;
+        public Output<bool> SetSubjectKeyId { get; private set; } = null!;
 
         /// <summary>
         /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
@@ -141,6 +141,10 @@ namespace Pulumi.Tls
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                AdditionalSecretOutputs =
+                {
+                    "privateKeyPem",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -216,19 +220,23 @@ namespace Pulumi.Tls
         [Input("isCaCertificate")]
         public Input<bool>? IsCaCertificate { get; set; }
 
-        /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-        /// </summary>
-        [Input("keyAlgorithm")]
-        public Input<string>? KeyAlgorithm { get; set; }
+        [Input("privateKeyPem", required: true)]
+        private Input<string>? _privateKeyPem;
 
         /// <summary>
         /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
         /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
         /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         /// </summary>
-        [Input("privateKeyPem", required: true)]
-        public Input<string> PrivateKeyPem { get; set; } = null!;
+        public Input<string>? PrivateKeyPem
+        {
+            get => _privateKeyPem;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
@@ -337,18 +345,28 @@ namespace Pulumi.Tls
         public Input<bool>? IsCaCertificate { get; set; }
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`.
         /// </summary>
         [Input("keyAlgorithm")]
         public Input<string>? KeyAlgorithm { get; set; }
+
+        [Input("privateKeyPem")]
+        private Input<string>? _privateKeyPem;
 
         /// <summary>
         /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
         /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
         /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         /// </summary>
-        [Input("privateKeyPem")]
-        public Input<string>? PrivateKeyPem { get; set; }
+        public Input<string>? PrivateKeyPem
+        {
+            get => _privateKeyPem;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?

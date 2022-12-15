@@ -16,12 +16,11 @@ __all__ = [
 @pulumi.output_type
 class Proxy(dict):
     def __init__(__self__, *,
-                 from_env: Optional[bool] = None,
+                 from_env: bool,
                  password: Optional[str] = None,
                  url: Optional[str] = None,
                  username: Optional[str] = None):
-        if from_env is not None:
-            pulumi.set(__self__, "from_env", from_env)
+        pulumi.set(__self__, "from_env", from_env)
         if password is not None:
             pulumi.set(__self__, "password", password)
         if url is not None:
@@ -31,7 +30,7 @@ class Proxy(dict):
 
     @property
     @pulumi.getter(name="fromEnv")
-    def from_env(self) -> Optional[bool]:
+    def from_env(self) -> bool:
         return pulumi.get(self, "from_env")
 
     @property

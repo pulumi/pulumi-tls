@@ -44,10 +44,10 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_ = tls.GetPublicKeyOutput(ctx, GetPublicKeyOutputArgs{
+//			_ = tls.GetPublicKeyOutput(ctx, tls.GetPublicKeyOutputArgs{
 //				PrivateKeyPem: ed25519_example.PrivateKeyPem,
 //			}, nil)
-//			_, err = tls.GetPublicKey(ctx, &GetPublicKeyArgs{
+//			_, err = tls.GetPublicKey(ctx, &tls.GetPublicKeyArgs{
 //				PrivateKeyOpenssh: pulumi.StringRef(readFileOrPanic("~/.ssh/id_rsa_rfc4716")),
 //			}, nil)
 //			if err != nil {
@@ -69,21 +69,21 @@ func GetPublicKey(ctx *pulumi.Context, args *GetPublicKeyArgs, opts ...pulumi.In
 
 // A collection of arguments for invoking getPublicKey.
 type GetPublicKeyArgs struct {
-	// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyPem`.
+	// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `privateKeyPem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
 	PrivateKeyOpenssh *string `pulumi:"privateKeyOpenssh"`
-	// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyOpenssh`.
+	// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `privateKeyOpenssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
 	PrivateKeyPem *string `pulumi:"privateKeyPem"`
 }
 
 // A collection of values returned by getPublicKey.
 type GetPublicKeyResult struct {
-	// The name of the algorithm used by the given private key. Possible values are: `RSA`, `ECDSA` and `ED25519`.
+	// The name of the algorithm used by the given private key. Possible values are: `RSA`, `ECDSA`, `ED25519`.
 	Algorithm string `pulumi:"algorithm"`
 	// Unique identifier for this data source: hexadecimal representation of the SHA1 checksum of the data source.
 	Id string `pulumi:"id"`
-	// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyPem`.
+	// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `privateKeyPem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
 	PrivateKeyOpenssh *string `pulumi:"privateKeyOpenssh"`
-	// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyOpenssh`.
+	// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `privateKeyOpenssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
 	PrivateKeyPem *string `pulumi:"privateKeyPem"`
 	// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, as per the rules for `publicKeyOpenssh` and ECDSA P224 limitations.
 	PublicKeyFingerprintMd5 string `pulumi:"publicKeyFingerprintMd5"`
@@ -108,9 +108,9 @@ func GetPublicKeyOutput(ctx *pulumi.Context, args GetPublicKeyOutputArgs, opts .
 
 // A collection of arguments for invoking getPublicKey.
 type GetPublicKeyOutputArgs struct {
-	// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyPem`.
+	// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `privateKeyPem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
 	PrivateKeyOpenssh pulumi.StringPtrInput `pulumi:"privateKeyOpenssh"`
-	// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyOpenssh`.
+	// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `privateKeyOpenssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
 	PrivateKeyPem pulumi.StringPtrInput `pulumi:"privateKeyPem"`
 }
 
@@ -133,7 +133,7 @@ func (o GetPublicKeyResultOutput) ToGetPublicKeyResultOutputWithContext(ctx cont
 	return o
 }
 
-// The name of the algorithm used by the given private key. Possible values are: `RSA`, `ECDSA` and `ED25519`.
+// The name of the algorithm used by the given private key. Possible values are: `RSA`, `ECDSA`, `ED25519`.
 func (o GetPublicKeyResultOutput) Algorithm() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPublicKeyResult) string { return v.Algorithm }).(pulumi.StringOutput)
 }
@@ -143,12 +143,12 @@ func (o GetPublicKeyResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPublicKeyResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyPem`.
+// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `privateKeyPem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
 func (o GetPublicKeyResultOutput) PrivateKeyOpenssh() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetPublicKeyResult) *string { return v.PrivateKeyOpenssh }).(pulumi.StringPtrOutput)
 }
 
-// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyOpenssh`.
+// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `privateKeyOpenssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
 func (o GetPublicKeyResultOutput) PrivateKeyPem() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetPublicKeyResult) *string { return v.PrivateKeyPem }).(pulumi.StringPtrOutput)
 }

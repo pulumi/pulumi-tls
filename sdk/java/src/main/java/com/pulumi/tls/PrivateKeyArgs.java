@@ -17,14 +17,14 @@ public final class PrivateKeyArgs extends com.pulumi.resources.ResourceArgs {
     public static final PrivateKeyArgs Empty = new PrivateKeyArgs();
 
     /**
-     * Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
+     * Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
      * 
      */
     @Import(name="algorithm", required=true)
     private Output<String> algorithm;
 
     /**
-     * @return Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
+     * @return Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
      * 
      */
     public Output<String> algorithm() {
@@ -32,14 +32,14 @@ public final class PrivateKeyArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+     * When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
      * 
      */
     @Import(name="ecdsaCurve")
     private @Nullable Output<String> ecdsaCurve;
 
     /**
-     * @return When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+     * @return When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
      * 
      */
     public Optional<Output<String>> ecdsaCurve() {
@@ -88,7 +88,7 @@ public final class PrivateKeyArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param algorithm Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
+         * @param algorithm Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
          * 
          * @return builder
          * 
@@ -99,7 +99,7 @@ public final class PrivateKeyArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param algorithm Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
+         * @param algorithm Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
          * 
          * @return builder
          * 
@@ -109,7 +109,7 @@ public final class PrivateKeyArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param ecdsaCurve When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+         * @param ecdsaCurve When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
          * 
          * @return builder
          * 
@@ -120,7 +120,7 @@ public final class PrivateKeyArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param ecdsaCurve When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+         * @param ecdsaCurve When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
          * 
          * @return builder
          * 
