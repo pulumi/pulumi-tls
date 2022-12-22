@@ -86,7 +86,7 @@ func NewCertRequest(ctx *pulumi.Context,
 		return nil, errors.New("invalid value for required argument 'PrivateKeyPem'")
 	}
 	if args.PrivateKeyPem != nil {
-		args.PrivateKeyPem = pulumi.ToSecret(args.PrivateKeyPem).(pulumi.StringOutput)
+		args.PrivateKeyPem = pulumi.ToSecret(args.PrivateKeyPem).(pulumi.StringInput)
 	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
 		"privateKeyPem",

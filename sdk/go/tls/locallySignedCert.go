@@ -73,7 +73,7 @@ func NewLocallySignedCert(ctx *pulumi.Context,
 		return nil, errors.New("invalid value for required argument 'ValidityPeriodHours'")
 	}
 	if args.CaPrivateKeyPem != nil {
-		args.CaPrivateKeyPem = pulumi.ToSecret(args.CaPrivateKeyPem).(pulumi.StringOutput)
+		args.CaPrivateKeyPem = pulumi.ToSecret(args.CaPrivateKeyPem).(pulumi.StringInput)
 	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
 		"caPrivateKeyPem",
