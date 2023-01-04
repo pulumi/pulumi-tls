@@ -303,6 +303,8 @@ class PrivateKey(pulumi.CustomResource):
             __props__.__dict__["public_key_fingerprint_sha256"] = None
             __props__.__dict__["public_key_openssh"] = None
             __props__.__dict__["public_key_pem"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["privateKeyOpenssh", "privateKeyPem"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(PrivateKey, __self__).__init__(
             'tls:index/privateKey:PrivateKey',
             resource_name,

@@ -5,13 +5,41 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
-export * from "./certRequest";
-export * from "./getCertificate";
-export * from "./getPublicKey";
-export * from "./locallySignedCert";
-export * from "./privateKey";
-export * from "./provider";
-export * from "./selfSignedCert";
+export { CertRequestArgs, CertRequestState } from "./certRequest";
+export type CertRequest = import("./certRequest").CertRequest;
+export const CertRequest: typeof import("./certRequest").CertRequest = null as any;
+utilities.lazyLoad(exports, ["CertRequest"], () => require("./certRequest"));
+
+export { GetCertificateArgs, GetCertificateResult, GetCertificateOutputArgs } from "./getCertificate";
+export const getCertificate: typeof import("./getCertificate").getCertificate = null as any;
+export const getCertificateOutput: typeof import("./getCertificate").getCertificateOutput = null as any;
+utilities.lazyLoad(exports, ["getCertificate","getCertificateOutput"], () => require("./getCertificate"));
+
+export { GetPublicKeyArgs, GetPublicKeyResult, GetPublicKeyOutputArgs } from "./getPublicKey";
+export const getPublicKey: typeof import("./getPublicKey").getPublicKey = null as any;
+export const getPublicKeyOutput: typeof import("./getPublicKey").getPublicKeyOutput = null as any;
+utilities.lazyLoad(exports, ["getPublicKey","getPublicKeyOutput"], () => require("./getPublicKey"));
+
+export { LocallySignedCertArgs, LocallySignedCertState } from "./locallySignedCert";
+export type LocallySignedCert = import("./locallySignedCert").LocallySignedCert;
+export const LocallySignedCert: typeof import("./locallySignedCert").LocallySignedCert = null as any;
+utilities.lazyLoad(exports, ["LocallySignedCert"], () => require("./locallySignedCert"));
+
+export { PrivateKeyArgs, PrivateKeyState } from "./privateKey";
+export type PrivateKey = import("./privateKey").PrivateKey;
+export const PrivateKey: typeof import("./privateKey").PrivateKey = null as any;
+utilities.lazyLoad(exports, ["PrivateKey"], () => require("./privateKey"));
+
+export { ProviderArgs } from "./provider";
+export type Provider = import("./provider").Provider;
+export const Provider: typeof import("./provider").Provider = null as any;
+utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+
+export { SelfSignedCertArgs, SelfSignedCertState } from "./selfSignedCert";
+export type SelfSignedCert = import("./selfSignedCert").SelfSignedCert;
+export const SelfSignedCert: typeof import("./selfSignedCert").SelfSignedCert = null as any;
+utilities.lazyLoad(exports, ["SelfSignedCert"], () => require("./selfSignedCert"));
+
 
 // Export sub-modules:
 import * as config from "./config";
@@ -21,12 +49,6 @@ export {
     config,
     types,
 };
-
-// Import resources to register:
-import { CertRequest } from "./certRequest";
-import { LocallySignedCert } from "./locallySignedCert";
-import { PrivateKey } from "./privateKey";
-import { SelfSignedCert } from "./selfSignedCert";
 
 const _module = {
     version: utilities.getVersion(),
@@ -49,9 +71,6 @@ pulumi.runtime.registerResourceModule("tls", "index/certRequest", _module)
 pulumi.runtime.registerResourceModule("tls", "index/locallySignedCert", _module)
 pulumi.runtime.registerResourceModule("tls", "index/privateKey", _module)
 pulumi.runtime.registerResourceModule("tls", "index/selfSignedCert", _module)
-
-import { Provider } from "./provider";
-
 pulumi.runtime.registerResourcePackage("tls", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

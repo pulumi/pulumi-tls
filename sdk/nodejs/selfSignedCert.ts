@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 export class SelfSignedCert extends pulumi.CustomResource {
@@ -156,7 +157,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["ipAddresses"] = args ? args.ipAddresses : undefined;
             resourceInputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
             resourceInputs["keyAlgorithm"] = args ? args.keyAlgorithm : undefined;
-            resourceInputs["privateKeyPem"] = args ? args.privateKeyPem : undefined;
+            resourceInputs["privateKeyPem"] = args?.privateKeyPem ? pulumi.secret(args.privateKeyPem) : undefined;
             resourceInputs["setAuthorityKeyId"] = args ? args.setAuthorityKeyId : undefined;
             resourceInputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
             resourceInputs["subject"] = args ? args.subject : undefined;
@@ -168,6 +169,8 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["validityStartTime"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["privateKeyPem"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(SelfSignedCert.__pulumiType, name, resourceInputs, opts);
     }
 }
