@@ -141,7 +141,7 @@ export class LocallySignedCert extends pulumi.CustomResource {
             resourceInputs["allowedUses"] = args ? args.allowedUses : undefined;
             resourceInputs["caCertPem"] = args ? args.caCertPem : undefined;
             resourceInputs["caKeyAlgorithm"] = args ? args.caKeyAlgorithm : undefined;
-            resourceInputs["caPrivateKeyPem"] = args ? args.caPrivateKeyPem : undefined;
+            resourceInputs["caPrivateKeyPem"] = args?.caPrivateKeyPem ? pulumi.secret(args.caPrivateKeyPem) : undefined;
             resourceInputs["certRequestPem"] = args ? args.certRequestPem : undefined;
             resourceInputs["earlyRenewalHours"] = args ? args.earlyRenewalHours : undefined;
             resourceInputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
@@ -153,6 +153,8 @@ export class LocallySignedCert extends pulumi.CustomResource {
             resourceInputs["validityStartTime"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["caPrivateKeyPem"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(LocallySignedCert.__pulumiType, name, resourceInputs, opts);
     }
 }

@@ -141,6 +141,10 @@ namespace Pulumi.Tls
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                AdditionalSecretOutputs =
+                {
+                    "privateKeyPem",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -222,13 +226,23 @@ namespace Pulumi.Tls
         [Input("keyAlgorithm")]
         public Input<string>? KeyAlgorithm { get; set; }
 
+        [Input("privateKeyPem", required: true)]
+        private Input<string>? _privateKeyPem;
+
         /// <summary>
         /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
         /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
         /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         /// </summary>
-        [Input("privateKeyPem", required: true)]
-        public Input<string> PrivateKeyPem { get; set; } = null!;
+        public Input<string>? PrivateKeyPem
+        {
+            get => _privateKeyPem;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
@@ -342,13 +356,23 @@ namespace Pulumi.Tls
         [Input("keyAlgorithm")]
         public Input<string>? KeyAlgorithm { get; set; }
 
+        [Input("privateKeyPem")]
+        private Input<string>? _privateKeyPem;
+
         /// <summary>
         /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
         /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
         /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
         /// </summary>
-        [Input("privateKeyPem")]
-        public Input<string>? PrivateKeyPem { get; set; }
+        public Input<string>? PrivateKeyPem
+        {
+            get => _privateKeyPem;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?

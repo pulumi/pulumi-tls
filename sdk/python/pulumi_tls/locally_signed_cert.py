@@ -490,7 +490,7 @@ class LocallySignedCert(pulumi.CustomResource):
             __props__.__dict__["ca_key_algorithm"] = ca_key_algorithm
             if ca_private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'ca_private_key_pem'")
-            __props__.__dict__["ca_private_key_pem"] = ca_private_key_pem
+            __props__.__dict__["ca_private_key_pem"] = None if ca_private_key_pem is None else pulumi.Output.secret(ca_private_key_pem)
             if cert_request_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'cert_request_pem'")
             __props__.__dict__["cert_request_pem"] = cert_request_pem
@@ -504,6 +504,8 @@ class LocallySignedCert(pulumi.CustomResource):
             __props__.__dict__["ready_for_renewal"] = None
             __props__.__dict__["validity_end_time"] = None
             __props__.__dict__["validity_start_time"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["caPrivateKeyPem"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(LocallySignedCert, __self__).__init__(
             'tls:index/locallySignedCert:LocallySignedCert',
             resource_name,

@@ -355,10 +355,12 @@ class CertRequest(pulumi.CustomResource):
             __props__.__dict__["key_algorithm"] = key_algorithm
             if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
-            __props__.__dict__["private_key_pem"] = private_key_pem
+            __props__.__dict__["private_key_pem"] = None if private_key_pem is None else pulumi.Output.secret(private_key_pem)
             __props__.__dict__["subject"] = subject
             __props__.__dict__["uris"] = uris
             __props__.__dict__["cert_request_pem"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["privateKeyPem"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(CertRequest, __self__).__init__(
             'tls:index/certRequest:CertRequest',
             resource_name,

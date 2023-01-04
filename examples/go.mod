@@ -2,9 +2,9 @@ module github.com/pulumi/pulumi-tls/examples/v4
 
 go 1.18
 
-require github.com/pulumi/pulumi/pkg/v3 v3.50.2
+require github.com/pulumi/pulumi/pkg/v3 v3.51.0
 
-require github.com/pulumi/pulumi/sdk/v3 v3.50.2 // indirect
+require github.com/pulumi/pulumi/sdk/v3 v3.51.0 // indirect
 
 require (
 	cloud.google.com/go v0.103.0 // indirect

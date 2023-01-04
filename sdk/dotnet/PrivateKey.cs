@@ -100,6 +100,11 @@ namespace Pulumi.Tls
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                AdditionalSecretOutputs =
+                {
+                    "privateKeyOpenssh",
+                    "privateKeyPem",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -161,17 +166,37 @@ namespace Pulumi.Tls
         [Input("ecdsaCurve")]
         public Input<string>? EcdsaCurve { get; set; }
 
+        [Input("privateKeyOpenssh")]
+        private Input<string>? _privateKeyOpenssh;
+
         /// <summary>
         /// Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
         /// </summary>
-        [Input("privateKeyOpenssh")]
-        public Input<string>? PrivateKeyOpenssh { get; set; }
+        public Input<string>? PrivateKeyOpenssh
+        {
+            get => _privateKeyOpenssh;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyOpenssh = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("privateKeyPem")]
+        private Input<string>? _privateKeyPem;
 
         /// <summary>
         /// Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
-        [Input("privateKeyPem")]
-        public Input<string>? PrivateKeyPem { get; set; }
+        public Input<string>? PrivateKeyPem
+        {
+            get => _privateKeyPem;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.

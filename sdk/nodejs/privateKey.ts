@@ -118,6 +118,8 @@ export class PrivateKey extends pulumi.CustomResource {
             resourceInputs["publicKeyPem"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["privateKeyOpenssh", "privateKeyPem"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(PrivateKey.__pulumiType, name, resourceInputs, opts);
     }
 }

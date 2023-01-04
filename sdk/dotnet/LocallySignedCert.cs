@@ -121,6 +121,10 @@ namespace Pulumi.Tls
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                AdditionalSecretOutputs =
+                {
+                    "caPrivateKeyPem",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -168,11 +172,21 @@ namespace Pulumi.Tls
         [Input("caKeyAlgorithm")]
         public Input<string>? CaKeyAlgorithm { get; set; }
 
+        [Input("caPrivateKeyPem", required: true)]
+        private Input<string>? _caPrivateKeyPem;
+
         /// <summary>
         /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
-        [Input("caPrivateKeyPem", required: true)]
-        public Input<string> CaPrivateKeyPem { get; set; } = null!;
+        public Input<string>? CaPrivateKeyPem
+        {
+            get => _caPrivateKeyPem;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _caPrivateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
@@ -240,11 +254,21 @@ namespace Pulumi.Tls
         [Input("caKeyAlgorithm")]
         public Input<string>? CaKeyAlgorithm { get; set; }
 
+        [Input("caPrivateKeyPem")]
+        private Input<string>? _caPrivateKeyPem;
+
         /// <summary>
         /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         /// </summary>
-        [Input("caPrivateKeyPem")]
-        public Input<string>? CaPrivateKeyPem { get; set; }
+        public Input<string>? CaPrivateKeyPem
+        {
+            get => _caPrivateKeyPem;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _caPrivateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the

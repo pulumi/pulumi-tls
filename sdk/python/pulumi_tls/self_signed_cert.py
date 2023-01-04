@@ -610,7 +610,7 @@ class SelfSignedCert(pulumi.CustomResource):
             __props__.__dict__["key_algorithm"] = key_algorithm
             if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
-            __props__.__dict__["private_key_pem"] = private_key_pem
+            __props__.__dict__["private_key_pem"] = None if private_key_pem is None else pulumi.Output.secret(private_key_pem)
             __props__.__dict__["set_authority_key_id"] = set_authority_key_id
             __props__.__dict__["set_subject_key_id"] = set_subject_key_id
             __props__.__dict__["subject"] = subject
@@ -622,6 +622,8 @@ class SelfSignedCert(pulumi.CustomResource):
             __props__.__dict__["ready_for_renewal"] = None
             __props__.__dict__["validity_end_time"] = None
             __props__.__dict__["validity_start_time"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["privateKeyPem"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(SelfSignedCert, __self__).__init__(
             'tls:index/selfSignedCert:SelfSignedCert',
             resource_name,

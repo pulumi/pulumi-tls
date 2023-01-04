@@ -49,7 +49,7 @@ namespace Pulumi.Tls
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetPublicKeyResult> InvokeAsync(GetPublicKeyArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyArgs(), options.WithDefaults());
 
         /// <summary>
         /// Get a public key from a PEM-encoded private key.
@@ -89,23 +89,35 @@ namespace Pulumi.Tls
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetPublicKeyResult> Invoke(GetPublicKeyInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyInvokeArgs(), options.WithDefaults());
     }
 
 
     public sealed class GetPublicKeyArgs : global::Pulumi.InvokeArgs
     {
+        [Input("privateKeyOpenssh")]
+        private string? _privateKeyOpenssh;
+
         /// <summary>
         /// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_pem`.
         /// </summary>
-        [Input("privateKeyOpenssh")]
-        public string? PrivateKeyOpenssh { get; set; }
+        public string? PrivateKeyOpenssh
+        {
+            get => _privateKeyOpenssh;
+            set => _privateKeyOpenssh = value;
+        }
+
+        [Input("privateKeyPem")]
+        private string? _privateKeyPem;
 
         /// <summary>
         /// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_openssh`.
         /// </summary>
-        [Input("privateKeyPem")]
-        public string? PrivateKeyPem { get; set; }
+        public string? PrivateKeyPem
+        {
+            get => _privateKeyPem;
+            set => _privateKeyPem = value;
+        }
 
         public GetPublicKeyArgs()
         {
@@ -115,17 +127,37 @@ namespace Pulumi.Tls
 
     public sealed class GetPublicKeyInvokeArgs : global::Pulumi.InvokeArgs
     {
+        [Input("privateKeyOpenssh")]
+        private Input<string>? _privateKeyOpenssh;
+
         /// <summary>
         /// The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_pem`.
         /// </summary>
-        [Input("privateKeyOpenssh")]
-        public Input<string>? PrivateKeyOpenssh { get; set; }
+        public Input<string>? PrivateKeyOpenssh
+        {
+            get => _privateKeyOpenssh;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyOpenssh = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("privateKeyPem")]
+        private Input<string>? _privateKeyPem;
 
         /// <summary>
         /// The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_openssh`.
         /// </summary>
-        [Input("privateKeyPem")]
-        public Input<string>? PrivateKeyPem { get; set; }
+        public Input<string>? PrivateKeyPem
+        {
+            get => _privateKeyPem;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public GetPublicKeyInvokeArgs()
         {

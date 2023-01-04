@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -115,12 +116,14 @@ export class CertRequest extends pulumi.CustomResource {
             resourceInputs["dnsNames"] = args ? args.dnsNames : undefined;
             resourceInputs["ipAddresses"] = args ? args.ipAddresses : undefined;
             resourceInputs["keyAlgorithm"] = args ? args.keyAlgorithm : undefined;
-            resourceInputs["privateKeyPem"] = args ? args.privateKeyPem : undefined;
+            resourceInputs["privateKeyPem"] = args?.privateKeyPem ? pulumi.secret(args.privateKeyPem) : undefined;
             resourceInputs["subject"] = args ? args.subject : undefined;
             resourceInputs["uris"] = args ? args.uris : undefined;
             resourceInputs["certRequestPem"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["privateKeyPem"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(CertRequest.__pulumiType, name, resourceInputs, opts);
     }
 }
