@@ -5,6 +5,7 @@
 package examples
 
 import (
+	"os"
 	"path"
 	"testing"
 
@@ -14,7 +15,11 @@ import (
 func TestAccPrivateKeyCSharp(t *testing.T) {
 	test := getCsharpBaseOptions(t).
 		With(integration.ProgramTestOptions{
-			Dir: path.Join(getCwd(t), "private-key", "dotnet"),
+			DebugLogLevel: 9,
+			Verbose:       true,
+			Stdout:        os.Stdout,
+			Stderr:        os.Stderr,
+			Dir:           path.Join(getCwd(t), "private-key", "dotnet"),
 		})
 
 	integration.ProgramTest(t, &test)
