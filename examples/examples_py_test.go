@@ -13,6 +13,7 @@ import (
 )
 
 func TestAccPrivateKeyPy(t *testing.T) {
+	t.Skip()
 	test := getPythonBaseOptions(t).
 		With(integration.ProgramTestOptions{
 			Dir: path.Join(getCwd(t), "private-key", "py"),

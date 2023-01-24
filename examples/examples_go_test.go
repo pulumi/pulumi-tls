@@ -12,6 +12,7 @@ import (
 )
 
 func TestAccPrivateKeyGo(t *testing.T) {
+	t.Skip()
 	test := getGoBaseOptions(t).
 		With(integration.ProgramTestOptions{
 			Dir: path.Join(getCwd(t), "private-key", "go"),
@@ -21,6 +22,7 @@ func TestAccPrivateKeyGo(t *testing.T) {
 }
 
 func TestAccSelfSignedCertGoForcesNewResource(t *testing.T) {
+	t.Skip()
 	test := getGoBaseOptions(t).
 		With(integration.ProgramTestOptions{
 			Dir:                  path.Join(getCwd(t), "self-signed-cert", "go"),

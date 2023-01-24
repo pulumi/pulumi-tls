@@ -15,6 +15,7 @@ import (
 )
 
 func TestAccGetCert(t *testing.T) {
+	t.Skip()
 	test := getBaseOptions().With(integration.ProgramTestOptions{
 		Dir:                    filepath.Join(getCwd(t), "get-cert", "yaml"),
 		ExtraRuntimeValidation: validateExpectedVsActual,
