@@ -19,7 +19,6 @@ class LocallySignedCertArgs:
                  ca_private_key_pem: pulumi.Input[str],
                  cert_request_pem: pulumi.Input[str],
                  validity_period_hours: pulumi.Input[int],
-                 ca_key_algorithm: Optional[pulumi.Input[str]] = None,
                  early_renewal_hours: Optional[pulumi.Input[int]] = None,
                  is_ca_certificate: Optional[pulumi.Input[bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None):
@@ -30,7 +29,6 @@ class LocallySignedCertArgs:
         :param pulumi.Input[str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.
-        :param pulumi.Input[str] ca_key_algorithm: Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         :param pulumi.Input[int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
                can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
                certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
@@ -44,11 +42,6 @@ class LocallySignedCertArgs:
         pulumi.set(__self__, "ca_private_key_pem", ca_private_key_pem)
         pulumi.set(__self__, "cert_request_pem", cert_request_pem)
         pulumi.set(__self__, "validity_period_hours", validity_period_hours)
-        if ca_key_algorithm is not None:
-            warnings.warn("""This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.""", DeprecationWarning)
-            pulumi.log.warn("""ca_key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.""")
-        if ca_key_algorithm is not None:
-            pulumi.set(__self__, "ca_key_algorithm", ca_key_algorithm)
         if early_renewal_hours is not None:
             pulumi.set(__self__, "early_renewal_hours", early_renewal_hours)
         if is_ca_certificate is not None:
@@ -117,18 +110,6 @@ class LocallySignedCertArgs:
         pulumi.set(self, "validity_period_hours", value)
 
     @property
-    @pulumi.getter(name="caKeyAlgorithm")
-    def ca_key_algorithm(self) -> Optional[pulumi.Input[str]]:
-        """
-        Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-        """
-        return pulumi.get(self, "ca_key_algorithm")
-
-    @ca_key_algorithm.setter
-    def ca_key_algorithm(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "ca_key_algorithm", value)
-
-    @property
     @pulumi.getter(name="earlyRenewalHours")
     def early_renewal_hours(self) -> Optional[pulumi.Input[int]]:
         """
@@ -189,7 +170,7 @@ class _LocallySignedCertState:
         Input properties used for looking up and filtering LocallySignedCert resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         :param pulumi.Input[str] ca_cert_pem: Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
-        :param pulumi.Input[str] ca_key_algorithm: Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        :param pulumi.Input[str] ca_key_algorithm: Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
         :param pulumi.Input[str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
                [underlying](https://pkg.go.dev/encoding/pem#Encode)
@@ -213,9 +194,6 @@ class _LocallySignedCertState:
             pulumi.set(__self__, "allowed_uses", allowed_uses)
         if ca_cert_pem is not None:
             pulumi.set(__self__, "ca_cert_pem", ca_cert_pem)
-        if ca_key_algorithm is not None:
-            warnings.warn("""This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.""", DeprecationWarning)
-            pulumi.log.warn("""ca_key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.""")
         if ca_key_algorithm is not None:
             pulumi.set(__self__, "ca_key_algorithm", ca_key_algorithm)
         if ca_private_key_pem is not None:
@@ -267,7 +245,7 @@ class _LocallySignedCertState:
     @pulumi.getter(name="caKeyAlgorithm")
     def ca_key_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
         """
         return pulumi.get(self, "ca_key_algorithm")
 
@@ -411,7 +389,6 @@ class LocallySignedCert(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ca_cert_pem: Optional[pulumi.Input[str]] = None,
-                 ca_key_algorithm: Optional[pulumi.Input[str]] = None,
                  ca_private_key_pem: Optional[pulumi.Input[str]] = None,
                  cert_request_pem: Optional[pulumi.Input[str]] = None,
                  early_renewal_hours: Optional[pulumi.Input[int]] = None,
@@ -425,7 +402,6 @@ class LocallySignedCert(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         :param pulumi.Input[str] ca_cert_pem: Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
-        :param pulumi.Input[str] ca_key_algorithm: Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         :param pulumi.Input[str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
@@ -462,7 +438,6 @@ class LocallySignedCert(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ca_cert_pem: Optional[pulumi.Input[str]] = None,
-                 ca_key_algorithm: Optional[pulumi.Input[str]] = None,
                  ca_private_key_pem: Optional[pulumi.Input[str]] = None,
                  cert_request_pem: Optional[pulumi.Input[str]] = None,
                  early_renewal_hours: Optional[pulumi.Input[int]] = None,
@@ -484,10 +459,6 @@ class LocallySignedCert(pulumi.CustomResource):
             if ca_cert_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'ca_cert_pem'")
             __props__.__dict__["ca_cert_pem"] = ca_cert_pem
-            if ca_key_algorithm is not None and not opts.urn:
-                warnings.warn("""This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.""", DeprecationWarning)
-                pulumi.log.warn("""ca_key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.""")
-            __props__.__dict__["ca_key_algorithm"] = ca_key_algorithm
             if ca_private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'ca_private_key_pem'")
             __props__.__dict__["ca_private_key_pem"] = None if ca_private_key_pem is None else pulumi.Output.secret(ca_private_key_pem)
@@ -500,6 +471,7 @@ class LocallySignedCert(pulumi.CustomResource):
             if validity_period_hours is None and not opts.urn:
                 raise TypeError("Missing required property 'validity_period_hours'")
             __props__.__dict__["validity_period_hours"] = validity_period_hours
+            __props__.__dict__["ca_key_algorithm"] = None
             __props__.__dict__["cert_pem"] = None
             __props__.__dict__["ready_for_renewal"] = None
             __props__.__dict__["validity_end_time"] = None
@@ -538,7 +510,7 @@ class LocallySignedCert(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         :param pulumi.Input[str] ca_cert_pem: Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
-        :param pulumi.Input[str] ca_key_algorithm: Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        :param pulumi.Input[str] ca_key_algorithm: Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
         :param pulumi.Input[str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
                [underlying](https://pkg.go.dev/encoding/pem#Encode)
@@ -597,7 +569,7 @@ class LocallySignedCert(pulumi.CustomResource):
     @pulumi.getter(name="caKeyAlgorithm")
     def ca_key_algorithm(self) -> pulumi.Output[str]:
         """
-        Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
         """
         return pulumi.get(self, "ca_key_algorithm")
 
@@ -631,7 +603,7 @@ class LocallySignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="earlyRenewalHours")
-    def early_renewal_hours(self) -> pulumi.Output[Optional[int]]:
+    def early_renewal_hours(self) -> pulumi.Output[int]:
         """
         The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
         can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
@@ -643,7 +615,7 @@ class LocallySignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="isCaCertificate")
-    def is_ca_certificate(self) -> pulumi.Output[Optional[bool]]:
+    def is_ca_certificate(self) -> pulumi.Output[bool]:
         """
         Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         """
@@ -659,7 +631,7 @@ class LocallySignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="setSubjectKeyId")
-    def set_subject_key_id(self) -> pulumi.Output[Optional[bool]]:
+    def set_subject_key_id(self) -> pulumi.Output[bool]:
         """
         Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         """

@@ -59,7 +59,7 @@ namespace Pulumi.Tls
         public Output<ImmutableArray<string>> IpAddresses { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`.
         /// </summary>
         [Output("keyAlgorithm")]
         public Output<string> KeyAlgorithm { get; private set; } = null!;
@@ -158,12 +158,6 @@ namespace Pulumi.Tls
             set => _ipAddresses = value;
         }
 
-        /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-        /// </summary>
-        [Input("keyAlgorithm")]
-        public Input<string>? KeyAlgorithm { get; set; }
-
         [Input("privateKeyPem", required: true)]
         private Input<string>? _privateKeyPem;
 
@@ -243,7 +237,7 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`.
         /// </summary>
         [Input("keyAlgorithm")]
         public Input<string>? KeyAlgorithm { get; set; }
