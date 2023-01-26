@@ -15,11 +15,10 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
+	"github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge/tfgen"
 	tls "github.com/pulumi/pulumi-tls/provider/v4"
-	"github.com/pulumi/pulumi-tls/provider/v4/pkg/version"
 )
 
 func main() {
-	tfgen.Main("tls", version.Version, tls.Provider())
+	tfgen.Main("tls", tls.Provider())
 }
