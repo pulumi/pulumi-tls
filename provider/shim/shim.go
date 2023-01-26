@@ -1,11 +1,11 @@
 package shim
 
 import (
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/terraform-providers/terraform-provider-tls/internal/provider"
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	tlsProvider "github.com/hashicorp/terraform-provider-tls/internal/provider"
 )
 
-func NewProvider() *schema.Provider {
-	p, _ := provider.New()
+func NewProvider() provider.Provider {
+	p := tlsProvider.New()
 	return p
 }
