@@ -15,7 +15,7 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge/tfgen"
+	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
 	tls "github.com/pulumi/pulumi-tls/provider/v4"
 )
 

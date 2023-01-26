@@ -16,7 +16,7 @@ package tls
 
 import (
 	"fmt"
-	"github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge"
+	tfpfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"path/filepath"
 	"unicode"
 
