@@ -60,7 +60,6 @@ func tlsResource(mod string, res string) tokens.Type {
 
 // Provider returns additional overlaid schema and metadata associated with the tls package.
 func Provider() tfpfbridge.ProviderInfo {
-	fmt.Println("have a version", version.Version)
 	info := tfbridge.ProviderInfo{
 		Name:        "tls",
 		Description: "A Pulumi package to create TLS resources in Pulumi programs.",
