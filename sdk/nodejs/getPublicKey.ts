@@ -40,11 +40,11 @@ export function getPublicKey(args?: GetPublicKeyArgs, opts?: pulumi.InvokeOption
  */
 export interface GetPublicKeyArgs {
     /**
-     * The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `privateKeyPem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+     * The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyPem`.
      */
     privateKeyOpenssh?: string;
     /**
-     * The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `privateKeyOpenssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+     * The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyOpenssh`.
      */
     privateKeyPem?: string;
 }
@@ -54,7 +54,7 @@ export interface GetPublicKeyArgs {
  */
 export interface GetPublicKeyResult {
     /**
-     * The name of the algorithm used by the given private key. Possible values are: `RSA`, `ECDSA`, `ED25519`.
+     * The name of the algorithm used by the given private key. Possible values are: `RSA`, `ECDSA` and `ED25519`.
      */
     readonly algorithm: string;
     /**
@@ -62,11 +62,11 @@ export interface GetPublicKeyResult {
      */
     readonly id: string;
     /**
-     * The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `privateKeyPem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+     * The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyPem`.
      */
     readonly privateKeyOpenssh?: string;
     /**
-     * The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `privateKeyOpenssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+     * The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyOpenssh`.
      */
     readonly privateKeyPem?: string;
     /**
@@ -110,11 +110,11 @@ export function getPublicKeyOutput(args?: GetPublicKeyOutputArgs, opts?: pulumi.
  */
 export interface GetPublicKeyOutputArgs {
     /**
-     * The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `privateKeyPem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+     * The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyPem`.
      */
     privateKeyOpenssh?: pulumi.Input<string>;
     /**
-     * The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `privateKeyOpenssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+     * The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `privateKeyOpenssh`.
      */
     privateKeyPem?: pulumi.Input<string>;
 }

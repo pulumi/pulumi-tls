@@ -51,7 +51,7 @@ class GetPublicKeyResult:
     @pulumi.getter
     def algorithm(self) -> str:
         """
-        The name of the algorithm used by the given private key. Possible values are: `RSA`, `ECDSA`, `ED25519`.
+        The name of the algorithm used by the given private key. Possible values are: `RSA`, `ECDSA` and `ED25519`.
         """
         return pulumi.get(self, "algorithm")
 
@@ -67,7 +67,7 @@ class GetPublicKeyResult:
     @pulumi.getter(name="privateKeyOpenssh")
     def private_key_openssh(self) -> Optional[str]:
         """
-        The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `private_key_pem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+        The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_pem`.
         """
         return pulumi.get(self, "private_key_openssh")
 
@@ -75,7 +75,7 @@ class GetPublicKeyResult:
     @pulumi.getter(name="privateKeyPem")
     def private_key_pem(self) -> Optional[str]:
         """
-        The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `private_key_openssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+        The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_openssh`.
         """
         return pulumi.get(self, "private_key_pem")
 
@@ -142,8 +142,8 @@ def get_public_key(private_key_openssh: Optional[str] = None,
     ```
 
 
-    :param str private_key_openssh: The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `private_key_pem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
-    :param str private_key_pem: The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `private_key_openssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+    :param str private_key_openssh: The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_pem`.
+    :param str private_key_pem: The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_openssh`.
     """
     __args__ = dict()
     __args__['privateKeyOpenssh'] = private_key_openssh
@@ -183,7 +183,7 @@ def get_public_key_output(private_key_openssh: Optional[pulumi.Input[Optional[st
     ```
 
 
-    :param str private_key_openssh: The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `private_key_pem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
-    :param str private_key_pem: The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `private_key_openssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+    :param str private_key_openssh: The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_pem`.
+    :param str private_key_pem: The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. Currently-supported algorithms for keys are `RSA`, `ECDSA` and `ED25519`. This is *mutually exclusive* with `private_key_openssh`.
     """
     ...

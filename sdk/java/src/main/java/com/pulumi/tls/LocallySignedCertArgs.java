@@ -49,6 +49,29 @@ public final class LocallySignedCertArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
+     * Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+     * 
+     * @deprecated
+     * This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+     * 
+     */
+    @Deprecated /* This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`. */
+    @Import(name="caKeyAlgorithm")
+    private @Nullable Output<String> caKeyAlgorithm;
+
+    /**
+     * @return Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+     * 
+     * @deprecated
+     * This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+     * 
+     */
+    @Deprecated /* This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`. */
+    public Optional<Output<String>> caKeyAlgorithm() {
+        return Optional.ofNullable(this.caKeyAlgorithm);
+    }
+
+    /**
      * Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      * 
      */
@@ -151,6 +174,7 @@ public final class LocallySignedCertArgs extends com.pulumi.resources.ResourceAr
     private LocallySignedCertArgs(LocallySignedCertArgs $) {
         this.allowedUses = $.allowedUses;
         this.caCertPem = $.caCertPem;
+        this.caKeyAlgorithm = $.caKeyAlgorithm;
         this.caPrivateKeyPem = $.caPrivateKeyPem;
         this.certRequestPem = $.certRequestPem;
         this.earlyRenewalHours = $.earlyRenewalHours;
@@ -227,6 +251,35 @@ public final class LocallySignedCertArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder caCertPem(String caCertPem) {
             return caCertPem(Output.of(caCertPem));
+        }
+
+        /**
+         * @param caKeyAlgorithm Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+         * 
+         * @return builder
+         * 
+         * @deprecated
+         * This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+         * 
+         */
+        @Deprecated /* This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`. */
+        public Builder caKeyAlgorithm(@Nullable Output<String> caKeyAlgorithm) {
+            $.caKeyAlgorithm = caKeyAlgorithm;
+            return this;
+        }
+
+        /**
+         * @param caKeyAlgorithm Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+         * 
+         * @return builder
+         * 
+         * @deprecated
+         * This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+         * 
+         */
+        @Deprecated /* This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`. */
+        public Builder caKeyAlgorithm(String caKeyAlgorithm) {
+            return caKeyAlgorithm(Output.of(caKeyAlgorithm));
         }
 
         /**
