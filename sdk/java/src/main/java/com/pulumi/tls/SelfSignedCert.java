@@ -79,7 +79,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * 
      */
     @Export(name="earlyRenewalHours", type=Integer.class, parameters={})
-    private Output<Integer> earlyRenewalHours;
+    private Output</* @Nullable */ Integer> earlyRenewalHours;
 
     /**
      * @return The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
@@ -89,8 +89,8 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * early renewal period. (default: `0`)
      * 
      */
-    public Output<Integer> earlyRenewalHours() {
-        return this.earlyRenewalHours;
+    public Output<Optional<Integer>> earlyRenewalHours() {
+        return Codegen.optional(this.earlyRenewalHours);
     }
     /**
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
@@ -111,24 +111,28 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * 
      */
     @Export(name="isCaCertificate", type=Boolean.class, parameters={})
-    private Output<Boolean> isCaCertificate;
+    private Output</* @Nullable */ Boolean> isCaCertificate;
 
     /**
      * @return Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      * 
      */
-    public Output<Boolean> isCaCertificate() {
-        return this.isCaCertificate;
+    public Output<Optional<Boolean>> isCaCertificate() {
+        return Codegen.optional(this.isCaCertificate);
     }
     /**
-     * Name of the algorithm used when generating the private key provided in `private_key_pem`.
+     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+     * 
+     * @deprecated
+     * This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
      * 
      */
+    @Deprecated /* This is now ignored, as the key algorithm is inferred from the `private_key_pem`. */
     @Export(name="keyAlgorithm", type=String.class, parameters={})
     private Output<String> keyAlgorithm;
 
     /**
-     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`.
+     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
      * 
      */
     public Output<String> keyAlgorithm() {
@@ -171,28 +175,28 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * 
      */
     @Export(name="setAuthorityKeyId", type=Boolean.class, parameters={})
-    private Output<Boolean> setAuthorityKeyId;
+    private Output</* @Nullable */ Boolean> setAuthorityKeyId;
 
     /**
      * @return Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
-    public Output<Boolean> setAuthorityKeyId() {
-        return this.setAuthorityKeyId;
+    public Output<Optional<Boolean>> setAuthorityKeyId() {
+        return Codegen.optional(this.setAuthorityKeyId);
     }
     /**
      * Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
     @Export(name="setSubjectKeyId", type=Boolean.class, parameters={})
-    private Output<Boolean> setSubjectKeyId;
+    private Output</* @Nullable */ Boolean> setSubjectKeyId;
 
     /**
      * @return Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
-    public Output<Boolean> setSubjectKeyId() {
-        return this.setSubjectKeyId;
+    public Output<Optional<Boolean>> setSubjectKeyId() {
+        return Codegen.optional(this.setSubjectKeyId);
     }
     /**
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
