@@ -1,6 +1,6 @@
 module github.com/pulumi/pulumi-tls/examples/private-key/go
 
-go 1.18
+go 1.19
 
 require (
 	github.com/pulumi/pulumi-tls/sdk/v4 v4.2.2
