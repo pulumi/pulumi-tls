@@ -4,8 +4,8 @@ go 1.19
 
 require (
 	github.com/hashicorp/terraform-provider-tls/shim v0.0.0
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.2.0
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.40.0
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.2.1
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.40.1-0.20230214142332-83bd1f2d3013
 	github.com/pulumi/pulumi/sdk/v3 v3.53.1
 )
 
