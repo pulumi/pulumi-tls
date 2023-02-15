@@ -42,7 +42,7 @@ namespace Pulumi.Tls
         /// early renewal period. (default: `0`)
         /// </summary>
         [Output("earlyRenewalHours")]
-        public Output<int> EarlyRenewalHours { get; private set; } = null!;
+        public Output<int?> EarlyRenewalHours { get; private set; } = null!;
 
         /// <summary>
         /// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
@@ -54,10 +54,10 @@ namespace Pulumi.Tls
         /// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         /// </summary>
         [Output("isCaCertificate")]
-        public Output<bool> IsCaCertificate { get; private set; } = null!;
+        public Output<bool?> IsCaCertificate { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `private_key_pem`.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Output("keyAlgorithm")]
         public Output<string> KeyAlgorithm { get; private set; } = null!;
@@ -80,13 +80,13 @@ namespace Pulumi.Tls
         /// Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Output("setAuthorityKeyId")]
-        public Output<bool> SetAuthorityKeyId { get; private set; } = null!;
+        public Output<bool?> SetAuthorityKeyId { get; private set; } = null!;
 
         /// <summary>
         /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Output("setSubjectKeyId")]
-        public Output<bool> SetSubjectKeyId { get; private set; } = null!;
+        public Output<bool?> SetSubjectKeyId { get; private set; } = null!;
 
         /// <summary>
         /// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
@@ -220,6 +220,12 @@ namespace Pulumi.Tls
         [Input("isCaCertificate")]
         public Input<bool>? IsCaCertificate { get; set; }
 
+        /// <summary>
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        /// </summary>
+        [Input("keyAlgorithm")]
+        public Input<string>? KeyAlgorithm { get; set; }
+
         [Input("privateKeyPem", required: true)]
         private Input<string>? _privateKeyPem;
 
@@ -345,7 +351,7 @@ namespace Pulumi.Tls
         public Input<bool>? IsCaCertificate { get; set; }
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `private_key_pem`.
+        /// Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Input("keyAlgorithm")]
         public Input<string>? KeyAlgorithm { get; set; }

@@ -25,7 +25,7 @@ namespace Pulumi.Tls
         public Output<string> CaCertPem { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
+        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Output("caKeyAlgorithm")]
         public Output<string> CaKeyAlgorithm { get; private set; } = null!;
@@ -60,13 +60,13 @@ namespace Pulumi.Tls
         /// early renewal period. (default: `0`)
         /// </summary>
         [Output("earlyRenewalHours")]
-        public Output<int> EarlyRenewalHours { get; private set; } = null!;
+        public Output<int?> EarlyRenewalHours { get; private set; } = null!;
 
         /// <summary>
         /// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         /// </summary>
         [Output("isCaCertificate")]
-        public Output<bool> IsCaCertificate { get; private set; } = null!;
+        public Output<bool?> IsCaCertificate { get; private set; } = null!;
 
         /// <summary>
         /// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
@@ -78,7 +78,7 @@ namespace Pulumi.Tls
         /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         /// </summary>
         [Output("setSubjectKeyId")]
-        public Output<bool> SetSubjectKeyId { get; private set; } = null!;
+        public Output<bool?> SetSubjectKeyId { get; private set; } = null!;
 
         /// <summary>
         /// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -166,6 +166,12 @@ namespace Pulumi.Tls
         [Input("caCertPem", required: true)]
         public Input<string> CaCertPem { get; set; } = null!;
 
+        /// <summary>
+        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        /// </summary>
+        [Input("caKeyAlgorithm")]
+        public Input<string>? CaKeyAlgorithm { get; set; }
+
         [Input("caPrivateKeyPem", required: true)]
         private Input<string>? _caPrivateKeyPem;
 
@@ -243,7 +249,7 @@ namespace Pulumi.Tls
         public Input<string>? CaCertPem { get; set; }
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
+        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         /// </summary>
         [Input("caKeyAlgorithm")]
         public Input<string>? CaKeyAlgorithm { get; set; }

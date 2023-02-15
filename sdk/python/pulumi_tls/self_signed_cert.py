@@ -23,6 +23,7 @@ class SelfSignedCertArgs:
                  early_renewal_hours: Optional[pulumi.Input[int]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  is_ca_certificate: Optional[pulumi.Input[bool]] = None,
+                 key_algorithm: Optional[pulumi.Input[str]] = None,
                  set_authority_key_id: Optional[pulumi.Input[bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None,
                  subject: Optional[pulumi.Input['SelfSignedCertSubjectArgs']] = None,
@@ -42,6 +43,7 @@ class SelfSignedCertArgs:
                early renewal period. (default: `0`)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
+        :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         :param pulumi.Input[bool] set_authority_key_id: Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input['SelfSignedCertSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
@@ -58,6 +60,11 @@ class SelfSignedCertArgs:
             pulumi.set(__self__, "ip_addresses", ip_addresses)
         if is_ca_certificate is not None:
             pulumi.set(__self__, "is_ca_certificate", is_ca_certificate)
+        if key_algorithm is not None:
+            warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
+            pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
+        if key_algorithm is not None:
+            pulumi.set(__self__, "key_algorithm", key_algorithm)
         if set_authority_key_id is not None:
             pulumi.set(__self__, "set_authority_key_id", set_authority_key_id)
         if set_subject_key_id is not None:
@@ -158,6 +165,18 @@ class SelfSignedCertArgs:
         pulumi.set(self, "is_ca_certificate", value)
 
     @property
+    @pulumi.getter(name="keyAlgorithm")
+    def key_algorithm(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+        """
+        return pulumi.get(self, "key_algorithm")
+
+    @key_algorithm.setter
+    def key_algorithm(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_algorithm", value)
+
+    @property
     @pulumi.getter(name="setAuthorityKeyId")
     def set_authority_key_id(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -241,7 +260,7 @@ class _SelfSignedCertState:
                early renewal period. (default: `0`)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
-        :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
+        :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
                to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
@@ -266,6 +285,9 @@ class _SelfSignedCertState:
             pulumi.set(__self__, "ip_addresses", ip_addresses)
         if is_ca_certificate is not None:
             pulumi.set(__self__, "is_ca_certificate", is_ca_certificate)
+        if key_algorithm is not None:
+            warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
+            pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
         if key_algorithm is not None:
             pulumi.set(__self__, "key_algorithm", key_algorithm)
         if private_key_pem is not None:
@@ -371,7 +393,7 @@ class _SelfSignedCertState:
     @pulumi.getter(name="keyAlgorithm")
     def key_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the algorithm used when generating the private key provided in `private_key_pem`.
+        Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         """
         return pulumi.get(self, "key_algorithm")
 
@@ -500,6 +522,7 @@ class SelfSignedCert(pulumi.CustomResource):
                  early_renewal_hours: Optional[pulumi.Input[int]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  is_ca_certificate: Optional[pulumi.Input[bool]] = None,
+                 key_algorithm: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
                  set_authority_key_id: Optional[pulumi.Input[bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None,
@@ -520,6 +543,7 @@ class SelfSignedCert(pulumi.CustomResource):
                early renewal period. (default: `0`)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
+        :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
                to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
@@ -557,6 +581,7 @@ class SelfSignedCert(pulumi.CustomResource):
                  early_renewal_hours: Optional[pulumi.Input[int]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  is_ca_certificate: Optional[pulumi.Input[bool]] = None,
+                 key_algorithm: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
                  set_authority_key_id: Optional[pulumi.Input[bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None,
@@ -579,6 +604,10 @@ class SelfSignedCert(pulumi.CustomResource):
             __props__.__dict__["early_renewal_hours"] = early_renewal_hours
             __props__.__dict__["ip_addresses"] = ip_addresses
             __props__.__dict__["is_ca_certificate"] = is_ca_certificate
+            if key_algorithm is not None and not opts.urn:
+                warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
+                pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
+            __props__.__dict__["key_algorithm"] = key_algorithm
             if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
             __props__.__dict__["private_key_pem"] = None if private_key_pem is None else pulumi.Output.secret(private_key_pem)
@@ -590,7 +619,6 @@ class SelfSignedCert(pulumi.CustomResource):
                 raise TypeError("Missing required property 'validity_period_hours'")
             __props__.__dict__["validity_period_hours"] = validity_period_hours
             __props__.__dict__["cert_pem"] = None
-            __props__.__dict__["key_algorithm"] = None
             __props__.__dict__["ready_for_renewal"] = None
             __props__.__dict__["validity_end_time"] = None
             __props__.__dict__["validity_start_time"] = None
@@ -643,7 +671,7 @@ class SelfSignedCert(pulumi.CustomResource):
                early renewal period. (default: `0`)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
-        :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
+        :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
                to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
                interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
@@ -708,7 +736,7 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="earlyRenewalHours")
-    def early_renewal_hours(self) -> pulumi.Output[int]:
+    def early_renewal_hours(self) -> pulumi.Output[Optional[int]]:
         """
         The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
         can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
@@ -728,7 +756,7 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="isCaCertificate")
-    def is_ca_certificate(self) -> pulumi.Output[bool]:
+    def is_ca_certificate(self) -> pulumi.Output[Optional[bool]]:
         """
         Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         """
@@ -738,7 +766,7 @@ class SelfSignedCert(pulumi.CustomResource):
     @pulumi.getter(name="keyAlgorithm")
     def key_algorithm(self) -> pulumi.Output[str]:
         """
-        Name of the algorithm used when generating the private key provided in `private_key_pem`.
+        Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         """
         return pulumi.get(self, "key_algorithm")
 
@@ -762,7 +790,7 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="setAuthorityKeyId")
-    def set_authority_key_id(self) -> pulumi.Output[bool]:
+    def set_authority_key_id(self) -> pulumi.Output[Optional[bool]]:
         """
         Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         """
@@ -770,7 +798,7 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="setSubjectKeyId")
-    def set_subject_key_id(self) -> pulumi.Output[bool]:
+    def set_subject_key_id(self) -> pulumi.Output[Optional[bool]]:
         """
         Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         """

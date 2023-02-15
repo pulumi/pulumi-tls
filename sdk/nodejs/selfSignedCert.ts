@@ -57,7 +57,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
      * revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
      * early renewal period. (default: `0`)
      */
-    public readonly earlyRenewalHours!: pulumi.Output<number>;
+    public readonly earlyRenewalHours!: pulumi.Output<number | undefined>;
     /**
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */
@@ -65,11 +65,13 @@ export class SelfSignedCert extends pulumi.CustomResource {
     /**
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      */
-    public readonly isCaCertificate!: pulumi.Output<boolean>;
+    public readonly isCaCertificate!: pulumi.Output<boolean | undefined>;
     /**
-     * Name of the algorithm used when generating the private key provided in `privateKeyPem`.
+     * Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+     *
+     * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
      */
-    public /*out*/ readonly keyAlgorithm!: pulumi.Output<string>;
+    public readonly keyAlgorithm!: pulumi.Output<string>;
     /**
      * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
      * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
@@ -83,11 +85,11 @@ export class SelfSignedCert extends pulumi.CustomResource {
     /**
      * Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
-    public readonly setAuthorityKeyId!: pulumi.Output<boolean>;
+    public readonly setAuthorityKeyId!: pulumi.Output<boolean | undefined>;
     /**
      * Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
-    public readonly setSubjectKeyId!: pulumi.Output<boolean>;
+    public readonly setSubjectKeyId!: pulumi.Output<boolean | undefined>;
     /**
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
@@ -154,6 +156,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["earlyRenewalHours"] = args ? args.earlyRenewalHours : undefined;
             resourceInputs["ipAddresses"] = args ? args.ipAddresses : undefined;
             resourceInputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
+            resourceInputs["keyAlgorithm"] = args ? args.keyAlgorithm : undefined;
             resourceInputs["privateKeyPem"] = args?.privateKeyPem ? pulumi.secret(args.privateKeyPem) : undefined;
             resourceInputs["setAuthorityKeyId"] = args ? args.setAuthorityKeyId : undefined;
             resourceInputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
@@ -161,7 +164,6 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["uris"] = args ? args.uris : undefined;
             resourceInputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
             resourceInputs["certPem"] = undefined /*out*/;
-            resourceInputs["keyAlgorithm"] = undefined /*out*/;
             resourceInputs["readyForRenewal"] = undefined /*out*/;
             resourceInputs["validityEndTime"] = undefined /*out*/;
             resourceInputs["validityStartTime"] = undefined /*out*/;
@@ -210,7 +212,9 @@ export interface SelfSignedCertState {
      */
     isCaCertificate?: pulumi.Input<boolean>;
     /**
-     * Name of the algorithm used when generating the private key provided in `privateKeyPem`.
+     * Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+     *
+     * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
      */
     keyAlgorithm?: pulumi.Input<string>;
     /**
@@ -281,6 +285,12 @@ export interface SelfSignedCertArgs {
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      */
     isCaCertificate?: pulumi.Input<boolean>;
+    /**
+     * Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+     *
+     * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+     */
+    keyAlgorithm?: pulumi.Input<string>;
     /**
      * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
      * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
