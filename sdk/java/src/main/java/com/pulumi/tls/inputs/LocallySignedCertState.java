@@ -49,16 +49,24 @@ public final class LocallySignedCertState extends com.pulumi.resources.ResourceA
     }
 
     /**
-     * Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
+     * Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+     * 
+     * @deprecated
+     * This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
      * 
      */
+    @Deprecated /* This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`. */
     @Import(name="caKeyAlgorithm")
     private @Nullable Output<String> caKeyAlgorithm;
 
     /**
-     * @return Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
+     * @return Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
+     * 
+     * @deprecated
+     * This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
      * 
      */
+    @Deprecated /* This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`. */
     public Optional<Output<String>> caKeyAlgorithm() {
         return Optional.ofNullable(this.caKeyAlgorithm);
     }
@@ -318,22 +326,30 @@ public final class LocallySignedCertState extends com.pulumi.resources.ResourceA
         }
 
         /**
-         * @param caKeyAlgorithm Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
+         * @param caKeyAlgorithm Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
          * 
          * @return builder
          * 
+         * @deprecated
+         * This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+         * 
          */
+        @Deprecated /* This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`. */
         public Builder caKeyAlgorithm(@Nullable Output<String> caKeyAlgorithm) {
             $.caKeyAlgorithm = caKeyAlgorithm;
             return this;
         }
 
         /**
-         * @param caKeyAlgorithm Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
+         * @param caKeyAlgorithm Name of the algorithm used when generating the private key provided in `ca_private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
          * 
          * @return builder
          * 
+         * @deprecated
+         * This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+         * 
          */
+        @Deprecated /* This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`. */
         public Builder caKeyAlgorithm(String caKeyAlgorithm) {
             return caKeyAlgorithm(Output.of(caKeyAlgorithm));
         }
