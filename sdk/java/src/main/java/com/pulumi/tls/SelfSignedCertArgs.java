@@ -103,29 +103,6 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
     }
 
     /**
-     * Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-     * 
-     * @deprecated
-     * This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
-     * 
-     */
-    @Deprecated /* This is now ignored, as the key algorithm is inferred from the `private_key_pem`. */
-    @Import(name="keyAlgorithm")
-    private @Nullable Output<String> keyAlgorithm;
-
-    /**
-     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-     * 
-     * @deprecated
-     * This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
-     * 
-     */
-    @Deprecated /* This is now ignored, as the key algorithm is inferred from the `private_key_pem`. */
-    public Optional<Output<String>> keyAlgorithm() {
-        return Optional.ofNullable(this.keyAlgorithm);
-    }
-
-    /**
      * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
      * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
      * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
@@ -227,7 +204,6 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         this.earlyRenewalHours = $.earlyRenewalHours;
         this.ipAddresses = $.ipAddresses;
         this.isCaCertificate = $.isCaCertificate;
-        this.keyAlgorithm = $.keyAlgorithm;
         this.privateKeyPem = $.privateKeyPem;
         this.setAuthorityKeyId = $.setAuthorityKeyId;
         this.setSubjectKeyId = $.setSubjectKeyId;
@@ -395,35 +371,6 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
          */
         public Builder isCaCertificate(Boolean isCaCertificate) {
             return isCaCertificate(Output.of(isCaCertificate));
-        }
-
-        /**
-         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-         * 
-         * @return builder
-         * 
-         * @deprecated
-         * This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
-         * 
-         */
-        @Deprecated /* This is now ignored, as the key algorithm is inferred from the `private_key_pem`. */
-        public Builder keyAlgorithm(@Nullable Output<String> keyAlgorithm) {
-            $.keyAlgorithm = keyAlgorithm;
-            return this;
-        }
-
-        /**
-         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-         * 
-         * @return builder
-         * 
-         * @deprecated
-         * This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
-         * 
-         */
-        @Deprecated /* This is now ignored, as the key algorithm is inferred from the `private_key_pem`. */
-        public Builder keyAlgorithm(String keyAlgorithm) {
-            return keyAlgorithm(Output.of(keyAlgorithm));
         }
 
         /**

@@ -13,38 +13,37 @@ import com.pulumi.tls.inputs.PrivateKeyState;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.List;
-import java.util.Optional;
 import javax.annotation.Nullable;
 
 @ResourceType(type="tls:index/privateKey:PrivateKey")
 public class PrivateKey extends com.pulumi.resources.CustomResource {
     /**
-     * Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
+     * Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
      * 
      */
     @Export(name="algorithm", type=String.class, parameters={})
     private Output<String> algorithm;
 
     /**
-     * @return Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
+     * @return Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
      * 
      */
     public Output<String> algorithm() {
         return this.algorithm;
     }
     /**
-     * When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+     * When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
      * 
      */
     @Export(name="ecdsaCurve", type=String.class, parameters={})
-    private Output</* @Nullable */ String> ecdsaCurve;
+    private Output<String> ecdsaCurve;
 
     /**
-     * @return When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+     * @return When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
      * 
      */
-    public Output<Optional<String>> ecdsaCurve() {
-        return Codegen.optional(this.ecdsaCurve);
+    public Output<String> ecdsaCurve() {
+        return this.ecdsaCurve;
     }
     /**
      * Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
@@ -73,6 +72,20 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      */
     public Output<String> privateKeyPem() {
         return this.privateKeyPem;
+    }
+    /**
+     * Private key data in [PKCS#8 PEM (RFC 5208)](https://datatracker.ietf.org/doc/html/rfc5208) format.
+     * 
+     */
+    @Export(name="privateKeyPemPkcs8", type=String.class, parameters={})
+    private Output<String> privateKeyPemPkcs8;
+
+    /**
+     * @return Private key data in [PKCS#8 PEM (RFC 5208)](https://datatracker.ietf.org/doc/html/rfc5208) format.
+     * 
+     */
+    public Output<String> privateKeyPemPkcs8() {
+        return this.privateKeyPemPkcs8;
     }
     /**
      * The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
@@ -104,10 +117,9 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
     }
     /**
      * The public key data in [&#34;Authorized
-     * Keys&#34;](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-     * populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-     * `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-     * supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
+     * Keys&#34;](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not
+     * populated for `ECDSA` with curve `P224`, as it is [not supported](../../docs#limitations). **NOTE**: the
+     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
      * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
      * the end of the PEM. In case this disrupts your use case, we recommend using
      * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
@@ -118,10 +130,9 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
 
     /**
      * @return The public key data in [&#34;Authorized
-     * Keys&#34;](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-     * populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-     * `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-     * supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
+     * Keys&#34;](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not
+     * populated for `ECDSA` with curve `P224`, as it is [not supported](../../docs#limitations). **NOTE**: the
+     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
      * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
      * the end of the PEM. In case this disrupts your use case, we recommend using
      * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
@@ -157,14 +168,14 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      * 
      */
     @Export(name="rsaBits", type=Integer.class, parameters={})
-    private Output</* @Nullable */ Integer> rsaBits;
+    private Output<Integer> rsaBits;
 
     /**
      * @return When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
      * 
      */
-    public Output<Optional<Integer>> rsaBits() {
-        return Codegen.optional(this.rsaBits);
+    public Output<Integer> rsaBits() {
+        return this.rsaBits;
     }
 
     /**
@@ -201,7 +212,8 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
             .version(Utilities.getVersion())
             .additionalSecretOutputs(List.of(
                 "privateKeyOpenssh",
-                "privateKeyPem"
+                "privateKeyPem",
+                "privateKeyPemPkcs8"
             ))
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);
