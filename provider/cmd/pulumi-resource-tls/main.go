@@ -20,7 +20,7 @@ import (
 	"context"
 	_ "embed"
 	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
-	tls "github.com/pulumi/pulumi-tls/provider/v4"
+	tls "github.com/pulumi/pulumi-tls/provider/v5"
 )
 
 //go:embed schema-embed.json

@@ -22,7 +22,7 @@ import (
 	"github.com/hashicorp/terraform-provider-tls/shim"
 	tfpfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	"github.com/pulumi/pulumi-tls/provider/v4/pkg/version"
+	"github.com/pulumi/pulumi-tls/provider/v5/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 )

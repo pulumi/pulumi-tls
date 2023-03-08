@@ -23,8 +23,8 @@ import (
 
 	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	testutils "github.com/pulumi/pulumi-terraform-bridge/testing/x"
-	provider "github.com/pulumi/pulumi-tls/provider/v4"
-	"github.com/pulumi/pulumi-tls/provider/v4/pkg/version"
+	provider "github.com/pulumi/pulumi-tls/provider/v5"
+	"github.com/pulumi/pulumi-tls/provider/v5/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
 )
 
