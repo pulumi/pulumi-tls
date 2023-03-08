@@ -1,17 +1,17 @@
-module github.com/pulumi/pulumi-tls/examples/v4
+module github.com/pulumi/pulumi-tls/examples/v5
 
 go 1.19
 
 replace (
 	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20220824175045-450992f2f5b9
 	github.com/hashicorp/terraform-provider-tls/shim => ../provider/shim
-	github.com/pulumi/pulumi-tls/provider/v4 => ../provider
+	github.com/pulumi/pulumi-tls/provider/v5 => ../provider
 )
 
 require (
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.4.0
 	github.com/pulumi/pulumi-terraform-bridge/testing v0.0.0-20230303215835-2d06ce884cd2
-	github.com/pulumi/pulumi-tls/provider/v4 v4.0.0-00010101000000-000000000000
+	github.com/pulumi/pulumi-tls/provider/v5 v5.0.0-00010101000000-000000000000
 	github.com/pulumi/pulumi/pkg/v3 v3.56.0
 	github.com/stretchr/testify v1.8.2
 )

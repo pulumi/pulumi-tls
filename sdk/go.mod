@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-tls/sdk/v4
+module github.com/pulumi/pulumi-tls/sdk/v5
 
 go 1.19
 
