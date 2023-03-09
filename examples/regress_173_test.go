@@ -28,6 +28,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
 )
 
+// Tests that upgrading from to Plugin Framework is NOT a replacement plan for SelfSignedCert, when running Diff against
+// a state populated by an older version of the provider.
+//
 // See https://github.com/pulumi/pulumi-tls/issues/173
 func TestRegress173(t *testing.T) {
 	ctx := context.Background()
