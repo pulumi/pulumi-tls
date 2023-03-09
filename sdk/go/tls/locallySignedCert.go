@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -18,9 +18,7 @@ type LocallySignedCert struct {
 	AllowedUses pulumi.StringArrayOutput `pulumi:"allowedUses"`
 	// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaCertPem pulumi.StringOutput `pulumi:"caCertPem"`
-	// Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+	// Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`.
 	CaKeyAlgorithm pulumi.StringOutput `pulumi:"caKeyAlgorithm"`
 	// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaPrivateKeyPem pulumi.StringOutput `pulumi:"caPrivateKeyPem"`
@@ -37,13 +35,13 @@ type LocallySignedCert struct {
 	// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
 	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
 	// early renewal period. (default: `0`)
-	EarlyRenewalHours pulumi.IntPtrOutput `pulumi:"earlyRenewalHours"`
+	EarlyRenewalHours pulumi.IntOutput `pulumi:"earlyRenewalHours"`
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
-	IsCaCertificate pulumi.BoolPtrOutput `pulumi:"isCaCertificate"`
+	IsCaCertificate pulumi.BoolOutput `pulumi:"isCaCertificate"`
 	// Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
 	ReadyForRenewal pulumi.BoolOutput `pulumi:"readyForRenewal"`
 	// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
-	SetSubjectKeyId pulumi.BoolPtrOutput `pulumi:"setSubjectKeyId"`
+	SetSubjectKeyId pulumi.BoolOutput `pulumi:"setSubjectKeyId"`
 	// The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
 	ValidityEndTime pulumi.StringOutput `pulumi:"validityEndTime"`
 	// Number of hours, after initial issuing, that the certificate will remain valid for.
@@ -107,9 +105,7 @@ type locallySignedCertState struct {
 	AllowedUses []string `pulumi:"allowedUses"`
 	// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaCertPem *string `pulumi:"caCertPem"`
-	// Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+	// Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`.
 	CaKeyAlgorithm *string `pulumi:"caKeyAlgorithm"`
 	// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaPrivateKeyPem *string `pulumi:"caPrivateKeyPem"`
@@ -146,9 +142,7 @@ type LocallySignedCertState struct {
 	AllowedUses pulumi.StringArrayInput
 	// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaCertPem pulumi.StringPtrInput
-	// Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+	// Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`.
 	CaKeyAlgorithm pulumi.StringPtrInput
 	// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaPrivateKeyPem pulumi.StringPtrInput
@@ -189,10 +183,6 @@ type locallySignedCertArgs struct {
 	AllowedUses []string `pulumi:"allowedUses"`
 	// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaCertPem string `pulumi:"caCertPem"`
-	// Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
-	CaKeyAlgorithm *string `pulumi:"caKeyAlgorithm"`
 	// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaPrivateKeyPem string `pulumi:"caPrivateKeyPem"`
 	// Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
@@ -217,10 +207,6 @@ type LocallySignedCertArgs struct {
 	AllowedUses pulumi.StringArrayInput
 	// Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaCertPem pulumi.StringInput
-	// Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
-	CaKeyAlgorithm pulumi.StringPtrInput
 	// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
 	CaPrivateKeyPem pulumi.StringInput
 	// Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
@@ -336,9 +322,7 @@ func (o LocallySignedCertOutput) CaCertPem() pulumi.StringOutput {
 	return o.ApplyT(func(v *LocallySignedCert) pulumi.StringOutput { return v.CaCertPem }).(pulumi.StringOutput)
 }
 
-// Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-//
-// Deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.
+// Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`.
 func (o LocallySignedCertOutput) CaKeyAlgorithm() pulumi.StringOutput {
 	return o.ApplyT(func(v *LocallySignedCert) pulumi.StringOutput { return v.CaKeyAlgorithm }).(pulumi.StringOutput)
 }
@@ -367,13 +351,13 @@ func (o LocallySignedCertOutput) CertRequestPem() pulumi.StringOutput {
 // certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
 // revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
 // early renewal period. (default: `0`)
-func (o LocallySignedCertOutput) EarlyRenewalHours() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *LocallySignedCert) pulumi.IntPtrOutput { return v.EarlyRenewalHours }).(pulumi.IntPtrOutput)
+func (o LocallySignedCertOutput) EarlyRenewalHours() pulumi.IntOutput {
+	return o.ApplyT(func(v *LocallySignedCert) pulumi.IntOutput { return v.EarlyRenewalHours }).(pulumi.IntOutput)
 }
 
 // Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
-func (o LocallySignedCertOutput) IsCaCertificate() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *LocallySignedCert) pulumi.BoolPtrOutput { return v.IsCaCertificate }).(pulumi.BoolPtrOutput)
+func (o LocallySignedCertOutput) IsCaCertificate() pulumi.BoolOutput {
+	return o.ApplyT(func(v *LocallySignedCert) pulumi.BoolOutput { return v.IsCaCertificate }).(pulumi.BoolOutput)
 }
 
 // Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
@@ -382,8 +366,8 @@ func (o LocallySignedCertOutput) ReadyForRenewal() pulumi.BoolOutput {
 }
 
 // Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
-func (o LocallySignedCertOutput) SetSubjectKeyId() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *LocallySignedCert) pulumi.BoolPtrOutput { return v.SetSubjectKeyId }).(pulumi.BoolPtrOutput)
+func (o LocallySignedCertOutput) SetSubjectKeyId() pulumi.BoolOutput {
+	return o.ApplyT(func(v *LocallySignedCert) pulumi.BoolOutput { return v.SetSubjectKeyId }).(pulumi.BoolOutput)
 }
 
 // The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.

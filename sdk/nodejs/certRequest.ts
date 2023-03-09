@@ -68,11 +68,9 @@ export class CertRequest extends pulumi.CustomResource {
      */
     public readonly ipAddresses!: pulumi.Output<string[] | undefined>;
     /**
-     * Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-     *
-     * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+     * Name of the algorithm used when generating the private key provided in `privateKeyPem`.
      */
-    public readonly keyAlgorithm!: pulumi.Output<string>;
+    public /*out*/ readonly keyAlgorithm!: pulumi.Output<string>;
     /**
      * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
      * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
@@ -115,11 +113,11 @@ export class CertRequest extends pulumi.CustomResource {
             }
             resourceInputs["dnsNames"] = args ? args.dnsNames : undefined;
             resourceInputs["ipAddresses"] = args ? args.ipAddresses : undefined;
-            resourceInputs["keyAlgorithm"] = args ? args.keyAlgorithm : undefined;
             resourceInputs["privateKeyPem"] = args?.privateKeyPem ? pulumi.secret(args.privateKeyPem) : undefined;
             resourceInputs["subject"] = args ? args.subject : undefined;
             resourceInputs["uris"] = args ? args.uris : undefined;
             resourceInputs["certRequestPem"] = undefined /*out*/;
+            resourceInputs["keyAlgorithm"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["privateKeyPem"] };
@@ -149,9 +147,7 @@ export interface CertRequestState {
      */
     ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-     *
-     * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+     * Name of the algorithm used when generating the private key provided in `privateKeyPem`.
      */
     keyAlgorithm?: pulumi.Input<string>;
     /**
@@ -182,12 +178,6 @@ export interface CertRequestArgs {
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */
     ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-     *
-     * @deprecated This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
-     */
-    keyAlgorithm?: pulumi.Input<string>;
     /**
      * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
      * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)

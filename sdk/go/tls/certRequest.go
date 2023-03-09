@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -18,15 +18,15 @@ import (
 //
 // import (
 //
-//	"io/ioutil"
+//	"os"
 //
-//	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls"
+//	"github.com/pulumi/pulumi-tls/sdk/v5/go/tls"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func readFileOrPanic(path string) pulumi.StringPtrInput {
-//		data, err := ioutil.ReadFile(path)
+//		data, err := os.ReadFile(path)
 //		if err != nil {
 //			panic(err.Error())
 //		}
@@ -63,9 +63,7 @@ type CertRequest struct {
 	DnsNames pulumi.StringArrayOutput `pulumi:"dnsNames"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayOutput `pulumi:"ipAddresses"`
-	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+	// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 	KeyAlgorithm pulumi.StringOutput `pulumi:"keyAlgorithm"`
 	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
@@ -126,9 +124,7 @@ type certRequestState struct {
 	DnsNames []string `pulumi:"dnsNames"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses []string `pulumi:"ipAddresses"`
-	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+	// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 	KeyAlgorithm *string `pulumi:"keyAlgorithm"`
 	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
@@ -151,9 +147,7 @@ type CertRequestState struct {
 	DnsNames pulumi.StringArrayInput
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayInput
-	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+	// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 	KeyAlgorithm pulumi.StringPtrInput
 	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
@@ -174,10 +168,6 @@ type certRequestArgs struct {
 	DnsNames []string `pulumi:"dnsNames"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses []string `pulumi:"ipAddresses"`
-	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
-	KeyAlgorithm *string `pulumi:"keyAlgorithm"`
 	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
 	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
@@ -194,10 +184,6 @@ type CertRequestArgs struct {
 	DnsNames pulumi.StringArrayInput
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayInput
-	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
-	KeyAlgorithm pulumi.StringPtrInput
 	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
 	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
@@ -314,9 +300,7 @@ func (o CertRequestOutput) IpAddresses() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *CertRequest) pulumi.StringArrayOutput { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
-// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-//
-// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 func (o CertRequestOutput) KeyAlgorithm() pulumi.StringOutput {
 	return o.ApplyT(func(v *CertRequest) pulumi.StringOutput { return v.KeyAlgorithm }).(pulumi.StringOutput)
 }

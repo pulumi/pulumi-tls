@@ -19,8 +19,8 @@ class PrivateKeyArgs:
                  rsa_bits: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a PrivateKey resource.
-        :param pulumi.Input[str] algorithm: Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
-        :param pulumi.Input[str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+        :param pulumi.Input[str] algorithm: Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
+        :param pulumi.Input[str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
         :param pulumi.Input[int] rsa_bits: When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
         """
         pulumi.set(__self__, "algorithm", algorithm)
@@ -33,7 +33,7 @@ class PrivateKeyArgs:
     @pulumi.getter
     def algorithm(self) -> pulumi.Input[str]:
         """
-        Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
+        Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
         """
         return pulumi.get(self, "algorithm")
 
@@ -45,7 +45,7 @@ class PrivateKeyArgs:
     @pulumi.getter(name="ecdsaCurve")
     def ecdsa_curve(self) -> Optional[pulumi.Input[str]]:
         """
-        When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+        When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
         """
         return pulumi.get(self, "ecdsa_curve")
 
@@ -73,6 +73,7 @@ class _PrivateKeyState:
                  ecdsa_curve: Optional[pulumi.Input[str]] = None,
                  private_key_openssh: Optional[pulumi.Input[str]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
+                 private_key_pem_pkcs8: Optional[pulumi.Input[str]] = None,
                  public_key_fingerprint_md5: Optional[pulumi.Input[str]] = None,
                  public_key_fingerprint_sha256: Optional[pulumi.Input[str]] = None,
                  public_key_openssh: Optional[pulumi.Input[str]] = None,
@@ -80,17 +81,17 @@ class _PrivateKeyState:
                  rsa_bits: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering PrivateKey resources.
-        :param pulumi.Input[str] algorithm: Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
-        :param pulumi.Input[str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+        :param pulumi.Input[str] algorithm: Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
+        :param pulumi.Input[str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
         :param pulumi.Input[str] private_key_openssh: Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
         :param pulumi.Input[str] private_key_pem: Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        :param pulumi.Input[str] private_key_pem_pkcs8: Private key data in [PKCS#8 PEM (RFC 5208)](https://datatracker.ietf.org/doc/html/rfc5208) format.
         :param pulumi.Input[str] public_key_fingerprint_md5: The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
         :param pulumi.Input[str] public_key_fingerprint_sha256: The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
         :param pulumi.Input[str] public_key_openssh: The public key data in ["Authorized
-               Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-               populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-               `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-               supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
+               Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not
+               populated for `ECDSA` with curve `P224`, as it is [not supported](../../docs#limitations). **NOTE**: the
+               [underlying](https://pkg.go.dev/encoding/pem#Encode)
                [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at
                the end of the PEM. In case this disrupts your use case, we recommend using
                [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
@@ -109,6 +110,8 @@ class _PrivateKeyState:
             pulumi.set(__self__, "private_key_openssh", private_key_openssh)
         if private_key_pem is not None:
             pulumi.set(__self__, "private_key_pem", private_key_pem)
+        if private_key_pem_pkcs8 is not None:
+            pulumi.set(__self__, "private_key_pem_pkcs8", private_key_pem_pkcs8)
         if public_key_fingerprint_md5 is not None:
             pulumi.set(__self__, "public_key_fingerprint_md5", public_key_fingerprint_md5)
         if public_key_fingerprint_sha256 is not None:
@@ -124,7 +127,7 @@ class _PrivateKeyState:
     @pulumi.getter
     def algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
+        Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
         """
         return pulumi.get(self, "algorithm")
 
@@ -136,7 +139,7 @@ class _PrivateKeyState:
     @pulumi.getter(name="ecdsaCurve")
     def ecdsa_curve(self) -> Optional[pulumi.Input[str]]:
         """
-        When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+        When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
         """
         return pulumi.get(self, "ecdsa_curve")
 
@@ -169,6 +172,18 @@ class _PrivateKeyState:
         pulumi.set(self, "private_key_pem", value)
 
     @property
+    @pulumi.getter(name="privateKeyPemPkcs8")
+    def private_key_pem_pkcs8(self) -> Optional[pulumi.Input[str]]:
+        """
+        Private key data in [PKCS#8 PEM (RFC 5208)](https://datatracker.ietf.org/doc/html/rfc5208) format.
+        """
+        return pulumi.get(self, "private_key_pem_pkcs8")
+
+    @private_key_pem_pkcs8.setter
+    def private_key_pem_pkcs8(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "private_key_pem_pkcs8", value)
+
+    @property
     @pulumi.getter(name="publicKeyFingerprintMd5")
     def public_key_fingerprint_md5(self) -> Optional[pulumi.Input[str]]:
         """
@@ -197,10 +212,9 @@ class _PrivateKeyState:
     def public_key_openssh(self) -> Optional[pulumi.Input[str]]:
         """
         The public key data in ["Authorized
-        Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-        populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-        `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-        supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
+        Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not
+        populated for `ECDSA` with curve `P224`, as it is [not supported](../../docs#limitations). **NOTE**: the
+        [underlying](https://pkg.go.dev/encoding/pem#Encode)
         [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at
         the end of the PEM. In case this disrupts your use case, we recommend using
         [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
@@ -253,8 +267,8 @@ class PrivateKey(pulumi.CustomResource):
         Create a PrivateKey resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] algorithm: Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
-        :param pulumi.Input[str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+        :param pulumi.Input[str] algorithm: Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
+        :param pulumi.Input[str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
         :param pulumi.Input[int] rsa_bits: When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
         """
         ...
@@ -299,11 +313,12 @@ class PrivateKey(pulumi.CustomResource):
             __props__.__dict__["rsa_bits"] = rsa_bits
             __props__.__dict__["private_key_openssh"] = None
             __props__.__dict__["private_key_pem"] = None
+            __props__.__dict__["private_key_pem_pkcs8"] = None
             __props__.__dict__["public_key_fingerprint_md5"] = None
             __props__.__dict__["public_key_fingerprint_sha256"] = None
             __props__.__dict__["public_key_openssh"] = None
             __props__.__dict__["public_key_pem"] = None
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["privateKeyOpenssh", "privateKeyPem"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["privateKeyOpenssh", "privateKeyPem", "privateKeyPemPkcs8"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(PrivateKey, __self__).__init__(
             'tls:index/privateKey:PrivateKey',
@@ -319,6 +334,7 @@ class PrivateKey(pulumi.CustomResource):
             ecdsa_curve: Optional[pulumi.Input[str]] = None,
             private_key_openssh: Optional[pulumi.Input[str]] = None,
             private_key_pem: Optional[pulumi.Input[str]] = None,
+            private_key_pem_pkcs8: Optional[pulumi.Input[str]] = None,
             public_key_fingerprint_md5: Optional[pulumi.Input[str]] = None,
             public_key_fingerprint_sha256: Optional[pulumi.Input[str]] = None,
             public_key_openssh: Optional[pulumi.Input[str]] = None,
@@ -331,17 +347,17 @@ class PrivateKey(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] algorithm: Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
-        :param pulumi.Input[str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+        :param pulumi.Input[str] algorithm: Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
+        :param pulumi.Input[str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
         :param pulumi.Input[str] private_key_openssh: Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
         :param pulumi.Input[str] private_key_pem: Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        :param pulumi.Input[str] private_key_pem_pkcs8: Private key data in [PKCS#8 PEM (RFC 5208)](https://datatracker.ietf.org/doc/html/rfc5208) format.
         :param pulumi.Input[str] public_key_fingerprint_md5: The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
         :param pulumi.Input[str] public_key_fingerprint_sha256: The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
         :param pulumi.Input[str] public_key_openssh: The public key data in ["Authorized
-               Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-               populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-               `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-               supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
+               Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not
+               populated for `ECDSA` with curve `P224`, as it is [not supported](../../docs#limitations). **NOTE**: the
+               [underlying](https://pkg.go.dev/encoding/pem#Encode)
                [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at
                the end of the PEM. In case this disrupts your use case, we recommend using
                [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
@@ -360,6 +376,7 @@ class PrivateKey(pulumi.CustomResource):
         __props__.__dict__["ecdsa_curve"] = ecdsa_curve
         __props__.__dict__["private_key_openssh"] = private_key_openssh
         __props__.__dict__["private_key_pem"] = private_key_pem
+        __props__.__dict__["private_key_pem_pkcs8"] = private_key_pem_pkcs8
         __props__.__dict__["public_key_fingerprint_md5"] = public_key_fingerprint_md5
         __props__.__dict__["public_key_fingerprint_sha256"] = public_key_fingerprint_sha256
         __props__.__dict__["public_key_openssh"] = public_key_openssh
@@ -371,15 +388,15 @@ class PrivateKey(pulumi.CustomResource):
     @pulumi.getter
     def algorithm(self) -> pulumi.Output[str]:
         """
-        Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
+        Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
         """
         return pulumi.get(self, "algorithm")
 
     @property
     @pulumi.getter(name="ecdsaCurve")
-    def ecdsa_curve(self) -> pulumi.Output[Optional[str]]:
+    def ecdsa_curve(self) -> pulumi.Output[str]:
         """
-        When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
+        When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
         """
         return pulumi.get(self, "ecdsa_curve")
 
@@ -398,6 +415,14 @@ class PrivateKey(pulumi.CustomResource):
         Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         """
         return pulumi.get(self, "private_key_pem")
+
+    @property
+    @pulumi.getter(name="privateKeyPemPkcs8")
+    def private_key_pem_pkcs8(self) -> pulumi.Output[str]:
+        """
+        Private key data in [PKCS#8 PEM (RFC 5208)](https://datatracker.ietf.org/doc/html/rfc5208) format.
+        """
+        return pulumi.get(self, "private_key_pem_pkcs8")
 
     @property
     @pulumi.getter(name="publicKeyFingerprintMd5")
@@ -420,10 +445,9 @@ class PrivateKey(pulumi.CustomResource):
     def public_key_openssh(self) -> pulumi.Output[str]:
         """
         The public key data in ["Authorized
-        Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-        populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-        `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-        supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
+        Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not
+        populated for `ECDSA` with curve `P224`, as it is [not supported](../../docs#limitations). **NOTE**: the
+        [underlying](https://pkg.go.dev/encoding/pem#Encode)
         [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at
         the end of the PEM. In case this disrupts your use case, we recommend using
         [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
@@ -444,7 +468,7 @@ class PrivateKey(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="rsaBits")
-    def rsa_bits(self) -> pulumi.Output[Optional[int]]:
+    def rsa_bits(self) -> pulumi.Output[int]:
         """
         When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
         """

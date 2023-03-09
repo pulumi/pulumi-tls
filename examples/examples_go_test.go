@@ -34,7 +34,7 @@ func getGoBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	baseGo := base.With(integration.ProgramTestOptions{
 		Dependencies: []string{
-			"github.com/pulumi/pulumi-tls/sdk/v4",
+			"github.com/pulumi/pulumi-tls/sdk/v5",
 		},
 	})
 

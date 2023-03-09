@@ -19,11 +19,12 @@ import (
 	"path/filepath"
 	"unicode"
 
+	"github.com/hashicorp/terraform-provider-tls/shim"
+	tfpfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
-	"github.com/pulumi/pulumi-tls/provider/v4/pkg/version"
+	"github.com/pulumi/pulumi-tls/provider/v5/pkg/version"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
-	"github.com/terraform-providers/terraform-provider-tls/shim"
 )
 
 // all of the tls token components used below.
@@ -59,20 +60,25 @@ func tlsResource(mod string, res string) tokens.Type {
 }
 
 // Provider returns additional overlaid schema and metadata associated with the tls package.
-func Provider() tfbridge.ProviderInfo {
-	return tfbridge.ProviderInfo{
-		P:           shimv2.NewProvider(shim.NewProvider()),
+func Provider() tfpfbridge.ProviderInfo {
+	info := tfbridge.ProviderInfo{
 		Name:        "tls",
 		Description: "A Pulumi package to create TLS resources in Pulumi programs.",
 		Keywords:    []string{"pulumi", "tls"},
 		License:     "Apache-2.0",
 		Homepage:    "https://pulumi.io",
 		Repository:  "https://github.com/pulumi/pulumi-tls",
+		Version:     version.Version,
+		GitHubOrg:   "hashicorp",
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"tls_cert_request":        {Tok: tlsResource(tlsMod, "CertRequest")},
 			"tls_locally_signed_cert": {Tok: tlsResource(tlsMod, "LocallySignedCert")},
 			"tls_private_key":         {Tok: tlsResource(tlsMod, "PrivateKey")},
-			"tls_self_signed_cert":    {Tok: tlsResource(tlsMod, "SelfSignedCert")},
+
+			"tls_self_signed_cert": {
+				Tok:                 tlsResource(tlsMod, "SelfSignedCert"),
+				PreStateUpgradeHook: selfSignedCertPreStateUpgradeHook,
+			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"tls_public_key":  {Tok: tlsDataSource(tlsMod, "getPublicKey")},
@@ -109,4 +115,66 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 	}
+
+	return tfpfbridge.ProviderInfo{
+		ProviderInfo: info,
+		NewProvider:  shim.NewProvider,
+	}
+}
+
+func selfSignedCertPreStateUpgradeHook(args tfbridge.PreStateUpgradeHookArgs) (int64, resource.PropertyMap, error) {
+
+	// When upstream starts versioning the schemas, do nothing. Only attempt to fixup state for the transition to
+	// Plugin Framework.
+	if args.ResourceSchemaVersion != 0 || args.PriorStateSchemaVersion != 0 {
+		return args.PriorStateSchemaVersion, args.PriorState, nil
+	}
+
+	s := args.PriorState
+
+	// Computed+Optional booleans defaulting to false. Prior to PF, when unset they are not present in Pulumi state,
+	// causing non-empty diffs (nil vs false). Fixup to false to get empty diffs.
+	for _, f := range []string{
+		"setSubjectKeyId",
+		"setAuthorityKeyId",
+		"isCaCertificate",
+	} {
+		k := resource.PropertyKey(f)
+		if _, ok := s[k]; !ok {
+			s[k] = resource.NewBoolProperty(false)
+		}
+	}
+
+	if subject, ok := s["subject"]; ok && subject.IsObject() {
+		su := subject.ObjectValue()
+
+		// All these are optional strings, but manifest as empty strings in Pulumi state. This causes spurious
+		// diffs. Delete empty strings if found.
+		for _, country := range []string{
+			"commonName",
+			"country",
+			"locality",
+			"organization",
+			"organizationalUnit",
+			"postalCode",
+			"province",
+			"serialNumber",
+		} {
+			country := resource.PropertyKey(country)
+			if x, ok := su[country]; ok && x.IsString() && x.StringValue() == "" {
+				delete(su, country)
+			}
+		}
+
+		if sa, ok := su["streetAddresses"]; ok && sa.IsArray() && len(sa.ArrayValue()) == 0 {
+			delete(su, "streetAddresses")
+		}
+	}
+
+	// allowedUses is a required property. If the state does not have it, replace with an empty array.
+	if _, ok := s["allowedUses"]; !ok {
+		s["allowedUses"] = resource.NewArrayProperty([]resource.PropertyValue{})
+	}
+
+	return 0, s, nil
 }

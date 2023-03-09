@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -29,14 +29,12 @@ type SelfSignedCert struct {
 	// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
 	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
 	// early renewal period. (default: `0`)
-	EarlyRenewalHours pulumi.IntPtrOutput `pulumi:"earlyRenewalHours"`
+	EarlyRenewalHours pulumi.IntOutput `pulumi:"earlyRenewalHours"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayOutput `pulumi:"ipAddresses"`
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
-	IsCaCertificate pulumi.BoolPtrOutput `pulumi:"isCaCertificate"`
-	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+	IsCaCertificate pulumi.BoolOutput `pulumi:"isCaCertificate"`
+	// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 	KeyAlgorithm pulumi.StringOutput `pulumi:"keyAlgorithm"`
 	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
@@ -45,9 +43,9 @@ type SelfSignedCert struct {
 	// Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
 	ReadyForRenewal pulumi.BoolOutput `pulumi:"readyForRenewal"`
 	// Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
-	SetAuthorityKeyId pulumi.BoolPtrOutput `pulumi:"setAuthorityKeyId"`
+	SetAuthorityKeyId pulumi.BoolOutput `pulumi:"setAuthorityKeyId"`
 	// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
-	SetSubjectKeyId pulumi.BoolPtrOutput `pulumi:"setSubjectKeyId"`
+	SetSubjectKeyId pulumi.BoolOutput `pulumi:"setSubjectKeyId"`
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subject SelfSignedCertSubjectPtrOutput `pulumi:"subject"`
 	// List of URIs for which a certificate is being requested (i.e. certificate subjects).
@@ -125,9 +123,7 @@ type selfSignedCertState struct {
 	IpAddresses []string `pulumi:"ipAddresses"`
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate *bool `pulumi:"isCaCertificate"`
-	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+	// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 	KeyAlgorithm *string `pulumi:"keyAlgorithm"`
 	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
@@ -172,9 +168,7 @@ type SelfSignedCertState struct {
 	IpAddresses pulumi.StringArrayInput
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate pulumi.BoolPtrInput
-	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+	// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 	KeyAlgorithm pulumi.StringPtrInput
 	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
@@ -217,10 +211,6 @@ type selfSignedCertArgs struct {
 	IpAddresses []string `pulumi:"ipAddresses"`
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate *bool `pulumi:"isCaCertificate"`
-	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
-	KeyAlgorithm *string `pulumi:"keyAlgorithm"`
 	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
 	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
@@ -253,10 +243,6 @@ type SelfSignedCertArgs struct {
 	IpAddresses pulumi.StringArrayInput
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate pulumi.BoolPtrInput
-	// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-	//
-	// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
-	KeyAlgorithm pulumi.StringPtrInput
 	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
 	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
 	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
@@ -384,8 +370,8 @@ func (o SelfSignedCertOutput) DnsNames() pulumi.StringArrayOutput {
 // certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
 // revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
 // early renewal period. (default: `0`)
-func (o SelfSignedCertOutput) EarlyRenewalHours() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SelfSignedCert) pulumi.IntPtrOutput { return v.EarlyRenewalHours }).(pulumi.IntPtrOutput)
+func (o SelfSignedCertOutput) EarlyRenewalHours() pulumi.IntOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.IntOutput { return v.EarlyRenewalHours }).(pulumi.IntOutput)
 }
 
 // List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
@@ -394,13 +380,11 @@ func (o SelfSignedCertOutput) IpAddresses() pulumi.StringArrayOutput {
 }
 
 // Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
-func (o SelfSignedCertOutput) IsCaCertificate() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *SelfSignedCert) pulumi.BoolPtrOutput { return v.IsCaCertificate }).(pulumi.BoolPtrOutput)
+func (o SelfSignedCertOutput) IsCaCertificate() pulumi.BoolOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.BoolOutput { return v.IsCaCertificate }).(pulumi.BoolOutput)
 }
 
-// Name of the algorithm used when generating the private key provided in `privateKeyPem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
-//
-// Deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.
+// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 func (o SelfSignedCertOutput) KeyAlgorithm() pulumi.StringOutput {
 	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringOutput { return v.KeyAlgorithm }).(pulumi.StringOutput)
 }
@@ -418,13 +402,13 @@ func (o SelfSignedCertOutput) ReadyForRenewal() pulumi.BoolOutput {
 }
 
 // Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
-func (o SelfSignedCertOutput) SetAuthorityKeyId() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *SelfSignedCert) pulumi.BoolPtrOutput { return v.SetAuthorityKeyId }).(pulumi.BoolPtrOutput)
+func (o SelfSignedCertOutput) SetAuthorityKeyId() pulumi.BoolOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.BoolOutput { return v.SetAuthorityKeyId }).(pulumi.BoolOutput)
 }
 
 // Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
-func (o SelfSignedCertOutput) SetSubjectKeyId() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *SelfSignedCert) pulumi.BoolPtrOutput { return v.SetSubjectKeyId }).(pulumi.BoolPtrOutput)
+func (o SelfSignedCertOutput) SetSubjectKeyId() pulumi.BoolOutput {
+	return o.ApplyT(func(v *SelfSignedCert) pulumi.BoolOutput { return v.SetSubjectKeyId }).(pulumi.BoolOutput)
 }
 
 // The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.

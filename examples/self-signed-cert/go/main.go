@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls"
+	"github.com/pulumi/pulumi-tls/sdk/v5/go/tls"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -17,7 +17,6 @@ func main() {
 		}
 
 		caRoot, err := tls.NewSelfSignedCert(ctx, "self-signed", &tls.SelfSignedCertArgs{
-			KeyAlgorithm:  caKey.Algorithm,
 			PrivateKeyPem: caKey.PrivateKeyPem,
 
 			ValidityPeriodHours: pulumi.Int(87600).ToIntOutput(),
@@ -44,7 +43,6 @@ func main() {
 		}
 
 		localCertReq, err := tls.NewCertRequest(ctx, "local", &tls.CertRequestArgs{
-			KeyAlgorithm:  certKey.Algorithm,
 			PrivateKeyPem: certKey.PrivateKeyPem,
 
 			Subject: tls.CertRequestSubjectArgs{
@@ -59,7 +57,6 @@ func main() {
 		localCert, err := tls.NewLocallySignedCert(ctx, "local", &tls.LocallySignedCertArgs{
 			CertRequestPem: localCertReq.CertRequestPem,
 
-			CaKeyAlgorithm:  caKey.Algorithm,
 			CaPrivateKeyPem: caKey.PrivateKeyPem,
 			CaCertPem:       caRoot.CertPem,
 
