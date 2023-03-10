@@ -80,87 +80,42 @@
             "properties": {
                 "commonName": {
                     "type": "string",
-                    "description": "Distinguished name: `CN`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `CN`\n"
                 },
                 "country": {
                     "type": "string",
-                    "description": "Distinguished name: `C`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `C`\n"
                 },
                 "locality": {
                     "type": "string",
-                    "description": "Distinguished name: `L`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `L`\n"
                 },
                 "organization": {
                     "type": "string",
-                    "description": "Distinguished name: `O`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `O`\n"
                 },
                 "organizationalUnit": {
                     "type": "string",
-                    "description": "Distinguished name: `OU`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `OU`\n"
                 },
                 "postalCode": {
                     "type": "string",
-                    "description": "Distinguished name: `PC`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `PC`\n"
                 },
                 "province": {
                     "type": "string",
-                    "description": "Distinguished name: `ST`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `ST`\n"
                 },
                 "serialNumber": {
                     "type": "string",
-                    "description": "Distinguished name: `SERIALNUMBER`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `SERIALNUMBER`\n"
                 },
                 "streetAddresses": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "Distinguished name: `STREET`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `STREET`\n"
                 }
             },
             "type": "object"
@@ -168,37 +123,17 @@
         "tls:index/ProviderProxy:ProviderProxy": {
             "properties": {
                 "fromEnv": {
-                    "type": "boolean",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "type": "boolean"
                 },
                 "password": {
                     "type": "string",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    },
                     "secret": true
                 },
                 "url": {
-                    "type": "string",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "type": "string"
                 },
                 "username": {
-                    "type": "string",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "type": "string"
                 }
             },
             "type": "object"
@@ -207,87 +142,42 @@
             "properties": {
                 "commonName": {
                     "type": "string",
-                    "description": "Distinguished name: `CN`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `CN`\n"
                 },
                 "country": {
                     "type": "string",
-                    "description": "Distinguished name: `C`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `C`\n"
                 },
                 "locality": {
                     "type": "string",
-                    "description": "Distinguished name: `L`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `L`\n"
                 },
                 "organization": {
                     "type": "string",
-                    "description": "Distinguished name: `O`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `O`\n"
                 },
                 "organizationalUnit": {
                     "type": "string",
-                    "description": "Distinguished name: `OU`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `OU`\n"
                 },
                 "postalCode": {
                     "type": "string",
-                    "description": "Distinguished name: `PC`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `PC`\n"
                 },
                 "province": {
                     "type": "string",
-                    "description": "Distinguished name: `ST`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `ST`\n"
                 },
                 "serialNumber": {
                     "type": "string",
-                    "description": "Distinguished name: `SERIALNUMBER`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `SERIALNUMBER`\n"
                 },
                 "streetAddresses": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "Distinguished name: `STREET`\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Distinguished name: `STREET`\n"
                 }
             },
             "type": "object"
@@ -295,102 +185,47 @@
         "tls:index/getCertificateCertificate:getCertificateCertificate": {
             "properties": {
                 "certPem": {
-                    "type": "string",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "type": "string"
                 },
                 "isCa": {
                     "type": "boolean",
-                    "description": "`true` if the certificate is of a CA (Certificate Authority).\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "`true` if the certificate is of a CA (Certificate Authority).\n"
                 },
                 "issuer": {
                     "type": "string",
-                    "description": "Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).\n"
                 },
                 "notAfter": {
                     "type": "string",
-                    "description": "The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
                 },
                 "notBefore": {
                     "type": "string",
-                    "description": "The time after which the certificate is valid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "The time after which the certificate is valid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
                 },
                 "publicKeyAlgorithm": {
                     "type": "string",
-                    "description": "The key algorithm used to create the certificate.\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "The key algorithm used to create the certificate.\n"
                 },
                 "serialNumber": {
                     "type": "string",
-                    "description": "Number that uniquely identifies the certificate with the CA's system.\nThe `format` function can be used to convert this *base 10* number into other bases, such as hex.\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "Number that uniquely identifies the certificate with the CA's system.\nThe `format` function can be used to convert this *base 10* number into other bases, such as hex.\n"
                 },
                 "sha1Fingerprint": {
                     "type": "string",
-                    "description": "The SHA1 fingerprint of the public key of the certificate.\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "The SHA1 fingerprint of the public key of the certificate.\n"
                 },
                 "signatureAlgorithm": {
                     "type": "string",
-                    "description": "The algorithm used to sign the certificate.\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "The algorithm used to sign the certificate.\n"
                 },
                 "subject": {
                     "type": "string",
-                    "description": "The entity the certificate belongs to, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "The entity the certificate belongs to, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).\n"
                 },
                 "version": {
                     "type": "integer",
-                    "description": "The version the certificate is in.\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "The version the certificate is in.\n"
                 }
             },
             "type": "object",
