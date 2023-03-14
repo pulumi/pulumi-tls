@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2023, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,11 +14,14 @@
 
 import * as tls from "@pulumi/tls";
 
-const ssoPrivateKey = new tls.PrivateKey("ssoPrivateKey", { algorithm: "RSA", rsaBits: 2048 })
+export const key = new tls.PrivateKey("my-private-key", {
+    algorithm: "ECDSA",
+    ecdsaCurve: "P384",
+});
 
-new tls.SelfSignedCert("ssoCert", {
+export const ssCert = new tls.SelfSignedCert("ssoCert", {
     allowedUses: ["cert_signing"],
-    privateKeyPem: ssoPrivateKey.privateKeyPem,
+    privateKeyPem: key.privateKeyPem,
     subject: {
         commonName: `api.example.com`,
     },
