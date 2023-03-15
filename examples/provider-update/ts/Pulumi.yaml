@@ -1,0 +1,3 @@
+name: provider-update
+runtime: nodejs
+description: This stack helps testing provider upgrades and is not a proper example.
