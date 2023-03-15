@@ -103,9 +103,9 @@ func yarn(t *testing.T, opts integration.ProgramTestOptions, wd string, args ...
 
 	// Yarn will time out if multiple processes are trying to install packages at the same time.
 	pulumi_testing.YarnInstallMutex.Lock()
+	defer t.Log("released yarn install lock")
 	defer pulumi_testing.YarnInstallMutex.Unlock()
 	t.Log("acquired yarn install lock")
-	t.Log("released yarn install lock")
 
 	var yarnBin string = opts.YarnBin
 	if yarnBin == "" {
