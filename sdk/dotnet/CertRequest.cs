@@ -15,6 +15,7 @@ namespace Pulumi.Tls
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.IO;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tls = Pulumi.Tls;
     /// 
@@ -37,11 +38,7 @@ namespace Pulumi.Tls
     public partial class CertRequest : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-        /// [underlying](https://pkg.go.dev/encoding/pem#Encode)
-        /// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-        /// the end of the PEM. In case this disrupts your use case, we recommend using
-        /// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+        /// The certificate request data in PEM (RFC 1421).
         /// </summary>
         [Output("certRequestPem")]
         public Output<string> CertRequestPem { get; private set; } = null!;
@@ -203,11 +200,7 @@ namespace Pulumi.Tls
     public sealed class CertRequestState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-        /// [underlying](https://pkg.go.dev/encoding/pem#Encode)
-        /// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-        /// the end of the PEM. In case this disrupts your use case, we recommend using
-        /// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+        /// The certificate request data in PEM (RFC 1421).
         /// </summary>
         [Input("certRequestPem")]
         public Input<string>? CertRequestPem { get; set; }

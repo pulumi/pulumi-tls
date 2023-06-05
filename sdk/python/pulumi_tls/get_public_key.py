@@ -98,11 +98,17 @@ class GetPublicKeyResult:
     @property
     @pulumi.getter(name="publicKeyOpenssh")
     def public_key_openssh(self) -> str:
+        """
+        The public key, in  OpenSSH PEM (RFC 4716).
+        """
         return pulumi.get(self, "public_key_openssh")
 
     @property
     @pulumi.getter(name="publicKeyPem")
     def public_key_pem(self) -> str:
+        """
+        The public key, in PEM (RFC 1421).
+        """
         return pulumi.get(self, "public_key_pem")
 
 

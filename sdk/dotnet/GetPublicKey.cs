@@ -23,6 +23,7 @@ namespace Pulumi.Tls
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.IO;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tls = Pulumi.Tls;
         /// 
@@ -63,6 +64,7 @@ namespace Pulumi.Tls
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.IO;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tls = Pulumi.Tls;
         /// 
@@ -193,7 +195,13 @@ namespace Pulumi.Tls
         /// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, as per the rules for `public_key_openssh` and ECDSA P224 limitations.
         /// </summary>
         public readonly string PublicKeyFingerprintSha256;
+        /// <summary>
+        /// The public key, in  OpenSSH PEM (RFC 4716).
+        /// </summary>
         public readonly string PublicKeyOpenssh;
+        /// <summary>
+        /// The public key, in PEM (RFC 1421).
+        /// </summary>
         public readonly string PublicKeyPem;
 
         [OutputConstructor]

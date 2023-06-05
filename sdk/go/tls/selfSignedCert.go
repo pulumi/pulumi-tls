@@ -16,11 +16,7 @@ type SelfSignedCert struct {
 
 	// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `anyExtended`, `certSigning`, `clientAuth`, `codeSigning`, `contentCommitment`, `crlSigning`, `dataEncipherment`, `decipherOnly`, `digitalSignature`, `emailProtection`, `encipherOnly`, `ipsecEndSystem`, `ipsecTunnel`, `ipsecUser`, `keyAgreement`, `keyEncipherment`, `microsoftCommercialCodeSigning`, `microsoftKernelCodeSigning`, `microsoftServerGatedCrypto`, `netscapeServerGatedCrypto`, `ocspSigning`, `serverAuth`, `timestamping`.
 	AllowedUses pulumi.StringArrayOutput `pulumi:"allowedUses"`
-	// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-	// [underlying](https://pkg.go.dev/encoding/pem#Encode)
-	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-	// the end of the PEM. In case this disrupts your use case, we recommend using
-	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+	// Certificate data in PEM (RFC 1421).
 	CertPem pulumi.StringOutput `pulumi:"certPem"`
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames pulumi.StringArrayOutput `pulumi:"dnsNames"`
@@ -105,11 +101,7 @@ func GetSelfSignedCert(ctx *pulumi.Context,
 type selfSignedCertState struct {
 	// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `anyExtended`, `certSigning`, `clientAuth`, `codeSigning`, `contentCommitment`, `crlSigning`, `dataEncipherment`, `decipherOnly`, `digitalSignature`, `emailProtection`, `encipherOnly`, `ipsecEndSystem`, `ipsecTunnel`, `ipsecUser`, `keyAgreement`, `keyEncipherment`, `microsoftCommercialCodeSigning`, `microsoftKernelCodeSigning`, `microsoftServerGatedCrypto`, `netscapeServerGatedCrypto`, `ocspSigning`, `serverAuth`, `timestamping`.
 	AllowedUses []string `pulumi:"allowedUses"`
-	// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-	// [underlying](https://pkg.go.dev/encoding/pem#Encode)
-	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-	// the end of the PEM. In case this disrupts your use case, we recommend using
-	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+	// Certificate data in PEM (RFC 1421).
 	CertPem *string `pulumi:"certPem"`
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames []string `pulumi:"dnsNames"`
@@ -150,11 +142,7 @@ type selfSignedCertState struct {
 type SelfSignedCertState struct {
 	// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `anyExtended`, `certSigning`, `clientAuth`, `codeSigning`, `contentCommitment`, `crlSigning`, `dataEncipherment`, `decipherOnly`, `digitalSignature`, `emailProtection`, `encipherOnly`, `ipsecEndSystem`, `ipsecTunnel`, `ipsecUser`, `keyAgreement`, `keyEncipherment`, `microsoftCommercialCodeSigning`, `microsoftKernelCodeSigning`, `microsoftServerGatedCrypto`, `netscapeServerGatedCrypto`, `ocspSigning`, `serverAuth`, `timestamping`.
 	AllowedUses pulumi.StringArrayInput
-	// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-	// [underlying](https://pkg.go.dev/encoding/pem#Encode)
-	// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-	// the end of the PEM. In case this disrupts your use case, we recommend using
-	// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+	// Certificate data in PEM (RFC 1421).
 	CertPem pulumi.StringPtrInput
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames pulumi.StringArrayInput
@@ -351,11 +339,7 @@ func (o SelfSignedCertOutput) AllowedUses() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringArrayOutput { return v.AllowedUses }).(pulumi.StringArrayOutput)
 }
 
-// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-// [underlying](https://pkg.go.dev/encoding/pem#Encode)
-// [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-// the end of the PEM. In case this disrupts your use case, we recommend using
-// [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+// Certificate data in PEM (RFC 1421).
 func (o SelfSignedCertOutput) CertPem() pulumi.StringOutput {
 	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringOutput { return v.CertPem }).(pulumi.StringOutput)
 }

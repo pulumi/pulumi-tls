@@ -13,6 +13,9 @@ namespace Pulumi.Tls.Outputs
     [OutputType]
     public sealed class GetCertificateCertificateResult
     {
+        /// <summary>
+        /// Certificate data in PEM (RFC 1421).
+        /// </summary>
         public readonly string CertPem;
         /// <summary>
         /// `true` if the certificate is of a CA (Certificate Authority).
