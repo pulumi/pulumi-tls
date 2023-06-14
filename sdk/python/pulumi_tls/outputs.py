@@ -310,6 +310,7 @@ class GetCertificateCertificateResult(dict):
                  subject: str,
                  version: int):
         """
+        :param str cert_pem: Certificate data in PEM (RFC 1421).
         :param bool is_ca: `true` if the certificate is of a CA (Certificate Authority).
         :param str issuer: Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
         :param str not_after: The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -337,6 +338,9 @@ class GetCertificateCertificateResult(dict):
     @property
     @pulumi.getter(name="certPem")
     def cert_pem(self) -> str:
+        """
+        Certificate data in PEM (RFC 1421).
+        """
         return pulumi.get(self, "cert_pem")
 
     @property

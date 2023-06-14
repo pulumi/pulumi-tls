@@ -89,8 +89,10 @@ type GetPublicKeyResult struct {
 	PublicKeyFingerprintMd5 string `pulumi:"publicKeyFingerprintMd5"`
 	// The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, as per the rules for `publicKeyOpenssh` and ECDSA P224 limitations.
 	PublicKeyFingerprintSha256 string `pulumi:"publicKeyFingerprintSha256"`
-	PublicKeyOpenssh           string `pulumi:"publicKeyOpenssh"`
-	PublicKeyPem               string `pulumi:"publicKeyPem"`
+	// The public key, in  OpenSSH PEM (RFC 4716).
+	PublicKeyOpenssh string `pulumi:"publicKeyOpenssh"`
+	// The public key, in PEM (RFC 1421).
+	PublicKeyPem string `pulumi:"publicKeyPem"`
 }
 
 func GetPublicKeyOutput(ctx *pulumi.Context, args GetPublicKeyOutputArgs, opts ...pulumi.InvokeOption) GetPublicKeyResultOutput {
@@ -163,10 +165,12 @@ func (o GetPublicKeyResultOutput) PublicKeyFingerprintSha256() pulumi.StringOutp
 	return o.ApplyT(func(v GetPublicKeyResult) string { return v.PublicKeyFingerprintSha256 }).(pulumi.StringOutput)
 }
 
+// The public key, in  OpenSSH PEM (RFC 4716).
 func (o GetPublicKeyResultOutput) PublicKeyOpenssh() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPublicKeyResult) string { return v.PublicKeyOpenssh }).(pulumi.StringOutput)
 }
 
+// The public key, in PEM (RFC 1421).
 func (o GetPublicKeyResultOutput) PublicKeyPem() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPublicKeyResult) string { return v.PublicKeyPem }).(pulumi.StringOutput)
 }

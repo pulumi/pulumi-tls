@@ -38,6 +38,7 @@ def readme():
 
 
 setup(name='pulumi_tls',
+      python_requires='>=3.7',
       version=VERSION,
       description="A Pulumi package to create TLS resources in Pulumi programs.",
       long_description=readme(),

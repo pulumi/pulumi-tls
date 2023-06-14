@@ -767,6 +767,7 @@ func (o SelfSignedCertSubjectPtrOutput) StreetAddresses() pulumi.StringArrayOutp
 }
 
 type GetCertificateCertificate struct {
+	// Certificate data in PEM (RFC 1421).
 	CertPem string `pulumi:"certPem"`
 	// `true` if the certificate is of a CA (Certificate Authority).
 	IsCa bool `pulumi:"isCa"`
@@ -803,6 +804,7 @@ type GetCertificateCertificateInput interface {
 }
 
 type GetCertificateCertificateArgs struct {
+	// Certificate data in PEM (RFC 1421).
 	CertPem pulumi.StringInput `pulumi:"certPem"`
 	// `true` if the certificate is of a CA (Certificate Authority).
 	IsCa pulumi.BoolInput `pulumi:"isCa"`
@@ -878,6 +880,7 @@ func (o GetCertificateCertificateOutput) ToGetCertificateCertificateOutputWithCo
 	return o
 }
 
+// Certificate data in PEM (RFC 1421).
 func (o GetCertificateCertificateOutput) CertPem() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificateCertificate) string { return v.CertPem }).(pulumi.StringOutput)
 }

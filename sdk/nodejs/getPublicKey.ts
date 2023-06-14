@@ -77,7 +77,13 @@ export interface GetPublicKeyResult {
      * The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, as per the rules for `publicKeyOpenssh` and ECDSA P224 limitations.
      */
     readonly publicKeyFingerprintSha256: string;
+    /**
+     * The public key, in  OpenSSH PEM (RFC 4716).
+     */
     readonly publicKeyOpenssh: string;
+    /**
+     * The public key, in PEM (RFC 1421).
+     */
     readonly publicKeyPem: string;
 }
 /**
