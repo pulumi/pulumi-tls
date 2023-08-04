@@ -1,6 +1,6 @@
 module github.com/pulumi/pulumi-tls/examples/v5
 
-go 1.19
+go 1.20
 
 replace (
 	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20220824175045-450992f2f5b9
