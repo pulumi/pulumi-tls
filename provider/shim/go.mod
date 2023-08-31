@@ -1,6 +1,6 @@
 module github.com/hashicorp/terraform-provider-tls/shim
 
-go 1.20
+go 1.21
 
 require (
 	github.com/hashicorp/terraform-plugin-framework v1.1.1
