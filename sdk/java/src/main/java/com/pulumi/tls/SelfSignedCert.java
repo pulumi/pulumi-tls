@@ -24,7 +24,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
      * 
      */
-    @Export(name="allowedUses", type=List.class, parameters={String.class})
+    @Export(name="allowedUses", refs={List.class,String.class}, tree="[0,1]")
     private Output<List<String>> allowedUses;
 
     /**
@@ -38,7 +38,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * Certificate data in PEM (RFC 1421).
      * 
      */
-    @Export(name="certPem", type=String.class, parameters={})
+    @Export(name="certPem", refs={String.class}, tree="[0]")
     private Output<String> certPem;
 
     /**
@@ -52,7 +52,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      * 
      */
-    @Export(name="dnsNames", type=List.class, parameters={String.class})
+    @Export(name="dnsNames", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> dnsNames;
 
     /**
@@ -70,7 +70,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * early renewal period. (default: `0`)
      * 
      */
-    @Export(name="earlyRenewalHours", type=Integer.class, parameters={})
+    @Export(name="earlyRenewalHours", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> earlyRenewalHours;
 
     /**
@@ -88,7 +88,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      * 
      */
-    @Export(name="ipAddresses", type=List.class, parameters={String.class})
+    @Export(name="ipAddresses", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> ipAddresses;
 
     /**
@@ -102,7 +102,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      * 
      */
-    @Export(name="isCaCertificate", type=Boolean.class, parameters={})
+    @Export(name="isCaCertificate", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> isCaCertificate;
 
     /**
@@ -120,7 +120,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * 
      */
     @Deprecated /* This is now ignored, as the key algorithm is inferred from the `private_key_pem`. */
-    @Export(name="keyAlgorithm", type=String.class, parameters={})
+    @Export(name="keyAlgorithm", refs={String.class}, tree="[0]")
     private Output<String> keyAlgorithm;
 
     /**
@@ -136,7 +136,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
      * 
      */
-    @Export(name="privateKeyPem", type=String.class, parameters={})
+    @Export(name="privateKeyPem", refs={String.class}, tree="[0]")
     private Output<String> privateKeyPem;
 
     /**
@@ -152,7 +152,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
      * 
      */
-    @Export(name="readyForRenewal", type=Boolean.class, parameters={})
+    @Export(name="readyForRenewal", refs={Boolean.class}, tree="[0]")
     private Output<Boolean> readyForRenewal;
 
     /**
@@ -166,7 +166,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
-    @Export(name="setAuthorityKeyId", type=Boolean.class, parameters={})
+    @Export(name="setAuthorityKeyId", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> setAuthorityKeyId;
 
     /**
@@ -180,7 +180,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
-    @Export(name="setSubjectKeyId", type=Boolean.class, parameters={})
+    @Export(name="setSubjectKeyId", refs={Boolean.class}, tree="[0]")
     private Output</* @Nullable */ Boolean> setSubjectKeyId;
 
     /**
@@ -194,7 +194,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      * 
      */
-    @Export(name="subject", type=SelfSignedCertSubject.class, parameters={})
+    @Export(name="subject", refs={SelfSignedCertSubject.class}, tree="[0]")
     private Output</* @Nullable */ SelfSignedCertSubject> subject;
 
     /**
@@ -208,7 +208,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      * 
      */
-    @Export(name="uris", type=List.class, parameters={String.class})
+    @Export(name="uris", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> uris;
 
     /**
@@ -222,7 +222,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      * 
      */
-    @Export(name="validityEndTime", type=String.class, parameters={})
+    @Export(name="validityEndTime", refs={String.class}, tree="[0]")
     private Output<String> validityEndTime;
 
     /**
@@ -236,7 +236,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * Number of hours, after initial issuing, that the certificate will remain valid for.
      * 
      */
-    @Export(name="validityPeriodHours", type=Integer.class, parameters={})
+    @Export(name="validityPeriodHours", refs={Integer.class}, tree="[0]")
     private Output<Integer> validityPeriodHours;
 
     /**
@@ -250,7 +250,7 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
      * The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      * 
      */
-    @Export(name="validityStartTime", type=String.class, parameters={})
+    @Export(name="validityStartTime", refs={String.class}, tree="[0]")
     private Output<String> validityStartTime;
 
     /**
