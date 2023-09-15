@@ -4,9 +4,12 @@
 package config
 
 import (
+	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 )
+
+var _ = internal.GetEnvOrDefault
 
 // Proxy used by resources and data sources that connect to external endpoints.
 func GetProxy(ctx *pulumi.Context) string {

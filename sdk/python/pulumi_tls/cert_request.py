@@ -92,6 +92,9 @@ class CertRequestArgs:
         """
         Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         """
+        warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
+        pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
+
         return pulumi.get(self, "key_algorithm")
 
     @key_algorithm.setter
@@ -135,11 +138,7 @@ class _CertRequestState:
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering CertRequest resources.
-        :param pulumi.Input[str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-               [underlying](https://pkg.go.dev/encoding/pem#Encode)
-               [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at
-               the end of the PEM. In case this disrupts your use case, we recommend using
-               [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+        :param pulumi.Input[str] cert_request_pem: The certificate request data in PEM (RFC 1421).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
@@ -171,11 +170,7 @@ class _CertRequestState:
     @pulumi.getter(name="certRequestPem")
     def cert_request_pem(self) -> Optional[pulumi.Input[str]]:
         """
-        The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-        [underlying](https://pkg.go.dev/encoding/pem#Encode)
-        [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at
-        the end of the PEM. In case this disrupts your use case, we recommend using
-        [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+        The certificate request data in PEM (RFC 1421).
         """
         return pulumi.get(self, "cert_request_pem")
 
@@ -213,6 +208,9 @@ class _CertRequestState:
         """
         Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         """
+        warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
+        pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
+
         return pulumi.get(self, "key_algorithm")
 
     @key_algorithm.setter
@@ -349,9 +347,6 @@ class CertRequest(pulumi.CustomResource):
 
             __props__.__dict__["dns_names"] = dns_names
             __props__.__dict__["ip_addresses"] = ip_addresses
-            if key_algorithm is not None and not opts.urn:
-                warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
-                pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
             __props__.__dict__["key_algorithm"] = key_algorithm
             if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
@@ -385,11 +380,7 @@ class CertRequest(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-               [underlying](https://pkg.go.dev/encoding/pem#Encode)
-               [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at
-               the end of the PEM. In case this disrupts your use case, we recommend using
-               [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+        :param pulumi.Input[str] cert_request_pem: The certificate request data in PEM (RFC 1421).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
@@ -416,11 +407,7 @@ class CertRequest(pulumi.CustomResource):
     @pulumi.getter(name="certRequestPem")
     def cert_request_pem(self) -> pulumi.Output[str]:
         """
-        The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-        [underlying](https://pkg.go.dev/encoding/pem#Encode)
-        [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at
-        the end of the PEM. In case this disrupts your use case, we recommend using
-        [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+        The certificate request data in PEM (RFC 1421).
         """
         return pulumi.get(self, "cert_request_pem")
 
@@ -446,6 +433,9 @@ class CertRequest(pulumi.CustomResource):
         """
         Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         """
+        warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
+        pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
+
         return pulumi.get(self, "key_algorithm")
 
     @property

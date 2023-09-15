@@ -22,7 +22,7 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      * Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
      * 
      */
-    @Export(name="algorithm", type=String.class, parameters={})
+    @Export(name="algorithm", refs={String.class}, tree="[0]")
     private Output<String> algorithm;
 
     /**
@@ -36,7 +36,7 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      * When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
      * 
      */
-    @Export(name="ecdsaCurve", type=String.class, parameters={})
+    @Export(name="ecdsaCurve", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> ecdsaCurve;
 
     /**
@@ -50,7 +50,7 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      * Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
      * 
      */
-    @Export(name="privateKeyOpenssh", type=String.class, parameters={})
+    @Export(name="privateKeyOpenssh", refs={String.class}, tree="[0]")
     private Output<String> privateKeyOpenssh;
 
     /**
@@ -64,7 +64,7 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      * Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      * 
      */
-    @Export(name="privateKeyPem", type=String.class, parameters={})
+    @Export(name="privateKeyPem", refs={String.class}, tree="[0]")
     private Output<String> privateKeyPem;
 
     /**
@@ -78,7 +78,7 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      * The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
      * 
      */
-    @Export(name="publicKeyFingerprintMd5", type=String.class, parameters={})
+    @Export(name="publicKeyFingerprintMd5", refs={String.class}, tree="[0]")
     private Output<String> publicKeyFingerprintMd5;
 
     /**
@@ -92,7 +92,7 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      * The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
      * 
      */
-    @Export(name="publicKeyFingerprintSha256", type=String.class, parameters={})
+    @Export(name="publicKeyFingerprintSha256", refs={String.class}, tree="[0]")
     private Output<String> publicKeyFingerprintSha256;
 
     /**
@@ -103,50 +103,28 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
         return this.publicKeyFingerprintSha256;
     }
     /**
-     * The public key data in [&#34;Authorized
-     * Keys&#34;](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-     * populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-     * `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-     * supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
-     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-     * the end of the PEM. In case this disrupts your use case, we recommend using
-     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+     * The public key data in &#34;Authorized Keys&#34;.
      * 
      */
-    @Export(name="publicKeyOpenssh", type=String.class, parameters={})
+    @Export(name="publicKeyOpenssh", refs={String.class}, tree="[0]")
     private Output<String> publicKeyOpenssh;
 
     /**
-     * @return The public key data in [&#34;Authorized
-     * Keys&#34;](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-     * populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-     * `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-     * supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
-     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-     * the end of the PEM. In case this disrupts your use case, we recommend using
-     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+     * @return The public key data in &#34;Authorized Keys&#34;.
      * 
      */
     public Output<String> publicKeyOpenssh() {
         return this.publicKeyOpenssh;
     }
     /**
-     * Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
-     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-     * the end of the PEM. In case this disrupts your use case, we recommend using
-     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+     * Public key data in PEM (RFC 1421).
      * 
      */
-    @Export(name="publicKeyPem", type=String.class, parameters={})
+    @Export(name="publicKeyPem", refs={String.class}, tree="[0]")
     private Output<String> publicKeyPem;
 
     /**
-     * @return Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
-     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-     * the end of the PEM. In case this disrupts your use case, we recommend using
-     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+     * @return Public key data in PEM (RFC 1421).
      * 
      */
     public Output<String> publicKeyPem() {
@@ -156,7 +134,7 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      * When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
      * 
      */
-    @Export(name="rsaBits", type=Integer.class, parameters={})
+    @Export(name="rsaBits", refs={Integer.class}, tree="[0]")
     private Output</* @Nullable */ Integer> rsaBits;
 
     /**

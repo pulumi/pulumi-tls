@@ -98,11 +98,17 @@ class GetPublicKeyResult:
     @property
     @pulumi.getter(name="publicKeyOpenssh")
     def public_key_openssh(self) -> str:
+        """
+        The public key, in  OpenSSH PEM (RFC 4716).
+        """
         return pulumi.get(self, "public_key_openssh")
 
     @property
     @pulumi.getter(name="publicKeyPem")
     def public_key_pem(self) -> str:
+        """
+        The public key, in PEM (RFC 1421).
+        """
         return pulumi.get(self, "public_key_pem")
 
 
@@ -152,14 +158,14 @@ def get_public_key(private_key_openssh: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('tls:index/getPublicKey:getPublicKey', __args__, opts=opts, typ=GetPublicKeyResult).value
 
     return AwaitableGetPublicKeyResult(
-        algorithm=__ret__.algorithm,
-        id=__ret__.id,
-        private_key_openssh=__ret__.private_key_openssh,
-        private_key_pem=__ret__.private_key_pem,
-        public_key_fingerprint_md5=__ret__.public_key_fingerprint_md5,
-        public_key_fingerprint_sha256=__ret__.public_key_fingerprint_sha256,
-        public_key_openssh=__ret__.public_key_openssh,
-        public_key_pem=__ret__.public_key_pem)
+        algorithm=pulumi.get(__ret__, 'algorithm'),
+        id=pulumi.get(__ret__, 'id'),
+        private_key_openssh=pulumi.get(__ret__, 'private_key_openssh'),
+        private_key_pem=pulumi.get(__ret__, 'private_key_pem'),
+        public_key_fingerprint_md5=pulumi.get(__ret__, 'public_key_fingerprint_md5'),
+        public_key_fingerprint_sha256=pulumi.get(__ret__, 'public_key_fingerprint_sha256'),
+        public_key_openssh=pulumi.get(__ret__, 'public_key_openssh'),
+        public_key_pem=pulumi.get(__ret__, 'public_key_pem'))
 
 
 @_utilities.lift_output_func(get_public_key)

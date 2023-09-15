@@ -56,22 +56,14 @@ import javax.annotation.Nullable;
 @ResourceType(type="tls:index/certRequest:CertRequest")
 public class CertRequest extends com.pulumi.resources.CustomResource {
     /**
-     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
-     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-     * the end of the PEM. In case this disrupts your use case, we recommend using
-     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+     * The certificate request data in PEM (RFC 1421).
      * 
      */
-    @Export(name="certRequestPem", type=String.class, parameters={})
+    @Export(name="certRequestPem", refs={String.class}, tree="[0]")
     private Output<String> certRequestPem;
 
     /**
-     * @return The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
-     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-     * the end of the PEM. In case this disrupts your use case, we recommend using
-     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+     * @return The certificate request data in PEM (RFC 1421).
      * 
      */
     public Output<String> certRequestPem() {
@@ -81,7 +73,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
      * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      * 
      */
-    @Export(name="dnsNames", type=List.class, parameters={String.class})
+    @Export(name="dnsNames", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> dnsNames;
 
     /**
@@ -95,7 +87,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      * 
      */
-    @Export(name="ipAddresses", type=List.class, parameters={String.class})
+    @Export(name="ipAddresses", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> ipAddresses;
 
     /**
@@ -113,7 +105,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
      * 
      */
     @Deprecated /* This is now ignored, as the key algorithm is inferred from the `private_key_pem`. */
-    @Export(name="keyAlgorithm", type=String.class, parameters={})
+    @Export(name="keyAlgorithm", refs={String.class}, tree="[0]")
     private Output<String> keyAlgorithm;
 
     /**
@@ -129,7 +121,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
      * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
      * 
      */
-    @Export(name="privateKeyPem", type=String.class, parameters={})
+    @Export(name="privateKeyPem", refs={String.class}, tree="[0]")
     private Output<String> privateKeyPem;
 
     /**
@@ -145,7 +137,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      * 
      */
-    @Export(name="subject", type=CertRequestSubject.class, parameters={})
+    @Export(name="subject", refs={CertRequestSubject.class}, tree="[0]")
     private Output</* @Nullable */ CertRequestSubject> subject;
 
     /**
@@ -159,7 +151,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
      * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      * 
      */
-    @Export(name="uris", type=List.class, parameters={String.class})
+    @Export(name="uris", refs={List.class,String.class}, tree="[0,1]")
     private Output</* @Nullable */ List<String>> uris;
 
     /**
