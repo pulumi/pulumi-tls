@@ -41,7 +41,15 @@ public final class GetPublicKeyResult {
      * 
      */
     private String publicKeyFingerprintSha256;
+    /**
+     * @return The public key, in  OpenSSH PEM (RFC 4716).
+     * 
+     */
     private String publicKeyOpenssh;
+    /**
+     * @return The public key, in PEM (RFC 1421).
+     * 
+     */
     private String publicKeyPem;
 
     private GetPublicKeyResult() {}
@@ -87,9 +95,17 @@ public final class GetPublicKeyResult {
     public String publicKeyFingerprintSha256() {
         return this.publicKeyFingerprintSha256;
     }
+    /**
+     * @return The public key, in  OpenSSH PEM (RFC 4716).
+     * 
+     */
     public String publicKeyOpenssh() {
         return this.publicKeyOpenssh;
     }
+    /**
+     * @return The public key, in PEM (RFC 1421).
+     * 
+     */
     public String publicKeyPem() {
         return this.publicKeyPem;
     }

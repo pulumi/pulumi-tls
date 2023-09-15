@@ -112,11 +112,11 @@ def get_certificate(content: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('tls:index/getCertificate:getCertificate', __args__, opts=opts, typ=GetCertificateResult).value
 
     return AwaitableGetCertificateResult(
-        certificates=__ret__.certificates,
-        content=__ret__.content,
-        id=__ret__.id,
-        url=__ret__.url,
-        verify_chain=__ret__.verify_chain)
+        certificates=pulumi.get(__ret__, 'certificates'),
+        content=pulumi.get(__ret__, 'content'),
+        id=pulumi.get(__ret__, 'id'),
+        url=pulumi.get(__ret__, 'url'),
+        verify_chain=pulumi.get(__ret__, 'verify_chain'))
 
 
 @_utilities.lift_output_func(get_certificate)

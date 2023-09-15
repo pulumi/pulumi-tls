@@ -170,6 +170,9 @@ class SelfSignedCertArgs:
         """
         Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         """
+        warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
+        pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
+
         return pulumi.get(self, "key_algorithm")
 
     @key_algorithm.setter
@@ -247,11 +250,7 @@ class _SelfSignedCertState:
         """
         Input properties used for looking up and filtering SelfSignedCert resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
-        :param pulumi.Input[str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-               [underlying](https://pkg.go.dev/encoding/pem#Encode)
-               [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at
-               the end of the PEM. In case this disrupts your use case, we recommend using
-               [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+        :param pulumi.Input[str] cert_pem: Certificate data in PEM (RFC 1421).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
                can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
@@ -325,11 +324,7 @@ class _SelfSignedCertState:
     @pulumi.getter(name="certPem")
     def cert_pem(self) -> Optional[pulumi.Input[str]]:
         """
-        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-        [underlying](https://pkg.go.dev/encoding/pem#Encode)
-        [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at
-        the end of the PEM. In case this disrupts your use case, we recommend using
-        [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+        Certificate data in PEM (RFC 1421).
         """
         return pulumi.get(self, "cert_pem")
 
@@ -395,6 +390,9 @@ class _SelfSignedCertState:
         """
         Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         """
+        warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
+        pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
+
         return pulumi.get(self, "key_algorithm")
 
     @key_algorithm.setter
@@ -604,9 +602,6 @@ class SelfSignedCert(pulumi.CustomResource):
             __props__.__dict__["early_renewal_hours"] = early_renewal_hours
             __props__.__dict__["ip_addresses"] = ip_addresses
             __props__.__dict__["is_ca_certificate"] = is_ca_certificate
-            if key_algorithm is not None and not opts.urn:
-                warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
-                pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
             __props__.__dict__["key_algorithm"] = key_algorithm
             if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
@@ -658,11 +653,7 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
-        :param pulumi.Input[str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-               [underlying](https://pkg.go.dev/encoding/pem#Encode)
-               [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at
-               the end of the PEM. In case this disrupts your use case, we recommend using
-               [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+        :param pulumi.Input[str] cert_pem: Certificate data in PEM (RFC 1421).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
                can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
@@ -718,11 +709,7 @@ class SelfSignedCert(pulumi.CustomResource):
     @pulumi.getter(name="certPem")
     def cert_pem(self) -> pulumi.Output[str]:
         """
-        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-        [underlying](https://pkg.go.dev/encoding/pem#Encode)
-        [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at
-        the end of the PEM. In case this disrupts your use case, we recommend using
-        [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+        Certificate data in PEM (RFC 1421).
         """
         return pulumi.get(self, "cert_pem")
 
@@ -768,6 +755,9 @@ class SelfSignedCert(pulumi.CustomResource):
         """
         Name of the algorithm used when generating the private key provided in `private_key_pem`. **NOTE**: this is deprecated and ignored, as the key algorithm is now inferred from the key.
         """
+        warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
+        pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
+
         return pulumi.get(self, "key_algorithm")
 
     @property

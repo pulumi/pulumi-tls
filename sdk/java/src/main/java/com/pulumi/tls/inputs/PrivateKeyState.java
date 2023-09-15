@@ -107,28 +107,14 @@ public final class PrivateKeyState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * The public key data in [&#34;Authorized
-     * Keys&#34;](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-     * populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-     * `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-     * supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
-     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-     * the end of the PEM. In case this disrupts your use case, we recommend using
-     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+     * The public key data in &#34;Authorized Keys&#34;.
      * 
      */
     @Import(name="publicKeyOpenssh")
     private @Nullable Output<String> publicKeyOpenssh;
 
     /**
-     * @return The public key data in [&#34;Authorized
-     * Keys&#34;](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-     * populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-     * `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-     * supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
-     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-     * the end of the PEM. In case this disrupts your use case, we recommend using
-     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+     * @return The public key data in &#34;Authorized Keys&#34;.
      * 
      */
     public Optional<Output<String>> publicKeyOpenssh() {
@@ -136,22 +122,14 @@ public final class PrivateKeyState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
-     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-     * the end of the PEM. In case this disrupts your use case, we recommend using
-     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+     * Public key data in PEM (RFC 1421).
      * 
      */
     @Import(name="publicKeyPem")
     private @Nullable Output<String> publicKeyPem;
 
     /**
-     * @return Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
-     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-     * the end of the PEM. In case this disrupts your use case, we recommend using
-     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+     * @return Public key data in PEM (RFC 1421).
      * 
      */
     public Optional<Output<String>> publicKeyPem() {
@@ -332,14 +310,7 @@ public final class PrivateKeyState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param publicKeyOpenssh The public key data in [&#34;Authorized
-         * Keys&#34;](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-         * populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-         * `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-         * supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
-         * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-         * the end of the PEM. In case this disrupts your use case, we recommend using
-         * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+         * @param publicKeyOpenssh The public key data in &#34;Authorized Keys&#34;.
          * 
          * @return builder
          * 
@@ -350,14 +321,7 @@ public final class PrivateKeyState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param publicKeyOpenssh The public key data in [&#34;Authorized
-         * Keys&#34;](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is
-         * populated only if the configured private key is supported: this includes all `RSA` and `ED25519` keys, as well as
-         * `ECDSA` keys with curves `P256`, `P384` and `P521`. `ECDSA` with curve `P224` [is not
-         * supported](../../docs#limitations). **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode)
-         * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-         * the end of the PEM. In case this disrupts your use case, we recommend using
-         * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+         * @param publicKeyOpenssh The public key data in &#34;Authorized Keys&#34;.
          * 
          * @return builder
          * 
@@ -367,11 +331,7 @@ public final class PrivateKeyState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param publicKeyPem Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-         * [underlying](https://pkg.go.dev/encoding/pem#Encode)
-         * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-         * the end of the PEM. In case this disrupts your use case, we recommend using
-         * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+         * @param publicKeyPem Public key data in PEM (RFC 1421).
          * 
          * @return builder
          * 
@@ -382,11 +342,7 @@ public final class PrivateKeyState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param publicKeyPem Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-         * [underlying](https://pkg.go.dev/encoding/pem#Encode)
-         * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-         * the end of the PEM. In case this disrupts your use case, we recommend using
-         * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+         * @param publicKeyPem Public key data in PEM (RFC 1421).
          * 
          * @return builder
          * 

@@ -11,6 +11,10 @@ import java.util.Objects;
 
 @CustomType
 public final class GetCertificateCertificate {
+    /**
+     * @return Certificate data in PEM (RFC 1421).
+     * 
+     */
     private String certPem;
     /**
      * @return `true` if the certificate is of a CA (Certificate Authority).
@@ -65,6 +69,10 @@ public final class GetCertificateCertificate {
     private Integer version;
 
     private GetCertificateCertificate() {}
+    /**
+     * @return Certificate data in PEM (RFC 1421).
+     * 
+     */
     public String certPem() {
         return this.certPem;
     }

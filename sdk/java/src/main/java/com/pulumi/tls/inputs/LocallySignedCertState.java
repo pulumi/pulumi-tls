@@ -87,22 +87,14 @@ public final class LocallySignedCertState extends com.pulumi.resources.ResourceA
     }
 
     /**
-     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
-     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-     * the end of the PEM. In case this disrupts your use case, we recommend using
-     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+     * Certificate data in PEM (RFC 1421).
      * 
      */
     @Import(name="certPem")
     private @Nullable Output<String> certPem;
 
     /**
-     * @return Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-     * [underlying](https://pkg.go.dev/encoding/pem#Encode)
-     * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-     * the end of the PEM. In case this disrupts your use case, we recommend using
-     * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+     * @return Certificate data in PEM (RFC 1421).
      * 
      */
     public Optional<Output<String>> certPem() {
@@ -376,11 +368,7 @@ public final class LocallySignedCertState extends com.pulumi.resources.ResourceA
         }
 
         /**
-         * @param certPem Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-         * [underlying](https://pkg.go.dev/encoding/pem#Encode)
-         * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-         * the end of the PEM. In case this disrupts your use case, we recommend using
-         * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+         * @param certPem Certificate data in PEM (RFC 1421).
          * 
          * @return builder
          * 
@@ -391,11 +379,7 @@ public final class LocallySignedCertState extends com.pulumi.resources.ResourceA
         }
 
         /**
-         * @param certPem Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the
-         * [underlying](https://pkg.go.dev/encoding/pem#Encode)
-         * [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at
-         * the end of the PEM. In case this disrupts your use case, we recommend using
-         * [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
+         * @param certPem Certificate data in PEM (RFC 1421).
          * 
          * @return builder
          * 

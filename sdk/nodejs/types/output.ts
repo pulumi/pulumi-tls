@@ -45,6 +45,9 @@ export interface CertRequestSubject {
 }
 
 export interface GetCertificateCertificate {
+    /**
+     * Certificate data in PEM (RFC 1421).
+     */
     certPem: string;
     /**
      * `true` if the certificate is of a CA (Certificate Authority).
