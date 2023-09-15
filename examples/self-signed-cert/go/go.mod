@@ -1,6 +1,6 @@
 module github.com/pulumi/pulumi-tls/examples/self-signed-cert/go
 
-go 1.18
+go 1.21
 
 require (
 	github.com/pulumi/pulumi-tls/sdk/v4 v4.5.0
