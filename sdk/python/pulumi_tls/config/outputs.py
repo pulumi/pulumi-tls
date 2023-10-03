@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
@@ -20,14 +20,29 @@ class Proxy(dict):
                  password: Optional[str] = None,
                  url: Optional[str] = None,
                  username: Optional[str] = None):
+        Proxy._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            from_env=from_env,
+            password=password,
+            url=url,
+            username=username,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             from_env: Optional[bool] = None,
+             password: Optional[str] = None,
+             url: Optional[str] = None,
+             username: Optional[str] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if from_env is not None:
-            pulumi.set(__self__, "from_env", from_env)
+            _setter("from_env", from_env)
         if password is not None:
-            pulumi.set(__self__, "password", password)
+            _setter("password", password)
         if url is not None:
-            pulumi.set(__self__, "url", url)
+            _setter("url", url)
         if username is not None:
-            pulumi.set(__self__, "username", username)
+            _setter("username", username)
 
     @property
     @pulumi.getter(name="fromEnv")
