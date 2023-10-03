@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -38,24 +38,49 @@ class CertRequestSubjectArgs:
         :param pulumi.Input[str] serial_number: Distinguished name: `SERIALNUMBER`
         :param pulumi.Input[Sequence[pulumi.Input[str]]] street_addresses: Distinguished name: `STREET`
         """
+        CertRequestSubjectArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            common_name=common_name,
+            country=country,
+            locality=locality,
+            organization=organization,
+            organizational_unit=organizational_unit,
+            postal_code=postal_code,
+            province=province,
+            serial_number=serial_number,
+            street_addresses=street_addresses,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             common_name: Optional[pulumi.Input[str]] = None,
+             country: Optional[pulumi.Input[str]] = None,
+             locality: Optional[pulumi.Input[str]] = None,
+             organization: Optional[pulumi.Input[str]] = None,
+             organizational_unit: Optional[pulumi.Input[str]] = None,
+             postal_code: Optional[pulumi.Input[str]] = None,
+             province: Optional[pulumi.Input[str]] = None,
+             serial_number: Optional[pulumi.Input[str]] = None,
+             street_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if common_name is not None:
-            pulumi.set(__self__, "common_name", common_name)
+            _setter("common_name", common_name)
         if country is not None:
-            pulumi.set(__self__, "country", country)
+            _setter("country", country)
         if locality is not None:
-            pulumi.set(__self__, "locality", locality)
+            _setter("locality", locality)
         if organization is not None:
-            pulumi.set(__self__, "organization", organization)
+            _setter("organization", organization)
         if organizational_unit is not None:
-            pulumi.set(__self__, "organizational_unit", organizational_unit)
+            _setter("organizational_unit", organizational_unit)
         if postal_code is not None:
-            pulumi.set(__self__, "postal_code", postal_code)
+            _setter("postal_code", postal_code)
         if province is not None:
-            pulumi.set(__self__, "province", province)
+            _setter("province", province)
         if serial_number is not None:
-            pulumi.set(__self__, "serial_number", serial_number)
+            _setter("serial_number", serial_number)
         if street_addresses is not None:
-            pulumi.set(__self__, "street_addresses", street_addresses)
+            _setter("street_addresses", street_addresses)
 
     @property
     @pulumi.getter(name="commonName")
@@ -173,14 +198,29 @@ class ProviderProxyArgs:
                  password: Optional[pulumi.Input[str]] = None,
                  url: Optional[pulumi.Input[str]] = None,
                  username: Optional[pulumi.Input[str]] = None):
+        ProviderProxyArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            from_env=from_env,
+            password=password,
+            url=url,
+            username=username,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             from_env: Optional[pulumi.Input[bool]] = None,
+             password: Optional[pulumi.Input[str]] = None,
+             url: Optional[pulumi.Input[str]] = None,
+             username: Optional[pulumi.Input[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if from_env is not None:
-            pulumi.set(__self__, "from_env", from_env)
+            _setter("from_env", from_env)
         if password is not None:
-            pulumi.set(__self__, "password", password)
+            _setter("password", password)
         if url is not None:
-            pulumi.set(__self__, "url", url)
+            _setter("url", url)
         if username is not None:
-            pulumi.set(__self__, "username", username)
+            _setter("username", username)
 
     @property
     @pulumi.getter(name="fromEnv")
@@ -242,24 +282,49 @@ class SelfSignedCertSubjectArgs:
         :param pulumi.Input[str] serial_number: Distinguished name: `SERIALNUMBER`
         :param pulumi.Input[Sequence[pulumi.Input[str]]] street_addresses: Distinguished name: `STREET`
         """
+        SelfSignedCertSubjectArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            common_name=common_name,
+            country=country,
+            locality=locality,
+            organization=organization,
+            organizational_unit=organizational_unit,
+            postal_code=postal_code,
+            province=province,
+            serial_number=serial_number,
+            street_addresses=street_addresses,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             common_name: Optional[pulumi.Input[str]] = None,
+             country: Optional[pulumi.Input[str]] = None,
+             locality: Optional[pulumi.Input[str]] = None,
+             organization: Optional[pulumi.Input[str]] = None,
+             organizational_unit: Optional[pulumi.Input[str]] = None,
+             postal_code: Optional[pulumi.Input[str]] = None,
+             province: Optional[pulumi.Input[str]] = None,
+             serial_number: Optional[pulumi.Input[str]] = None,
+             street_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None):
         if common_name is not None:
-            pulumi.set(__self__, "common_name", common_name)
+            _setter("common_name", common_name)
         if country is not None:
-            pulumi.set(__self__, "country", country)
+            _setter("country", country)
         if locality is not None:
-            pulumi.set(__self__, "locality", locality)
+            _setter("locality", locality)
         if organization is not None:
-            pulumi.set(__self__, "organization", organization)
+            _setter("organization", organization)
         if organizational_unit is not None:
-            pulumi.set(__self__, "organizational_unit", organizational_unit)
+            _setter("organizational_unit", organizational_unit)
         if postal_code is not None:
-            pulumi.set(__self__, "postal_code", postal_code)
+            _setter("postal_code", postal_code)
         if province is not None:
-            pulumi.set(__self__, "province", province)
+            _setter("province", province)
         if serial_number is not None:
-            pulumi.set(__self__, "serial_number", serial_number)
+            _setter("serial_number", serial_number)
         if street_addresses is not None:
-            pulumi.set(__self__, "street_addresses", street_addresses)
+            _setter("street_addresses", street_addresses)
 
     @property
     @pulumi.getter(name="commonName")
