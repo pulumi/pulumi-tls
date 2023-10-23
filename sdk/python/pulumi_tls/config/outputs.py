@@ -34,7 +34,11 @@ class Proxy(dict):
              password: Optional[str] = None,
              url: Optional[str] = None,
              username: Optional[str] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if from_env is None and 'fromEnv' in kwargs:
+            from_env = kwargs['fromEnv']
+
         if from_env is not None:
             _setter("from_env", from_env)
         if password is not None:

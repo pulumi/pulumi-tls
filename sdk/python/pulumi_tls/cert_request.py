@@ -45,13 +45,25 @@ class CertRequestArgs:
     @staticmethod
     def _configure(
              _setter: Callable[[Any, Any], None],
-             private_key_pem: pulumi.Input[str],
+             private_key_pem: Optional[pulumi.Input[str]] = None,
              dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
              ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
              key_algorithm: Optional[pulumi.Input[str]] = None,
              subject: Optional[pulumi.Input['CertRequestSubjectArgs']] = None,
              uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if private_key_pem is None and 'privateKeyPem' in kwargs:
+            private_key_pem = kwargs['privateKeyPem']
+        if private_key_pem is None:
+            raise TypeError("Missing 'private_key_pem' argument")
+        if dns_names is None and 'dnsNames' in kwargs:
+            dns_names = kwargs['dnsNames']
+        if ip_addresses is None and 'ipAddresses' in kwargs:
+            ip_addresses = kwargs['ipAddresses']
+        if key_algorithm is None and 'keyAlgorithm' in kwargs:
+            key_algorithm = kwargs['keyAlgorithm']
+
         _setter("private_key_pem", private_key_pem)
         if dns_names is not None:
             _setter("dns_names", dns_names)
@@ -187,7 +199,19 @@ class _CertRequestState:
              private_key_pem: Optional[pulumi.Input[str]] = None,
              subject: Optional[pulumi.Input['CertRequestSubjectArgs']] = None,
              uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if cert_request_pem is None and 'certRequestPem' in kwargs:
+            cert_request_pem = kwargs['certRequestPem']
+        if dns_names is None and 'dnsNames' in kwargs:
+            dns_names = kwargs['dnsNames']
+        if ip_addresses is None and 'ipAddresses' in kwargs:
+            ip_addresses = kwargs['ipAddresses']
+        if key_algorithm is None and 'keyAlgorithm' in kwargs:
+            key_algorithm = kwargs['keyAlgorithm']
+        if private_key_pem is None and 'privateKeyPem' in kwargs:
+            private_key_pem = kwargs['privateKeyPem']
+
         if cert_request_pem is not None:
             _setter("cert_request_pem", cert_request_pem)
         if dns_names is not None:

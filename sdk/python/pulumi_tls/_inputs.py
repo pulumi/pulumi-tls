@@ -62,7 +62,19 @@ class CertRequestSubjectArgs:
              province: Optional[pulumi.Input[str]] = None,
              serial_number: Optional[pulumi.Input[str]] = None,
              street_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if common_name is None and 'commonName' in kwargs:
+            common_name = kwargs['commonName']
+        if organizational_unit is None and 'organizationalUnit' in kwargs:
+            organizational_unit = kwargs['organizationalUnit']
+        if postal_code is None and 'postalCode' in kwargs:
+            postal_code = kwargs['postalCode']
+        if serial_number is None and 'serialNumber' in kwargs:
+            serial_number = kwargs['serialNumber']
+        if street_addresses is None and 'streetAddresses' in kwargs:
+            street_addresses = kwargs['streetAddresses']
+
         if common_name is not None:
             _setter("common_name", common_name)
         if country is not None:
@@ -212,7 +224,11 @@ class ProviderProxyArgs:
              password: Optional[pulumi.Input[str]] = None,
              url: Optional[pulumi.Input[str]] = None,
              username: Optional[pulumi.Input[str]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if from_env is None and 'fromEnv' in kwargs:
+            from_env = kwargs['fromEnv']
+
         if from_env is not None:
             _setter("from_env", from_env)
         if password is not None:
@@ -306,7 +322,19 @@ class SelfSignedCertSubjectArgs:
              province: Optional[pulumi.Input[str]] = None,
              serial_number: Optional[pulumi.Input[str]] = None,
              street_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if common_name is None and 'commonName' in kwargs:
+            common_name = kwargs['commonName']
+        if organizational_unit is None and 'organizationalUnit' in kwargs:
+            organizational_unit = kwargs['organizationalUnit']
+        if postal_code is None and 'postalCode' in kwargs:
+            postal_code = kwargs['postalCode']
+        if serial_number is None and 'serialNumber' in kwargs:
+            serial_number = kwargs['serialNumber']
+        if street_addresses is None and 'streetAddresses' in kwargs:
+            street_addresses = kwargs['streetAddresses']
+
         if common_name is not None:
             _setter("common_name", common_name)
         if country is not None:

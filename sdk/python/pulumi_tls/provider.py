@@ -28,7 +28,9 @@ class ProviderArgs:
     def _configure(
              _setter: Callable[[Any, Any], None],
              proxy: Optional[pulumi.Input['ProviderProxyArgs']] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+
         if proxy is not None:
             _setter("proxy", proxy)
 

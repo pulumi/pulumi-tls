@@ -67,9 +67,9 @@ class SelfSignedCertArgs:
     @staticmethod
     def _configure(
              _setter: Callable[[Any, Any], None],
-             allowed_uses: pulumi.Input[Sequence[pulumi.Input[str]]],
-             private_key_pem: pulumi.Input[str],
-             validity_period_hours: pulumi.Input[int],
+             allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+             private_key_pem: Optional[pulumi.Input[str]] = None,
+             validity_period_hours: Optional[pulumi.Input[int]] = None,
              dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
              early_renewal_hours: Optional[pulumi.Input[int]] = None,
              ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -79,7 +79,35 @@ class SelfSignedCertArgs:
              set_subject_key_id: Optional[pulumi.Input[bool]] = None,
              subject: Optional[pulumi.Input['SelfSignedCertSubjectArgs']] = None,
              uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if allowed_uses is None and 'allowedUses' in kwargs:
+            allowed_uses = kwargs['allowedUses']
+        if allowed_uses is None:
+            raise TypeError("Missing 'allowed_uses' argument")
+        if private_key_pem is None and 'privateKeyPem' in kwargs:
+            private_key_pem = kwargs['privateKeyPem']
+        if private_key_pem is None:
+            raise TypeError("Missing 'private_key_pem' argument")
+        if validity_period_hours is None and 'validityPeriodHours' in kwargs:
+            validity_period_hours = kwargs['validityPeriodHours']
+        if validity_period_hours is None:
+            raise TypeError("Missing 'validity_period_hours' argument")
+        if dns_names is None and 'dnsNames' in kwargs:
+            dns_names = kwargs['dnsNames']
+        if early_renewal_hours is None and 'earlyRenewalHours' in kwargs:
+            early_renewal_hours = kwargs['earlyRenewalHours']
+        if ip_addresses is None and 'ipAddresses' in kwargs:
+            ip_addresses = kwargs['ipAddresses']
+        if is_ca_certificate is None and 'isCaCertificate' in kwargs:
+            is_ca_certificate = kwargs['isCaCertificate']
+        if key_algorithm is None and 'keyAlgorithm' in kwargs:
+            key_algorithm = kwargs['keyAlgorithm']
+        if set_authority_key_id is None and 'setAuthorityKeyId' in kwargs:
+            set_authority_key_id = kwargs['setAuthorityKeyId']
+        if set_subject_key_id is None and 'setSubjectKeyId' in kwargs:
+            set_subject_key_id = kwargs['setSubjectKeyId']
+
         _setter("allowed_uses", allowed_uses)
         _setter("private_key_pem", private_key_pem)
         _setter("validity_period_hours", validity_period_hours)
@@ -341,7 +369,37 @@ class _SelfSignedCertState:
              validity_end_time: Optional[pulumi.Input[str]] = None,
              validity_period_hours: Optional[pulumi.Input[int]] = None,
              validity_start_time: Optional[pulumi.Input[str]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if allowed_uses is None and 'allowedUses' in kwargs:
+            allowed_uses = kwargs['allowedUses']
+        if cert_pem is None and 'certPem' in kwargs:
+            cert_pem = kwargs['certPem']
+        if dns_names is None and 'dnsNames' in kwargs:
+            dns_names = kwargs['dnsNames']
+        if early_renewal_hours is None and 'earlyRenewalHours' in kwargs:
+            early_renewal_hours = kwargs['earlyRenewalHours']
+        if ip_addresses is None and 'ipAddresses' in kwargs:
+            ip_addresses = kwargs['ipAddresses']
+        if is_ca_certificate is None and 'isCaCertificate' in kwargs:
+            is_ca_certificate = kwargs['isCaCertificate']
+        if key_algorithm is None and 'keyAlgorithm' in kwargs:
+            key_algorithm = kwargs['keyAlgorithm']
+        if private_key_pem is None and 'privateKeyPem' in kwargs:
+            private_key_pem = kwargs['privateKeyPem']
+        if ready_for_renewal is None and 'readyForRenewal' in kwargs:
+            ready_for_renewal = kwargs['readyForRenewal']
+        if set_authority_key_id is None and 'setAuthorityKeyId' in kwargs:
+            set_authority_key_id = kwargs['setAuthorityKeyId']
+        if set_subject_key_id is None and 'setSubjectKeyId' in kwargs:
+            set_subject_key_id = kwargs['setSubjectKeyId']
+        if validity_end_time is None and 'validityEndTime' in kwargs:
+            validity_end_time = kwargs['validityEndTime']
+        if validity_period_hours is None and 'validityPeriodHours' in kwargs:
+            validity_period_hours = kwargs['validityPeriodHours']
+        if validity_start_time is None and 'validityStartTime' in kwargs:
+            validity_start_time = kwargs['validityStartTime']
+
         if allowed_uses is not None:
             _setter("allowed_uses", allowed_uses)
         if cert_pem is not None:

@@ -32,10 +32,18 @@ class PrivateKeyArgs:
     @staticmethod
     def _configure(
              _setter: Callable[[Any, Any], None],
-             algorithm: pulumi.Input[str],
+             algorithm: Optional[pulumi.Input[str]] = None,
              ecdsa_curve: Optional[pulumi.Input[str]] = None,
              rsa_bits: Optional[pulumi.Input[int]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if algorithm is None:
+            raise TypeError("Missing 'algorithm' argument")
+        if ecdsa_curve is None and 'ecdsaCurve' in kwargs:
+            ecdsa_curve = kwargs['ecdsaCurve']
+        if rsa_bits is None and 'rsaBits' in kwargs:
+            rsa_bits = kwargs['rsaBits']
+
         _setter("algorithm", algorithm)
         if ecdsa_curve is not None:
             _setter("ecdsa_curve", ecdsa_curve)
@@ -127,7 +135,25 @@ class _PrivateKeyState:
              public_key_openssh: Optional[pulumi.Input[str]] = None,
              public_key_pem: Optional[pulumi.Input[str]] = None,
              rsa_bits: Optional[pulumi.Input[int]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if ecdsa_curve is None and 'ecdsaCurve' in kwargs:
+            ecdsa_curve = kwargs['ecdsaCurve']
+        if private_key_openssh is None and 'privateKeyOpenssh' in kwargs:
+            private_key_openssh = kwargs['privateKeyOpenssh']
+        if private_key_pem is None and 'privateKeyPem' in kwargs:
+            private_key_pem = kwargs['privateKeyPem']
+        if public_key_fingerprint_md5 is None and 'publicKeyFingerprintMd5' in kwargs:
+            public_key_fingerprint_md5 = kwargs['publicKeyFingerprintMd5']
+        if public_key_fingerprint_sha256 is None and 'publicKeyFingerprintSha256' in kwargs:
+            public_key_fingerprint_sha256 = kwargs['publicKeyFingerprintSha256']
+        if public_key_openssh is None and 'publicKeyOpenssh' in kwargs:
+            public_key_openssh = kwargs['publicKeyOpenssh']
+        if public_key_pem is None and 'publicKeyPem' in kwargs:
+            public_key_pem = kwargs['publicKeyPem']
+        if rsa_bits is None and 'rsaBits' in kwargs:
+            rsa_bits = kwargs['rsaBits']
+
         if algorithm is not None:
             _setter("algorithm", algorithm)
         if ecdsa_curve is not None:
