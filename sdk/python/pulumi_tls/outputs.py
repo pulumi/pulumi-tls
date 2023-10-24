@@ -87,7 +87,19 @@ class CertRequestSubject(dict):
              province: Optional[str] = None,
              serial_number: Optional[str] = None,
              street_addresses: Optional[Sequence[str]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if common_name is None and 'commonName' in kwargs:
+            common_name = kwargs['commonName']
+        if organizational_unit is None and 'organizationalUnit' in kwargs:
+            organizational_unit = kwargs['organizationalUnit']
+        if postal_code is None and 'postalCode' in kwargs:
+            postal_code = kwargs['postalCode']
+        if serial_number is None and 'serialNumber' in kwargs:
+            serial_number = kwargs['serialNumber']
+        if street_addresses is None and 'streetAddresses' in kwargs:
+            street_addresses = kwargs['streetAddresses']
+
         if common_name is not None:
             _setter("common_name", common_name)
         if country is not None:
@@ -252,7 +264,19 @@ class SelfSignedCertSubject(dict):
              province: Optional[str] = None,
              serial_number: Optional[str] = None,
              street_addresses: Optional[Sequence[str]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if common_name is None and 'commonName' in kwargs:
+            common_name = kwargs['commonName']
+        if organizational_unit is None and 'organizationalUnit' in kwargs:
+            organizational_unit = kwargs['organizationalUnit']
+        if postal_code is None and 'postalCode' in kwargs:
+            postal_code = kwargs['postalCode']
+        if serial_number is None and 'serialNumber' in kwargs:
+            serial_number = kwargs['serialNumber']
+        if street_addresses is None and 'streetAddresses' in kwargs:
+            street_addresses = kwargs['streetAddresses']
+
         if common_name is not None:
             _setter("common_name", common_name)
         if country is not None:
@@ -390,18 +414,58 @@ class GetCertificateCertificateResult(dict):
     @staticmethod
     def _configure(
              _setter: Callable[[Any, Any], None],
-             cert_pem: str,
-             is_ca: bool,
-             issuer: str,
-             not_after: str,
-             not_before: str,
-             public_key_algorithm: str,
-             serial_number: str,
-             sha1_fingerprint: str,
-             signature_algorithm: str,
-             subject: str,
-             version: int,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             cert_pem: Optional[str] = None,
+             is_ca: Optional[bool] = None,
+             issuer: Optional[str] = None,
+             not_after: Optional[str] = None,
+             not_before: Optional[str] = None,
+             public_key_algorithm: Optional[str] = None,
+             serial_number: Optional[str] = None,
+             sha1_fingerprint: Optional[str] = None,
+             signature_algorithm: Optional[str] = None,
+             subject: Optional[str] = None,
+             version: Optional[int] = None,
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if cert_pem is None and 'certPem' in kwargs:
+            cert_pem = kwargs['certPem']
+        if cert_pem is None:
+            raise TypeError("Missing 'cert_pem' argument")
+        if is_ca is None and 'isCa' in kwargs:
+            is_ca = kwargs['isCa']
+        if is_ca is None:
+            raise TypeError("Missing 'is_ca' argument")
+        if issuer is None:
+            raise TypeError("Missing 'issuer' argument")
+        if not_after is None and 'notAfter' in kwargs:
+            not_after = kwargs['notAfter']
+        if not_after is None:
+            raise TypeError("Missing 'not_after' argument")
+        if not_before is None and 'notBefore' in kwargs:
+            not_before = kwargs['notBefore']
+        if not_before is None:
+            raise TypeError("Missing 'not_before' argument")
+        if public_key_algorithm is None and 'publicKeyAlgorithm' in kwargs:
+            public_key_algorithm = kwargs['publicKeyAlgorithm']
+        if public_key_algorithm is None:
+            raise TypeError("Missing 'public_key_algorithm' argument")
+        if serial_number is None and 'serialNumber' in kwargs:
+            serial_number = kwargs['serialNumber']
+        if serial_number is None:
+            raise TypeError("Missing 'serial_number' argument")
+        if sha1_fingerprint is None and 'sha1Fingerprint' in kwargs:
+            sha1_fingerprint = kwargs['sha1Fingerprint']
+        if sha1_fingerprint is None:
+            raise TypeError("Missing 'sha1_fingerprint' argument")
+        if signature_algorithm is None and 'signatureAlgorithm' in kwargs:
+            signature_algorithm = kwargs['signatureAlgorithm']
+        if signature_algorithm is None:
+            raise TypeError("Missing 'signature_algorithm' argument")
+        if subject is None:
+            raise TypeError("Missing 'subject' argument")
+        if version is None:
+            raise TypeError("Missing 'version' argument")
+
         _setter("cert_pem", cert_pem)
         _setter("is_ca", is_ca)
         _setter("issuer", issuer)
