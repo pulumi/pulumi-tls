@@ -6,6 +6,23 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as fs from "fs";
+ * import * as tls from "@pulumi/tls";
+ *
+ * const example = new tls.CertRequest("example", {
+ *     privateKeyPem: fs.readFileSync("private_key.pem"),
+ *     subject: {
+ *         commonName: "example.com",
+ *         organization: "ACME Examples, Inc",
+ *     },
+ * });
+ * ```
+ */
 export class CertRequest extends pulumi.CustomResource {
     /**
      * Get an existing CertRequest resource's state with the given name, ID, and optional extra
