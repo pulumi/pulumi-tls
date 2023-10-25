@@ -15,6 +15,51 @@ import (
 // Get a public key from a PEM-encoded private key.
 //
 // Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"os"
+//
+//	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func readFileOrPanic(path string) pulumi.StringPtrInput {
+//		data, err := os.ReadFile(path)
+//		if err != nil {
+//			panic(err.Error())
+//		}
+//		return pulumi.String(string(data))
+//	}
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := tls.NewPrivateKey(ctx, "ed25519-example", &tls.PrivateKeyArgs{
+//				Algorithm: pulumi.String("ED25519"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = tls.GetPublicKeyOutput(ctx, tls.GetPublicKeyOutputArgs{
+//				PrivateKeyPem: ed25519_example.PrivateKeyPem,
+//			}, nil)
+//			_, err = tls.GetPublicKey(ctx, &tls.GetPublicKeyArgs{
+//				PrivateKeyOpenssh: pulumi.StringRef(readFileOrPanic("~/.ssh/id_rsa_rfc4716")),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetPublicKey(ctx *pulumi.Context, args *GetPublicKeyArgs, opts ...pulumi.InvokeOption) (*GetPublicKeyResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPublicKeyResult
