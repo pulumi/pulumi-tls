@@ -45,13 +45,25 @@ class CertRequestArgs:
     @staticmethod
     def _configure(
              _setter: Callable[[Any, Any], None],
-             private_key_pem: pulumi.Input[str],
+             private_key_pem: Optional[pulumi.Input[str]] = None,
              dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
              ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
              key_algorithm: Optional[pulumi.Input[str]] = None,
              subject: Optional[pulumi.Input['CertRequestSubjectArgs']] = None,
              uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if private_key_pem is None and 'privateKeyPem' in kwargs:
+            private_key_pem = kwargs['privateKeyPem']
+        if private_key_pem is None:
+            raise TypeError("Missing 'private_key_pem' argument")
+        if dns_names is None and 'dnsNames' in kwargs:
+            dns_names = kwargs['dnsNames']
+        if ip_addresses is None and 'ipAddresses' in kwargs:
+            ip_addresses = kwargs['ipAddresses']
+        if key_algorithm is None and 'keyAlgorithm' in kwargs:
+            key_algorithm = kwargs['keyAlgorithm']
+
         _setter("private_key_pem", private_key_pem)
         if dns_names is not None:
             _setter("dns_names", dns_names)
@@ -187,7 +199,19 @@ class _CertRequestState:
              private_key_pem: Optional[pulumi.Input[str]] = None,
              subject: Optional[pulumi.Input['CertRequestSubjectArgs']] = None,
              uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+        if cert_request_pem is None and 'certRequestPem' in kwargs:
+            cert_request_pem = kwargs['certRequestPem']
+        if dns_names is None and 'dnsNames' in kwargs:
+            dns_names = kwargs['dnsNames']
+        if ip_addresses is None and 'ipAddresses' in kwargs:
+            ip_addresses = kwargs['ipAddresses']
+        if key_algorithm is None and 'keyAlgorithm' in kwargs:
+            key_algorithm = kwargs['keyAlgorithm']
+        if private_key_pem is None and 'privateKeyPem' in kwargs:
+            private_key_pem = kwargs['privateKeyPem']
+
         if cert_request_pem is not None:
             _setter("cert_request_pem", cert_request_pem)
         if dns_names is not None:
@@ -309,20 +333,7 @@ class CertRequest(pulumi.CustomResource):
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_tls as tls
-
-        example = tls.CertRequest("example",
-            private_key_pem=(lambda path: open(path).read())("private_key.pem"),
-            subject=tls.CertRequestSubjectArgs(
-                common_name="example.com",
-                organization="ACME Examples, Inc",
-            ))
-        ```
-
+        Create a CertRequest resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
@@ -341,20 +352,7 @@ class CertRequest(pulumi.CustomResource):
                  args: CertRequestArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_tls as tls
-
-        example = tls.CertRequest("example",
-            private_key_pem=(lambda path: open(path).read())("private_key.pem"),
-            subject=tls.CertRequestSubjectArgs(
-                common_name="example.com",
-                organization="ACME Examples, Inc",
-            ))
-        ```
-
+        Create a CertRequest resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param CertRequestArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -395,11 +393,7 @@ class CertRequest(pulumi.CustomResource):
             if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
             __props__.__dict__["private_key_pem"] = None if private_key_pem is None else pulumi.Output.secret(private_key_pem)
-            if subject is not None and not isinstance(subject, CertRequestSubjectArgs):
-                subject = subject or {}
-                def _setter(key, value):
-                    subject[key] = value
-                CertRequestSubjectArgs._configure(_setter, **subject)
+            subject = _utilities.configure(subject, CertRequestSubjectArgs, True)
             __props__.__dict__["subject"] = subject
             __props__.__dict__["uris"] = uris
             __props__.__dict__["cert_request_pem"] = None

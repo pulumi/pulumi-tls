@@ -28,7 +28,9 @@ class ProviderArgs:
     def _configure(
              _setter: Callable[[Any, Any], None],
              proxy: Optional[pulumi.Input['ProviderProxyArgs']] = None,
-             opts: Optional[pulumi.ResourceOptions]=None):
+             opts: Optional[pulumi.ResourceOptions] = None,
+             **kwargs):
+
         if proxy is not None:
             _setter("proxy", proxy)
 
@@ -103,11 +105,7 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
-            if proxy is not None and not isinstance(proxy, ProviderProxyArgs):
-                proxy = proxy or {}
-                def _setter(key, value):
-                    proxy[key] = value
-                ProviderProxyArgs._configure(_setter, **proxy)
+            proxy = _utilities.configure(proxy, ProviderProxyArgs, True)
             __props__.__dict__["proxy"] = pulumi.Output.from_input(proxy).apply(pulumi.runtime.to_json) if proxy is not None else None
         super(Provider, __self__).__init__(
             'tls',
