@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -49,89 +49,30 @@ class SelfSignedCertArgs:
         :param pulumi.Input['SelfSignedCertSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
-        SelfSignedCertArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            allowed_uses=allowed_uses,
-            private_key_pem=private_key_pem,
-            validity_period_hours=validity_period_hours,
-            dns_names=dns_names,
-            early_renewal_hours=early_renewal_hours,
-            ip_addresses=ip_addresses,
-            is_ca_certificate=is_ca_certificate,
-            key_algorithm=key_algorithm,
-            set_authority_key_id=set_authority_key_id,
-            set_subject_key_id=set_subject_key_id,
-            subject=subject,
-            uris=uris,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             private_key_pem: Optional[pulumi.Input[str]] = None,
-             validity_period_hours: Optional[pulumi.Input[int]] = None,
-             dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             early_renewal_hours: Optional[pulumi.Input[int]] = None,
-             ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             is_ca_certificate: Optional[pulumi.Input[bool]] = None,
-             key_algorithm: Optional[pulumi.Input[str]] = None,
-             set_authority_key_id: Optional[pulumi.Input[bool]] = None,
-             set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-             subject: Optional[pulumi.Input['SelfSignedCertSubjectArgs']] = None,
-             uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if allowed_uses is None and 'allowedUses' in kwargs:
-            allowed_uses = kwargs['allowedUses']
-        if allowed_uses is None:
-            raise TypeError("Missing 'allowed_uses' argument")
-        if private_key_pem is None and 'privateKeyPem' in kwargs:
-            private_key_pem = kwargs['privateKeyPem']
-        if private_key_pem is None:
-            raise TypeError("Missing 'private_key_pem' argument")
-        if validity_period_hours is None and 'validityPeriodHours' in kwargs:
-            validity_period_hours = kwargs['validityPeriodHours']
-        if validity_period_hours is None:
-            raise TypeError("Missing 'validity_period_hours' argument")
-        if dns_names is None and 'dnsNames' in kwargs:
-            dns_names = kwargs['dnsNames']
-        if early_renewal_hours is None and 'earlyRenewalHours' in kwargs:
-            early_renewal_hours = kwargs['earlyRenewalHours']
-        if ip_addresses is None and 'ipAddresses' in kwargs:
-            ip_addresses = kwargs['ipAddresses']
-        if is_ca_certificate is None and 'isCaCertificate' in kwargs:
-            is_ca_certificate = kwargs['isCaCertificate']
-        if key_algorithm is None and 'keyAlgorithm' in kwargs:
-            key_algorithm = kwargs['keyAlgorithm']
-        if set_authority_key_id is None and 'setAuthorityKeyId' in kwargs:
-            set_authority_key_id = kwargs['setAuthorityKeyId']
-        if set_subject_key_id is None and 'setSubjectKeyId' in kwargs:
-            set_subject_key_id = kwargs['setSubjectKeyId']
-
-        _setter("allowed_uses", allowed_uses)
-        _setter("private_key_pem", private_key_pem)
-        _setter("validity_period_hours", validity_period_hours)
+        pulumi.set(__self__, "allowed_uses", allowed_uses)
+        pulumi.set(__self__, "private_key_pem", private_key_pem)
+        pulumi.set(__self__, "validity_period_hours", validity_period_hours)
         if dns_names is not None:
-            _setter("dns_names", dns_names)
+            pulumi.set(__self__, "dns_names", dns_names)
         if early_renewal_hours is not None:
-            _setter("early_renewal_hours", early_renewal_hours)
+            pulumi.set(__self__, "early_renewal_hours", early_renewal_hours)
         if ip_addresses is not None:
-            _setter("ip_addresses", ip_addresses)
+            pulumi.set(__self__, "ip_addresses", ip_addresses)
         if is_ca_certificate is not None:
-            _setter("is_ca_certificate", is_ca_certificate)
+            pulumi.set(__self__, "is_ca_certificate", is_ca_certificate)
         if key_algorithm is not None:
             warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
             pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
         if key_algorithm is not None:
-            _setter("key_algorithm", key_algorithm)
+            pulumi.set(__self__, "key_algorithm", key_algorithm)
         if set_authority_key_id is not None:
-            _setter("set_authority_key_id", set_authority_key_id)
+            pulumi.set(__self__, "set_authority_key_id", set_authority_key_id)
         if set_subject_key_id is not None:
-            _setter("set_subject_key_id", set_subject_key_id)
+            pulumi.set(__self__, "set_subject_key_id", set_subject_key_id)
         if subject is not None:
-            _setter("subject", subject)
+            pulumi.set(__self__, "subject", subject)
         if uris is not None:
-            _setter("uris", uris)
+            pulumi.set(__self__, "uris", uris)
 
     @property
     @pulumi.getter(name="allowedUses")
@@ -331,110 +272,41 @@ class _SelfSignedCertState:
         :param pulumi.Input[int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.
         :param pulumi.Input[str] validity_start_time: The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         """
-        _SelfSignedCertState._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            allowed_uses=allowed_uses,
-            cert_pem=cert_pem,
-            dns_names=dns_names,
-            early_renewal_hours=early_renewal_hours,
-            ip_addresses=ip_addresses,
-            is_ca_certificate=is_ca_certificate,
-            key_algorithm=key_algorithm,
-            private_key_pem=private_key_pem,
-            ready_for_renewal=ready_for_renewal,
-            set_authority_key_id=set_authority_key_id,
-            set_subject_key_id=set_subject_key_id,
-            subject=subject,
-            uris=uris,
-            validity_end_time=validity_end_time,
-            validity_period_hours=validity_period_hours,
-            validity_start_time=validity_start_time,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             cert_pem: Optional[pulumi.Input[str]] = None,
-             dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             early_renewal_hours: Optional[pulumi.Input[int]] = None,
-             ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             is_ca_certificate: Optional[pulumi.Input[bool]] = None,
-             key_algorithm: Optional[pulumi.Input[str]] = None,
-             private_key_pem: Optional[pulumi.Input[str]] = None,
-             ready_for_renewal: Optional[pulumi.Input[bool]] = None,
-             set_authority_key_id: Optional[pulumi.Input[bool]] = None,
-             set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-             subject: Optional[pulumi.Input['SelfSignedCertSubjectArgs']] = None,
-             uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             validity_end_time: Optional[pulumi.Input[str]] = None,
-             validity_period_hours: Optional[pulumi.Input[int]] = None,
-             validity_start_time: Optional[pulumi.Input[str]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if allowed_uses is None and 'allowedUses' in kwargs:
-            allowed_uses = kwargs['allowedUses']
-        if cert_pem is None and 'certPem' in kwargs:
-            cert_pem = kwargs['certPem']
-        if dns_names is None and 'dnsNames' in kwargs:
-            dns_names = kwargs['dnsNames']
-        if early_renewal_hours is None and 'earlyRenewalHours' in kwargs:
-            early_renewal_hours = kwargs['earlyRenewalHours']
-        if ip_addresses is None and 'ipAddresses' in kwargs:
-            ip_addresses = kwargs['ipAddresses']
-        if is_ca_certificate is None and 'isCaCertificate' in kwargs:
-            is_ca_certificate = kwargs['isCaCertificate']
-        if key_algorithm is None and 'keyAlgorithm' in kwargs:
-            key_algorithm = kwargs['keyAlgorithm']
-        if private_key_pem is None and 'privateKeyPem' in kwargs:
-            private_key_pem = kwargs['privateKeyPem']
-        if ready_for_renewal is None and 'readyForRenewal' in kwargs:
-            ready_for_renewal = kwargs['readyForRenewal']
-        if set_authority_key_id is None and 'setAuthorityKeyId' in kwargs:
-            set_authority_key_id = kwargs['setAuthorityKeyId']
-        if set_subject_key_id is None and 'setSubjectKeyId' in kwargs:
-            set_subject_key_id = kwargs['setSubjectKeyId']
-        if validity_end_time is None and 'validityEndTime' in kwargs:
-            validity_end_time = kwargs['validityEndTime']
-        if validity_period_hours is None and 'validityPeriodHours' in kwargs:
-            validity_period_hours = kwargs['validityPeriodHours']
-        if validity_start_time is None and 'validityStartTime' in kwargs:
-            validity_start_time = kwargs['validityStartTime']
-
         if allowed_uses is not None:
-            _setter("allowed_uses", allowed_uses)
+            pulumi.set(__self__, "allowed_uses", allowed_uses)
         if cert_pem is not None:
-            _setter("cert_pem", cert_pem)
+            pulumi.set(__self__, "cert_pem", cert_pem)
         if dns_names is not None:
-            _setter("dns_names", dns_names)
+            pulumi.set(__self__, "dns_names", dns_names)
         if early_renewal_hours is not None:
-            _setter("early_renewal_hours", early_renewal_hours)
+            pulumi.set(__self__, "early_renewal_hours", early_renewal_hours)
         if ip_addresses is not None:
-            _setter("ip_addresses", ip_addresses)
+            pulumi.set(__self__, "ip_addresses", ip_addresses)
         if is_ca_certificate is not None:
-            _setter("is_ca_certificate", is_ca_certificate)
+            pulumi.set(__self__, "is_ca_certificate", is_ca_certificate)
         if key_algorithm is not None:
             warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
             pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
         if key_algorithm is not None:
-            _setter("key_algorithm", key_algorithm)
+            pulumi.set(__self__, "key_algorithm", key_algorithm)
         if private_key_pem is not None:
-            _setter("private_key_pem", private_key_pem)
+            pulumi.set(__self__, "private_key_pem", private_key_pem)
         if ready_for_renewal is not None:
-            _setter("ready_for_renewal", ready_for_renewal)
+            pulumi.set(__self__, "ready_for_renewal", ready_for_renewal)
         if set_authority_key_id is not None:
-            _setter("set_authority_key_id", set_authority_key_id)
+            pulumi.set(__self__, "set_authority_key_id", set_authority_key_id)
         if set_subject_key_id is not None:
-            _setter("set_subject_key_id", set_subject_key_id)
+            pulumi.set(__self__, "set_subject_key_id", set_subject_key_id)
         if subject is not None:
-            _setter("subject", subject)
+            pulumi.set(__self__, "subject", subject)
         if uris is not None:
-            _setter("uris", uris)
+            pulumi.set(__self__, "uris", uris)
         if validity_end_time is not None:
-            _setter("validity_end_time", validity_end_time)
+            pulumi.set(__self__, "validity_end_time", validity_end_time)
         if validity_period_hours is not None:
-            _setter("validity_period_hours", validity_period_hours)
+            pulumi.set(__self__, "validity_period_hours", validity_period_hours)
         if validity_start_time is not None:
-            _setter("validity_start_time", validity_start_time)
+            pulumi.set(__self__, "validity_start_time", validity_start_time)
 
     @property
     @pulumi.getter(name="allowedUses")
@@ -697,10 +569,6 @@ class SelfSignedCert(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
-            kwargs = kwargs or {}
-            def _setter(key, value):
-                kwargs[key] = value
-            SelfSignedCertArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -740,7 +608,6 @@ class SelfSignedCert(pulumi.CustomResource):
             __props__.__dict__["private_key_pem"] = None if private_key_pem is None else pulumi.Output.secret(private_key_pem)
             __props__.__dict__["set_authority_key_id"] = set_authority_key_id
             __props__.__dict__["set_subject_key_id"] = set_subject_key_id
-            subject = _utilities.configure(subject, SelfSignedCertSubjectArgs, True)
             __props__.__dict__["subject"] = subject
             __props__.__dict__["uris"] = uris
             if validity_period_hours is None and not opts.urn:
