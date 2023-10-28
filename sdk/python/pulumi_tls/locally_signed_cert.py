@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['LocallySignedCertArgs', 'LocallySignedCert']
@@ -39,77 +39,22 @@ class LocallySignedCertArgs:
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         """
-        LocallySignedCertArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            allowed_uses=allowed_uses,
-            ca_cert_pem=ca_cert_pem,
-            ca_private_key_pem=ca_private_key_pem,
-            cert_request_pem=cert_request_pem,
-            validity_period_hours=validity_period_hours,
-            ca_key_algorithm=ca_key_algorithm,
-            early_renewal_hours=early_renewal_hours,
-            is_ca_certificate=is_ca_certificate,
-            set_subject_key_id=set_subject_key_id,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             ca_cert_pem: Optional[pulumi.Input[str]] = None,
-             ca_private_key_pem: Optional[pulumi.Input[str]] = None,
-             cert_request_pem: Optional[pulumi.Input[str]] = None,
-             validity_period_hours: Optional[pulumi.Input[int]] = None,
-             ca_key_algorithm: Optional[pulumi.Input[str]] = None,
-             early_renewal_hours: Optional[pulumi.Input[int]] = None,
-             is_ca_certificate: Optional[pulumi.Input[bool]] = None,
-             set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if allowed_uses is None and 'allowedUses' in kwargs:
-            allowed_uses = kwargs['allowedUses']
-        if allowed_uses is None:
-            raise TypeError("Missing 'allowed_uses' argument")
-        if ca_cert_pem is None and 'caCertPem' in kwargs:
-            ca_cert_pem = kwargs['caCertPem']
-        if ca_cert_pem is None:
-            raise TypeError("Missing 'ca_cert_pem' argument")
-        if ca_private_key_pem is None and 'caPrivateKeyPem' in kwargs:
-            ca_private_key_pem = kwargs['caPrivateKeyPem']
-        if ca_private_key_pem is None:
-            raise TypeError("Missing 'ca_private_key_pem' argument")
-        if cert_request_pem is None and 'certRequestPem' in kwargs:
-            cert_request_pem = kwargs['certRequestPem']
-        if cert_request_pem is None:
-            raise TypeError("Missing 'cert_request_pem' argument")
-        if validity_period_hours is None and 'validityPeriodHours' in kwargs:
-            validity_period_hours = kwargs['validityPeriodHours']
-        if validity_period_hours is None:
-            raise TypeError("Missing 'validity_period_hours' argument")
-        if ca_key_algorithm is None and 'caKeyAlgorithm' in kwargs:
-            ca_key_algorithm = kwargs['caKeyAlgorithm']
-        if early_renewal_hours is None and 'earlyRenewalHours' in kwargs:
-            early_renewal_hours = kwargs['earlyRenewalHours']
-        if is_ca_certificate is None and 'isCaCertificate' in kwargs:
-            is_ca_certificate = kwargs['isCaCertificate']
-        if set_subject_key_id is None and 'setSubjectKeyId' in kwargs:
-            set_subject_key_id = kwargs['setSubjectKeyId']
-
-        _setter("allowed_uses", allowed_uses)
-        _setter("ca_cert_pem", ca_cert_pem)
-        _setter("ca_private_key_pem", ca_private_key_pem)
-        _setter("cert_request_pem", cert_request_pem)
-        _setter("validity_period_hours", validity_period_hours)
+        pulumi.set(__self__, "allowed_uses", allowed_uses)
+        pulumi.set(__self__, "ca_cert_pem", ca_cert_pem)
+        pulumi.set(__self__, "ca_private_key_pem", ca_private_key_pem)
+        pulumi.set(__self__, "cert_request_pem", cert_request_pem)
+        pulumi.set(__self__, "validity_period_hours", validity_period_hours)
         if ca_key_algorithm is not None:
             warnings.warn("""This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.""", DeprecationWarning)
             pulumi.log.warn("""ca_key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.""")
         if ca_key_algorithm is not None:
-            _setter("ca_key_algorithm", ca_key_algorithm)
+            pulumi.set(__self__, "ca_key_algorithm", ca_key_algorithm)
         if early_renewal_hours is not None:
-            _setter("early_renewal_hours", early_renewal_hours)
+            pulumi.set(__self__, "early_renewal_hours", early_renewal_hours)
         if is_ca_certificate is not None:
-            _setter("is_ca_certificate", is_ca_certificate)
+            pulumi.set(__self__, "is_ca_certificate", is_ca_certificate)
         if set_subject_key_id is not None:
-            _setter("set_subject_key_id", set_subject_key_id)
+            pulumi.set(__self__, "set_subject_key_id", set_subject_key_id)
 
     @property
     @pulumi.getter(name="allowedUses")
@@ -263,96 +208,35 @@ class _LocallySignedCertState:
         :param pulumi.Input[int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.
         :param pulumi.Input[str] validity_start_time: The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         """
-        _LocallySignedCertState._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            allowed_uses=allowed_uses,
-            ca_cert_pem=ca_cert_pem,
-            ca_key_algorithm=ca_key_algorithm,
-            ca_private_key_pem=ca_private_key_pem,
-            cert_pem=cert_pem,
-            cert_request_pem=cert_request_pem,
-            early_renewal_hours=early_renewal_hours,
-            is_ca_certificate=is_ca_certificate,
-            ready_for_renewal=ready_for_renewal,
-            set_subject_key_id=set_subject_key_id,
-            validity_end_time=validity_end_time,
-            validity_period_hours=validity_period_hours,
-            validity_start_time=validity_start_time,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             ca_cert_pem: Optional[pulumi.Input[str]] = None,
-             ca_key_algorithm: Optional[pulumi.Input[str]] = None,
-             ca_private_key_pem: Optional[pulumi.Input[str]] = None,
-             cert_pem: Optional[pulumi.Input[str]] = None,
-             cert_request_pem: Optional[pulumi.Input[str]] = None,
-             early_renewal_hours: Optional[pulumi.Input[int]] = None,
-             is_ca_certificate: Optional[pulumi.Input[bool]] = None,
-             ready_for_renewal: Optional[pulumi.Input[bool]] = None,
-             set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-             validity_end_time: Optional[pulumi.Input[str]] = None,
-             validity_period_hours: Optional[pulumi.Input[int]] = None,
-             validity_start_time: Optional[pulumi.Input[str]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if allowed_uses is None and 'allowedUses' in kwargs:
-            allowed_uses = kwargs['allowedUses']
-        if ca_cert_pem is None and 'caCertPem' in kwargs:
-            ca_cert_pem = kwargs['caCertPem']
-        if ca_key_algorithm is None and 'caKeyAlgorithm' in kwargs:
-            ca_key_algorithm = kwargs['caKeyAlgorithm']
-        if ca_private_key_pem is None and 'caPrivateKeyPem' in kwargs:
-            ca_private_key_pem = kwargs['caPrivateKeyPem']
-        if cert_pem is None and 'certPem' in kwargs:
-            cert_pem = kwargs['certPem']
-        if cert_request_pem is None and 'certRequestPem' in kwargs:
-            cert_request_pem = kwargs['certRequestPem']
-        if early_renewal_hours is None and 'earlyRenewalHours' in kwargs:
-            early_renewal_hours = kwargs['earlyRenewalHours']
-        if is_ca_certificate is None and 'isCaCertificate' in kwargs:
-            is_ca_certificate = kwargs['isCaCertificate']
-        if ready_for_renewal is None and 'readyForRenewal' in kwargs:
-            ready_for_renewal = kwargs['readyForRenewal']
-        if set_subject_key_id is None and 'setSubjectKeyId' in kwargs:
-            set_subject_key_id = kwargs['setSubjectKeyId']
-        if validity_end_time is None and 'validityEndTime' in kwargs:
-            validity_end_time = kwargs['validityEndTime']
-        if validity_period_hours is None and 'validityPeriodHours' in kwargs:
-            validity_period_hours = kwargs['validityPeriodHours']
-        if validity_start_time is None and 'validityStartTime' in kwargs:
-            validity_start_time = kwargs['validityStartTime']
-
         if allowed_uses is not None:
-            _setter("allowed_uses", allowed_uses)
+            pulumi.set(__self__, "allowed_uses", allowed_uses)
         if ca_cert_pem is not None:
-            _setter("ca_cert_pem", ca_cert_pem)
+            pulumi.set(__self__, "ca_cert_pem", ca_cert_pem)
         if ca_key_algorithm is not None:
             warnings.warn("""This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.""", DeprecationWarning)
             pulumi.log.warn("""ca_key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `ca_private_key_pem`.""")
         if ca_key_algorithm is not None:
-            _setter("ca_key_algorithm", ca_key_algorithm)
+            pulumi.set(__self__, "ca_key_algorithm", ca_key_algorithm)
         if ca_private_key_pem is not None:
-            _setter("ca_private_key_pem", ca_private_key_pem)
+            pulumi.set(__self__, "ca_private_key_pem", ca_private_key_pem)
         if cert_pem is not None:
-            _setter("cert_pem", cert_pem)
+            pulumi.set(__self__, "cert_pem", cert_pem)
         if cert_request_pem is not None:
-            _setter("cert_request_pem", cert_request_pem)
+            pulumi.set(__self__, "cert_request_pem", cert_request_pem)
         if early_renewal_hours is not None:
-            _setter("early_renewal_hours", early_renewal_hours)
+            pulumi.set(__self__, "early_renewal_hours", early_renewal_hours)
         if is_ca_certificate is not None:
-            _setter("is_ca_certificate", is_ca_certificate)
+            pulumi.set(__self__, "is_ca_certificate", is_ca_certificate)
         if ready_for_renewal is not None:
-            _setter("ready_for_renewal", ready_for_renewal)
+            pulumi.set(__self__, "ready_for_renewal", ready_for_renewal)
         if set_subject_key_id is not None:
-            _setter("set_subject_key_id", set_subject_key_id)
+            pulumi.set(__self__, "set_subject_key_id", set_subject_key_id)
         if validity_end_time is not None:
-            _setter("validity_end_time", validity_end_time)
+            pulumi.set(__self__, "validity_end_time", validity_end_time)
         if validity_period_hours is not None:
-            _setter("validity_period_hours", validity_period_hours)
+            pulumi.set(__self__, "validity_period_hours", validity_period_hours)
         if validity_start_time is not None:
-            _setter("validity_start_time", validity_start_time)
+            pulumi.set(__self__, "validity_start_time", validity_start_time)
 
     @property
     @pulumi.getter(name="allowedUses")
@@ -569,10 +453,6 @@ class LocallySignedCert(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
-            kwargs = kwargs or {}
-            def _setter(key, value):
-                kwargs[key] = value
-            LocallySignedCertArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,

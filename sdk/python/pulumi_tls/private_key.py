@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = ['PrivateKeyArgs', 'PrivateKey']
@@ -23,32 +23,11 @@ class PrivateKeyArgs:
         :param pulumi.Input[str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are `P224`, `P256`, `P384` or `P521` (default: `P224`).
         :param pulumi.Input[int] rsa_bits: When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
         """
-        PrivateKeyArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            algorithm=algorithm,
-            ecdsa_curve=ecdsa_curve,
-            rsa_bits=rsa_bits,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             algorithm: Optional[pulumi.Input[str]] = None,
-             ecdsa_curve: Optional[pulumi.Input[str]] = None,
-             rsa_bits: Optional[pulumi.Input[int]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if algorithm is None:
-            raise TypeError("Missing 'algorithm' argument")
-        if ecdsa_curve is None and 'ecdsaCurve' in kwargs:
-            ecdsa_curve = kwargs['ecdsaCurve']
-        if rsa_bits is None and 'rsaBits' in kwargs:
-            rsa_bits = kwargs['rsaBits']
-
-        _setter("algorithm", algorithm)
+        pulumi.set(__self__, "algorithm", algorithm)
         if ecdsa_curve is not None:
-            _setter("ecdsa_curve", ecdsa_curve)
+            pulumi.set(__self__, "ecdsa_curve", ecdsa_curve)
         if rsa_bits is not None:
-            _setter("rsa_bits", rsa_bits)
+            pulumi.set(__self__, "rsa_bits", rsa_bits)
 
     @property
     @pulumi.getter
@@ -111,67 +90,24 @@ class _PrivateKeyState:
         :param pulumi.Input[str] public_key_pem: Public key data in PEM (RFC 1421).
         :param pulumi.Input[int] rsa_bits: When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
         """
-        _PrivateKeyState._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            algorithm=algorithm,
-            ecdsa_curve=ecdsa_curve,
-            private_key_openssh=private_key_openssh,
-            private_key_pem=private_key_pem,
-            public_key_fingerprint_md5=public_key_fingerprint_md5,
-            public_key_fingerprint_sha256=public_key_fingerprint_sha256,
-            public_key_openssh=public_key_openssh,
-            public_key_pem=public_key_pem,
-            rsa_bits=rsa_bits,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             algorithm: Optional[pulumi.Input[str]] = None,
-             ecdsa_curve: Optional[pulumi.Input[str]] = None,
-             private_key_openssh: Optional[pulumi.Input[str]] = None,
-             private_key_pem: Optional[pulumi.Input[str]] = None,
-             public_key_fingerprint_md5: Optional[pulumi.Input[str]] = None,
-             public_key_fingerprint_sha256: Optional[pulumi.Input[str]] = None,
-             public_key_openssh: Optional[pulumi.Input[str]] = None,
-             public_key_pem: Optional[pulumi.Input[str]] = None,
-             rsa_bits: Optional[pulumi.Input[int]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if ecdsa_curve is None and 'ecdsaCurve' in kwargs:
-            ecdsa_curve = kwargs['ecdsaCurve']
-        if private_key_openssh is None and 'privateKeyOpenssh' in kwargs:
-            private_key_openssh = kwargs['privateKeyOpenssh']
-        if private_key_pem is None and 'privateKeyPem' in kwargs:
-            private_key_pem = kwargs['privateKeyPem']
-        if public_key_fingerprint_md5 is None and 'publicKeyFingerprintMd5' in kwargs:
-            public_key_fingerprint_md5 = kwargs['publicKeyFingerprintMd5']
-        if public_key_fingerprint_sha256 is None and 'publicKeyFingerprintSha256' in kwargs:
-            public_key_fingerprint_sha256 = kwargs['publicKeyFingerprintSha256']
-        if public_key_openssh is None and 'publicKeyOpenssh' in kwargs:
-            public_key_openssh = kwargs['publicKeyOpenssh']
-        if public_key_pem is None and 'publicKeyPem' in kwargs:
-            public_key_pem = kwargs['publicKeyPem']
-        if rsa_bits is None and 'rsaBits' in kwargs:
-            rsa_bits = kwargs['rsaBits']
-
         if algorithm is not None:
-            _setter("algorithm", algorithm)
+            pulumi.set(__self__, "algorithm", algorithm)
         if ecdsa_curve is not None:
-            _setter("ecdsa_curve", ecdsa_curve)
+            pulumi.set(__self__, "ecdsa_curve", ecdsa_curve)
         if private_key_openssh is not None:
-            _setter("private_key_openssh", private_key_openssh)
+            pulumi.set(__self__, "private_key_openssh", private_key_openssh)
         if private_key_pem is not None:
-            _setter("private_key_pem", private_key_pem)
+            pulumi.set(__self__, "private_key_pem", private_key_pem)
         if public_key_fingerprint_md5 is not None:
-            _setter("public_key_fingerprint_md5", public_key_fingerprint_md5)
+            pulumi.set(__self__, "public_key_fingerprint_md5", public_key_fingerprint_md5)
         if public_key_fingerprint_sha256 is not None:
-            _setter("public_key_fingerprint_sha256", public_key_fingerprint_sha256)
+            pulumi.set(__self__, "public_key_fingerprint_sha256", public_key_fingerprint_sha256)
         if public_key_openssh is not None:
-            _setter("public_key_openssh", public_key_openssh)
+            pulumi.set(__self__, "public_key_openssh", public_key_openssh)
         if public_key_pem is not None:
-            _setter("public_key_pem", public_key_pem)
+            pulumi.set(__self__, "public_key_pem", public_key_pem)
         if rsa_bits is not None:
-            _setter("rsa_bits", rsa_bits)
+            pulumi.set(__self__, "rsa_bits", rsa_bits)
 
     @property
     @pulumi.getter
@@ -317,10 +253,6 @@ class PrivateKey(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
-            kwargs = kwargs or {}
-            def _setter(key, value):
-                kwargs[key] = value
-            PrivateKeyArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
