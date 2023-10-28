@@ -3,11 +3,11 @@ module github.com/pulumi/pulumi-tls/examples/v4
 go 1.21
 
 require (
-	github.com/pulumi/pulumi/pkg/v3 v3.90.1
+	github.com/pulumi/pulumi/pkg/v3 v3.91.1
 	github.com/stretchr/testify v1.8.4
 )
 
-require github.com/pulumi/pulumi/sdk/v3 v3.90.1 // indirect
+require github.com/pulumi/pulumi/sdk/v3 v3.91.1 // indirect
 
 require (
 	cloud.google.com/go v0.110.4 // indirect
