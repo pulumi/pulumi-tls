@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -33,51 +33,20 @@ class CertRequestArgs:
         :param pulumi.Input['CertRequestSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
-        CertRequestArgs._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            private_key_pem=private_key_pem,
-            dns_names=dns_names,
-            ip_addresses=ip_addresses,
-            key_algorithm=key_algorithm,
-            subject=subject,
-            uris=uris,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             private_key_pem: Optional[pulumi.Input[str]] = None,
-             dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             key_algorithm: Optional[pulumi.Input[str]] = None,
-             subject: Optional[pulumi.Input['CertRequestSubjectArgs']] = None,
-             uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if private_key_pem is None and 'privateKeyPem' in kwargs:
-            private_key_pem = kwargs['privateKeyPem']
-        if private_key_pem is None:
-            raise TypeError("Missing 'private_key_pem' argument")
-        if dns_names is None and 'dnsNames' in kwargs:
-            dns_names = kwargs['dnsNames']
-        if ip_addresses is None and 'ipAddresses' in kwargs:
-            ip_addresses = kwargs['ipAddresses']
-        if key_algorithm is None and 'keyAlgorithm' in kwargs:
-            key_algorithm = kwargs['keyAlgorithm']
-
-        _setter("private_key_pem", private_key_pem)
+        pulumi.set(__self__, "private_key_pem", private_key_pem)
         if dns_names is not None:
-            _setter("dns_names", dns_names)
+            pulumi.set(__self__, "dns_names", dns_names)
         if ip_addresses is not None:
-            _setter("ip_addresses", ip_addresses)
+            pulumi.set(__self__, "ip_addresses", ip_addresses)
         if key_algorithm is not None:
             warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
             pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
         if key_algorithm is not None:
-            _setter("key_algorithm", key_algorithm)
+            pulumi.set(__self__, "key_algorithm", key_algorithm)
         if subject is not None:
-            _setter("subject", subject)
+            pulumi.set(__self__, "subject", subject)
         if uris is not None:
-            _setter("uris", uris)
+            pulumi.set(__self__, "uris", uris)
 
     @property
     @pulumi.getter(name="privateKeyPem")
@@ -179,56 +148,23 @@ class _CertRequestState:
         :param pulumi.Input['CertRequestSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
-        _CertRequestState._configure(
-            lambda key, value: pulumi.set(__self__, key, value),
-            cert_request_pem=cert_request_pem,
-            dns_names=dns_names,
-            ip_addresses=ip_addresses,
-            key_algorithm=key_algorithm,
-            private_key_pem=private_key_pem,
-            subject=subject,
-            uris=uris,
-        )
-    @staticmethod
-    def _configure(
-             _setter: Callable[[Any, Any], None],
-             cert_request_pem: Optional[pulumi.Input[str]] = None,
-             dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             key_algorithm: Optional[pulumi.Input[str]] = None,
-             private_key_pem: Optional[pulumi.Input[str]] = None,
-             subject: Optional[pulumi.Input['CertRequestSubjectArgs']] = None,
-             uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-             opts: Optional[pulumi.ResourceOptions] = None,
-             **kwargs):
-        if cert_request_pem is None and 'certRequestPem' in kwargs:
-            cert_request_pem = kwargs['certRequestPem']
-        if dns_names is None and 'dnsNames' in kwargs:
-            dns_names = kwargs['dnsNames']
-        if ip_addresses is None and 'ipAddresses' in kwargs:
-            ip_addresses = kwargs['ipAddresses']
-        if key_algorithm is None and 'keyAlgorithm' in kwargs:
-            key_algorithm = kwargs['keyAlgorithm']
-        if private_key_pem is None and 'privateKeyPem' in kwargs:
-            private_key_pem = kwargs['privateKeyPem']
-
         if cert_request_pem is not None:
-            _setter("cert_request_pem", cert_request_pem)
+            pulumi.set(__self__, "cert_request_pem", cert_request_pem)
         if dns_names is not None:
-            _setter("dns_names", dns_names)
+            pulumi.set(__self__, "dns_names", dns_names)
         if ip_addresses is not None:
-            _setter("ip_addresses", ip_addresses)
+            pulumi.set(__self__, "ip_addresses", ip_addresses)
         if key_algorithm is not None:
             warnings.warn("""This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""", DeprecationWarning)
             pulumi.log.warn("""key_algorithm is deprecated: This is now ignored, as the key algorithm is inferred from the `private_key_pem`.""")
         if key_algorithm is not None:
-            _setter("key_algorithm", key_algorithm)
+            pulumi.set(__self__, "key_algorithm", key_algorithm)
         if private_key_pem is not None:
-            _setter("private_key_pem", private_key_pem)
+            pulumi.set(__self__, "private_key_pem", private_key_pem)
         if subject is not None:
-            _setter("subject", subject)
+            pulumi.set(__self__, "subject", subject)
         if uris is not None:
-            _setter("uris", uris)
+            pulumi.set(__self__, "uris", uris)
 
     @property
     @pulumi.getter(name="certRequestPem")
@@ -389,10 +325,6 @@ class CertRequest(pulumi.CustomResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
-            kwargs = kwargs or {}
-            def _setter(key, value):
-                kwargs[key] = value
-            CertRequestArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -419,7 +351,6 @@ class CertRequest(pulumi.CustomResource):
             if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
             __props__.__dict__["private_key_pem"] = None if private_key_pem is None else pulumi.Output.secret(private_key_pem)
-            subject = _utilities.configure(subject, CertRequestSubjectArgs, True)
             __props__.__dict__["subject"] = subject
             __props__.__dict__["uris"] = uris
             __props__.__dict__["cert_request_pem"] = None
