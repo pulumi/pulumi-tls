@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
@@ -63,24 +63,61 @@ class CertRequestSubject(dict):
         :param str serial_number: Distinguished name: `SERIALNUMBER`
         :param Sequence[str] street_addresses: Distinguished name: `STREET`
         """
+        CertRequestSubject._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            common_name=common_name,
+            country=country,
+            locality=locality,
+            organization=organization,
+            organizational_unit=organizational_unit,
+            postal_code=postal_code,
+            province=province,
+            serial_number=serial_number,
+            street_addresses=street_addresses,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             common_name: Optional[str] = None,
+             country: Optional[str] = None,
+             locality: Optional[str] = None,
+             organization: Optional[str] = None,
+             organizational_unit: Optional[str] = None,
+             postal_code: Optional[str] = None,
+             province: Optional[str] = None,
+             serial_number: Optional[str] = None,
+             street_addresses: Optional[Sequence[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if common_name is None and 'commonName' in kwargs:
+            common_name = kwargs['commonName']
+        if organizational_unit is None and 'organizationalUnit' in kwargs:
+            organizational_unit = kwargs['organizationalUnit']
+        if postal_code is None and 'postalCode' in kwargs:
+            postal_code = kwargs['postalCode']
+        if serial_number is None and 'serialNumber' in kwargs:
+            serial_number = kwargs['serialNumber']
+        if street_addresses is None and 'streetAddresses' in kwargs:
+            street_addresses = kwargs['streetAddresses']
+
         if common_name is not None:
-            pulumi.set(__self__, "common_name", common_name)
+            _setter("common_name", common_name)
         if country is not None:
-            pulumi.set(__self__, "country", country)
+            _setter("country", country)
         if locality is not None:
-            pulumi.set(__self__, "locality", locality)
+            _setter("locality", locality)
         if organization is not None:
-            pulumi.set(__self__, "organization", organization)
+            _setter("organization", organization)
         if organizational_unit is not None:
-            pulumi.set(__self__, "organizational_unit", organizational_unit)
+            _setter("organizational_unit", organizational_unit)
         if postal_code is not None:
-            pulumi.set(__self__, "postal_code", postal_code)
+            _setter("postal_code", postal_code)
         if province is not None:
-            pulumi.set(__self__, "province", province)
+            _setter("province", province)
         if serial_number is not None:
-            pulumi.set(__self__, "serial_number", serial_number)
+            _setter("serial_number", serial_number)
         if street_addresses is not None:
-            pulumi.set(__self__, "street_addresses", street_addresses)
+            _setter("street_addresses", street_addresses)
 
     @property
     @pulumi.getter(name="commonName")
@@ -203,24 +240,61 @@ class SelfSignedCertSubject(dict):
         :param str serial_number: Distinguished name: `SERIALNUMBER`
         :param Sequence[str] street_addresses: Distinguished name: `STREET`
         """
+        SelfSignedCertSubject._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            common_name=common_name,
+            country=country,
+            locality=locality,
+            organization=organization,
+            organizational_unit=organizational_unit,
+            postal_code=postal_code,
+            province=province,
+            serial_number=serial_number,
+            street_addresses=street_addresses,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             common_name: Optional[str] = None,
+             country: Optional[str] = None,
+             locality: Optional[str] = None,
+             organization: Optional[str] = None,
+             organizational_unit: Optional[str] = None,
+             postal_code: Optional[str] = None,
+             province: Optional[str] = None,
+             serial_number: Optional[str] = None,
+             street_addresses: Optional[Sequence[str]] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if common_name is None and 'commonName' in kwargs:
+            common_name = kwargs['commonName']
+        if organizational_unit is None and 'organizationalUnit' in kwargs:
+            organizational_unit = kwargs['organizationalUnit']
+        if postal_code is None and 'postalCode' in kwargs:
+            postal_code = kwargs['postalCode']
+        if serial_number is None and 'serialNumber' in kwargs:
+            serial_number = kwargs['serialNumber']
+        if street_addresses is None and 'streetAddresses' in kwargs:
+            street_addresses = kwargs['streetAddresses']
+
         if common_name is not None:
-            pulumi.set(__self__, "common_name", common_name)
+            _setter("common_name", common_name)
         if country is not None:
-            pulumi.set(__self__, "country", country)
+            _setter("country", country)
         if locality is not None:
-            pulumi.set(__self__, "locality", locality)
+            _setter("locality", locality)
         if organization is not None:
-            pulumi.set(__self__, "organization", organization)
+            _setter("organization", organization)
         if organizational_unit is not None:
-            pulumi.set(__self__, "organizational_unit", organizational_unit)
+            _setter("organizational_unit", organizational_unit)
         if postal_code is not None:
-            pulumi.set(__self__, "postal_code", postal_code)
+            _setter("postal_code", postal_code)
         if province is not None:
-            pulumi.set(__self__, "province", province)
+            _setter("province", province)
         if serial_number is not None:
-            pulumi.set(__self__, "serial_number", serial_number)
+            _setter("serial_number", serial_number)
         if street_addresses is not None:
-            pulumi.set(__self__, "street_addresses", street_addresses)
+            _setter("street_addresses", street_addresses)
 
     @property
     @pulumi.getter(name="commonName")
@@ -323,17 +397,86 @@ class GetCertificateCertificateResult(dict):
         :param str subject: The entity the certificate belongs to, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
         :param int version: The version the certificate is in.
         """
-        pulumi.set(__self__, "cert_pem", cert_pem)
-        pulumi.set(__self__, "is_ca", is_ca)
-        pulumi.set(__self__, "issuer", issuer)
-        pulumi.set(__self__, "not_after", not_after)
-        pulumi.set(__self__, "not_before", not_before)
-        pulumi.set(__self__, "public_key_algorithm", public_key_algorithm)
-        pulumi.set(__self__, "serial_number", serial_number)
-        pulumi.set(__self__, "sha1_fingerprint", sha1_fingerprint)
-        pulumi.set(__self__, "signature_algorithm", signature_algorithm)
-        pulumi.set(__self__, "subject", subject)
-        pulumi.set(__self__, "version", version)
+        GetCertificateCertificateResult._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            cert_pem=cert_pem,
+            is_ca=is_ca,
+            issuer=issuer,
+            not_after=not_after,
+            not_before=not_before,
+            public_key_algorithm=public_key_algorithm,
+            serial_number=serial_number,
+            sha1_fingerprint=sha1_fingerprint,
+            signature_algorithm=signature_algorithm,
+            subject=subject,
+            version=version,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             cert_pem: Optional[str] = None,
+             is_ca: Optional[bool] = None,
+             issuer: Optional[str] = None,
+             not_after: Optional[str] = None,
+             not_before: Optional[str] = None,
+             public_key_algorithm: Optional[str] = None,
+             serial_number: Optional[str] = None,
+             sha1_fingerprint: Optional[str] = None,
+             signature_algorithm: Optional[str] = None,
+             subject: Optional[str] = None,
+             version: Optional[int] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+        if cert_pem is None and 'certPem' in kwargs:
+            cert_pem = kwargs['certPem']
+        if cert_pem is None:
+            raise TypeError("Missing 'cert_pem' argument")
+        if is_ca is None and 'isCa' in kwargs:
+            is_ca = kwargs['isCa']
+        if is_ca is None:
+            raise TypeError("Missing 'is_ca' argument")
+        if issuer is None:
+            raise TypeError("Missing 'issuer' argument")
+        if not_after is None and 'notAfter' in kwargs:
+            not_after = kwargs['notAfter']
+        if not_after is None:
+            raise TypeError("Missing 'not_after' argument")
+        if not_before is None and 'notBefore' in kwargs:
+            not_before = kwargs['notBefore']
+        if not_before is None:
+            raise TypeError("Missing 'not_before' argument")
+        if public_key_algorithm is None and 'publicKeyAlgorithm' in kwargs:
+            public_key_algorithm = kwargs['publicKeyAlgorithm']
+        if public_key_algorithm is None:
+            raise TypeError("Missing 'public_key_algorithm' argument")
+        if serial_number is None and 'serialNumber' in kwargs:
+            serial_number = kwargs['serialNumber']
+        if serial_number is None:
+            raise TypeError("Missing 'serial_number' argument")
+        if sha1_fingerprint is None and 'sha1Fingerprint' in kwargs:
+            sha1_fingerprint = kwargs['sha1Fingerprint']
+        if sha1_fingerprint is None:
+            raise TypeError("Missing 'sha1_fingerprint' argument")
+        if signature_algorithm is None and 'signatureAlgorithm' in kwargs:
+            signature_algorithm = kwargs['signatureAlgorithm']
+        if signature_algorithm is None:
+            raise TypeError("Missing 'signature_algorithm' argument")
+        if subject is None:
+            raise TypeError("Missing 'subject' argument")
+        if version is None:
+            raise TypeError("Missing 'version' argument")
+
+        _setter("cert_pem", cert_pem)
+        _setter("is_ca", is_ca)
+        _setter("issuer", issuer)
+        _setter("not_after", not_after)
+        _setter("not_before", not_before)
+        _setter("public_key_algorithm", public_key_algorithm)
+        _setter("serial_number", serial_number)
+        _setter("sha1_fingerprint", sha1_fingerprint)
+        _setter("signature_algorithm", signature_algorithm)
+        _setter("subject", subject)
+        _setter("version", version)
 
     @property
     @pulumi.getter(name="certPem")

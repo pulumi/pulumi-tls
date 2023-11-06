@@ -6,7 +6,7 @@ import copy
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 from ._inputs import *
 
@@ -20,8 +20,19 @@ class ProviderArgs:
         The set of arguments for constructing a Provider resource.
         :param pulumi.Input['ProviderProxyArgs'] proxy: Proxy used by resources and data sources that connect to external endpoints.
         """
+        ProviderArgs._configure(
+            lambda key, value: pulumi.set(__self__, key, value),
+            proxy=proxy,
+        )
+    @staticmethod
+    def _configure(
+             _setter: Callable[[Any, Any], None],
+             proxy: Optional[pulumi.Input['ProviderProxyArgs']] = None,
+             opts: Optional[pulumi.ResourceOptions]=None,
+             **kwargs):
+
         if proxy is not None:
-            pulumi.set(__self__, "proxy", proxy)
+            _setter("proxy", proxy)
 
     @property
     @pulumi.getter
@@ -75,6 +86,10 @@ class Provider(pulumi.ProviderResource):
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
+            kwargs = kwargs or {}
+            def _setter(key, value):
+                kwargs[key] = value
+            ProviderArgs._configure(_setter, **kwargs)
             __self__._internal_init(resource_name, *args, **kwargs)
 
     def _internal_init(__self__,
@@ -90,6 +105,11 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
+            if proxy is not None and not isinstance(proxy, ProviderProxyArgs):
+                proxy = proxy or {}
+                def _setter(key, value):
+                    proxy[key] = value
+                ProviderProxyArgs._configure(_setter, **proxy)
             __props__.__dict__["proxy"] = pulumi.Output.from_input(proxy).apply(pulumi.runtime.to_json) if proxy is not None else None
         super(Provider, __self__).__init__(
             'tls',
