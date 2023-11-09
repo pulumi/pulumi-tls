@@ -8,4 +8,6 @@ plugins:
     version: "4.26.0"
 javaGenVersion: "v0.9.7"
 team: ecosystem
-
+license:
+  ignore:
+    - github.com/terraform-providers/terraform-provider-tls/shim
