@@ -10,7 +10,6 @@ import (
 	"errors"
 	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 type PrivateKey struct {
@@ -161,12 +160,6 @@ func (i *PrivateKey) ToPrivateKeyOutputWithContext(ctx context.Context) PrivateK
 	return pulumi.ToOutputWithContext(ctx, i).(PrivateKeyOutput)
 }
 
-func (i *PrivateKey) ToOutput(ctx context.Context) pulumix.Output[*PrivateKey] {
-	return pulumix.Output[*PrivateKey]{
-		OutputState: i.ToPrivateKeyOutputWithContext(ctx).OutputState,
-	}
-}
-
 // PrivateKeyArrayInput is an input type that accepts PrivateKeyArray and PrivateKeyArrayOutput values.
 // You can construct a concrete instance of `PrivateKeyArrayInput` via:
 //
@@ -190,12 +183,6 @@ func (i PrivateKeyArray) ToPrivateKeyArrayOutput() PrivateKeyArrayOutput {
 
 func (i PrivateKeyArray) ToPrivateKeyArrayOutputWithContext(ctx context.Context) PrivateKeyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PrivateKeyArrayOutput)
-}
-
-func (i PrivateKeyArray) ToOutput(ctx context.Context) pulumix.Output[[]*PrivateKey] {
-	return pulumix.Output[[]*PrivateKey]{
-		OutputState: i.ToPrivateKeyArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // PrivateKeyMapInput is an input type that accepts PrivateKeyMap and PrivateKeyMapOutput values.
@@ -223,12 +210,6 @@ func (i PrivateKeyMap) ToPrivateKeyMapOutputWithContext(ctx context.Context) Pri
 	return pulumi.ToOutputWithContext(ctx, i).(PrivateKeyMapOutput)
 }
 
-func (i PrivateKeyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PrivateKey] {
-	return pulumix.Output[map[string]*PrivateKey]{
-		OutputState: i.ToPrivateKeyMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type PrivateKeyOutput struct{ *pulumi.OutputState }
 
 func (PrivateKeyOutput) ElementType() reflect.Type {
@@ -241,12 +222,6 @@ func (o PrivateKeyOutput) ToPrivateKeyOutput() PrivateKeyOutput {
 
 func (o PrivateKeyOutput) ToPrivateKeyOutputWithContext(ctx context.Context) PrivateKeyOutput {
 	return o
-}
-
-func (o PrivateKeyOutput) ToOutput(ctx context.Context) pulumix.Output[*PrivateKey] {
-	return pulumix.Output[*PrivateKey]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Name of the algorithm to use when generating the private key. Currently-supported values are `RSA`, `ECDSA` and `ED25519`.
@@ -308,12 +283,6 @@ func (o PrivateKeyArrayOutput) ToPrivateKeyArrayOutputWithContext(ctx context.Co
 	return o
 }
 
-func (o PrivateKeyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PrivateKey] {
-	return pulumix.Output[[]*PrivateKey]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o PrivateKeyArrayOutput) Index(i pulumi.IntInput) PrivateKeyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PrivateKey {
 		return vs[0].([]*PrivateKey)[vs[1].(int)]
@@ -332,12 +301,6 @@ func (o PrivateKeyMapOutput) ToPrivateKeyMapOutput() PrivateKeyMapOutput {
 
 func (o PrivateKeyMapOutput) ToPrivateKeyMapOutputWithContext(ctx context.Context) PrivateKeyMapOutput {
 	return o
-}
-
-func (o PrivateKeyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PrivateKey] {
-	return pulumix.Output[map[string]*PrivateKey]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PrivateKeyMapOutput) MapIndex(k pulumi.StringInput) PrivateKeyOutput {

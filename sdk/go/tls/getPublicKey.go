@@ -9,7 +9,6 @@ import (
 
 	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Get a public key from a PEM-encoded private key.
@@ -136,12 +135,6 @@ func (o GetPublicKeyResultOutput) ToGetPublicKeyResultOutput() GetPublicKeyResul
 
 func (o GetPublicKeyResultOutput) ToGetPublicKeyResultOutputWithContext(ctx context.Context) GetPublicKeyResultOutput {
 	return o
-}
-
-func (o GetPublicKeyResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetPublicKeyResult] {
-	return pulumix.Output[GetPublicKeyResult]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The name of the algorithm used by the given private key. Possible values are: `RSA`, `ECDSA` and `ED25519`.

@@ -9,7 +9,6 @@ import (
 
 	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 var _ = internal.GetEnvOrDefault
@@ -51,12 +50,6 @@ func (i ProxyArgs) ToProxyOutputWithContext(ctx context.Context) ProxyOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyOutput)
 }
 
-func (i ProxyArgs) ToOutput(ctx context.Context) pulumix.Output[Proxy] {
-	return pulumix.Output[Proxy]{
-		OutputState: i.ToProxyOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ProxyOutput struct{ *pulumi.OutputState }
 
 func (ProxyOutput) ElementType() reflect.Type {
@@ -69,12 +62,6 @@ func (o ProxyOutput) ToProxyOutput() ProxyOutput {
 
 func (o ProxyOutput) ToProxyOutputWithContext(ctx context.Context) ProxyOutput {
 	return o
-}
-
-func (o ProxyOutput) ToOutput(ctx context.Context) pulumix.Output[Proxy] {
-	return pulumix.Output[Proxy]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ProxyOutput) FromEnv() pulumi.BoolPtrOutput {
