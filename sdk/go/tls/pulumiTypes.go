@@ -9,7 +9,6 @@ import (
 
 	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 var _ = internal.GetEnvOrDefault
@@ -79,12 +78,6 @@ func (i CertRequestSubjectArgs) ToCertRequestSubjectOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(CertRequestSubjectOutput)
 }
 
-func (i CertRequestSubjectArgs) ToOutput(ctx context.Context) pulumix.Output[CertRequestSubject] {
-	return pulumix.Output[CertRequestSubject]{
-		OutputState: i.ToCertRequestSubjectOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i CertRequestSubjectArgs) ToCertRequestSubjectPtrOutput() CertRequestSubjectPtrOutput {
 	return i.ToCertRequestSubjectPtrOutputWithContext(context.Background())
 }
@@ -126,12 +119,6 @@ func (i *certRequestSubjectPtrType) ToCertRequestSubjectPtrOutputWithContext(ctx
 	return pulumi.ToOutputWithContext(ctx, i).(CertRequestSubjectPtrOutput)
 }
 
-func (i *certRequestSubjectPtrType) ToOutput(ctx context.Context) pulumix.Output[*CertRequestSubject] {
-	return pulumix.Output[*CertRequestSubject]{
-		OutputState: i.ToCertRequestSubjectPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type CertRequestSubjectOutput struct{ *pulumi.OutputState }
 
 func (CertRequestSubjectOutput) ElementType() reflect.Type {
@@ -154,12 +141,6 @@ func (o CertRequestSubjectOutput) ToCertRequestSubjectPtrOutputWithContext(ctx c
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v CertRequestSubject) *CertRequestSubject {
 		return &v
 	}).(CertRequestSubjectPtrOutput)
-}
-
-func (o CertRequestSubjectOutput) ToOutput(ctx context.Context) pulumix.Output[CertRequestSubject] {
-	return pulumix.Output[CertRequestSubject]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Distinguished name: `CN`
@@ -219,12 +200,6 @@ func (o CertRequestSubjectPtrOutput) ToCertRequestSubjectPtrOutput() CertRequest
 
 func (o CertRequestSubjectPtrOutput) ToCertRequestSubjectPtrOutputWithContext(ctx context.Context) CertRequestSubjectPtrOutput {
 	return o
-}
-
-func (o CertRequestSubjectPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*CertRequestSubject] {
-	return pulumix.Output[*CertRequestSubject]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o CertRequestSubjectPtrOutput) Elem() CertRequestSubjectOutput {
@@ -364,12 +339,6 @@ func (i ProviderProxyArgs) ToProviderProxyOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderProxyOutput)
 }
 
-func (i ProviderProxyArgs) ToOutput(ctx context.Context) pulumix.Output[ProviderProxy] {
-	return pulumix.Output[ProviderProxy]{
-		OutputState: i.ToProviderProxyOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i ProviderProxyArgs) ToProviderProxyPtrOutput() ProviderProxyPtrOutput {
 	return i.ToProviderProxyPtrOutputWithContext(context.Background())
 }
@@ -411,12 +380,6 @@ func (i *providerProxyPtrType) ToProviderProxyPtrOutputWithContext(ctx context.C
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderProxyPtrOutput)
 }
 
-func (i *providerProxyPtrType) ToOutput(ctx context.Context) pulumix.Output[*ProviderProxy] {
-	return pulumix.Output[*ProviderProxy]{
-		OutputState: i.ToProviderProxyPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ProviderProxyOutput struct{ *pulumi.OutputState }
 
 func (ProviderProxyOutput) ElementType() reflect.Type {
@@ -439,12 +402,6 @@ func (o ProviderProxyOutput) ToProviderProxyPtrOutputWithContext(ctx context.Con
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProviderProxy) *ProviderProxy {
 		return &v
 	}).(ProviderProxyPtrOutput)
-}
-
-func (o ProviderProxyOutput) ToOutput(ctx context.Context) pulumix.Output[ProviderProxy] {
-	return pulumix.Output[ProviderProxy]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ProviderProxyOutput) FromEnv() pulumi.BoolPtrOutput {
@@ -475,12 +432,6 @@ func (o ProviderProxyPtrOutput) ToProviderProxyPtrOutput() ProviderProxyPtrOutpu
 
 func (o ProviderProxyPtrOutput) ToProviderProxyPtrOutputWithContext(ctx context.Context) ProviderProxyPtrOutput {
 	return o
-}
-
-func (o ProviderProxyPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*ProviderProxy] {
-	return pulumix.Output[*ProviderProxy]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ProviderProxyPtrOutput) Elem() ProviderProxyOutput {
@@ -594,12 +545,6 @@ func (i SelfSignedCertSubjectArgs) ToSelfSignedCertSubjectOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertSubjectOutput)
 }
 
-func (i SelfSignedCertSubjectArgs) ToOutput(ctx context.Context) pulumix.Output[SelfSignedCertSubject] {
-	return pulumix.Output[SelfSignedCertSubject]{
-		OutputState: i.ToSelfSignedCertSubjectOutputWithContext(ctx).OutputState,
-	}
-}
-
 func (i SelfSignedCertSubjectArgs) ToSelfSignedCertSubjectPtrOutput() SelfSignedCertSubjectPtrOutput {
 	return i.ToSelfSignedCertSubjectPtrOutputWithContext(context.Background())
 }
@@ -641,12 +586,6 @@ func (i *selfSignedCertSubjectPtrType) ToSelfSignedCertSubjectPtrOutputWithConte
 	return pulumi.ToOutputWithContext(ctx, i).(SelfSignedCertSubjectPtrOutput)
 }
 
-func (i *selfSignedCertSubjectPtrType) ToOutput(ctx context.Context) pulumix.Output[*SelfSignedCertSubject] {
-	return pulumix.Output[*SelfSignedCertSubject]{
-		OutputState: i.ToSelfSignedCertSubjectPtrOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SelfSignedCertSubjectOutput struct{ *pulumi.OutputState }
 
 func (SelfSignedCertSubjectOutput) ElementType() reflect.Type {
@@ -669,12 +608,6 @@ func (o SelfSignedCertSubjectOutput) ToSelfSignedCertSubjectPtrOutputWithContext
 	return o.ApplyTWithContext(ctx, func(_ context.Context, v SelfSignedCertSubject) *SelfSignedCertSubject {
 		return &v
 	}).(SelfSignedCertSubjectPtrOutput)
-}
-
-func (o SelfSignedCertSubjectOutput) ToOutput(ctx context.Context) pulumix.Output[SelfSignedCertSubject] {
-	return pulumix.Output[SelfSignedCertSubject]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Distinguished name: `CN`
@@ -734,12 +667,6 @@ func (o SelfSignedCertSubjectPtrOutput) ToSelfSignedCertSubjectPtrOutput() SelfS
 
 func (o SelfSignedCertSubjectPtrOutput) ToSelfSignedCertSubjectPtrOutputWithContext(ctx context.Context) SelfSignedCertSubjectPtrOutput {
 	return o
-}
-
-func (o SelfSignedCertSubjectPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*SelfSignedCertSubject] {
-	return pulumix.Output[*SelfSignedCertSubject]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SelfSignedCertSubjectPtrOutput) Elem() SelfSignedCertSubjectOutput {
@@ -917,12 +844,6 @@ func (i GetCertificateCertificateArgs) ToGetCertificateCertificateOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateCertificateOutput)
 }
 
-func (i GetCertificateCertificateArgs) ToOutput(ctx context.Context) pulumix.Output[GetCertificateCertificate] {
-	return pulumix.Output[GetCertificateCertificate]{
-		OutputState: i.ToGetCertificateCertificateOutputWithContext(ctx).OutputState,
-	}
-}
-
 // GetCertificateCertificateArrayInput is an input type that accepts GetCertificateCertificateArray and GetCertificateCertificateArrayOutput values.
 // You can construct a concrete instance of `GetCertificateCertificateArrayInput` via:
 //
@@ -948,12 +869,6 @@ func (i GetCertificateCertificateArray) ToGetCertificateCertificateArrayOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateCertificateArrayOutput)
 }
 
-func (i GetCertificateCertificateArray) ToOutput(ctx context.Context) pulumix.Output[[]GetCertificateCertificate] {
-	return pulumix.Output[[]GetCertificateCertificate]{
-		OutputState: i.ToGetCertificateCertificateArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 type GetCertificateCertificateOutput struct{ *pulumi.OutputState }
 
 func (GetCertificateCertificateOutput) ElementType() reflect.Type {
@@ -966,12 +881,6 @@ func (o GetCertificateCertificateOutput) ToGetCertificateCertificateOutput() Get
 
 func (o GetCertificateCertificateOutput) ToGetCertificateCertificateOutputWithContext(ctx context.Context) GetCertificateCertificateOutput {
 	return o
-}
-
-func (o GetCertificateCertificateOutput) ToOutput(ctx context.Context) pulumix.Output[GetCertificateCertificate] {
-	return pulumix.Output[GetCertificateCertificate]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Certificate data in PEM (RFC 1421).
@@ -1042,12 +951,6 @@ func (o GetCertificateCertificateArrayOutput) ToGetCertificateCertificateArrayOu
 
 func (o GetCertificateCertificateArrayOutput) ToGetCertificateCertificateArrayOutputWithContext(ctx context.Context) GetCertificateCertificateArrayOutput {
 	return o
-}
-
-func (o GetCertificateCertificateArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]GetCertificateCertificate] {
-	return pulumix.Output[[]GetCertificateCertificate]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o GetCertificateCertificateArrayOutput) Index(i pulumi.IntInput) GetCertificateCertificateOutput {
