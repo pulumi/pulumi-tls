@@ -1,0 +1,44 @@
+
+env:
+  GH_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  check_upgrade_provider:
+    name: Check for upstream provider upgrades
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install upgrade-provider
+        run: go install github.com/pulumi/upgrade-provider@d59b1400fa8b1f08fc15fe30494b60c1f7b5342d
+        shell: bash
+      - name: "Set up git identity: name"
+        run: git config --global user.name pulumi-bot
+        shell: bash
+      - name: "Set up git identity: email"
+        run: git config --global user.email bot@pulumi.com
+        shell: bash
+      - name: Confidence check One
+        run: "echo we have executed all steps so far, one"
+        shell: bash
+      - name: Run upgrade-provider upstream check
+        id: upstream_version
+        run: |
+          upgrade-provider "$REPO" --kind="check-upstream-version" >> $GITHUB_OUTPUT
+        shell: bash
+      - name: Confidence check Two
+        run: "echo we have executed all steps so far, two"
+        shell: bash
+      - name: Get version number if any
+        id: version_number
+        run: echo ${{ steps.upstream_version.output }} | tail -n 1 | awk -F' ' '{print $NF}'>> $GITHUB_OUTPUT
+        shell: bash
+      - name: Print version number, if any
+        run: echo ${{ steps.version_number.output }}
+        shell: bash
+
+
+name: Check upstream upgrade
+on:
+  workflow_dispatch: {}
+  pull_request_target: {}
+
+
