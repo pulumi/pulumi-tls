@@ -15,12 +15,13 @@
 package tls
 
 import (
+	_ "embed"
 	"fmt"
 	"path/filepath"
 	"unicode"
 
 	"github.com/hashicorp/terraform-provider-tls/shim"
-	tfpfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
+	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi-tls/provider/v5/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
@@ -59,17 +60,21 @@ func tlsResource(mod string, res string) tokens.Type {
 	return tlsType(mod+"/"+fn, res)
 }
 
+var metadata []byte
+
 // Provider returns additional overlaid schema and metadata associated with the tls package.
-func Provider() tfpfbridge.ProviderInfo {
+func Provider() tfbridge.ProviderInfo {
 	info := tfbridge.ProviderInfo{
-		Name:        "tls",
-		Description: "A Pulumi package to create TLS resources in Pulumi programs.",
-		Keywords:    []string{"pulumi", "tls"},
-		License:     "Apache-2.0",
-		Homepage:    "https://pulumi.io",
-		Repository:  "https://github.com/pulumi/pulumi-tls",
-		Version:     version.Version,
-		GitHubOrg:   "hashicorp",
+		P:            pf.ShimProvider(shim.NewProvider()),
+		Name:         "tls",
+		Description:  "A Pulumi package to create TLS resources in Pulumi programs.",
+		Keywords:     []string{"pulumi", "tls"},
+		License:      "Apache-2.0",
+		Homepage:     "https://pulumi.io",
+		Repository:   "https://github.com/pulumi/pulumi-tls",
+		Version:      version.Version,
+		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
+		GitHubOrg:    "hashicorp",
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"tls_cert_request":        {Tok: tlsResource(tlsMod, "CertRequest")},
 			"tls_locally_signed_cert": {Tok: tlsResource(tlsMod, "LocallySignedCert")},
@@ -92,11 +97,15 @@ func Provider() tfpfbridge.ProviderInfo {
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
 			},
 		},
-		Python: &tfbridge.PythonInfo{
-			Requires: map[string]string{
-				"pulumi": ">=3.0.0,<4.0.0",
-			},
-		},
+		Python: (func() *tfbridge.PythonInfo {
+			i := &tfbridge.PythonInfo{
+				Requires: map[string]string{
+					"pulumi": ">=3.0.0,<4.0.0",
+				}}
+			i.PyProject.Enabled = true
+			return i
+		})(),
+
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: filepath.Join(
 				fmt.Sprintf("github.com/pulumi/pulumi-%[1]s/sdk/", tlsPkg),
@@ -116,10 +125,7 @@ func Provider() tfpfbridge.ProviderInfo {
 		},
 	}
 
-	return tfpfbridge.ProviderInfo{
-		ProviderInfo: info,
-		NewProvider:  shim.NewProvider,
-	}
+	return info
 }
 
 func selfSignedCertPreStateUpgradeHook(args tfbridge.PreStateUpgradeHookArgs) (int64, resource.PropertyMap, error) {

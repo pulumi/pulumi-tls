@@ -8,6 +8,7 @@ import (
 	"reflect"
 
 	"errors"
+	"github.com/pulumi/pulumi-tls/sdk/v5/go/tls/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -52,6 +53,7 @@ func NewPrivateKey(ctx *pulumi.Context,
 		"privateKeyPemPkcs8",
 	})
 	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PrivateKey
 	err := ctx.RegisterResource("tls:index/privateKey:PrivateKey", name, args, &resource, opts...)
 	if err != nil {

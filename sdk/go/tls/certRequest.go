@@ -8,6 +8,7 @@ import (
 	"reflect"
 
 	"errors"
+	"github.com/pulumi/pulumi-tls/sdk/v5/go/tls/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -88,6 +89,7 @@ func NewCertRequest(ctx *pulumi.Context,
 		"privateKeyPem",
 	})
 	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CertRequest
 	err := ctx.RegisterResource("tls:index/certRequest:CertRequest", name, args, &resource, opts...)
 	if err != nil {
