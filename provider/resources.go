@@ -61,13 +61,14 @@ func tlsResource(mod string, res string) tokens.Type {
 // Provider returns additional overlaid schema and metadata associated with the tls package.
 func Provider() tfbridge.ProviderInfo {
 	return tfbridge.ProviderInfo{
-		P:           shimv2.NewProvider(shim.NewProvider()),
-		Name:        "tls",
-		Description: "A Pulumi package to create TLS resources in Pulumi programs.",
-		Keywords:    []string{"pulumi", "tls"},
-		License:     "Apache-2.0",
-		Homepage:    "https://pulumi.io",
-		Repository:  "https://github.com/pulumi/pulumi-tls",
+		P:                shimv2.NewProvider(shim.NewProvider()),
+		Name:             "tls",
+		Description:      "A Pulumi package to create TLS resources in Pulumi programs.",
+		Keywords:         []string{"pulumi", "tls"},
+		License:          "Apache-2.0",
+		Homepage:         "https://pulumi.io",
+		Repository:       "https://github.com/pulumi/pulumi-tls",
+		UpstreamRepoPath: "./upstream",
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"tls_cert_request":        {Tok: tlsResource(tlsMod, "CertRequest")},
 			"tls_locally_signed_cert": {Tok: tlsResource(tlsMod, "LocallySignedCert")},
@@ -90,7 +91,8 @@ func Provider() tfbridge.ProviderInfo {
 			i := &tfbridge.PythonInfo{
 				Requires: map[string]string{
 					"pulumi": ">=3.0.0,<4.0.0",
-				}}
+				},
+			}
 			i.PyProject.Enabled = true
 			return i
 		})(),

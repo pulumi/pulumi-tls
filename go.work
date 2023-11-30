@@ -1,0 +1,15 @@
+go 1.21.3
+
+use (
+	./examples
+	./examples/private-key/go
+	./examples/self-signed-cert/go
+	./provider
+	./sdk
+	./sdk/dotnet
+	./sdk/java
+	./sdk/nodejs
+	./sdk/python
+	./upstream
+	./upstream/tools
+)
