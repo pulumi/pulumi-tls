@@ -22,7 +22,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
      * 
      */
-    @Export(name="allowedUses", type=List.class, parameters={String.class})
+    @Export(name="allowedUses", refs={List.class,String.class}, tree="[0,1]")
     private Output<List<String>> allowedUses;
 
     /**
@@ -36,7 +36,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      * 
      */
-    @Export(name="caCertPem", type=String.class, parameters={})
+    @Export(name="caCertPem", refs={String.class}, tree="[0]")
     private Output<String> caCertPem;
 
     /**
@@ -50,7 +50,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
      * 
      */
-    @Export(name="caKeyAlgorithm", type=String.class, parameters={})
+    @Export(name="caKeyAlgorithm", refs={String.class}, tree="[0]")
     private Output<String> caKeyAlgorithm;
 
     /**
@@ -64,7 +64,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      * 
      */
-    @Export(name="caPrivateKeyPem", type=String.class, parameters={})
+    @Export(name="caPrivateKeyPem", refs={String.class}, tree="[0]")
     private Output<String> caPrivateKeyPem;
 
     /**
@@ -78,7 +78,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * Certificate data in PEM (RFC 1421).
      * 
      */
-    @Export(name="certPem", type=String.class, parameters={})
+    @Export(name="certPem", refs={String.class}, tree="[0]")
     private Output<String> certPem;
 
     /**
@@ -92,7 +92,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      * 
      */
-    @Export(name="certRequestPem", type=String.class, parameters={})
+    @Export(name="certRequestPem", refs={String.class}, tree="[0]")
     private Output<String> certRequestPem;
 
     /**
@@ -110,7 +110,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * early renewal period. (default: `0`)
      * 
      */
-    @Export(name="earlyRenewalHours", type=Integer.class, parameters={})
+    @Export(name="earlyRenewalHours", refs={Integer.class}, tree="[0]")
     private Output<Integer> earlyRenewalHours;
 
     /**
@@ -128,7 +128,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      * 
      */
-    @Export(name="isCaCertificate", type=Boolean.class, parameters={})
+    @Export(name="isCaCertificate", refs={Boolean.class}, tree="[0]")
     private Output<Boolean> isCaCertificate;
 
     /**
@@ -142,7 +142,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
      * 
      */
-    @Export(name="readyForRenewal", type=Boolean.class, parameters={})
+    @Export(name="readyForRenewal", refs={Boolean.class}, tree="[0]")
     private Output<Boolean> readyForRenewal;
 
     /**
@@ -156,7 +156,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      * 
      */
-    @Export(name="setSubjectKeyId", type=Boolean.class, parameters={})
+    @Export(name="setSubjectKeyId", refs={Boolean.class}, tree="[0]")
     private Output<Boolean> setSubjectKeyId;
 
     /**
@@ -170,7 +170,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      * 
      */
-    @Export(name="validityEndTime", type=String.class, parameters={})
+    @Export(name="validityEndTime", refs={String.class}, tree="[0]")
     private Output<String> validityEndTime;
 
     /**
@@ -184,7 +184,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * Number of hours, after initial issuing, that the certificate will remain valid for.
      * 
      */
-    @Export(name="validityPeriodHours", type=Integer.class, parameters={})
+    @Export(name="validityPeriodHours", refs={Integer.class}, tree="[0]")
     private Output<Integer> validityPeriodHours;
 
     /**
@@ -198,7 +198,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      * 
      */
-    @Export(name="validityStartTime", type=String.class, parameters={})
+    @Export(name="validityStartTime", refs={String.class}, tree="[0]")
     private Output<String> validityStartTime;
 
     /**

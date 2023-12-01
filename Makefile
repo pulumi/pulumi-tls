@@ -9,9 +9,10 @@ TFGEN := pulumi-tfgen-$(PACK)
 PROVIDER := pulumi-resource-$(PACK)
 VERSION := $(shell pulumictl get version)
 JAVA_GEN := pulumi-java-gen
-JAVA_GEN_VERSION := v0.5.4
+JAVA_GEN_VERSION := v0.9.7
 TESTPARALLELISM := 10
 WORKING_DIR := $(shell pwd)
+PULUMI_CONVERT := 0
 
 development: install_plugins provider build_sdks install_sdks
 
@@ -61,15 +62,18 @@ build_nodejs: upstream
 
 build_python: PYPI_VERSION := $(shell pulumictl get version --language python)
 build_python: upstream
+	rm -rf sdk/python/
 	$(WORKING_DIR)/bin/$(TFGEN) python --out sdk/python/
 	cd sdk/python/ && \
 		printf "module fake_python_module // Exclude this directory from Go tools\n\ngo 1.17\n" > go.mod && \
 		cp ../../README.md . && \
-		python3 setup.py clean --all 2>/dev/null && \
 		rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
-		sed -i.bak -e 's/^VERSION = .*/VERSION = "$(PYPI_VERSION)"/g' -e 's/^PLUGIN_VERSION = .*/PLUGIN_VERSION = "$(VERSION)"/g' ./bin/setup.py && \
-		rm ./bin/setup.py.bak && rm ./bin/go.mod && \
-		cd ./bin && python3 setup.py build sdist
+		sed -i.bak -e 's/^  version = .*/  version = "$(PYPI_VERSION)"/g' ./bin/pyproject.toml && \
+		rm ./bin/pyproject.toml.bak && rm ./bin/go.mod && \
+		python3 -m venv venv && \
+		./venv/bin/python -m pip install build && \
+		cd ./bin && \
+		../venv/bin/python -m build .
 
 clean:
 	rm -rf sdk/{dotnet,nodejs,go,python}
@@ -90,36 +94,67 @@ install_dotnet_sdk:
 install_nodejs_sdk:
 	yarn link --cwd $(WORKING_DIR)/sdk/nodejs/bin
 
-install_plugins:
-	[ -x "$(shell command -v pulumi 2>/dev/null)" ] || curl -fsSL https://get.pulumi.com | sh
-	pulumi plugin install resource aws 4.26.0
+install_plugins: .pulumi/bin/pulumi
+	.pulumi/bin/pulumi plugin install resource aws 4.26.0
 
 lint_provider: provider
 	cd provider && golangci-lint run -c ../.golangci.yml
 
-provider: tfgen install_plugins
+# `make provider_no_deps` builds the provider binary directly, without ensuring that 
+# `cmd/pulumi-resource-tls/schema.json` is valid and up to date. 
+# To create a release ready binary, you should use `make provider`.
+provider_no_deps:
 	(cd provider && go build $(PULUMI_PROVIDER_BUILD_PARALLELISM) -o $(WORKING_DIR)/bin/$(PROVIDER) -ldflags "-X $(PROJECT)/$(VERSION_PATH)=$(VERSION)" $(PROJECT)/$(PROVIDER_PATH)/cmd/$(PROVIDER))
+
+provider: tfgen provider_no_deps
 
 test:
 	cd examples && go test -v -tags=all -parallel $(TESTPARALLELISM) -timeout 2h
 
+test_provider:
+	@echo ""
+	@echo "== test_provider ==================================================================="
+	@echo ""
+	cd provider && go test -v -short ./... -parallel $(TESTPARALLELISM)
+
 tfgen: install_plugins upstream
 	(cd provider && go build $(PULUMI_PROVIDER_BUILD_PARALLELISM) -o $(WORKING_DIR)/bin/$(TFGEN) -ldflags "-X $(PROJECT)/$(VERSION_PATH)=$(VERSION)" $(PROJECT)/$(PROVIDER_PATH)/cmd/$(TFGEN))
-	$(WORKING_DIR)/bin/$(TFGEN) schema --out provider/cmd/$(PROVIDER)
+	PATH=${PWD}/.pulumi/bin:$$PATH PULUMI_CONVERT=$(PULUMI_CONVERT) $(WORKING_DIR)/bin/$(TFGEN) schema --out provider/cmd/$(PROVIDER)
 	(cd provider && VERSION=$(VERSION) go generate cmd/$(PROVIDER)/main.go)
 
 upstream:
 ifneq ("$(wildcard upstream)","")
-	@$(SHELL) ./scripts/upstream.sh "$@" apply
+	scripts/upstream.sh "$@" apply
 endif
 
 upstream.finalize:
-	@$(SHELL) ./scripts/upstream.sh "$@" end_rebase
+	scripts/upstream.sh "$@" end_rebase
 
 upstream.rebase:
-	@$(SHELL) ./scripts/upstream.sh "$@" start_rebase
+	scripts/upstream.sh "$@" start_rebase
 
 bin/pulumi-java-gen:
-	$(shell pulumictl download-binary -n pulumi-language-java -v $(JAVA_GEN_VERSION) -r pulumi/pulumi-java)
+	pulumictl download-binary -n pulumi-language-java -v $(JAVA_GEN_VERSION) -r pulumi/pulumi-java
 
-.PHONY: development build build_sdks install_go_sdk install_java_sdk install_python_sdk install_sdks only_build build_dotnet build_go build_java build_nodejs build_python clean cleanup help install_dotnet_sdk install_nodejs_sdk install_plugins lint_provider provider test tfgen upstream upstream.finalize upstream.rebase
+# To make an immediately observable change to .ci-mgmt.yaml:
+#
+# - Edit .ci-mgmt.yaml
+# - Run make ci-mgmt to apply the change locally.
+#
+ci-mgmt: .ci-mgmt.yaml
+	rm .github/workflows/*.yml # Copied from update-workflows.yml
+	go run github.com/pulumi/ci-mgmt/provider-ci@master generate \
+		--name pulumi/pulumi-$(PACK) \
+		--out . \
+		--template bridged-provider \
+		--config $<
+
+.pulumi/bin/pulumi: .pulumi/version
+	curl -fsSL https://get.pulumi.com | HOME=$(WORKING_DIR) sh -s -- --version $(cat .pulumi/version)
+
+# Compute the version of Pulumi to use by inspecting the Go dependencies of the provider.
+.pulumi/version:
+	@mkdir -p .pulumi
+	@cd provider && go list -f "{{slice .Version 1}}" -m github.com/pulumi/pulumi/pkg/v3 | tee ../$@
+
+.PHONY: development build build_sdks install_go_sdk install_java_sdk install_python_sdk install_sdks only_build build_dotnet build_go build_java build_nodejs build_python clean cleanup help install_dotnet_sdk install_nodejs_sdk install_plugins lint_provider provider provider_no_deps test tfgen upstream upstream.finalize upstream.rebase ci-mgmt test_provider

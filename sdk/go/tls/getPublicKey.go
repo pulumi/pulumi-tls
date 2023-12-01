@@ -7,6 +7,7 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/pulumi/pulumi-tls/sdk/v5/go/tls/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -59,6 +60,7 @@ import (
 //
 // ```
 func GetPublicKey(ctx *pulumi.Context, args *GetPublicKeyArgs, opts ...pulumi.InvokeOption) (*GetPublicKeyResult, error) {
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPublicKeyResult
 	err := ctx.Invoke("tls:index/getPublicKey:getPublicKey", args, &rv, opts...)
 	if err != nil {
