@@ -62,9 +62,7 @@ type CertRequest struct {
 	IpAddresses pulumi.StringArrayOutput `pulumi:"ipAddresses"`
 	// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 	KeyAlgorithm pulumi.StringOutput `pulumi:"keyAlgorithm"`
-	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+	// Private key in PEM (RFC 1421) interpolation function.
 	PrivateKeyPem pulumi.StringOutput `pulumi:"privateKeyPem"`
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subject CertRequestSubjectPtrOutput `pulumi:"subject"`
@@ -120,9 +118,7 @@ type certRequestState struct {
 	IpAddresses []string `pulumi:"ipAddresses"`
 	// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 	KeyAlgorithm *string `pulumi:"keyAlgorithm"`
-	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+	// Private key in PEM (RFC 1421) interpolation function.
 	PrivateKeyPem *string `pulumi:"privateKeyPem"`
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subject *CertRequestSubject `pulumi:"subject"`
@@ -139,9 +135,7 @@ type CertRequestState struct {
 	IpAddresses pulumi.StringArrayInput
 	// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 	KeyAlgorithm pulumi.StringPtrInput
-	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+	// Private key in PEM (RFC 1421) interpolation function.
 	PrivateKeyPem pulumi.StringPtrInput
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subject CertRequestSubjectPtrInput
@@ -158,9 +152,7 @@ type certRequestArgs struct {
 	DnsNames []string `pulumi:"dnsNames"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses []string `pulumi:"ipAddresses"`
-	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+	// Private key in PEM (RFC 1421) interpolation function.
 	PrivateKeyPem string `pulumi:"privateKeyPem"`
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subject *CertRequestSubject `pulumi:"subject"`
@@ -174,9 +166,7 @@ type CertRequestArgs struct {
 	DnsNames pulumi.StringArrayInput
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayInput
-	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+	// Private key in PEM (RFC 1421) interpolation function.
 	PrivateKeyPem pulumi.StringInput
 	// The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
 	Subject CertRequestSubjectPtrInput
@@ -291,9 +281,7 @@ func (o CertRequestOutput) KeyAlgorithm() pulumi.StringOutput {
 	return o.ApplyT(func(v *CertRequest) pulumi.StringOutput { return v.KeyAlgorithm }).(pulumi.StringOutput)
 }
 
-// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+// Private key in PEM (RFC 1421) interpolation function.
 func (o CertRequestOutput) PrivateKeyPem() pulumi.StringOutput {
 	return o.ApplyT(func(v *CertRequest) pulumi.StringOutput { return v.PrivateKeyPem }).(pulumi.StringOutput)
 }

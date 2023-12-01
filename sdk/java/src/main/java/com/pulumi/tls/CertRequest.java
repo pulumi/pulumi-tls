@@ -112,18 +112,14 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
         return this.keyAlgorithm;
     }
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-     * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-     * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+     * Private key in PEM (RFC 1421) interpolation function.
      * 
      */
     @Export(name="privateKeyPem", refs={String.class}, tree="[0]")
     private Output<String> privateKeyPem;
 
     /**
-     * @return Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-     * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-     * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+     * @return Private key in PEM (RFC 1421) interpolation function.
      * 
      */
     public Output<String> privateKeyPem() {

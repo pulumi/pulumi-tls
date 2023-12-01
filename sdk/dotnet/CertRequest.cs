@@ -62,9 +62,7 @@ namespace Pulumi.Tls
         public Output<string> KeyAlgorithm { get; private set; } = null!;
 
         /// <summary>
-        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-        /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-        /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+        /// Private key in PEM (RFC 1421) interpolation function.
         /// </summary>
         [Output("privateKeyPem")]
         public Output<string> PrivateKeyPem { get; private set; } = null!;
@@ -159,9 +157,7 @@ namespace Pulumi.Tls
         private Input<string>? _privateKeyPem;
 
         /// <summary>
-        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-        /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-        /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+        /// Private key in PEM (RFC 1421) interpolation function.
         /// </summary>
         public Input<string>? PrivateKeyPem
         {
@@ -239,9 +235,7 @@ namespace Pulumi.Tls
         private Input<string>? _privateKeyPem;
 
         /// <summary>
-        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-        /// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-        /// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+        /// Private key in PEM (RFC 1421) interpolation function.
         /// </summary>
         public Input<string>? PrivateKeyPem
         {

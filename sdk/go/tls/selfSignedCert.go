@@ -33,9 +33,7 @@ type SelfSignedCert struct {
 	IsCaCertificate pulumi.BoolOutput `pulumi:"isCaCertificate"`
 	// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 	KeyAlgorithm pulumi.StringOutput `pulumi:"keyAlgorithm"`
-	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+	// Private key in PEM (RFC 1421) interpolation function.
 	PrivateKeyPem pulumi.StringOutput `pulumi:"privateKeyPem"`
 	// Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
 	ReadyForRenewal pulumi.BoolOutput `pulumi:"readyForRenewal"`
@@ -119,9 +117,7 @@ type selfSignedCertState struct {
 	IsCaCertificate *bool `pulumi:"isCaCertificate"`
 	// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 	KeyAlgorithm *string `pulumi:"keyAlgorithm"`
-	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+	// Private key in PEM (RFC 1421) interpolation function.
 	PrivateKeyPem *string `pulumi:"privateKeyPem"`
 	// Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
 	ReadyForRenewal *bool `pulumi:"readyForRenewal"`
@@ -160,9 +156,7 @@ type SelfSignedCertState struct {
 	IsCaCertificate pulumi.BoolPtrInput
 	// Name of the algorithm used when generating the private key provided in `privateKeyPem`.
 	KeyAlgorithm pulumi.StringPtrInput
-	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+	// Private key in PEM (RFC 1421) interpolation function.
 	PrivateKeyPem pulumi.StringPtrInput
 	// Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
 	ReadyForRenewal pulumi.BoolPtrInput
@@ -201,9 +195,7 @@ type selfSignedCertArgs struct {
 	IpAddresses []string `pulumi:"ipAddresses"`
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate *bool `pulumi:"isCaCertificate"`
-	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+	// Private key in PEM (RFC 1421) interpolation function.
 	PrivateKeyPem string `pulumi:"privateKeyPem"`
 	// Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 	SetAuthorityKeyId *bool `pulumi:"setAuthorityKeyId"`
@@ -233,9 +225,7 @@ type SelfSignedCertArgs struct {
 	IpAddresses pulumi.StringArrayInput
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
 	IsCaCertificate pulumi.BoolPtrInput
-	// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-	// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-	// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+	// Private key in PEM (RFC 1421) interpolation function.
 	PrivateKeyPem pulumi.StringInput
 	// Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
 	SetAuthorityKeyId pulumi.BoolPtrInput
@@ -375,9 +365,7 @@ func (o SelfSignedCertOutput) KeyAlgorithm() pulumi.StringOutput {
 	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringOutput { return v.KeyAlgorithm }).(pulumi.StringOutput)
 }
 
-// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-// to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-// interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+// Private key in PEM (RFC 1421) interpolation function.
 func (o SelfSignedCertOutput) PrivateKeyPem() pulumi.StringOutput {
 	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringOutput { return v.PrivateKeyPem }).(pulumi.StringOutput)
 }
