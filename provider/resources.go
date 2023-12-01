@@ -15,7 +15,7 @@
 package tls
 
 import (
-	_ "embed"
+	_ "embed" //used to store bridge-metadata.json in the compiled binary
 	"fmt"
 	"path/filepath"
 	"unicode"
