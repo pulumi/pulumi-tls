@@ -9,4 +9,4 @@ javaGenVersion: "v0.9.7"
 team: ecosystem
 license:
   ignore:
-    - github.com/terraform-providers/terraform-provider-tls/shim
+    - github.com/hashicorp/terraform-provider-tls/shim

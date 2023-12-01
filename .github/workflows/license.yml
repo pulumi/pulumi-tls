@@ -56,7 +56,7 @@ jobs:
       with:
         module-path: provider
         ignore-modules: >-
-          github.com/terraform-providers/terraform-provider-tls/shim,
+          github.com/hashicorp/terraform-provider-tls/shim,
           github.com/aead/chacha20,
           github.com/apache/arrow/go/v12,
           github.com/apache/thrift/lib/go/thrift,
