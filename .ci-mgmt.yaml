@@ -1,8 +1,7 @@
 provider: tls
 major-version: 5
 makeTemplate: bridged
-# TODO: Enable this once our tls provider is updated with framework support
-# generate-nightly-test-workflow: true
+generate-nightly-test-workflow: true
 plugins:
   - name: aws
     version: "4.26.0"
