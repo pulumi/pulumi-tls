@@ -7,8 +7,6 @@ require (
 	github.com/pulumi/pulumi/sdk/v3 v3.94.2
 )
 
-require github.com/pulumi/pulumi-tls/sdk/v4 v4.11.1
-
 require (
 	dario.cat/mergo v1.0.0 // indirect
 	github.com/Microsoft/go-winio v0.6.1 // indirect
