@@ -2,7 +2,6 @@
 
 env:
   PROVIDER: tls
-  PR_COMMIT_SHA: ${{ github.event.client_payload.pull_request.head.sha }}
   DOTNETVERSION: |
       6.0.x
       3.1.301
@@ -28,23 +27,14 @@ env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   TF_APPEND_USER_AGENT: pulumi
   TRAVIS_OS_NAME: linux
-
-# This should cancel any previous runs of the same workflow on the same branch which are still running.
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 jobs:
   build_sdk:
-    if: github.event_name == 'repository_dispatch' ||
-      github.event.pull_request.head.repo.full_name == github.repository
     name: build_sdk
     needs: prerequisites
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v3
-      with:
-        ref: ${{ env.PR_COMMIT_SHA }}
     - name: Checkout Scripts Repo
       uses: actions/checkout@v3
       with:
@@ -133,30 +123,8 @@ jobs:
         - dotnet
         - go
         - java
-  comment-notification:
-    if: github.event_name == 'repository_dispatch'
-    name: comment-notification
-    runs-on: ubuntu-latest
-    steps:
-    - id: run-url
-      name: Create URL to the run output
-      run: echo "run-url=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> "$GITHUB_OUTPUT"
-    - name: Update with Result
-      uses: peter-evans/create-or-update-comment@v1
-      with:
-        body: "Please view the PR build: ${{ steps.run-url.outputs.run-url }}"
-        issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
-        repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
-        token: ${{ secrets.PULUMI_BOT_TOKEN }}
-  lint:
-    if: github.event_name == 'repository_dispatch' ||
-      github.event.pull_request.head.repo.full_name == github.repository
-    name: lint
-    uses: ./.github/workflows/lint.yml
-    secrets: inherit
+
   prerequisites:
-    if: github.event_name == 'repository_dispatch' ||
-      github.event.pull_request.head.repo.full_name == github.repository
     name: prerequisites
     runs-on: ubuntu-latest
     steps:
@@ -233,48 +201,7 @@ jobs:
         status: ${{ job.status }}
 
 
-  sentinel:
-    name: sentinel
-    # We would like to be able to specify `sentinel` as the only required job for this
-    # workflow. To do that, we need `sentinel` to succeed only when it is safe to
-    # merge and fail in all other cases.
-    #
-    # We can't use the default `if: success()`, since GitHub interprets a skipped job as a
-    # success, and by default a dependee job failing will skip a dependent job. That means
-    # if a test step fails, then it will skip `sentinel` so GitHub will register
-    # `sentinel` as succeeded.
-    #
-    # GitHub documents `jobs.result` as:
-    #
-    # The result of a job in the reusable workflow. Possible values are success,
-    # failure, cancelled, or skipped.
-    #
-    # GitHub documents `cancelled()` as:
-    #
-    # Returns true if the workflow was canceled.
-    #
-    # Combining these terms gives us an intuitive definition of success:
-    #
-    # We have succeeded when no dependent workflow has failed and the job was
-    # not cancelled.
-    #
-    if: (github.event_name == 'repository_dispatch' ||
-      github.event.pull_request.head.repo.full_name == github.repository) &&
-      ! cancelled()
-    needs:
-    - test
-    - license_check
-    - lint
-    runs-on: ubuntu-latest
-    steps:
-    - name: Workflow is not a success
-      if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
-      run: exit 1
-    - name: Workflow is a success
-      run: echo "🎉🎈🎉🎈🎉"
   test:
-    if: github.event_name == 'repository_dispatch' ||
-      github.event.pull_request.head.repo.full_name == github.repository
     name: test
     needs: build_sdk
     permissions:
@@ -284,8 +211,6 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v3
-      with:
-        ref: ${{ env.PR_COMMIT_SHA }}
     - name: Checkout Scripts Repo
       uses: actions/checkout@v3
       with:
@@ -380,19 +305,7 @@ jobs:
         - dotnet
         - go
         - java
-  license_check:
-    name: License Check
-    uses: ./.github/workflows/license.yml
-    secrets: inherit
-name: run-acceptance-tests
+name: cron
 on:
-  pull_request:
-    branches:
-    - master
-    - v*
-    - feature*
-    paths-ignore:
-    - CHANGELOG.md
-  repository_dispatch:
-    types:
-    - run-acceptance-tests-command
+  schedule:
+  - cron: 0 6 * * *
