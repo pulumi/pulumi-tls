@@ -60,6 +60,7 @@ func tlsResource(mod string, res string) tokens.Type {
 	return tlsType(mod+"/"+fn, res)
 }
 
+//go:embed cmd/pulumi-resource-tls/bridge-metadata.json
 var metadata []byte
 
 // Provider returns additional overlaid schema and metadata associated with the tls package.

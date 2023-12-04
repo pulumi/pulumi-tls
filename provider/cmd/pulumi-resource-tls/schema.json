@@ -294,7 +294,7 @@
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n",
+                    "description": "Private key in PEM (RFC 1421) interpolation function.\n",
                     "secret": true
                 },
                 "subject": {
@@ -331,7 +331,7 @@
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n",
+                    "description": "Private key in PEM (RFC 1421) interpolation function.\n",
                     "secret": true
                 },
                 "subject": {
@@ -376,7 +376,7 @@
                     },
                     "privateKeyPem": {
                         "type": "string",
-                        "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n",
+                        "description": "Private key in PEM (RFC 1421) interpolation function.\n",
                         "secret": true
                     },
                     "subject": {
@@ -742,7 +742,7 @@
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n",
+                    "description": "Private key in PEM (RFC 1421) interpolation function.\n",
                     "secret": true
                 },
                 "readyForRenewal": {
@@ -827,7 +827,7 @@
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n",
+                    "description": "Private key in PEM (RFC 1421) interpolation function.\n",
                     "secret": true
                 },
                 "setAuthorityKeyId": {
@@ -901,7 +901,7 @@
                     },
                     "privateKeyPem": {
                         "type": "string",
-                        "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong\nto. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)\ninterpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.\n",
+                        "description": "Private key in PEM (RFC 1421) interpolation function.\n",
                         "secret": true
                     },
                     "readyForRenewal": {

@@ -23,9 +23,7 @@ class CertRequestArgs:
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a CertRequest resource.
-        :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-               to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-               interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+        :param pulumi.Input[str] private_key_pem: Private key in PEM (RFC 1421) interpolation function.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input['CertRequestSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
@@ -45,9 +43,7 @@ class CertRequestArgs:
     @pulumi.getter(name="privateKeyPem")
     def private_key_pem(self) -> pulumi.Input[str]:
         """
-        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-        to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-        interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+        Private key in PEM (RFC 1421) interpolation function.
         """
         return pulumi.get(self, "private_key_pem")
 
@@ -120,9 +116,7 @@ class _CertRequestState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
-        :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-               to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-               interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+        :param pulumi.Input[str] private_key_pem: Private key in PEM (RFC 1421) interpolation function.
         :param pulumi.Input['CertRequestSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
@@ -193,9 +187,7 @@ class _CertRequestState:
     @pulumi.getter(name="privateKeyPem")
     def private_key_pem(self) -> Optional[pulumi.Input[str]]:
         """
-        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-        to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-        interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+        Private key in PEM (RFC 1421) interpolation function.
         """
         return pulumi.get(self, "private_key_pem")
 
@@ -258,9 +250,7 @@ class CertRequest(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
-        :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-               to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-               interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+        :param pulumi.Input[str] private_key_pem: Private key in PEM (RFC 1421) interpolation function.
         :param pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
@@ -353,9 +343,7 @@ class CertRequest(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
-        :param pulumi.Input[str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-               to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-               interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+        :param pulumi.Input[str] private_key_pem: Private key in PEM (RFC 1421) interpolation function.
         :param pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
@@ -408,9 +396,7 @@ class CertRequest(pulumi.CustomResource):
     @pulumi.getter(name="privateKeyPem")
     def private_key_pem(self) -> pulumi.Output[str]:
         """
-        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-        to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-        interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+        Private key in PEM (RFC 1421) interpolation function.
         """
         return pulumi.get(self, "private_key_pem")
 

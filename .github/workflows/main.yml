@@ -449,11 +449,11 @@ jobs:
         - dotnet
         - go
         - java
-name: master
+name: main
 on:
   push:
     branches:
-    - master
+    - main
     paths-ignore:
     - "**.md"
     tags-ignore:

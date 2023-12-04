@@ -103,18 +103,14 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
     }
 
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-     * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-     * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+     * Private key in PEM (RFC 1421) interpolation function.
      * 
      */
     @Import(name="privateKeyPem", required=true)
     private Output<String> privateKeyPem;
 
     /**
-     * @return Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-     * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-     * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+     * @return Private key in PEM (RFC 1421) interpolation function.
      * 
      */
     public Output<String> privateKeyPem() {
@@ -374,9 +370,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param privateKeyPem Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-         * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-         * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+         * @param privateKeyPem Private key in PEM (RFC 1421) interpolation function.
          * 
          * @return builder
          * 
@@ -387,9 +381,7 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         /**
-         * @param privateKeyPem Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong
-         * to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file)
-         * interpolation function. Only an irreversible secure hash of the private key will be stored in the Terraform state.
+         * @param privateKeyPem Private key in PEM (RFC 1421) interpolation function.
          * 
          * @return builder
          * 
