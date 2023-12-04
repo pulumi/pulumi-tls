@@ -21,7 +21,7 @@ import * as utilities from "./utilities";
  *     privateKeyPem: ed25519_example.privateKeyPem,
  * });
  * const privateKeyOpenssh-example = tls.getPublicKey({
- *     privateKeyOpenssh: fs.readFileSync("~/.ssh/id_rsa_rfc4716"),
+ *     privateKeyOpenssh: fs.readFileSync("~/.ssh/id_rsa_rfc4716", "utf8"),
  * });
  * ```
  */
@@ -103,7 +103,7 @@ export interface GetPublicKeyResult {
  *     privateKeyPem: ed25519_example.privateKeyPem,
  * });
  * const privateKeyOpenssh-example = tls.getPublicKey({
- *     privateKeyOpenssh: fs.readFileSync("~/.ssh/id_rsa_rfc4716"),
+ *     privateKeyOpenssh: fs.readFileSync("~/.ssh/id_rsa_rfc4716", "utf8"),
  * });
  * ```
  */
