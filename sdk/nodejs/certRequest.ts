@@ -15,7 +15,7 @@ import * as utilities from "./utilities";
  * import * as tls from "@pulumi/tls";
  *
  * const example = new tls.CertRequest("example", {
- *     privateKeyPem: fs.readFileSync("private_key.pem"),
+ *     privateKeyPem: fs.readFileSync("private_key.pem", "utf8"),
  *     subject: {
  *         commonName: "example.com",
  *         organization: "ACME Examples, Inc",
