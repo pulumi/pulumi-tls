@@ -130,13 +130,13 @@ public final class GetCertificateResult {
             return this;
         }
         public GetCertificateResult build() {
-            final var o = new GetCertificateResult();
-            o.certificates = certificates;
-            o.content = content;
-            o.id = id;
-            o.url = url;
-            o.verifyChain = verifyChain;
-            return o;
+            final var _resultValue = new GetCertificateResult();
+            _resultValue.certificates = certificates;
+            _resultValue.content = content;
+            _resultValue.id = id;
+            _resultValue.url = url;
+            _resultValue.verifyChain = verifyChain;
+            return _resultValue;
         }
     }
 }

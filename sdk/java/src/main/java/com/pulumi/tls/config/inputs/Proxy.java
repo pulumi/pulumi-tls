@@ -74,12 +74,12 @@ public final class Proxy {
             return this;
         }
         public Proxy build() {
-            final var o = new Proxy();
-            o.fromEnv = fromEnv;
-            o.password = password;
-            o.url = url;
-            o.username = username;
-            return o;
+            final var _resultValue = new Proxy();
+            _resultValue.fromEnv = fromEnv;
+            _resultValue.password = password;
+            _resultValue.url = url;
+            _resultValue.username = username;
+            return _resultValue;
         }
     }
 }

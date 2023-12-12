@@ -204,17 +204,17 @@ public final class CertRequestSubject {
             return streetAddresses(List.of(streetAddresses));
         }
         public CertRequestSubject build() {
-            final var o = new CertRequestSubject();
-            o.commonName = commonName;
-            o.country = country;
-            o.locality = locality;
-            o.organization = organization;
-            o.organizationalUnit = organizationalUnit;
-            o.postalCode = postalCode;
-            o.province = province;
-            o.serialNumber = serialNumber;
-            o.streetAddresses = streetAddresses;
-            return o;
+            final var _resultValue = new CertRequestSubject();
+            _resultValue.commonName = commonName;
+            _resultValue.country = country;
+            _resultValue.locality = locality;
+            _resultValue.organization = organization;
+            _resultValue.organizationalUnit = organizationalUnit;
+            _resultValue.postalCode = postalCode;
+            _resultValue.province = province;
+            _resultValue.serialNumber = serialNumber;
+            _resultValue.streetAddresses = streetAddresses;
+            return _resultValue;
         }
     }
 }
