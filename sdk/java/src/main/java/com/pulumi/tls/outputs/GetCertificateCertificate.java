@@ -240,19 +240,19 @@ public final class GetCertificateCertificate {
             return this;
         }
         public GetCertificateCertificate build() {
-            final var o = new GetCertificateCertificate();
-            o.certPem = certPem;
-            o.isCa = isCa;
-            o.issuer = issuer;
-            o.notAfter = notAfter;
-            o.notBefore = notBefore;
-            o.publicKeyAlgorithm = publicKeyAlgorithm;
-            o.serialNumber = serialNumber;
-            o.sha1Fingerprint = sha1Fingerprint;
-            o.signatureAlgorithm = signatureAlgorithm;
-            o.subject = subject;
-            o.version = version;
-            return o;
+            final var _resultValue = new GetCertificateCertificate();
+            _resultValue.certPem = certPem;
+            _resultValue.isCa = isCa;
+            _resultValue.issuer = issuer;
+            _resultValue.notAfter = notAfter;
+            _resultValue.notBefore = notBefore;
+            _resultValue.publicKeyAlgorithm = publicKeyAlgorithm;
+            _resultValue.serialNumber = serialNumber;
+            _resultValue.sha1Fingerprint = sha1Fingerprint;
+            _resultValue.signatureAlgorithm = signatureAlgorithm;
+            _resultValue.subject = subject;
+            _resultValue.version = version;
+            return _resultValue;
         }
     }
 }

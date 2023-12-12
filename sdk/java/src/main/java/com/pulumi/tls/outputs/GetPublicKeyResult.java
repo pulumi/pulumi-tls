@@ -181,16 +181,16 @@ public final class GetPublicKeyResult {
             return this;
         }
         public GetPublicKeyResult build() {
-            final var o = new GetPublicKeyResult();
-            o.algorithm = algorithm;
-            o.id = id;
-            o.privateKeyOpenssh = privateKeyOpenssh;
-            o.privateKeyPem = privateKeyPem;
-            o.publicKeyFingerprintMd5 = publicKeyFingerprintMd5;
-            o.publicKeyFingerprintSha256 = publicKeyFingerprintSha256;
-            o.publicKeyOpenssh = publicKeyOpenssh;
-            o.publicKeyPem = publicKeyPem;
-            return o;
+            final var _resultValue = new GetPublicKeyResult();
+            _resultValue.algorithm = algorithm;
+            _resultValue.id = id;
+            _resultValue.privateKeyOpenssh = privateKeyOpenssh;
+            _resultValue.privateKeyPem = privateKeyPem;
+            _resultValue.publicKeyFingerprintMd5 = publicKeyFingerprintMd5;
+            _resultValue.publicKeyFingerprintSha256 = publicKeyFingerprintSha256;
+            _resultValue.publicKeyOpenssh = publicKeyOpenssh;
+            _resultValue.publicKeyPem = publicKeyPem;
+            return _resultValue;
         }
     }
 }
