@@ -9,7 +9,7 @@ replace (
 )
 
 require (
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.21.0
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.21.1-0.20231212222643-ba3ef0bc9481
 	github.com/pulumi/pulumi-terraform-bridge/testing v0.0.1
 	github.com/pulumi/pulumi-tls/provider/v5 v5.0.0-00010101000000-000000000000
 	github.com/pulumi/pulumi/pkg/v3 v3.96.2
@@ -164,7 +164,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 // indirect
 	github.com/pulumi/esc v0.6.1-0.20231111193429-44b746a5b3b5 // indirect
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.68.0 // indirect
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.68.1-0.20231212222643-ba3ef0bc9481 // indirect
 	github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.6 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/rogpeppe/go-internal v1.11.0 // indirect
