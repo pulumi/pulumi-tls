@@ -5,6 +5,7 @@ package com.pulumi.tls;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.Objects;
@@ -151,7 +152,9 @@ public final class PrivateKeyArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         public PrivateKeyArgs build() {
-            $.algorithm = Objects.requireNonNull($.algorithm, "expected parameter 'algorithm' to be non-null");
+            if ($.algorithm == null) {
+                throw new MissingRequiredPropertyException("PrivateKeyArgs", "algorithm");
+            }
             return $;
         }
     }

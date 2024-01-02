@@ -4,6 +4,7 @@
 package com.pulumi.tls.outputs;
 
 import com.pulumi.core.annotations.CustomType;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
@@ -142,42 +143,62 @@ public final class GetPublicKeyResult {
 
         @CustomType.Setter
         public Builder algorithm(String algorithm) {
-            this.algorithm = Objects.requireNonNull(algorithm);
+            if (algorithm == null) {
+              throw new MissingRequiredPropertyException("GetPublicKeyResult", "algorithm");
+            }
+            this.algorithm = algorithm;
             return this;
         }
         @CustomType.Setter
         public Builder id(String id) {
-            this.id = Objects.requireNonNull(id);
+            if (id == null) {
+              throw new MissingRequiredPropertyException("GetPublicKeyResult", "id");
+            }
+            this.id = id;
             return this;
         }
         @CustomType.Setter
         public Builder privateKeyOpenssh(@Nullable String privateKeyOpenssh) {
+
             this.privateKeyOpenssh = privateKeyOpenssh;
             return this;
         }
         @CustomType.Setter
         public Builder privateKeyPem(@Nullable String privateKeyPem) {
+
             this.privateKeyPem = privateKeyPem;
             return this;
         }
         @CustomType.Setter
         public Builder publicKeyFingerprintMd5(String publicKeyFingerprintMd5) {
-            this.publicKeyFingerprintMd5 = Objects.requireNonNull(publicKeyFingerprintMd5);
+            if (publicKeyFingerprintMd5 == null) {
+              throw new MissingRequiredPropertyException("GetPublicKeyResult", "publicKeyFingerprintMd5");
+            }
+            this.publicKeyFingerprintMd5 = publicKeyFingerprintMd5;
             return this;
         }
         @CustomType.Setter
         public Builder publicKeyFingerprintSha256(String publicKeyFingerprintSha256) {
-            this.publicKeyFingerprintSha256 = Objects.requireNonNull(publicKeyFingerprintSha256);
+            if (publicKeyFingerprintSha256 == null) {
+              throw new MissingRequiredPropertyException("GetPublicKeyResult", "publicKeyFingerprintSha256");
+            }
+            this.publicKeyFingerprintSha256 = publicKeyFingerprintSha256;
             return this;
         }
         @CustomType.Setter
         public Builder publicKeyOpenssh(String publicKeyOpenssh) {
-            this.publicKeyOpenssh = Objects.requireNonNull(publicKeyOpenssh);
+            if (publicKeyOpenssh == null) {
+              throw new MissingRequiredPropertyException("GetPublicKeyResult", "publicKeyOpenssh");
+            }
+            this.publicKeyOpenssh = publicKeyOpenssh;
             return this;
         }
         @CustomType.Setter
         public Builder publicKeyPem(String publicKeyPem) {
-            this.publicKeyPem = Objects.requireNonNull(publicKeyPem);
+            if (publicKeyPem == null) {
+              throw new MissingRequiredPropertyException("GetPublicKeyResult", "publicKeyPem");
+            }
+            this.publicKeyPem = publicKeyPem;
             return this;
         }
         public GetPublicKeyResult build() {

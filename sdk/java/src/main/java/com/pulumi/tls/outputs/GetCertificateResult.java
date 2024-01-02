@@ -4,6 +4,7 @@
 package com.pulumi.tls.outputs;
 
 import com.pulumi.core.annotations.CustomType;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import com.pulumi.tls.outputs.GetCertificateCertificate;
 import java.lang.Boolean;
 import java.lang.String;
@@ -103,7 +104,10 @@ public final class GetCertificateResult {
 
         @CustomType.Setter
         public Builder certificates(List<GetCertificateCertificate> certificates) {
-            this.certificates = Objects.requireNonNull(certificates);
+            if (certificates == null) {
+              throw new MissingRequiredPropertyException("GetCertificateResult", "certificates");
+            }
+            this.certificates = certificates;
             return this;
         }
         public Builder certificates(GetCertificateCertificate... certificates) {
@@ -111,21 +115,27 @@ public final class GetCertificateResult {
         }
         @CustomType.Setter
         public Builder content(@Nullable String content) {
+
             this.content = content;
             return this;
         }
         @CustomType.Setter
         public Builder id(String id) {
-            this.id = Objects.requireNonNull(id);
+            if (id == null) {
+              throw new MissingRequiredPropertyException("GetCertificateResult", "id");
+            }
+            this.id = id;
             return this;
         }
         @CustomType.Setter
         public Builder url(@Nullable String url) {
+
             this.url = url;
             return this;
         }
         @CustomType.Setter
         public Builder verifyChain(@Nullable Boolean verifyChain) {
+
             this.verifyChain = verifyChain;
             return this;
         }
