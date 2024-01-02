@@ -4,6 +4,7 @@
 package com.pulumi.tls.outputs;
 
 import com.pulumi.core.annotations.CustomType;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
@@ -186,57 +187,90 @@ public final class GetCertificateCertificate {
 
         @CustomType.Setter
         public Builder certPem(String certPem) {
-            this.certPem = Objects.requireNonNull(certPem);
+            if (certPem == null) {
+              throw new MissingRequiredPropertyException("GetCertificateCertificate", "certPem");
+            }
+            this.certPem = certPem;
             return this;
         }
         @CustomType.Setter
         public Builder isCa(Boolean isCa) {
-            this.isCa = Objects.requireNonNull(isCa);
+            if (isCa == null) {
+              throw new MissingRequiredPropertyException("GetCertificateCertificate", "isCa");
+            }
+            this.isCa = isCa;
             return this;
         }
         @CustomType.Setter
         public Builder issuer(String issuer) {
-            this.issuer = Objects.requireNonNull(issuer);
+            if (issuer == null) {
+              throw new MissingRequiredPropertyException("GetCertificateCertificate", "issuer");
+            }
+            this.issuer = issuer;
             return this;
         }
         @CustomType.Setter
         public Builder notAfter(String notAfter) {
-            this.notAfter = Objects.requireNonNull(notAfter);
+            if (notAfter == null) {
+              throw new MissingRequiredPropertyException("GetCertificateCertificate", "notAfter");
+            }
+            this.notAfter = notAfter;
             return this;
         }
         @CustomType.Setter
         public Builder notBefore(String notBefore) {
-            this.notBefore = Objects.requireNonNull(notBefore);
+            if (notBefore == null) {
+              throw new MissingRequiredPropertyException("GetCertificateCertificate", "notBefore");
+            }
+            this.notBefore = notBefore;
             return this;
         }
         @CustomType.Setter
         public Builder publicKeyAlgorithm(String publicKeyAlgorithm) {
-            this.publicKeyAlgorithm = Objects.requireNonNull(publicKeyAlgorithm);
+            if (publicKeyAlgorithm == null) {
+              throw new MissingRequiredPropertyException("GetCertificateCertificate", "publicKeyAlgorithm");
+            }
+            this.publicKeyAlgorithm = publicKeyAlgorithm;
             return this;
         }
         @CustomType.Setter
         public Builder serialNumber(String serialNumber) {
-            this.serialNumber = Objects.requireNonNull(serialNumber);
+            if (serialNumber == null) {
+              throw new MissingRequiredPropertyException("GetCertificateCertificate", "serialNumber");
+            }
+            this.serialNumber = serialNumber;
             return this;
         }
         @CustomType.Setter
         public Builder sha1Fingerprint(String sha1Fingerprint) {
-            this.sha1Fingerprint = Objects.requireNonNull(sha1Fingerprint);
+            if (sha1Fingerprint == null) {
+              throw new MissingRequiredPropertyException("GetCertificateCertificate", "sha1Fingerprint");
+            }
+            this.sha1Fingerprint = sha1Fingerprint;
             return this;
         }
         @CustomType.Setter
         public Builder signatureAlgorithm(String signatureAlgorithm) {
-            this.signatureAlgorithm = Objects.requireNonNull(signatureAlgorithm);
+            if (signatureAlgorithm == null) {
+              throw new MissingRequiredPropertyException("GetCertificateCertificate", "signatureAlgorithm");
+            }
+            this.signatureAlgorithm = signatureAlgorithm;
             return this;
         }
         @CustomType.Setter
         public Builder subject(String subject) {
-            this.subject = Objects.requireNonNull(subject);
+            if (subject == null) {
+              throw new MissingRequiredPropertyException("GetCertificateCertificate", "subject");
+            }
+            this.subject = subject;
             return this;
         }
         @CustomType.Setter
         public Builder version(Integer version) {
-            this.version = Objects.requireNonNull(version);
+            if (version == null) {
+              throw new MissingRequiredPropertyException("GetCertificateCertificate", "version");
+            }
+            this.version = version;
             return this;
         }
         public GetCertificateCertificate build() {

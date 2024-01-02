@@ -5,6 +5,7 @@ package com.pulumi.tls;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
@@ -364,11 +365,21 @@ public final class LocallySignedCertArgs extends com.pulumi.resources.ResourceAr
         }
 
         public LocallySignedCertArgs build() {
-            $.allowedUses = Objects.requireNonNull($.allowedUses, "expected parameter 'allowedUses' to be non-null");
-            $.caCertPem = Objects.requireNonNull($.caCertPem, "expected parameter 'caCertPem' to be non-null");
-            $.caPrivateKeyPem = Objects.requireNonNull($.caPrivateKeyPem, "expected parameter 'caPrivateKeyPem' to be non-null");
-            $.certRequestPem = Objects.requireNonNull($.certRequestPem, "expected parameter 'certRequestPem' to be non-null");
-            $.validityPeriodHours = Objects.requireNonNull($.validityPeriodHours, "expected parameter 'validityPeriodHours' to be non-null");
+            if ($.allowedUses == null) {
+                throw new MissingRequiredPropertyException("LocallySignedCertArgs", "allowedUses");
+            }
+            if ($.caCertPem == null) {
+                throw new MissingRequiredPropertyException("LocallySignedCertArgs", "caCertPem");
+            }
+            if ($.caPrivateKeyPem == null) {
+                throw new MissingRequiredPropertyException("LocallySignedCertArgs", "caPrivateKeyPem");
+            }
+            if ($.certRequestPem == null) {
+                throw new MissingRequiredPropertyException("LocallySignedCertArgs", "certRequestPem");
+            }
+            if ($.validityPeriodHours == null) {
+                throw new MissingRequiredPropertyException("LocallySignedCertArgs", "validityPeriodHours");
+            }
             return $;
         }
     }

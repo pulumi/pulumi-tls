@@ -5,6 +5,7 @@ package com.pulumi.tls;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import com.pulumi.tls.inputs.SelfSignedCertSubjectArgs;
 import java.lang.Boolean;
 import java.lang.Integer;
@@ -506,9 +507,15 @@ public final class SelfSignedCertArgs extends com.pulumi.resources.ResourceArgs 
         }
 
         public SelfSignedCertArgs build() {
-            $.allowedUses = Objects.requireNonNull($.allowedUses, "expected parameter 'allowedUses' to be non-null");
-            $.privateKeyPem = Objects.requireNonNull($.privateKeyPem, "expected parameter 'privateKeyPem' to be non-null");
-            $.validityPeriodHours = Objects.requireNonNull($.validityPeriodHours, "expected parameter 'validityPeriodHours' to be non-null");
+            if ($.allowedUses == null) {
+                throw new MissingRequiredPropertyException("SelfSignedCertArgs", "allowedUses");
+            }
+            if ($.privateKeyPem == null) {
+                throw new MissingRequiredPropertyException("SelfSignedCertArgs", "privateKeyPem");
+            }
+            if ($.validityPeriodHours == null) {
+                throw new MissingRequiredPropertyException("SelfSignedCertArgs", "validityPeriodHours");
+            }
             return $;
         }
     }

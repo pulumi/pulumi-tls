@@ -5,6 +5,7 @@ package com.pulumi.tls;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import com.pulumi.exceptions.MissingRequiredPropertyException;
 import com.pulumi.tls.inputs.CertRequestSubjectArgs;
 import java.lang.String;
 import java.util.List;
@@ -256,7 +257,9 @@ public final class CertRequestArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         public CertRequestArgs build() {
-            $.privateKeyPem = Objects.requireNonNull($.privateKeyPem, "expected parameter 'privateKeyPem' to be non-null");
+            if ($.privateKeyPem == null) {
+                throw new MissingRequiredPropertyException("CertRequestArgs", "privateKeyPem");
+            }
             return $;
         }
     }
