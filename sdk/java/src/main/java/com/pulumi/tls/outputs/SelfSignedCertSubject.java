@@ -157,46 +157,55 @@ public final class SelfSignedCertSubject {
 
         @CustomType.Setter
         public Builder commonName(@Nullable String commonName) {
+
             this.commonName = commonName;
             return this;
         }
         @CustomType.Setter
         public Builder country(@Nullable String country) {
+
             this.country = country;
             return this;
         }
         @CustomType.Setter
         public Builder locality(@Nullable String locality) {
+
             this.locality = locality;
             return this;
         }
         @CustomType.Setter
         public Builder organization(@Nullable String organization) {
+
             this.organization = organization;
             return this;
         }
         @CustomType.Setter
         public Builder organizationalUnit(@Nullable String organizationalUnit) {
+
             this.organizationalUnit = organizationalUnit;
             return this;
         }
         @CustomType.Setter
         public Builder postalCode(@Nullable String postalCode) {
+
             this.postalCode = postalCode;
             return this;
         }
         @CustomType.Setter
         public Builder province(@Nullable String province) {
+
             this.province = province;
             return this;
         }
         @CustomType.Setter
         public Builder serialNumber(@Nullable String serialNumber) {
+
             this.serialNumber = serialNumber;
             return this;
         }
         @CustomType.Setter
         public Builder streetAddresses(@Nullable List<String> streetAddresses) {
+
             this.streetAddresses = streetAddresses;
             return this;
         }
