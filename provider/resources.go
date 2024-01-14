@@ -15,17 +15,20 @@
 package tls
 
 import (
-	_ "embed" //used to store bridge-metadata.json in the compiled binary
 	"fmt"
 	"path/filepath"
 	"unicode"
 
+	_ "embed" //used to store bridge-metadata.json in the compiled binary
+
 	"github.com/hashicorp/terraform-provider-tls/shim"
+
 	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	"github.com/pulumi/pulumi-tls/provider/v5/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
+
+	"github.com/pulumi/pulumi-tls/provider/v5/pkg/version"
 )
 
 // all of the tls token components used below.
