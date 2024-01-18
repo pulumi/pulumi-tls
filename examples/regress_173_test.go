@@ -21,8 +21,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	testutils "github.com/pulumi/providertest/replay"
 	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
-	testutils "github.com/pulumi/pulumi-terraform-bridge/testing/x"
 	provider "github.com/pulumi/pulumi-tls/provider/v5"
 	"github.com/pulumi/pulumi-tls/provider/v5/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
@@ -66,8 +66,7 @@ func TestRegress173(t *testing.T) {
   "response": {
     "changes": "DIFF_SOME",
     "diffs": [
-      "privateKeyPem",
-      "subject"
+      "privateKeyPem"
     ]
   },
   "metadata": {
