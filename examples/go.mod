@@ -1,6 +1,8 @@
 module github.com/pulumi/pulumi-tls/examples/v5
 
-go 1.21
+go 1.21.0
+
+toolchain go1.21.3
 
 replace (
 	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20230912190043-e6d96b3b8f7e
@@ -9,8 +11,8 @@ replace (
 )
 
 require (
+	github.com/pulumi/providertest v0.0.7
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.23.1-0.20240117212351-2890b4f76530
-	github.com/pulumi/pulumi-terraform-bridge/testing v0.0.1
 	github.com/pulumi/pulumi-tls/provider/v5 v5.0.0-00010101000000-000000000000
 	github.com/pulumi/pulumi/pkg/v3 v3.101.1
 	github.com/pulumi/pulumi/sdk/v3 v3.101.1
