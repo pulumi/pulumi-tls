@@ -16,30 +16,62 @@ public final class ProviderProxyArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ProviderProxyArgs Empty = new ProviderProxyArgs();
 
+    /**
+     * When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+     * 
+     */
     @Import(name="fromEnv")
     private @Nullable Output<Boolean> fromEnv;
 
+    /**
+     * @return When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+     * 
+     */
     public Optional<Output<Boolean>> fromEnv() {
         return Optional.ofNullable(this.fromEnv);
     }
 
+    /**
+     * Password used for Basic authentication against the Proxy.
+     * 
+     */
     @Import(name="password")
     private @Nullable Output<String> password;
 
+    /**
+     * @return Password used for Basic authentication against the Proxy.
+     * 
+     */
     public Optional<Output<String>> password() {
         return Optional.ofNullable(this.password);
     }
 
+    /**
+     * URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+     * 
+     */
     @Import(name="url")
     private @Nullable Output<String> url;
 
+    /**
+     * @return URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+     * 
+     */
     public Optional<Output<String>> url() {
         return Optional.ofNullable(this.url);
     }
 
+    /**
+     * Username (or Token) used for Basic authentication against the Proxy.
+     * 
+     */
     @Import(name="username")
     private @Nullable Output<String> username;
 
+    /**
+     * @return Username (or Token) used for Basic authentication against the Proxy.
+     * 
+     */
     public Optional<Output<String>> username() {
         return Optional.ofNullable(this.username);
     }
@@ -71,38 +103,86 @@ public final class ProviderProxyArgs extends com.pulumi.resources.ResourceArgs {
             $ = new ProviderProxyArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param fromEnv When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+         * 
+         * @return builder
+         * 
+         */
         public Builder fromEnv(@Nullable Output<Boolean> fromEnv) {
             $.fromEnv = fromEnv;
             return this;
         }
 
+        /**
+         * @param fromEnv When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+         * 
+         * @return builder
+         * 
+         */
         public Builder fromEnv(Boolean fromEnv) {
             return fromEnv(Output.of(fromEnv));
         }
 
+        /**
+         * @param password Password used for Basic authentication against the Proxy.
+         * 
+         * @return builder
+         * 
+         */
         public Builder password(@Nullable Output<String> password) {
             $.password = password;
             return this;
         }
 
+        /**
+         * @param password Password used for Basic authentication against the Proxy.
+         * 
+         * @return builder
+         * 
+         */
         public Builder password(String password) {
             return password(Output.of(password));
         }
 
+        /**
+         * @param url URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder url(@Nullable Output<String> url) {
             $.url = url;
             return this;
         }
 
+        /**
+         * @param url URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+         * 
+         * @return builder
+         * 
+         */
         public Builder url(String url) {
             return url(Output.of(url));
         }
 
+        /**
+         * @param username Username (or Token) used for Basic authentication against the Proxy.
+         * 
+         * @return builder
+         * 
+         */
         public Builder username(@Nullable Output<String> username) {
             $.username = username;
             return this;
         }
 
+        /**
+         * @param username Username (or Token) used for Basic authentication against the Proxy.
+         * 
+         * @return builder
+         * 
+         */
         public Builder username(String username) {
             return username(Output.of(username));
         }
