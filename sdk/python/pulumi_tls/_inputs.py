@@ -173,6 +173,12 @@ class ProviderProxyArgs:
                  password: Optional[pulumi.Input[str]] = None,
                  url: Optional[pulumi.Input[str]] = None,
                  username: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] from_env: When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+        :param pulumi.Input[str] password: Password used for Basic authentication against the Proxy.
+        :param pulumi.Input[str] url: URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+        :param pulumi.Input[str] username: Username (or Token) used for Basic authentication against the Proxy.
+        """
         if from_env is not None:
             pulumi.set(__self__, "from_env", from_env)
         if password is not None:
@@ -185,6 +191,9 @@ class ProviderProxyArgs:
     @property
     @pulumi.getter(name="fromEnv")
     def from_env(self) -> Optional[pulumi.Input[bool]]:
+        """
+        When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+        """
         return pulumi.get(self, "from_env")
 
     @from_env.setter
@@ -194,6 +203,9 @@ class ProviderProxyArgs:
     @property
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        Password used for Basic authentication against the Proxy.
+        """
         return pulumi.get(self, "password")
 
     @password.setter
@@ -203,6 +215,9 @@ class ProviderProxyArgs:
     @property
     @pulumi.getter
     def url(self) -> Optional[pulumi.Input[str]]:
+        """
+        URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+        """
         return pulumi.get(self, "url")
 
     @url.setter
@@ -212,6 +227,9 @@ class ProviderProxyArgs:
     @property
     @pulumi.getter
     def username(self) -> Optional[pulumi.Input[str]]:
+        """
+        Username (or Token) used for Basic authentication against the Proxy.
+        """
         return pulumi.get(self, "username")
 
     @username.setter

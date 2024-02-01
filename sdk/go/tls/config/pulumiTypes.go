@@ -14,9 +14,13 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type Proxy struct {
-	FromEnv  *bool   `pulumi:"fromEnv"`
+	// When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+	FromEnv *bool `pulumi:"fromEnv"`
+	// Password used for Basic authentication against the Proxy.
 	Password *string `pulumi:"password"`
-	Url      *string `pulumi:"url"`
+	// URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+	Url *string `pulumi:"url"`
+	// Username (or Token) used for Basic authentication against the Proxy.
 	Username *string `pulumi:"username"`
 }
 
@@ -32,9 +36,13 @@ type ProxyInput interface {
 }
 
 type ProxyArgs struct {
-	FromEnv  pulumi.BoolPtrInput   `pulumi:"fromEnv"`
+	// When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+	FromEnv pulumi.BoolPtrInput `pulumi:"fromEnv"`
+	// Password used for Basic authentication against the Proxy.
 	Password pulumi.StringPtrInput `pulumi:"password"`
-	Url      pulumi.StringPtrInput `pulumi:"url"`
+	// URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+	Url pulumi.StringPtrInput `pulumi:"url"`
+	// Username (or Token) used for Basic authentication against the Proxy.
 	Username pulumi.StringPtrInput `pulumi:"username"`
 }
 
@@ -64,18 +72,22 @@ func (o ProxyOutput) ToProxyOutputWithContext(ctx context.Context) ProxyOutput {
 	return o
 }
 
+// When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
 func (o ProxyOutput) FromEnv() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v Proxy) *bool { return v.FromEnv }).(pulumi.BoolPtrOutput)
 }
 
+// Password used for Basic authentication against the Proxy.
 func (o ProxyOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v Proxy) *string { return v.Password }).(pulumi.StringPtrOutput)
 }
 
+// URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
 func (o ProxyOutput) Url() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v Proxy) *string { return v.Url }).(pulumi.StringPtrOutput)
 }
 
+// Username (or Token) used for Basic authentication against the Proxy.
 func (o ProxyOutput) Username() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v Proxy) *string { return v.Username }).(pulumi.StringPtrOutput)
 }
