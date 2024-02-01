@@ -20,6 +20,12 @@ class Proxy(dict):
                  password: Optional[str] = None,
                  url: Optional[str] = None,
                  username: Optional[str] = None):
+        """
+        :param bool from_env: When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+        :param str password: Password used for Basic authentication against the Proxy.
+        :param str url: URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+        :param str username: Username (or Token) used for Basic authentication against the Proxy.
+        """
         if from_env is not None:
             pulumi.set(__self__, "from_env", from_env)
         if password is not None:
@@ -32,21 +38,33 @@ class Proxy(dict):
     @property
     @pulumi.getter(name="fromEnv")
     def from_env(self) -> Optional[bool]:
+        """
+        When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+        """
         return pulumi.get(self, "from_env")
 
     @property
     @pulumi.getter
     def password(self) -> Optional[str]:
+        """
+        Password used for Basic authentication against the Proxy.
+        """
         return pulumi.get(self, "password")
 
     @property
     @pulumi.getter
     def url(self) -> Optional[str]:
+        """
+        URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+        """
         return pulumi.get(self, "url")
 
     @property
     @pulumi.getter
     def username(self) -> Optional[str]:
+        """
+        Username (or Token) used for Basic authentication against the Proxy.
+        """
         return pulumi.get(self, "username")
 
 

@@ -12,11 +12,18 @@ namespace Pulumi.Tls.Inputs
 
     public sealed class ProviderProxyArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+        /// </summary>
         [Input("fromEnv")]
         public Input<bool>? FromEnv { get; set; }
 
         [Input("password")]
         private Input<string>? _password;
+
+        /// <summary>
+        /// Password used for Basic authentication against the Proxy.
+        /// </summary>
         public Input<string>? Password
         {
             get => _password;
@@ -27,9 +34,15 @@ namespace Pulumi.Tls.Inputs
             }
         }
 
+        /// <summary>
+        /// URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+        /// </summary>
         [Input("url")]
         public Input<string>? Url { get; set; }
 
+        /// <summary>
+        /// Username (or Token) used for Basic authentication against the Proxy.
+        /// </summary>
         [Input("username")]
         public Input<string>? Username { get; set; }
 
