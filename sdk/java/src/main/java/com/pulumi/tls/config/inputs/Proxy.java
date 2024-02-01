@@ -12,21 +12,53 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class Proxy {
+    /**
+     * @return When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+     * 
+     */
     private @Nullable Boolean fromEnv;
+    /**
+     * @return Password used for Basic authentication against the Proxy.
+     * 
+     */
     private @Nullable String password;
+    /**
+     * @return URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+     * 
+     */
     private @Nullable String url;
+    /**
+     * @return Username (or Token) used for Basic authentication against the Proxy.
+     * 
+     */
     private @Nullable String username;
 
     private Proxy() {}
+    /**
+     * @return When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+     * 
+     */
     public Optional<Boolean> fromEnv() {
         return Optional.ofNullable(this.fromEnv);
     }
+    /**
+     * @return Password used for Basic authentication against the Proxy.
+     * 
+     */
     public Optional<String> password() {
         return Optional.ofNullable(this.password);
     }
+    /**
+     * @return URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+     * 
+     */
     public Optional<String> url() {
         return Optional.ofNullable(this.url);
     }
+    /**
+     * @return Username (or Token) used for Basic authentication against the Proxy.
+     * 
+     */
     public Optional<String> username() {
         return Optional.ofNullable(this.username);
     }

@@ -45,9 +45,21 @@ export interface CertRequestSubject {
 }
 
 export interface ProviderProxy {
+    /**
+     * When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+     */
     fromEnv?: pulumi.Input<boolean>;
+    /**
+     * Password used for Basic authentication against the Proxy.
+     */
     password?: pulumi.Input<string>;
+    /**
+     * URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+     */
     url?: pulumi.Input<string>;
+    /**
+     * Username (or Token) used for Basic authentication against the Proxy.
+     */
     username?: pulumi.Input<string>;
 }
 
