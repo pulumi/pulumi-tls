@@ -234,6 +234,7 @@ class CertRequest(pulumi.CustomResource):
         """
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_tls as tls
@@ -245,6 +246,7 @@ class CertRequest(pulumi.CustomResource):
                 organization="ACME Examples, Inc",
             ))
         ```
+        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -263,6 +265,7 @@ class CertRequest(pulumi.CustomResource):
         """
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_tls as tls
@@ -274,6 +277,7 @@ class CertRequest(pulumi.CustomResource):
                 organization="ACME Examples, Inc",
             ))
         ```
+        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param CertRequestArgs args: The arguments to use to populate this resource's properties.
