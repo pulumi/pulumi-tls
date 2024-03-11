@@ -11,6 +11,7 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as fs from "fs";
@@ -24,6 +25,7 @@ import * as utilities from "./utilities";
  *     privateKeyOpenssh: fs.readFileSync("~/.ssh/id_rsa_rfc4716", "utf8"),
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPublicKey(args?: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
     args = args || {};
@@ -93,6 +95,7 @@ export interface GetPublicKeyResult {
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as fs from "fs";
@@ -106,6 +109,7 @@ export interface GetPublicKeyResult {
  *     privateKeyOpenssh: fs.readFileSync("~/.ssh/id_rsa_rfc4716", "utf8"),
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPublicKeyOutput(args?: GetPublicKeyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublicKeyResult> {
     return pulumi.output(args).apply((a: any) => getPublicKey(a, opts))
