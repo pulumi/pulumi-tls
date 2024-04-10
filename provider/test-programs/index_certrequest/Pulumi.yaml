@@ -1,0 +1,21 @@
+name: index_certrequestrENOzEFrqIDU
+runtime: yaml
+description: ""
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: https://www.pulumi.com/ai/api/project/77240274-5e66-4e3f-a9e2-0861a946e7d4.zip
+resources:
+  certRequest:
+    properties:
+      dnsNames:
+        - example.com
+        - www.example.com
+      privateKeyPem: ${privateKey.privateKeyPem}
+      subject:
+        commonName: example.com
+    type: tls:CertRequest
+  privateKey:
+    properties:
+      algorithm: RSA
+    type: tls:PrivateKey

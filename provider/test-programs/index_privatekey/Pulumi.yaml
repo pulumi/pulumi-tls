@@ -1,0 +1,13 @@
+name: index_privatekeyTaPFV5Tk3Klm
+runtime: yaml
+description: ""
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: https://www.pulumi.com/ai/api/project/b536a62c-82d6-4798-8bec-06aca4a73eac.zip
+resources:
+  tls-private-key:
+    properties:
+      algorithm: RSA
+      rsaBits: 2048
+    type: tls:PrivateKey
