@@ -5,8 +5,8 @@ go 1.21
 require (
 	github.com/hashicorp/terraform-provider-tls/shim v0.0.0
 	github.com/pulumi/providertest v0.0.11
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.33.0
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.80.0
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.33.1-0.20240411141225-91f57ce6e23a
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.80.1-0.20240411141225-91f57ce6e23a
 	github.com/pulumi/pulumi/sdk/v3 v3.112.0
 	github.com/stretchr/testify v1.9.0
 )
