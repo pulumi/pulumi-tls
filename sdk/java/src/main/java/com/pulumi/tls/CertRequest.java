@@ -19,42 +19,6 @@ import javax.annotation.Nullable;
 /**
  * ## Example Usage
  * 
- * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
- * package generated_program;
- * 
- * import com.pulumi.Context;
- * import com.pulumi.Pulumi;
- * import com.pulumi.core.Output;
- * import com.pulumi.tls.CertRequest;
- * import com.pulumi.tls.CertRequestArgs;
- * import com.pulumi.tls.inputs.CertRequestSubjectArgs;
- * import java.util.List;
- * import java.util.ArrayList;
- * import java.util.Map;
- * import java.io.File;
- * import java.nio.file.Files;
- * import java.nio.file.Paths;
- * 
- * public class App {
- *     public static void main(String[] args) {
- *         Pulumi.run(App::stack);
- *     }
- * 
- *     public static void stack(Context ctx) {
- *         var example = new CertRequest(&#34;example&#34;, CertRequestArgs.builder()        
- *             .privateKeyPem(Files.readString(Paths.get(&#34;private_key.pem&#34;)))
- *             .subject(CertRequestSubjectArgs.builder()
- *                 .commonName(&#34;example.com&#34;)
- *                 .organization(&#34;ACME Examples, Inc&#34;)
- *                 .build())
- *             .build());
- * 
- *     }
- * }
- * ```
- * &lt;!--End PulumiCodeChooser --&gt;
- * 
  */
 @ResourceType(type="tls:index/certRequest:CertRequest")
 public class CertRequest extends com.pulumi.resources.CustomResource {
