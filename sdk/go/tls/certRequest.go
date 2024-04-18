@@ -13,6 +13,43 @@ import (
 )
 
 // ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi-std/sdk/go/std"
+//	"github.com/pulumi/pulumi-tls/sdk/v5/go/tls"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			invokeFile, err := std.File(ctx, &std.FileArgs{
+//				Input: "private_key.pem",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = tls.NewCertRequest(ctx, "example", &tls.CertRequestArgs{
+//				PrivateKeyPem: invokeFile.Result,
+//				Subject: &tls.CertRequestSubjectArgs{
+//					CommonName:   pulumi.String("example.com"),
+//					Organization: pulumi.String("ACME Examples, Inc"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
 type CertRequest struct {
 	pulumi.CustomResourceState
 

@@ -8,6 +8,24 @@ import * as utilities from "./utilities";
 
 /**
  * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as std from "@pulumi/std";
+ * import * as tls from "@pulumi/tls";
+ *
+ * const example = new tls.CertRequest("example", {
+ *     privateKeyPem: std.file({
+ *         input: "private_key.pem",
+ *     }).then(invoke => invoke.result),
+ *     subject: {
+ *         commonName: "example.com",
+ *         organization: "ACME Examples, Inc",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class CertRequest extends pulumi.CustomResource {
     /**

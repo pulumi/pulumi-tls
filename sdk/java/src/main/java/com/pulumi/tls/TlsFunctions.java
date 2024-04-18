@@ -40,6 +40,53 @@ public final class TlsFunctions {
      * 
      * Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
      * 
+     * ## Example Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * ```java
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.tls.PrivateKey;
+     * import com.pulumi.tls.PrivateKeyArgs;
+     * import com.pulumi.tls.TlsFunctions;
+     * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         var ed25519_example = new PrivateKey(&#34;ed25519-example&#34;, PrivateKeyArgs.builder()        
+     *             .algorithm(&#34;ED25519&#34;)
+     *             .build());
+     * 
+     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyPem(ed25519_example.privateKeyPem())
+     *             .build());
+     * 
+     *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
+     *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
+     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .build()).result())
+     *             .build());
+     * 
+     *     }
+     * }
+     * ```
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
      */
     public static Output<GetPublicKeyResult> getPublicKey() {
         return getPublicKey(GetPublicKeyArgs.Empty, InvokeOptions.Empty);
@@ -48,6 +95,53 @@ public final class TlsFunctions {
      * Get a public key from a PEM-encoded private key.
      * 
      * Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
+     * 
+     * ## Example Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * ```java
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.tls.PrivateKey;
+     * import com.pulumi.tls.PrivateKeyArgs;
+     * import com.pulumi.tls.TlsFunctions;
+     * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         var ed25519_example = new PrivateKey(&#34;ed25519-example&#34;, PrivateKeyArgs.builder()        
+     *             .algorithm(&#34;ED25519&#34;)
+     *             .build());
+     * 
+     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyPem(ed25519_example.privateKeyPem())
+     *             .build());
+     * 
+     *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
+     *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
+     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .build()).result())
+     *             .build());
+     * 
+     *     }
+     * }
+     * ```
+     * &lt;!--End PulumiCodeChooser --&gt;
      * 
      */
     public static CompletableFuture<GetPublicKeyResult> getPublicKeyPlain() {
@@ -58,6 +152,53 @@ public final class TlsFunctions {
      * 
      * Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
      * 
+     * ## Example Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * ```java
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.tls.PrivateKey;
+     * import com.pulumi.tls.PrivateKeyArgs;
+     * import com.pulumi.tls.TlsFunctions;
+     * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         var ed25519_example = new PrivateKey(&#34;ed25519-example&#34;, PrivateKeyArgs.builder()        
+     *             .algorithm(&#34;ED25519&#34;)
+     *             .build());
+     * 
+     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyPem(ed25519_example.privateKeyPem())
+     *             .build());
+     * 
+     *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
+     *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
+     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .build()).result())
+     *             .build());
+     * 
+     *     }
+     * }
+     * ```
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
      */
     public static Output<GetPublicKeyResult> getPublicKey(GetPublicKeyArgs args) {
         return getPublicKey(args, InvokeOptions.Empty);
@@ -66,6 +207,53 @@ public final class TlsFunctions {
      * Get a public key from a PEM-encoded private key.
      * 
      * Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
+     * 
+     * ## Example Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * ```java
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.tls.PrivateKey;
+     * import com.pulumi.tls.PrivateKeyArgs;
+     * import com.pulumi.tls.TlsFunctions;
+     * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         var ed25519_example = new PrivateKey(&#34;ed25519-example&#34;, PrivateKeyArgs.builder()        
+     *             .algorithm(&#34;ED25519&#34;)
+     *             .build());
+     * 
+     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyPem(ed25519_example.privateKeyPem())
+     *             .build());
+     * 
+     *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
+     *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
+     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .build()).result())
+     *             .build());
+     * 
+     *     }
+     * }
+     * ```
+     * &lt;!--End PulumiCodeChooser --&gt;
      * 
      */
     public static CompletableFuture<GetPublicKeyResult> getPublicKeyPlain(GetPublicKeyPlainArgs args) {
@@ -76,6 +264,53 @@ public final class TlsFunctions {
      * 
      * Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
      * 
+     * ## Example Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * ```java
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.tls.PrivateKey;
+     * import com.pulumi.tls.PrivateKeyArgs;
+     * import com.pulumi.tls.TlsFunctions;
+     * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         var ed25519_example = new PrivateKey(&#34;ed25519-example&#34;, PrivateKeyArgs.builder()        
+     *             .algorithm(&#34;ED25519&#34;)
+     *             .build());
+     * 
+     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyPem(ed25519_example.privateKeyPem())
+     *             .build());
+     * 
+     *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
+     *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
+     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .build()).result())
+     *             .build());
+     * 
+     *     }
+     * }
+     * ```
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
      */
     public static Output<GetPublicKeyResult> getPublicKey(GetPublicKeyArgs args, InvokeOptions options) {
         return Deployment.getInstance().invoke("tls:index/getPublicKey:getPublicKey", TypeShape.of(GetPublicKeyResult.class), args, Utilities.withVersion(options));
@@ -84,6 +319,53 @@ public final class TlsFunctions {
      * Get a public key from a PEM-encoded private key.
      * 
      * Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
+     * 
+     * ## Example Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * ```java
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.tls.PrivateKey;
+     * import com.pulumi.tls.PrivateKeyArgs;
+     * import com.pulumi.tls.TlsFunctions;
+     * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         var ed25519_example = new PrivateKey(&#34;ed25519-example&#34;, PrivateKeyArgs.builder()        
+     *             .algorithm(&#34;ED25519&#34;)
+     *             .build());
+     * 
+     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyPem(ed25519_example.privateKeyPem())
+     *             .build());
+     * 
+     *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
+     *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
+     *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
+     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .build()).result())
+     *             .build());
+     * 
+     *     }
+     * }
+     * ```
+     * &lt;!--End PulumiCodeChooser --&gt;
      * 
      */
     public static CompletableFuture<GetPublicKeyResult> getPublicKeyPlain(GetPublicKeyPlainArgs args, InvokeOptions options) {

@@ -15,6 +15,42 @@ namespace Pulumi.Tls
         /// Get a public key from a PEM-encoded private key.
         /// 
         /// Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Std = Pulumi.Std;
+        /// using Tls = Pulumi.Tls;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var ed25519_example = new Tls.PrivateKey("ed25519-example", new()
+        ///     {
+        ///         Algorithm = "ED25519",
+        ///     });
+        /// 
+        ///     // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+        ///     var privateKeyPem_example = Tls.GetPublicKey.Invoke(new()
+        ///     {
+        ///         PrivateKeyPem = ed25519_example.PrivateKeyPem,
+        ///     });
+        /// 
+        ///     // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
+        ///     var privateKeyOpenssh_example = Tls.GetPublicKey.Invoke(new()
+        ///     {
+        ///         PrivateKeyOpenssh = Std.File.Invoke(new()
+        ///         {
+        ///             Input = "~/.ssh/id_rsa_rfc4716",
+        ///         }).Result,
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPublicKeyResult> InvokeAsync(GetPublicKeyArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyArgs(), options.WithDefaults());
@@ -23,6 +59,42 @@ namespace Pulumi.Tls
         /// Get a public key from a PEM-encoded private key.
         /// 
         /// Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Std = Pulumi.Std;
+        /// using Tls = Pulumi.Tls;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var ed25519_example = new Tls.PrivateKey("ed25519-example", new()
+        ///     {
+        ///         Algorithm = "ED25519",
+        ///     });
+        /// 
+        ///     // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+        ///     var privateKeyPem_example = Tls.GetPublicKey.Invoke(new()
+        ///     {
+        ///         PrivateKeyPem = ed25519_example.PrivateKeyPem,
+        ///     });
+        /// 
+        ///     // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
+        ///     var privateKeyOpenssh_example = Tls.GetPublicKey.Invoke(new()
+        ///     {
+        ///         PrivateKeyOpenssh = Std.File.Invoke(new()
+        ///         {
+        ///             Input = "~/.ssh/id_rsa_rfc4716",
+        ///         }).Result,
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPublicKeyResult> Invoke(GetPublicKeyInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPublicKeyResult>("tls:index/getPublicKey:getPublicKey", args ?? new GetPublicKeyInvokeArgs(), options.WithDefaults());

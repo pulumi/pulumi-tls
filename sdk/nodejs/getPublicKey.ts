@@ -8,6 +8,28 @@ import * as utilities from "./utilities";
  * Get a public key from a PEM-encoded private key.
  *
  * Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as std from "@pulumi/std";
+ * import * as tls from "@pulumi/tls";
+ *
+ * const ed25519_example = new tls.PrivateKey("ed25519-example", {algorithm: "ED25519"});
+ * // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+ * const privateKeyPem-example = tls.getPublicKeyOutput({
+ *     privateKeyPem: ed25519_example.privateKeyPem,
+ * });
+ * // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
+ * const privateKeyOpenssh-example = std.file({
+ *     input: "~/.ssh/id_rsa_rfc4716",
+ * }).then(invoke => tls.getPublicKey({
+ *     privateKeyOpenssh: invoke.result,
+ * }));
+ * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPublicKey(args?: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
     args = args || {};
@@ -74,6 +96,28 @@ export interface GetPublicKeyResult {
  * Get a public key from a PEM-encoded private key.
  *
  * Use this data source to get the public key from a [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) or [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) formatted private key, for use in other resources.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as std from "@pulumi/std";
+ * import * as tls from "@pulumi/tls";
+ *
+ * const ed25519_example = new tls.PrivateKey("ed25519-example", {algorithm: "ED25519"});
+ * // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+ * const privateKeyPem-example = tls.getPublicKeyOutput({
+ *     privateKeyPem: ed25519_example.privateKeyPem,
+ * });
+ * // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
+ * const privateKeyOpenssh-example = std.file({
+ *     input: "~/.ssh/id_rsa_rfc4716",
+ * }).then(invoke => tls.getPublicKey({
+ *     privateKeyOpenssh: invoke.result,
+ * }));
+ * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPublicKeyOutput(args?: GetPublicKeyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublicKeyResult> {
     return pulumi.output(args).apply((a: any) => getPublicKey(a, opts))

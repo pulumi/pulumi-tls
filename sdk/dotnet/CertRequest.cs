@@ -11,6 +11,33 @@ namespace Pulumi.Tls
 {
     /// <summary>
     /// ## Example Usage
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Std = Pulumi.Std;
+    /// using Tls = Pulumi.Tls;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tls.CertRequest("example", new()
+    ///     {
+    ///         PrivateKeyPem = Std.File.Invoke(new()
+    ///         {
+    ///             Input = "private_key.pem",
+    ///         }).Apply(invoke =&gt; invoke.Result),
+    ///         Subject = new Tls.Inputs.CertRequestSubjectArgs
+    ///         {
+    ///             CommonName = "example.com",
+    ///             Organization = "ACME Examples, Inc",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TlsResourceType("tls:index/certRequest:CertRequest")]
     public partial class CertRequest : global::Pulumi.CustomResource
