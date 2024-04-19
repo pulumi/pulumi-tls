@@ -12,7 +12,6 @@ namespace Pulumi.Tls
     /// <summary>
     /// ## Example Usage
     /// 
-    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.IO;
@@ -34,7 +33,6 @@ namespace Pulumi.Tls
     /// 
     /// });
     /// ```
-    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TlsResourceType("tls:index/certRequest:CertRequest")]
     public partial class CertRequest : global::Pulumi.CustomResource
