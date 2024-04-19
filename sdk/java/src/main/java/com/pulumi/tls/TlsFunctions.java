@@ -70,12 +70,16 @@ public final class TlsFunctions {
      *             .algorithm(&#34;ED25519&#34;)
      *             .build());
      * 
+     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
      * 
+     *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
      *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
-     *             .privateKeyOpenssh(Files.readString(Paths.get(&#34;~/.ssh/id_rsa_rfc4716&#34;)))
+     *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
+     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .build()).result())
      *             .build());
      * 
      *     }
@@ -122,12 +126,16 @@ public final class TlsFunctions {
      *             .algorithm(&#34;ED25519&#34;)
      *             .build());
      * 
+     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
      * 
+     *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
      *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
-     *             .privateKeyOpenssh(Files.readString(Paths.get(&#34;~/.ssh/id_rsa_rfc4716&#34;)))
+     *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
+     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .build()).result())
      *             .build());
      * 
      *     }
@@ -174,12 +182,16 @@ public final class TlsFunctions {
      *             .algorithm(&#34;ED25519&#34;)
      *             .build());
      * 
+     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
      * 
+     *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
      *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
-     *             .privateKeyOpenssh(Files.readString(Paths.get(&#34;~/.ssh/id_rsa_rfc4716&#34;)))
+     *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
+     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .build()).result())
      *             .build());
      * 
      *     }
@@ -226,12 +238,16 @@ public final class TlsFunctions {
      *             .algorithm(&#34;ED25519&#34;)
      *             .build());
      * 
+     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
      * 
+     *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
      *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
-     *             .privateKeyOpenssh(Files.readString(Paths.get(&#34;~/.ssh/id_rsa_rfc4716&#34;)))
+     *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
+     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .build()).result())
      *             .build());
      * 
      *     }
@@ -278,12 +294,16 @@ public final class TlsFunctions {
      *             .algorithm(&#34;ED25519&#34;)
      *             .build());
      * 
+     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
      * 
+     *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
      *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
-     *             .privateKeyOpenssh(Files.readString(Paths.get(&#34;~/.ssh/id_rsa_rfc4716&#34;)))
+     *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
+     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .build()).result())
      *             .build());
      * 
      *     }
@@ -330,12 +350,16 @@ public final class TlsFunctions {
      *             .algorithm(&#34;ED25519&#34;)
      *             .build());
      * 
+     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
      * 
+     *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
      *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
-     *             .privateKeyOpenssh(Files.readString(Paths.get(&#34;~/.ssh/id_rsa_rfc4716&#34;)))
+     *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
+     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .build()).result())
      *             .build());
      * 
      *     }

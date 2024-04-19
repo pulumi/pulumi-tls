@@ -12,11 +12,13 @@ import * as utilities from "./utilities";
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as fs from "fs";
+ * import * as std from "@pulumi/std";
  * import * as tls from "@pulumi/tls";
  *
  * const example = new tls.CertRequest("example", {
- *     privateKeyPem: fs.readFileSync("private_key.pem", "utf8"),
+ *     privateKeyPem: std.file({
+ *         input: "private_key.pem",
+ *     }).then(invoke => invoke.result),
  *     subject: {
  *         commonName: "example.com",
  *         organization: "ACME Examples, Inc",

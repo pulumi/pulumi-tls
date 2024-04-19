@@ -15,16 +15,19 @@ namespace Pulumi.Tls
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
-    /// using System.IO;
     /// using System.Linq;
     /// using Pulumi;
+    /// using Std = Pulumi.Std;
     /// using Tls = Pulumi.Tls;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
     ///     var example = new Tls.CertRequest("example", new()
     ///     {
-    ///         PrivateKeyPem = File.ReadAllText("private_key.pem"),
+    ///         PrivateKeyPem = Std.File.Invoke(new()
+    ///         {
+    ///             Input = "private_key.pem",
+    ///         }).Apply(invoke =&gt; invoke.Result),
     ///         Subject = new Tls.Inputs.CertRequestSubjectArgs
     ///         {
     ///             CommonName = "example.com",

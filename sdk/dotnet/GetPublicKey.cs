@@ -21,9 +21,9 @@ namespace Pulumi.Tls
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
-        /// using System.IO;
         /// using System.Linq;
         /// using Pulumi;
+        /// using Std = Pulumi.Std;
         /// using Tls = Pulumi.Tls;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
@@ -33,14 +33,19 @@ namespace Pulumi.Tls
         ///         Algorithm = "ED25519",
         ///     });
         /// 
+        ///     // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
         ///     var privateKeyPem_example = Tls.GetPublicKey.Invoke(new()
         ///     {
         ///         PrivateKeyPem = ed25519_example.PrivateKeyPem,
         ///     });
         /// 
+        ///     // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
         ///     var privateKeyOpenssh_example = Tls.GetPublicKey.Invoke(new()
         ///     {
-        ///         PrivateKeyOpenssh = File.ReadAllText("~/.ssh/id_rsa_rfc4716"),
+        ///         PrivateKeyOpenssh = Std.File.Invoke(new()
+        ///         {
+        ///             Input = "~/.ssh/id_rsa_rfc4716",
+        ///         }).Result,
         ///     });
         /// 
         /// });
@@ -60,9 +65,9 @@ namespace Pulumi.Tls
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
-        /// using System.IO;
         /// using System.Linq;
         /// using Pulumi;
+        /// using Std = Pulumi.Std;
         /// using Tls = Pulumi.Tls;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
@@ -72,14 +77,19 @@ namespace Pulumi.Tls
         ///         Algorithm = "ED25519",
         ///     });
         /// 
+        ///     // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
         ///     var privateKeyPem_example = Tls.GetPublicKey.Invoke(new()
         ///     {
         ///         PrivateKeyPem = ed25519_example.PrivateKeyPem,
         ///     });
         /// 
+        ///     // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
         ///     var privateKeyOpenssh_example = Tls.GetPublicKey.Invoke(new()
         ///     {
-        ///         PrivateKeyOpenssh = File.ReadAllText("~/.ssh/id_rsa_rfc4716"),
+        ///         PrivateKeyOpenssh = Std.File.Invoke(new()
+        ///         {
+        ///             Input = "~/.ssh/id_rsa_rfc4716",
+        ///         }).Result,
         ///     });
         /// 
         /// });

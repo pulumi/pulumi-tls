@@ -14,16 +14,20 @@ import * as utilities from "./utilities";
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as fs from "fs";
+ * import * as std from "@pulumi/std";
  * import * as tls from "@pulumi/tls";
  *
  * const ed25519_example = new tls.PrivateKey("ed25519-example", {algorithm: "ED25519"});
+ * // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
  * const privateKeyPem-example = tls.getPublicKeyOutput({
  *     privateKeyPem: ed25519_example.privateKeyPem,
  * });
- * const privateKeyOpenssh-example = tls.getPublicKey({
- *     privateKeyOpenssh: fs.readFileSync("~/.ssh/id_rsa_rfc4716", "utf8"),
- * });
+ * // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
+ * const privateKeyOpenssh-example = std.file({
+ *     input: "~/.ssh/id_rsa_rfc4716",
+ * }).then(invoke => tls.getPublicKey({
+ *     privateKeyOpenssh: invoke.result,
+ * }));
  * ```
  * <!--End PulumiCodeChooser -->
  */
@@ -98,16 +102,20 @@ export interface GetPublicKeyResult {
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as fs from "fs";
+ * import * as std from "@pulumi/std";
  * import * as tls from "@pulumi/tls";
  *
  * const ed25519_example = new tls.PrivateKey("ed25519-example", {algorithm: "ED25519"});
+ * // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
  * const privateKeyPem-example = tls.getPublicKeyOutput({
  *     privateKeyPem: ed25519_example.privateKeyPem,
  * });
- * const privateKeyOpenssh-example = tls.getPublicKey({
- *     privateKeyOpenssh: fs.readFileSync("~/.ssh/id_rsa_rfc4716", "utf8"),
- * });
+ * // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
+ * const privateKeyOpenssh-example = std.file({
+ *     input: "~/.ssh/id_rsa_rfc4716",
+ * }).then(invoke => tls.getPublicKey({
+ *     privateKeyOpenssh: invoke.result,
+ * }));
  * ```
  * <!--End PulumiCodeChooser -->
  */

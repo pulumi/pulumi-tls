@@ -43,7 +43,9 @@ import javax.annotation.Nullable;
  * 
  *     public static void stack(Context ctx) {
  *         var example = new CertRequest(&#34;example&#34;, CertRequestArgs.builder()        
- *             .privateKeyPem(Files.readString(Paths.get(&#34;private_key.pem&#34;)))
+ *             .privateKeyPem(StdFunctions.file(FileArgs.builder()
+ *                 .input(&#34;private_key.pem&#34;)
+ *                 .build()).result())
  *             .subject(CertRequestSubjectArgs.builder()
  *                 .commonName(&#34;example.com&#34;)
  *                 .organization(&#34;ACME Examples, Inc&#34;)

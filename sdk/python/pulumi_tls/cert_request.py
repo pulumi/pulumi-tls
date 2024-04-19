@@ -237,10 +237,11 @@ class CertRequest(pulumi.CustomResource):
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
+        import pulumi_std as std
         import pulumi_tls as tls
 
         example = tls.CertRequest("example",
-            private_key_pem=(lambda path: open(path).read())("private_key.pem"),
+            private_key_pem=std.file(input="private_key.pem").result,
             subject=tls.CertRequestSubjectArgs(
                 common_name="example.com",
                 organization="ACME Examples, Inc",
@@ -268,10 +269,11 @@ class CertRequest(pulumi.CustomResource):
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
+        import pulumi_std as std
         import pulumi_tls as tls
 
         example = tls.CertRequest("example",
-            private_key_pem=(lambda path: open(path).read())("private_key.pem"),
+            private_key_pem=std.file(input="private_key.pem").result,
             subject=tls.CertRequestSubjectArgs(
                 common_name="example.com",
                 organization="ACME Examples, Inc",
