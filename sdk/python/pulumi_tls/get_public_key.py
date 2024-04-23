@@ -138,7 +138,6 @@ def get_public_key(private_key_openssh: Optional[str] = None,
 
     ## Example Usage
 
-    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_std as std
@@ -150,7 +149,6 @@ def get_public_key(private_key_openssh: Optional[str] = None,
     # Public key loaded from filesystem, using the Open SSH (RFC 4716) format
     private_key_openssh_example = tls.get_public_key(private_key_openssh=std.file(input="~/.ssh/id_rsa_rfc4716").result)
     ```
-    <!--End PulumiCodeChooser -->
 
 
     :param str private_key_openssh: The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `private_key_pem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
@@ -184,7 +182,6 @@ def get_public_key_output(private_key_openssh: Optional[pulumi.Input[Optional[st
 
     ## Example Usage
 
-    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_std as std
@@ -196,7 +193,6 @@ def get_public_key_output(private_key_openssh: Optional[pulumi.Input[Optional[st
     # Public key loaded from filesystem, using the Open SSH (RFC 4716) format
     private_key_openssh_example = tls.get_public_key(private_key_openssh=std.file(input="~/.ssh/id_rsa_rfc4716").result)
     ```
-    <!--End PulumiCodeChooser -->
 
 
     :param str private_key_openssh: The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `private_key_pem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
