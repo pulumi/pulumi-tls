@@ -11,7 +11,6 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
- * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as std from "@pulumi/std";
@@ -29,7 +28,6 @@ import * as utilities from "./utilities";
  *     privateKeyOpenssh: invoke.result,
  * }));
  * ```
- * <!--End PulumiCodeChooser -->
  */
 export function getPublicKey(args?: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
     args = args || {};
@@ -99,7 +97,6 @@ export interface GetPublicKeyResult {
  *
  * ## Example Usage
  *
- * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as std from "@pulumi/std";
@@ -117,7 +114,6 @@ export interface GetPublicKeyResult {
  *     privateKeyOpenssh: invoke.result,
  * }));
  * ```
- * <!--End PulumiCodeChooser -->
  */
 export function getPublicKeyOutput(args?: GetPublicKeyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublicKeyResult> {
     return pulumi.output(args).apply((a: any) => getPublicKey(a, opts))
