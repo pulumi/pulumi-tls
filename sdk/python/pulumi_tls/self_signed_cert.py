@@ -33,11 +33,6 @@ class SelfSignedCertArgs:
         :param pulumi.Input[str] private_key_pem: Private key in PEM (RFC 1421) interpolation function.
         :param pulumi.Input[int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
-        :param pulumi.Input[int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-               can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-               certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-               revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-               early renewal period. (default: `0`)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[bool] set_authority_key_id: Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
@@ -116,13 +111,6 @@ class SelfSignedCertArgs:
     @property
     @pulumi.getter(name="earlyRenewalHours")
     def early_renewal_hours(self) -> Optional[pulumi.Input[int]]:
-        """
-        The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-        can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-        certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-        revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-        early renewal period. (default: `0`)
-        """
         return pulumi.get(self, "early_renewal_hours")
 
     @early_renewal_hours.setter
@@ -226,11 +214,6 @@ class _SelfSignedCertState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         :param pulumi.Input[str] cert_pem: Certificate data in PEM (RFC 1421).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
-        :param pulumi.Input[int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-               can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-               certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-               revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-               early renewal period. (default: `0`)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
@@ -316,13 +299,6 @@ class _SelfSignedCertState:
     @property
     @pulumi.getter(name="earlyRenewalHours")
     def early_renewal_hours(self) -> Optional[pulumi.Input[int]]:
-        """
-        The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-        can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-        certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-        revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-        early renewal period. (default: `0`)
-        """
         return pulumi.get(self, "early_renewal_hours")
 
     @early_renewal_hours.setter
@@ -497,11 +473,6 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
-        :param pulumi.Input[int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-               can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-               certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-               revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-               early renewal period. (default: `0`)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[str] private_key_pem: Private key in PEM (RFC 1421) interpolation function.
@@ -614,11 +585,6 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         :param pulumi.Input[str] cert_pem: Certificate data in PEM (RFC 1421).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
-        :param pulumi.Input[int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-               can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-               certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-               revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-               early renewal period. (default: `0`)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
@@ -681,13 +647,6 @@ class SelfSignedCert(pulumi.CustomResource):
     @property
     @pulumi.getter(name="earlyRenewalHours")
     def early_renewal_hours(self) -> pulumi.Output[int]:
-        """
-        The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-        can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-        certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-        revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-        early renewal period. (default: `0`)
-        """
         return pulumi.get(self, "early_renewal_hours")
 
     @property
