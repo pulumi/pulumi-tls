@@ -12,7 +12,7 @@ replace (
 
 require (
 	github.com/pulumi/providertest v0.0.11
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.34.0
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.33.1-0.20240503212316-40b530845390
 	github.com/pulumi/pulumi-tls/provider/v5 v5.0.0-00010101000000-000000000000
 	github.com/pulumi/pulumi/pkg/v3 v3.114.0
 	github.com/pulumi/pulumi/sdk/v3 v3.114.0
