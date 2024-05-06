@@ -433,8 +433,7 @@
                     "description": "Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n"
                 },
                 "earlyRenewalHours": {
-                    "type": "integer",
-                    "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This\ncan be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old\ncertificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate\nrevocation. Also, this advance update can only be performed should the Terraform configuration be applied during the\nearly renewal period. (default: `0`)\n"
+                    "type": "integer"
                 },
                 "isCaCertificate": {
                     "type": "boolean",
@@ -498,8 +497,7 @@
                     "description": "Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n"
                 },
                 "earlyRenewalHours": {
-                    "type": "integer",
-                    "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This\ncan be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old\ncertificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate\nrevocation. Also, this advance update can only be performed should the Terraform configuration be applied during the\nearly renewal period. (default: `0`)\n"
+                    "type": "integer"
                 },
                 "isCaCertificate": {
                     "type": "boolean",
@@ -553,8 +551,7 @@
                         "description": "Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n"
                     },
                     "earlyRenewalHours": {
-                        "type": "integer",
-                        "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This\ncan be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old\ncertificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate\nrevocation. Also, this advance update can only be performed should the Terraform configuration be applied during the\nearly renewal period. (default: `0`)\n"
+                        "type": "integer"
                     },
                     "isCaCertificate": {
                         "type": "boolean",
@@ -730,8 +727,7 @@
                     "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects).\n"
                 },
                 "earlyRenewalHours": {
-                    "type": "integer",
-                    "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This\ncan be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old\ncertificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate\nrevocation. Also, this advance update can only be performed should the Terraform configuration be applied during the\nearly renewal period. (default: `0`)\n"
+                    "type": "integer"
                 },
                 "ipAddresses": {
                     "type": "array",
@@ -819,8 +815,7 @@
                     "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects).\n"
                 },
                 "earlyRenewalHours": {
-                    "type": "integer",
-                    "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This\ncan be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old\ncertificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate\nrevocation. Also, this advance update can only be performed should the Terraform configuration be applied during the\nearly renewal period. (default: `0`)\n"
+                    "type": "integer"
                 },
                 "ipAddresses": {
                     "type": "array",
@@ -889,8 +884,7 @@
                         "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects).\n"
                     },
                     "earlyRenewalHours": {
-                        "type": "integer",
-                        "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This\ncan be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old\ncertificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate\nrevocation. Also, this advance update can only be performed should the Terraform configuration be applied during the\nearly renewal period. (default: `0`)\n"
+                        "type": "integer"
                     },
                     "ipAddresses": {
                         "type": "array",
