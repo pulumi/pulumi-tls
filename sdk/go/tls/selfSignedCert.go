@@ -20,13 +20,8 @@ type SelfSignedCert struct {
 	// Certificate data in PEM (RFC 1421).
 	CertPem pulumi.StringOutput `pulumi:"certPem"`
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
-	DnsNames pulumi.StringArrayOutput `pulumi:"dnsNames"`
-	// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-	// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-	// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-	// early renewal period. (default: `0`)
-	EarlyRenewalHours pulumi.IntOutput `pulumi:"earlyRenewalHours"`
+	DnsNames          pulumi.StringArrayOutput `pulumi:"dnsNames"`
+	EarlyRenewalHours pulumi.IntOutput         `pulumi:"earlyRenewalHours"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayOutput `pulumi:"ipAddresses"`
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
@@ -104,13 +99,8 @@ type selfSignedCertState struct {
 	// Certificate data in PEM (RFC 1421).
 	CertPem *string `pulumi:"certPem"`
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
-	DnsNames []string `pulumi:"dnsNames"`
-	// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-	// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-	// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-	// early renewal period. (default: `0`)
-	EarlyRenewalHours *int `pulumi:"earlyRenewalHours"`
+	DnsNames          []string `pulumi:"dnsNames"`
+	EarlyRenewalHours *int     `pulumi:"earlyRenewalHours"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses []string `pulumi:"ipAddresses"`
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
@@ -143,12 +133,7 @@ type SelfSignedCertState struct {
 	// Certificate data in PEM (RFC 1421).
 	CertPem pulumi.StringPtrInput
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
-	DnsNames pulumi.StringArrayInput
-	// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-	// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-	// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-	// early renewal period. (default: `0`)
+	DnsNames          pulumi.StringArrayInput
 	EarlyRenewalHours pulumi.IntPtrInput
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayInput
@@ -184,13 +169,8 @@ type selfSignedCertArgs struct {
 	// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `anyExtended`, `certSigning`, `clientAuth`, `codeSigning`, `contentCommitment`, `crlSigning`, `dataEncipherment`, `decipherOnly`, `digitalSignature`, `emailProtection`, `encipherOnly`, `ipsecEndSystem`, `ipsecTunnel`, `ipsecUser`, `keyAgreement`, `keyEncipherment`, `microsoftCommercialCodeSigning`, `microsoftKernelCodeSigning`, `microsoftServerGatedCrypto`, `netscapeServerGatedCrypto`, `ocspSigning`, `serverAuth`, `timestamping`.
 	AllowedUses []string `pulumi:"allowedUses"`
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
-	DnsNames []string `pulumi:"dnsNames"`
-	// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-	// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-	// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-	// early renewal period. (default: `0`)
-	EarlyRenewalHours *int `pulumi:"earlyRenewalHours"`
+	DnsNames          []string `pulumi:"dnsNames"`
+	EarlyRenewalHours *int     `pulumi:"earlyRenewalHours"`
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses []string `pulumi:"ipAddresses"`
 	// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
@@ -214,12 +194,7 @@ type SelfSignedCertArgs struct {
 	// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `anyExtended`, `certSigning`, `clientAuth`, `codeSigning`, `contentCommitment`, `crlSigning`, `dataEncipherment`, `decipherOnly`, `digitalSignature`, `emailProtection`, `encipherOnly`, `ipsecEndSystem`, `ipsecTunnel`, `ipsecUser`, `keyAgreement`, `keyEncipherment`, `microsoftCommercialCodeSigning`, `microsoftKernelCodeSigning`, `microsoftServerGatedCrypto`, `netscapeServerGatedCrypto`, `ocspSigning`, `serverAuth`, `timestamping`.
 	AllowedUses pulumi.StringArrayInput
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
-	DnsNames pulumi.StringArrayInput
-	// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-	// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-	// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-	// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-	// early renewal period. (default: `0`)
+	DnsNames          pulumi.StringArrayInput
 	EarlyRenewalHours pulumi.IntPtrInput
 	// List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
 	IpAddresses pulumi.StringArrayInput
@@ -341,11 +316,6 @@ func (o SelfSignedCertOutput) DnsNames() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *SelfSignedCert) pulumi.StringArrayOutput { return v.DnsNames }).(pulumi.StringArrayOutput)
 }
 
-// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-// early renewal period. (default: `0`)
 func (o SelfSignedCertOutput) EarlyRenewalHours() pulumi.IntOutput {
 	return o.ApplyT(func(v *SelfSignedCert) pulumi.IntOutput { return v.EarlyRenewalHours }).(pulumi.IntOutput)
 }
