@@ -30,13 +30,6 @@ namespace Pulumi.Tls
         [Output("dnsNames")]
         public Output<ImmutableArray<string>> DnsNames { get; private set; } = null!;
 
-        /// <summary>
-        /// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-        /// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-        /// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-        /// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-        /// early renewal period. (default: `0`)
-        /// </summary>
         [Output("earlyRenewalHours")]
         public Output<int> EarlyRenewalHours { get; private set; } = null!;
 
@@ -186,13 +179,6 @@ namespace Pulumi.Tls
             set => _dnsNames = value;
         }
 
-        /// <summary>
-        /// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-        /// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-        /// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-        /// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-        /// early renewal period. (default: `0`)
-        /// </summary>
         [Input("earlyRenewalHours")]
         public Input<int>? EarlyRenewalHours { get; set; }
 
@@ -304,13 +290,6 @@ namespace Pulumi.Tls
             set => _dnsNames = value;
         }
 
-        /// <summary>
-        /// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-        /// can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-        /// certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-        /// revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-        /// early renewal period. (default: `0`)
-        /// </summary>
         [Input("earlyRenewalHours")]
         public Input<int>? EarlyRenewalHours { get; set; }
 
