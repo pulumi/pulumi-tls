@@ -108,25 +108,9 @@ public final class LocallySignedCertState extends com.pulumi.resources.ResourceA
         return Optional.ofNullable(this.certRequestPem);
     }
 
-    /**
-     * The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-     * can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-     * certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-     * revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-     * early renewal period. (default: `0`)
-     * 
-     */
     @Import(name="earlyRenewalHours")
     private @Nullable Output<Integer> earlyRenewalHours;
 
-    /**
-     * @return The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-     * can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-     * certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-     * revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-     * early renewal period. (default: `0`)
-     * 
-     */
     public Optional<Output<Integer>> earlyRenewalHours() {
         return Optional.ofNullable(this.earlyRenewalHours);
     }
@@ -393,31 +377,11 @@ public final class LocallySignedCertState extends com.pulumi.resources.ResourceA
             return certRequestPem(Output.of(certRequestPem));
         }
 
-        /**
-         * @param earlyRenewalHours The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-         * can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-         * certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-         * revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-         * early renewal period. (default: `0`)
-         * 
-         * @return builder
-         * 
-         */
         public Builder earlyRenewalHours(@Nullable Output<Integer> earlyRenewalHours) {
             $.earlyRenewalHours = earlyRenewalHours;
             return this;
         }
 
-        /**
-         * @param earlyRenewalHours The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-         * can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-         * certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-         * revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-         * early renewal period. (default: `0`)
-         * 
-         * @return builder
-         * 
-         */
         public Builder earlyRenewalHours(Integer earlyRenewalHours) {
             return earlyRenewalHours(Output.of(earlyRenewalHours));
         }

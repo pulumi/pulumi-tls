@@ -62,25 +62,9 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
     public Output<Optional<List<String>>> dnsNames() {
         return Codegen.optional(this.dnsNames);
     }
-    /**
-     * The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-     * can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-     * certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-     * revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-     * early renewal period. (default: `0`)
-     * 
-     */
     @Export(name="earlyRenewalHours", refs={Integer.class}, tree="[0]")
     private Output<Integer> earlyRenewalHours;
 
-    /**
-     * @return The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This
-     * can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old
-     * certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate
-     * revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the
-     * early renewal period. (default: `0`)
-     * 
-     */
     public Output<Integer> earlyRenewalHours() {
         return this.earlyRenewalHours;
     }
