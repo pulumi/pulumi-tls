@@ -20,7 +20,8 @@ import javax.annotation.Nullable;
  * ## Example Usage
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * ```java
+ * <pre>
+ * {@code
  * package generated_program;
  * 
  * import com.pulumi.Context;
@@ -42,19 +43,20 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var example = new CertRequest(&#34;example&#34;, CertRequestArgs.builder()        
+ *         var example = new CertRequest("example", CertRequestArgs.builder()        
  *             .privateKeyPem(StdFunctions.file(FileArgs.builder()
- *                 .input(&#34;private_key.pem&#34;)
+ *                 .input("private_key.pem")
  *                 .build()).result())
  *             .subject(CertRequestSubjectArgs.builder()
- *                 .commonName(&#34;example.com&#34;)
- *                 .organization(&#34;ACME Examples, Inc&#34;)
+ *                 .commonName("example.com")
+ *                 .organization("ACME Examples, Inc")
  *                 .build())
  *             .build());
  * 
  *     }
  * }
- * ```
+ * }
+ * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  */

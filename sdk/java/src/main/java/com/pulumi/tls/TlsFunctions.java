@@ -43,7 +43,8 @@ public final class TlsFunctions {
      * ## Example Usage
      * 
      * &lt;!--Start PulumiCodeChooser --&gt;
-     * ```java
+     * <pre>
+     * {@code
      * package generated_program;
      * 
      * import com.pulumi.Context;
@@ -66,8 +67,8 @@ public final class TlsFunctions {
      *     }
      * 
      *     public static void stack(Context ctx) {
-     *         var ed25519_example = new PrivateKey(&#34;ed25519-example&#34;, PrivateKeyArgs.builder()        
-     *             .algorithm(&#34;ED25519&#34;)
+     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()        
+     *             .algorithm("ED25519")
      *             .build());
      * 
      *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
@@ -78,13 +79,14 @@ public final class TlsFunctions {
      *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
      *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
-     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .input("~/.ssh/id_rsa_rfc4716")
      *                 .build()).result())
      *             .build());
      * 
      *     }
      * }
-     * ```
+     * }
+     * </pre>
      * &lt;!--End PulumiCodeChooser --&gt;
      * 
      */
@@ -99,7 +101,8 @@ public final class TlsFunctions {
      * ## Example Usage
      * 
      * &lt;!--Start PulumiCodeChooser --&gt;
-     * ```java
+     * <pre>
+     * {@code
      * package generated_program;
      * 
      * import com.pulumi.Context;
@@ -122,8 +125,8 @@ public final class TlsFunctions {
      *     }
      * 
      *     public static void stack(Context ctx) {
-     *         var ed25519_example = new PrivateKey(&#34;ed25519-example&#34;, PrivateKeyArgs.builder()        
-     *             .algorithm(&#34;ED25519&#34;)
+     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()        
+     *             .algorithm("ED25519")
      *             .build());
      * 
      *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
@@ -134,13 +137,14 @@ public final class TlsFunctions {
      *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
      *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
-     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .input("~/.ssh/id_rsa_rfc4716")
      *                 .build()).result())
      *             .build());
      * 
      *     }
      * }
-     * ```
+     * }
+     * </pre>
      * &lt;!--End PulumiCodeChooser --&gt;
      * 
      */
@@ -155,7 +159,8 @@ public final class TlsFunctions {
      * ## Example Usage
      * 
      * &lt;!--Start PulumiCodeChooser --&gt;
-     * ```java
+     * <pre>
+     * {@code
      * package generated_program;
      * 
      * import com.pulumi.Context;
@@ -178,8 +183,8 @@ public final class TlsFunctions {
      *     }
      * 
      *     public static void stack(Context ctx) {
-     *         var ed25519_example = new PrivateKey(&#34;ed25519-example&#34;, PrivateKeyArgs.builder()        
-     *             .algorithm(&#34;ED25519&#34;)
+     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()        
+     *             .algorithm("ED25519")
      *             .build());
      * 
      *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
@@ -190,13 +195,14 @@ public final class TlsFunctions {
      *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
      *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
-     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .input("~/.ssh/id_rsa_rfc4716")
      *                 .build()).result())
      *             .build());
      * 
      *     }
      * }
-     * ```
+     * }
+     * </pre>
      * &lt;!--End PulumiCodeChooser --&gt;
      * 
      */
@@ -211,7 +217,8 @@ public final class TlsFunctions {
      * ## Example Usage
      * 
      * &lt;!--Start PulumiCodeChooser --&gt;
-     * ```java
+     * <pre>
+     * {@code
      * package generated_program;
      * 
      * import com.pulumi.Context;
@@ -234,8 +241,8 @@ public final class TlsFunctions {
      *     }
      * 
      *     public static void stack(Context ctx) {
-     *         var ed25519_example = new PrivateKey(&#34;ed25519-example&#34;, PrivateKeyArgs.builder()        
-     *             .algorithm(&#34;ED25519&#34;)
+     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()        
+     *             .algorithm("ED25519")
      *             .build());
      * 
      *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
@@ -246,13 +253,14 @@ public final class TlsFunctions {
      *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
      *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
-     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .input("~/.ssh/id_rsa_rfc4716")
      *                 .build()).result())
      *             .build());
      * 
      *     }
      * }
-     * ```
+     * }
+     * </pre>
      * &lt;!--End PulumiCodeChooser --&gt;
      * 
      */
@@ -267,7 +275,8 @@ public final class TlsFunctions {
      * ## Example Usage
      * 
      * &lt;!--Start PulumiCodeChooser --&gt;
-     * ```java
+     * <pre>
+     * {@code
      * package generated_program;
      * 
      * import com.pulumi.Context;
@@ -290,8 +299,8 @@ public final class TlsFunctions {
      *     }
      * 
      *     public static void stack(Context ctx) {
-     *         var ed25519_example = new PrivateKey(&#34;ed25519-example&#34;, PrivateKeyArgs.builder()        
-     *             .algorithm(&#34;ED25519&#34;)
+     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()        
+     *             .algorithm("ED25519")
      *             .build());
      * 
      *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
@@ -302,13 +311,14 @@ public final class TlsFunctions {
      *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
      *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
-     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .input("~/.ssh/id_rsa_rfc4716")
      *                 .build()).result())
      *             .build());
      * 
      *     }
      * }
-     * ```
+     * }
+     * </pre>
      * &lt;!--End PulumiCodeChooser --&gt;
      * 
      */
@@ -323,7 +333,8 @@ public final class TlsFunctions {
      * ## Example Usage
      * 
      * &lt;!--Start PulumiCodeChooser --&gt;
-     * ```java
+     * <pre>
+     * {@code
      * package generated_program;
      * 
      * import com.pulumi.Context;
@@ -346,8 +357,8 @@ public final class TlsFunctions {
      *     }
      * 
      *     public static void stack(Context ctx) {
-     *         var ed25519_example = new PrivateKey(&#34;ed25519-example&#34;, PrivateKeyArgs.builder()        
-     *             .algorithm(&#34;ED25519&#34;)
+     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()        
+     *             .algorithm("ED25519")
      *             .build());
      * 
      *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
@@ -358,13 +369,14 @@ public final class TlsFunctions {
      *         // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
      *         final var privateKeyOpenssh-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyOpenssh(StdFunctions.file(FileArgs.builder()
-     *                 .input(&#34;~/.ssh/id_rsa_rfc4716&#34;)
+     *                 .input("~/.ssh/id_rsa_rfc4716")
      *                 .build()).result())
      *             .build());
      * 
      *     }
      * }
-     * ```
+     * }
+     * </pre>
      * &lt;!--End PulumiCodeChooser --&gt;
      * 
      */
