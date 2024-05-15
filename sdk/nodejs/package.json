@@ -1,6 +1,6 @@
 {
     "name": "@pulumi/tls",
-    "version": "${VERSION}",
+    "version": "5.0.0-alpha.0+dev",
     "description": "A Pulumi package to create TLS resources in Pulumi programs.",
     "keywords": [
         "pulumi",
@@ -21,6 +21,7 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "tls"
+        "name": "tls",
+        "version": "5.0.0-alpha.0+dev"
     }
 }

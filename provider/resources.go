@@ -19,7 +19,7 @@ import (
 	"path/filepath"
 	"unicode"
 
-	_ "embed" //used to store bridge-metadata.json in the compiled binary
+	_ "embed" // used to store bridge-metadata.json in the compiled binary
 
 	"github.com/hashicorp/terraform-provider-tls/shim"
 
@@ -100,12 +100,15 @@ func Provider() tfbridge.ProviderInfo {
 			DevDependencies: map[string]string{
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
 			},
+			RespectSchemaVersion: true,
 		},
 		Python: (func() *tfbridge.PythonInfo {
 			i := &tfbridge.PythonInfo{
+				RespectSchemaVersion: true,
 				Requires: map[string]string{
 					"pulumi": ">=3.0.0,<4.0.0",
-				}}
+				},
+			}
 			i.PyProject.Enabled = true
 			return i
 		})(),
@@ -118,8 +121,10 @@ func Provider() tfbridge.ProviderInfo {
 				tlsPkg,
 			),
 			GenerateResourceContainerTypes: true,
+			RespectSchemaVersion:           true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
+			RespectSchemaVersion: true,
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},
@@ -133,7 +138,6 @@ func Provider() tfbridge.ProviderInfo {
 }
 
 func selfSignedCertPreStateUpgradeHook(args tfbridge.PreStateUpgradeHookArgs) (int64, resource.PropertyMap, error) {
-
 	// When upstream starts versioning the schemas, do nothing. Only attempt to fixup state for the transition to
 	// Plugin Framework.
 	if args.ResourceSchemaVersion != 0 || args.PriorStateSchemaVersion != 0 {
