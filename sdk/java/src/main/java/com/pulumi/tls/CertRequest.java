@@ -43,7 +43,7 @@ import javax.annotation.Nullable;
  *     }
  * 
  *     public static void stack(Context ctx) {
- *         var example = new CertRequest("example", CertRequestArgs.builder()        
+ *         var example = new CertRequest("example", CertRequestArgs.builder()
  *             .privateKeyPem(StdFunctions.file(FileArgs.builder()
  *                 .input("private_key.pem")
  *                 .build()).result())
