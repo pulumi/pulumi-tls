@@ -67,7 +67,7 @@ public final class TlsFunctions {
      *     }
      * 
      *     public static void stack(Context ctx) {
-     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()        
+     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()
      *             .algorithm("ED25519")
      *             .build());
      * 
@@ -125,7 +125,7 @@ public final class TlsFunctions {
      *     }
      * 
      *     public static void stack(Context ctx) {
-     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()        
+     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()
      *             .algorithm("ED25519")
      *             .build());
      * 
@@ -183,7 +183,7 @@ public final class TlsFunctions {
      *     }
      * 
      *     public static void stack(Context ctx) {
-     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()        
+     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()
      *             .algorithm("ED25519")
      *             .build());
      * 
@@ -241,7 +241,7 @@ public final class TlsFunctions {
      *     }
      * 
      *     public static void stack(Context ctx) {
-     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()        
+     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()
      *             .algorithm("ED25519")
      *             .build());
      * 
@@ -299,7 +299,7 @@ public final class TlsFunctions {
      *     }
      * 
      *     public static void stack(Context ctx) {
-     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()        
+     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()
      *             .algorithm("ED25519")
      *             .build());
      * 
@@ -357,7 +357,7 @@ public final class TlsFunctions {
      *     }
      * 
      *     public static void stack(Context ctx) {
-     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()        
+     *         var ed25519_example = new PrivateKey("ed25519-example", PrivateKeyArgs.builder()
      *             .algorithm("ED25519")
      *             .build());
      * 
