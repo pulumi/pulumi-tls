@@ -12,7 +12,7 @@ replace (
 
 require (
 	github.com/pulumi/providertest v0.0.11
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.37.0
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.36.1-0.20240622200535-0e6f548c1b53
 	github.com/pulumi/pulumi-tls/provider/v5 v5.0.0-00010101000000-000000000000
 	github.com/pulumi/pulumi/pkg/v3 v3.121.0
 	github.com/pulumi/pulumi/sdk/v3 v3.121.0
@@ -159,7 +159,7 @@ require (
 	github.com/pulumi/esc v0.9.1 // indirect
 	github.com/pulumi/inflector v0.1.1 // indirect
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.84.1-0.20240622200535-0e6f548c1b53 // indirect
-	github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.8 // indirect
+	github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.9-0.20240622200535-0e6f548c1b53 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
