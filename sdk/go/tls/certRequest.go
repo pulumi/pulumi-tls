@@ -34,7 +34,7 @@ import (
 //				return err
 //			}
 //			_, err = tls.NewCertRequest(ctx, "example", &tls.CertRequestArgs{
-//				PrivateKeyPem: invokeFile.Result,
+//				PrivateKeyPem: pulumi.String(invokeFile.Result),
 //				Subject: &tls.CertRequestSubjectArgs{
 //					CommonName:   pulumi.String("example.com"),
 //					Organization: pulumi.String("ACME Examples, Inc"),
