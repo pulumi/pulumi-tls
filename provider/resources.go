@@ -132,6 +132,7 @@ func Provider() tfbridge.ProviderInfo {
 				"tls": "Tls",
 			},
 		},
+		EnableZeroDefaultSchemaVersion: true,
 	}
 
 	return info
