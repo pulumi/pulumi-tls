@@ -228,7 +228,7 @@ class CertRequest(pulumi.CustomResource):
                  dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
-                 subject: Optional[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]] = None,
+                 subject: Optional[pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
@@ -241,10 +241,10 @@ class CertRequest(pulumi.CustomResource):
 
         example = tls.CertRequest("example",
             private_key_pem=std.file(input="private_key.pem").result,
-            subject=tls.CertRequestSubjectArgs(
-                common_name="example.com",
-                organization="ACME Examples, Inc",
-            ))
+            subject={
+                "common_name": "example.com",
+                "organization": "ACME Examples, Inc",
+            })
         ```
 
         :param str resource_name: The name of the resource.
@@ -252,7 +252,7 @@ class CertRequest(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] private_key_pem: Private key in PEM (RFC 1421) interpolation function.
-        :param pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+        :param pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
         ...
@@ -271,10 +271,10 @@ class CertRequest(pulumi.CustomResource):
 
         example = tls.CertRequest("example",
             private_key_pem=std.file(input="private_key.pem").result,
-            subject=tls.CertRequestSubjectArgs(
-                common_name="example.com",
-                organization="ACME Examples, Inc",
-            ))
+            subject={
+                "common_name": "example.com",
+                "organization": "ACME Examples, Inc",
+            })
         ```
 
         :param str resource_name: The name of the resource.
@@ -295,7 +295,7 @@ class CertRequest(pulumi.CustomResource):
                  dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  private_key_pem: Optional[pulumi.Input[str]] = None,
-                 subject: Optional[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]] = None,
+                 subject: Optional[pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -332,7 +332,7 @@ class CertRequest(pulumi.CustomResource):
             ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             key_algorithm: Optional[pulumi.Input[str]] = None,
             private_key_pem: Optional[pulumi.Input[str]] = None,
-            subject: Optional[pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']]] = None,
+            subject: Optional[pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
             uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'CertRequest':
         """
         Get an existing CertRequest resource's state with the given name, id, and optional extra
@@ -346,7 +346,7 @@ class CertRequest(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
         :param pulumi.Input[str] private_key_pem: Private key in PEM (RFC 1421) interpolation function.
-        :param pulumi.Input[pulumi.InputType['CertRequestSubjectArgs']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+        :param pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))

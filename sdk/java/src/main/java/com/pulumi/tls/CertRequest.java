@@ -165,7 +165,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
      *
      * @param name The _unique_ name of the resulting resource.
      */
-    public CertRequest(String name) {
+    public CertRequest(java.lang.String name) {
         this(name, CertRequestArgs.Empty);
     }
     /**
@@ -173,7 +173,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param args The arguments to use to populate this resource's properties.
      */
-    public CertRequest(String name, CertRequestArgs args) {
+    public CertRequest(java.lang.String name, CertRequestArgs args) {
         this(name, args, null);
     }
     /**
@@ -182,15 +182,22 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param options A bag of options that control this resource's behavior.
      */
-    public CertRequest(String name, CertRequestArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("tls:index/certRequest:CertRequest", name, args == null ? CertRequestArgs.Empty : args, makeResourceOptions(options, Codegen.empty()));
+    public CertRequest(java.lang.String name, CertRequestArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("tls:index/certRequest:CertRequest", name, makeArgs(args, options), makeResourceOptions(options, Codegen.empty()), false);
     }
 
-    private CertRequest(String name, Output<String> id, @Nullable CertRequestState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("tls:index/certRequest:CertRequest", name, state, makeResourceOptions(options, id));
+    private CertRequest(java.lang.String name, Output<java.lang.String> id, @Nullable CertRequestState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("tls:index/certRequest:CertRequest", name, state, makeResourceOptions(options, id), false);
     }
 
-    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<String> id) {
+    private static CertRequestArgs makeArgs(CertRequestArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        if (options != null && options.getUrn().isPresent()) {
+            return null;
+        }
+        return args == null ? CertRequestArgs.Empty : args;
+    }
+
+    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
             .additionalSecretOutputs(List.of(
@@ -209,7 +216,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
      * @param state
      * @param options Optional settings to control the behavior of the CustomResource.
      */
-    public static CertRequest get(String name, Output<String> id, @Nullable CertRequestState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    public static CertRequest get(java.lang.String name, Output<java.lang.String> id, @Nullable CertRequestState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         return new CertRequest(name, id, state, options);
     }
 }

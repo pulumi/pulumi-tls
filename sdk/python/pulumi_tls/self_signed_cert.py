@@ -463,7 +463,7 @@ class SelfSignedCert(pulumi.CustomResource):
                  private_key_pem: Optional[pulumi.Input[str]] = None,
                  set_authority_key_id: Optional[pulumi.Input[bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-                 subject: Optional[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]] = None,
+                 subject: Optional[pulumi.Input[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']]] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  validity_period_hours: Optional[pulumi.Input[int]] = None,
                  __props__=None):
@@ -478,7 +478,7 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.Input[str] private_key_pem: Private key in PEM (RFC 1421) interpolation function.
         :param pulumi.Input[bool] set_authority_key_id: Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
-        :param pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+        :param pulumi.Input[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.
         """
@@ -513,7 +513,7 @@ class SelfSignedCert(pulumi.CustomResource):
                  private_key_pem: Optional[pulumi.Input[str]] = None,
                  set_authority_key_id: Optional[pulumi.Input[bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-                 subject: Optional[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]] = None,
+                 subject: Optional[pulumi.Input[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']]] = None,
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  validity_period_hours: Optional[pulumi.Input[int]] = None,
                  __props__=None):
@@ -570,7 +570,7 @@ class SelfSignedCert(pulumi.CustomResource):
             ready_for_renewal: Optional[pulumi.Input[bool]] = None,
             set_authority_key_id: Optional[pulumi.Input[bool]] = None,
             set_subject_key_id: Optional[pulumi.Input[bool]] = None,
-            subject: Optional[pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']]] = None,
+            subject: Optional[pulumi.Input[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']]] = None,
             uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             validity_end_time: Optional[pulumi.Input[str]] = None,
             validity_period_hours: Optional[pulumi.Input[int]] = None,
@@ -592,7 +592,7 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.Input[bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
         :param pulumi.Input[bool] set_authority_key_id: Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
-        :param pulumi.Input[pulumi.InputType['SelfSignedCertSubjectArgs']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+        :param pulumi.Input[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[str] validity_end_time: The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         :param pulumi.Input[int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.

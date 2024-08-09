@@ -197,7 +197,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      *
      * @param name The _unique_ name of the resulting resource.
      */
-    public LocallySignedCert(String name) {
+    public LocallySignedCert(java.lang.String name) {
         this(name, LocallySignedCertArgs.Empty);
     }
     /**
@@ -205,7 +205,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param args The arguments to use to populate this resource's properties.
      */
-    public LocallySignedCert(String name, LocallySignedCertArgs args) {
+    public LocallySignedCert(java.lang.String name, LocallySignedCertArgs args) {
         this(name, args, null);
     }
     /**
@@ -214,15 +214,22 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param options A bag of options that control this resource's behavior.
      */
-    public LocallySignedCert(String name, LocallySignedCertArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("tls:index/locallySignedCert:LocallySignedCert", name, args == null ? LocallySignedCertArgs.Empty : args, makeResourceOptions(options, Codegen.empty()));
+    public LocallySignedCert(java.lang.String name, LocallySignedCertArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("tls:index/locallySignedCert:LocallySignedCert", name, makeArgs(args, options), makeResourceOptions(options, Codegen.empty()), false);
     }
 
-    private LocallySignedCert(String name, Output<String> id, @Nullable LocallySignedCertState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("tls:index/locallySignedCert:LocallySignedCert", name, state, makeResourceOptions(options, id));
+    private LocallySignedCert(java.lang.String name, Output<java.lang.String> id, @Nullable LocallySignedCertState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("tls:index/locallySignedCert:LocallySignedCert", name, state, makeResourceOptions(options, id), false);
     }
 
-    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<String> id) {
+    private static LocallySignedCertArgs makeArgs(LocallySignedCertArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        if (options != null && options.getUrn().isPresent()) {
+            return null;
+        }
+        return args == null ? LocallySignedCertArgs.Empty : args;
+    }
+
+    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
             .additionalSecretOutputs(List.of(
@@ -241,7 +248,7 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
      * @param state
      * @param options Optional settings to control the behavior of the CustomResource.
      */
-    public static LocallySignedCert get(String name, Output<String> id, @Nullable LocallySignedCertState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    public static LocallySignedCert get(java.lang.String name, Output<java.lang.String> id, @Nullable LocallySignedCertState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         return new LocallySignedCert(name, id, state, options);
     }
 }
