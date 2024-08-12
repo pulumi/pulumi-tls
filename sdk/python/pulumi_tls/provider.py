@@ -41,7 +41,7 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 proxy: Optional[pulumi.Input[pulumi.InputType['ProviderProxyArgs']]] = None,
+                 proxy: Optional[pulumi.Input[Union['ProviderProxyArgs', 'ProviderProxyArgsDict']]] = None,
                  __props__=None):
         """
         The provider type for the tls package. By default, resources use package-wide configuration
@@ -51,7 +51,7 @@ class Provider(pulumi.ProviderResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[pulumi.InputType['ProviderProxyArgs']] proxy: Proxy used by resources and data sources that connect to external endpoints.
+        :param pulumi.Input[Union['ProviderProxyArgs', 'ProviderProxyArgsDict']] proxy: Proxy used by resources and data sources that connect to external endpoints.
         """
         ...
     @overload
@@ -80,7 +80,7 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 proxy: Optional[pulumi.Input[pulumi.InputType['ProviderProxyArgs']]] = None,
+                 proxy: Optional[pulumi.Input[Union['ProviderProxyArgs', 'ProviderProxyArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):

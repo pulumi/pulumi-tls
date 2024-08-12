@@ -162,7 +162,7 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      *
      * @param name The _unique_ name of the resulting resource.
      */
-    public PrivateKey(String name) {
+    public PrivateKey(java.lang.String name) {
         this(name, PrivateKeyArgs.Empty);
     }
     /**
@@ -170,7 +170,7 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param args The arguments to use to populate this resource's properties.
      */
-    public PrivateKey(String name, PrivateKeyArgs args) {
+    public PrivateKey(java.lang.String name, PrivateKeyArgs args) {
         this(name, args, null);
     }
     /**
@@ -179,15 +179,22 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param options A bag of options that control this resource's behavior.
      */
-    public PrivateKey(String name, PrivateKeyArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("tls:index/privateKey:PrivateKey", name, args == null ? PrivateKeyArgs.Empty : args, makeResourceOptions(options, Codegen.empty()));
+    public PrivateKey(java.lang.String name, PrivateKeyArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("tls:index/privateKey:PrivateKey", name, makeArgs(args, options), makeResourceOptions(options, Codegen.empty()), false);
     }
 
-    private PrivateKey(String name, Output<String> id, @Nullable PrivateKeyState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
-        super("tls:index/privateKey:PrivateKey", name, state, makeResourceOptions(options, id));
+    private PrivateKey(java.lang.String name, Output<java.lang.String> id, @Nullable PrivateKeyState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        super("tls:index/privateKey:PrivateKey", name, state, makeResourceOptions(options, id), false);
     }
 
-    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<String> id) {
+    private static PrivateKeyArgs makeArgs(PrivateKeyArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+        if (options != null && options.getUrn().isPresent()) {
+            return null;
+        }
+        return args == null ? PrivateKeyArgs.Empty : args;
+    }
+
+    private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
             .additionalSecretOutputs(List.of(
@@ -208,7 +215,7 @@ public class PrivateKey extends com.pulumi.resources.CustomResource {
      * @param state
      * @param options Optional settings to control the behavior of the CustomResource.
      */
-    public static PrivateKey get(String name, Output<String> id, @Nullable PrivateKeyState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    public static PrivateKey get(java.lang.String name, Output<java.lang.String> id, @Nullable PrivateKeyState state, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         return new PrivateKey(name, id, state, options);
     }
 }
