@@ -43,12 +43,12 @@ public final class GetPublicKeyResult {
      */
     private String publicKeyFingerprintSha256;
     /**
-     * @return The public key, in  OpenSSH PEM (RFC 4716).
+     * @return The public key, in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format. This is also known as [&#39;Authorized Keys&#39;](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not populated for `ECDSA` with curve `P224`, as it is not supported. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      * 
      */
     private String publicKeyOpenssh;
     /**
-     * @return The public key, in PEM (RFC 1421).
+     * @return The public key, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      * 
      */
     private String publicKeyPem;
@@ -97,14 +97,14 @@ public final class GetPublicKeyResult {
         return this.publicKeyFingerprintSha256;
     }
     /**
-     * @return The public key, in  OpenSSH PEM (RFC 4716).
+     * @return The public key, in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format. This is also known as [&#39;Authorized Keys&#39;](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not populated for `ECDSA` with curve `P224`, as it is not supported. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      * 
      */
     public String publicKeyOpenssh() {
         return this.publicKeyOpenssh;
     }
     /**
-     * @return The public key, in PEM (RFC 1421).
+     * @return The public key, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      * 
      */
     public String publicKeyPem() {

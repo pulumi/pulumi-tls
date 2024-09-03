@@ -198,11 +198,11 @@ namespace Pulumi.Tls
         /// </summary>
         public readonly string PublicKeyFingerprintSha256;
         /// <summary>
-        /// The public key, in  OpenSSH PEM (RFC 4716).
+        /// The public key, in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format. This is also known as ['Authorized Keys'](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not populated for `ECDSA` with curve `P224`, as it is not supported. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         /// </summary>
         public readonly string PublicKeyOpenssh;
         /// <summary>
-        /// The public key, in PEM (RFC 1421).
+        /// The public key, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         /// </summary>
         public readonly string PublicKeyPem;
 
