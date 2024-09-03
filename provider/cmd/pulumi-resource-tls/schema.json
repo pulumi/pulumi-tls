@@ -199,7 +199,7 @@
             "properties": {
                 "certPem": {
                     "type": "string",
-                    "description": "Certificate data in PEM (RFC 1421).\n"
+                    "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
                 },
                 "isCa": {
                     "type": "boolean",
@@ -284,7 +284,7 @@
             "properties": {
                 "certRequestPem": {
                     "type": "string",
-                    "description": "The certificate request data in PEM (RFC 1421).\n"
+                    "description": "The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
                 },
                 "dnsNames": {
                     "type": "array",
@@ -306,7 +306,7 @@
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in PEM (RFC 1421) interpolation function.\n",
+                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.\n",
                     "secret": true
                 },
                 "subject": {
@@ -343,7 +343,7 @@
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in PEM (RFC 1421) interpolation function.\n",
+                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.\n",
                     "secret": true
                 },
                 "subject": {
@@ -366,7 +366,7 @@
                 "properties": {
                     "certRequestPem": {
                         "type": "string",
-                        "description": "The certificate request data in PEM (RFC 1421).\n"
+                        "description": "The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
                     },
                     "dnsNames": {
                         "type": "array",
@@ -388,7 +388,7 @@
                     },
                     "privateKeyPem": {
                         "type": "string",
-                        "description": "Private key in PEM (RFC 1421) interpolation function.\n",
+                        "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.\n",
                         "secret": true
                     },
                     "subject": {
@@ -430,7 +430,7 @@
                 },
                 "certPem": {
                     "type": "string",
-                    "description": "Certificate data in PEM (RFC 1421).\n"
+                    "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
                 },
                 "certRequestPem": {
                     "type": "string",
@@ -548,7 +548,7 @@
                     },
                     "certPem": {
                         "type": "string",
-                        "description": "Certificate data in PEM (RFC 1421).\n"
+                        "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
                     },
                     "certRequestPem": {
                         "type": "string",
@@ -620,11 +620,11 @@
                 },
                 "publicKeyOpenssh": {
                     "type": "string",
-                    "description": "The public key data in \"Authorized Keys\".\n"
+                    "description": "The public key data in [\"Authorized Keys\"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not populated for `ECDSA` with curve `P224`, as it is not supported. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
                 },
                 "publicKeyPem": {
                     "type": "string",
-                    "description": "Public key data in PEM (RFC 1421).\n"
+                    "description": "Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
                 },
                 "rsaBits": {
                     "type": "integer",
@@ -696,11 +696,11 @@
                     },
                     "publicKeyOpenssh": {
                         "type": "string",
-                        "description": "The public key data in \"Authorized Keys\".\n"
+                        "description": "The public key data in [\"Authorized Keys\"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not populated for `ECDSA` with curve `P224`, as it is not supported. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
                     },
                     "publicKeyPem": {
                         "type": "string",
-                        "description": "Public key data in PEM (RFC 1421).\n"
+                        "description": "Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
                     },
                     "rsaBits": {
                         "type": "integer",
@@ -721,7 +721,7 @@
                 },
                 "certPem": {
                     "type": "string",
-                    "description": "Certificate data in PEM (RFC 1421).\n"
+                    "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
                 },
                 "dnsNames": {
                     "type": "array",
@@ -750,7 +750,7 @@
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in PEM (RFC 1421) interpolation function.\n",
+                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.\n",
                     "secret": true
                 },
                 "readyForRenewal": {
@@ -834,7 +834,7 @@
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in PEM (RFC 1421) interpolation function.\n",
+                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.\n",
                     "secret": true
                 },
                 "setAuthorityKeyId": {
@@ -878,7 +878,7 @@
                     },
                     "certPem": {
                         "type": "string",
-                        "description": "Certificate data in PEM (RFC 1421).\n"
+                        "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
                     },
                     "dnsNames": {
                         "type": "array",
@@ -907,7 +907,7 @@
                     },
                     "privateKeyPem": {
                         "type": "string",
-                        "description": "Private key in PEM (RFC 1421) interpolation function.\n",
+                        "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.\n",
                         "secret": true
                     },
                     "readyForRenewal": {
@@ -1052,11 +1052,11 @@
                         "type": "string"
                     },
                     "publicKeyOpenssh": {
-                        "description": "The public key, in  OpenSSH PEM (RFC 4716).\n",
+                        "description": "The public key, in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format. This is also known as ['Authorized Keys'](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not populated for `ECDSA` with curve `P224`, as it is not supported. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n",
                         "type": "string"
                     },
                     "publicKeyPem": {
-                        "description": "The public key, in PEM (RFC 1421).\n",
+                        "description": "The public key, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n",
                         "type": "string"
                     }
                 },
