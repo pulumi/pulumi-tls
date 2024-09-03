@@ -35,14 +35,14 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
         return this.allowedUses;
     }
     /**
-     * Certificate data in PEM (RFC 1421).
+     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      * 
      */
     @Export(name="certPem", refs={String.class}, tree="[0]")
     private Output<String> certPem;
 
     /**
-     * @return Certificate data in PEM (RFC 1421).
+     * @return Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      * 
      */
     public Output<String> certPem() {
@@ -111,14 +111,14 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
         return this.keyAlgorithm;
     }
     /**
-     * Private key in PEM (RFC 1421) interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
      * 
      */
     @Export(name="privateKeyPem", refs={String.class}, tree="[0]")
     private Output<String> privateKeyPem;
 
     /**
-     * @return Private key in PEM (RFC 1421) interpolation function.
+     * @return Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
      * 
      */
     public Output<String> privateKeyPem() {
