@@ -160,7 +160,7 @@ class _LocallySignedCertState:
         :param pulumi.Input[str] ca_cert_pem: Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[str] ca_key_algorithm: Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
         :param pulumi.Input[str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
-        :param pulumi.Input[str] cert_pem: Certificate data in PEM (RFC 1421).
+        :param pulumi.Input[str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         :param pulumi.Input[str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
@@ -248,7 +248,7 @@ class _LocallySignedCertState:
     @pulumi.getter(name="certPem")
     def cert_pem(self) -> Optional[pulumi.Input[str]]:
         """
-        Certificate data in PEM (RFC 1421).
+        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         """
         return pulumi.get(self, "cert_pem")
 
@@ -475,7 +475,7 @@ class LocallySignedCert(pulumi.CustomResource):
         :param pulumi.Input[str] ca_cert_pem: Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[str] ca_key_algorithm: Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
         :param pulumi.Input[str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
-        :param pulumi.Input[str] cert_pem: Certificate data in PEM (RFC 1421).
+        :param pulumi.Input[str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         :param pulumi.Input[str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
@@ -539,7 +539,7 @@ class LocallySignedCert(pulumi.CustomResource):
     @pulumi.getter(name="certPem")
     def cert_pem(self) -> pulumi.Output[str]:
         """
-        Certificate data in PEM (RFC 1421).
+        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         """
         return pulumi.get(self, "cert_pem")
 

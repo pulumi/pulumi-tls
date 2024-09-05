@@ -49,7 +49,7 @@ export class LocallySignedCert extends pulumi.CustomResource {
      */
     public readonly caPrivateKeyPem!: pulumi.Output<string>;
     /**
-     * Certificate data in PEM (RFC 1421).
+     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      */
     public /*out*/ readonly certPem!: pulumi.Output<string>;
     /**
@@ -167,7 +167,7 @@ export interface LocallySignedCertState {
      */
     caPrivateKeyPem?: pulumi.Input<string>;
     /**
-     * Certificate data in PEM (RFC 1421).
+     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      */
     certPem?: pulumi.Input<string>;
     /**

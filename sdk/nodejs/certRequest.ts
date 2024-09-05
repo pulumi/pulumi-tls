@@ -54,7 +54,7 @@ export class CertRequest extends pulumi.CustomResource {
     }
 
     /**
-     * The certificate request data in PEM (RFC 1421).
+     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      */
     public /*out*/ readonly certRequestPem!: pulumi.Output<string>;
     /**
@@ -70,7 +70,7 @@ export class CertRequest extends pulumi.CustomResource {
      */
     public /*out*/ readonly keyAlgorithm!: pulumi.Output<string>;
     /**
-     * Private key in PEM (RFC 1421) interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
      */
     public readonly privateKeyPem!: pulumi.Output<string>;
     /**
@@ -127,7 +127,7 @@ export class CertRequest extends pulumi.CustomResource {
  */
 export interface CertRequestState {
     /**
-     * The certificate request data in PEM (RFC 1421).
+     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      */
     certRequestPem?: pulumi.Input<string>;
     /**
@@ -143,7 +143,7 @@ export interface CertRequestState {
      */
     keyAlgorithm?: pulumi.Input<string>;
     /**
-     * Private key in PEM (RFC 1421) interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
      */
     privateKeyPem?: pulumi.Input<string>;
     /**
@@ -169,7 +169,7 @@ export interface CertRequestArgs {
      */
     ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Private key in PEM (RFC 1421) interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
      */
     privateKeyPem: pulumi.Input<string>;
     /**
