@@ -310,7 +310,7 @@ class GetCertificateCertificateResult(dict):
                  subject: str,
                  version: int):
         """
-        :param str cert_pem: Certificate data in PEM (RFC 1421).
+        :param str cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         :param bool is_ca: `true` if the certificate is of a CA (Certificate Authority).
         :param str issuer: Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
         :param str not_after: The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -339,7 +339,7 @@ class GetCertificateCertificateResult(dict):
     @pulumi.getter(name="certPem")
     def cert_pem(self) -> str:
         """
-        Certificate data in PEM (RFC 1421).
+        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         """
         return pulumi.get(self, "cert_pem")
 
