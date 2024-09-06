@@ -49,14 +49,14 @@ public final class CertRequestArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Private key in PEM (RFC 1421) interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
      * 
      */
     @Import(name="privateKeyPem", required=true)
     private Output<String> privateKeyPem;
 
     /**
-     * @return Private key in PEM (RFC 1421) interpolation function.
+     * @return Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
      * 
      */
     public Output<String> privateKeyPem() {
@@ -184,7 +184,7 @@ public final class CertRequestArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param privateKeyPem Private key in PEM (RFC 1421) interpolation function.
+         * @param privateKeyPem Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
          * 
          * @return builder
          * 
@@ -195,7 +195,7 @@ public final class CertRequestArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param privateKeyPem Private key in PEM (RFC 1421) interpolation function.
+         * @param privateKeyPem Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
          * 
          * @return builder
          * 
