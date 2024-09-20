@@ -8,7 +8,6 @@ import * as utilities from "./utilities";
 
 export function getCertificate(args?: GetCertificateArgs, opts?: pulumi.InvokeOptions): Promise<GetCertificateResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tls:index/getCertificate:getCertificate", {
         "content": args.content,
@@ -61,7 +60,13 @@ export interface GetCertificateResult {
     readonly verifyChain?: boolean;
 }
 export function getCertificateOutput(args?: GetCertificateOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCertificateResult> {
-    return pulumi.output(args).apply((a: any) => getCertificate(a, opts))
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("tls:index/getCertificate:getCertificate", {
+        "content": args.content,
+        "url": args.url,
+        "verifyChain": args.verifyChain,
+    }, opts);
 }
 
 /**
