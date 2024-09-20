@@ -31,7 +31,6 @@ import * as utilities from "./utilities";
  */
 export function getPublicKey(args?: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tls:index/getPublicKey:getPublicKey", {
         "privateKeyOpenssh": args.privateKeyOpenssh,
@@ -116,7 +115,12 @@ export interface GetPublicKeyResult {
  * ```
  */
 export function getPublicKeyOutput(args?: GetPublicKeyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublicKeyResult> {
-    return pulumi.output(args).apply((a: any) => getPublicKey(a, opts))
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("tls:index/getPublicKey:getPublicKey", {
+        "privateKeyOpenssh": args.privateKeyOpenssh,
+        "privateKeyPem": args.privateKeyPem,
+    }, opts);
 }
 
 /**
