@@ -405,18 +405,3 @@ The attributes affected are:
 
 This is because the SSH ECC Algorithm Integration ([RFC 5656](https://datatracker.ietf.org/doc/html/rfc5656))
 restricts support for elliptic curves to "nistp256", "nistp384" and "nistp521".
-### Secrets and Pulumi state
-
-Some resources that can be created with this provider, like `tls.PrivateKey`, are
-considered "secrets", and as such are marked by this provider as *sensitive*, so to
-help practitioner to not accidentally leak their value in logs or other form of output.
-
-It's important to remember that the values that constitute the "state" of those
-resources will be stored in the Pulumi state file.
-This includes the "secrets", that will be part of the state file *unencrypted*.
-
-Because of these limitations, **use of these resources for production deployments is *not* recommended**.
-Failing that, **protecting the content of the state file is strongly recommended**.
-
-The more general advice is that it's better to generate "secrets" outside of Pulumi,
-and then distribute them securely to the system where Pulumi will make use of them.
