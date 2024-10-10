@@ -4,16 +4,67 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
     'CertRequestSubjectArgs',
+    'CertRequestSubjectArgsDict',
     'ProviderProxyArgs',
+    'ProviderProxyArgsDict',
     'SelfSignedCertSubjectArgs',
+    'SelfSignedCertSubjectArgsDict',
 ]
+
+MYPY = False
+
+if not MYPY:
+    class CertRequestSubjectArgsDict(TypedDict):
+        common_name: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `CN`
+        """
+        country: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `C`
+        """
+        locality: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `L`
+        """
+        organization: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `O`
+        """
+        organizational_unit: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `OU`
+        """
+        postal_code: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `PC`
+        """
+        province: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `ST`
+        """
+        serial_number: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `SERIALNUMBER`
+        """
+        street_addresses: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Distinguished name: `STREET`
+        """
+elif False:
+    CertRequestSubjectArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class CertRequestSubjectArgs:
@@ -166,6 +217,27 @@ class CertRequestSubjectArgs:
         pulumi.set(self, "street_addresses", value)
 
 
+if not MYPY:
+    class ProviderProxyArgsDict(TypedDict):
+        from_env: NotRequired[pulumi.Input[bool]]
+        """
+        When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+        """
+        password: NotRequired[pulumi.Input[str]]
+        """
+        Password used for Basic authentication against the Proxy.
+        """
+        url: NotRequired[pulumi.Input[str]]
+        """
+        URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+        """
+        username: NotRequired[pulumi.Input[str]]
+        """
+        Username (or Token) used for Basic authentication against the Proxy.
+        """
+elif False:
+    ProviderProxyArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ProviderProxyArgs:
     def __init__(__self__, *,
@@ -236,6 +308,47 @@ class ProviderProxyArgs:
     def username(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "username", value)
 
+
+if not MYPY:
+    class SelfSignedCertSubjectArgsDict(TypedDict):
+        common_name: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `CN`
+        """
+        country: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `C`
+        """
+        locality: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `L`
+        """
+        organization: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `O`
+        """
+        organizational_unit: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `OU`
+        """
+        postal_code: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `PC`
+        """
+        province: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `ST`
+        """
+        serial_number: NotRequired[pulumi.Input[str]]
+        """
+        Distinguished name: `SERIALNUMBER`
+        """
+        street_addresses: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Distinguished name: `STREET`
+        """
+elif False:
+    SelfSignedCertSubjectArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class SelfSignedCertSubjectArgs:

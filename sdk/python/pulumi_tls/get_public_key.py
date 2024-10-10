@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
@@ -169,9 +174,6 @@ def get_public_key(private_key_openssh: Optional[str] = None,
         public_key_fingerprint_sha256=pulumi.get(__ret__, 'public_key_fingerprint_sha256'),
         public_key_openssh=pulumi.get(__ret__, 'public_key_openssh'),
         public_key_pem=pulumi.get(__ret__, 'public_key_pem'))
-
-
-@_utilities.lift_output_func(get_public_key)
 def get_public_key_output(private_key_openssh: Optional[pulumi.Input[Optional[str]]] = None,
                           private_key_pem: Optional[pulumi.Input[Optional[str]]] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPublicKeyResult]:
@@ -198,4 +200,17 @@ def get_public_key_output(private_key_openssh: Optional[pulumi.Input[Optional[st
     :param str private_key_openssh: The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `private_key_pem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
     :param str private_key_pem: The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `private_key_openssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
     """
-    ...
+    __args__ = dict()
+    __args__['privateKeyOpenssh'] = private_key_openssh
+    __args__['privateKeyPem'] = private_key_pem
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('tls:index/getPublicKey:getPublicKey', __args__, opts=opts, typ=GetPublicKeyResult)
+    return __ret__.apply(lambda __response__: GetPublicKeyResult(
+        algorithm=pulumi.get(__response__, 'algorithm'),
+        id=pulumi.get(__response__, 'id'),
+        private_key_openssh=pulumi.get(__response__, 'private_key_openssh'),
+        private_key_pem=pulumi.get(__response__, 'private_key_pem'),
+        public_key_fingerprint_md5=pulumi.get(__response__, 'public_key_fingerprint_md5'),
+        public_key_fingerprint_sha256=pulumi.get(__response__, 'public_key_fingerprint_sha256'),
+        public_key_openssh=pulumi.get(__response__, 'public_key_openssh'),
+        public_key_pem=pulumi.get(__response__, 'public_key_pem')))
