@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -117,9 +122,6 @@ def get_certificate(content: Optional[str] = None,
         id=pulumi.get(__ret__, 'id'),
         url=pulumi.get(__ret__, 'url'),
         verify_chain=pulumi.get(__ret__, 'verify_chain'))
-
-
-@_utilities.lift_output_func(get_certificate)
 def get_certificate_output(content: Optional[pulumi.Input[Optional[str]]] = None,
                            url: Optional[pulumi.Input[Optional[str]]] = None,
                            verify_chain: Optional[pulumi.Input[Optional[bool]]] = None,
@@ -131,4 +133,15 @@ def get_certificate_output(content: Optional[pulumi.Input[Optional[str]]] = None
     :param str url: The URL of the website to get the certificates from. Cannot be used with `content`.
     :param bool verify_chain: Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
     """
-    ...
+    __args__ = dict()
+    __args__['content'] = content
+    __args__['url'] = url
+    __args__['verifyChain'] = verify_chain
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('tls:index/getCertificate:getCertificate', __args__, opts=opts, typ=GetCertificateResult)
+    return __ret__.apply(lambda __response__: GetCertificateResult(
+        certificates=pulumi.get(__response__, 'certificates'),
+        content=pulumi.get(__response__, 'content'),
+        id=pulumi.get(__response__, 'id'),
+        url=pulumi.get(__response__, 'url'),
+        verify_chain=pulumi.get(__response__, 'verify_chain')))
