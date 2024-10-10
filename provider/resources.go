@@ -25,6 +25,7 @@ import (
 
 	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 
@@ -79,6 +80,7 @@ func Provider() tfbridge.ProviderInfo {
 		Version:      version.Version,
 		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 		GitHubOrg:    "hashicorp",
+		DocRules:     &tfbridge.DocRuleInfo{EditRules: docEditRules},
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"tls_cert_request":        {Tok: tlsResource(tlsMod, "CertRequest")},
 			"tls_locally_signed_cert": {Tok: tlsResource(tlsMod, "LocallySignedCert")},
@@ -186,4 +188,20 @@ func selfSignedCertPreStateUpgradeHook(args tfbridge.PreStateUpgradeHookArgs) (i
 	}
 
 	return 0, s, nil
+}
+func docEditRules(defaults []tfbridge.DocsEdit) []tfbridge.DocsEdit {
+	return append(
+		defaults,
+		skipSecretsSection,
+	)
+}
+
+// Removes a "Secrets and Terraform state" section that does not apply to Pulumi
+var skipSecretsSection = tfbridge.DocsEdit{
+	Path: "index.md",
+	Edit: func(_ string, content []byte) ([]byte, error) {
+		return tfgen.SkipSectionByHeaderContent(content, func(headerText string) bool {
+			return headerText == "Secrets and Terraform state"
+		})
+	},
 }
