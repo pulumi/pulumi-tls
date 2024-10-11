@@ -189,6 +189,7 @@ func selfSignedCertPreStateUpgradeHook(args tfbridge.PreStateUpgradeHookArgs) (i
 
 	return 0, s, nil
 }
+
 func docEditRules(defaults []tfbridge.DocsEdit) []tfbridge.DocsEdit {
 	return append(
 		defaults,
