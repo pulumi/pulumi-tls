@@ -22,7 +22,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	testutils "github.com/pulumi/providertest/replay"
-	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 	provider "github.com/pulumi/pulumi-tls/provider/v5"
 	"github.com/pulumi/pulumi-tls/provider/v5/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource/plugin"
