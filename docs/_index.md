@@ -381,7 +381,7 @@ public class App {
 - `proxy` (Block List) Proxy used by resources and functions that connect to external endpoints. (see below for nested schema)
 
 <a id="nestedblock--proxy"></a>
-### Nested Configuration Reference for `proxy`
+### Nested Schema for `proxy`
 
 Optional:
 
