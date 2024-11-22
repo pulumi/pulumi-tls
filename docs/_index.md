@@ -6,7 +6,7 @@ layout: package
 ---
 ## Installation
 
-The tls provider is available as a package in all Pulumi languages:
+The Tls provider is available as a package in all Pulumi languages:
 
 * JavaScript/TypeScript: [`@pulumi/tls`](https://www.npmjs.com/package/@pulumi/tls)
 * Python: [`pulumi-tls`](https://pypi.org/project/pulumi-tls/)
