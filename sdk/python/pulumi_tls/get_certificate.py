@@ -125,7 +125,7 @@ def get_certificate(content: Optional[str] = None,
 def get_certificate_output(content: Optional[pulumi.Input[Optional[str]]] = None,
                            url: Optional[pulumi.Input[Optional[str]]] = None,
                            verify_chain: Optional[pulumi.Input[Optional[bool]]] = None,
-                           opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetCertificateResult]:
+                           opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetCertificateResult]:
     """
     Use this data source to access information about an existing resource.
 
@@ -137,7 +137,7 @@ def get_certificate_output(content: Optional[pulumi.Input[Optional[str]]] = None
     __args__['content'] = content
     __args__['url'] = url
     __args__['verifyChain'] = verify_chain
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('tls:index/getCertificate:getCertificate', __args__, opts=opts, typ=GetCertificateResult)
     return __ret__.apply(lambda __response__: GetCertificateResult(
         certificates=pulumi.get(__response__, 'certificates'),
