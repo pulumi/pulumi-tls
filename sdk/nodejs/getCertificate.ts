@@ -59,7 +59,7 @@ export interface GetCertificateResult {
      */
     readonly verifyChain?: boolean;
 }
-export function getCertificateOutput(args?: GetCertificateOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCertificateResult> {
+export function getCertificateOutput(args?: GetCertificateOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCertificateResult> {
     args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("tls:index/getCertificate:getCertificate", {

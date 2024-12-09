@@ -114,7 +114,7 @@ export interface GetPublicKeyResult {
  * }));
  * ```
  */
-export function getPublicKeyOutput(args?: GetPublicKeyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublicKeyResult> {
+export function getPublicKeyOutput(args?: GetPublicKeyOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPublicKeyResult> {
     args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("tls:index/getPublicKey:getPublicKey", {
