@@ -176,7 +176,7 @@ def get_public_key(private_key_openssh: Optional[str] = None,
         public_key_pem=pulumi.get(__ret__, 'public_key_pem'))
 def get_public_key_output(private_key_openssh: Optional[pulumi.Input[Optional[str]]] = None,
                           private_key_pem: Optional[pulumi.Input[Optional[str]]] = None,
-                          opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPublicKeyResult]:
+                          opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetPublicKeyResult]:
     """
     Get a public key from a PEM-encoded private key.
 
@@ -203,7 +203,7 @@ def get_public_key_output(private_key_openssh: Optional[pulumi.Input[Optional[st
     __args__ = dict()
     __args__['privateKeyOpenssh'] = private_key_openssh
     __args__['privateKeyPem'] = private_key_pem
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('tls:index/getPublicKey:getPublicKey', __args__, opts=opts, typ=GetPublicKeyResult)
     return __ret__.apply(lambda __response__: GetPublicKeyResult(
         algorithm=pulumi.get(__response__, 'algorithm'),
