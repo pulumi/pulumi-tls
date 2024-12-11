@@ -71,32 +71,11 @@ jobs:
         uses: ./.github/actions/setup-tools
         with:
           tools: pulumicli, nodejs, python, dotnet, go, java
-      - name: Verify nodejs release
-        uses: pulumi/verify-provider-release@v1
-        with:
-          runtime: nodejs
-          directory: private-key/ts
-          provider: tls
-          providerVersion: ${{ inputs.providerVersion }}
-      - name: Verify python release
-        uses: pulumi/verify-provider-release@v1
-        with:
-          runtime: python
-          directory: private-key/py
-          provider: tls
-          providerVersion: ${{ inputs.providerVersion }}
-      - name: Verify dotnet release
-        uses: pulumi/verify-provider-release@v1
-        with:
-          runtime: dotnet
-          directory: private-key/dotnet
-          provider: tls
-          providerVersion: ${{ inputs.providerVersion }}
       - name: Verify go release
         uses: pulumi/verify-provider-release@v1
         if: inputs.skipGoSdk == false
         with:
           runtime: go
-          directory: private-key/go
+          directory: examples/private-key/go
           provider: tls
           providerVersion: ${{ inputs.providerVersion }}
