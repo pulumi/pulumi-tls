@@ -30,7 +30,7 @@ pulumiConvert: 1
 registryDocs: true
 
 releaseVerification:
-  # nodejs: examples/private-key/ts # TODO[https://github.com/pulumi/verify-provider-release/issues/73]
-  # python: examples/private-key/py # TODO[https://github.com/pulumi/verify-provider-release/issues/74]
-  # dotnet: examples/private-key/dotnet # TODO[https://github.com/pulumi/verify-provider-release/issues/75]
+  nodejs: examples/private-key/ts
+  python: examples/private-key/py
+  dotnet: examples/private-key/dotnet
   go: examples/private-key/go
