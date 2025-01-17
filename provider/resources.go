@@ -129,6 +129,7 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		EnableZeroDefaultSchemaVersion: true,
+		EnableAccurateBridgePreview:    true,
 	}
 
 	return info
