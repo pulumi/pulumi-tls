@@ -18,11 +18,11 @@ import * as utilities from "./utilities";
  *
  * const ed25519_example = new tls.PrivateKey("ed25519-example", {algorithm: "ED25519"});
  * // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
- * const privateKeyPem-example = tls.getPublicKeyOutput({
+ * const privateKeyPem_example = tls.getPublicKeyOutput({
  *     privateKeyPem: ed25519_example.privateKeyPem,
  * });
  * // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
- * const privateKeyOpenssh-example = std.file({
+ * const privateKeyOpenssh_example = std.file({
  *     input: "~/.ssh/id_rsa_rfc4716",
  * }).then(invoke => tls.getPublicKey({
  *     privateKeyOpenssh: invoke.result,
@@ -103,11 +103,11 @@ export interface GetPublicKeyResult {
  *
  * const ed25519_example = new tls.PrivateKey("ed25519-example", {algorithm: "ED25519"});
  * // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
- * const privateKeyPem-example = tls.getPublicKeyOutput({
+ * const privateKeyPem_example = tls.getPublicKeyOutput({
  *     privateKeyPem: ed25519_example.privateKeyPem,
  * });
  * // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
- * const privateKeyOpenssh-example = std.file({
+ * const privateKeyOpenssh_example = std.file({
  *     input: "~/.ssh/id_rsa_rfc4716",
  * }).then(invoke => tls.getPublicKey({
  *     privateKeyOpenssh: invoke.result,

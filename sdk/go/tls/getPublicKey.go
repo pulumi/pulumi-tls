@@ -30,7 +30,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := tls.NewPrivateKey(ctx, "ed25519-example", &tls.PrivateKeyArgs{
+//			ed25519_example, err := tls.NewPrivateKey(ctx, "ed25519-example", &tls.PrivateKeyArgs{
 //				Algorithm: pulumi.String("ED25519"),
 //			})
 //			if err != nil {
