@@ -48,3 +48,8 @@ func validateExpectedVsActual(t *testing.T, stack integration.RuntimeValidationS
 		})
 	}
 }
+
+
+func TestSelfSignedKeyUpgrade(t *testing.T) {
+	testProviderUpgrade(t, "self-signed-cert/yaml")
+}

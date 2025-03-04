@@ -1,0 +1,209 @@
+{
+  "version": 3,
+  "deployment": {
+    "manifest": {
+      "time": "2025-03-04T15:50:29.870013+02:00",
+      "magic": "314f350dd99c0299d94a7042323e86b6762195d4bd5f498ffaabc785d7cdc963",
+      "version": "v3.153.1"
+    },
+    "secrets_providers": {
+      "type": "passphrase",
+      "state": {
+        "salt": "v1:u9whky8hiCk=:v1:CUtRkmziNtanVihW:VEiPaNXcfn//t21+WqnR+UmxgRSiqw=="
+      }
+    },
+    "resources": [
+      {
+        "urn": "urn:pulumi:test::provider-update::pulumi:pulumi:Stack::provider-update-test",
+        "custom": false,
+        "type": "pulumi:pulumi:Stack",
+        "outputs": {
+          "key": {
+            "algorithm": "ECDSA",
+            "ecdsaCurve": "P384",
+            "id": "8c961361e5e4499fb162958edd5b263cee491cab",
+            "privateKeyOpenssh": {
+              "4dabf18193072939515e22adb298388d": "1b47061264138c4ac30d75fd1eb44270",
+              "plaintext": "\"REDACTED BY PROVIDERTEST\""
+            },
+            "privateKeyPem": {
+              "4dabf18193072939515e22adb298388d": "1b47061264138c4ac30d75fd1eb44270",
+              "plaintext": "\"REDACTED BY PROVIDERTEST\""
+            },
+            "publicKeyFingerprintMd5": "49:32:06:f8:00:6d:d5:2e:c7:cc:07:e8:87:c5:26:51",
+            "publicKeyFingerprintSha256": "SHA256:YNzz57jV+wMUCnS8zoyJbPDMmAyL5bRAyZv7PijouoQ",
+            "publicKeyOpenssh": "ecdsa-sha2-nistp384 AAAAE2VjZHNhLXNoYTItbmlzdHAzODQAAAAIbmlzdHAzODQAAABhBIRqVSM2yXPyOwZYFB/8BeQ9QqPoOZf0Ar245HgMo7Ww8iOYStgTkwgC3wwsdxukOQRNofu/G/HCwUn8SC5MrXXUR68Ik3n3j2YjkEdZEZh9toM8e23P1MrEawSfWfVuAg==\n",
+            "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEhGpVIzbJc/I7BlgUH/wF5D1Co+g5l/QC\nvbjkeAyjtbDyI5hK2BOTCALfDCx3G6Q5BE2h+78b8cLBSfxILkytddRHrwiTefeP\nZiOQR1kRmH22gzx7bc/UysRrBJ9Z9W4C\n-----END PUBLIC KEY-----\n",
+            "rsaBits": 2048,
+            "urn": "urn:pulumi:test::provider-update::tls:index/privateKey:PrivateKey::my-private-key"
+          },
+          "ssCert": {
+            "allowedUses": [
+              "cert_signing"
+            ],
+            "certPem": "-----BEGIN CERTIFICATE-----\nMIIBkDCCARWgAwIBAgIQMR69OIGZ7qsaa2YtyG4VRTAKBggqhkjOPQQDAzAaMRgw\nFgYDVQQDEw9hcGkuZXhhbXBsZS5jb20wHhcNMjUwMzA0MTM1MDI5WhcNMjYwMzA0\nMTM1MDI5WjAaMRgwFgYDVQQDEw9hcGkuZXhhbXBsZS5jb20wdjAQBgcqhkjOPQIB\nBgUrgQQAIgNiAASEalUjNslz8jsGWBQf/AXkPUKj6DmX9AK9uOR4DKO1sPIjmErY\nE5MIAt8MLHcbpDkETaH7vxvxwsFJ/EguTK111EevCJN5949mI5BHWRGYfbaDPHtt\nz9TKxGsEn1n1bgKjIDAeMA4GA1UdDwEB/wQEAwICBDAMBgNVHRMBAf8EAjAAMAoG\nCCqGSM49BAMDA2kAMGYCMQC4OD8RZp1vZ8ZelB53ODyTBx4W05MLSe82i3tgWKDb\nPjM96C+aK1GgfpHoZ3zGCt4CMQCyhzzZHX+8geSFEtXH+u+00LF8/s9MXw05NIP9\nOHObwgmWC/NwzIitNa1oKFAo0bQ=\n-----END CERTIFICATE-----\n",
+            "earlyRenewalHours": 0,
+            "id": "65291778551518772562529931436005135685",
+            "keyAlgorithm": "ECDSA",
+            "privateKeyPem": {
+              "4dabf18193072939515e22adb298388d": "1b47061264138c4ac30d75fd1eb44270",
+              "plaintext": "\"REDACTED BY PROVIDERTEST\""
+            },
+            "readyForRenewal": false,
+            "subject": {
+              "commonName": "api.example.com",
+              "country": "",
+              "locality": "",
+              "organization": "",
+              "organizationalUnit": "",
+              "postalCode": "",
+              "province": "",
+              "serialNumber": "",
+              "streetAddresses": []
+            },
+            "urn": "urn:pulumi:test::provider-update::tls:index/selfSignedCert:SelfSignedCert::ssoCert",
+            "validityEndTime": "2026-03-04T15:50:29.844458+02:00",
+            "validityPeriodHours": 8760,
+            "validityStartTime": "2025-03-04T15:50:29.844458+02:00"
+          }
+        },
+        "created": "2025-03-04T13:50:28.877368Z",
+        "modified": "2025-03-04T13:50:28.877368Z",
+        "sourcePosition": "project:///node_modules/@pulumi/runtime/stack.ts#38,23"
+      },
+      {
+        "urn": "urn:pulumi:test::provider-update::pulumi:providers:tls::default_5_0_0_alpha_0_7c9d3d42",
+        "custom": true,
+        "id": "f1e62f52-77c0-4f54-887b-79fbc5b43d38",
+        "type": "pulumi:providers:tls",
+        "inputs": {
+          "__internal": {},
+          "version": "5.0.0-alpha.0+7c9d3d42"
+        },
+        "outputs": {
+          "version": "5.0.0-alpha.0+7c9d3d42"
+        },
+        "created": "2025-03-04T13:50:29.83171Z",
+        "modified": "2025-03-04T13:50:29.83171Z"
+      },
+      {
+        "urn": "urn:pulumi:test::provider-update::tls:index/privateKey:PrivateKey::my-private-key",
+        "custom": true,
+        "id": "8c961361e5e4499fb162958edd5b263cee491cab",
+        "type": "tls:index/privateKey:PrivateKey",
+        "inputs": {
+          "__defaults": [
+            "rsaBits"
+          ],
+          "algorithm": "ECDSA",
+          "ecdsaCurve": "P384",
+          "rsaBits": 2048
+        },
+        "outputs": {
+          "algorithm": "ECDSA",
+          "ecdsaCurve": "P384",
+          "id": "8c961361e5e4499fb162958edd5b263cee491cab",
+          "privateKeyOpenssh": {
+            "4dabf18193072939515e22adb298388d": "1b47061264138c4ac30d75fd1eb44270",
+            "plaintext": "\"REDACTED BY PROVIDERTEST\""
+          },
+          "privateKeyPem": {
+            "4dabf18193072939515e22adb298388d": "1b47061264138c4ac30d75fd1eb44270",
+            "plaintext": "\"REDACTED BY PROVIDERTEST\""
+          },
+          "publicKeyFingerprintMd5": "49:32:06:f8:00:6d:d5:2e:c7:cc:07:e8:87:c5:26:51",
+          "publicKeyFingerprintSha256": "SHA256:YNzz57jV+wMUCnS8zoyJbPDMmAyL5bRAyZv7PijouoQ",
+          "publicKeyOpenssh": "ecdsa-sha2-nistp384 AAAAE2VjZHNhLXNoYTItbmlzdHAzODQAAAAIbmlzdHAzODQAAABhBIRqVSM2yXPyOwZYFB/8BeQ9QqPoOZf0Ar245HgMo7Ww8iOYStgTkwgC3wwsdxukOQRNofu/G/HCwUn8SC5MrXXUR68Ik3n3j2YjkEdZEZh9toM8e23P1MrEawSfWfVuAg==\n",
+          "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEhGpVIzbJc/I7BlgUH/wF5D1Co+g5l/QC\nvbjkeAyjtbDyI5hK2BOTCALfDCx3G6Q5BE2h+78b8cLBSfxILkytddRHrwiTefeP\nZiOQR1kRmH22gzx7bc/UysRrBJ9Z9W4C\n-----END PUBLIC KEY-----\n",
+          "rsaBits": 2048
+        },
+        "parent": "urn:pulumi:test::provider-update::pulumi:pulumi:Stack::provider-update-test",
+        "provider": "urn:pulumi:test::provider-update::pulumi:providers:tls::default_5_0_0_alpha_0_7c9d3d42::f1e62f52-77c0-4f54-887b-79fbc5b43d38",
+        "propertyDependencies": {
+          "algorithm": [],
+          "ecdsaCurve": []
+        },
+        "additionalSecretOutputs": [
+          "privateKeyOpenssh",
+          "privateKeyPem",
+          "privateKeyPemPkcs8"
+        ],
+        "created": "2025-03-04T13:50:29.836392Z",
+        "modified": "2025-03-04T13:50:29.836392Z",
+        "sourcePosition": "project:///index.ts#17,20"
+      },
+      {
+        "urn": "urn:pulumi:test::provider-update::tls:index/selfSignedCert:SelfSignedCert::ssoCert",
+        "custom": true,
+        "id": "65291778551518772562529931436005135685",
+        "type": "tls:index/selfSignedCert:SelfSignedCert",
+        "inputs": {
+          "__defaults": [
+            "earlyRenewalHours"
+          ],
+          "allowedUses": [
+            "cert_signing"
+          ],
+          "earlyRenewalHours": 0,
+          "privateKeyPem": {
+            "4dabf18193072939515e22adb298388d": "1b47061264138c4ac30d75fd1eb44270",
+            "plaintext": "\"REDACTED BY PROVIDERTEST\""
+          },
+          "subject": {
+            "__defaults": [],
+            "commonName": "api.example.com"
+          },
+          "validityPeriodHours": 8760
+        },
+        "outputs": {
+          "allowedUses": [
+            "cert_signing"
+          ],
+          "certPem": "-----BEGIN CERTIFICATE-----\nMIIBkDCCARWgAwIBAgIQMR69OIGZ7qsaa2YtyG4VRTAKBggqhkjOPQQDAzAaMRgw\nFgYDVQQDEw9hcGkuZXhhbXBsZS5jb20wHhcNMjUwMzA0MTM1MDI5WhcNMjYwMzA0\nMTM1MDI5WjAaMRgwFgYDVQQDEw9hcGkuZXhhbXBsZS5jb20wdjAQBgcqhkjOPQIB\nBgUrgQQAIgNiAASEalUjNslz8jsGWBQf/AXkPUKj6DmX9AK9uOR4DKO1sPIjmErY\nE5MIAt8MLHcbpDkETaH7vxvxwsFJ/EguTK111EevCJN5949mI5BHWRGYfbaDPHtt\nz9TKxGsEn1n1bgKjIDAeMA4GA1UdDwEB/wQEAwICBDAMBgNVHRMBAf8EAjAAMAoG\nCCqGSM49BAMDA2kAMGYCMQC4OD8RZp1vZ8ZelB53ODyTBx4W05MLSe82i3tgWKDb\nPjM96C+aK1GgfpHoZ3zGCt4CMQCyhzzZHX+8geSFEtXH+u+00LF8/s9MXw05NIP9\nOHObwgmWC/NwzIitNa1oKFAo0bQ=\n-----END CERTIFICATE-----\n",
+          "earlyRenewalHours": 0,
+          "id": "65291778551518772562529931436005135685",
+          "keyAlgorithm": "ECDSA",
+          "privateKeyPem": {
+            "4dabf18193072939515e22adb298388d": "1b47061264138c4ac30d75fd1eb44270",
+            "plaintext": "\"REDACTED BY PROVIDERTEST\""
+          },
+          "readyForRenewal": false,
+          "subject": {
+            "commonName": "api.example.com",
+            "country": "",
+            "locality": "",
+            "organization": "",
+            "organizationalUnit": "",
+            "postalCode": "",
+            "province": "",
+            "serialNumber": "",
+            "streetAddresses": []
+          },
+          "validityEndTime": "2026-03-04T15:50:29.844458+02:00",
+          "validityPeriodHours": 8760,
+          "validityStartTime": "2025-03-04T15:50:29.844458+02:00"
+        },
+        "parent": "urn:pulumi:test::provider-update::pulumi:pulumi:Stack::provider-update-test",
+        "dependencies": [
+          "urn:pulumi:test::provider-update::tls:index/privateKey:PrivateKey::my-private-key"
+        ],
+        "provider": "urn:pulumi:test::provider-update::pulumi:providers:tls::default_5_0_0_alpha_0_7c9d3d42::f1e62f52-77c0-4f54-887b-79fbc5b43d38",
+        "propertyDependencies": {
+          "allowedUses": [],
+          "privateKeyPem": [
+            "urn:pulumi:test::provider-update::tls:index/privateKey:PrivateKey::my-private-key"
+          ],
+          "subject": [],
+          "validityPeriodHours": []
+        },
+        "additionalSecretOutputs": [
+          "privateKeyPem"
+        ],
+        "created": "2025-03-04T13:50:29.845658Z",
+        "modified": "2025-03-04T13:50:29.845658Z",
+        "sourcePosition": "project:///index.ts#22,23"
+      }
+    ],
+    "metadata": {}
+  }
+}

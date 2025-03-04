@@ -1,0 +1,78 @@
+{
+  "version": 3,
+  "deployment": {
+    "manifest": {
+      "time": "2025-03-04T16:10:04.532372+02:00",
+      "magic": "314f350dd99c0299d94a7042323e86b6762195d4bd5f498ffaabc785d7cdc963",
+      "version": "v3.153.1"
+    },
+    "secrets_providers": {
+      "type": "passphrase",
+      "state": {
+        "salt": "v1:/KwErG3OMeQ=:v1:l4V07V+Xg/HKgjIY:mDPj0AtzE+ycAanI/gvDQwAfUxs/bw=="
+      }
+    },
+    "resources": [
+      {
+        "urn": "urn:pulumi:test::self-signed-key::pulumi:pulumi:Stack::self-signed-key-test",
+        "custom": false,
+        "type": "pulumi:pulumi:Stack",
+        "created": "2025-03-04T14:10:04.473673Z",
+        "modified": "2025-03-04T14:10:04.473673Z"
+      },
+      {
+        "urn": "urn:pulumi:test::self-signed-key::pulumi:providers:tls::default",
+        "custom": true,
+        "id": "6605e473-f6ed-47a6-9888-75eae9143777",
+        "type": "pulumi:providers:tls",
+        "created": "2025-03-04T14:10:04.523004Z",
+        "modified": "2025-03-04T14:10:04.523004Z"
+      },
+      {
+        "urn": "urn:pulumi:test::self-signed-key::tls:index/selfSignedCert:SelfSignedCert::ssoCert",
+        "custom": true,
+        "id": "251633524552831154817811094671696735676",
+        "type": "tls:index/selfSignedCert:SelfSignedCert",
+        "inputs": {
+          "allowedUses": [],
+          "privateKeyPem": {
+            "4dabf18193072939515e22adb298388d": "1b47061264138c4ac30d75fd1eb44270",
+            "plaintext": "\"REDACTED BY PROVIDERTEST\""
+          },
+          "validityPeriodHours": 8760
+        },
+        "outputs": {
+          "allowedUses": [],
+          "certPem": "-----BEGIN CERTIFICATE-----\nMIICmzCCAYOgAwIBAgIRAL1O2p9nODQ35zD5RnsWLbwwDQYJKoZIhvcNAQELBQAw\nADAeFw0yNTAzMDQxNDEwMDRaFw0yNjAzMDQxNDEwMDRaMAAwggEiMA0GCSqGSIb3\nDQEBAQUAA4IBDwAwggEKAoIBAQC8ixL7Rhc7RdYIy4YPI/x94aRRSykiIY408gOg\nq7JiOS/7VQj3KAxQL1cKcODbk96y294MBORKEnWtJuMBt3TnonTtXXff/pydbh+5\nMqdfX90BE5JYTVWdLsMlrQmbpbWz5BxzXsSQE/p8Aym+24Rc0MHEFiHWi/lJ+O1Y\ntDC0dbUww9BZ9hNC3lQ25+agzveyvqlh8piRXscLV59LkRZHR+ABk4aA6mR1KdiX\n/1gVvcFIg3mrsDDgoGxxg7kidD5YGqgUfuqP4jeZg3K3MZ1BqBR6IvL/U88x+I6p\nv9OfPJT9SroeMxzVTttUpbeWwCVdD9Pa+l8xyqyJ4FXIgGz5AgMBAAGjEDAOMAwG\nA1UdEwEB/wQCMAAwDQYJKoZIhvcNAQELBQADggEBAFekQWhDxKGMFfaGAIXKnI6s\nZzWLdnNnNQTbmyLlmogTIR00YkqQX2V/AtPciZ6RYASdr/qnLRs2Hqp9lYzd9rGS\nXpIpaKO5syRMxYBDoC94OA2xMwNI8Dn/zMvVmKB/WYAqvRo8ck0FfIKnv8ZJhdPV\nOKkjpMsQkq1lrpfjWwEDjeNxheJxWp74/WwhTrHDSdBtVKzvo3sSULZ0RdoxcYZX\nW6iM+qvEg5Tgr1RYKa+Qi0d0n3nOSexqpczWiavVwclTrS84BgLlOrFLpO3ZvxpV\nc+yaorJT3syMnYokMoVMEd7AhqUBQoiSQKVx858sHEPCSWP+ULE3Uz81DBp6uo8=\n-----END CERTIFICATE-----\n",
+          "earlyRenewalHours": 0,
+          "id": "251633524552831154817811094671696735676",
+          "isCaCertificate": false,
+          "keyAlgorithm": "RSA",
+          "privateKeyPem": {
+            "4dabf18193072939515e22adb298388d": "1b47061264138c4ac30d75fd1eb44270",
+            "plaintext": "\"REDACTED BY PROVIDERTEST\""
+          },
+          "readyForRenewal": false,
+          "setAuthorityKeyId": false,
+          "setSubjectKeyId": false,
+          "validityEndTime": "2026-03-04T16:10:04.527628+02:00",
+          "validityPeriodHours": 8760,
+          "validityStartTime": "2025-03-04T16:10:04.527628+02:00"
+        },
+        "parent": "urn:pulumi:test::self-signed-key::pulumi:pulumi:Stack::self-signed-key-test",
+        "provider": "urn:pulumi:test::self-signed-key::pulumi:providers:tls::default::6605e473-f6ed-47a6-9888-75eae9143777",
+        "propertyDependencies": {
+          "allowedUses": [],
+          "privateKeyPem": [],
+          "validityPeriodHours": []
+        },
+        "additionalSecretOutputs": [
+          "privateKeyPem"
+        ],
+        "created": "2025-03-04T14:10:04.529695Z",
+        "modified": "2025-03-04T14:10:04.529695Z"
+      }
+    ],
+    "metadata": {}
+  }
+}
