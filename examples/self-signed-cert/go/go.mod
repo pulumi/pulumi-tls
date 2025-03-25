@@ -43,8 +43,6 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240227224415-6ceb2ff114de // indirect
 )
 
-replace github.com/pulumi/pulumi-tls/sdk/v5 => ../../../sdk
-
 require (
 	github.com/Microsoft/go-winio v0.6.1 // indirect
 	github.com/ProtonMail/go-crypto v1.1.3 // indirect

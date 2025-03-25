@@ -9,8 +9,6 @@ require (
 	github.com/pulumi/pulumi/sdk/v3 v3.156.0
 )
 
-replace github.com/pulumi/pulumi-tls/sdk/v5 => ../../../sdk
-
 require (
 	dario.cat/mergo v1.0.0 // indirect
 	github.com/BurntSushi/toml v1.2.1 // indirect
