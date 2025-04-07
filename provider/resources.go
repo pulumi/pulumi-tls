@@ -15,6 +15,7 @@
 package tls
 
 import (
+	"bytes"
 	"fmt"
 	"path/filepath"
 	"unicode"
@@ -195,6 +196,7 @@ func docEditRules(defaults []tfbridge.DocsEdit) []tfbridge.DocsEdit {
 	return append(
 		defaults,
 		skipSecretsSection,
+		noFileFunction,
 	)
 }
 
@@ -205,5 +207,22 @@ var skipSecretsSection = tfbridge.DocsEdit{
 		return tfgen.SkipSectionByHeaderContent(content, func(headerText string) bool {
 			return headerText == "Secrets and Terraform state"
 		})
+	},
+}
+
+// Removes an unnecessary reference to the TF file interpolation function
+var noFileFunction = tfbridge.DocsEdit{
+	Path: "self_signed_cert.md",
+	Edit: func(_ string, content []byte) ([]byte, error) {
+		inputByte := []byte("This can be read from a separate file using the `file` interpolation function.")
+		if bytes.Contains(content, inputByte) {
+			content = bytes.ReplaceAll(content, inputByte, nil)
+		} else {
+			// Hard error to ensure we keep this content up to date
+			return nil, fmt.Errorf("could not find text in upstream self_signed_cert.md, "+
+				"please verify upstream self_signed_cert.md contains:\n\n %s", string(inputByte),
+			)
+		}
+		return content, nil
 	},
 }

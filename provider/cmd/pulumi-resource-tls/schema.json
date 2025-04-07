@@ -744,7 +744,7 @@
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.\n",
+                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.\n",
                     "secret": true
                 },
                 "readyForRenewal": {
@@ -828,7 +828,7 @@
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.\n",
+                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.\n",
                     "secret": true
                 },
                 "setAuthorityKeyId": {
@@ -901,7 +901,7 @@
                     },
                     "privateKeyPem": {
                         "type": "string",
-                        "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.\n",
+                        "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.\n",
                         "secret": true
                     },
                     "readyForRenewal": {
