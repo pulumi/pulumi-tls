@@ -60,7 +60,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
      */
     public /*out*/ readonly keyAlgorithm!: pulumi.Output<string>;
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
      */
     public readonly privateKeyPem!: pulumi.Output<string>;
     /**
@@ -190,7 +190,7 @@ export interface SelfSignedCertState {
      */
     keyAlgorithm?: pulumi.Input<string>;
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
      */
     privateKeyPem?: pulumi.Input<string>;
     /**
@@ -249,7 +249,7 @@ export interface SelfSignedCertArgs {
      */
     isCaCertificate?: pulumi.Input<boolean>;
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
      */
     privateKeyPem: pulumi.Input<string>;
     /**

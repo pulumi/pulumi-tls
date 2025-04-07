@@ -117,14 +117,14 @@ public final class SelfSignedCertState extends com.pulumi.resources.ResourceArgs
     }
 
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
      * 
      */
     @Import(name="privateKeyPem")
     private @Nullable Output<String> privateKeyPem;
 
     /**
-     * @return Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+     * @return Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
      * 
      */
     public Optional<Output<String>> privateKeyPem() {
@@ -456,7 +456,7 @@ public final class SelfSignedCertState extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param privateKeyPem Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+         * @param privateKeyPem Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
          * 
          * @return builder
          * 
@@ -467,7 +467,7 @@ public final class SelfSignedCertState extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param privateKeyPem Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+         * @param privateKeyPem Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
          * 
          * @return builder
          * 
