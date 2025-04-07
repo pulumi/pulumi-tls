@@ -52,7 +52,7 @@ namespace Pulumi.Tls
         public Output<string> KeyAlgorithm { get; private set; } = null!;
 
         /// <summary>
-        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
         /// </summary>
         [Output("privateKeyPem")]
         public Output<string> PrivateKeyPem { get; private set; } = null!;
@@ -204,7 +204,7 @@ namespace Pulumi.Tls
         private Input<string>? _privateKeyPem;
 
         /// <summary>
-        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
         /// </summary>
         public Input<string>? PrivateKeyPem
         {
@@ -321,7 +321,7 @@ namespace Pulumi.Tls
         private Input<string>? _privateKeyPem;
 
         /// <summary>
-        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
         /// </summary>
         public Input<string>? PrivateKeyPem
         {
