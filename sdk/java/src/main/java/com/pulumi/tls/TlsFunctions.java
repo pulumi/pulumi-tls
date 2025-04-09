@@ -58,6 +58,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.PrivateKeyArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import com.pulumi.std.StdFunctions;
+     * import com.pulumi.std.inputs.FileArgs;
      * import java.util.List;
      * import java.util.ArrayList;
      * import java.util.Map;
@@ -116,6 +118,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.PrivateKeyArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import com.pulumi.std.StdFunctions;
+     * import com.pulumi.std.inputs.FileArgs;
      * import java.util.List;
      * import java.util.ArrayList;
      * import java.util.Map;
@@ -174,6 +178,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.PrivateKeyArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import com.pulumi.std.StdFunctions;
+     * import com.pulumi.std.inputs.FileArgs;
      * import java.util.List;
      * import java.util.ArrayList;
      * import java.util.Map;
@@ -232,6 +238,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.PrivateKeyArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import com.pulumi.std.StdFunctions;
+     * import com.pulumi.std.inputs.FileArgs;
      * import java.util.List;
      * import java.util.ArrayList;
      * import java.util.Map;
@@ -290,6 +298,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.PrivateKeyArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import com.pulumi.std.StdFunctions;
+     * import com.pulumi.std.inputs.FileArgs;
      * import java.util.List;
      * import java.util.ArrayList;
      * import java.util.Map;
@@ -348,6 +358,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.PrivateKeyArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import com.pulumi.std.StdFunctions;
+     * import com.pulumi.std.inputs.FileArgs;
      * import java.util.List;
      * import java.util.ArrayList;
      * import java.util.Map;
@@ -406,6 +418,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.PrivateKeyArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
+     * import com.pulumi.std.StdFunctions;
+     * import com.pulumi.std.inputs.FileArgs;
      * import java.util.List;
      * import java.util.ArrayList;
      * import java.util.Map;

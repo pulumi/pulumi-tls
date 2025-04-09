@@ -30,6 +30,8 @@ import javax.annotation.Nullable;
  * import com.pulumi.tls.CertRequest;
  * import com.pulumi.tls.CertRequestArgs;
  * import com.pulumi.tls.inputs.CertRequestSubjectArgs;
+ * import com.pulumi.std.StdFunctions;
+ * import com.pulumi.std.inputs.FileArgs;
  * import java.util.List;
  * import java.util.ArrayList;
  * import java.util.Map;
