@@ -15,6 +15,10 @@ export interface CertRequestSubject {
      */
     country?: string;
     /**
+     * ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+     */
+    emailAddress?: string;
+    /**
      * Distinguished name: `L`
      */
     locality?: string;
@@ -101,6 +105,10 @@ export interface SelfSignedCertSubject {
      * Distinguished name: `C`
      */
     country?: string;
+    /**
+     * ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+     */
+    emailAddress?: string;
     /**
      * Distinguished name: `L`
      */

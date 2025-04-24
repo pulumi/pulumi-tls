@@ -15,6 +15,10 @@ export interface CertRequestSubject {
      */
     country?: pulumi.Input<string>;
     /**
+     * ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+     */
+    emailAddress?: pulumi.Input<string>;
+    /**
      * Distinguished name: `L`
      */
     locality?: pulumi.Input<string>;
@@ -72,6 +76,10 @@ export interface SelfSignedCertSubject {
      * Distinguished name: `C`
      */
     country?: pulumi.Input<string>;
+    /**
+     * ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+     */
+    emailAddress?: pulumi.Input<string>;
     /**
      * Distinguished name: `L`
      */

@@ -36,6 +36,10 @@ if not MYPY:
         """
         Distinguished name: `C`
         """
+        email_address: NotRequired[pulumi.Input[builtins.str]]
+        """
+        ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+        """
         locality: NotRequired[pulumi.Input[builtins.str]]
         """
         Distinguished name: `L`
@@ -72,6 +76,7 @@ class CertRequestSubjectArgs:
     def __init__(__self__, *,
                  common_name: Optional[pulumi.Input[builtins.str]] = None,
                  country: Optional[pulumi.Input[builtins.str]] = None,
+                 email_address: Optional[pulumi.Input[builtins.str]] = None,
                  locality: Optional[pulumi.Input[builtins.str]] = None,
                  organization: Optional[pulumi.Input[builtins.str]] = None,
                  organizational_unit: Optional[pulumi.Input[builtins.str]] = None,
@@ -82,6 +87,7 @@ class CertRequestSubjectArgs:
         """
         :param pulumi.Input[builtins.str] common_name: Distinguished name: `CN`
         :param pulumi.Input[builtins.str] country: Distinguished name: `C`
+        :param pulumi.Input[builtins.str] email_address: ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
         :param pulumi.Input[builtins.str] locality: Distinguished name: `L`
         :param pulumi.Input[builtins.str] organization: Distinguished name: `O`
         :param pulumi.Input[builtins.str] organizational_unit: Distinguished name: `OU`
@@ -94,6 +100,8 @@ class CertRequestSubjectArgs:
             pulumi.set(__self__, "common_name", common_name)
         if country is not None:
             pulumi.set(__self__, "country", country)
+        if email_address is not None:
+            pulumi.set(__self__, "email_address", email_address)
         if locality is not None:
             pulumi.set(__self__, "locality", locality)
         if organization is not None:
@@ -132,6 +140,18 @@ class CertRequestSubjectArgs:
     @country.setter
     def country(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "country", value)
+
+    @property
+    @pulumi.getter(name="emailAddress")
+    def email_address(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+        """
+        return pulumi.get(self, "email_address")
+
+    @email_address.setter
+    def email_address(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "email_address", value)
 
     @property
     @pulumi.getter
@@ -320,6 +340,10 @@ if not MYPY:
         """
         Distinguished name: `C`
         """
+        email_address: NotRequired[pulumi.Input[builtins.str]]
+        """
+        ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+        """
         locality: NotRequired[pulumi.Input[builtins.str]]
         """
         Distinguished name: `L`
@@ -356,6 +380,7 @@ class SelfSignedCertSubjectArgs:
     def __init__(__self__, *,
                  common_name: Optional[pulumi.Input[builtins.str]] = None,
                  country: Optional[pulumi.Input[builtins.str]] = None,
+                 email_address: Optional[pulumi.Input[builtins.str]] = None,
                  locality: Optional[pulumi.Input[builtins.str]] = None,
                  organization: Optional[pulumi.Input[builtins.str]] = None,
                  organizational_unit: Optional[pulumi.Input[builtins.str]] = None,
@@ -366,6 +391,7 @@ class SelfSignedCertSubjectArgs:
         """
         :param pulumi.Input[builtins.str] common_name: Distinguished name: `CN`
         :param pulumi.Input[builtins.str] country: Distinguished name: `C`
+        :param pulumi.Input[builtins.str] email_address: ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
         :param pulumi.Input[builtins.str] locality: Distinguished name: `L`
         :param pulumi.Input[builtins.str] organization: Distinguished name: `O`
         :param pulumi.Input[builtins.str] organizational_unit: Distinguished name: `OU`
@@ -378,6 +404,8 @@ class SelfSignedCertSubjectArgs:
             pulumi.set(__self__, "common_name", common_name)
         if country is not None:
             pulumi.set(__self__, "country", country)
+        if email_address is not None:
+            pulumi.set(__self__, "email_address", email_address)
         if locality is not None:
             pulumi.set(__self__, "locality", locality)
         if organization is not None:
@@ -416,6 +444,18 @@ class SelfSignedCertSubjectArgs:
     @country.setter
     def country(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "country", value)
+
+    @property
+    @pulumi.getter(name="emailAddress")
+    def email_address(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+        """
+        return pulumi.get(self, "email_address")
+
+    @email_address.setter
+    def email_address(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "email_address", value)
 
     @property
     @pulumi.getter

@@ -23,6 +23,11 @@ public final class SelfSignedCertSubject {
      */
     private @Nullable String country;
     /**
+     * @return ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+     * 
+     */
+    private @Nullable String emailAddress;
+    /**
      * @return Distinguished name: `L`
      * 
      */
@@ -72,6 +77,13 @@ public final class SelfSignedCertSubject {
      */
     public Optional<String> country() {
         return Optional.ofNullable(this.country);
+    }
+    /**
+     * @return ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+     * 
+     */
+    public Optional<String> emailAddress() {
+        return Optional.ofNullable(this.emailAddress);
     }
     /**
      * @return Distinguished name: `L`
@@ -134,6 +146,7 @@ public final class SelfSignedCertSubject {
     public static final class Builder {
         private @Nullable String commonName;
         private @Nullable String country;
+        private @Nullable String emailAddress;
         private @Nullable String locality;
         private @Nullable String organization;
         private @Nullable String organizationalUnit;
@@ -146,6 +159,7 @@ public final class SelfSignedCertSubject {
     	      Objects.requireNonNull(defaults);
     	      this.commonName = defaults.commonName;
     	      this.country = defaults.country;
+    	      this.emailAddress = defaults.emailAddress;
     	      this.locality = defaults.locality;
     	      this.organization = defaults.organization;
     	      this.organizationalUnit = defaults.organizationalUnit;
@@ -165,6 +179,12 @@ public final class SelfSignedCertSubject {
         public Builder country(@Nullable String country) {
 
             this.country = country;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder emailAddress(@Nullable String emailAddress) {
+
+            this.emailAddress = emailAddress;
             return this;
         }
         @CustomType.Setter
@@ -216,6 +236,7 @@ public final class SelfSignedCertSubject {
             final var _resultValue = new SelfSignedCertSubject();
             _resultValue.commonName = commonName;
             _resultValue.country = country;
+            _resultValue.emailAddress = emailAddress;
             _resultValue.locality = locality;
             _resultValue.organization = organization;
             _resultValue.organizationalUnit = organizationalUnit;

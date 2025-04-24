@@ -89,6 +89,10 @@
                     "type": "string",
                     "description": "Distinguished name: `C`\n"
                 },
+                "emailAddress": {
+                    "type": "string",
+                    "description": "ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`\n"
+                },
                 "locality": {
                     "type": "string",
                     "description": "Distinguished name: `L`\n"
@@ -154,6 +158,10 @@
                 "country": {
                     "type": "string",
                     "description": "Distinguished name: `C`\n"
+                },
+                "emailAddress": {
+                    "type": "string",
+                    "description": "ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`\n"
                 },
                 "locality": {
                     "type": "string",

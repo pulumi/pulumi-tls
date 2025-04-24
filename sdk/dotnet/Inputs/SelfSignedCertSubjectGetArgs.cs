@@ -25,6 +25,12 @@ namespace Pulumi.Tls.Inputs
         public Input<string>? Country { get; set; }
 
         /// <summary>
+        /// ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+        /// </summary>
+        [Input("emailAddress")]
+        public Input<string>? EmailAddress { get; set; }
+
+        /// <summary>
         /// Distinguished name: `L`
         /// </summary>
         [Input("locality")]

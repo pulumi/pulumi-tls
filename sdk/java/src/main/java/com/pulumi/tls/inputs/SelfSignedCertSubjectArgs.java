@@ -47,6 +47,21 @@ public final class SelfSignedCertSubjectArgs extends com.pulumi.resources.Resour
     }
 
     /**
+     * ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+     * 
+     */
+    @Import(name="emailAddress")
+    private @Nullable Output<String> emailAddress;
+
+    /**
+     * @return ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+     * 
+     */
+    public Optional<Output<String>> emailAddress() {
+        return Optional.ofNullable(this.emailAddress);
+    }
+
+    /**
      * Distinguished name: `L`
      * 
      */
@@ -156,6 +171,7 @@ public final class SelfSignedCertSubjectArgs extends com.pulumi.resources.Resour
     private SelfSignedCertSubjectArgs(SelfSignedCertSubjectArgs $) {
         this.commonName = $.commonName;
         this.country = $.country;
+        this.emailAddress = $.emailAddress;
         this.locality = $.locality;
         this.organization = $.organization;
         this.organizationalUnit = $.organizationalUnit;
@@ -223,6 +239,27 @@ public final class SelfSignedCertSubjectArgs extends com.pulumi.resources.Resour
          */
         public Builder country(String country) {
             return country(Output.of(country));
+        }
+
+        /**
+         * @param emailAddress ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+         * 
+         * @return builder
+         * 
+         */
+        public Builder emailAddress(@Nullable Output<String> emailAddress) {
+            $.emailAddress = emailAddress;
+            return this;
+        }
+
+        /**
+         * @param emailAddress ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+         * 
+         * @return builder
+         * 
+         */
+        public Builder emailAddress(String emailAddress) {
+            return emailAddress(Output.of(emailAddress));
         }
 
         /**

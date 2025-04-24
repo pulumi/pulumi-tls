@@ -22,6 +22,10 @@ namespace Pulumi.Tls.Outputs
         /// </summary>
         public readonly string? Country;
         /// <summary>
+        /// ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+        /// </summary>
+        public readonly string? EmailAddress;
+        /// <summary>
         /// Distinguished name: `L`
         /// </summary>
         public readonly string? Locality;
@@ -56,6 +60,8 @@ namespace Pulumi.Tls.Outputs
 
             string? country,
 
+            string? emailAddress,
+
             string? locality,
 
             string? organization,
@@ -72,6 +78,7 @@ namespace Pulumi.Tls.Outputs
         {
             CommonName = commonName;
             Country = country;
+            EmailAddress = emailAddress;
             Locality = locality;
             Organization = organization;
             OrganizationalUnit = organizationalUnit;
