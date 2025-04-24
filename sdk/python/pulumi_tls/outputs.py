@@ -28,6 +28,8 @@ class CertRequestSubject(dict):
         suggest = None
         if key == "commonName":
             suggest = "common_name"
+        elif key == "emailAddress":
+            suggest = "email_address"
         elif key == "organizationalUnit":
             suggest = "organizational_unit"
         elif key == "postalCode":
@@ -51,6 +53,7 @@ class CertRequestSubject(dict):
     def __init__(__self__, *,
                  common_name: Optional[builtins.str] = None,
                  country: Optional[builtins.str] = None,
+                 email_address: Optional[builtins.str] = None,
                  locality: Optional[builtins.str] = None,
                  organization: Optional[builtins.str] = None,
                  organizational_unit: Optional[builtins.str] = None,
@@ -61,6 +64,7 @@ class CertRequestSubject(dict):
         """
         :param builtins.str common_name: Distinguished name: `CN`
         :param builtins.str country: Distinguished name: `C`
+        :param builtins.str email_address: ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
         :param builtins.str locality: Distinguished name: `L`
         :param builtins.str organization: Distinguished name: `O`
         :param builtins.str organizational_unit: Distinguished name: `OU`
@@ -73,6 +77,8 @@ class CertRequestSubject(dict):
             pulumi.set(__self__, "common_name", common_name)
         if country is not None:
             pulumi.set(__self__, "country", country)
+        if email_address is not None:
+            pulumi.set(__self__, "email_address", email_address)
         if locality is not None:
             pulumi.set(__self__, "locality", locality)
         if organization is not None:
@@ -103,6 +109,14 @@ class CertRequestSubject(dict):
         Distinguished name: `C`
         """
         return pulumi.get(self, "country")
+
+    @property
+    @pulumi.getter(name="emailAddress")
+    def email_address(self) -> Optional[builtins.str]:
+        """
+        ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+        """
+        return pulumi.get(self, "email_address")
 
     @property
     @pulumi.getter
@@ -168,6 +182,8 @@ class SelfSignedCertSubject(dict):
         suggest = None
         if key == "commonName":
             suggest = "common_name"
+        elif key == "emailAddress":
+            suggest = "email_address"
         elif key == "organizationalUnit":
             suggest = "organizational_unit"
         elif key == "postalCode":
@@ -191,6 +207,7 @@ class SelfSignedCertSubject(dict):
     def __init__(__self__, *,
                  common_name: Optional[builtins.str] = None,
                  country: Optional[builtins.str] = None,
+                 email_address: Optional[builtins.str] = None,
                  locality: Optional[builtins.str] = None,
                  organization: Optional[builtins.str] = None,
                  organizational_unit: Optional[builtins.str] = None,
@@ -201,6 +218,7 @@ class SelfSignedCertSubject(dict):
         """
         :param builtins.str common_name: Distinguished name: `CN`
         :param builtins.str country: Distinguished name: `C`
+        :param builtins.str email_address: ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
         :param builtins.str locality: Distinguished name: `L`
         :param builtins.str organization: Distinguished name: `O`
         :param builtins.str organizational_unit: Distinguished name: `OU`
@@ -213,6 +231,8 @@ class SelfSignedCertSubject(dict):
             pulumi.set(__self__, "common_name", common_name)
         if country is not None:
             pulumi.set(__self__, "country", country)
+        if email_address is not None:
+            pulumi.set(__self__, "email_address", email_address)
         if locality is not None:
             pulumi.set(__self__, "locality", locality)
         if organization is not None:
@@ -243,6 +263,14 @@ class SelfSignedCertSubject(dict):
         Distinguished name: `C`
         """
         return pulumi.get(self, "country")
+
+    @property
+    @pulumi.getter(name="emailAddress")
+    def email_address(self) -> Optional[builtins.str]:
+        """
+        ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+        """
+        return pulumi.get(self, "email_address")
 
     @property
     @pulumi.getter
