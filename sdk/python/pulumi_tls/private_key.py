@@ -241,6 +241,9 @@ class _PrivateKeyState:
 
 
 class PrivateKey(pulumi.CustomResource):
+
+    pulumi_type = "tls:index/privateKey:PrivateKey"
+
     @overload
     def __init__(__self__,
                  resource_name: str,
