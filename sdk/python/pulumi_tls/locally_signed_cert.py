@@ -357,6 +357,9 @@ class _LocallySignedCertState:
 
 
 class LocallySignedCert(pulumi.CustomResource):
+
+    pulumi_type = "tls:index/locallySignedCert:LocallySignedCert"
+
     @overload
     def __init__(__self__,
                  resource_name: str,
