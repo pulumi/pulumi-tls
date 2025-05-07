@@ -30,10 +30,8 @@ export type PrivateKey = import("./privateKey").PrivateKey;
 export const PrivateKey: typeof import("./privateKey").PrivateKey = null as any;
 utilities.lazyLoad(exports, ["PrivateKey"], () => require("./privateKey"));
 
-export { ProviderArgs } from "./provider";
-export type Provider = import("./provider").Provider;
-export const Provider: typeof import("./provider").Provider = null as any;
-utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+export * from "./provider";
+import { Provider } from "./provider";
 
 export { SelfSignedCertArgs, SelfSignedCertState } from "./selfSignedCert";
 export type SelfSignedCert = import("./selfSignedCert").SelfSignedCert;
