@@ -240,10 +240,8 @@ class _PrivateKeyState:
         pulumi.set(self, "rsa_bits", value)
 
 
+@pulumi.type_token("tls:index/privateKey:PrivateKey")
 class PrivateKey(pulumi.CustomResource):
-
-    pulumi_type = "tls:index/privateKey:PrivateKey"
-
     @overload
     def __init__(__self__,
                  resource_name: str,

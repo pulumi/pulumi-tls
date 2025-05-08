@@ -456,10 +456,8 @@ class _SelfSignedCertState:
         pulumi.set(self, "validity_start_time", value)
 
 
+@pulumi.type_token("tls:index/selfSignedCert:SelfSignedCert")
 class SelfSignedCert(pulumi.CustomResource):
-
-    pulumi_type = "tls:index/selfSignedCert:SelfSignedCert"
-
     @overload
     def __init__(__self__,
                  resource_name: str,

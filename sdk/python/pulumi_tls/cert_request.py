@@ -226,10 +226,8 @@ class _CertRequestState:
         pulumi.set(self, "uris", value)
 
 
+@pulumi.type_token("tls:index/certRequest:CertRequest")
 class CertRequest(pulumi.CustomResource):
-
-    pulumi_type = "tls:index/certRequest:CertRequest"
-
     @overload
     def __init__(__self__,
                  resource_name: str,
