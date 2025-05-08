@@ -44,6 +44,15 @@ export class Provider extends pulumi.ProviderResource {
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
     }
+
+    /**
+     * This function returns a Terraform config object with terraform-namecased keys,to be used with the Terraform Module Provider.
+     */
+    terraformConfig(): pulumi.Output<Provider.TerraformConfigResult> {
+        return pulumi.runtime.call("pulumi:providers:tls/terraformConfig", {
+            "__self__": this,
+        }, this);
+    }
 }
 
 /**
@@ -54,4 +63,14 @@ export interface ProviderArgs {
      * Proxy used by resources and data sources that connect to external endpoints.
      */
     proxy?: pulumi.Input<inputs.ProviderProxy>;
+}
+
+export namespace Provider {
+    /**
+     * The results of the Provider.terraformConfig method.
+     */
+    export interface TerraformConfigResult {
+        readonly result: {[key: string]: any};
+    }
+
 }
