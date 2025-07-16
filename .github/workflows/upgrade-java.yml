@@ -60,5 +60,4 @@ jobs:
         env:
           V: ${{inputs.version}}
         run: |
-          cd provider
           upgrade-provider pulumi/pulumi-tls --kind=java --java-version="$V"
