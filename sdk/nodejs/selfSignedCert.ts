@@ -37,64 +37,64 @@ export class SelfSignedCert extends pulumi.CustomResource {
     /**
      * List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `anyExtended`, `certSigning`, `clientAuth`, `codeSigning`, `contentCommitment`, `crlSigning`, `dataEncipherment`, `decipherOnly`, `digitalSignature`, `emailProtection`, `encipherOnly`, `ipsecEndSystem`, `ipsecTunnel`, `ipsecUser`, `keyAgreement`, `keyEncipherment`, `microsoftCommercialCodeSigning`, `microsoftKernelCodeSigning`, `microsoftServerGatedCrypto`, `netscapeServerGatedCrypto`, `ocspSigning`, `serverAuth`, `timestamping`.
      */
-    public readonly allowedUses!: pulumi.Output<string[]>;
+    declare public readonly allowedUses: pulumi.Output<string[]>;
     /**
      * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      */
-    public /*out*/ readonly certPem!: pulumi.Output<string>;
+    declare public /*out*/ readonly certPem: pulumi.Output<string>;
     /**
      * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      */
-    public readonly dnsNames!: pulumi.Output<string[] | undefined>;
-    public readonly earlyRenewalHours!: pulumi.Output<number>;
+    declare public readonly dnsNames: pulumi.Output<string[] | undefined>;
+    declare public readonly earlyRenewalHours: pulumi.Output<number>;
     /**
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */
-    public readonly ipAddresses!: pulumi.Output<string[] | undefined>;
+    declare public readonly ipAddresses: pulumi.Output<string[] | undefined>;
     /**
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      */
-    public readonly isCaCertificate!: pulumi.Output<boolean>;
+    declare public readonly isCaCertificate: pulumi.Output<boolean>;
     /**
      * Name of the algorithm used when generating the private key provided in `privateKeyPem`.
      */
-    public /*out*/ readonly keyAlgorithm!: pulumi.Output<string>;
+    declare public /*out*/ readonly keyAlgorithm: pulumi.Output<string>;
     /**
      * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
      */
-    public readonly privateKeyPem!: pulumi.Output<string>;
+    declare public readonly privateKeyPem: pulumi.Output<string>;
     /**
      * Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
      */
-    public /*out*/ readonly readyForRenewal!: pulumi.Output<boolean>;
+    declare public /*out*/ readonly readyForRenewal: pulumi.Output<boolean>;
     /**
      * Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
-    public readonly setAuthorityKeyId!: pulumi.Output<boolean>;
+    declare public readonly setAuthorityKeyId: pulumi.Output<boolean>;
     /**
      * Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
-    public readonly setSubjectKeyId!: pulumi.Output<boolean>;
+    declare public readonly setSubjectKeyId: pulumi.Output<boolean>;
     /**
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
-    public readonly subject!: pulumi.Output<outputs.SelfSignedCertSubject | undefined>;
+    declare public readonly subject: pulumi.Output<outputs.SelfSignedCertSubject | undefined>;
     /**
      * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */
-    public readonly uris!: pulumi.Output<string[] | undefined>;
+    declare public readonly uris: pulumi.Output<string[] | undefined>;
     /**
      * The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      */
-    public /*out*/ readonly validityEndTime!: pulumi.Output<string>;
+    declare public /*out*/ readonly validityEndTime: pulumi.Output<string>;
     /**
      * Number of hours, after initial issuing, that the certificate will remain valid for.
      */
-    public readonly validityPeriodHours!: pulumi.Output<number>;
+    declare public readonly validityPeriodHours: pulumi.Output<number>;
     /**
      * The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      */
-    public /*out*/ readonly validityStartTime!: pulumi.Output<string>;
+    declare public /*out*/ readonly validityStartTime: pulumi.Output<string>;
 
     /**
      * Create a SelfSignedCert resource with the given unique name, arguments, and options.
@@ -109,44 +109,44 @@ export class SelfSignedCert extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SelfSignedCertState | undefined;
-            resourceInputs["allowedUses"] = state ? state.allowedUses : undefined;
-            resourceInputs["certPem"] = state ? state.certPem : undefined;
-            resourceInputs["dnsNames"] = state ? state.dnsNames : undefined;
-            resourceInputs["earlyRenewalHours"] = state ? state.earlyRenewalHours : undefined;
-            resourceInputs["ipAddresses"] = state ? state.ipAddresses : undefined;
-            resourceInputs["isCaCertificate"] = state ? state.isCaCertificate : undefined;
-            resourceInputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
-            resourceInputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
-            resourceInputs["readyForRenewal"] = state ? state.readyForRenewal : undefined;
-            resourceInputs["setAuthorityKeyId"] = state ? state.setAuthorityKeyId : undefined;
-            resourceInputs["setSubjectKeyId"] = state ? state.setSubjectKeyId : undefined;
-            resourceInputs["subject"] = state ? state.subject : undefined;
-            resourceInputs["uris"] = state ? state.uris : undefined;
-            resourceInputs["validityEndTime"] = state ? state.validityEndTime : undefined;
-            resourceInputs["validityPeriodHours"] = state ? state.validityPeriodHours : undefined;
-            resourceInputs["validityStartTime"] = state ? state.validityStartTime : undefined;
+            resourceInputs["allowedUses"] = state?.allowedUses;
+            resourceInputs["certPem"] = state?.certPem;
+            resourceInputs["dnsNames"] = state?.dnsNames;
+            resourceInputs["earlyRenewalHours"] = state?.earlyRenewalHours;
+            resourceInputs["ipAddresses"] = state?.ipAddresses;
+            resourceInputs["isCaCertificate"] = state?.isCaCertificate;
+            resourceInputs["keyAlgorithm"] = state?.keyAlgorithm;
+            resourceInputs["privateKeyPem"] = state?.privateKeyPem;
+            resourceInputs["readyForRenewal"] = state?.readyForRenewal;
+            resourceInputs["setAuthorityKeyId"] = state?.setAuthorityKeyId;
+            resourceInputs["setSubjectKeyId"] = state?.setSubjectKeyId;
+            resourceInputs["subject"] = state?.subject;
+            resourceInputs["uris"] = state?.uris;
+            resourceInputs["validityEndTime"] = state?.validityEndTime;
+            resourceInputs["validityPeriodHours"] = state?.validityPeriodHours;
+            resourceInputs["validityStartTime"] = state?.validityStartTime;
         } else {
             const args = argsOrState as SelfSignedCertArgs | undefined;
-            if ((!args || args.allowedUses === undefined) && !opts.urn) {
+            if (args?.allowedUses === undefined && !opts.urn) {
                 throw new Error("Missing required property 'allowedUses'");
             }
-            if ((!args || args.privateKeyPem === undefined) && !opts.urn) {
+            if (args?.privateKeyPem === undefined && !opts.urn) {
                 throw new Error("Missing required property 'privateKeyPem'");
             }
-            if ((!args || args.validityPeriodHours === undefined) && !opts.urn) {
+            if (args?.validityPeriodHours === undefined && !opts.urn) {
                 throw new Error("Missing required property 'validityPeriodHours'");
             }
-            resourceInputs["allowedUses"] = args ? args.allowedUses : undefined;
-            resourceInputs["dnsNames"] = args ? args.dnsNames : undefined;
-            resourceInputs["earlyRenewalHours"] = args ? args.earlyRenewalHours : undefined;
-            resourceInputs["ipAddresses"] = args ? args.ipAddresses : undefined;
-            resourceInputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
+            resourceInputs["allowedUses"] = args?.allowedUses;
+            resourceInputs["dnsNames"] = args?.dnsNames;
+            resourceInputs["earlyRenewalHours"] = args?.earlyRenewalHours;
+            resourceInputs["ipAddresses"] = args?.ipAddresses;
+            resourceInputs["isCaCertificate"] = args?.isCaCertificate;
             resourceInputs["privateKeyPem"] = args?.privateKeyPem ? pulumi.secret(args.privateKeyPem) : undefined;
-            resourceInputs["setAuthorityKeyId"] = args ? args.setAuthorityKeyId : undefined;
-            resourceInputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
-            resourceInputs["subject"] = args ? args.subject : undefined;
-            resourceInputs["uris"] = args ? args.uris : undefined;
-            resourceInputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
+            resourceInputs["setAuthorityKeyId"] = args?.setAuthorityKeyId;
+            resourceInputs["setSubjectKeyId"] = args?.setSubjectKeyId;
+            resourceInputs["subject"] = args?.subject;
+            resourceInputs["uris"] = args?.uris;
+            resourceInputs["validityPeriodHours"] = args?.validityPeriodHours;
             resourceInputs["certPem"] = undefined /*out*/;
             resourceInputs["keyAlgorithm"] = undefined /*out*/;
             resourceInputs["readyForRenewal"] = undefined /*out*/;
