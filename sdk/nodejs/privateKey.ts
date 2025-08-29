@@ -35,43 +35,43 @@ export class PrivateKey extends pulumi.CustomResource {
     /**
      * Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
      */
-    public readonly algorithm!: pulumi.Output<string>;
+    declare public readonly algorithm: pulumi.Output<string>;
     /**
      * When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
      */
-    public readonly ecdsaCurve!: pulumi.Output<string>;
+    declare public readonly ecdsaCurve: pulumi.Output<string>;
     /**
      * Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
      */
-    public /*out*/ readonly privateKeyOpenssh!: pulumi.Output<string>;
+    declare public /*out*/ readonly privateKeyOpenssh: pulumi.Output<string>;
     /**
      * Private key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
-    public /*out*/ readonly privateKeyPem!: pulumi.Output<string>;
+    declare public /*out*/ readonly privateKeyPem: pulumi.Output<string>;
     /**
      * Private key data in [PKCS#8 PEM (RFC 5208)](https://datatracker.ietf.org/doc/html/rfc5208) format.
      */
-    public /*out*/ readonly privateKeyPemPkcs8!: pulumi.Output<string>;
+    declare public /*out*/ readonly privateKeyPemPkcs8: pulumi.Output<string>;
     /**
      * The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
      */
-    public /*out*/ readonly publicKeyFingerprintMd5!: pulumi.Output<string>;
+    declare public /*out*/ readonly publicKeyFingerprintMd5: pulumi.Output<string>;
     /**
      * The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
      */
-    public /*out*/ readonly publicKeyFingerprintSha256!: pulumi.Output<string>;
+    declare public /*out*/ readonly publicKeyFingerprintSha256: pulumi.Output<string>;
     /**
      * The public key data in ["Authorized Keys"](https://www.ssh.com/academy/ssh/authorized_keys/openssh#format-of-the-authorized-keys-file) format. This is not populated for `ECDSA` with curve `P224`, as it is not supported. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      */
-    public /*out*/ readonly publicKeyOpenssh!: pulumi.Output<string>;
+    declare public /*out*/ readonly publicKeyOpenssh: pulumi.Output<string>;
     /**
      * Public key data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      */
-    public /*out*/ readonly publicKeyPem!: pulumi.Output<string>;
+    declare public /*out*/ readonly publicKeyPem: pulumi.Output<string>;
     /**
      * When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
      */
-    public readonly rsaBits!: pulumi.Output<number>;
+    declare public readonly rsaBits: pulumi.Output<number>;
 
     /**
      * Create a PrivateKey resource with the given unique name, arguments, and options.
@@ -86,24 +86,24 @@ export class PrivateKey extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as PrivateKeyState | undefined;
-            resourceInputs["algorithm"] = state ? state.algorithm : undefined;
-            resourceInputs["ecdsaCurve"] = state ? state.ecdsaCurve : undefined;
-            resourceInputs["privateKeyOpenssh"] = state ? state.privateKeyOpenssh : undefined;
-            resourceInputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
-            resourceInputs["privateKeyPemPkcs8"] = state ? state.privateKeyPemPkcs8 : undefined;
-            resourceInputs["publicKeyFingerprintMd5"] = state ? state.publicKeyFingerprintMd5 : undefined;
-            resourceInputs["publicKeyFingerprintSha256"] = state ? state.publicKeyFingerprintSha256 : undefined;
-            resourceInputs["publicKeyOpenssh"] = state ? state.publicKeyOpenssh : undefined;
-            resourceInputs["publicKeyPem"] = state ? state.publicKeyPem : undefined;
-            resourceInputs["rsaBits"] = state ? state.rsaBits : undefined;
+            resourceInputs["algorithm"] = state?.algorithm;
+            resourceInputs["ecdsaCurve"] = state?.ecdsaCurve;
+            resourceInputs["privateKeyOpenssh"] = state?.privateKeyOpenssh;
+            resourceInputs["privateKeyPem"] = state?.privateKeyPem;
+            resourceInputs["privateKeyPemPkcs8"] = state?.privateKeyPemPkcs8;
+            resourceInputs["publicKeyFingerprintMd5"] = state?.publicKeyFingerprintMd5;
+            resourceInputs["publicKeyFingerprintSha256"] = state?.publicKeyFingerprintSha256;
+            resourceInputs["publicKeyOpenssh"] = state?.publicKeyOpenssh;
+            resourceInputs["publicKeyPem"] = state?.publicKeyPem;
+            resourceInputs["rsaBits"] = state?.rsaBits;
         } else {
             const args = argsOrState as PrivateKeyArgs | undefined;
-            if ((!args || args.algorithm === undefined) && !opts.urn) {
+            if (args?.algorithm === undefined && !opts.urn) {
                 throw new Error("Missing required property 'algorithm'");
             }
-            resourceInputs["algorithm"] = args ? args.algorithm : undefined;
-            resourceInputs["ecdsaCurve"] = args ? args.ecdsaCurve : undefined;
-            resourceInputs["rsaBits"] = args ? args.rsaBits : undefined;
+            resourceInputs["algorithm"] = args?.algorithm;
+            resourceInputs["ecdsaCurve"] = args?.ecdsaCurve;
+            resourceInputs["rsaBits"] = args?.rsaBits;
             resourceInputs["privateKeyOpenssh"] = undefined /*out*/;
             resourceInputs["privateKeyPem"] = undefined /*out*/;
             resourceInputs["privateKeyPemPkcs8"] = undefined /*out*/;
