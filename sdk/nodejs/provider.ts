@@ -39,7 +39,7 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            resourceInputs["proxy"] = pulumi.output(args ? args.proxy : undefined).apply(JSON.stringify);
+            resourceInputs["proxy"] = pulumi.output(args?.proxy).apply(JSON.stringify);
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Provider.__pulumiType, name, resourceInputs, opts);

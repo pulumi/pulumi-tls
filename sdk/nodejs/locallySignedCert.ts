@@ -35,52 +35,52 @@ export class LocallySignedCert extends pulumi.CustomResource {
     /**
      * List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `anyExtended`, `certSigning`, `clientAuth`, `codeSigning`, `contentCommitment`, `crlSigning`, `dataEncipherment`, `decipherOnly`, `digitalSignature`, `emailProtection`, `encipherOnly`, `ipsecEndSystem`, `ipsecTunnel`, `ipsecUser`, `keyAgreement`, `keyEncipherment`, `microsoftCommercialCodeSigning`, `microsoftKernelCodeSigning`, `microsoftServerGatedCrypto`, `netscapeServerGatedCrypto`, `ocspSigning`, `serverAuth`, `timestamping`.
      */
-    public readonly allowedUses!: pulumi.Output<string[]>;
+    declare public readonly allowedUses: pulumi.Output<string[]>;
     /**
      * Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
-    public readonly caCertPem!: pulumi.Output<string>;
+    declare public readonly caCertPem: pulumi.Output<string>;
     /**
      * Name of the algorithm used when generating the private key provided in `caPrivateKeyPem`.
      */
-    public /*out*/ readonly caKeyAlgorithm!: pulumi.Output<string>;
+    declare public /*out*/ readonly caKeyAlgorithm: pulumi.Output<string>;
     /**
      * Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
-    public readonly caPrivateKeyPem!: pulumi.Output<string>;
+    declare public readonly caPrivateKeyPem: pulumi.Output<string>;
     /**
      * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      */
-    public /*out*/ readonly certPem!: pulumi.Output<string>;
+    declare public /*out*/ readonly certPem: pulumi.Output<string>;
     /**
      * Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
-    public readonly certRequestPem!: pulumi.Output<string>;
-    public readonly earlyRenewalHours!: pulumi.Output<number>;
+    declare public readonly certRequestPem: pulumi.Output<string>;
+    declare public readonly earlyRenewalHours: pulumi.Output<number>;
     /**
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      */
-    public readonly isCaCertificate!: pulumi.Output<boolean>;
+    declare public readonly isCaCertificate: pulumi.Output<boolean>;
     /**
      * Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
      */
-    public /*out*/ readonly readyForRenewal!: pulumi.Output<boolean>;
+    declare public /*out*/ readonly readyForRenewal: pulumi.Output<boolean>;
     /**
      * Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
-    public readonly setSubjectKeyId!: pulumi.Output<boolean>;
+    declare public readonly setSubjectKeyId: pulumi.Output<boolean>;
     /**
      * The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      */
-    public /*out*/ readonly validityEndTime!: pulumi.Output<string>;
+    declare public /*out*/ readonly validityEndTime: pulumi.Output<string>;
     /**
      * Number of hours, after initial issuing, that the certificate will remain valid for.
      */
-    public readonly validityPeriodHours!: pulumi.Output<number>;
+    declare public readonly validityPeriodHours: pulumi.Output<number>;
     /**
      * The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      */
-    public /*out*/ readonly validityStartTime!: pulumi.Output<string>;
+    declare public /*out*/ readonly validityStartTime: pulumi.Output<string>;
 
     /**
      * Create a LocallySignedCert resource with the given unique name, arguments, and options.
@@ -95,44 +95,44 @@ export class LocallySignedCert extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as LocallySignedCertState | undefined;
-            resourceInputs["allowedUses"] = state ? state.allowedUses : undefined;
-            resourceInputs["caCertPem"] = state ? state.caCertPem : undefined;
-            resourceInputs["caKeyAlgorithm"] = state ? state.caKeyAlgorithm : undefined;
-            resourceInputs["caPrivateKeyPem"] = state ? state.caPrivateKeyPem : undefined;
-            resourceInputs["certPem"] = state ? state.certPem : undefined;
-            resourceInputs["certRequestPem"] = state ? state.certRequestPem : undefined;
-            resourceInputs["earlyRenewalHours"] = state ? state.earlyRenewalHours : undefined;
-            resourceInputs["isCaCertificate"] = state ? state.isCaCertificate : undefined;
-            resourceInputs["readyForRenewal"] = state ? state.readyForRenewal : undefined;
-            resourceInputs["setSubjectKeyId"] = state ? state.setSubjectKeyId : undefined;
-            resourceInputs["validityEndTime"] = state ? state.validityEndTime : undefined;
-            resourceInputs["validityPeriodHours"] = state ? state.validityPeriodHours : undefined;
-            resourceInputs["validityStartTime"] = state ? state.validityStartTime : undefined;
+            resourceInputs["allowedUses"] = state?.allowedUses;
+            resourceInputs["caCertPem"] = state?.caCertPem;
+            resourceInputs["caKeyAlgorithm"] = state?.caKeyAlgorithm;
+            resourceInputs["caPrivateKeyPem"] = state?.caPrivateKeyPem;
+            resourceInputs["certPem"] = state?.certPem;
+            resourceInputs["certRequestPem"] = state?.certRequestPem;
+            resourceInputs["earlyRenewalHours"] = state?.earlyRenewalHours;
+            resourceInputs["isCaCertificate"] = state?.isCaCertificate;
+            resourceInputs["readyForRenewal"] = state?.readyForRenewal;
+            resourceInputs["setSubjectKeyId"] = state?.setSubjectKeyId;
+            resourceInputs["validityEndTime"] = state?.validityEndTime;
+            resourceInputs["validityPeriodHours"] = state?.validityPeriodHours;
+            resourceInputs["validityStartTime"] = state?.validityStartTime;
         } else {
             const args = argsOrState as LocallySignedCertArgs | undefined;
-            if ((!args || args.allowedUses === undefined) && !opts.urn) {
+            if (args?.allowedUses === undefined && !opts.urn) {
                 throw new Error("Missing required property 'allowedUses'");
             }
-            if ((!args || args.caCertPem === undefined) && !opts.urn) {
+            if (args?.caCertPem === undefined && !opts.urn) {
                 throw new Error("Missing required property 'caCertPem'");
             }
-            if ((!args || args.caPrivateKeyPem === undefined) && !opts.urn) {
+            if (args?.caPrivateKeyPem === undefined && !opts.urn) {
                 throw new Error("Missing required property 'caPrivateKeyPem'");
             }
-            if ((!args || args.certRequestPem === undefined) && !opts.urn) {
+            if (args?.certRequestPem === undefined && !opts.urn) {
                 throw new Error("Missing required property 'certRequestPem'");
             }
-            if ((!args || args.validityPeriodHours === undefined) && !opts.urn) {
+            if (args?.validityPeriodHours === undefined && !opts.urn) {
                 throw new Error("Missing required property 'validityPeriodHours'");
             }
-            resourceInputs["allowedUses"] = args ? args.allowedUses : undefined;
-            resourceInputs["caCertPem"] = args ? args.caCertPem : undefined;
+            resourceInputs["allowedUses"] = args?.allowedUses;
+            resourceInputs["caCertPem"] = args?.caCertPem;
             resourceInputs["caPrivateKeyPem"] = args?.caPrivateKeyPem ? pulumi.secret(args.caPrivateKeyPem) : undefined;
-            resourceInputs["certRequestPem"] = args ? args.certRequestPem : undefined;
-            resourceInputs["earlyRenewalHours"] = args ? args.earlyRenewalHours : undefined;
-            resourceInputs["isCaCertificate"] = args ? args.isCaCertificate : undefined;
-            resourceInputs["setSubjectKeyId"] = args ? args.setSubjectKeyId : undefined;
-            resourceInputs["validityPeriodHours"] = args ? args.validityPeriodHours : undefined;
+            resourceInputs["certRequestPem"] = args?.certRequestPem;
+            resourceInputs["earlyRenewalHours"] = args?.earlyRenewalHours;
+            resourceInputs["isCaCertificate"] = args?.isCaCertificate;
+            resourceInputs["setSubjectKeyId"] = args?.setSubjectKeyId;
+            resourceInputs["validityPeriodHours"] = args?.validityPeriodHours;
             resourceInputs["caKeyAlgorithm"] = undefined /*out*/;
             resourceInputs["certPem"] = undefined /*out*/;
             resourceInputs["readyForRenewal"] = undefined /*out*/;

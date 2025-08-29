@@ -52,7 +52,7 @@
         "variables": {
             "proxy": {
                 "$ref": "#/types/tls:config/proxy:proxy",
-                "description": "Proxy used by resources and data sources that connect to external endpoints.\n"
+                "description": "Proxy used by resources and data sources that connect to external endpoints."
             }
         }
     },
@@ -270,13 +270,13 @@
         "properties": {
             "proxy": {
                 "$ref": "#/types/tls:index/ProviderProxy:ProviderProxy",
-                "description": "Proxy used by resources and data sources that connect to external endpoints.\n"
+                "description": "Proxy used by resources and data sources that connect to external endpoints."
             }
         },
         "inputProperties": {
             "proxy": {
                 "$ref": "#/types/tls:index/ProviderProxy:ProviderProxy",
-                "description": "Proxy used by resources and data sources that connect to external endpoints.\n"
+                "description": "Proxy used by resources and data sources that connect to external endpoints."
             }
         },
         "methods": {

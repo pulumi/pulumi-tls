@@ -56,31 +56,31 @@ export class CertRequest extends pulumi.CustomResource {
     /**
      * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
      */
-    public /*out*/ readonly certRequestPem!: pulumi.Output<string>;
+    declare public /*out*/ readonly certRequestPem: pulumi.Output<string>;
     /**
      * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      */
-    public readonly dnsNames!: pulumi.Output<string[] | undefined>;
+    declare public readonly dnsNames: pulumi.Output<string[] | undefined>;
     /**
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
      */
-    public readonly ipAddresses!: pulumi.Output<string[] | undefined>;
+    declare public readonly ipAddresses: pulumi.Output<string[] | undefined>;
     /**
      * Name of the algorithm used when generating the private key provided in `privateKeyPem`.
      */
-    public /*out*/ readonly keyAlgorithm!: pulumi.Output<string>;
+    declare public /*out*/ readonly keyAlgorithm: pulumi.Output<string>;
     /**
      * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
      */
-    public readonly privateKeyPem!: pulumi.Output<string>;
+    declare public readonly privateKeyPem: pulumi.Output<string>;
     /**
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
-    public readonly subject!: pulumi.Output<outputs.CertRequestSubject | undefined>;
+    declare public readonly subject: pulumi.Output<outputs.CertRequestSubject | undefined>;
     /**
      * List of URIs for which a certificate is being requested (i.e. certificate subjects).
      */
-    public readonly uris!: pulumi.Output<string[] | undefined>;
+    declare public readonly uris: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a CertRequest resource with the given unique name, arguments, and options.
@@ -95,23 +95,23 @@ export class CertRequest extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as CertRequestState | undefined;
-            resourceInputs["certRequestPem"] = state ? state.certRequestPem : undefined;
-            resourceInputs["dnsNames"] = state ? state.dnsNames : undefined;
-            resourceInputs["ipAddresses"] = state ? state.ipAddresses : undefined;
-            resourceInputs["keyAlgorithm"] = state ? state.keyAlgorithm : undefined;
-            resourceInputs["privateKeyPem"] = state ? state.privateKeyPem : undefined;
-            resourceInputs["subject"] = state ? state.subject : undefined;
-            resourceInputs["uris"] = state ? state.uris : undefined;
+            resourceInputs["certRequestPem"] = state?.certRequestPem;
+            resourceInputs["dnsNames"] = state?.dnsNames;
+            resourceInputs["ipAddresses"] = state?.ipAddresses;
+            resourceInputs["keyAlgorithm"] = state?.keyAlgorithm;
+            resourceInputs["privateKeyPem"] = state?.privateKeyPem;
+            resourceInputs["subject"] = state?.subject;
+            resourceInputs["uris"] = state?.uris;
         } else {
             const args = argsOrState as CertRequestArgs | undefined;
-            if ((!args || args.privateKeyPem === undefined) && !opts.urn) {
+            if (args?.privateKeyPem === undefined && !opts.urn) {
                 throw new Error("Missing required property 'privateKeyPem'");
             }
-            resourceInputs["dnsNames"] = args ? args.dnsNames : undefined;
-            resourceInputs["ipAddresses"] = args ? args.ipAddresses : undefined;
+            resourceInputs["dnsNames"] = args?.dnsNames;
+            resourceInputs["ipAddresses"] = args?.ipAddresses;
             resourceInputs["privateKeyPem"] = args?.privateKeyPem ? pulumi.secret(args.privateKeyPem) : undefined;
-            resourceInputs["subject"] = args ? args.subject : undefined;
-            resourceInputs["uris"] = args ? args.uris : undefined;
+            resourceInputs["subject"] = args?.subject;
+            resourceInputs["uris"] = args?.uris;
             resourceInputs["certRequestPem"] = undefined /*out*/;
             resourceInputs["keyAlgorithm"] = undefined /*out*/;
         }
