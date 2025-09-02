@@ -1,6 +1,6 @@
 module github.com/pulumi/pulumi-tls/provider/v5
 
-go 1.23.11
+go 1.23.12
 
 toolchain go1.24.6
 
