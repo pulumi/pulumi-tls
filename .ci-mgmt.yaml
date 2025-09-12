@@ -23,3 +23,6 @@ releaseVerification:
   dotnet: examples/private-key/dotnet
   go: examples/private-key/go
 integrationTestProvider: true
+esc:
+  enabled: true
+  environment: imports/github-secrets # No repo-specific secrets.
