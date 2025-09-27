@@ -39,3 +39,6 @@ sdk/python/venv
 
 go.work
 go.work.sum
+
+# Ignore local mise config
+mise.local.toml
