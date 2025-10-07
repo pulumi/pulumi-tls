@@ -25,19 +25,19 @@ namespace Pulumi.Tls
     public sealed class GetCertificateArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+        /// The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `Url`.
         /// </summary>
         [Input("content")]
         public string? Content { get; set; }
 
         /// <summary>
-        /// The URL of the website to get the certificates from. Cannot be used with `content`.
+        /// The URL of the website to get the certificates from. Cannot be used with `Content`.
         /// </summary>
         [Input("url")]
         public string? Url { get; set; }
 
         /// <summary>
-        /// Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+        /// Whether to verify the certificate chain while parsing it or not (default: `True`). Cannot be used with `Content`.
         /// </summary>
         [Input("verifyChain")]
         public bool? VerifyChain { get; set; }
@@ -51,19 +51,19 @@ namespace Pulumi.Tls
     public sealed class GetCertificateInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+        /// The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `Url`.
         /// </summary>
         [Input("content")]
         public Input<string>? Content { get; set; }
 
         /// <summary>
-        /// The URL of the website to get the certificates from. Cannot be used with `content`.
+        /// The URL of the website to get the certificates from. Cannot be used with `Content`.
         /// </summary>
         [Input("url")]
         public Input<string>? Url { get; set; }
 
         /// <summary>
-        /// Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+        /// Whether to verify the certificate chain while parsing it or not (default: `True`). Cannot be used with `Content`.
         /// </summary>
         [Input("verifyChain")]
         public Input<bool>? VerifyChain { get; set; }
@@ -83,7 +83,7 @@ namespace Pulumi.Tls
         /// </summary>
         public readonly ImmutableArray<Outputs.GetCertificateCertificateResult> Certificates;
         /// <summary>
-        /// The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
+        /// The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `Url`.
         /// </summary>
         public readonly string? Content;
         /// <summary>
@@ -91,11 +91,11 @@ namespace Pulumi.Tls
         /// </summary>
         public readonly string Id;
         /// <summary>
-        /// The URL of the website to get the certificates from. Cannot be used with `content`.
+        /// The URL of the website to get the certificates from. Cannot be used with `Content`.
         /// </summary>
         public readonly string? Url;
         /// <summary>
-        /// Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
+        /// Whether to verify the certificate chain while parsing it or not (default: `True`). Cannot be used with `Content`.
         /// </summary>
         public readonly bool? VerifyChain;
 

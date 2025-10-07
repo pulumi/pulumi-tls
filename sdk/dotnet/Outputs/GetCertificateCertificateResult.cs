@@ -18,7 +18,7 @@ namespace Pulumi.Tls.Outputs
         /// </summary>
         public readonly string CertPem;
         /// <summary>
-        /// `true` if the certificate is of a CA (Certificate Authority).
+        /// `True` if the certificate is of a CA (Certificate Authority).
         /// </summary>
         public readonly bool IsCa;
         /// <summary>
@@ -39,7 +39,7 @@ namespace Pulumi.Tls.Outputs
         public readonly string PublicKeyAlgorithm;
         /// <summary>
         /// Number that uniquely identifies the certificate with the CA's system.
-        /// The `format` function can be used to convert this *base 10* number into other bases, such as hex.
+        /// The `Format` function can be used to convert this *base 10* number into other bases, such as hex.
         /// </summary>
         public readonly string SerialNumber;
         /// <summary>
