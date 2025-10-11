@@ -48,7 +48,7 @@ namespace Pulumi.Tls
              public class Proxy
              {
             /// <summary>
-            /// When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+            /// When `True` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `True`).
             /// </summary>
                 public bool? FromEnv { get; set; }
             /// <summary>
@@ -56,7 +56,7 @@ namespace Pulumi.Tls
             /// </summary>
                 public string? Password { get; set; } = null!;
             /// <summary>
-            /// URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+            /// URL used to connect to the Proxy. Accepted schemes are: `Http`, `Https`, `Socks5`.
             /// </summary>
                 public string? Url { get; set; } = null!;
             /// <summary>
