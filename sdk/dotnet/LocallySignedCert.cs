@@ -13,7 +13,7 @@ namespace Pulumi.Tls
     public partial class LocallySignedCert : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+        /// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `AnyExtended`, `CertSigning`, `ClientAuth`, `CodeSigning`, `ContentCommitment`, `CrlSigning`, `DataEncipherment`, `DecipherOnly`, `DigitalSignature`, `EmailProtection`, `EncipherOnly`, `IpsecEndSystem`, `IpsecTunnel`, `IpsecUser`, `KeyAgreement`, `KeyEncipherment`, `MicrosoftCommercialCodeSigning`, `MicrosoftKernelCodeSigning`, `MicrosoftServerGatedCrypto`, `NetscapeServerGatedCrypto`, `OcspSigning`, `ServerAuth`, `Timestamping`.
         /// </summary>
         [Output("allowedUses")]
         public Output<ImmutableArray<string>> AllowedUses { get; private set; } = null!;
@@ -25,7 +25,7 @@ namespace Pulumi.Tls
         public Output<string> CaCertPem { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
+        /// Name of the algorithm used when generating the private key provided in `CaPrivateKeyPem`.
         /// </summary>
         [Output("caKeyAlgorithm")]
         public Output<string> CaKeyAlgorithm { get; private set; } = null!;
@@ -52,19 +52,19 @@ namespace Pulumi.Tls
         public Output<int> EarlyRenewalHours { get; private set; } = null!;
 
         /// <summary>
-        /// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
+        /// Is the generated certificate representing a Certificate Authority (CA) (default: `False`).
         /// </summary>
         [Output("isCaCertificate")]
         public Output<bool> IsCaCertificate { get; private set; } = null!;
 
         /// <summary>
-        /// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
+        /// Is the certificate either expired (i.e. beyond the `ValidityPeriodHours`) or ready for an early renewal (i.e. within the `EarlyRenewalHours`)?
         /// </summary>
         [Output("readyForRenewal")]
         public Output<bool> ReadyForRenewal { get; private set; } = null!;
 
         /// <summary>
-        /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+        /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `False`).
         /// </summary>
         [Output("setSubjectKeyId")]
         public Output<bool> SetSubjectKeyId { get; private set; } = null!;
@@ -141,7 +141,7 @@ namespace Pulumi.Tls
         private InputList<string>? _allowedUses;
 
         /// <summary>
-        /// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+        /// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `AnyExtended`, `CertSigning`, `ClientAuth`, `CodeSigning`, `ContentCommitment`, `CrlSigning`, `DataEncipherment`, `DecipherOnly`, `DigitalSignature`, `EmailProtection`, `EncipherOnly`, `IpsecEndSystem`, `IpsecTunnel`, `IpsecUser`, `KeyAgreement`, `KeyEncipherment`, `MicrosoftCommercialCodeSigning`, `MicrosoftKernelCodeSigning`, `MicrosoftServerGatedCrypto`, `NetscapeServerGatedCrypto`, `OcspSigning`, `ServerAuth`, `Timestamping`.
         /// </summary>
         public InputList<string> AllowedUses
         {
@@ -181,13 +181,13 @@ namespace Pulumi.Tls
         public Input<int>? EarlyRenewalHours { get; set; }
 
         /// <summary>
-        /// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
+        /// Is the generated certificate representing a Certificate Authority (CA) (default: `False`).
         /// </summary>
         [Input("isCaCertificate")]
         public Input<bool>? IsCaCertificate { get; set; }
 
         /// <summary>
-        /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+        /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `False`).
         /// </summary>
         [Input("setSubjectKeyId")]
         public Input<bool>? SetSubjectKeyId { get; set; }
@@ -210,7 +210,7 @@ namespace Pulumi.Tls
         private InputList<string>? _allowedUses;
 
         /// <summary>
-        /// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
+        /// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `AnyExtended`, `CertSigning`, `ClientAuth`, `CodeSigning`, `ContentCommitment`, `CrlSigning`, `DataEncipherment`, `DecipherOnly`, `DigitalSignature`, `EmailProtection`, `EncipherOnly`, `IpsecEndSystem`, `IpsecTunnel`, `IpsecUser`, `KeyAgreement`, `KeyEncipherment`, `MicrosoftCommercialCodeSigning`, `MicrosoftKernelCodeSigning`, `MicrosoftServerGatedCrypto`, `NetscapeServerGatedCrypto`, `OcspSigning`, `ServerAuth`, `Timestamping`.
         /// </summary>
         public InputList<string> AllowedUses
         {
@@ -225,7 +225,7 @@ namespace Pulumi.Tls
         public Input<string>? CaCertPem { get; set; }
 
         /// <summary>
-        /// Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
+        /// Name of the algorithm used when generating the private key provided in `CaPrivateKeyPem`.
         /// </summary>
         [Input("caKeyAlgorithm")]
         public Input<string>? CaKeyAlgorithm { get; set; }
@@ -262,19 +262,19 @@ namespace Pulumi.Tls
         public Input<int>? EarlyRenewalHours { get; set; }
 
         /// <summary>
-        /// Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
+        /// Is the generated certificate representing a Certificate Authority (CA) (default: `False`).
         /// </summary>
         [Input("isCaCertificate")]
         public Input<bool>? IsCaCertificate { get; set; }
 
         /// <summary>
-        /// Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
+        /// Is the certificate either expired (i.e. beyond the `ValidityPeriodHours`) or ready for an early renewal (i.e. within the `EarlyRenewalHours`)?
         /// </summary>
         [Input("readyForRenewal")]
         public Input<bool>? ReadyForRenewal { get; set; }
 
         /// <summary>
-        /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
+        /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `False`).
         /// </summary>
         [Input("setSubjectKeyId")]
         public Input<bool>? SetSubjectKeyId { get; set; }

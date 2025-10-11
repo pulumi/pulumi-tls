@@ -23,22 +23,22 @@ public final class GetPublicKeyResult {
      */
     private String id;
     /**
-     * @return The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `private_key_pem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+     * @return The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `privateKeyPem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
      * 
      */
     private @Nullable String privateKeyOpenssh;
     /**
-     * @return The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `private_key_openssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+     * @return The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `privateKeyOpenssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
      * 
      */
     private @Nullable String privateKeyPem;
     /**
-     * @return The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, as per the rules for `public_key_openssh` and ECDSA P224 limitations.
+     * @return The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, as per the rules for `publicKeyOpenssh` and ECDSA P224 limitations.
      * 
      */
     private String publicKeyFingerprintMd5;
     /**
-     * @return The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, as per the rules for `public_key_openssh` and ECDSA P224 limitations.
+     * @return The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, as per the rules for `publicKeyOpenssh` and ECDSA P224 limitations.
      * 
      */
     private String publicKeyFingerprintSha256;
@@ -69,28 +69,28 @@ public final class GetPublicKeyResult {
         return this.id;
     }
     /**
-     * @return The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `private_key_pem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+     * @return The private key (in  [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format) to extract the public key from. This is *mutually exclusive* with `privateKeyPem`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
      * 
      */
     public Optional<String> privateKeyOpenssh() {
         return Optional.ofNullable(this.privateKeyOpenssh);
     }
     /**
-     * @return The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `private_key_openssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
+     * @return The private key (in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format) to extract the public key from. This is *mutually exclusive* with `privateKeyOpenssh`. Currently-supported algorithms for keys are: `RSA`, `ECDSA`, `ED25519`.
      * 
      */
     public Optional<String> privateKeyPem() {
         return Optional.ofNullable(this.privateKeyPem);
     }
     /**
-     * @return The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, as per the rules for `public_key_openssh` and ECDSA P224 limitations.
+     * @return The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, as per the rules for `publicKeyOpenssh` and ECDSA P224 limitations.
      * 
      */
     public String publicKeyFingerprintMd5() {
         return this.publicKeyFingerprintMd5;
     }
     /**
-     * @return The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, as per the rules for `public_key_openssh` and ECDSA P224 limitations.
+     * @return The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, as per the rules for `publicKeyOpenssh` and ECDSA P224 limitations.
      * 
      */
     public String publicKeyFingerprintSha256() {

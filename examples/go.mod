@@ -5,7 +5,7 @@ go 1.23.11
 toolchain go1.24.6
 
 replace (
-	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20250530111747-935112552988
+	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20250923233607-7f1981c8674a
 	github.com/hashicorp/terraform-provider-tls/shim => ../provider/shim
 	github.com/pulumi/pulumi-tls/provider/v5 => ../provider
 )

@@ -105,14 +105,14 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.ipAddresses);
     }
     /**
-     * Name of the algorithm used when generating the private key provided in `private_key_pem`.
+     * Name of the algorithm used when generating the private key provided in `privateKeyPem`.
      * 
      */
     @Export(name="keyAlgorithm", refs={String.class}, tree="[0]")
     private Output<String> keyAlgorithm;
 
     /**
-     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`.
+     * @return Name of the algorithm used when generating the private key provided in `privateKeyPem`.
      * 
      */
     public Output<String> keyAlgorithm() {

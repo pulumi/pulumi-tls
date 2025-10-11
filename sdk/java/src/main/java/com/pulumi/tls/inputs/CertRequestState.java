@@ -63,14 +63,14 @@ public final class CertRequestState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Name of the algorithm used when generating the private key provided in `private_key_pem`.
+     * Name of the algorithm used when generating the private key provided in `privateKeyPem`.
      * 
      */
     @Import(name="keyAlgorithm")
     private @Nullable Output<String> keyAlgorithm;
 
     /**
-     * @return Name of the algorithm used when generating the private key provided in `private_key_pem`.
+     * @return Name of the algorithm used when generating the private key provided in `privateKeyPem`.
      * 
      */
     public Optional<Output<String>> keyAlgorithm() {
@@ -236,7 +236,7 @@ public final class CertRequestState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `private_key_pem`.
+         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `privateKeyPem`.
          * 
          * @return builder
          * 
@@ -247,7 +247,7 @@ public final class CertRequestState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `private_key_pem`.
+         * @param keyAlgorithm Name of the algorithm used when generating the private key provided in `privateKeyPem`.
          * 
          * @return builder
          * 
