@@ -92,14 +92,14 @@ public final class PrivateKeyState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
+     * The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
      * 
      */
     @Import(name="publicKeyFingerprintMd5")
     private @Nullable Output<String> publicKeyFingerprintMd5;
 
     /**
-     * @return The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
+     * @return The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
      * 
      */
     public Optional<Output<String>> publicKeyFingerprintMd5() {
@@ -107,14 +107,14 @@ public final class PrivateKeyState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
+     * The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
      * 
      */
     @Import(name="publicKeyFingerprintSha256")
     private @Nullable Output<String> publicKeyFingerprintSha256;
 
     /**
-     * @return The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
+     * @return The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
      * 
      */
     public Optional<Output<String>> publicKeyFingerprintSha256() {
@@ -305,7 +305,7 @@ public final class PrivateKeyState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param publicKeyFingerprintMd5 The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
+         * @param publicKeyFingerprintMd5 The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
          * 
          * @return builder
          * 
@@ -316,7 +316,7 @@ public final class PrivateKeyState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param publicKeyFingerprintMd5 The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
+         * @param publicKeyFingerprintMd5 The fingerprint of the public key data in OpenSSH MD5 hash format, e.g. `aa:bb:cc:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
          * 
          * @return builder
          * 
@@ -326,7 +326,7 @@ public final class PrivateKeyState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param publicKeyFingerprintSha256 The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
+         * @param publicKeyFingerprintSha256 The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
          * 
          * @return builder
          * 
@@ -337,7 +337,7 @@ public final class PrivateKeyState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param publicKeyFingerprintSha256 The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `public_key_openssh` and the ECDSA P224 limitations.
+         * @param publicKeyFingerprintSha256 The fingerprint of the public key data in OpenSSH SHA256 hash format, e.g. `SHA256:...`. Only available if the selected private key format is compatible, similarly to `publicKeyOpenssh` and the ECDSA P224 limitations.
          * 
          * @return builder
          * 
