@@ -241,7 +241,9 @@ bin/$(PROVIDER): .make/schema
 .PHONY: provider provider_no_deps
 
 test: export PATH := $(WORKING_DIR)/bin:$(PATH)
+test: export PULUMI_HOME := $(HOME)/.pulumi
 test:
+	@env | grep PULUMI_HOME
 	cd examples && go test -v -tags=all -parallel $(TESTPARALLELISM) -timeout 2h $(value GOTESTARGS)
 .PHONY: test
 test_provider_cmd = cd provider && go test -v -short \
