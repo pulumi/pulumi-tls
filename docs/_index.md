@@ -74,6 +74,7 @@ const exampleServerCertificate = new aws.iam.ServerCertificate("example", {
     privateKey: example.privateKeyPem,
 });
 ```
+
 {{% /choosable %}}
 {{% choosable language python %}}
 ```python
@@ -112,6 +113,7 @@ example_server_certificate = aws.iam.ServerCertificate("example",
     certificate_body=example_self_signed_cert.cert_pem,
     private_key=example.private_key_pem)
 ```
+
 {{% /choosable %}}
 {{% choosable language csharp %}}
 ```csharp
@@ -169,6 +171,7 @@ return await Deployment.RunAsync(() =>
 });
 
 ```
+
 {{% /choosable %}}
 {{% choosable language go %}}
 ```go
@@ -229,6 +232,7 @@ func main() {
 	})
 }
 ```
+
 {{% /choosable %}}
 {{% choosable language yaml %}}
 ```yaml
@@ -271,6 +275,7 @@ resources:
       certificateBody: ${exampleSelfSignedCert.certPem}
       privateKey: ${example.privateKeyPem}
 ```
+
 {{% /choosable %}}
 {{% choosable language java %}}
 ```java
@@ -337,6 +342,7 @@ public class App {
     }
 }
 ```
+
 {{% /choosable %}}
 {{< /chooser >}}
 ### Configuring Proxy
@@ -349,6 +355,7 @@ name: configuration-example
 runtime: nodejs
 
 ```
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tls from "@pulumi/tls";
@@ -357,6 +364,7 @@ const test = tls.getCertificate({
     url: "https://example.com",
 });
 ```
+
 {{% /choosable %}}
 {{% choosable language python %}}
 ```yaml
@@ -365,12 +373,14 @@ name: configuration-example
 runtime: python
 
 ```
+
 ```python
 import pulumi
 import pulumi_tls as tls
 
 test = tls.get_certificate(url="https://example.com")
 ```
+
 {{% /choosable %}}
 {{% choosable language csharp %}}
 ```yaml
@@ -379,6 +389,7 @@ name: configuration-example
 runtime: dotnet
 
 ```
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -395,6 +406,7 @@ return await Deployment.RunAsync(() =>
 });
 
 ```
+
 {{% /choosable %}}
 {{% choosable language go %}}
 ```yaml
@@ -403,6 +415,7 @@ name: configuration-example
 runtime: go
 
 ```
+
 ```go
 package main
 
@@ -423,6 +436,7 @@ func main() {
 	})
 }
 ```
+
 {{% /choosable %}}
 {{% choosable language yaml %}}
 ```yaml
@@ -431,6 +445,7 @@ name: configuration-example
 runtime: yaml
 
 ```
+
 ```yaml
 variables:
   test:
@@ -439,6 +454,7 @@ variables:
       arguments:
         url: https://example.com
 ```
+
 {{% /choosable %}}
 {{% choosable language java %}}
 ```yaml
@@ -447,6 +463,7 @@ name: configuration-example
 runtime: java
 
 ```
+
 ```java
 package generated_program;
 
@@ -475,6 +492,7 @@ public class App {
     }
 }
 ```
+
 {{% /choosable %}}
 {{< /chooser >}}
 
@@ -486,6 +504,7 @@ name: configuration-example
 runtime: nodejs
 
 ```
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tls from "@pulumi/tls";
@@ -494,6 +513,7 @@ const test = tls.getCertificate({
     url: "https://example.com",
 });
 ```
+
 {{% /choosable %}}
 {{% choosable language python %}}
 ```yaml
@@ -502,12 +522,14 @@ name: configuration-example
 runtime: python
 
 ```
+
 ```python
 import pulumi
 import pulumi_tls as tls
 
 test = tls.get_certificate(url="https://example.com")
 ```
+
 {{% /choosable %}}
 {{% choosable language csharp %}}
 ```yaml
@@ -516,6 +538,7 @@ name: configuration-example
 runtime: dotnet
 
 ```
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -532,6 +555,7 @@ return await Deployment.RunAsync(() =>
 });
 
 ```
+
 {{% /choosable %}}
 {{% choosable language go %}}
 ```yaml
@@ -540,6 +564,7 @@ name: configuration-example
 runtime: go
 
 ```
+
 ```go
 package main
 
@@ -560,6 +585,7 @@ func main() {
 	})
 }
 ```
+
 {{% /choosable %}}
 {{% choosable language yaml %}}
 ```yaml
@@ -568,6 +594,7 @@ name: configuration-example
 runtime: yaml
 
 ```
+
 ```yaml
 variables:
   test:
@@ -576,6 +603,7 @@ variables:
       arguments:
         url: https://example.com
 ```
+
 {{% /choosable %}}
 {{% choosable language java %}}
 ```yaml
@@ -584,6 +612,7 @@ name: configuration-example
 runtime: java
 
 ```
+
 ```java
 package generated_program;
 
@@ -612,6 +641,7 @@ public class App {
     }
 }
 ```
+
 {{% /choosable %}}
 {{< /chooser >}}
 ## Configuration Reference
