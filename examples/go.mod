@@ -11,7 +11,7 @@ replace (
 )
 
 require (
-	github.com/pulumi/providertest v0.1.3
+	github.com/pulumi/providertest v0.6.0
 	github.com/pulumi/pulumi/pkg/v3 v3.207.0
 	github.com/stretchr/testify v1.10.0
 )

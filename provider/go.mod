@@ -6,7 +6,7 @@ toolchain go1.24.10
 
 require (
 	github.com/hashicorp/terraform-provider-tls/shim v0.0.0
-	github.com/pulumi/providertest v0.3.0
+	github.com/pulumi/providertest v0.6.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.117.0
 	github.com/pulumi/pulumi/sdk/v3 v3.207.0
 	github.com/stretchr/testify v1.10.0
