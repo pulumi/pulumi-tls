@@ -49,7 +49,6 @@ import * as tls from "@pulumi/tls";
 // security considerations and other practical tradeoffs.
 const example = new tls.PrivateKey("example", {algorithm: "ECDSA"});
 const exampleSelfSignedCert = new tls.SelfSignedCert("example", {
-    keyAlgorithm: example.algorithm,
     privateKeyPem: example.privateKeyPem,
     validityPeriodHours: 12,
     earlyRenewalHours: 3,
@@ -90,7 +89,6 @@ import pulumi_tls as tls
 # security considerations and other practical tradeoffs.
 example = tls.PrivateKey("example", algorithm="ECDSA")
 example_self_signed_cert = tls.SelfSignedCert("example",
-    key_algorithm=example.algorithm,
     private_key_pem=example.private_key_pem,
     validity_period_hours=12,
     early_renewal_hours=3,
@@ -138,7 +136,6 @@ return await Deployment.RunAsync(() =>
 
     var exampleSelfSignedCert = new Tls.SelfSignedCert("example", new()
     {
-        KeyAlgorithm = example.Algorithm,
         PrivateKeyPem = example.PrivateKeyPem,
         ValidityPeriodHours = 12,
         EarlyRenewalHours = 3,
@@ -198,7 +195,6 @@ func main() {
 			return err
 		}
 		exampleSelfSignedCert, err := tls.NewSelfSignedCert(ctx, "example", &tls.SelfSignedCertArgs{
-			KeyAlgorithm:        example.Algorithm,
 			PrivateKeyPem:       example.PrivateKeyPem,
 			ValidityPeriodHours: pulumi.Int(12),
 			EarlyRenewalHours:   pulumi.Int(3),
@@ -251,7 +247,6 @@ resources:
     type: tls:SelfSignedCert
     name: example
     properties:
-      keyAlgorithm: ${example.algorithm}
       privateKeyPem: ${example.privateKeyPem}
       validityPeriodHours: 12 # Generate a new certificate if Pulumi is run within three
       #   # hours of the certificate's expiration time.
@@ -315,7 +310,6 @@ public class App {
             .build());
 
         var exampleSelfSignedCert = new SelfSignedCert("exampleSelfSignedCert", SelfSignedCertArgs.builder()
-            .keyAlgorithm(example.algorithm())
             .privateKeyPem(example.privateKeyPem())
             .validityPeriodHours(12)
             .earlyRenewalHours(3)

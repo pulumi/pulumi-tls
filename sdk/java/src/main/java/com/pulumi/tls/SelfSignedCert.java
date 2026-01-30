@@ -111,6 +111,20 @@ public class SelfSignedCert extends com.pulumi.resources.CustomResource {
         return this.keyAlgorithm;
     }
     /**
+     * Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored. (default: `-1`)
+     * 
+     */
+    @Export(name="maxPathLength", refs={Integer.class}, tree="[0]")
+    private Output<Integer> maxPathLength;
+
+    /**
+     * @return Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored. (default: `-1`)
+     * 
+     */
+    public Output<Integer> maxPathLength() {
+        return this.maxPathLength;
+    }
+    /**
      * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
      * 
      */
