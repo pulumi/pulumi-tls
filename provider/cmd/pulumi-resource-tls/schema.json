@@ -211,6 +211,10 @@
                     "type": "string",
                     "description": "Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).\n"
                 },
+                "maxPathLength": {
+                    "type": "integer",
+                    "description": "The maximum number of intermediate certificates that can follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCa`\" pulumi-lang-dotnet=\"`IsCa`\" pulumi-lang-go=\"`isCa`\" pulumi-lang-python=\"`is_ca`\" pulumi-lang-yaml=\"`isCa`\" pulumi-lang-java=\"`isCa`\"\u003e`is_ca`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e, this value is `-1`.\n"
+                },
                 "notAfter": {
                     "type": "string",
                     "description": "The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
@@ -249,6 +253,7 @@
                 "certPem",
                 "isCa",
                 "issuer",
+                "maxPathLength",
                 "notAfter",
                 "notBefore",
                 "publicKeyAlgorithm",
@@ -448,6 +453,10 @@
                     "type": "boolean",
                     "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
                 },
+                "maxPathLength": {
+                    "type": "integer",
+                    "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\"\u003e`is_ca_certificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored. (default: `-1`)\n"
+                },
                 "readyForRenewal": {
                     "type": "boolean",
                     "description": "Is the certificate either expired (i.e. beyond the \u003cspan pulumi-lang-nodejs=\"`validityPeriodHours`\" pulumi-lang-dotnet=\"`ValidityPeriodHours`\" pulumi-lang-go=\"`validityPeriodHours`\" pulumi-lang-python=\"`validity_period_hours`\" pulumi-lang-yaml=\"`validityPeriodHours`\" pulumi-lang-java=\"`validityPeriodHours`\"\u003e`validity_period_hours`\u003c/span\u003e) or ready for an early renewal (i.e. within the \u003cspan pulumi-lang-nodejs=\"`earlyRenewalHours`\" pulumi-lang-dotnet=\"`EarlyRenewalHours`\" pulumi-lang-go=\"`earlyRenewalHours`\" pulumi-lang-python=\"`early_renewal_hours`\" pulumi-lang-yaml=\"`earlyRenewalHours`\" pulumi-lang-java=\"`earlyRenewalHours`\"\u003e`early_renewal_hours`\u003c/span\u003e)?\n"
@@ -478,6 +487,7 @@
                 "certRequestPem",
                 "earlyRenewalHours",
                 "isCaCertificate",
+                "maxPathLength",
                 "readyForRenewal",
                 "setSubjectKeyId",
                 "validityEndTime",
@@ -511,6 +521,10 @@
                 "isCaCertificate": {
                     "type": "boolean",
                     "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                },
+                "maxPathLength": {
+                    "type": "integer",
+                    "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\"\u003e`is_ca_certificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored. (default: `-1`)\n"
                 },
                 "setSubjectKeyId": {
                     "type": "boolean",
@@ -565,6 +579,10 @@
                     "isCaCertificate": {
                         "type": "boolean",
                         "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                    },
+                    "maxPathLength": {
+                        "type": "integer",
+                        "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\"\u003e`is_ca_certificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored. (default: `-1`)\n"
                     },
                     "readyForRenewal": {
                         "type": "boolean",
@@ -753,6 +771,10 @@
                     "type": "string",
                     "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\"\u003e`private_key_pem`\u003c/span\u003e.\n"
                 },
+                "maxPathLength": {
+                    "type": "integer",
+                    "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\"\u003e`is_ca_certificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored. (default: `-1`)\n"
+                },
                 "privateKeyPem": {
                     "type": "string",
                     "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.\n",
@@ -800,6 +822,7 @@
                 "earlyRenewalHours",
                 "isCaCertificate",
                 "keyAlgorithm",
+                "maxPathLength",
                 "privateKeyPem",
                 "readyForRenewal",
                 "setAuthorityKeyId",
@@ -836,6 +859,10 @@
                 "isCaCertificate": {
                     "type": "boolean",
                     "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                },
+                "maxPathLength": {
+                    "type": "integer",
+                    "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\"\u003e`is_ca_certificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored. (default: `-1`)\n"
                 },
                 "privateKeyPem": {
                     "type": "string",
@@ -909,6 +936,10 @@
                     "keyAlgorithm": {
                         "type": "string",
                         "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\"\u003e`private_key_pem`\u003c/span\u003e.\n"
+                    },
+                    "maxPathLength": {
+                        "type": "integer",
+                        "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\"\u003e`is_ca_certificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored. (default: `-1`)\n"
                     },
                     "privateKeyPem": {
                         "type": "string",
