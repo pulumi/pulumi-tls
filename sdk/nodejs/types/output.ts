@@ -62,6 +62,10 @@ export interface GetCertificateCertificate {
      */
     issuer: string;
     /**
+     * The maximum number of intermediate certificates that can follow this certificate in a valid certification path. If `isCa` is `false`, this value is `-1`.
+     */
+    maxPathLength: number;
+    /**
      * The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      */
     notAfter: string;

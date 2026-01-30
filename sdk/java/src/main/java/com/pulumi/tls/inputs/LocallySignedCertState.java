@@ -131,6 +131,21 @@ public final class LocallySignedCertState extends com.pulumi.resources.ResourceA
     }
 
     /**
+     * Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored. (default: `-1`)
+     * 
+     */
+    @Import(name="maxPathLength")
+    private @Nullable Output<Integer> maxPathLength;
+
+    /**
+     * @return Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored. (default: `-1`)
+     * 
+     */
+    public Optional<Output<Integer>> maxPathLength() {
+        return Optional.ofNullable(this.maxPathLength);
+    }
+
+    /**
      * Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
      * 
      */
@@ -216,6 +231,7 @@ public final class LocallySignedCertState extends com.pulumi.resources.ResourceA
         this.certRequestPem = $.certRequestPem;
         this.earlyRenewalHours = $.earlyRenewalHours;
         this.isCaCertificate = $.isCaCertificate;
+        this.maxPathLength = $.maxPathLength;
         this.readyForRenewal = $.readyForRenewal;
         this.setSubjectKeyId = $.setSubjectKeyId;
         this.validityEndTime = $.validityEndTime;
@@ -405,6 +421,27 @@ public final class LocallySignedCertState extends com.pulumi.resources.ResourceA
          */
         public Builder isCaCertificate(Boolean isCaCertificate) {
             return isCaCertificate(Output.of(isCaCertificate));
+        }
+
+        /**
+         * @param maxPathLength Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored. (default: `-1`)
+         * 
+         * @return builder
+         * 
+         */
+        public Builder maxPathLength(@Nullable Output<Integer> maxPathLength) {
+            $.maxPathLength = maxPathLength;
+            return this;
+        }
+
+        /**
+         * @param maxPathLength Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored. (default: `-1`)
+         * 
+         * @return builder
+         * 
+         */
+        public Builder maxPathLength(Integer maxPathLength) {
+            return maxPathLength(Output.of(maxPathLength));
         }
 
         /**

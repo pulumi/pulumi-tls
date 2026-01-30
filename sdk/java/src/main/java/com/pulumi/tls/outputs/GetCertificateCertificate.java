@@ -28,6 +28,11 @@ public final class GetCertificateCertificate {
      */
     private String issuer;
     /**
+     * @return The maximum number of intermediate certificates that can follow this certificate in a valid certification path. If `isCa` is `false`, this value is `-1`.
+     * 
+     */
+    private Integer maxPathLength;
+    /**
      * @return The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
      * 
      */
@@ -90,6 +95,13 @@ public final class GetCertificateCertificate {
      */
     public String issuer() {
         return this.issuer;
+    }
+    /**
+     * @return The maximum number of intermediate certificates that can follow this certificate in a valid certification path. If `isCa` is `false`, this value is `-1`.
+     * 
+     */
+    public Integer maxPathLength() {
+        return this.maxPathLength;
     }
     /**
      * @return The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -161,6 +173,7 @@ public final class GetCertificateCertificate {
         private String certPem;
         private Boolean isCa;
         private String issuer;
+        private Integer maxPathLength;
         private String notAfter;
         private String notBefore;
         private String publicKeyAlgorithm;
@@ -175,6 +188,7 @@ public final class GetCertificateCertificate {
     	      this.certPem = defaults.certPem;
     	      this.isCa = defaults.isCa;
     	      this.issuer = defaults.issuer;
+    	      this.maxPathLength = defaults.maxPathLength;
     	      this.notAfter = defaults.notAfter;
     	      this.notBefore = defaults.notBefore;
     	      this.publicKeyAlgorithm = defaults.publicKeyAlgorithm;
@@ -207,6 +221,14 @@ public final class GetCertificateCertificate {
               throw new MissingRequiredPropertyException("GetCertificateCertificate", "issuer");
             }
             this.issuer = issuer;
+            return this;
+        }
+        @CustomType.Setter
+        public Builder maxPathLength(Integer maxPathLength) {
+            if (maxPathLength == null) {
+              throw new MissingRequiredPropertyException("GetCertificateCertificate", "maxPathLength");
+            }
+            this.maxPathLength = maxPathLength;
             return this;
         }
         @CustomType.Setter
@@ -278,6 +300,7 @@ public final class GetCertificateCertificate {
             _resultValue.certPem = certPem;
             _resultValue.isCa = isCa;
             _resultValue.issuer = issuer;
+            _resultValue.maxPathLength = maxPathLength;
             _resultValue.notAfter = notAfter;
             _resultValue.notBefore = notBefore;
             _resultValue.publicKeyAlgorithm = publicKeyAlgorithm;

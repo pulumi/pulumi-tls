@@ -26,6 +26,7 @@ class LocallySignedCertArgs:
                  validity_period_hours: pulumi.Input[_builtins.int],
                  early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
                  is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
+                 max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
                  set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None):
         """
         The set of arguments for constructing a LocallySignedCert resource.
@@ -35,6 +36,7 @@ class LocallySignedCertArgs:
         :param pulumi.Input[_builtins.str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
+        :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored. (default: `-1`)
         :param pulumi.Input[_builtins.bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         """
         pulumi.set(__self__, "allowed_uses", allowed_uses)
@@ -46,6 +48,8 @@ class LocallySignedCertArgs:
             pulumi.set(__self__, "early_renewal_hours", early_renewal_hours)
         if is_ca_certificate is not None:
             pulumi.set(__self__, "is_ca_certificate", is_ca_certificate)
+        if max_path_length is not None:
+            pulumi.set(__self__, "max_path_length", max_path_length)
         if set_subject_key_id is not None:
             pulumi.set(__self__, "set_subject_key_id", set_subject_key_id)
 
@@ -131,6 +135,18 @@ class LocallySignedCertArgs:
         pulumi.set(self, "is_ca_certificate", value)
 
     @_builtins.property
+    @pulumi.getter(name="maxPathLength")
+    def max_path_length(self) -> Optional[pulumi.Input[_builtins.int]]:
+        """
+        Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored. (default: `-1`)
+        """
+        return pulumi.get(self, "max_path_length")
+
+    @max_path_length.setter
+    def max_path_length(self, value: Optional[pulumi.Input[_builtins.int]]):
+        pulumi.set(self, "max_path_length", value)
+
+    @_builtins.property
     @pulumi.getter(name="setSubjectKeyId")
     def set_subject_key_id(self) -> Optional[pulumi.Input[_builtins.bool]]:
         """
@@ -154,6 +170,7 @@ class _LocallySignedCertState:
                  cert_request_pem: Optional[pulumi.Input[_builtins.str]] = None,
                  early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
                  is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
+                 max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
                  ready_for_renewal: Optional[pulumi.Input[_builtins.bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
                  validity_end_time: Optional[pulumi.Input[_builtins.str]] = None,
@@ -168,6 +185,7 @@ class _LocallySignedCertState:
         :param pulumi.Input[_builtins.str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         :param pulumi.Input[_builtins.str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
+        :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored. (default: `-1`)
         :param pulumi.Input[_builtins.bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
         :param pulumi.Input[_builtins.bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[_builtins.str] validity_end_time: The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -190,6 +208,8 @@ class _LocallySignedCertState:
             pulumi.set(__self__, "early_renewal_hours", early_renewal_hours)
         if is_ca_certificate is not None:
             pulumi.set(__self__, "is_ca_certificate", is_ca_certificate)
+        if max_path_length is not None:
+            pulumi.set(__self__, "max_path_length", max_path_length)
         if ready_for_renewal is not None:
             pulumi.set(__self__, "ready_for_renewal", ready_for_renewal)
         if set_subject_key_id is not None:
@@ -295,6 +315,18 @@ class _LocallySignedCertState:
         pulumi.set(self, "is_ca_certificate", value)
 
     @_builtins.property
+    @pulumi.getter(name="maxPathLength")
+    def max_path_length(self) -> Optional[pulumi.Input[_builtins.int]]:
+        """
+        Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored. (default: `-1`)
+        """
+        return pulumi.get(self, "max_path_length")
+
+    @max_path_length.setter
+    def max_path_length(self, value: Optional[pulumi.Input[_builtins.int]]):
+        pulumi.set(self, "max_path_length", value)
+
+    @_builtins.property
     @pulumi.getter(name="readyForRenewal")
     def ready_for_renewal(self) -> Optional[pulumi.Input[_builtins.bool]]:
         """
@@ -367,6 +399,7 @@ class LocallySignedCert(pulumi.CustomResource):
                  cert_request_pem: Optional[pulumi.Input[_builtins.str]] = None,
                  early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
                  is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
+                 max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
                  set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
                  validity_period_hours: Optional[pulumi.Input[_builtins.int]] = None,
                  __props__=None):
@@ -379,6 +412,7 @@ class LocallySignedCert(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
+        :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored. (default: `-1`)
         :param pulumi.Input[_builtins.bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[_builtins.int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.
         """
@@ -411,6 +445,7 @@ class LocallySignedCert(pulumi.CustomResource):
                  cert_request_pem: Optional[pulumi.Input[_builtins.str]] = None,
                  early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
                  is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
+                 max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
                  set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
                  validity_period_hours: Optional[pulumi.Input[_builtins.int]] = None,
                  __props__=None):
@@ -436,6 +471,7 @@ class LocallySignedCert(pulumi.CustomResource):
             __props__.__dict__["cert_request_pem"] = cert_request_pem
             __props__.__dict__["early_renewal_hours"] = early_renewal_hours
             __props__.__dict__["is_ca_certificate"] = is_ca_certificate
+            __props__.__dict__["max_path_length"] = max_path_length
             __props__.__dict__["set_subject_key_id"] = set_subject_key_id
             if validity_period_hours is None and not opts.urn:
                 raise TypeError("Missing required property 'validity_period_hours'")
@@ -465,6 +501,7 @@ class LocallySignedCert(pulumi.CustomResource):
             cert_request_pem: Optional[pulumi.Input[_builtins.str]] = None,
             early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
             is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
+            max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
             ready_for_renewal: Optional[pulumi.Input[_builtins.bool]] = None,
             set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
             validity_end_time: Optional[pulumi.Input[_builtins.str]] = None,
@@ -484,6 +521,7 @@ class LocallySignedCert(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         :param pulumi.Input[_builtins.str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
+        :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored. (default: `-1`)
         :param pulumi.Input[_builtins.bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
         :param pulumi.Input[_builtins.bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[_builtins.str] validity_end_time: The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
@@ -502,6 +540,7 @@ class LocallySignedCert(pulumi.CustomResource):
         __props__.__dict__["cert_request_pem"] = cert_request_pem
         __props__.__dict__["early_renewal_hours"] = early_renewal_hours
         __props__.__dict__["is_ca_certificate"] = is_ca_certificate
+        __props__.__dict__["max_path_length"] = max_path_length
         __props__.__dict__["ready_for_renewal"] = ready_for_renewal
         __props__.__dict__["set_subject_key_id"] = set_subject_key_id
         __props__.__dict__["validity_end_time"] = validity_end_time
@@ -569,6 +608,14 @@ class LocallySignedCert(pulumi.CustomResource):
         Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         """
         return pulumi.get(self, "is_ca_certificate")
+
+    @_builtins.property
+    @pulumi.getter(name="maxPathLength")
+    def max_path_length(self) -> pulumi.Output[_builtins.int]:
+        """
+        Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored. (default: `-1`)
+        """
+        return pulumi.get(self, "max_path_length")
 
     @_builtins.property
     @pulumi.getter(name="readyForRenewal")

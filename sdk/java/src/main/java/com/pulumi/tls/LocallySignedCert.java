@@ -123,6 +123,20 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
         return this.isCaCertificate;
     }
     /**
+     * Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored. (default: `-1`)
+     * 
+     */
+    @Export(name="maxPathLength", refs={Integer.class}, tree="[0]")
+    private Output<Integer> maxPathLength;
+
+    /**
+     * @return Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored. (default: `-1`)
+     * 
+     */
+    public Output<Integer> maxPathLength() {
+        return this.maxPathLength;
+    }
+    /**
      * Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
      * 
      */

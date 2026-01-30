@@ -62,6 +62,10 @@ export class LocallySignedCert extends pulumi.CustomResource {
      */
     declare public readonly isCaCertificate: pulumi.Output<boolean>;
     /**
+     * Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored. (default: `-1`)
+     */
+    declare public readonly maxPathLength: pulumi.Output<number>;
+    /**
      * Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
      */
     declare public /*out*/ readonly readyForRenewal: pulumi.Output<boolean>;
@@ -103,6 +107,7 @@ export class LocallySignedCert extends pulumi.CustomResource {
             resourceInputs["certRequestPem"] = state?.certRequestPem;
             resourceInputs["earlyRenewalHours"] = state?.earlyRenewalHours;
             resourceInputs["isCaCertificate"] = state?.isCaCertificate;
+            resourceInputs["maxPathLength"] = state?.maxPathLength;
             resourceInputs["readyForRenewal"] = state?.readyForRenewal;
             resourceInputs["setSubjectKeyId"] = state?.setSubjectKeyId;
             resourceInputs["validityEndTime"] = state?.validityEndTime;
@@ -131,6 +136,7 @@ export class LocallySignedCert extends pulumi.CustomResource {
             resourceInputs["certRequestPem"] = args?.certRequestPem;
             resourceInputs["earlyRenewalHours"] = args?.earlyRenewalHours;
             resourceInputs["isCaCertificate"] = args?.isCaCertificate;
+            resourceInputs["maxPathLength"] = args?.maxPathLength;
             resourceInputs["setSubjectKeyId"] = args?.setSubjectKeyId;
             resourceInputs["validityPeriodHours"] = args?.validityPeriodHours;
             resourceInputs["caKeyAlgorithm"] = undefined /*out*/;
@@ -180,6 +186,10 @@ export interface LocallySignedCertState {
      */
     isCaCertificate?: pulumi.Input<boolean>;
     /**
+     * Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored. (default: `-1`)
+     */
+    maxPathLength?: pulumi.Input<number>;
+    /**
      * Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
      */
     readyForRenewal?: pulumi.Input<boolean>;
@@ -226,6 +236,10 @@ export interface LocallySignedCertArgs {
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      */
     isCaCertificate?: pulumi.Input<boolean>;
+    /**
+     * Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored. (default: `-1`)
+     */
+    maxPathLength?: pulumi.Input<number>;
     /**
      * Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */
