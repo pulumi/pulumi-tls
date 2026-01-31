@@ -58,6 +58,12 @@ namespace Pulumi.Tls
         public Output<bool> IsCaCertificate { get; private set; } = null!;
 
         /// <summary>
+        /// Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `IsCaCertificate` is `False`, this value is ignored.
+        /// </summary>
+        [Output("maxPathLength")]
+        public Output<int> MaxPathLength { get; private set; } = null!;
+
+        /// <summary>
         /// Is the certificate either expired (i.e. beyond the `ValidityPeriodHours`) or ready for an early renewal (i.e. within the `EarlyRenewalHours`)?
         /// </summary>
         [Output("readyForRenewal")]
@@ -187,6 +193,12 @@ namespace Pulumi.Tls
         public Input<bool>? IsCaCertificate { get; set; }
 
         /// <summary>
+        /// Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `IsCaCertificate` is `False`, this value is ignored.
+        /// </summary>
+        [Input("maxPathLength")]
+        public Input<int>? MaxPathLength { get; set; }
+
+        /// <summary>
         /// Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `False`).
         /// </summary>
         [Input("setSubjectKeyId")]
@@ -266,6 +278,12 @@ namespace Pulumi.Tls
         /// </summary>
         [Input("isCaCertificate")]
         public Input<bool>? IsCaCertificate { get; set; }
+
+        /// <summary>
+        /// Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `IsCaCertificate` is `False`, this value is ignored.
+        /// </summary>
+        [Input("maxPathLength")]
+        public Input<int>? MaxPathLength { get; set; }
 
         /// <summary>
         /// Is the certificate either expired (i.e. beyond the `ValidityPeriodHours`) or ready for an early renewal (i.e. within the `EarlyRenewalHours`)?
