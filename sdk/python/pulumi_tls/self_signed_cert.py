@@ -28,6 +28,7 @@ class SelfSignedCertArgs:
                  early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
+                 max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
                  set_authority_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
                  subject: Optional[pulumi.Input['SelfSignedCertSubjectArgs']] = None,
@@ -40,6 +41,7 @@ class SelfSignedCertArgs:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
+        :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
         :param pulumi.Input[_builtins.bool] set_authority_key_id: Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[_builtins.bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input['SelfSignedCertSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
@@ -56,6 +58,8 @@ class SelfSignedCertArgs:
             pulumi.set(__self__, "ip_addresses", ip_addresses)
         if is_ca_certificate is not None:
             pulumi.set(__self__, "is_ca_certificate", is_ca_certificate)
+        if max_path_length is not None:
+            pulumi.set(__self__, "max_path_length", max_path_length)
         if set_authority_key_id is not None:
             pulumi.set(__self__, "set_authority_key_id", set_authority_key_id)
         if set_subject_key_id is not None:
@@ -147,6 +151,18 @@ class SelfSignedCertArgs:
         pulumi.set(self, "is_ca_certificate", value)
 
     @_builtins.property
+    @pulumi.getter(name="maxPathLength")
+    def max_path_length(self) -> Optional[pulumi.Input[_builtins.int]]:
+        """
+        Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
+        """
+        return pulumi.get(self, "max_path_length")
+
+    @max_path_length.setter
+    def max_path_length(self, value: Optional[pulumi.Input[_builtins.int]]):
+        pulumi.set(self, "max_path_length", value)
+
+    @_builtins.property
     @pulumi.getter(name="setAuthorityKeyId")
     def set_authority_key_id(self) -> Optional[pulumi.Input[_builtins.bool]]:
         """
@@ -205,6 +221,7 @@ class _SelfSignedCertState:
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
                  key_algorithm: Optional[pulumi.Input[_builtins.str]] = None,
+                 max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
                  private_key_pem: Optional[pulumi.Input[_builtins.str]] = None,
                  ready_for_renewal: Optional[pulumi.Input[_builtins.bool]] = None,
                  set_authority_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -222,6 +239,7 @@ class _SelfSignedCertState:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[_builtins.str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
+        :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
         :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
         :param pulumi.Input[_builtins.bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
         :param pulumi.Input[_builtins.bool] set_authority_key_id: Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
@@ -246,6 +264,8 @@ class _SelfSignedCertState:
             pulumi.set(__self__, "is_ca_certificate", is_ca_certificate)
         if key_algorithm is not None:
             pulumi.set(__self__, "key_algorithm", key_algorithm)
+        if max_path_length is not None:
+            pulumi.set(__self__, "max_path_length", max_path_length)
         if private_key_pem is not None:
             pulumi.set(__self__, "private_key_pem", private_key_pem)
         if ready_for_renewal is not None:
@@ -345,6 +365,18 @@ class _SelfSignedCertState:
     @key_algorithm.setter
     def key_algorithm(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "key_algorithm", value)
+
+    @_builtins.property
+    @pulumi.getter(name="maxPathLength")
+    def max_path_length(self) -> Optional[pulumi.Input[_builtins.int]]:
+        """
+        Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
+        """
+        return pulumi.get(self, "max_path_length")
+
+    @max_path_length.setter
+    def max_path_length(self, value: Optional[pulumi.Input[_builtins.int]]):
+        pulumi.set(self, "max_path_length", value)
 
     @_builtins.property
     @pulumi.getter(name="privateKeyPem")
@@ -466,6 +498,7 @@ class SelfSignedCert(pulumi.CustomResource):
                  early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
+                 max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
                  private_key_pem: Optional[pulumi.Input[_builtins.str]] = None,
                  set_authority_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -481,6 +514,7 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
+        :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
         :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
         :param pulumi.Input[_builtins.bool] set_authority_key_id: Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[_builtins.bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
@@ -516,6 +550,7 @@ class SelfSignedCert(pulumi.CustomResource):
                  early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
                  ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
+                 max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
                  private_key_pem: Optional[pulumi.Input[_builtins.str]] = None,
                  set_authority_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
                  set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -538,6 +573,7 @@ class SelfSignedCert(pulumi.CustomResource):
             __props__.__dict__["early_renewal_hours"] = early_renewal_hours
             __props__.__dict__["ip_addresses"] = ip_addresses
             __props__.__dict__["is_ca_certificate"] = is_ca_certificate
+            __props__.__dict__["max_path_length"] = max_path_length
             if private_key_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key_pem'")
             __props__.__dict__["private_key_pem"] = None if private_key_pem is None else pulumi.Output.secret(private_key_pem)
@@ -572,6 +608,7 @@ class SelfSignedCert(pulumi.CustomResource):
             ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
             is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
             key_algorithm: Optional[pulumi.Input[_builtins.str]] = None,
+            max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
             private_key_pem: Optional[pulumi.Input[_builtins.str]] = None,
             ready_for_renewal: Optional[pulumi.Input[_builtins.bool]] = None,
             set_authority_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -594,6 +631,7 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[_builtins.str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
+        :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
         :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
         :param pulumi.Input[_builtins.bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
         :param pulumi.Input[_builtins.bool] set_authority_key_id: Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
@@ -615,6 +653,7 @@ class SelfSignedCert(pulumi.CustomResource):
         __props__.__dict__["ip_addresses"] = ip_addresses
         __props__.__dict__["is_ca_certificate"] = is_ca_certificate
         __props__.__dict__["key_algorithm"] = key_algorithm
+        __props__.__dict__["max_path_length"] = max_path_length
         __props__.__dict__["private_key_pem"] = private_key_pem
         __props__.__dict__["ready_for_renewal"] = ready_for_renewal
         __props__.__dict__["set_authority_key_id"] = set_authority_key_id
@@ -678,6 +717,14 @@ class SelfSignedCert(pulumi.CustomResource):
         Name of the algorithm used when generating the private key provided in `private_key_pem`.
         """
         return pulumi.get(self, "key_algorithm")
+
+    @_builtins.property
+    @pulumi.getter(name="maxPathLength")
+    def max_path_length(self) -> pulumi.Output[_builtins.int]:
+        """
+        Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
+        """
+        return pulumi.get(self, "max_path_length")
 
     @_builtins.property
     @pulumi.getter(name="privateKeyPem")

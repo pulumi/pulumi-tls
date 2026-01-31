@@ -60,6 +60,10 @@ export class SelfSignedCert extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly keyAlgorithm: pulumi.Output<string>;
     /**
+     * Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored.
+     */
+    declare public readonly maxPathLength: pulumi.Output<number>;
+    /**
      * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
      */
     declare public readonly privateKeyPem: pulumi.Output<string>;
@@ -116,6 +120,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["ipAddresses"] = state?.ipAddresses;
             resourceInputs["isCaCertificate"] = state?.isCaCertificate;
             resourceInputs["keyAlgorithm"] = state?.keyAlgorithm;
+            resourceInputs["maxPathLength"] = state?.maxPathLength;
             resourceInputs["privateKeyPem"] = state?.privateKeyPem;
             resourceInputs["readyForRenewal"] = state?.readyForRenewal;
             resourceInputs["setAuthorityKeyId"] = state?.setAuthorityKeyId;
@@ -141,6 +146,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["earlyRenewalHours"] = args?.earlyRenewalHours;
             resourceInputs["ipAddresses"] = args?.ipAddresses;
             resourceInputs["isCaCertificate"] = args?.isCaCertificate;
+            resourceInputs["maxPathLength"] = args?.maxPathLength;
             resourceInputs["privateKeyPem"] = args?.privateKeyPem ? pulumi.secret(args.privateKeyPem) : undefined;
             resourceInputs["setAuthorityKeyId"] = args?.setAuthorityKeyId;
             resourceInputs["setSubjectKeyId"] = args?.setSubjectKeyId;
@@ -189,6 +195,10 @@ export interface SelfSignedCertState {
      * Name of the algorithm used when generating the private key provided in `privateKeyPem`.
      */
     keyAlgorithm?: pulumi.Input<string>;
+    /**
+     * Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored.
+     */
+    maxPathLength?: pulumi.Input<number>;
     /**
      * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
      */
@@ -248,6 +258,10 @@ export interface SelfSignedCertArgs {
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
      */
     isCaCertificate?: pulumi.Input<boolean>;
+    /**
+     * Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `isCaCertificate` is `false`, this value is ignored.
+     */
+    maxPathLength?: pulumi.Input<number>;
     /**
      * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
      */

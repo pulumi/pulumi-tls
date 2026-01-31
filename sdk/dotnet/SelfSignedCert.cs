@@ -52,6 +52,12 @@ namespace Pulumi.Tls
         public Output<string> KeyAlgorithm { get; private set; } = null!;
 
         /// <summary>
+        /// Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `IsCaCertificate` is `False`, this value is ignored.
+        /// </summary>
+        [Output("maxPathLength")]
+        public Output<int> MaxPathLength { get; private set; } = null!;
+
+        /// <summary>
         /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
         /// </summary>
         [Output("privateKeyPem")]
@@ -200,6 +206,12 @@ namespace Pulumi.Tls
         [Input("isCaCertificate")]
         public Input<bool>? IsCaCertificate { get; set; }
 
+        /// <summary>
+        /// Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `IsCaCertificate` is `False`, this value is ignored.
+        /// </summary>
+        [Input("maxPathLength")]
+        public Input<int>? MaxPathLength { get; set; }
+
         [Input("privateKeyPem", required: true)]
         private Input<string>? _privateKeyPem;
 
@@ -316,6 +328,12 @@ namespace Pulumi.Tls
         /// </summary>
         [Input("keyAlgorithm")]
         public Input<string>? KeyAlgorithm { get; set; }
+
+        /// <summary>
+        /// Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `IsCaCertificate` is `False`, this value is ignored.
+        /// </summary>
+        [Input("maxPathLength")]
+        public Input<int>? MaxPathLength { get; set; }
 
         [Input("privateKeyPem")]
         private Input<string>? _privateKeyPem;

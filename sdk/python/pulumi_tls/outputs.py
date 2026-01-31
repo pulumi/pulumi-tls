@@ -334,6 +334,7 @@ class GetCertificateCertificateResult(dict):
                  cert_pem: _builtins.str,
                  is_ca: _builtins.bool,
                  issuer: _builtins.str,
+                 max_path_length: _builtins.int,
                  not_after: _builtins.str,
                  not_before: _builtins.str,
                  public_key_algorithm: _builtins.str,
@@ -346,6 +347,7 @@ class GetCertificateCertificateResult(dict):
         :param _builtins.str cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         :param _builtins.bool is_ca: `true` if the certificate is of a CA (Certificate Authority).
         :param _builtins.str issuer: Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
+        :param _builtins.int max_path_length: The maximum number of intermediate certificates that can follow this certificate in a valid certification path. If `is_ca` is `false`, this value is `-1`.
         :param _builtins.str not_after: The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         :param _builtins.str not_before: The time after which the certificate is valid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         :param _builtins.str public_key_algorithm: The key algorithm used to create the certificate.
@@ -359,6 +361,7 @@ class GetCertificateCertificateResult(dict):
         pulumi.set(__self__, "cert_pem", cert_pem)
         pulumi.set(__self__, "is_ca", is_ca)
         pulumi.set(__self__, "issuer", issuer)
+        pulumi.set(__self__, "max_path_length", max_path_length)
         pulumi.set(__self__, "not_after", not_after)
         pulumi.set(__self__, "not_before", not_before)
         pulumi.set(__self__, "public_key_algorithm", public_key_algorithm)
@@ -391,6 +394,14 @@ class GetCertificateCertificateResult(dict):
         Who verified and signed the certificate, roughly following [RFC2253](https://tools.ietf.org/html/rfc2253).
         """
         return pulumi.get(self, "issuer")
+
+    @_builtins.property
+    @pulumi.getter(name="maxPathLength")
+    def max_path_length(self) -> _builtins.int:
+        """
+        The maximum number of intermediate certificates that can follow this certificate in a valid certification path. If `is_ca` is `false`, this value is `-1`.
+        """
+        return pulumi.get(self, "max_path_length")
 
     @_builtins.property
     @pulumi.getter(name="notAfter")

@@ -26,6 +26,10 @@ namespace Pulumi.Tls.Outputs
         /// </summary>
         public readonly string Issuer;
         /// <summary>
+        /// The maximum number of intermediate certificates that can follow this certificate in a valid certification path. If `IsCa` is `False`, this value is `-1`.
+        /// </summary>
+        public readonly int MaxPathLength;
+        /// <summary>
         /// The time until which the certificate is invalid, as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         /// </summary>
         public readonly string NotAfter;
@@ -67,6 +71,8 @@ namespace Pulumi.Tls.Outputs
 
             string issuer,
 
+            int maxPathLength,
+
             string notAfter,
 
             string notBefore,
@@ -86,6 +92,7 @@ namespace Pulumi.Tls.Outputs
             CertPem = certPem;
             IsCa = isCa;
             Issuer = issuer;
+            MaxPathLength = maxPathLength;
             NotAfter = notAfter;
             NotBefore = notBefore;
             PublicKeyAlgorithm = publicKeyAlgorithm;
