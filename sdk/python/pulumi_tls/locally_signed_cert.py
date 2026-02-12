@@ -35,6 +35,7 @@ class LocallySignedCertArgs:
         :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.
+        :param pulumi.Input[_builtins.int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
         :param pulumi.Input[_builtins.bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
@@ -116,6 +117,9 @@ class LocallySignedCertArgs:
     @_builtins.property
     @pulumi.getter(name="earlyRenewalHours")
     def early_renewal_hours(self) -> Optional[pulumi.Input[_builtins.int]]:
+        """
+        The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+        """
         return pulumi.get(self, "early_renewal_hours")
 
     @early_renewal_hours.setter
@@ -184,6 +188,7 @@ class _LocallySignedCertState:
         :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         :param pulumi.Input[_builtins.str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        :param pulumi.Input[_builtins.int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
         :param pulumi.Input[_builtins.bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
@@ -296,6 +301,9 @@ class _LocallySignedCertState:
     @_builtins.property
     @pulumi.getter(name="earlyRenewalHours")
     def early_renewal_hours(self) -> Optional[pulumi.Input[_builtins.int]]:
+        """
+        The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+        """
         return pulumi.get(self, "early_renewal_hours")
 
     @early_renewal_hours.setter
@@ -404,13 +412,54 @@ class LocallySignedCert(pulumi.CustomResource):
                  validity_period_hours: Optional[pulumi.Input[_builtins.int]] = None,
                  __props__=None):
         """
-        Create a LocallySignedCert resource with the given unique name, props, and options.
+        Creates a TLS certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format using a Certificate Signing Request (CSR) and signs it with a provided (local) Certificate Authority (CA).
+
+        > **Note** Locally-signed certificates are generally only trusted by client software when
+        setup to use the provided CA. They are normally used in development environments
+        or when deployed internally to an organization.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_std as std
+        import pulumi_tls as tls
+
+        example = tls.LocallySignedCert("example",
+            cert_request_pem=std.file(input="cert_request.pem").result,
+            ca_private_key_pem=std.file(input="ca_private_key.pem").result,
+            ca_cert_pem=std.file(input="ca_cert.pem").result,
+            validity_period_hours=12,
+            allowed_uses=[
+                "key_encipherment",
+                "digital_signature",
+                "server_auth",
+            ])
+        ```
+
+        ## Automatic Renewal
+
+        This resource considers its instances to have been deleted after either their validity
+        periods ends (i.e. beyond the `validity_period_hours`)
+        or the early renewal period is reached (i.e. within the `early_renewal_hours`):
+        when this happens, the `ready_for_renewal` attribute will be `true`.
+        At this time, applying the Terraform configuration will cause a new certificate to be
+        generated for the instance.
+
+        Therefore in a development environment with frequent deployments it may be convenient
+        to set a relatively-short expiration time and use early renewal to automatically provision
+        a new certificate when the current one is about to expire.
+
+        The creation of a new certificate may of course cause dependent resources to be updated
+        or replaced, depending on the lifecycle rules applying to those resources.
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         :param pulumi.Input[_builtins.str] ca_cert_pem: Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        :param pulumi.Input[_builtins.int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
         :param pulumi.Input[_builtins.bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
@@ -423,7 +472,47 @@ class LocallySignedCert(pulumi.CustomResource):
                  args: LocallySignedCertArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a LocallySignedCert resource with the given unique name, props, and options.
+        Creates a TLS certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format using a Certificate Signing Request (CSR) and signs it with a provided (local) Certificate Authority (CA).
+
+        > **Note** Locally-signed certificates are generally only trusted by client software when
+        setup to use the provided CA. They are normally used in development environments
+        or when deployed internally to an organization.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_std as std
+        import pulumi_tls as tls
+
+        example = tls.LocallySignedCert("example",
+            cert_request_pem=std.file(input="cert_request.pem").result,
+            ca_private_key_pem=std.file(input="ca_private_key.pem").result,
+            ca_cert_pem=std.file(input="ca_cert.pem").result,
+            validity_period_hours=12,
+            allowed_uses=[
+                "key_encipherment",
+                "digital_signature",
+                "server_auth",
+            ])
+        ```
+
+        ## Automatic Renewal
+
+        This resource considers its instances to have been deleted after either their validity
+        periods ends (i.e. beyond the `validity_period_hours`)
+        or the early renewal period is reached (i.e. within the `early_renewal_hours`):
+        when this happens, the `ready_for_renewal` attribute will be `true`.
+        At this time, applying the Terraform configuration will cause a new certificate to be
+        generated for the instance.
+
+        Therefore in a development environment with frequent deployments it may be convenient
+        to set a relatively-short expiration time and use early renewal to automatically provision
+        a new certificate when the current one is about to expire.
+
+        The creation of a new certificate may of course cause dependent resources to be updated
+        or replaced, depending on the lifecycle rules applying to those resources.
+
         :param str resource_name: The name of the resource.
         :param LocallySignedCertArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -520,6 +609,7 @@ class LocallySignedCert(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         :param pulumi.Input[_builtins.str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        :param pulumi.Input[_builtins.int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
         :param pulumi.Input[_builtins.bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
@@ -599,6 +689,9 @@ class LocallySignedCert(pulumi.CustomResource):
     @_builtins.property
     @pulumi.getter(name="earlyRenewalHours")
     def early_renewal_hours(self) -> pulumi.Output[_builtins.int]:
+        """
+        The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+        """
         return pulumi.get(self, "early_renewal_hours")
 
     @_builtins.property

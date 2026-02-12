@@ -4,6 +4,55 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Creates a TLS certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format using a Certificate Signing Request (CSR) and signs it with a provided (local) Certificate Authority (CA).
+ *
+ * > **Note** Locally-signed certificates are generally only trusted by client software when
+ * setup to use the provided CA. They are normally used in development environments
+ * or when deployed internally to an organization.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as std from "@pulumi/std";
+ * import * as tls from "@pulumi/tls";
+ *
+ * const example = new tls.LocallySignedCert("example", {
+ *     certRequestPem: std.file({
+ *         input: "cert_request.pem",
+ *     }).then(invoke => invoke.result),
+ *     caPrivateKeyPem: std.file({
+ *         input: "ca_private_key.pem",
+ *     }).then(invoke => invoke.result),
+ *     caCertPem: std.file({
+ *         input: "ca_cert.pem",
+ *     }).then(invoke => invoke.result),
+ *     validityPeriodHours: 12,
+ *     allowedUses: [
+ *         "key_encipherment",
+ *         "digital_signature",
+ *         "server_auth",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Automatic Renewal
+ *
+ * This resource considers its instances to have been deleted after either their validity
+ * periods ends (i.e. beyond the `validityPeriodHours`)
+ * or the early renewal period is reached (i.e. within the `earlyRenewalHours`):
+ * when this happens, the `readyForRenewal` attribute will be `true`.
+ * At this time, applying the Terraform configuration will cause a new certificate to be
+ * generated for the instance.
+ *
+ * Therefore in a development environment with frequent deployments it may be convenient
+ * to set a relatively-short expiration time and use early renewal to automatically provision
+ * a new certificate when the current one is about to expire.
+ *
+ * The creation of a new certificate may of course cause dependent resources to be updated
+ * or replaced, depending on the lifecycle rules applying to those resources.
+ */
 export class LocallySignedCert extends pulumi.CustomResource {
     /**
      * Get an existing LocallySignedCert resource's state with the given name, ID, and optional extra
@@ -56,6 +105,9 @@ export class LocallySignedCert extends pulumi.CustomResource {
      * Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
     declare public readonly certRequestPem: pulumi.Output<string>;
+    /**
+     * The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+     */
     declare public readonly earlyRenewalHours: pulumi.Output<number>;
     /**
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
@@ -180,6 +232,9 @@ export interface LocallySignedCertState {
      * Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
     certRequestPem?: pulumi.Input<string>;
+    /**
+     * The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+     */
     earlyRenewalHours?: pulumi.Input<number>;
     /**
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
@@ -231,6 +286,9 @@ export interface LocallySignedCertArgs {
      * Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
      */
     certRequestPem: pulumi.Input<string>;
+    /**
+     * The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+     */
     earlyRenewalHours?: pulumi.Input<number>;
     /**
      * Is the generated certificate representing a Certificate Authority (CA) (default: `false`).

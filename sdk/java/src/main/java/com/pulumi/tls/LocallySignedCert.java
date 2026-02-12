@@ -16,6 +16,78 @@ import java.lang.String;
 import java.util.List;
 import javax.annotation.Nullable;
 
+/**
+ * Creates a TLS certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format using a Certificate Signing Request (CSR) and signs it with a provided (local) Certificate Authority (CA).
+ * 
+ * &gt; **Note** Locally-signed certificates are generally only trusted by client software when
+ * setup to use the provided CA. They are normally used in development environments
+ * or when deployed internally to an organization.
+ * 
+ * ## Example Usage
+ * 
+ * <pre>
+ * {@code
+ * package generated_program;
+ * 
+ * import com.pulumi.Context;
+ * import com.pulumi.Pulumi;
+ * import com.pulumi.core.Output;
+ * import com.pulumi.tls.LocallySignedCert;
+ * import com.pulumi.tls.LocallySignedCertArgs;
+ * import com.pulumi.std.StdFunctions;
+ * import com.pulumi.std.inputs.FileArgs;
+ * import java.util.List;
+ * import java.util.ArrayList;
+ * import java.util.Map;
+ * import java.io.File;
+ * import java.nio.file.Files;
+ * import java.nio.file.Paths;
+ * 
+ * public class App {
+ *     public static void main(String[] args) {
+ *         Pulumi.run(App::stack);
+ *     }
+ * 
+ *     public static void stack(Context ctx) {
+ *         var example = new LocallySignedCert("example", LocallySignedCertArgs.builder()
+ *             .certRequestPem(StdFunctions.file(FileArgs.builder()
+ *                 .input("cert_request.pem")
+ *                 .build()).result())
+ *             .caPrivateKeyPem(StdFunctions.file(FileArgs.builder()
+ *                 .input("ca_private_key.pem")
+ *                 .build()).result())
+ *             .caCertPem(StdFunctions.file(FileArgs.builder()
+ *                 .input("ca_cert.pem")
+ *                 .build()).result())
+ *             .validityPeriodHours(12)
+ *             .allowedUses(            
+ *                 "key_encipherment",
+ *                 "digital_signature",
+ *                 "server_auth")
+ *             .build());
+ * 
+ *     }
+ * }
+ * }
+ * </pre>
+ * 
+ * ## Automatic Renewal
+ * 
+ * This resource considers its instances to have been deleted after either their validity
+ * periods ends (i.e. beyond the `validityPeriodHours`)
+ * or the early renewal period is reached (i.e. within the `earlyRenewalHours`):
+ * when this happens, the `readyForRenewal` attribute will be `true`.
+ * At this time, applying the Terraform configuration will cause a new certificate to be
+ * generated for the instance.
+ * 
+ * Therefore in a development environment with frequent deployments it may be convenient
+ * to set a relatively-short expiration time and use early renewal to automatically provision
+ * a new certificate when the current one is about to expire.
+ * 
+ * The creation of a new certificate may of course cause dependent resources to be updated
+ * or replaced, depending on the lifecycle rules applying to those resources.
+ * 
+ */
 @ResourceType(type="tls:index/locallySignedCert:LocallySignedCert")
 public class LocallySignedCert extends com.pulumi.resources.CustomResource {
     /**
@@ -102,9 +174,17 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
     public Output<String> certRequestPem() {
         return this.certRequestPem;
     }
+    /**
+     * The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+     * 
+     */
     @Export(name="earlyRenewalHours", refs={Integer.class}, tree="[0]")
     private Output<Integer> earlyRenewalHours;
 
+    /**
+     * @return The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+     * 
+     */
     public Output<Integer> earlyRenewalHours() {
         return this.earlyRenewalHours;
     }
