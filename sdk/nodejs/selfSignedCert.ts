@@ -6,6 +6,55 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Creates a **self-signed** TLS certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+ *
+ * > **Warning** Self-signed certificates are usually used only in development environments
+ * or applications deployed internally to an organization.
+ * Certificates of this type are generally not trusted by client software such
+ * as web browsers. Therefore clients are likely to generate trust warnings when
+ * connecting to a server that has a self-signed certificate.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as std from "@pulumi/std";
+ * import * as tls from "@pulumi/tls";
+ *
+ * const example = new tls.SelfSignedCert("example", {
+ *     privateKeyPem: std.file({
+ *         input: "private_key.pem",
+ *     }).then(invoke => invoke.result),
+ *     subject: {
+ *         commonName: "example.com",
+ *         organization: "ACME Examples, Inc",
+ *     },
+ *     validityPeriodHours: 12,
+ *     allowedUses: [
+ *         "key_encipherment",
+ *         "digital_signature",
+ *         "server_auth",
+ *     ],
+ * });
+ * ```
+ *
+ * ## Automatic Renewal
+ *
+ * This resource considers its instances to have been deleted after either their validity
+ * periods ends (i.e. beyond the `validityPeriodHours`)
+ * or the early renewal period is reached (i.e. within the `earlyRenewalHours`):
+ * when this happens, the `readyForRenewal` attribute will be `true`.
+ * At this time, applying the Terraform configuration will cause a new certificate to be
+ * generated for the instance.
+ *
+ * Therefore in a development environment with frequent deployments it may be convenient
+ * to set a relatively-short expiration time and use early renewal to automatically provision
+ * a new certificate when the current one is about to expire.
+ *
+ * The creation of a new certificate may of course cause dependent resources to be updated
+ * or replaced, depending on the lifecycle rules applying to those resources.
+ */
 export class SelfSignedCert extends pulumi.CustomResource {
     /**
      * Get an existing SelfSignedCert resource's state with the given name, ID, and optional extra
@@ -46,6 +95,9 @@ export class SelfSignedCert extends pulumi.CustomResource {
      * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      */
     declare public readonly dnsNames: pulumi.Output<string[] | undefined>;
+    /**
+     * The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+     */
     declare public readonly earlyRenewalHours: pulumi.Output<number>;
     /**
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
@@ -182,6 +234,9 @@ export interface SelfSignedCertState {
      * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      */
     dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+     */
     earlyRenewalHours?: pulumi.Input<number>;
     /**
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
@@ -249,6 +304,9 @@ export interface SelfSignedCertArgs {
      * List of DNS names for which a certificate is being requested (i.e. certificate subjects).
      */
     dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+     */
     earlyRenewalHours?: pulumi.Input<number>;
     /**
      * List of IP addresses for which a certificate is being requested (i.e. certificate subjects).

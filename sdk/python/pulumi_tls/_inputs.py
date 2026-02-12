@@ -23,52 +23,47 @@ __all__ = [
     'SelfSignedCertSubjectArgsDict',
 ]
 
-MYPY = False
-
-if not MYPY:
-    class CertRequestSubjectArgsDict(TypedDict):
-        common_name: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `CN`
-        """
-        country: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `C`
-        """
-        email_address: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
-        """
-        locality: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `L`
-        """
-        organization: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `O`
-        """
-        organizational_unit: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `OU`
-        """
-        postal_code: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `PC`
-        """
-        province: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `ST`
-        """
-        serial_number: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `SERIALNUMBER`
-        """
-        street_addresses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Distinguished name: `STREET`
-        """
-elif False:
-    CertRequestSubjectArgsDict: TypeAlias = Mapping[str, Any]
+class CertRequestSubjectArgsDict(TypedDict):
+    common_name: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `CN`
+    """
+    country: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `C`
+    """
+    email_address: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+    """
+    locality: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `L`
+    """
+    organization: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `O`
+    """
+    organizational_unit: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `OU`
+    """
+    postal_code: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `PC`
+    """
+    province: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `ST`
+    """
+    serial_number: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `SERIALNUMBER`
+    """
+    street_addresses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Distinguished name: `STREET`
+    """
 
 @pulumi.input_type
 class CertRequestSubjectArgs:
@@ -237,26 +232,23 @@ class CertRequestSubjectArgs:
         pulumi.set(self, "street_addresses", value)
 
 
-if not MYPY:
-    class ProviderProxyArgsDict(TypedDict):
-        from_env: NotRequired[pulumi.Input[_builtins.bool]]
-        """
-        When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
-        """
-        password: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Password used for Basic authentication against the Proxy.
-        """
-        url: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
-        """
-        username: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Username (or Token) used for Basic authentication against the Proxy.
-        """
-elif False:
-    ProviderProxyArgsDict: TypeAlias = Mapping[str, Any]
+class ProviderProxyArgsDict(TypedDict):
+    from_env: NotRequired[pulumi.Input[_builtins.bool]]
+    """
+    When `true` the provider will discover the proxy configuration from environment variables. This is based upon [`http.ProxyFromEnvironment`](https://pkg.go.dev/net/http#ProxyFromEnvironment) and it supports the same environment variables (default: `true`).
+    """
+    password: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Password used for Basic authentication against the Proxy.
+    """
+    url: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    URL used to connect to the Proxy. Accepted schemes are: `http`, `https`, `socks5`.
+    """
+    username: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Username (or Token) used for Basic authentication against the Proxy.
+    """
 
 @pulumi.input_type
 class ProviderProxyArgs:
@@ -329,50 +321,47 @@ class ProviderProxyArgs:
         pulumi.set(self, "username", value)
 
 
-if not MYPY:
-    class SelfSignedCertSubjectArgsDict(TypedDict):
-        common_name: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `CN`
-        """
-        country: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `C`
-        """
-        email_address: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
-        """
-        locality: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `L`
-        """
-        organization: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `O`
-        """
-        organizational_unit: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `OU`
-        """
-        postal_code: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `PC`
-        """
-        province: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `ST`
-        """
-        serial_number: NotRequired[pulumi.Input[_builtins.str]]
-        """
-        Distinguished name: `SERIALNUMBER`
-        """
-        street_addresses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
-        """
-        Distinguished name: `STREET`
-        """
-elif False:
-    SelfSignedCertSubjectArgsDict: TypeAlias = Mapping[str, Any]
+class SelfSignedCertSubjectArgsDict(TypedDict):
+    common_name: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `CN`
+    """
+    country: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `C`
+    """
+    email_address: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    ASN.1 Object Identifier (OID): `1.2.840.113549.1.9.1`
+    """
+    locality: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `L`
+    """
+    organization: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `O`
+    """
+    organizational_unit: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `OU`
+    """
+    postal_code: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `PC`
+    """
+    province: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `ST`
+    """
+    serial_number: NotRequired[pulumi.Input[_builtins.str]]
+    """
+    Distinguished name: `SERIALNUMBER`
+    """
+    street_addresses: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
+    """
+    Distinguished name: `STREET`
+    """
 
 @pulumi.input_type
 class SelfSignedCertSubjectArgs:

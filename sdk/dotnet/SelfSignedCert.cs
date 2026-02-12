@@ -9,6 +9,65 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Tls
 {
+    /// <summary>
+    /// Creates a **self-signed** TLS certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+    /// 
+    /// &gt; **Warning** Self-signed certificates are usually used only in development environments
+    /// or applications deployed internally to an organization.
+    /// Certificates of this type are generally not trusted by client software such
+    /// as web browsers. Therefore clients are likely to generate trust warnings when
+    /// connecting to a server that has a self-signed certificate.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Std = Pulumi.Std;
+    /// using Tls = Pulumi.Tls;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tls.SelfSignedCert("example", new()
+    ///     {
+    ///         PrivateKeyPem = Std.File.Invoke(new()
+    ///         {
+    ///             Input = "private_key.pem",
+    ///         }).Apply(invoke =&gt; invoke.Result),
+    ///         Subject = new Tls.Inputs.SelfSignedCertSubjectArgs
+    ///         {
+    ///             CommonName = "example.com",
+    ///             Organization = "ACME Examples, Inc",
+    ///         },
+    ///         ValidityPeriodHours = 12,
+    ///         AllowedUses = new[]
+    ///         {
+    ///             "key_encipherment",
+    ///             "digital_signature",
+    ///             "server_auth",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Automatic Renewal
+    /// 
+    /// This resource considers its instances to have been deleted after either their validity
+    /// periods ends (i.e. beyond the `ValidityPeriodHours`)
+    /// or the early renewal period is reached (i.e. within the `EarlyRenewalHours`):
+    /// when this happens, the `ReadyForRenewal` attribute will be `True`.
+    /// At this time, applying the Terraform configuration will cause a new certificate to be
+    /// generated for the instance.
+    /// 
+    /// Therefore in a development environment with frequent deployments it may be convenient
+    /// to set a relatively-short expiration time and use early renewal to automatically provision
+    /// a new certificate when the current one is about to expire.
+    /// 
+    /// The creation of a new certificate may of course cause dependent resources to be updated
+    /// or replaced, depending on the lifecycle rules applying to those resources.
+    /// </summary>
     [TlsResourceType("tls:index/selfSignedCert:SelfSignedCert")]
     public partial class SelfSignedCert : global::Pulumi.CustomResource
     {
@@ -30,6 +89,9 @@ namespace Pulumi.Tls
         [Output("dnsNames")]
         public Output<ImmutableArray<string>> DnsNames { get; private set; } = null!;
 
+        /// <summary>
+        /// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+        /// </summary>
         [Output("earlyRenewalHours")]
         public Output<int> EarlyRenewalHours { get; private set; } = null!;
 
@@ -185,6 +247,9 @@ namespace Pulumi.Tls
             set => _dnsNames = value;
         }
 
+        /// <summary>
+        /// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+        /// </summary>
         [Input("earlyRenewalHours")]
         public Input<int>? EarlyRenewalHours { get; set; }
 
@@ -302,6 +367,9 @@ namespace Pulumi.Tls
             set => _dnsNames = value;
         }
 
+        /// <summary>
+        /// The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
+        /// </summary>
         [Input("earlyRenewalHours")]
         public Input<int>? EarlyRenewalHours { get; set; }
 
