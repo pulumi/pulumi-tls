@@ -28,6 +28,7 @@ class CertRequestArgs:
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a CertRequest resource.
+
         :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
@@ -117,6 +118,7 @@ class _CertRequestState:
                  uris: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering CertRequest resources.
+
         :param pulumi.Input[_builtins.str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
@@ -262,6 +264,7 @@ class CertRequest(pulumi.CustomResource):
             })
         ```
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
@@ -300,6 +303,7 @@ class CertRequest(pulumi.CustomResource):
                 "organization": "ACME Examples, Inc",
             })
         ```
+
 
         :param str resource_name: The name of the resource.
         :param CertRequestArgs args: The arguments to use to populate this resource's properties.

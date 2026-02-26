@@ -24,6 +24,7 @@ class PrivateKeyArgs:
                  rsa_bits: Optional[pulumi.Input[_builtins.int]] = None):
         """
         The set of arguments for constructing a PrivateKey resource.
+
         :param pulumi.Input[_builtins.str] algorithm: Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
         :param pulumi.Input[_builtins.str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
         :param pulumi.Input[_builtins.int] rsa_bits: When `algorithm` is `RSA`, the size of the generated RSA key, in bits (default: `2048`).
@@ -86,6 +87,7 @@ class _PrivateKeyState:
                  rsa_bits: Optional[pulumi.Input[_builtins.int]] = None):
         """
         Input properties used for looking up and filtering PrivateKey resources.
+
         :param pulumi.Input[_builtins.str] algorithm: Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
         :param pulumi.Input[_builtins.str] ecdsa_curve: When `algorithm` is `ECDSA`, the name of the elliptic curve to use. Currently-supported values are: `P224`, `P256`, `P384`, `P521`. (default: `P224`).
         :param pulumi.Input[_builtins.str] private_key_openssh: Private key data in [OpenSSH PEM (RFC 4716)](https://datatracker.ietf.org/doc/html/rfc4716) format.
@@ -293,6 +295,7 @@ class PrivateKey(pulumi.CustomResource):
 
         A new key will then be generated on the next ``pulumi up``.
 
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] algorithm: Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
@@ -348,6 +351,7 @@ class PrivateKey(pulumi.CustomResource):
         private key instance can be "tainted":
 
         A new key will then be generated on the next ``pulumi up``.
+
 
         :param str resource_name: The name of the resource.
         :param PrivateKeyArgs args: The arguments to use to populate this resource's properties.
