@@ -25,5 +25,5 @@ export const ssCert = new tls.SelfSignedCert("ssoCert", {
     subject: {
         commonName: `api.example.com`,
     },
-    validityPeriodHours: (365*24),
+    validityPeriodHours: (365*24*100),
 })
