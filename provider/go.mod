@@ -2,6 +2,8 @@ module github.com/pulumi/pulumi-tls/provider/v4
 
 go 1.21
 
+toolchain go1.25.5
+
 require (
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.66.0
 	github.com/pulumi/pulumi/sdk/v3 v3.94.2
