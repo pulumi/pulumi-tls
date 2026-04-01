@@ -1,0 +1,6 @@
+[tools]
+golangci-lint = "2.11.4"
+
+[settings]
+experimental = true
+lockfile = false
