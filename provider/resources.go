@@ -18,7 +18,6 @@ import (
 	"bytes"
 	"fmt"
 	"path/filepath"
-	"unicode"
 
 	_ "embed" // used to store bridge-metadata.json in the compiled binary
 
@@ -26,9 +25,9 @@ import (
 
 	pf "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	tftokens "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 
 	"github.com/pulumi/pulumi-tls/provider/v5/pkg/version"
 )
@@ -38,32 +37,6 @@ const (
 	tlsPkg = "tls"
 	tlsMod = "index"
 )
-
-// tlsMember manufactures a type token for the TLS package and the given module and type.
-func tlsMember(mod string, mem string) tokens.ModuleMember {
-	return tokens.ModuleMember(tlsPkg + ":" + mod + ":" + mem)
-}
-
-// tlsType manufactures a type token for the TLS package and the given module and type.
-func tlsType(mod string, typ string) tokens.Type {
-	return tokens.Type(tlsMember(mod, typ))
-}
-
-// tlsDataSource manufactures a standard resource token given a module and resource name.
-// It automatically uses the TLS package and names the file by simply lower casing the data
-// source's first character.
-func tlsDataSource(mod string, res string) tokens.ModuleMember {
-	fn := string(unicode.ToLower(rune(res[0]))) + res[1:]
-	return tlsMember(mod+"/"+fn, res)
-}
-
-// tlsResource manufactures a standard resource token given a module and resource name.
-// It automatically uses the TLS package and names the file by simply lower casing the resource's
-// first character.
-func tlsResource(mod string, res string) tokens.Type {
-	fn := string(unicode.ToLower(rune(res[0]))) + res[1:]
-	return tlsType(mod+"/"+fn, res)
-}
 
 //go:embed cmd/pulumi-resource-tls/bridge-metadata.json
 var metadata []byte
@@ -83,18 +56,9 @@ func Provider() tfbridge.ProviderInfo {
 		GitHubOrg:    "hashicorp",
 		DocRules:     &tfbridge.DocRuleInfo{EditRules: docEditRules},
 		Resources: map[string]*tfbridge.ResourceInfo{
-			"tls_cert_request":        {Tok: tlsResource(tlsMod, "CertRequest")},
-			"tls_locally_signed_cert": {Tok: tlsResource(tlsMod, "LocallySignedCert")},
-			"tls_private_key":         {Tok: tlsResource(tlsMod, "PrivateKey")},
-
 			"tls_self_signed_cert": {
-				Tok:                 tlsResource(tlsMod, "SelfSignedCert"),
 				PreStateUpgradeHook: selfSignedCertPreStateUpgradeHook,
 			},
-		},
-		DataSources: map[string]*tfbridge.DataSourceInfo{
-			"tls_public_key":  {Tok: tlsDataSource(tlsMod, "getPublicKey")},
-			"tls_certificate": {Tok: tlsDataSource(tlsMod, "getCertificate")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			DevDependencies: map[string]string{
@@ -132,6 +96,12 @@ func Provider() tfbridge.ProviderInfo {
 		EnableZeroDefaultSchemaVersion: true,
 		EnableAccurateBridgePreview:    true,
 	}
+
+	info.MustComputeTokens(tftokens.SingleModule(
+		info.GetResourcePrefix()+"_",
+		tlsMod,
+		tftokens.MakeStandard(tlsPkg),
+	))
 
 	return info
 }
