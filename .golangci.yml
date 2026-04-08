@@ -10,12 +10,17 @@ linters:
   - misspell
   - nakedret
   - unconvert
+  exclusions:
+    paths:
+    - schema.go
+    - pulumiManifest.go
 formatters:
   enable:
   - gofmt
+  exclusions:
+    paths:
+    - schema.go
+    - pulumiManifest.go
 run:
   timeout: 20m
-issues:
-  exclude-files:
-  - schema.go
-  - pulumiManifest.go
+  
