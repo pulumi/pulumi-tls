@@ -129,12 +129,12 @@ return await Deployment.RunAsync(() =>
     // THIS IS NOT RECOMMENDED FOR PRODUCTION SERVICES.
     // See the detailed documentation of each resource for further
     // security considerations and other practical tradeoffs.
-    var example = new Tls.PrivateKey("example", new()
+    var example = new Tls.Index.PrivateKey("example", new()
     {
         Algorithm = "ECDSA",
     });
 
-    var exampleSelfSignedCert = new Tls.SelfSignedCert("example", new()
+    var exampleSelfSignedCert = new Tls.Index.SelfSignedCert("example", new()
     {
         PrivateKeyPem = example.PrivateKeyPem,
         ValidityPeriodHours = 12,
@@ -392,7 +392,7 @@ using Tls = Pulumi.Tls;
 
 return await Deployment.RunAsync(() =>
 {
-    var test = Tls.GetCertificate.Invoke(new()
+    var test = Tls.Index.GetCertificate.Invoke(new()
     {
         Url = "https://example.com",
     });
@@ -541,7 +541,7 @@ using Tls = Pulumi.Tls;
 
 return await Deployment.RunAsync(() =>
 {
-    var test = Tls.GetCertificate.Invoke(new()
+    var test = Tls.Index.GetCertificate.Invoke(new()
     {
         Url = "https://example.com",
     });

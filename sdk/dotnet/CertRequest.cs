@@ -30,9 +30,9 @@ namespace Pulumi.Tls
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var example = new Tls.CertRequest("example", new()
+    ///     var example = new Tls.Index.CertRequest("example", new()
     ///     {
-    ///         PrivateKeyPem = Std.File.Invoke(new()
+    ///         PrivateKeyPem = Std.Index.File.Invoke(new()
     ///         {
     ///             Input = "private_key.pem",
     ///         }).Apply(invoke =&gt; invoke.Result),
