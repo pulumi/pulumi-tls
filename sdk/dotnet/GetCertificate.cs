@@ -33,7 +33,7 @@ namespace Pulumi.Tls
         ///         Name = "example",
         ///     });
         /// 
-        ///     var example = Tls.GetCertificate.Invoke(new()
+        ///     var example = Tls.Index.GetCertificate.Invoke(new()
         ///     {
         ///         Url = exampleEksCluster.Identity[0].Oidc[0].Issuer,
         ///     });
@@ -64,9 +64,9 @@ namespace Pulumi.Tls
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var exampleContent = Tls.GetCertificate.Invoke(new()
+        ///     var exampleContent = Tls.Index.GetCertificate.Invoke(new()
         ///     {
-        ///         Content = Std.File.Invoke(new()
+        ///         Content = Std.Index.File.Invoke(new()
         ///         {
         ///             Input = "example.pem",
         ///         }).Result,
@@ -107,7 +107,7 @@ namespace Pulumi.Tls
         ///         Name = "example",
         ///     });
         /// 
-        ///     var example = Tls.GetCertificate.Invoke(new()
+        ///     var example = Tls.Index.GetCertificate.Invoke(new()
         ///     {
         ///         Url = exampleEksCluster.Identity[0].Oidc[0].Issuer,
         ///     });
@@ -138,9 +138,9 @@ namespace Pulumi.Tls
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var exampleContent = Tls.GetCertificate.Invoke(new()
+        ///     var exampleContent = Tls.Index.GetCertificate.Invoke(new()
         ///     {
-        ///         Content = Std.File.Invoke(new()
+        ///         Content = Std.Index.File.Invoke(new()
         ///         {
         ///             Input = "example.pem",
         ///         }).Result,
@@ -181,7 +181,7 @@ namespace Pulumi.Tls
         ///         Name = "example",
         ///     });
         /// 
-        ///     var example = Tls.GetCertificate.Invoke(new()
+        ///     var example = Tls.Index.GetCertificate.Invoke(new()
         ///     {
         ///         Url = exampleEksCluster.Identity[0].Oidc[0].Issuer,
         ///     });
@@ -212,9 +212,9 @@ namespace Pulumi.Tls
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var exampleContent = Tls.GetCertificate.Invoke(new()
+        ///     var exampleContent = Tls.Index.GetCertificate.Invoke(new()
         ///     {
-        ///         Content = Std.File.Invoke(new()
+        ///         Content = Std.Index.File.Invoke(new()
         ///         {
         ///             Input = "example.pem",
         ///         }).Result,

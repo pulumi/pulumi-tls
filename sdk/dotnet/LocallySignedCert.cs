@@ -27,17 +27,17 @@ namespace Pulumi.Tls
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var example = new Tls.LocallySignedCert("example", new()
+    ///     var example = new Tls.Index.LocallySignedCert("example", new()
     ///     {
-    ///         CertRequestPem = Std.File.Invoke(new()
+    ///         CertRequestPem = Std.Index.File.Invoke(new()
     ///         {
     ///             Input = "cert_request.pem",
     ///         }).Apply(invoke =&gt; invoke.Result),
-    ///         CaPrivateKeyPem = Std.File.Invoke(new()
+    ///         CaPrivateKeyPem = Std.Index.File.Invoke(new()
     ///         {
     ///             Input = "ca_private_key.pem",
     ///         }).Apply(invoke =&gt; invoke.Result),
-    ///         CaCertPem = Std.File.Invoke(new()
+    ///         CaCertPem = Std.Index.File.Invoke(new()
     ///         {
     ///             Input = "ca_cert.pem",
     ///         }).Apply(invoke =&gt; invoke.Result),
