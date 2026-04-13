@@ -248,7 +248,9 @@ jobs:
       with:
         args: -p 3 -f .goreleaser.prerelease.yml --rm-dist --skip-validate --timeout
           60m0s
-        version: latest
+        # Pinned to last v1 release. v2 renamed --rm-dist to --clean and
+        # --skip-validate to --skip=validate; pinning avoids both on this backport branch.
+        version: v1.26.2
     - if: failure() && github.event_name == 'push'
       name: Notify Slack
       uses: 8398a7/action-slack@v3
