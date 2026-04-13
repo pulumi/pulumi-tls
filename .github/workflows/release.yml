@@ -288,7 +288,11 @@ jobs:
       name: Fetch secrets from ESC
       uses: pulumi/esc-action@9eb774255b1a4afb7855678ae8d4a77359da0d9b
     - name: Publish SDKs
-      uses: pulumi/pulumi-package-publisher@v0.0.12
+      # Bumped from v0.0.12: v0.0.12's composite hardcoded actions/download-artifact@v2,
+      # which GitHub has force-removed, causing the job to fail at "Set up job". v0.0.14
+      # is the earliest version that uses download-artifact@v4 while still supporting
+      # the no-args invocation pattern (versions >= v0.0.15 require a version: input).
+      uses: pulumi/pulumi-package-publisher@v0.0.14
       env:
         PYPI_USERNAME: __token__
         PYPI_PASSWORD: ${{ steps.esc-secrets.outputs.PYPI_API_TOKEN }}
