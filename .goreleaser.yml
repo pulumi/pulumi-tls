@@ -46,6 +46,11 @@ changelog:
   use: git
 release:
   disable: false
+  # This is a backport branch. Releases from it must not be marked as
+  # the "latest" release on GitHub, since pulumi/registry and other
+  # downstream consumers treat "latest release" webhook events as a
+  # signal to rebuild docs / move pointers. Keep this as a string.
+  make_latest: "false"
 snapshot:
   name_template: "{{ .Tag }}-SNAPSHOT"
 project_name: "pulumi-tls"
