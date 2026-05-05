@@ -1,6 +1,7 @@
 provider: tls
 major-version: 5
 makeTemplate: bridged
+disableMajorProviderUpgrades: true
 generate-nightly-test-workflow: true
 providerDefaultBranch: main
 team: ecosystem
