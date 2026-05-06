@@ -28,17 +28,17 @@ namespace Pulumi.Tls
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var exampleEksCluster = new Aws.Index.EksCluster("example", new()
+        ///     var exampleEksCluster = new Aws.EksCluster("example", new()
         ///     {
         ///         Name = "example",
         ///     });
         /// 
-        ///     var example = Tls.Index.GetCertificate.Invoke(new()
+        ///     var example = Tls.GetCertificate.Invoke(new()
         ///     {
         ///         Url = exampleEksCluster.Identity[0].Oidc[0].Issuer,
         ///     });
         /// 
-        ///     var exampleIamOpenidConnectProvider = new Aws.Index.IamOpenidConnectProvider("example", new()
+        ///     var exampleIamOpenidConnectProvider = new Aws.IamOpenidConnectProvider("example", new()
         ///     {
         ///         ClientIdList = new[]
         ///         {
@@ -64,9 +64,9 @@ namespace Pulumi.Tls
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var exampleContent = Tls.Index.GetCertificate.Invoke(new()
+        ///     var exampleContent = Tls.GetCertificate.Invoke(new()
         ///     {
-        ///         Content = Std.Index.File.Invoke(new()
+        ///         Content = Std.File.Invoke(new()
         ///         {
         ///             Input = "example.pem",
         ///         }).Result,
@@ -102,17 +102,17 @@ namespace Pulumi.Tls
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var exampleEksCluster = new Aws.Index.EksCluster("example", new()
+        ///     var exampleEksCluster = new Aws.EksCluster("example", new()
         ///     {
         ///         Name = "example",
         ///     });
         /// 
-        ///     var example = Tls.Index.GetCertificate.Invoke(new()
+        ///     var example = Tls.GetCertificate.Invoke(new()
         ///     {
         ///         Url = exampleEksCluster.Identity[0].Oidc[0].Issuer,
         ///     });
         /// 
-        ///     var exampleIamOpenidConnectProvider = new Aws.Index.IamOpenidConnectProvider("example", new()
+        ///     var exampleIamOpenidConnectProvider = new Aws.IamOpenidConnectProvider("example", new()
         ///     {
         ///         ClientIdList = new[]
         ///         {
@@ -138,9 +138,9 @@ namespace Pulumi.Tls
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var exampleContent = Tls.Index.GetCertificate.Invoke(new()
+        ///     var exampleContent = Tls.GetCertificate.Invoke(new()
         ///     {
-        ///         Content = Std.Index.File.Invoke(new()
+        ///         Content = Std.File.Invoke(new()
         ///         {
         ///             Input = "example.pem",
         ///         }).Result,
@@ -176,17 +176,17 @@ namespace Pulumi.Tls
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var exampleEksCluster = new Aws.Index.EksCluster("example", new()
+        ///     var exampleEksCluster = new Aws.EksCluster("example", new()
         ///     {
         ///         Name = "example",
         ///     });
         /// 
-        ///     var example = Tls.Index.GetCertificate.Invoke(new()
+        ///     var example = Tls.GetCertificate.Invoke(new()
         ///     {
         ///         Url = exampleEksCluster.Identity[0].Oidc[0].Issuer,
         ///     });
         /// 
-        ///     var exampleIamOpenidConnectProvider = new Aws.Index.IamOpenidConnectProvider("example", new()
+        ///     var exampleIamOpenidConnectProvider = new Aws.IamOpenidConnectProvider("example", new()
         ///     {
         ///         ClientIdList = new[]
         ///         {
@@ -212,9 +212,9 @@ namespace Pulumi.Tls
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var exampleContent = Tls.Index.GetCertificate.Invoke(new()
+        ///     var exampleContent = Tls.GetCertificate.Invoke(new()
         ///     {
-        ///         Content = Std.Index.File.Invoke(new()
+        ///         Content = Std.File.Invoke(new()
         ///         {
         ///             Input = "example.pem",
         ///         }).Result,

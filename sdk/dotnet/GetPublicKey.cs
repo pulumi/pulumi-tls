@@ -27,21 +27,21 @@ namespace Pulumi.Tls
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var ed25519_example = new Tls.Index.PrivateKey("ed25519-example", new()
+        ///     var ed25519_example = new Tls.PrivateKey("ed25519-example", new()
         ///     {
         ///         Algorithm = "ED25519",
         ///     });
         /// 
         ///     // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
-        ///     var privateKeyPem_example = Tls.Index.GetPublicKey.Invoke(new()
+        ///     var privateKeyPem_example = Tls.GetPublicKey.Invoke(new()
         ///     {
         ///         PrivateKeyPem = ed25519_example.PrivateKeyPem,
         ///     });
         /// 
         ///     // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
-        ///     var privateKeyOpenssh_example = Tls.Index.GetPublicKey.Invoke(new()
+        ///     var privateKeyOpenssh_example = Tls.GetPublicKey.Invoke(new()
         ///     {
-        ///         PrivateKeyOpenssh = Std.Index.File.Invoke(new()
+        ///         PrivateKeyOpenssh = Std.File.Invoke(new()
         ///         {
         ///             Input = "~/.ssh/id_rsa_rfc4716",
         ///         }).Result,
@@ -69,21 +69,21 @@ namespace Pulumi.Tls
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var ed25519_example = new Tls.Index.PrivateKey("ed25519-example", new()
+        ///     var ed25519_example = new Tls.PrivateKey("ed25519-example", new()
         ///     {
         ///         Algorithm = "ED25519",
         ///     });
         /// 
         ///     // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
-        ///     var privateKeyPem_example = Tls.Index.GetPublicKey.Invoke(new()
+        ///     var privateKeyPem_example = Tls.GetPublicKey.Invoke(new()
         ///     {
         ///         PrivateKeyPem = ed25519_example.PrivateKeyPem,
         ///     });
         /// 
         ///     // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
-        ///     var privateKeyOpenssh_example = Tls.Index.GetPublicKey.Invoke(new()
+        ///     var privateKeyOpenssh_example = Tls.GetPublicKey.Invoke(new()
         ///     {
-        ///         PrivateKeyOpenssh = Std.Index.File.Invoke(new()
+        ///         PrivateKeyOpenssh = Std.File.Invoke(new()
         ///         {
         ///             Input = "~/.ssh/id_rsa_rfc4716",
         ///         }).Result,
@@ -111,21 +111,21 @@ namespace Pulumi.Tls
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var ed25519_example = new Tls.Index.PrivateKey("ed25519-example", new()
+        ///     var ed25519_example = new Tls.PrivateKey("ed25519-example", new()
         ///     {
         ///         Algorithm = "ED25519",
         ///     });
         /// 
         ///     // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
-        ///     var privateKeyPem_example = Tls.Index.GetPublicKey.Invoke(new()
+        ///     var privateKeyPem_example = Tls.GetPublicKey.Invoke(new()
         ///     {
         ///         PrivateKeyPem = ed25519_example.PrivateKeyPem,
         ///     });
         /// 
         ///     // Public key loaded from filesystem, using the Open SSH (RFC 4716) format
-        ///     var privateKeyOpenssh_example = Tls.Index.GetPublicKey.Invoke(new()
+        ///     var privateKeyOpenssh_example = Tls.GetPublicKey.Invoke(new()
         ///     {
-        ///         PrivateKeyOpenssh = Std.Index.File.Invoke(new()
+        ///         PrivateKeyOpenssh = Std.File.Invoke(new()
         ///         {
         ///             Input = "~/.ssh/id_rsa_rfc4716",
         ///         }).Result,
