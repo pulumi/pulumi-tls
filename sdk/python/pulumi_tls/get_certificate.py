@@ -157,9 +157,9 @@ def get_certificate(content: Optional[_builtins.str] = None,
         id=pulumi.get(__ret__, 'id'),
         url=pulumi.get(__ret__, 'url'),
         verify_chain=pulumi.get(__ret__, 'verify_chain'))
-def get_certificate_output(content: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                           url: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                           verify_chain: Optional[pulumi.Input[Optional[_builtins.bool]]] = None,
+def get_certificate_output(content: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                           url: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                           verify_chain: pulumi.Input[Optional[Optional[_builtins.bool]]] = None,
                            opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetCertificateResult]:
     """
     Get information about the TLS certificates securing a host.
