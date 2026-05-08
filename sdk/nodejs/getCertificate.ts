@@ -164,13 +164,13 @@ export interface GetCertificateOutputArgs {
     /**
      * The content of the certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Cannot be used with `url`.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * The URL of the website to get the certificates from. Cannot be used with `content`.
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
     /**
      * Whether to verify the certificate chain while parsing it or not (default: `true`). Cannot be used with `content`.
      */
-    verifyChain?: pulumi.Input<boolean>;
+    verifyChain?: pulumi.Input<boolean | undefined>;
 }

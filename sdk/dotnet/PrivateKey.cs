@@ -36,21 +36,21 @@ namespace Pulumi.Tls
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
     ///     // ECDSA key with P384 elliptic curve
-    ///     var ecdsa_p384_example = new Tls.Index.PrivateKey("ecdsa-p384-example", new()
+    ///     var ecdsa_p384_example = new Tls.PrivateKey("ecdsa-p384-example", new()
     ///     {
     ///         Algorithm = "ECDSA",
     ///         EcdsaCurve = "P384",
     ///     });
     /// 
     ///     // RSA key of size 4096 bits
-    ///     var rsa_4096_example = new Tls.Index.PrivateKey("rsa-4096-example", new()
+    ///     var rsa_4096_example = new Tls.PrivateKey("rsa-4096-example", new()
     ///     {
     ///         Algorithm = "RSA",
     ///         RsaBits = 4096,
     ///     });
     /// 
     ///     // ED25519 key
-    ///     var ed25519_example = new Tls.Index.PrivateKey("ed25519-example", new()
+    ///     var ed25519_example = new Tls.PrivateKey("ed25519-example", new()
     ///     {
     ///         Algorithm = "ED25519",
     ///     });

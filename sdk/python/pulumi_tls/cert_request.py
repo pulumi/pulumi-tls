@@ -22,10 +22,10 @@ __all__ = ['CertRequestArgs', 'CertRequest']
 class CertRequestArgs:
     def __init__(__self__, *,
                  private_key_pem: pulumi.Input[_builtins.str],
-                 dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 subject: Optional[pulumi.Input['CertRequestSubjectArgs']] = None,
-                 uris: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 subject: pulumi.Input[Optional['CertRequestSubjectArgs']] = None,
+                 uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a CertRequest resource.
 
@@ -59,63 +59,63 @@ class CertRequestArgs:
 
     @_builtins.property
     @pulumi.getter(name="dnsNames")
-    def dns_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def dns_names(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "dns_names")
 
     @dns_names.setter
-    def dns_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def dns_names(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "dns_names", value)
 
     @_builtins.property
     @pulumi.getter(name="ipAddresses")
-    def ip_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def ip_addresses(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "ip_addresses")
 
     @ip_addresses.setter
-    def ip_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def ip_addresses(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "ip_addresses", value)
 
     @_builtins.property
     @pulumi.getter
-    def subject(self) -> Optional[pulumi.Input['CertRequestSubjectArgs']]:
+    def subject(self) -> pulumi.Input[Optional['CertRequestSubjectArgs']]:
         """
         The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         """
         return pulumi.get(self, "subject")
 
     @subject.setter
-    def subject(self, value: Optional[pulumi.Input['CertRequestSubjectArgs']]):
+    def subject(self, value: pulumi.Input[Optional['CertRequestSubjectArgs']]):
         pulumi.set(self, "subject", value)
 
     @_builtins.property
     @pulumi.getter
-    def uris(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def uris(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "uris")
 
     @uris.setter
-    def uris(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def uris(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "uris", value)
 
 
 @pulumi.input_type
 class _CertRequestState:
     def __init__(__self__, *,
-                 cert_request_pem: Optional[pulumi.Input[_builtins.str]] = None,
-                 dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 key_algorithm: Optional[pulumi.Input[_builtins.str]] = None,
-                 private_key_pem: Optional[pulumi.Input[_builtins.str]] = None,
-                 subject: Optional[pulumi.Input['CertRequestSubjectArgs']] = None,
-                 uris: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 cert_request_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 subject: pulumi.Input[Optional['CertRequestSubjectArgs']] = None,
+                 uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering CertRequest resources.
 
@@ -144,86 +144,86 @@ class _CertRequestState:
 
     @_builtins.property
     @pulumi.getter(name="certRequestPem")
-    def cert_request_pem(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def cert_request_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         """
         return pulumi.get(self, "cert_request_pem")
 
     @cert_request_pem.setter
-    def cert_request_pem(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def cert_request_pem(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "cert_request_pem", value)
 
     @_builtins.property
     @pulumi.getter(name="dnsNames")
-    def dns_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def dns_names(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "dns_names")
 
     @dns_names.setter
-    def dns_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def dns_names(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "dns_names", value)
 
     @_builtins.property
     @pulumi.getter(name="ipAddresses")
-    def ip_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def ip_addresses(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "ip_addresses")
 
     @ip_addresses.setter
-    def ip_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def ip_addresses(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "ip_addresses", value)
 
     @_builtins.property
     @pulumi.getter(name="keyAlgorithm")
-    def key_algorithm(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def key_algorithm(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Name of the algorithm used when generating the private key provided in `private_key_pem`.
         """
         return pulumi.get(self, "key_algorithm")
 
     @key_algorithm.setter
-    def key_algorithm(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def key_algorithm(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "key_algorithm", value)
 
     @_builtins.property
     @pulumi.getter(name="privateKeyPem")
-    def private_key_pem(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def private_key_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
         """
         return pulumi.get(self, "private_key_pem")
 
     @private_key_pem.setter
-    def private_key_pem(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def private_key_pem(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "private_key_pem", value)
 
     @_builtins.property
     @pulumi.getter
-    def subject(self) -> Optional[pulumi.Input['CertRequestSubjectArgs']]:
+    def subject(self) -> pulumi.Input[Optional['CertRequestSubjectArgs']]:
         """
         The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         """
         return pulumi.get(self, "subject")
 
     @subject.setter
-    def subject(self, value: Optional[pulumi.Input['CertRequestSubjectArgs']]):
+    def subject(self, value: pulumi.Input[Optional['CertRequestSubjectArgs']]):
         pulumi.set(self, "subject", value)
 
     @_builtins.property
     @pulumi.getter
-    def uris(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def uris(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "uris")
 
     @uris.setter
-    def uris(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def uris(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "uris", value)
 
 
@@ -233,11 +233,11 @@ class CertRequest(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 private_key_pem: Optional[pulumi.Input[_builtins.str]] = None,
-                 subject: Optional[pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
-                 uris: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
+                 uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         """
         Creates a Certificate Signing Request (CSR) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
@@ -320,11 +320,11 @@ class CertRequest(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 private_key_pem: Optional[pulumi.Input[_builtins.str]] = None,
-                 subject: Optional[pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
-                 uris: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
+                 uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -355,13 +355,13 @@ class CertRequest(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            cert_request_pem: Optional[pulumi.Input[_builtins.str]] = None,
-            dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            key_algorithm: Optional[pulumi.Input[_builtins.str]] = None,
-            private_key_pem: Optional[pulumi.Input[_builtins.str]] = None,
-            subject: Optional[pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
-            uris: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'CertRequest':
+            cert_request_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
+            uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'CertRequest':
         """
         Get an existing CertRequest resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

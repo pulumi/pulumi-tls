@@ -39,8 +39,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetCertificateArgs;
      * import com.pulumi.aws.IamOpenidConnectProvider;
      * import com.pulumi.aws.IamOpenidConnectProviderArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -61,8 +61,8 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
-     *             .clientIdList(List.of("sts.amazonaws.com"))
-     *             .thumbprintList(List.of(example.certificates()[0].sha1Fingerprint()))
+     *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
+     *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
      *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
      *             .build());
      * 
@@ -83,8 +83,8 @@ public final class TlsFunctions {
      * import com.pulumi.std.inputs.FileArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetCertificateArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -139,8 +139,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetCertificateArgs;
      * import com.pulumi.aws.IamOpenidConnectProvider;
      * import com.pulumi.aws.IamOpenidConnectProviderArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -161,8 +161,8 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
-     *             .clientIdList(List.of("sts.amazonaws.com"))
-     *             .thumbprintList(List.of(example.certificates()[0].sha1Fingerprint()))
+     *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
+     *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
      *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
      *             .build());
      * 
@@ -183,8 +183,8 @@ public final class TlsFunctions {
      * import com.pulumi.std.inputs.FileArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetCertificateArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -239,8 +239,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetCertificateArgs;
      * import com.pulumi.aws.IamOpenidConnectProvider;
      * import com.pulumi.aws.IamOpenidConnectProviderArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -261,8 +261,8 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
-     *             .clientIdList(List.of("sts.amazonaws.com"))
-     *             .thumbprintList(List.of(example.certificates()[0].sha1Fingerprint()))
+     *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
+     *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
      *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
      *             .build());
      * 
@@ -283,8 +283,8 @@ public final class TlsFunctions {
      * import com.pulumi.std.inputs.FileArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetCertificateArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -339,8 +339,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetCertificateArgs;
      * import com.pulumi.aws.IamOpenidConnectProvider;
      * import com.pulumi.aws.IamOpenidConnectProviderArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -361,8 +361,8 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
-     *             .clientIdList(List.of("sts.amazonaws.com"))
-     *             .thumbprintList(List.of(example.certificates()[0].sha1Fingerprint()))
+     *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
+     *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
      *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
      *             .build());
      * 
@@ -383,8 +383,8 @@ public final class TlsFunctions {
      * import com.pulumi.std.inputs.FileArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetCertificateArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -439,8 +439,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetCertificateArgs;
      * import com.pulumi.aws.IamOpenidConnectProvider;
      * import com.pulumi.aws.IamOpenidConnectProviderArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -461,8 +461,8 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
-     *             .clientIdList(List.of("sts.amazonaws.com"))
-     *             .thumbprintList(List.of(example.certificates()[0].sha1Fingerprint()))
+     *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
+     *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
      *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
      *             .build());
      * 
@@ -483,8 +483,8 @@ public final class TlsFunctions {
      * import com.pulumi.std.inputs.FileArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetCertificateArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -539,8 +539,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetCertificateArgs;
      * import com.pulumi.aws.IamOpenidConnectProvider;
      * import com.pulumi.aws.IamOpenidConnectProviderArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -561,8 +561,8 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
-     *             .clientIdList(List.of("sts.amazonaws.com"))
-     *             .thumbprintList(List.of(example.certificates()[0].sha1Fingerprint()))
+     *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
+     *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
      *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
      *             .build());
      * 
@@ -583,8 +583,8 @@ public final class TlsFunctions {
      * import com.pulumi.std.inputs.FileArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetCertificateArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -639,8 +639,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetCertificateArgs;
      * import com.pulumi.aws.IamOpenidConnectProvider;
      * import com.pulumi.aws.IamOpenidConnectProviderArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -661,8 +661,8 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
-     *             .clientIdList(List.of("sts.amazonaws.com"))
-     *             .thumbprintList(List.of(example.certificates()[0].sha1Fingerprint()))
+     *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
+     *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
      *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
      *             .build());
      * 
@@ -683,8 +683,8 @@ public final class TlsFunctions {
      * import com.pulumi.std.inputs.FileArgs;
      * import com.pulumi.tls.TlsFunctions;
      * import com.pulumi.tls.inputs.GetCertificateArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -738,8 +738,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
      * import com.pulumi.std.StdFunctions;
      * import com.pulumi.std.inputs.FileArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -796,8 +796,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
      * import com.pulumi.std.StdFunctions;
      * import com.pulumi.std.inputs.FileArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -854,8 +854,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
      * import com.pulumi.std.StdFunctions;
      * import com.pulumi.std.inputs.FileArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -912,8 +912,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
      * import com.pulumi.std.StdFunctions;
      * import com.pulumi.std.inputs.FileArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -970,8 +970,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
      * import com.pulumi.std.StdFunctions;
      * import com.pulumi.std.inputs.FileArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -1028,8 +1028,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
      * import com.pulumi.std.StdFunctions;
      * import com.pulumi.std.inputs.FileArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;
@@ -1086,8 +1086,8 @@ public final class TlsFunctions {
      * import com.pulumi.tls.inputs.GetPublicKeyArgs;
      * import com.pulumi.std.StdFunctions;
      * import com.pulumi.std.inputs.FileArgs;
-     * import java.util.List;
      * import java.util.ArrayList;
+     * import java.util.Arrays;
      * import java.util.Map;
      * import java.io.File;
      * import java.nio.file.Files;

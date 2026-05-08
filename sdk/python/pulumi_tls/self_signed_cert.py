@@ -24,15 +24,15 @@ class SelfSignedCertArgs:
                  allowed_uses: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]],
                  private_key_pem: pulumi.Input[_builtins.str],
                  validity_period_hours: pulumi.Input[_builtins.int],
-                 dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
-                 ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
-                 max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
-                 set_authority_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
-                 set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
-                 subject: Optional[pulumi.Input['SelfSignedCertSubjectArgs']] = None,
-                 uris: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
+                 ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
+                 max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
+                 set_authority_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+                 set_subject_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+                 subject: pulumi.Input[Optional['SelfSignedCertSubjectArgs']] = None,
+                 uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a SelfSignedCert resource.
 
@@ -109,133 +109,133 @@ class SelfSignedCertArgs:
 
     @_builtins.property
     @pulumi.getter(name="dnsNames")
-    def dns_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def dns_names(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "dns_names")
 
     @dns_names.setter
-    def dns_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def dns_names(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "dns_names", value)
 
     @_builtins.property
     @pulumi.getter(name="earlyRenewalHours")
-    def early_renewal_hours(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def early_renewal_hours(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         """
         return pulumi.get(self, "early_renewal_hours")
 
     @early_renewal_hours.setter
-    def early_renewal_hours(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def early_renewal_hours(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "early_renewal_hours", value)
 
     @_builtins.property
     @pulumi.getter(name="ipAddresses")
-    def ip_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def ip_addresses(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "ip_addresses")
 
     @ip_addresses.setter
-    def ip_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def ip_addresses(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "ip_addresses", value)
 
     @_builtins.property
     @pulumi.getter(name="isCaCertificate")
-    def is_ca_certificate(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def is_ca_certificate(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         """
         return pulumi.get(self, "is_ca_certificate")
 
     @is_ca_certificate.setter
-    def is_ca_certificate(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def is_ca_certificate(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "is_ca_certificate", value)
 
     @_builtins.property
     @pulumi.getter(name="maxPathLength")
-    def max_path_length(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def max_path_length(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
         """
         return pulumi.get(self, "max_path_length")
 
     @max_path_length.setter
-    def max_path_length(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def max_path_length(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "max_path_length", value)
 
     @_builtins.property
     @pulumi.getter(name="setAuthorityKeyId")
-    def set_authority_key_id(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def set_authority_key_id(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         """
         return pulumi.get(self, "set_authority_key_id")
 
     @set_authority_key_id.setter
-    def set_authority_key_id(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def set_authority_key_id(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "set_authority_key_id", value)
 
     @_builtins.property
     @pulumi.getter(name="setSubjectKeyId")
-    def set_subject_key_id(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def set_subject_key_id(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         """
         return pulumi.get(self, "set_subject_key_id")
 
     @set_subject_key_id.setter
-    def set_subject_key_id(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def set_subject_key_id(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "set_subject_key_id", value)
 
     @_builtins.property
     @pulumi.getter
-    def subject(self) -> Optional[pulumi.Input['SelfSignedCertSubjectArgs']]:
+    def subject(self) -> pulumi.Input[Optional['SelfSignedCertSubjectArgs']]:
         """
         The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         """
         return pulumi.get(self, "subject")
 
     @subject.setter
-    def subject(self, value: Optional[pulumi.Input['SelfSignedCertSubjectArgs']]):
+    def subject(self, value: pulumi.Input[Optional['SelfSignedCertSubjectArgs']]):
         pulumi.set(self, "subject", value)
 
     @_builtins.property
     @pulumi.getter
-    def uris(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def uris(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "uris")
 
     @uris.setter
-    def uris(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def uris(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "uris", value)
 
 
 @pulumi.input_type
 class _SelfSignedCertState:
     def __init__(__self__, *,
-                 allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 cert_pem: Optional[pulumi.Input[_builtins.str]] = None,
-                 dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
-                 ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
-                 key_algorithm: Optional[pulumi.Input[_builtins.str]] = None,
-                 max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
-                 private_key_pem: Optional[pulumi.Input[_builtins.str]] = None,
-                 ready_for_renewal: Optional[pulumi.Input[_builtins.bool]] = None,
-                 set_authority_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
-                 set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
-                 subject: Optional[pulumi.Input['SelfSignedCertSubjectArgs']] = None,
-                 uris: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 validity_end_time: Optional[pulumi.Input[_builtins.str]] = None,
-                 validity_period_hours: Optional[pulumi.Input[_builtins.int]] = None,
-                 validity_start_time: Optional[pulumi.Input[_builtins.str]] = None):
+                 allowed_uses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 cert_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
+                 ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
+                 key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
+                 max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
+                 private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 ready_for_renewal: pulumi.Input[Optional[_builtins.bool]] = None,
+                 set_authority_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+                 set_subject_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+                 subject: pulumi.Input[Optional['SelfSignedCertSubjectArgs']] = None,
+                 uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 validity_end_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 validity_period_hours: pulumi.Input[Optional[_builtins.int]] = None,
+                 validity_start_time: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering SelfSignedCert resources.
 
@@ -294,206 +294,206 @@ class _SelfSignedCertState:
 
     @_builtins.property
     @pulumi.getter(name="allowedUses")
-    def allowed_uses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def allowed_uses(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         """
         return pulumi.get(self, "allowed_uses")
 
     @allowed_uses.setter
-    def allowed_uses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def allowed_uses(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "allowed_uses", value)
 
     @_builtins.property
     @pulumi.getter(name="certPem")
-    def cert_pem(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def cert_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
         """
         return pulumi.get(self, "cert_pem")
 
     @cert_pem.setter
-    def cert_pem(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def cert_pem(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "cert_pem", value)
 
     @_builtins.property
     @pulumi.getter(name="dnsNames")
-    def dns_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def dns_names(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "dns_names")
 
     @dns_names.setter
-    def dns_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def dns_names(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "dns_names", value)
 
     @_builtins.property
     @pulumi.getter(name="earlyRenewalHours")
-    def early_renewal_hours(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def early_renewal_hours(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         """
         return pulumi.get(self, "early_renewal_hours")
 
     @early_renewal_hours.setter
-    def early_renewal_hours(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def early_renewal_hours(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "early_renewal_hours", value)
 
     @_builtins.property
     @pulumi.getter(name="ipAddresses")
-    def ip_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def ip_addresses(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "ip_addresses")
 
     @ip_addresses.setter
-    def ip_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def ip_addresses(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "ip_addresses", value)
 
     @_builtins.property
     @pulumi.getter(name="isCaCertificate")
-    def is_ca_certificate(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def is_ca_certificate(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         """
         return pulumi.get(self, "is_ca_certificate")
 
     @is_ca_certificate.setter
-    def is_ca_certificate(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def is_ca_certificate(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "is_ca_certificate", value)
 
     @_builtins.property
     @pulumi.getter(name="keyAlgorithm")
-    def key_algorithm(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def key_algorithm(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Name of the algorithm used when generating the private key provided in `private_key_pem`.
         """
         return pulumi.get(self, "key_algorithm")
 
     @key_algorithm.setter
-    def key_algorithm(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def key_algorithm(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "key_algorithm", value)
 
     @_builtins.property
     @pulumi.getter(name="maxPathLength")
-    def max_path_length(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def max_path_length(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
         """
         return pulumi.get(self, "max_path_length")
 
     @max_path_length.setter
-    def max_path_length(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def max_path_length(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "max_path_length", value)
 
     @_builtins.property
     @pulumi.getter(name="privateKeyPem")
-    def private_key_pem(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def private_key_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
         """
         return pulumi.get(self, "private_key_pem")
 
     @private_key_pem.setter
-    def private_key_pem(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def private_key_pem(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "private_key_pem", value)
 
     @_builtins.property
     @pulumi.getter(name="readyForRenewal")
-    def ready_for_renewal(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def ready_for_renewal(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
         """
         return pulumi.get(self, "ready_for_renewal")
 
     @ready_for_renewal.setter
-    def ready_for_renewal(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def ready_for_renewal(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "ready_for_renewal", value)
 
     @_builtins.property
     @pulumi.getter(name="setAuthorityKeyId")
-    def set_authority_key_id(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def set_authority_key_id(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         """
         return pulumi.get(self, "set_authority_key_id")
 
     @set_authority_key_id.setter
-    def set_authority_key_id(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def set_authority_key_id(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "set_authority_key_id", value)
 
     @_builtins.property
     @pulumi.getter(name="setSubjectKeyId")
-    def set_subject_key_id(self) -> Optional[pulumi.Input[_builtins.bool]]:
+    def set_subject_key_id(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
         Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         """
         return pulumi.get(self, "set_subject_key_id")
 
     @set_subject_key_id.setter
-    def set_subject_key_id(self, value: Optional[pulumi.Input[_builtins.bool]]):
+    def set_subject_key_id(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "set_subject_key_id", value)
 
     @_builtins.property
     @pulumi.getter
-    def subject(self) -> Optional[pulumi.Input['SelfSignedCertSubjectArgs']]:
+    def subject(self) -> pulumi.Input[Optional['SelfSignedCertSubjectArgs']]:
         """
         The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         """
         return pulumi.get(self, "subject")
 
     @subject.setter
-    def subject(self, value: Optional[pulumi.Input['SelfSignedCertSubjectArgs']]):
+    def subject(self, value: pulumi.Input[Optional['SelfSignedCertSubjectArgs']]):
         pulumi.set(self, "subject", value)
 
     @_builtins.property
     @pulumi.getter
-    def uris(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+    def uris(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
         """
         List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
         return pulumi.get(self, "uris")
 
     @uris.setter
-    def uris(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+    def uris(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "uris", value)
 
     @_builtins.property
     @pulumi.getter(name="validityEndTime")
-    def validity_end_time(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def validity_end_time(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         """
         return pulumi.get(self, "validity_end_time")
 
     @validity_end_time.setter
-    def validity_end_time(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def validity_end_time(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "validity_end_time", value)
 
     @_builtins.property
     @pulumi.getter(name="validityPeriodHours")
-    def validity_period_hours(self) -> Optional[pulumi.Input[_builtins.int]]:
+    def validity_period_hours(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
         Number of hours, after initial issuing, that the certificate will remain valid for.
         """
         return pulumi.get(self, "validity_period_hours")
 
     @validity_period_hours.setter
-    def validity_period_hours(self, value: Optional[pulumi.Input[_builtins.int]]):
+    def validity_period_hours(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "validity_period_hours", value)
 
     @_builtins.property
     @pulumi.getter(name="validityStartTime")
-    def validity_start_time(self) -> Optional[pulumi.Input[_builtins.str]]:
+    def validity_start_time(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.
         """
         return pulumi.get(self, "validity_start_time")
 
     @validity_start_time.setter
-    def validity_start_time(self, value: Optional[pulumi.Input[_builtins.str]]):
+    def validity_start_time(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "validity_start_time", value)
 
 
@@ -503,18 +503,18 @@ class SelfSignedCert(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
-                 ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
-                 max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
-                 private_key_pem: Optional[pulumi.Input[_builtins.str]] = None,
-                 set_authority_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
-                 set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
-                 subject: Optional[pulumi.Input[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']]] = None,
-                 uris: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 validity_period_hours: Optional[pulumi.Input[_builtins.int]] = None,
+                 allowed_uses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
+                 ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
+                 max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
+                 private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 set_authority_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+                 set_subject_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+                 subject: pulumi.Input[Optional[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']]] = None,
+                 uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 validity_period_hours: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         """
         Creates a **self-signed** TLS certificate in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
@@ -646,18 +646,18 @@ class SelfSignedCert(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
-                 ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
-                 max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
-                 private_key_pem: Optional[pulumi.Input[_builtins.str]] = None,
-                 set_authority_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
-                 set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
-                 subject: Optional[pulumi.Input[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']]] = None,
-                 uris: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 validity_period_hours: Optional[pulumi.Input[_builtins.int]] = None,
+                 allowed_uses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
+                 ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
+                 max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
+                 private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 set_authority_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+                 set_subject_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+                 subject: pulumi.Input[Optional[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']]] = None,
+                 uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 validity_period_hours: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -702,23 +702,23 @@ class SelfSignedCert(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            allowed_uses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            cert_pem: Optional[pulumi.Input[_builtins.str]] = None,
-            dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            early_renewal_hours: Optional[pulumi.Input[_builtins.int]] = None,
-            ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            is_ca_certificate: Optional[pulumi.Input[_builtins.bool]] = None,
-            key_algorithm: Optional[pulumi.Input[_builtins.str]] = None,
-            max_path_length: Optional[pulumi.Input[_builtins.int]] = None,
-            private_key_pem: Optional[pulumi.Input[_builtins.str]] = None,
-            ready_for_renewal: Optional[pulumi.Input[_builtins.bool]] = None,
-            set_authority_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
-            set_subject_key_id: Optional[pulumi.Input[_builtins.bool]] = None,
-            subject: Optional[pulumi.Input[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']]] = None,
-            uris: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            validity_end_time: Optional[pulumi.Input[_builtins.str]] = None,
-            validity_period_hours: Optional[pulumi.Input[_builtins.int]] = None,
-            validity_start_time: Optional[pulumi.Input[_builtins.str]] = None) -> 'SelfSignedCert':
+            allowed_uses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            cert_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
+            ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
+            key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
+            max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
+            private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            ready_for_renewal: pulumi.Input[Optional[_builtins.bool]] = None,
+            set_authority_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+            set_subject_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+            subject: pulumi.Input[Optional[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']]] = None,
+            uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            validity_end_time: pulumi.Input[Optional[_builtins.str]] = None,
+            validity_period_hours: pulumi.Input[Optional[_builtins.int]] = None,
+            validity_start_time: pulumi.Input[Optional[_builtins.str]] = None) -> 'SelfSignedCert':
         """
         Get an existing SelfSignedCert resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.

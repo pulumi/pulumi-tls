@@ -20,7 +20,7 @@ __all__ = ['ProviderArgs', 'Provider']
 @pulumi.input_type
 class ProviderArgs:
     def __init__(__self__, *,
-                 proxy: Optional[pulumi.Input['ProviderProxyArgs']] = None):
+                 proxy: pulumi.Input[Optional['ProviderProxyArgs']] = None):
         """
         The set of arguments for constructing a Provider resource.
 
@@ -31,14 +31,14 @@ class ProviderArgs:
 
     @_builtins.property
     @pulumi.getter
-    def proxy(self) -> Optional[pulumi.Input['ProviderProxyArgs']]:
+    def proxy(self) -> pulumi.Input[Optional['ProviderProxyArgs']]:
         """
         Proxy used by resources and data sources that connect to external endpoints.
         """
         return pulumi.get(self, "proxy")
 
     @proxy.setter
-    def proxy(self, value: Optional[pulumi.Input['ProviderProxyArgs']]):
+    def proxy(self, value: pulumi.Input[Optional['ProviderProxyArgs']]):
         pulumi.set(self, "proxy", value)
 
 
@@ -48,7 +48,7 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 proxy: Optional[pulumi.Input[Union['ProviderProxyArgs', 'ProviderProxyArgsDict']]] = None,
+                 proxy: pulumi.Input[Optional[Union['ProviderProxyArgs', 'ProviderProxyArgsDict']]] = None,
                  __props__=None):
         """
         The provider type for the tls package. By default, resources use package-wide configuration
@@ -89,7 +89,7 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 proxy: Optional[pulumi.Input[Union['ProviderProxyArgs', 'ProviderProxyArgsDict']]] = None,
+                 proxy: pulumi.Input[Optional[Union['ProviderProxyArgs', 'ProviderProxyArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):

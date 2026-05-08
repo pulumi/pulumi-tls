@@ -174,8 +174,8 @@ def get_public_key(private_key_openssh: Optional[_builtins.str] = None,
         public_key_fingerprint_sha256=pulumi.get(__ret__, 'public_key_fingerprint_sha256'),
         public_key_openssh=pulumi.get(__ret__, 'public_key_openssh'),
         public_key_pem=pulumi.get(__ret__, 'public_key_pem'))
-def get_public_key_output(private_key_openssh: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
-                          private_key_pem: Optional[pulumi.Input[Optional[_builtins.str]]] = None,
+def get_public_key_output(private_key_openssh: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
+                          private_key_pem: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
                           opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetPublicKeyResult]:
     """
     Get a public key from a PEM-encoded private key.

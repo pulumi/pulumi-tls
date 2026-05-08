@@ -62,7 +62,7 @@ export interface ProviderArgs {
     /**
      * Proxy used by resources and data sources that connect to external endpoints.
      */
-    proxy?: pulumi.Input<inputs.ProviderProxy>;
+    proxy?: pulumi.Input<inputs.ProviderProxy | undefined>;
 }
 
 export namespace Provider {
