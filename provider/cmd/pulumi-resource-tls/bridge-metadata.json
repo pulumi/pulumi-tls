@@ -1,4 +1,12 @@
 {
+    "default-resource-schema-fixups": {
+        "resources": {
+            "tls_cert_request": {},
+            "tls_locally_signed_cert": {},
+            "tls_private_key": {},
+            "tls_self_signed_cert": {}
+        }
+    },
     "renames": {
         "resources": {
             "tls:index/certRequest:CertRequest": "tls_cert_request",
