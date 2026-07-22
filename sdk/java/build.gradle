@@ -95,7 +95,7 @@ publishing {
                 inceptionYear = "2022"
                 name = "pulumi-tls"
                 packaging = "jar"
-                description = "A Pulumi package to create TLS resources in Pulumi programs."
+                description = $/A Pulumi package to create TLS resources in Pulumi programs./$
 
                 url = "https://github.com/pulumi/pulumi-tls"
 
