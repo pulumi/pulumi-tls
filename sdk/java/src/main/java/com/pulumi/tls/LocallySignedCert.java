@@ -14,6 +14,7 @@ import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
@@ -133,28 +134,58 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
         return this.caKeyAlgorithm;
     }
     /**
-     * Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+     * Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `caPrivateKeyPem` or `caPrivateKeyPemWo` must be set.
      * 
      */
     @Export(name="caPrivateKeyPem", refs={String.class}, tree="[0]")
-    private Output<String> caPrivateKeyPem;
+    private Output</* @Nullable */ String> caPrivateKeyPem;
 
     /**
-     * @return Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+     * @return Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `caPrivateKeyPem` or `caPrivateKeyPemWo` must be set.
      * 
      */
-    public Output<String> caPrivateKeyPem() {
-        return this.caPrivateKeyPem;
+    public Output<Optional<String>> caPrivateKeyPem() {
+        return Codegen.optional(this.caPrivateKeyPem);
     }
     /**
-     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `caPrivateKeyPem`, the value provided here is never persisted to Terraform state. Requires `caPrivateKeyPemWoVersion` to be set, and exactly one of `caPrivateKeyPem` or `caPrivateKeyPemWo` must be set.
+     * 
+     */
+    @Export(name="caPrivateKeyPemWo", refs={String.class}, tree="[0]")
+    private Output</* @Nullable */ String> caPrivateKeyPemWo;
+
+    /**
+     * @return **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `caPrivateKeyPem`, the value provided here is never persisted to Terraform state. Requires `caPrivateKeyPemWoVersion` to be set, and exactly one of `caPrivateKeyPem` or `caPrivateKeyPemWo` must be set.
+     * 
+     */
+    public Output<Optional<String>> caPrivateKeyPemWo() {
+        return Codegen.optional(this.caPrivateKeyPemWo);
+    }
+    /**
+     * The version of the `caPrivateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+     * 
+     */
+    @Export(name="caPrivateKeyPemWoVersion", refs={Integer.class}, tree="[0]")
+    private Output</* @Nullable */ Integer> caPrivateKeyPemWoVersion;
+
+    /**
+     * @return The version of the `caPrivateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+     * 
+     */
+    public Output<Optional<Integer>> caPrivateKeyPemWoVersion() {
+        return Codegen.optional(this.caPrivateKeyPemWoVersion);
+    }
+    /**
+     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
      * 
      */
     @Export(name="certPem", refs={String.class}, tree="[0]")
     private Output<String> certPem;
 
     /**
-     * @return Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+     * @return Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
      * 
      */
     public Output<String> certPem() {
@@ -327,7 +358,8 @@ public class LocallySignedCert extends com.pulumi.resources.CustomResource {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
             .additionalSecretOutputs(List.of(
-                "caPrivateKeyPem"
+                "caPrivateKeyPem",
+                "caPrivateKeyPemWo"
             ))
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);

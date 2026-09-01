@@ -63,7 +63,7 @@ export class CertRequest extends pulumi.CustomResource {
     }
 
     /**
-     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
      */
     declare public /*out*/ readonly certRequestPem: pulumi.Output<string>;
     /**
@@ -79,9 +79,18 @@ export class CertRequest extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly keyAlgorithm: pulumi.Output<string>;
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
      */
-    declare public readonly privateKeyPem: pulumi.Output<string>;
+    declare public readonly privateKeyPem: pulumi.Output<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `privateKeyPem`, the value provided here is never persisted to Terraform state. Requires `privateKeyPemWoVersion` to be set, and exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
+     */
+    declare public readonly privateKeyPemWo: pulumi.Output<string | undefined>;
+    /**
+     * The version of the `privateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
+     */
+    declare public readonly privateKeyPemWoVersion: pulumi.Output<number | undefined>;
     /**
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
@@ -98,7 +107,7 @@ export class CertRequest extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: CertRequestArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: CertRequestArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: CertRequestArgs | CertRequestState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -109,23 +118,24 @@ export class CertRequest extends pulumi.CustomResource {
             resourceInputs["ipAddresses"] = state?.ipAddresses;
             resourceInputs["keyAlgorithm"] = state?.keyAlgorithm;
             resourceInputs["privateKeyPem"] = state?.privateKeyPem;
+            resourceInputs["privateKeyPemWo"] = state?.privateKeyPemWo;
+            resourceInputs["privateKeyPemWoVersion"] = state?.privateKeyPemWoVersion;
             resourceInputs["subject"] = state?.subject;
             resourceInputs["uris"] = state?.uris;
         } else {
             const args = argsOrState as CertRequestArgs | undefined;
-            if (args?.privateKeyPem === undefined && !opts.urn) {
-                throw new Error("Missing required property 'privateKeyPem'");
-            }
             resourceInputs["dnsNames"] = args?.dnsNames;
             resourceInputs["ipAddresses"] = args?.ipAddresses;
             resourceInputs["privateKeyPem"] = args?.privateKeyPem ? pulumi.secret(args.privateKeyPem) : undefined;
+            resourceInputs["privateKeyPemWo"] = args?.privateKeyPemWo ? pulumi.secret(args.privateKeyPemWo) : undefined;
+            resourceInputs["privateKeyPemWoVersion"] = args?.privateKeyPemWoVersion;
             resourceInputs["subject"] = args?.subject;
             resourceInputs["uris"] = args?.uris;
             resourceInputs["certRequestPem"] = undefined /*out*/;
             resourceInputs["keyAlgorithm"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["privateKeyPem"] };
+        const secretOpts = { additionalSecretOutputs: ["privateKeyPem", "privateKeyPemWo"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
         super(CertRequest.__pulumiType, name, resourceInputs, opts);
     }
@@ -136,7 +146,7 @@ export class CertRequest extends pulumi.CustomResource {
  */
 export interface CertRequestState {
     /**
-     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
      */
     certRequestPem?: pulumi.Input<string | undefined>;
     /**
@@ -152,9 +162,18 @@ export interface CertRequestState {
      */
     keyAlgorithm?: pulumi.Input<string | undefined>;
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
      */
     privateKeyPem?: pulumi.Input<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `privateKeyPem`, the value provided here is never persisted to Terraform state. Requires `privateKeyPemWoVersion` to be set, and exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
+     */
+    privateKeyPemWo?: pulumi.Input<string | undefined>;
+    /**
+     * The version of the `privateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
+     */
+    privateKeyPemWoVersion?: pulumi.Input<number | undefined>;
     /**
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */
@@ -178,9 +197,18 @@ export interface CertRequestArgs {
      */
     ipAddresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
      */
-    privateKeyPem: pulumi.Input<string>;
+    privateKeyPem?: pulumi.Input<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `privateKeyPem`, the value provided here is never persisted to Terraform state. Requires `privateKeyPemWoVersion` to be set, and exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
+     */
+    privateKeyPemWo?: pulumi.Input<string | undefined>;
+    /**
+     * The version of the `privateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
+     */
+    privateKeyPemWoVersion?: pulumi.Input<number | undefined>;
     /**
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
      */

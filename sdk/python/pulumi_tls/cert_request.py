@@ -21,41 +21,39 @@ __all__ = ['CertRequestArgs', 'CertRequest']
 @pulumi.input_type
 class CertRequestArgs:
     def __init__(__self__, *,
-                 private_key_pem: pulumi.Input[_builtins.str],
                  dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
                  subject: pulumi.Input[Optional['CertRequestSubjectArgs']] = None,
                  uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a CertRequest resource.
 
-        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
+        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.str] private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.int] private_key_pem_wo_version: The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
         :param pulumi.Input['CertRequestSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
-        pulumi.set(__self__, "private_key_pem", private_key_pem)
         if dns_names is not None:
             pulumi.set(__self__, "dns_names", dns_names)
         if ip_addresses is not None:
             pulumi.set(__self__, "ip_addresses", ip_addresses)
+        if private_key_pem is not None:
+            pulumi.set(__self__, "private_key_pem", private_key_pem)
+        if private_key_pem_wo is not None:
+            pulumi.set(__self__, "private_key_pem_wo", private_key_pem_wo)
+        if private_key_pem_wo_version is not None:
+            pulumi.set(__self__, "private_key_pem_wo_version", private_key_pem_wo_version)
         if subject is not None:
             pulumi.set(__self__, "subject", subject)
         if uris is not None:
             pulumi.set(__self__, "uris", uris)
-
-    @_builtins.property
-    @pulumi.getter(name="privateKeyPem")
-    def private_key_pem(self) -> pulumi.Input[_builtins.str]:
-        """
-        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
-        """
-        return pulumi.get(self, "private_key_pem")
-
-    @private_key_pem.setter
-    def private_key_pem(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "private_key_pem", value)
 
     @_builtins.property
     @pulumi.getter(name="dnsNames")
@@ -80,6 +78,43 @@ class CertRequestArgs:
     @ip_addresses.setter
     def ip_addresses(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "ip_addresses", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPem")
+    def private_key_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        """
+        return pulumi.get(self, "private_key_pem")
+
+    @private_key_pem.setter
+    def private_key_pem(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "private_key_pem", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPemWo")
+    def private_key_pem_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        """
+        return pulumi.get(self, "private_key_pem_wo")
+
+    @private_key_pem_wo.setter
+    def private_key_pem_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "private_key_pem_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPemWoVersion")
+    def private_key_pem_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
+        """
+        return pulumi.get(self, "private_key_pem_wo_version")
+
+    @private_key_pem_wo_version.setter
+    def private_key_pem_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "private_key_pem_wo_version", value)
 
     @_builtins.property
     @pulumi.getter
@@ -114,16 +149,21 @@ class _CertRequestState:
                  ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
                  subject: pulumi.Input[Optional['CertRequestSubjectArgs']] = None,
                  uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         Input properties used for looking up and filtering CertRequest resources.
 
-        :param pulumi.Input[_builtins.str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        :param pulumi.Input[_builtins.str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
-        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.str] private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.int] private_key_pem_wo_version: The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
         :param pulumi.Input['CertRequestSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
@@ -137,6 +177,10 @@ class _CertRequestState:
             pulumi.set(__self__, "key_algorithm", key_algorithm)
         if private_key_pem is not None:
             pulumi.set(__self__, "private_key_pem", private_key_pem)
+        if private_key_pem_wo is not None:
+            pulumi.set(__self__, "private_key_pem_wo", private_key_pem_wo)
+        if private_key_pem_wo_version is not None:
+            pulumi.set(__self__, "private_key_pem_wo_version", private_key_pem_wo_version)
         if subject is not None:
             pulumi.set(__self__, "subject", subject)
         if uris is not None:
@@ -146,7 +190,7 @@ class _CertRequestState:
     @pulumi.getter(name="certRequestPem")
     def cert_request_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         """
         return pulumi.get(self, "cert_request_pem")
 
@@ -194,13 +238,38 @@ class _CertRequestState:
     @pulumi.getter(name="privateKeyPem")
     def private_key_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
         """
         return pulumi.get(self, "private_key_pem")
 
     @private_key_pem.setter
     def private_key_pem(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "private_key_pem", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPemWo")
+    def private_key_pem_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        """
+        return pulumi.get(self, "private_key_pem_wo")
+
+    @private_key_pem_wo.setter
+    def private_key_pem_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "private_key_pem_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPemWoVersion")
+    def private_key_pem_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
+        """
+        return pulumi.get(self, "private_key_pem_wo_version")
+
+    @private_key_pem_wo_version.setter
+    def private_key_pem_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "private_key_pem_wo_version", value)
 
     @_builtins.property
     @pulumi.getter
@@ -236,6 +305,8 @@ class CertRequest(pulumi.CustomResource):
                  dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
                  subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
                  uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
@@ -269,7 +340,10 @@ class CertRequest(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
-        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.str] private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.int] private_key_pem_wo_version: The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
         :param pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
@@ -277,7 +351,7 @@ class CertRequest(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: CertRequestArgs,
+                 args: Optional[CertRequestArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Creates a Certificate Signing Request (CSR) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
@@ -323,6 +397,8 @@ class CertRequest(pulumi.CustomResource):
                  dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
                  subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
                  uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
@@ -336,14 +412,14 @@ class CertRequest(pulumi.CustomResource):
 
             __props__.__dict__["dns_names"] = dns_names
             __props__.__dict__["ip_addresses"] = ip_addresses
-            if private_key_pem is None and not opts.urn:
-                raise TypeError("Missing required property 'private_key_pem'")
             __props__.__dict__["private_key_pem"] = None if private_key_pem is None else pulumi.Output.secret(private_key_pem)
+            __props__.__dict__["private_key_pem_wo"] = None if private_key_pem_wo is None else pulumi.Output.secret(private_key_pem_wo)
+            __props__.__dict__["private_key_pem_wo_version"] = private_key_pem_wo_version
             __props__.__dict__["subject"] = subject
             __props__.__dict__["uris"] = uris
             __props__.__dict__["cert_request_pem"] = None
             __props__.__dict__["key_algorithm"] = None
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["privateKeyPem"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["privateKeyPem", "privateKeyPemWo"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(CertRequest, __self__).__init__(
             'tls:index/certRequest:CertRequest',
@@ -360,6 +436,8 @@ class CertRequest(pulumi.CustomResource):
             ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
             private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
             subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
             uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'CertRequest':
         """
@@ -369,11 +447,14 @@ class CertRequest(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[_builtins.str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        :param pulumi.Input[_builtins.str] cert_request_pem: The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
-        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.str] private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.int] private_key_pem_wo_version: The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
         :param pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
@@ -386,6 +467,8 @@ class CertRequest(pulumi.CustomResource):
         __props__.__dict__["ip_addresses"] = ip_addresses
         __props__.__dict__["key_algorithm"] = key_algorithm
         __props__.__dict__["private_key_pem"] = private_key_pem
+        __props__.__dict__["private_key_pem_wo"] = private_key_pem_wo
+        __props__.__dict__["private_key_pem_wo_version"] = private_key_pem_wo_version
         __props__.__dict__["subject"] = subject
         __props__.__dict__["uris"] = uris
         return CertRequest(resource_name, opts=opts, __props__=__props__)
@@ -394,7 +477,7 @@ class CertRequest(pulumi.CustomResource):
     @pulumi.getter(name="certRequestPem")
     def cert_request_pem(self) -> pulumi.Output[_builtins.str]:
         """
-        The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         """
         return pulumi.get(self, "cert_request_pem")
 
@@ -424,11 +507,28 @@ class CertRequest(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="privateKeyPem")
-    def private_key_pem(self) -> pulumi.Output[_builtins.str]:
+    def private_key_pem(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
         """
         return pulumi.get(self, "private_key_pem")
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPemWo")
+    def private_key_pem_wo(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        """
+        return pulumi.get(self, "private_key_pem_wo")
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPemWoVersion")
+    def private_key_pem_wo_version(self) -> pulumi.Output[Optional[_builtins.int]]:
+        """
+        The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
+        """
+        return pulumi.get(self, "private_key_pem_wo_version")
 
     @_builtins.property
     @pulumi.getter

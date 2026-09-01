@@ -50,18 +50,50 @@ public final class LocallySignedCertArgs extends com.pulumi.resources.ResourceAr
     }
 
     /**
-     * Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+     * Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `caPrivateKeyPem` or `caPrivateKeyPemWo` must be set.
      * 
      */
-    @Import(name="caPrivateKeyPem", required=true)
-    private Output<String> caPrivateKeyPem;
+    @Import(name="caPrivateKeyPem")
+    private @Nullable Output<String> caPrivateKeyPem;
 
     /**
-     * @return Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+     * @return Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `caPrivateKeyPem` or `caPrivateKeyPemWo` must be set.
      * 
      */
-    public Output<String> caPrivateKeyPem() {
-        return this.caPrivateKeyPem;
+    public Optional<Output<String>> caPrivateKeyPem() {
+        return Optional.ofNullable(this.caPrivateKeyPem);
+    }
+
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `caPrivateKeyPem`, the value provided here is never persisted to Terraform state. Requires `caPrivateKeyPemWoVersion` to be set, and exactly one of `caPrivateKeyPem` or `caPrivateKeyPemWo` must be set.
+     * 
+     */
+    @Import(name="caPrivateKeyPemWo")
+    private @Nullable Output<String> caPrivateKeyPemWo;
+
+    /**
+     * @return **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `caPrivateKeyPem`, the value provided here is never persisted to Terraform state. Requires `caPrivateKeyPemWoVersion` to be set, and exactly one of `caPrivateKeyPem` or `caPrivateKeyPemWo` must be set.
+     * 
+     */
+    public Optional<Output<String>> caPrivateKeyPemWo() {
+        return Optional.ofNullable(this.caPrivateKeyPemWo);
+    }
+
+    /**
+     * The version of the `caPrivateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+     * 
+     */
+    @Import(name="caPrivateKeyPemWoVersion")
+    private @Nullable Output<Integer> caPrivateKeyPemWoVersion;
+
+    /**
+     * @return The version of the `caPrivateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+     * 
+     */
+    public Optional<Output<Integer>> caPrivateKeyPemWoVersion() {
+        return Optional.ofNullable(this.caPrivateKeyPemWoVersion);
     }
 
     /**
@@ -160,6 +192,8 @@ public final class LocallySignedCertArgs extends com.pulumi.resources.ResourceAr
         this.allowedUses = $.allowedUses;
         this.caCertPem = $.caCertPem;
         this.caPrivateKeyPem = $.caPrivateKeyPem;
+        this.caPrivateKeyPemWo = $.caPrivateKeyPemWo;
+        this.caPrivateKeyPemWoVersion = $.caPrivateKeyPemWoVersion;
         this.certRequestPem = $.certRequestPem;
         this.earlyRenewalHours = $.earlyRenewalHours;
         this.isCaCertificate = $.isCaCertificate;
@@ -239,24 +273,68 @@ public final class LocallySignedCertArgs extends com.pulumi.resources.ResourceAr
         }
 
         /**
-         * @param caPrivateKeyPem Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+         * @param caPrivateKeyPem Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `caPrivateKeyPem` or `caPrivateKeyPemWo` must be set.
          * 
          * @return builder
          * 
          */
-        public Builder caPrivateKeyPem(Output<String> caPrivateKeyPem) {
+        public Builder caPrivateKeyPem(@Nullable Output<String> caPrivateKeyPem) {
             $.caPrivateKeyPem = caPrivateKeyPem;
             return this;
         }
 
         /**
-         * @param caPrivateKeyPem Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+         * @param caPrivateKeyPem Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `caPrivateKeyPem` or `caPrivateKeyPemWo` must be set.
          * 
          * @return builder
          * 
          */
         public Builder caPrivateKeyPem(String caPrivateKeyPem) {
             return caPrivateKeyPem(Output.of(caPrivateKeyPem));
+        }
+
+        /**
+         * @param caPrivateKeyPemWo **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `caPrivateKeyPem`, the value provided here is never persisted to Terraform state. Requires `caPrivateKeyPemWoVersion` to be set, and exactly one of `caPrivateKeyPem` or `caPrivateKeyPemWo` must be set.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder caPrivateKeyPemWo(@Nullable Output<String> caPrivateKeyPemWo) {
+            $.caPrivateKeyPemWo = caPrivateKeyPemWo;
+            return this;
+        }
+
+        /**
+         * @param caPrivateKeyPemWo **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `caPrivateKeyPem`, the value provided here is never persisted to Terraform state. Requires `caPrivateKeyPemWoVersion` to be set, and exactly one of `caPrivateKeyPem` or `caPrivateKeyPemWo` must be set.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder caPrivateKeyPemWo(String caPrivateKeyPemWo) {
+            return caPrivateKeyPemWo(Output.of(caPrivateKeyPemWo));
+        }
+
+        /**
+         * @param caPrivateKeyPemWoVersion The version of the `caPrivateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder caPrivateKeyPemWoVersion(@Nullable Output<Integer> caPrivateKeyPemWoVersion) {
+            $.caPrivateKeyPemWoVersion = caPrivateKeyPemWoVersion;
+            return this;
+        }
+
+        /**
+         * @param caPrivateKeyPemWoVersion The version of the `caPrivateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder caPrivateKeyPemWoVersion(Integer caPrivateKeyPemWoVersion) {
+            return caPrivateKeyPemWoVersion(Output.of(caPrivateKeyPemWoVersion));
         }
 
         /**
@@ -391,9 +469,6 @@ public final class LocallySignedCertArgs extends com.pulumi.resources.ResourceAr
             }
             if ($.caCertPem == null) {
                 throw new MissingRequiredPropertyException("LocallySignedCertArgs", "caCertPem");
-            }
-            if ($.caPrivateKeyPem == null) {
-                throw new MissingRequiredPropertyException("LocallySignedCertArgs", "caPrivateKeyPem");
             }
             if ($.certRequestPem == null) {
                 throw new MissingRequiredPropertyException("LocallySignedCertArgs", "certRequestPem");
