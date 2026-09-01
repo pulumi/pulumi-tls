@@ -294,47 +294,55 @@
             "properties": {
                 "certRequestPem": {
                     "type": "string",
-                    "description": "The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
+                    "description": "The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace)."
                 },
                 "dnsNames": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects).\n"
+                    "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects)."
                 },
                 "ipAddresses": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of IP addresses for which a certificate is being requested (i.e. certificate subjects).\n"
+                    "description": "List of IP addresses for which a certificate is being requested (i.e. certificate subjects)."
                 },
                 "keyAlgorithm": {
                     "type": "string",
-                    "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e.\n"
+                    "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e."
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the \u003cspan pulumi-lang-nodejs=\"`file`\" pulumi-lang-dotnet=\"`File`\" pulumi-lang-go=\"`file`\" pulumi-lang-python=\"`file`\" pulumi-lang-yaml=\"`file`\" pulumi-lang-java=\"`file`\" pulumi-lang-hcl=\"`file`\"\u003e`file`\u003c/span\u003e interpolation function.\n",
+                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [\u003cspan pulumi-lang-nodejs=\"`file`\" pulumi-lang-dotnet=\"`File`\" pulumi-lang-go=\"`file`\" pulumi-lang-python=\"`file`\" pulumi-lang-yaml=\"`file`\" pulumi-lang-java=\"`file`\" pulumi-lang-hcl=\"`file`\"\u003e`file`\u003c/span\u003e](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e must be set.",
                     "secret": true
+                },
+                "privateKeyPemWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e, the value provided here is never persisted to Terraform state. Requires \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWoVersion`\" pulumi-lang-dotnet=\"`PrivateKeyPemWoVersion`\" pulumi-lang-go=\"`privateKeyPemWoVersion`\" pulumi-lang-python=\"`private_key_pem_wo_version`\" pulumi-lang-yaml=\"`privateKeyPemWoVersion`\" pulumi-lang-java=\"`privateKeyPemWoVersion`\" pulumi-lang-hcl=\"`private_key_pem_wo_version`\"\u003e`privateKeyPemWoVersion`\u003c/span\u003e to be set, and exactly one of \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e must be set.",
+                    "secret": true
+                },
+                "privateKeyPemWoVersion": {
+                    "type": "integer",
+                    "description": "The version of the \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key."
                 },
                 "subject": {
                     "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject",
-                    "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
+                    "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section."
                 },
                 "uris": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of URIs for which a certificate is being requested (i.e. certificate subjects).\n"
+                    "description": "List of URIs for which a certificate is being requested (i.e. certificate subjects)."
                 }
             },
             "required": [
                 "certRequestPem",
-                "keyAlgorithm",
-                "privateKeyPem"
+                "keyAlgorithm"
             ],
             "inputProperties": {
                 "dnsNames": {
@@ -342,75 +350,90 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects).\n"
+                    "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects)."
                 },
                 "ipAddresses": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of IP addresses for which a certificate is being requested (i.e. certificate subjects).\n"
+                    "description": "List of IP addresses for which a certificate is being requested (i.e. certificate subjects)."
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the \u003cspan pulumi-lang-nodejs=\"`file`\" pulumi-lang-dotnet=\"`File`\" pulumi-lang-go=\"`file`\" pulumi-lang-python=\"`file`\" pulumi-lang-yaml=\"`file`\" pulumi-lang-java=\"`file`\" pulumi-lang-hcl=\"`file`\"\u003e`file`\u003c/span\u003e interpolation function.\n",
+                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [\u003cspan pulumi-lang-nodejs=\"`file`\" pulumi-lang-dotnet=\"`File`\" pulumi-lang-go=\"`file`\" pulumi-lang-python=\"`file`\" pulumi-lang-yaml=\"`file`\" pulumi-lang-java=\"`file`\" pulumi-lang-hcl=\"`file`\"\u003e`file`\u003c/span\u003e](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e must be set.",
                     "secret": true
+                },
+                "privateKeyPemWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e, the value provided here is never persisted to Terraform state. Requires \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWoVersion`\" pulumi-lang-dotnet=\"`PrivateKeyPemWoVersion`\" pulumi-lang-go=\"`privateKeyPemWoVersion`\" pulumi-lang-python=\"`private_key_pem_wo_version`\" pulumi-lang-yaml=\"`privateKeyPemWoVersion`\" pulumi-lang-java=\"`privateKeyPemWoVersion`\" pulumi-lang-hcl=\"`private_key_pem_wo_version`\"\u003e`privateKeyPemWoVersion`\u003c/span\u003e to be set, and exactly one of \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e must be set.",
+                    "secret": true
+                },
+                "privateKeyPemWoVersion": {
+                    "type": "integer",
+                    "description": "The version of the \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key."
                 },
                 "subject": {
                     "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject",
-                    "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
+                    "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section."
                 },
                 "uris": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of URIs for which a certificate is being requested (i.e. certificate subjects).\n"
+                    "description": "List of URIs for which a certificate is being requested (i.e. certificate subjects)."
                 }
             },
-            "requiredInputs": [
-                "privateKeyPem"
-            ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering CertRequest resources.\n",
                 "properties": {
                     "certRequestPem": {
                         "type": "string",
-                        "description": "The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
+                        "description": "The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace)."
                     },
                     "dnsNames": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         },
-                        "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects).\n"
+                        "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects)."
                     },
                     "ipAddresses": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         },
-                        "description": "List of IP addresses for which a certificate is being requested (i.e. certificate subjects).\n"
+                        "description": "List of IP addresses for which a certificate is being requested (i.e. certificate subjects)."
                     },
                     "keyAlgorithm": {
                         "type": "string",
-                        "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e.\n"
+                        "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e."
                     },
                     "privateKeyPem": {
                         "type": "string",
-                        "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the \u003cspan pulumi-lang-nodejs=\"`file`\" pulumi-lang-dotnet=\"`File`\" pulumi-lang-go=\"`file`\" pulumi-lang-python=\"`file`\" pulumi-lang-yaml=\"`file`\" pulumi-lang-java=\"`file`\" pulumi-lang-hcl=\"`file`\"\u003e`file`\u003c/span\u003e interpolation function.\n",
+                        "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [\u003cspan pulumi-lang-nodejs=\"`file`\" pulumi-lang-dotnet=\"`File`\" pulumi-lang-go=\"`file`\" pulumi-lang-python=\"`file`\" pulumi-lang-yaml=\"`file`\" pulumi-lang-java=\"`file`\" pulumi-lang-hcl=\"`file`\"\u003e`file`\u003c/span\u003e](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e must be set.",
                         "secret": true
+                    },
+                    "privateKeyPemWo": {
+                        "type": "string",
+                        "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e, the value provided here is never persisted to Terraform state. Requires \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWoVersion`\" pulumi-lang-dotnet=\"`PrivateKeyPemWoVersion`\" pulumi-lang-go=\"`privateKeyPemWoVersion`\" pulumi-lang-python=\"`private_key_pem_wo_version`\" pulumi-lang-yaml=\"`privateKeyPemWoVersion`\" pulumi-lang-java=\"`privateKeyPemWoVersion`\" pulumi-lang-hcl=\"`private_key_pem_wo_version`\"\u003e`privateKeyPemWoVersion`\u003c/span\u003e to be set, and exactly one of \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e must be set.",
+                        "secret": true
+                    },
+                    "privateKeyPemWoVersion": {
+                        "type": "integer",
+                        "description": "The version of the \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key."
                     },
                     "subject": {
                         "$ref": "#/types/tls:index/CertRequestSubject:CertRequestSubject",
-                        "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
+                        "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section."
                     },
                     "uris": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         },
-                        "description": "List of URIs for which a certificate is being requested (i.e. certificate subjects).\n"
+                        "description": "List of URIs for which a certificate is being requested (i.e. certificate subjects)."
                     }
                 },
                 "type": "object"
@@ -432,16 +455,25 @@
                 },
                 "caKeyAlgorithm": {
                     "type": "string",
-                    "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e.\n"
+                    "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e."
                 },
                 "caPrivateKeyPem": {
                     "type": "string",
-                    "description": "Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n",
+                    "description": "Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPemWo`\" pulumi-lang-dotnet=\"`CaPrivateKeyPemWo`\" pulumi-lang-go=\"`caPrivateKeyPemWo`\" pulumi-lang-python=\"`ca_private_key_pem_wo`\" pulumi-lang-yaml=\"`caPrivateKeyPemWo`\" pulumi-lang-java=\"`caPrivateKeyPemWo`\" pulumi-lang-hcl=\"`ca_private_key_pem_wo`\"\u003e`caPrivateKeyPemWo`\u003c/span\u003e must be set.",
                     "secret": true
+                },
+                "caPrivateKeyPemWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e, the value provided here is never persisted to Terraform state. Requires \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPemWoVersion`\" pulumi-lang-dotnet=\"`CaPrivateKeyPemWoVersion`\" pulumi-lang-go=\"`caPrivateKeyPemWoVersion`\" pulumi-lang-python=\"`ca_private_key_pem_wo_version`\" pulumi-lang-yaml=\"`caPrivateKeyPemWoVersion`\" pulumi-lang-java=\"`caPrivateKeyPemWoVersion`\" pulumi-lang-hcl=\"`ca_private_key_pem_wo_version`\"\u003e`caPrivateKeyPemWoVersion`\u003c/span\u003e to be set, and exactly one of \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPemWo`\" pulumi-lang-dotnet=\"`CaPrivateKeyPemWo`\" pulumi-lang-go=\"`caPrivateKeyPemWo`\" pulumi-lang-python=\"`ca_private_key_pem_wo`\" pulumi-lang-yaml=\"`caPrivateKeyPemWo`\" pulumi-lang-java=\"`caPrivateKeyPemWo`\" pulumi-lang-hcl=\"`ca_private_key_pem_wo`\"\u003e`caPrivateKeyPemWo`\u003c/span\u003e must be set.",
+                    "secret": true
+                },
+                "caPrivateKeyPemWoVersion": {
+                    "type": "integer",
+                    "description": "The version of the \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPemWo`\" pulumi-lang-dotnet=\"`CaPrivateKeyPemWo`\" pulumi-lang-go=\"`caPrivateKeyPemWo`\" pulumi-lang-python=\"`ca_private_key_pem_wo`\" pulumi-lang-yaml=\"`caPrivateKeyPemWo`\" pulumi-lang-java=\"`caPrivateKeyPemWo`\" pulumi-lang-hcl=\"`ca_private_key_pem_wo`\"\u003e`caPrivateKeyPemWo`\u003c/span\u003e write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key."
                 },
                 "certPem": {
                     "type": "string",
-                    "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
+                    "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace)."
                 },
                 "certRequestPem": {
                     "type": "string",
@@ -449,27 +481,27 @@
                 },
                 "earlyRenewalHours": {
                     "type": "integer",
-                    "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: \u003cspan pulumi-lang-nodejs=\"`0`\" pulumi-lang-dotnet=\"`0`\" pulumi-lang-go=\"`0`\" pulumi-lang-python=\"`0`\" pulumi-lang-yaml=\"`0`\" pulumi-lang-java=\"`0`\" pulumi-lang-hcl=\"`0`\"\u003e`0`\u003c/span\u003e)\n"
+                    "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: \u003cspan pulumi-lang-nodejs=\"`0`\" pulumi-lang-dotnet=\"`0`\" pulumi-lang-go=\"`0`\" pulumi-lang-python=\"`0`\" pulumi-lang-yaml=\"`0`\" pulumi-lang-java=\"`0`\" pulumi-lang-hcl=\"`0`\"\u003e`0`\u003c/span\u003e)"
                 },
                 "isCaCertificate": {
                     "type": "boolean",
-                    "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                    "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                 },
                 "maxPathLength": {
                     "type": "integer",
-                    "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\" pulumi-lang-hcl=\"`is_ca_certificate`\"\u003e`isCaCertificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored.\n"
+                    "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\" pulumi-lang-hcl=\"`is_ca_certificate`\"\u003e`isCaCertificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored."
                 },
                 "readyForRenewal": {
                     "type": "boolean",
-                    "description": "Is the certificate either expired (i.e. beyond the \u003cspan pulumi-lang-nodejs=\"`validityPeriodHours`\" pulumi-lang-dotnet=\"`ValidityPeriodHours`\" pulumi-lang-go=\"`validityPeriodHours`\" pulumi-lang-python=\"`validity_period_hours`\" pulumi-lang-yaml=\"`validityPeriodHours`\" pulumi-lang-java=\"`validityPeriodHours`\" pulumi-lang-hcl=\"`validity_period_hours`\"\u003e`validityPeriodHours`\u003c/span\u003e) or ready for an early renewal (i.e. within the \u003cspan pulumi-lang-nodejs=\"`earlyRenewalHours`\" pulumi-lang-dotnet=\"`EarlyRenewalHours`\" pulumi-lang-go=\"`earlyRenewalHours`\" pulumi-lang-python=\"`early_renewal_hours`\" pulumi-lang-yaml=\"`earlyRenewalHours`\" pulumi-lang-java=\"`earlyRenewalHours`\" pulumi-lang-hcl=\"`early_renewal_hours`\"\u003e`earlyRenewalHours`\u003c/span\u003e)?\n"
+                    "description": "Is the certificate either expired (i.e. beyond the \u003cspan pulumi-lang-nodejs=\"`validityPeriodHours`\" pulumi-lang-dotnet=\"`ValidityPeriodHours`\" pulumi-lang-go=\"`validityPeriodHours`\" pulumi-lang-python=\"`validity_period_hours`\" pulumi-lang-yaml=\"`validityPeriodHours`\" pulumi-lang-java=\"`validityPeriodHours`\" pulumi-lang-hcl=\"`validity_period_hours`\"\u003e`validityPeriodHours`\u003c/span\u003e) or ready for an early renewal (i.e. within the \u003cspan pulumi-lang-nodejs=\"`earlyRenewalHours`\" pulumi-lang-dotnet=\"`EarlyRenewalHours`\" pulumi-lang-go=\"`earlyRenewalHours`\" pulumi-lang-python=\"`early_renewal_hours`\" pulumi-lang-yaml=\"`earlyRenewalHours`\" pulumi-lang-java=\"`earlyRenewalHours`\" pulumi-lang-hcl=\"`early_renewal_hours`\"\u003e`earlyRenewalHours`\u003c/span\u003e)?"
                 },
                 "setSubjectKeyId": {
                     "type": "boolean",
-                    "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                    "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                 },
                 "validityEndTime": {
                     "type": "string",
-                    "description": "The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                    "description": "The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp."
                 },
                 "validityPeriodHours": {
                     "type": "integer",
@@ -477,14 +509,13 @@
                 },
                 "validityStartTime": {
                     "type": "string",
-                    "description": "The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                    "description": "The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp."
                 }
             },
             "required": [
                 "allowedUses",
                 "caCertPem",
                 "caKeyAlgorithm",
-                "caPrivateKeyPem",
                 "certPem",
                 "certRequestPem",
                 "earlyRenewalHours",
@@ -510,8 +541,17 @@
                 },
                 "caPrivateKeyPem": {
                     "type": "string",
-                    "description": "Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n",
+                    "description": "Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPemWo`\" pulumi-lang-dotnet=\"`CaPrivateKeyPemWo`\" pulumi-lang-go=\"`caPrivateKeyPemWo`\" pulumi-lang-python=\"`ca_private_key_pem_wo`\" pulumi-lang-yaml=\"`caPrivateKeyPemWo`\" pulumi-lang-java=\"`caPrivateKeyPemWo`\" pulumi-lang-hcl=\"`ca_private_key_pem_wo`\"\u003e`caPrivateKeyPemWo`\u003c/span\u003e must be set.",
                     "secret": true
+                },
+                "caPrivateKeyPemWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e, the value provided here is never persisted to Terraform state. Requires \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPemWoVersion`\" pulumi-lang-dotnet=\"`CaPrivateKeyPemWoVersion`\" pulumi-lang-go=\"`caPrivateKeyPemWoVersion`\" pulumi-lang-python=\"`ca_private_key_pem_wo_version`\" pulumi-lang-yaml=\"`caPrivateKeyPemWoVersion`\" pulumi-lang-java=\"`caPrivateKeyPemWoVersion`\" pulumi-lang-hcl=\"`ca_private_key_pem_wo_version`\"\u003e`caPrivateKeyPemWoVersion`\u003c/span\u003e to be set, and exactly one of \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPemWo`\" pulumi-lang-dotnet=\"`CaPrivateKeyPemWo`\" pulumi-lang-go=\"`caPrivateKeyPemWo`\" pulumi-lang-python=\"`ca_private_key_pem_wo`\" pulumi-lang-yaml=\"`caPrivateKeyPemWo`\" pulumi-lang-java=\"`caPrivateKeyPemWo`\" pulumi-lang-hcl=\"`ca_private_key_pem_wo`\"\u003e`caPrivateKeyPemWo`\u003c/span\u003e must be set.",
+                    "secret": true
+                },
+                "caPrivateKeyPemWoVersion": {
+                    "type": "integer",
+                    "description": "The version of the \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPemWo`\" pulumi-lang-dotnet=\"`CaPrivateKeyPemWo`\" pulumi-lang-go=\"`caPrivateKeyPemWo`\" pulumi-lang-python=\"`ca_private_key_pem_wo`\" pulumi-lang-yaml=\"`caPrivateKeyPemWo`\" pulumi-lang-java=\"`caPrivateKeyPemWo`\" pulumi-lang-hcl=\"`ca_private_key_pem_wo`\"\u003e`caPrivateKeyPemWo`\u003c/span\u003e write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key."
                 },
                 "certRequestPem": {
                     "type": "string",
@@ -519,19 +559,19 @@
                 },
                 "earlyRenewalHours": {
                     "type": "integer",
-                    "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: \u003cspan pulumi-lang-nodejs=\"`0`\" pulumi-lang-dotnet=\"`0`\" pulumi-lang-go=\"`0`\" pulumi-lang-python=\"`0`\" pulumi-lang-yaml=\"`0`\" pulumi-lang-java=\"`0`\" pulumi-lang-hcl=\"`0`\"\u003e`0`\u003c/span\u003e)\n"
+                    "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: \u003cspan pulumi-lang-nodejs=\"`0`\" pulumi-lang-dotnet=\"`0`\" pulumi-lang-go=\"`0`\" pulumi-lang-python=\"`0`\" pulumi-lang-yaml=\"`0`\" pulumi-lang-java=\"`0`\" pulumi-lang-hcl=\"`0`\"\u003e`0`\u003c/span\u003e)"
                 },
                 "isCaCertificate": {
                     "type": "boolean",
-                    "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                    "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                 },
                 "maxPathLength": {
                     "type": "integer",
-                    "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\" pulumi-lang-hcl=\"`is_ca_certificate`\"\u003e`isCaCertificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored.\n"
+                    "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\" pulumi-lang-hcl=\"`is_ca_certificate`\"\u003e`isCaCertificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored."
                 },
                 "setSubjectKeyId": {
                     "type": "boolean",
-                    "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                    "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                 },
                 "validityPeriodHours": {
                     "type": "integer",
@@ -541,7 +581,6 @@
             "requiredInputs": [
                 "allowedUses",
                 "caCertPem",
-                "caPrivateKeyPem",
                 "certRequestPem",
                 "validityPeriodHours"
             ],
@@ -561,16 +600,25 @@
                     },
                     "caKeyAlgorithm": {
                         "type": "string",
-                        "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e.\n"
+                        "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e."
                     },
                     "caPrivateKeyPem": {
                         "type": "string",
-                        "description": "Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.\n",
+                        "description": "Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPemWo`\" pulumi-lang-dotnet=\"`CaPrivateKeyPemWo`\" pulumi-lang-go=\"`caPrivateKeyPemWo`\" pulumi-lang-python=\"`ca_private_key_pem_wo`\" pulumi-lang-yaml=\"`caPrivateKeyPemWo`\" pulumi-lang-java=\"`caPrivateKeyPemWo`\" pulumi-lang-hcl=\"`ca_private_key_pem_wo`\"\u003e`caPrivateKeyPemWo`\u003c/span\u003e must be set.",
                         "secret": true
+                    },
+                    "caPrivateKeyPemWo": {
+                        "type": "string",
+                        "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e, the value provided here is never persisted to Terraform state. Requires \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPemWoVersion`\" pulumi-lang-dotnet=\"`CaPrivateKeyPemWoVersion`\" pulumi-lang-go=\"`caPrivateKeyPemWoVersion`\" pulumi-lang-python=\"`ca_private_key_pem_wo_version`\" pulumi-lang-yaml=\"`caPrivateKeyPemWoVersion`\" pulumi-lang-java=\"`caPrivateKeyPemWoVersion`\" pulumi-lang-hcl=\"`ca_private_key_pem_wo_version`\"\u003e`caPrivateKeyPemWoVersion`\u003c/span\u003e to be set, and exactly one of \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPem`\" pulumi-lang-dotnet=\"`CaPrivateKeyPem`\" pulumi-lang-go=\"`caPrivateKeyPem`\" pulumi-lang-python=\"`ca_private_key_pem`\" pulumi-lang-yaml=\"`caPrivateKeyPem`\" pulumi-lang-java=\"`caPrivateKeyPem`\" pulumi-lang-hcl=\"`ca_private_key_pem`\"\u003e`caPrivateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPemWo`\" pulumi-lang-dotnet=\"`CaPrivateKeyPemWo`\" pulumi-lang-go=\"`caPrivateKeyPemWo`\" pulumi-lang-python=\"`ca_private_key_pem_wo`\" pulumi-lang-yaml=\"`caPrivateKeyPemWo`\" pulumi-lang-java=\"`caPrivateKeyPemWo`\" pulumi-lang-hcl=\"`ca_private_key_pem_wo`\"\u003e`caPrivateKeyPemWo`\u003c/span\u003e must be set.",
+                        "secret": true
+                    },
+                    "caPrivateKeyPemWoVersion": {
+                        "type": "integer",
+                        "description": "The version of the \u003cspan pulumi-lang-nodejs=\"`caPrivateKeyPemWo`\" pulumi-lang-dotnet=\"`CaPrivateKeyPemWo`\" pulumi-lang-go=\"`caPrivateKeyPemWo`\" pulumi-lang-python=\"`ca_private_key_pem_wo`\" pulumi-lang-yaml=\"`caPrivateKeyPemWo`\" pulumi-lang-java=\"`caPrivateKeyPemWo`\" pulumi-lang-hcl=\"`ca_private_key_pem_wo`\"\u003e`caPrivateKeyPemWo`\u003c/span\u003e write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key."
                     },
                     "certPem": {
                         "type": "string",
-                        "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
+                        "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace)."
                     },
                     "certRequestPem": {
                         "type": "string",
@@ -578,27 +626,27 @@
                     },
                     "earlyRenewalHours": {
                         "type": "integer",
-                        "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: \u003cspan pulumi-lang-nodejs=\"`0`\" pulumi-lang-dotnet=\"`0`\" pulumi-lang-go=\"`0`\" pulumi-lang-python=\"`0`\" pulumi-lang-yaml=\"`0`\" pulumi-lang-java=\"`0`\" pulumi-lang-hcl=\"`0`\"\u003e`0`\u003c/span\u003e)\n"
+                        "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: \u003cspan pulumi-lang-nodejs=\"`0`\" pulumi-lang-dotnet=\"`0`\" pulumi-lang-go=\"`0`\" pulumi-lang-python=\"`0`\" pulumi-lang-yaml=\"`0`\" pulumi-lang-java=\"`0`\" pulumi-lang-hcl=\"`0`\"\u003e`0`\u003c/span\u003e)"
                     },
                     "isCaCertificate": {
                         "type": "boolean",
-                        "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                        "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                     },
                     "maxPathLength": {
                         "type": "integer",
-                        "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\" pulumi-lang-hcl=\"`is_ca_certificate`\"\u003e`isCaCertificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored.\n"
+                        "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\" pulumi-lang-hcl=\"`is_ca_certificate`\"\u003e`isCaCertificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored."
                     },
                     "readyForRenewal": {
                         "type": "boolean",
-                        "description": "Is the certificate either expired (i.e. beyond the \u003cspan pulumi-lang-nodejs=\"`validityPeriodHours`\" pulumi-lang-dotnet=\"`ValidityPeriodHours`\" pulumi-lang-go=\"`validityPeriodHours`\" pulumi-lang-python=\"`validity_period_hours`\" pulumi-lang-yaml=\"`validityPeriodHours`\" pulumi-lang-java=\"`validityPeriodHours`\" pulumi-lang-hcl=\"`validity_period_hours`\"\u003e`validityPeriodHours`\u003c/span\u003e) or ready for an early renewal (i.e. within the \u003cspan pulumi-lang-nodejs=\"`earlyRenewalHours`\" pulumi-lang-dotnet=\"`EarlyRenewalHours`\" pulumi-lang-go=\"`earlyRenewalHours`\" pulumi-lang-python=\"`early_renewal_hours`\" pulumi-lang-yaml=\"`earlyRenewalHours`\" pulumi-lang-java=\"`earlyRenewalHours`\" pulumi-lang-hcl=\"`early_renewal_hours`\"\u003e`earlyRenewalHours`\u003c/span\u003e)?\n"
+                        "description": "Is the certificate either expired (i.e. beyond the \u003cspan pulumi-lang-nodejs=\"`validityPeriodHours`\" pulumi-lang-dotnet=\"`ValidityPeriodHours`\" pulumi-lang-go=\"`validityPeriodHours`\" pulumi-lang-python=\"`validity_period_hours`\" pulumi-lang-yaml=\"`validityPeriodHours`\" pulumi-lang-java=\"`validityPeriodHours`\" pulumi-lang-hcl=\"`validity_period_hours`\"\u003e`validityPeriodHours`\u003c/span\u003e) or ready for an early renewal (i.e. within the \u003cspan pulumi-lang-nodejs=\"`earlyRenewalHours`\" pulumi-lang-dotnet=\"`EarlyRenewalHours`\" pulumi-lang-go=\"`earlyRenewalHours`\" pulumi-lang-python=\"`early_renewal_hours`\" pulumi-lang-yaml=\"`earlyRenewalHours`\" pulumi-lang-java=\"`earlyRenewalHours`\" pulumi-lang-hcl=\"`early_renewal_hours`\"\u003e`earlyRenewalHours`\u003c/span\u003e)?"
                     },
                     "setSubjectKeyId": {
                         "type": "boolean",
-                        "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                        "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                     },
                     "validityEndTime": {
                         "type": "string",
-                        "description": "The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                        "description": "The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp."
                     },
                     "validityPeriodHours": {
                         "type": "integer",
@@ -606,7 +654,7 @@
                     },
                     "validityStartTime": {
                         "type": "string",
-                        "description": "The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                        "description": "The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp."
                     }
                 },
                 "type": "object"
@@ -750,69 +798,78 @@
                 },
                 "certPem": {
                     "type": "string",
-                    "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
+                    "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace)."
                 },
                 "dnsNames": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects).\n"
+                    "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects)."
                 },
                 "earlyRenewalHours": {
                     "type": "integer",
-                    "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: \u003cspan pulumi-lang-nodejs=\"`0`\" pulumi-lang-dotnet=\"`0`\" pulumi-lang-go=\"`0`\" pulumi-lang-python=\"`0`\" pulumi-lang-yaml=\"`0`\" pulumi-lang-java=\"`0`\" pulumi-lang-hcl=\"`0`\"\u003e`0`\u003c/span\u003e)\n"
+                    "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: \u003cspan pulumi-lang-nodejs=\"`0`\" pulumi-lang-dotnet=\"`0`\" pulumi-lang-go=\"`0`\" pulumi-lang-python=\"`0`\" pulumi-lang-yaml=\"`0`\" pulumi-lang-java=\"`0`\" pulumi-lang-hcl=\"`0`\"\u003e`0`\u003c/span\u003e)"
                 },
                 "ipAddresses": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of IP addresses for which a certificate is being requested (i.e. certificate subjects).\n"
+                    "description": "List of IP addresses for which a certificate is being requested (i.e. certificate subjects)."
                 },
                 "isCaCertificate": {
                     "type": "boolean",
-                    "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                    "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                 },
                 "keyAlgorithm": {
                     "type": "string",
-                    "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e.\n"
+                    "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e."
                 },
                 "maxPathLength": {
                     "type": "integer",
-                    "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\" pulumi-lang-hcl=\"`is_ca_certificate`\"\u003e`isCaCertificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored.\n"
+                    "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\" pulumi-lang-hcl=\"`is_ca_certificate`\"\u003e`isCaCertificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored."
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.\n",
+                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [\u003cspan pulumi-lang-nodejs=\"`file`\" pulumi-lang-dotnet=\"`File`\" pulumi-lang-go=\"`file`\" pulumi-lang-python=\"`file`\" pulumi-lang-yaml=\"`file`\" pulumi-lang-java=\"`file`\" pulumi-lang-hcl=\"`file`\"\u003e`file`\u003c/span\u003e](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e must be set.",
                     "secret": true
+                },
+                "privateKeyPemWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e, the value provided here is never persisted to Terraform state. Requires \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWoVersion`\" pulumi-lang-dotnet=\"`PrivateKeyPemWoVersion`\" pulumi-lang-go=\"`privateKeyPemWoVersion`\" pulumi-lang-python=\"`private_key_pem_wo_version`\" pulumi-lang-yaml=\"`privateKeyPemWoVersion`\" pulumi-lang-java=\"`privateKeyPemWoVersion`\" pulumi-lang-hcl=\"`private_key_pem_wo_version`\"\u003e`privateKeyPemWoVersion`\u003c/span\u003e to be set, and exactly one of \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e must be set.",
+                    "secret": true
+                },
+                "privateKeyPemWoVersion": {
+                    "type": "integer",
+                    "description": "The version of the \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key."
                 },
                 "readyForRenewal": {
                     "type": "boolean",
-                    "description": "Is the certificate either expired (i.e. beyond the \u003cspan pulumi-lang-nodejs=\"`validityPeriodHours`\" pulumi-lang-dotnet=\"`ValidityPeriodHours`\" pulumi-lang-go=\"`validityPeriodHours`\" pulumi-lang-python=\"`validity_period_hours`\" pulumi-lang-yaml=\"`validityPeriodHours`\" pulumi-lang-java=\"`validityPeriodHours`\" pulumi-lang-hcl=\"`validity_period_hours`\"\u003e`validityPeriodHours`\u003c/span\u003e) or ready for an early renewal (i.e. within the \u003cspan pulumi-lang-nodejs=\"`earlyRenewalHours`\" pulumi-lang-dotnet=\"`EarlyRenewalHours`\" pulumi-lang-go=\"`earlyRenewalHours`\" pulumi-lang-python=\"`early_renewal_hours`\" pulumi-lang-yaml=\"`earlyRenewalHours`\" pulumi-lang-java=\"`earlyRenewalHours`\" pulumi-lang-hcl=\"`early_renewal_hours`\"\u003e`earlyRenewalHours`\u003c/span\u003e)?\n"
+                    "description": "Is the certificate either expired (i.e. beyond the \u003cspan pulumi-lang-nodejs=\"`validityPeriodHours`\" pulumi-lang-dotnet=\"`ValidityPeriodHours`\" pulumi-lang-go=\"`validityPeriodHours`\" pulumi-lang-python=\"`validity_period_hours`\" pulumi-lang-yaml=\"`validityPeriodHours`\" pulumi-lang-java=\"`validityPeriodHours`\" pulumi-lang-hcl=\"`validity_period_hours`\"\u003e`validityPeriodHours`\u003c/span\u003e) or ready for an early renewal (i.e. within the \u003cspan pulumi-lang-nodejs=\"`earlyRenewalHours`\" pulumi-lang-dotnet=\"`EarlyRenewalHours`\" pulumi-lang-go=\"`earlyRenewalHours`\" pulumi-lang-python=\"`early_renewal_hours`\" pulumi-lang-yaml=\"`earlyRenewalHours`\" pulumi-lang-java=\"`earlyRenewalHours`\" pulumi-lang-hcl=\"`early_renewal_hours`\"\u003e`earlyRenewalHours`\u003c/span\u003e)?"
                 },
                 "setAuthorityKeyId": {
                     "type": "boolean",
-                    "description": "Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                    "description": "Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                 },
                 "setSubjectKeyId": {
                     "type": "boolean",
-                    "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                    "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                 },
                 "subject": {
                     "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject",
-                    "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
+                    "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section."
                 },
                 "uris": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of URIs for which a certificate is being requested (i.e. certificate subjects).\n"
+                    "description": "List of URIs for which a certificate is being requested (i.e. certificate subjects)."
                 },
                 "validityEndTime": {
                     "type": "string",
-                    "description": "The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                    "description": "The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp."
                 },
                 "validityPeriodHours": {
                     "type": "integer",
@@ -820,7 +877,7 @@
                 },
                 "validityStartTime": {
                     "type": "string",
-                    "description": "The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                    "description": "The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp."
                 }
             },
             "required": [
@@ -830,7 +887,6 @@
                 "isCaCertificate",
                 "keyAlgorithm",
                 "maxPathLength",
-                "privateKeyPem",
                 "readyForRenewal",
                 "setAuthorityKeyId",
                 "setSubjectKeyId",
@@ -851,50 +907,59 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects).\n"
+                    "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects)."
                 },
                 "earlyRenewalHours": {
                     "type": "integer",
-                    "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: \u003cspan pulumi-lang-nodejs=\"`0`\" pulumi-lang-dotnet=\"`0`\" pulumi-lang-go=\"`0`\" pulumi-lang-python=\"`0`\" pulumi-lang-yaml=\"`0`\" pulumi-lang-java=\"`0`\" pulumi-lang-hcl=\"`0`\"\u003e`0`\u003c/span\u003e)\n"
+                    "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: \u003cspan pulumi-lang-nodejs=\"`0`\" pulumi-lang-dotnet=\"`0`\" pulumi-lang-go=\"`0`\" pulumi-lang-python=\"`0`\" pulumi-lang-yaml=\"`0`\" pulumi-lang-java=\"`0`\" pulumi-lang-hcl=\"`0`\"\u003e`0`\u003c/span\u003e)"
                 },
                 "ipAddresses": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of IP addresses for which a certificate is being requested (i.e. certificate subjects).\n"
+                    "description": "List of IP addresses for which a certificate is being requested (i.e. certificate subjects)."
                 },
                 "isCaCertificate": {
                     "type": "boolean",
-                    "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                    "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                 },
                 "maxPathLength": {
                     "type": "integer",
-                    "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\" pulumi-lang-hcl=\"`is_ca_certificate`\"\u003e`isCaCertificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored.\n"
+                    "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\" pulumi-lang-hcl=\"`is_ca_certificate`\"\u003e`isCaCertificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored."
                 },
                 "privateKeyPem": {
                     "type": "string",
-                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.\n",
+                    "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [\u003cspan pulumi-lang-nodejs=\"`file`\" pulumi-lang-dotnet=\"`File`\" pulumi-lang-go=\"`file`\" pulumi-lang-python=\"`file`\" pulumi-lang-yaml=\"`file`\" pulumi-lang-java=\"`file`\" pulumi-lang-hcl=\"`file`\"\u003e`file`\u003c/span\u003e](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e must be set.",
                     "secret": true
+                },
+                "privateKeyPemWo": {
+                    "type": "string",
+                    "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e, the value provided here is never persisted to Terraform state. Requires \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWoVersion`\" pulumi-lang-dotnet=\"`PrivateKeyPemWoVersion`\" pulumi-lang-go=\"`privateKeyPemWoVersion`\" pulumi-lang-python=\"`private_key_pem_wo_version`\" pulumi-lang-yaml=\"`privateKeyPemWoVersion`\" pulumi-lang-java=\"`privateKeyPemWoVersion`\" pulumi-lang-hcl=\"`private_key_pem_wo_version`\"\u003e`privateKeyPemWoVersion`\u003c/span\u003e to be set, and exactly one of \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e must be set.",
+                    "secret": true
+                },
+                "privateKeyPemWoVersion": {
+                    "type": "integer",
+                    "description": "The version of the \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key."
                 },
                 "setAuthorityKeyId": {
                     "type": "boolean",
-                    "description": "Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                    "description": "Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                 },
                 "setSubjectKeyId": {
                     "type": "boolean",
-                    "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                    "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                 },
                 "subject": {
                     "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject",
-                    "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
+                    "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section."
                 },
                 "uris": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of URIs for which a certificate is being requested (i.e. certificate subjects).\n"
+                    "description": "List of URIs for which a certificate is being requested (i.e. certificate subjects)."
                 },
                 "validityPeriodHours": {
                     "type": "integer",
@@ -903,7 +968,6 @@
             },
             "requiredInputs": [
                 "allowedUses",
-                "privateKeyPem",
                 "validityPeriodHours"
             ],
             "stateInputs": {
@@ -918,69 +982,78 @@
                     },
                     "certPem": {
                         "type": "string",
-                        "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.\n"
+                        "description": "Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace)."
                     },
                     "dnsNames": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         },
-                        "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects).\n"
+                        "description": "List of DNS names for which a certificate is being requested (i.e. certificate subjects)."
                     },
                     "earlyRenewalHours": {
                         "type": "integer",
-                        "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: \u003cspan pulumi-lang-nodejs=\"`0`\" pulumi-lang-dotnet=\"`0`\" pulumi-lang-go=\"`0`\" pulumi-lang-python=\"`0`\" pulumi-lang-yaml=\"`0`\" pulumi-lang-java=\"`0`\" pulumi-lang-hcl=\"`0`\"\u003e`0`\u003c/span\u003e)\n"
+                        "description": "The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: \u003cspan pulumi-lang-nodejs=\"`0`\" pulumi-lang-dotnet=\"`0`\" pulumi-lang-go=\"`0`\" pulumi-lang-python=\"`0`\" pulumi-lang-yaml=\"`0`\" pulumi-lang-java=\"`0`\" pulumi-lang-hcl=\"`0`\"\u003e`0`\u003c/span\u003e)"
                     },
                     "ipAddresses": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         },
-                        "description": "List of IP addresses for which a certificate is being requested (i.e. certificate subjects).\n"
+                        "description": "List of IP addresses for which a certificate is being requested (i.e. certificate subjects)."
                     },
                     "isCaCertificate": {
                         "type": "boolean",
-                        "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                        "description": "Is the generated certificate representing a Certificate Authority (CA) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                     },
                     "keyAlgorithm": {
                         "type": "string",
-                        "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e.\n"
+                        "description": "Name of the algorithm used when generating the private key provided in \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e."
                     },
                     "maxPathLength": {
                         "type": "integer",
-                        "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\" pulumi-lang-hcl=\"`is_ca_certificate`\"\u003e`isCaCertificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored.\n"
+                        "description": "Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If \u003cspan pulumi-lang-nodejs=\"`isCaCertificate`\" pulumi-lang-dotnet=\"`IsCaCertificate`\" pulumi-lang-go=\"`isCaCertificate`\" pulumi-lang-python=\"`is_ca_certificate`\" pulumi-lang-yaml=\"`isCaCertificate`\" pulumi-lang-java=\"`isCaCertificate`\" pulumi-lang-hcl=\"`is_ca_certificate`\"\u003e`isCaCertificate`\u003c/span\u003e is \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e, this value is ignored."
                     },
                     "privateKeyPem": {
                         "type": "string",
-                        "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.\n",
+                        "description": "Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [\u003cspan pulumi-lang-nodejs=\"`file`\" pulumi-lang-dotnet=\"`File`\" pulumi-lang-go=\"`file`\" pulumi-lang-python=\"`file`\" pulumi-lang-yaml=\"`file`\" pulumi-lang-java=\"`file`\" pulumi-lang-hcl=\"`file`\"\u003e`file`\u003c/span\u003e](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e must be set.",
                         "secret": true
+                    },
+                    "privateKeyPemWo": {
+                        "type": "string",
+                        "description": "**NOTE:** This field is write-only and its value will not be updated in state as part of read operations.\nWrite-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e, the value provided here is never persisted to Terraform state. Requires \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWoVersion`\" pulumi-lang-dotnet=\"`PrivateKeyPemWoVersion`\" pulumi-lang-go=\"`privateKeyPemWoVersion`\" pulumi-lang-python=\"`private_key_pem_wo_version`\" pulumi-lang-yaml=\"`privateKeyPemWoVersion`\" pulumi-lang-java=\"`privateKeyPemWoVersion`\" pulumi-lang-hcl=\"`private_key_pem_wo_version`\"\u003e`privateKeyPemWoVersion`\u003c/span\u003e to be set, and exactly one of \u003cspan pulumi-lang-nodejs=\"`privateKeyPem`\" pulumi-lang-dotnet=\"`PrivateKeyPem`\" pulumi-lang-go=\"`privateKeyPem`\" pulumi-lang-python=\"`private_key_pem`\" pulumi-lang-yaml=\"`privateKeyPem`\" pulumi-lang-java=\"`privateKeyPem`\" pulumi-lang-hcl=\"`private_key_pem`\"\u003e`privateKeyPem`\u003c/span\u003e or \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e must be set.",
+                        "secret": true
+                    },
+                    "privateKeyPemWoVersion": {
+                        "type": "integer",
+                        "description": "The version of the \u003cspan pulumi-lang-nodejs=\"`privateKeyPemWo`\" pulumi-lang-dotnet=\"`PrivateKeyPemWo`\" pulumi-lang-go=\"`privateKeyPemWo`\" pulumi-lang-python=\"`private_key_pem_wo`\" pulumi-lang-yaml=\"`privateKeyPemWo`\" pulumi-lang-java=\"`privateKeyPemWo`\" pulumi-lang-hcl=\"`private_key_pem_wo`\"\u003e`privateKeyPemWo`\u003c/span\u003e write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key."
                     },
                     "readyForRenewal": {
                         "type": "boolean",
-                        "description": "Is the certificate either expired (i.e. beyond the \u003cspan pulumi-lang-nodejs=\"`validityPeriodHours`\" pulumi-lang-dotnet=\"`ValidityPeriodHours`\" pulumi-lang-go=\"`validityPeriodHours`\" pulumi-lang-python=\"`validity_period_hours`\" pulumi-lang-yaml=\"`validityPeriodHours`\" pulumi-lang-java=\"`validityPeriodHours`\" pulumi-lang-hcl=\"`validity_period_hours`\"\u003e`validityPeriodHours`\u003c/span\u003e) or ready for an early renewal (i.e. within the \u003cspan pulumi-lang-nodejs=\"`earlyRenewalHours`\" pulumi-lang-dotnet=\"`EarlyRenewalHours`\" pulumi-lang-go=\"`earlyRenewalHours`\" pulumi-lang-python=\"`early_renewal_hours`\" pulumi-lang-yaml=\"`earlyRenewalHours`\" pulumi-lang-java=\"`earlyRenewalHours`\" pulumi-lang-hcl=\"`early_renewal_hours`\"\u003e`earlyRenewalHours`\u003c/span\u003e)?\n"
+                        "description": "Is the certificate either expired (i.e. beyond the \u003cspan pulumi-lang-nodejs=\"`validityPeriodHours`\" pulumi-lang-dotnet=\"`ValidityPeriodHours`\" pulumi-lang-go=\"`validityPeriodHours`\" pulumi-lang-python=\"`validity_period_hours`\" pulumi-lang-yaml=\"`validityPeriodHours`\" pulumi-lang-java=\"`validityPeriodHours`\" pulumi-lang-hcl=\"`validity_period_hours`\"\u003e`validityPeriodHours`\u003c/span\u003e) or ready for an early renewal (i.e. within the \u003cspan pulumi-lang-nodejs=\"`earlyRenewalHours`\" pulumi-lang-dotnet=\"`EarlyRenewalHours`\" pulumi-lang-go=\"`earlyRenewalHours`\" pulumi-lang-python=\"`early_renewal_hours`\" pulumi-lang-yaml=\"`earlyRenewalHours`\" pulumi-lang-java=\"`earlyRenewalHours`\" pulumi-lang-hcl=\"`early_renewal_hours`\"\u003e`earlyRenewalHours`\u003c/span\u003e)?"
                     },
                     "setAuthorityKeyId": {
                         "type": "boolean",
-                        "description": "Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                        "description": "Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                     },
                     "setSubjectKeyId": {
                         "type": "boolean",
-                        "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                        "description": "Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e)."
                     },
                     "subject": {
                         "$ref": "#/types/tls:index/SelfSignedCertSubject:SelfSignedCertSubject",
-                        "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.\n"
+                        "description": "The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section."
                     },
                     "uris": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         },
-                        "description": "List of URIs for which a certificate is being requested (i.e. certificate subjects).\n"
+                        "description": "List of URIs for which a certificate is being requested (i.e. certificate subjects)."
                     },
                     "validityEndTime": {
                         "type": "string",
-                        "description": "The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                        "description": "The time until which the certificate is invalid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp."
                     },
                     "validityPeriodHours": {
                         "type": "integer",
@@ -988,7 +1061,7 @@
                     },
                     "validityStartTime": {
                         "type": "string",
-                        "description": "The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp.\n"
+                        "description": "The time after which the certificate is valid, expressed as an [RFC3339](https://tools.ietf.org/html/rfc3339) timestamp."
                     }
                 },
                 "type": "object"
