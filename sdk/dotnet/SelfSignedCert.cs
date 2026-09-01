@@ -78,7 +78,7 @@ namespace Pulumi.Tls
         public Output<ImmutableArray<string>> AllowedUses { get; private set; } = null!;
 
         /// <summary>
-        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         /// </summary>
         [Output("certPem")]
         public Output<string> CertPem { get; private set; } = null!;
@@ -120,10 +120,23 @@ namespace Pulumi.Tls
         public Output<int> MaxPathLength { get; private set; } = null!;
 
         /// <summary>
-        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
+        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`File`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `PrivateKeyPem` or `PrivateKeyPemWo` must be set.
         /// </summary>
         [Output("privateKeyPem")]
-        public Output<string> PrivateKeyPem { get; private set; } = null!;
+        public Output<string?> PrivateKeyPem { get; private set; } = null!;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `PrivateKeyPem`, the value provided here is never persisted to Terraform state. Requires `PrivateKeyPemWoVersion` to be set, and exactly one of `PrivateKeyPem` or `PrivateKeyPemWo` must be set.
+        /// </summary>
+        [Output("privateKeyPemWo")]
+        public Output<string?> PrivateKeyPemWo { get; private set; } = null!;
+
+        /// <summary>
+        /// The version of the `PrivateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
+        /// </summary>
+        [Output("privateKeyPemWoVersion")]
+        public Output<int?> PrivateKeyPemWoVersion { get; private set; } = null!;
 
         /// <summary>
         /// Is the certificate either expired (i.e. beyond the `ValidityPeriodHours`) or ready for an early renewal (i.e. within the `EarlyRenewalHours`)?
@@ -199,6 +212,7 @@ namespace Pulumi.Tls
                 AdditionalSecretOutputs =
                 {
                     "privateKeyPem",
+                    "privateKeyPemWo",
                 },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
@@ -277,11 +291,11 @@ namespace Pulumi.Tls
         [Input("maxPathLength")]
         public Input<int>? MaxPathLength { get; set; }
 
-        [Input("privateKeyPem", required: true)]
+        [Input("privateKeyPem")]
         private Input<string>? _privateKeyPem;
 
         /// <summary>
-        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
+        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`File`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `PrivateKeyPem` or `PrivateKeyPemWo` must be set.
         /// </summary>
         public Input<string>? PrivateKeyPem
         {
@@ -292,6 +306,29 @@ namespace Pulumi.Tls
                 _privateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
+
+        [Input("privateKeyPemWo")]
+        private Input<string>? _privateKeyPemWo;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `PrivateKeyPem`, the value provided here is never persisted to Terraform state. Requires `PrivateKeyPemWoVersion` to be set, and exactly one of `PrivateKeyPem` or `PrivateKeyPemWo` must be set.
+        /// </summary>
+        public Input<string>? PrivateKeyPemWo
+        {
+            get => _privateKeyPemWo;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyPemWo = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// The version of the `PrivateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
+        /// </summary>
+        [Input("privateKeyPemWoVersion")]
+        public Input<int>? PrivateKeyPemWoVersion { get; set; }
 
         /// <summary>
         /// Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `False`).
@@ -350,7 +387,7 @@ namespace Pulumi.Tls
         }
 
         /// <summary>
-        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         /// </summary>
         [Input("certPem")]
         public Input<string>? CertPem { get; set; }
@@ -407,7 +444,7 @@ namespace Pulumi.Tls
         private Input<string>? _privateKeyPem;
 
         /// <summary>
-        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
+        /// Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`File`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `PrivateKeyPem` or `PrivateKeyPemWo` must be set.
         /// </summary>
         public Input<string>? PrivateKeyPem
         {
@@ -418,6 +455,29 @@ namespace Pulumi.Tls
                 _privateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
+
+        [Input("privateKeyPemWo")]
+        private Input<string>? _privateKeyPemWo;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `PrivateKeyPem`, the value provided here is never persisted to Terraform state. Requires `PrivateKeyPemWoVersion` to be set, and exactly one of `PrivateKeyPem` or `PrivateKeyPemWo` must be set.
+        /// </summary>
+        public Input<string>? PrivateKeyPemWo
+        {
+            get => _privateKeyPemWo;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _privateKeyPemWo = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// The version of the `PrivateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
+        /// </summary>
+        [Input("privateKeyPemWoVersion")]
+        public Input<int>? PrivateKeyPemWoVersion { get; set; }
 
         /// <summary>
         /// Is the certificate either expired (i.e. beyond the `ValidityPeriodHours`) or ready for an early renewal (i.e. within the `EarlyRenewalHours`)?

@@ -91,13 +91,26 @@ namespace Pulumi.Tls
         public Output<string> CaKeyAlgorithm { get; private set; } = null!;
 
         /// <summary>
-        /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `CaPrivateKeyPem` or `CaPrivateKeyPemWo` must be set.
         /// </summary>
         [Output("caPrivateKeyPem")]
-        public Output<string> CaPrivateKeyPem { get; private set; } = null!;
+        public Output<string?> CaPrivateKeyPem { get; private set; } = null!;
 
         /// <summary>
-        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `CaPrivateKeyPem`, the value provided here is never persisted to Terraform state. Requires `CaPrivateKeyPemWoVersion` to be set, and exactly one of `CaPrivateKeyPem` or `CaPrivateKeyPemWo` must be set.
+        /// </summary>
+        [Output("caPrivateKeyPemWo")]
+        public Output<string?> CaPrivateKeyPemWo { get; private set; } = null!;
+
+        /// <summary>
+        /// The version of the `CaPrivateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+        /// </summary>
+        [Output("caPrivateKeyPemWoVersion")]
+        public Output<int?> CaPrivateKeyPemWoVersion { get; private set; } = null!;
+
+        /// <summary>
+        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         /// </summary>
         [Output("certPem")]
         public Output<string> CertPem { get; private set; } = null!;
@@ -182,6 +195,7 @@ namespace Pulumi.Tls
                 AdditionalSecretOutputs =
                 {
                     "caPrivateKeyPem",
+                    "caPrivateKeyPemWo",
                 },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
@@ -224,11 +238,11 @@ namespace Pulumi.Tls
         [Input("caCertPem", required: true)]
         public Input<string> CaCertPem { get; set; } = null!;
 
-        [Input("caPrivateKeyPem", required: true)]
+        [Input("caPrivateKeyPem")]
         private Input<string>? _caPrivateKeyPem;
 
         /// <summary>
-        /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `CaPrivateKeyPem` or `CaPrivateKeyPemWo` must be set.
         /// </summary>
         public Input<string>? CaPrivateKeyPem
         {
@@ -239,6 +253,29 @@ namespace Pulumi.Tls
                 _caPrivateKeyPem = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
+
+        [Input("caPrivateKeyPemWo")]
+        private Input<string>? _caPrivateKeyPemWo;
+
+        /// <summary>
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `CaPrivateKeyPem`, the value provided here is never persisted to Terraform state. Requires `CaPrivateKeyPemWoVersion` to be set, and exactly one of `CaPrivateKeyPem` or `CaPrivateKeyPemWo` must be set.
+        /// </summary>
+        public Input<string>? CaPrivateKeyPemWo
+        {
+            get => _caPrivateKeyPemWo;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _caPrivateKeyPemWo = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// The version of the `CaPrivateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+        /// </summary>
+        [Input("caPrivateKeyPemWoVersion")]
+        public Input<int>? CaPrivateKeyPemWoVersion { get; set; }
 
         /// <summary>
         /// Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
@@ -312,7 +349,7 @@ namespace Pulumi.Tls
         private Input<string>? _caPrivateKeyPem;
 
         /// <summary>
-        /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        /// Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `CaPrivateKeyPem` or `CaPrivateKeyPemWo` must be set.
         /// </summary>
         public Input<string>? CaPrivateKeyPem
         {
@@ -324,8 +361,31 @@ namespace Pulumi.Tls
             }
         }
 
+        [Input("caPrivateKeyPemWo")]
+        private Input<string>? _caPrivateKeyPemWo;
+
         /// <summary>
-        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        /// **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        /// Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `CaPrivateKeyPem`, the value provided here is never persisted to Terraform state. Requires `CaPrivateKeyPemWoVersion` to be set, and exactly one of `CaPrivateKeyPem` or `CaPrivateKeyPemWo` must be set.
+        /// </summary>
+        public Input<string>? CaPrivateKeyPemWo
+        {
+            get => _caPrivateKeyPemWo;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _caPrivateKeyPemWo = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// The version of the `CaPrivateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+        /// </summary>
+        [Input("caPrivateKeyPemWoVersion")]
+        public Input<int>? CaPrivateKeyPemWoVersion { get; set; }
+
+        /// <summary>
+        /// Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         /// </summary>
         [Input("certPem")]
         public Input<string>? CertPem { get; set; }

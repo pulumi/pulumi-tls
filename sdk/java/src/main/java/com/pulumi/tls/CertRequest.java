@@ -11,6 +11,7 @@ import com.pulumi.tls.CertRequestArgs;
 import com.pulumi.tls.Utilities;
 import com.pulumi.tls.inputs.CertRequestState;
 import com.pulumi.tls.outputs.CertRequestSubject;
+import java.lang.Integer;
 import java.lang.String;
 import java.util.List;
 import java.util.Optional;
@@ -72,14 +73,14 @@ import javax.annotation.Nullable;
 @ResourceType(type="tls:index/certRequest:CertRequest")
 public class CertRequest extends com.pulumi.resources.CustomResource {
     /**
-     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+     * The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
      * 
      */
     @Export(name="certRequestPem", refs={String.class}, tree="[0]")
     private Output<String> certRequestPem;
 
     /**
-     * @return The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+     * @return The certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
      * 
      */
     public Output<String> certRequestPem() {
@@ -128,18 +129,48 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
         return this.keyAlgorithm;
     }
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
      * 
      */
     @Export(name="privateKeyPem", refs={String.class}, tree="[0]")
-    private Output<String> privateKeyPem;
+    private Output</* @Nullable */ String> privateKeyPem;
 
     /**
-     * @return Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+     * @return Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
      * 
      */
-    public Output<String> privateKeyPem() {
-        return this.privateKeyPem;
+    public Output<Optional<String>> privateKeyPem() {
+        return Codegen.optional(this.privateKeyPem);
+    }
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `privateKeyPem`, the value provided here is never persisted to Terraform state. Requires `privateKeyPemWoVersion` to be set, and exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
+     * 
+     */
+    @Export(name="privateKeyPemWo", refs={String.class}, tree="[0]")
+    private Output</* @Nullable */ String> privateKeyPemWo;
+
+    /**
+     * @return **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `privateKeyPem`, the value provided here is never persisted to Terraform state. Requires `privateKeyPemWoVersion` to be set, and exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
+     * 
+     */
+    public Output<Optional<String>> privateKeyPemWo() {
+        return Codegen.optional(this.privateKeyPemWo);
+    }
+    /**
+     * The version of the `privateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
+     * 
+     */
+    @Export(name="privateKeyPemWoVersion", refs={Integer.class}, tree="[0]")
+    private Output</* @Nullable */ Integer> privateKeyPemWoVersion;
+
+    /**
+     * @return The version of the `privateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
+     * 
+     */
+    public Output<Optional<Integer>> privateKeyPemWoVersion() {
+        return Codegen.optional(this.privateKeyPemWoVersion);
     }
     /**
      * The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
@@ -182,7 +213,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param args The arguments to use to populate this resource's properties.
      */
-    public CertRequest(java.lang.String name, CertRequestArgs args) {
+    public CertRequest(java.lang.String name, @Nullable CertRequestArgs args) {
         this(name, args, null);
     }
     /**
@@ -191,7 +222,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param options A bag of options that control this resource's behavior.
      */
-    public CertRequest(java.lang.String name, CertRequestArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    public CertRequest(java.lang.String name, @Nullable CertRequestArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         super("tls:index/certRequest:CertRequest", name, makeArgs(args, options), makeResourceOptions(options, Codegen.empty()), false);
     }
 
@@ -199,7 +230,7 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
         super("tls:index/certRequest:CertRequest", name, state, makeResourceOptions(options, id), false);
     }
 
-    private static CertRequestArgs makeArgs(CertRequestArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
+    private static CertRequestArgs makeArgs(@Nullable CertRequestArgs args, @Nullable com.pulumi.resources.CustomResourceOptions options) {
         if (options != null && options.getUrn().isPresent()) {
             return null;
         }
@@ -210,7 +241,8 @@ public class CertRequest extends com.pulumi.resources.CustomResource {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
             .additionalSecretOutputs(List.of(
-                "privateKeyPem"
+                "privateKeyPem",
+                "privateKeyPemWo"
             ))
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);

@@ -88,7 +88,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
      */
     declare public readonly allowedUses: pulumi.Output<string[]>;
     /**
-     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
      */
     declare public /*out*/ readonly certPem: pulumi.Output<string>;
     /**
@@ -116,9 +116,18 @@ export class SelfSignedCert extends pulumi.CustomResource {
      */
     declare public readonly maxPathLength: pulumi.Output<number>;
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
      */
-    declare public readonly privateKeyPem: pulumi.Output<string>;
+    declare public readonly privateKeyPem: pulumi.Output<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `privateKeyPem`, the value provided here is never persisted to Terraform state. Requires `privateKeyPemWoVersion` to be set, and exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
+     */
+    declare public readonly privateKeyPemWo: pulumi.Output<string | undefined>;
+    /**
+     * The version of the `privateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
+     */
+    declare public readonly privateKeyPemWoVersion: pulumi.Output<number | undefined>;
     /**
      * Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
      */
@@ -174,6 +183,8 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["keyAlgorithm"] = state?.keyAlgorithm;
             resourceInputs["maxPathLength"] = state?.maxPathLength;
             resourceInputs["privateKeyPem"] = state?.privateKeyPem;
+            resourceInputs["privateKeyPemWo"] = state?.privateKeyPemWo;
+            resourceInputs["privateKeyPemWoVersion"] = state?.privateKeyPemWoVersion;
             resourceInputs["readyForRenewal"] = state?.readyForRenewal;
             resourceInputs["setAuthorityKeyId"] = state?.setAuthorityKeyId;
             resourceInputs["setSubjectKeyId"] = state?.setSubjectKeyId;
@@ -187,9 +198,6 @@ export class SelfSignedCert extends pulumi.CustomResource {
             if (args?.allowedUses === undefined && !opts.urn) {
                 throw new Error("Missing required property 'allowedUses'");
             }
-            if (args?.privateKeyPem === undefined && !opts.urn) {
-                throw new Error("Missing required property 'privateKeyPem'");
-            }
             if (args?.validityPeriodHours === undefined && !opts.urn) {
                 throw new Error("Missing required property 'validityPeriodHours'");
             }
@@ -200,6 +208,8 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["isCaCertificate"] = args?.isCaCertificate;
             resourceInputs["maxPathLength"] = args?.maxPathLength;
             resourceInputs["privateKeyPem"] = args?.privateKeyPem ? pulumi.secret(args.privateKeyPem) : undefined;
+            resourceInputs["privateKeyPemWo"] = args?.privateKeyPemWo ? pulumi.secret(args.privateKeyPemWo) : undefined;
+            resourceInputs["privateKeyPemWoVersion"] = args?.privateKeyPemWoVersion;
             resourceInputs["setAuthorityKeyId"] = args?.setAuthorityKeyId;
             resourceInputs["setSubjectKeyId"] = args?.setSubjectKeyId;
             resourceInputs["subject"] = args?.subject;
@@ -212,7 +222,7 @@ export class SelfSignedCert extends pulumi.CustomResource {
             resourceInputs["validityStartTime"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["privateKeyPem"] };
+        const secretOpts = { additionalSecretOutputs: ["privateKeyPem", "privateKeyPemWo"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
         super(SelfSignedCert.__pulumiType, name, resourceInputs, opts);
     }
@@ -227,7 +237,7 @@ export interface SelfSignedCertState {
      */
     allowedUses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+     * Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
      */
     certPem?: pulumi.Input<string | undefined>;
     /**
@@ -255,9 +265,18 @@ export interface SelfSignedCertState {
      */
     maxPathLength?: pulumi.Input<number | undefined>;
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
      */
     privateKeyPem?: pulumi.Input<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `privateKeyPem`, the value provided here is never persisted to Terraform state. Requires `privateKeyPemWoVersion` to be set, and exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
+     */
+    privateKeyPemWo?: pulumi.Input<string | undefined>;
+    /**
+     * The version of the `privateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
+     */
+    privateKeyPemWoVersion?: pulumi.Input<number | undefined>;
     /**
      * Is the certificate either expired (i.e. beyond the `validityPeriodHours`) or ready for an early renewal (i.e. within the `earlyRenewalHours`)?
      */
@@ -321,9 +340,18 @@ export interface SelfSignedCertArgs {
      */
     maxPathLength?: pulumi.Input<number | undefined>;
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
      */
-    privateKeyPem: pulumi.Input<string>;
+    privateKeyPem?: pulumi.Input<string | undefined>;
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `privateKeyPem`, the value provided here is never persisted to Terraform state. Requires `privateKeyPemWoVersion` to be set, and exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
+     */
+    privateKeyPemWo?: pulumi.Input<string | undefined>;
+    /**
+     * The version of the `privateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
+     */
+    privateKeyPemWoVersion?: pulumi.Input<number | undefined>;
     /**
      * Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
      */

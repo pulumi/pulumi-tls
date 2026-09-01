@@ -5,8 +5,8 @@ package com.pulumi.tls;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
-import com.pulumi.exceptions.MissingRequiredPropertyException;
 import com.pulumi.tls.inputs.CertRequestSubjectArgs;
+import java.lang.Integer;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
@@ -49,18 +49,50 @@ public final class CertRequestArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+     * Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
      * 
      */
-    @Import(name="privateKeyPem", required=true)
-    private Output<String> privateKeyPem;
+    @Import(name="privateKeyPem")
+    private @Nullable Output<String> privateKeyPem;
 
     /**
-     * @return Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+     * @return Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
      * 
      */
-    public Output<String> privateKeyPem() {
-        return this.privateKeyPem;
+    public Optional<Output<String>> privateKeyPem() {
+        return Optional.ofNullable(this.privateKeyPem);
+    }
+
+    /**
+     * **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `privateKeyPem`, the value provided here is never persisted to Terraform state. Requires `privateKeyPemWoVersion` to be set, and exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
+     * 
+     */
+    @Import(name="privateKeyPemWo")
+    private @Nullable Output<String> privateKeyPemWo;
+
+    /**
+     * @return **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+     * Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `privateKeyPem`, the value provided here is never persisted to Terraform state. Requires `privateKeyPemWoVersion` to be set, and exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
+     * 
+     */
+    public Optional<Output<String>> privateKeyPemWo() {
+        return Optional.ofNullable(this.privateKeyPemWo);
+    }
+
+    /**
+     * The version of the `privateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
+     * 
+     */
+    @Import(name="privateKeyPemWoVersion")
+    private @Nullable Output<Integer> privateKeyPemWoVersion;
+
+    /**
+     * @return The version of the `privateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
+     * 
+     */
+    public Optional<Output<Integer>> privateKeyPemWoVersion() {
+        return Optional.ofNullable(this.privateKeyPemWoVersion);
     }
 
     /**
@@ -99,6 +131,8 @@ public final class CertRequestArgs extends com.pulumi.resources.ResourceArgs {
         this.dnsNames = $.dnsNames;
         this.ipAddresses = $.ipAddresses;
         this.privateKeyPem = $.privateKeyPem;
+        this.privateKeyPemWo = $.privateKeyPemWo;
+        this.privateKeyPemWoVersion = $.privateKeyPemWoVersion;
         this.subject = $.subject;
         this.uris = $.uris;
     }
@@ -184,24 +218,68 @@ public final class CertRequestArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param privateKeyPem Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+         * @param privateKeyPem Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
          * 
          * @return builder
          * 
          */
-        public Builder privateKeyPem(Output<String> privateKeyPem) {
+        public Builder privateKeyPem(@Nullable Output<String> privateKeyPem) {
             $.privateKeyPem = privateKeyPem;
             return this;
         }
 
         /**
-         * @param privateKeyPem Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the `file` interpolation function.
+         * @param privateKeyPem Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
          * 
          * @return builder
          * 
          */
         public Builder privateKeyPem(String privateKeyPem) {
             return privateKeyPem(Output.of(privateKeyPem));
+        }
+
+        /**
+         * @param privateKeyPemWo **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `privateKeyPem`, the value provided here is never persisted to Terraform state. Requires `privateKeyPemWoVersion` to be set, and exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder privateKeyPemWo(@Nullable Output<String> privateKeyPemWo) {
+            $.privateKeyPemWo = privateKeyPemWo;
+            return this;
+        }
+
+        /**
+         * @param privateKeyPemWo **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+         * Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `privateKeyPem`, the value provided here is never persisted to Terraform state. Requires `privateKeyPemWoVersion` to be set, and exactly one of `privateKeyPem` or `privateKeyPemWo` must be set.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder privateKeyPemWo(String privateKeyPemWo) {
+            return privateKeyPemWo(Output.of(privateKeyPemWo));
+        }
+
+        /**
+         * @param privateKeyPemWoVersion The version of the `privateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder privateKeyPemWoVersion(@Nullable Output<Integer> privateKeyPemWoVersion) {
+            $.privateKeyPemWoVersion = privateKeyPemWoVersion;
+            return this;
+        }
+
+        /**
+         * @param privateKeyPemWoVersion The version of the `privateKeyPemWo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder privateKeyPemWoVersion(Integer privateKeyPemWoVersion) {
+            return privateKeyPemWoVersion(Output.of(privateKeyPemWoVersion));
         }
 
         /**
@@ -257,9 +335,6 @@ public final class CertRequestArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         public CertRequestArgs build() {
-            if ($.privateKeyPem == null) {
-                throw new MissingRequiredPropertyException("CertRequestArgs", "privateKeyPem");
-            }
             return $;
         }
     }

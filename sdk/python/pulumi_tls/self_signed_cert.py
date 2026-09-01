@@ -22,13 +22,15 @@ __all__ = ['SelfSignedCertArgs', 'SelfSignedCert']
 class SelfSignedCertArgs:
     def __init__(__self__, *,
                  allowed_uses: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]],
-                 private_key_pem: pulumi.Input[_builtins.str],
                  validity_period_hours: pulumi.Input[_builtins.int],
                  dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
                  ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
                  max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
+                 private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
                  set_authority_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
                  set_subject_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
                  subject: pulumi.Input[Optional['SelfSignedCertSubjectArgs']] = None,
@@ -37,20 +39,22 @@ class SelfSignedCertArgs:
         The set of arguments for constructing a SelfSignedCert resource.
 
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
-        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
         :param pulumi.Input[_builtins.int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
+        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.str] private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.int] private_key_pem_wo_version: The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
         :param pulumi.Input[_builtins.bool] set_authority_key_id: Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[_builtins.bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input['SelfSignedCertSubjectArgs'] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
         pulumi.set(__self__, "allowed_uses", allowed_uses)
-        pulumi.set(__self__, "private_key_pem", private_key_pem)
         pulumi.set(__self__, "validity_period_hours", validity_period_hours)
         if dns_names is not None:
             pulumi.set(__self__, "dns_names", dns_names)
@@ -62,6 +66,12 @@ class SelfSignedCertArgs:
             pulumi.set(__self__, "is_ca_certificate", is_ca_certificate)
         if max_path_length is not None:
             pulumi.set(__self__, "max_path_length", max_path_length)
+        if private_key_pem is not None:
+            pulumi.set(__self__, "private_key_pem", private_key_pem)
+        if private_key_pem_wo is not None:
+            pulumi.set(__self__, "private_key_pem_wo", private_key_pem_wo)
+        if private_key_pem_wo_version is not None:
+            pulumi.set(__self__, "private_key_pem_wo_version", private_key_pem_wo_version)
         if set_authority_key_id is not None:
             pulumi.set(__self__, "set_authority_key_id", set_authority_key_id)
         if set_subject_key_id is not None:
@@ -82,18 +92,6 @@ class SelfSignedCertArgs:
     @allowed_uses.setter
     def allowed_uses(self, value: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
         pulumi.set(self, "allowed_uses", value)
-
-    @_builtins.property
-    @pulumi.getter(name="privateKeyPem")
-    def private_key_pem(self) -> pulumi.Input[_builtins.str]:
-        """
-        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
-        """
-        return pulumi.get(self, "private_key_pem")
-
-    @private_key_pem.setter
-    def private_key_pem(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "private_key_pem", value)
 
     @_builtins.property
     @pulumi.getter(name="validityPeriodHours")
@@ -168,6 +166,43 @@ class SelfSignedCertArgs:
         pulumi.set(self, "max_path_length", value)
 
     @_builtins.property
+    @pulumi.getter(name="privateKeyPem")
+    def private_key_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        """
+        return pulumi.get(self, "private_key_pem")
+
+    @private_key_pem.setter
+    def private_key_pem(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "private_key_pem", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPemWo")
+    def private_key_pem_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        """
+        return pulumi.get(self, "private_key_pem_wo")
+
+    @private_key_pem_wo.setter
+    def private_key_pem_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "private_key_pem_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPemWoVersion")
+    def private_key_pem_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
+        """
+        return pulumi.get(self, "private_key_pem_wo_version")
+
+    @private_key_pem_wo_version.setter
+    def private_key_pem_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "private_key_pem_wo_version", value)
+
+    @_builtins.property
     @pulumi.getter(name="setAuthorityKeyId")
     def set_authority_key_id(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
@@ -228,6 +263,8 @@ class _SelfSignedCertState:
                  key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
                  max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
                  private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
                  ready_for_renewal: pulumi.Input[Optional[_builtins.bool]] = None,
                  set_authority_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
                  set_subject_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -240,14 +277,17 @@ class _SelfSignedCertState:
         Input properties used for looking up and filtering SelfSignedCert resources.
 
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
-        :param pulumi.Input[_builtins.str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        :param pulumi.Input[_builtins.str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[_builtins.str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
         :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
-        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
+        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.str] private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.int] private_key_pem_wo_version: The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
         :param pulumi.Input[_builtins.bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
         :param pulumi.Input[_builtins.bool] set_authority_key_id: Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[_builtins.bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
@@ -275,6 +315,10 @@ class _SelfSignedCertState:
             pulumi.set(__self__, "max_path_length", max_path_length)
         if private_key_pem is not None:
             pulumi.set(__self__, "private_key_pem", private_key_pem)
+        if private_key_pem_wo is not None:
+            pulumi.set(__self__, "private_key_pem_wo", private_key_pem_wo)
+        if private_key_pem_wo_version is not None:
+            pulumi.set(__self__, "private_key_pem_wo_version", private_key_pem_wo_version)
         if ready_for_renewal is not None:
             pulumi.set(__self__, "ready_for_renewal", ready_for_renewal)
         if set_authority_key_id is not None:
@@ -308,7 +352,7 @@ class _SelfSignedCertState:
     @pulumi.getter(name="certPem")
     def cert_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         """
         return pulumi.get(self, "cert_pem")
 
@@ -392,13 +436,38 @@ class _SelfSignedCertState:
     @pulumi.getter(name="privateKeyPem")
     def private_key_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
+        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
         """
         return pulumi.get(self, "private_key_pem")
 
     @private_key_pem.setter
     def private_key_pem(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "private_key_pem", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPemWo")
+    def private_key_pem_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        """
+        return pulumi.get(self, "private_key_pem_wo")
+
+    @private_key_pem_wo.setter
+    def private_key_pem_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "private_key_pem_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPemWoVersion")
+    def private_key_pem_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
+        """
+        return pulumi.get(self, "private_key_pem_wo_version")
+
+    @private_key_pem_wo_version.setter
+    def private_key_pem_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "private_key_pem_wo_version", value)
 
     @_builtins.property
     @pulumi.getter(name="readyForRenewal")
@@ -510,6 +579,8 @@ class SelfSignedCert(pulumi.CustomResource):
                  is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
                  max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
                  private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
                  set_authority_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
                  set_subject_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
                  subject: pulumi.Input[Optional[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']]] = None,
@@ -571,7 +642,10 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
-        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
+        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.str] private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.int] private_key_pem_wo_version: The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
         :param pulumi.Input[_builtins.bool] set_authority_key_id: Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[_builtins.bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
@@ -653,6 +727,8 @@ class SelfSignedCert(pulumi.CustomResource):
                  is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
                  max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
                  private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
                  set_authority_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
                  set_subject_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
                  subject: pulumi.Input[Optional[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict']]] = None,
@@ -675,9 +751,9 @@ class SelfSignedCert(pulumi.CustomResource):
             __props__.__dict__["ip_addresses"] = ip_addresses
             __props__.__dict__["is_ca_certificate"] = is_ca_certificate
             __props__.__dict__["max_path_length"] = max_path_length
-            if private_key_pem is None and not opts.urn:
-                raise TypeError("Missing required property 'private_key_pem'")
             __props__.__dict__["private_key_pem"] = None if private_key_pem is None else pulumi.Output.secret(private_key_pem)
+            __props__.__dict__["private_key_pem_wo"] = None if private_key_pem_wo is None else pulumi.Output.secret(private_key_pem_wo)
+            __props__.__dict__["private_key_pem_wo_version"] = private_key_pem_wo_version
             __props__.__dict__["set_authority_key_id"] = set_authority_key_id
             __props__.__dict__["set_subject_key_id"] = set_subject_key_id
             __props__.__dict__["subject"] = subject
@@ -690,7 +766,7 @@ class SelfSignedCert(pulumi.CustomResource):
             __props__.__dict__["ready_for_renewal"] = None
             __props__.__dict__["validity_end_time"] = None
             __props__.__dict__["validity_start_time"] = None
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["privateKeyPem"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["privateKeyPem", "privateKeyPemWo"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(SelfSignedCert, __self__).__init__(
             'tls:index/selfSignedCert:SelfSignedCert',
@@ -711,6 +787,8 @@ class SelfSignedCert(pulumi.CustomResource):
             key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
             max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
             private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
             ready_for_renewal: pulumi.Input[Optional[_builtins.bool]] = None,
             set_authority_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
             set_subject_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -727,14 +805,17 @@ class SelfSignedCert(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
-        :param pulumi.Input[_builtins.str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        :param pulumi.Input[_builtins.str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] dns_names: List of DNS names for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] ip_addresses: List of IP addresses for which a certificate is being requested (i.e. certificate subjects).
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[_builtins.str] key_algorithm: Name of the algorithm used when generating the private key provided in `private_key_pem`.
         :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
-        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
+        :param pulumi.Input[_builtins.str] private_key_pem: Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.str] private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.int] private_key_pem_wo_version: The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
         :param pulumi.Input[_builtins.bool] ready_for_renewal: Is the certificate either expired (i.e. beyond the `validity_period_hours`) or ready for an early renewal (i.e. within the `early_renewal_hours`)?
         :param pulumi.Input[_builtins.bool] set_authority_key_id: Should the generated certificate include an [authority key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.1): for self-signed certificates this is the same value as the [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
         :param pulumi.Input[_builtins.bool] set_subject_key_id: Should the generated certificate include a [subject key identifier](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2) (default: `false`).
@@ -757,6 +838,8 @@ class SelfSignedCert(pulumi.CustomResource):
         __props__.__dict__["key_algorithm"] = key_algorithm
         __props__.__dict__["max_path_length"] = max_path_length
         __props__.__dict__["private_key_pem"] = private_key_pem
+        __props__.__dict__["private_key_pem_wo"] = private_key_pem_wo
+        __props__.__dict__["private_key_pem_wo_version"] = private_key_pem_wo_version
         __props__.__dict__["ready_for_renewal"] = ready_for_renewal
         __props__.__dict__["set_authority_key_id"] = set_authority_key_id
         __props__.__dict__["set_subject_key_id"] = set_subject_key_id
@@ -779,7 +862,7 @@ class SelfSignedCert(pulumi.CustomResource):
     @pulumi.getter(name="certPem")
     def cert_pem(self) -> pulumi.Output[_builtins.str]:
         """
-        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         """
         return pulumi.get(self, "cert_pem")
 
@@ -833,11 +916,28 @@ class SelfSignedCert(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="privateKeyPem")
-    def private_key_pem(self) -> pulumi.Output[_builtins.str]:
+    def private_key_pem(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to.
+        Private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. This can be read from a separate file using the [`file`](https://www.terraform.io/language/functions/file) interpolation function. Exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
         """
         return pulumi.get(self, "private_key_pem")
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPemWo")
+    def private_key_pem_wo(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
+        """
+        return pulumi.get(self, "private_key_pem_wo")
+
+    @_builtins.property
+    @pulumi.getter(name="privateKeyPemWoVersion")
+    def private_key_pem_wo_version(self) -> pulumi.Output[Optional[_builtins.int]]:
+        """
+        The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the key.
+        """
+        return pulumi.get(self, "private_key_pem_wo_version")
 
     @_builtins.property
     @pulumi.getter(name="readyForRenewal")

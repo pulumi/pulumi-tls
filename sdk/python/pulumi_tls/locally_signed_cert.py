@@ -21,9 +21,11 @@ class LocallySignedCertArgs:
     def __init__(__self__, *,
                  allowed_uses: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]],
                  ca_cert_pem: pulumi.Input[_builtins.str],
-                 ca_private_key_pem: pulumi.Input[_builtins.str],
                  cert_request_pem: pulumi.Input[_builtins.str],
                  validity_period_hours: pulumi.Input[_builtins.int],
+                 ca_private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 ca_private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 ca_private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
                  early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
                  is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
                  max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
@@ -33,9 +35,12 @@ class LocallySignedCertArgs:
 
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         :param pulumi.Input[_builtins.str] ca_cert_pem: Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
-        :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.int] validity_period_hours: Number of hours, after initial issuing, that the certificate will remain valid for.
+        :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.str] ca_private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `ca_private_key_pem`, the value provided here is never persisted to Terraform state. Requires `ca_private_key_pem_wo_version` to be set, and exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.int] ca_private_key_pem_wo_version: The version of the `ca_private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
         :param pulumi.Input[_builtins.int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
         :param pulumi.Input[_builtins.int] max_path_length: Maximum number of intermediate certificates that may follow this certificate in a valid certification path. If `is_ca_certificate` is `false`, this value is ignored.
@@ -43,9 +48,14 @@ class LocallySignedCertArgs:
         """
         pulumi.set(__self__, "allowed_uses", allowed_uses)
         pulumi.set(__self__, "ca_cert_pem", ca_cert_pem)
-        pulumi.set(__self__, "ca_private_key_pem", ca_private_key_pem)
         pulumi.set(__self__, "cert_request_pem", cert_request_pem)
         pulumi.set(__self__, "validity_period_hours", validity_period_hours)
+        if ca_private_key_pem is not None:
+            pulumi.set(__self__, "ca_private_key_pem", ca_private_key_pem)
+        if ca_private_key_pem_wo is not None:
+            pulumi.set(__self__, "ca_private_key_pem_wo", ca_private_key_pem_wo)
+        if ca_private_key_pem_wo_version is not None:
+            pulumi.set(__self__, "ca_private_key_pem_wo_version", ca_private_key_pem_wo_version)
         if early_renewal_hours is not None:
             pulumi.set(__self__, "early_renewal_hours", early_renewal_hours)
         if is_ca_certificate is not None:
@@ -80,18 +90,6 @@ class LocallySignedCertArgs:
         pulumi.set(self, "ca_cert_pem", value)
 
     @_builtins.property
-    @pulumi.getter(name="caPrivateKeyPem")
-    def ca_private_key_pem(self) -> pulumi.Input[_builtins.str]:
-        """
-        Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
-        """
-        return pulumi.get(self, "ca_private_key_pem")
-
-    @ca_private_key_pem.setter
-    def ca_private_key_pem(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "ca_private_key_pem", value)
-
-    @_builtins.property
     @pulumi.getter(name="certRequestPem")
     def cert_request_pem(self) -> pulumi.Input[_builtins.str]:
         """
@@ -114,6 +112,43 @@ class LocallySignedCertArgs:
     @validity_period_hours.setter
     def validity_period_hours(self, value: pulumi.Input[_builtins.int]):
         pulumi.set(self, "validity_period_hours", value)
+
+    @_builtins.property
+    @pulumi.getter(name="caPrivateKeyPem")
+    def ca_private_key_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
+        """
+        return pulumi.get(self, "ca_private_key_pem")
+
+    @ca_private_key_pem.setter
+    def ca_private_key_pem(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "ca_private_key_pem", value)
+
+    @_builtins.property
+    @pulumi.getter(name="caPrivateKeyPemWo")
+    def ca_private_key_pem_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `ca_private_key_pem`, the value provided here is never persisted to Terraform state. Requires `ca_private_key_pem_wo_version` to be set, and exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
+        """
+        return pulumi.get(self, "ca_private_key_pem_wo")
+
+    @ca_private_key_pem_wo.setter
+    def ca_private_key_pem_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "ca_private_key_pem_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="caPrivateKeyPemWoVersion")
+    def ca_private_key_pem_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        The version of the `ca_private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+        """
+        return pulumi.get(self, "ca_private_key_pem_wo_version")
+
+    @ca_private_key_pem_wo_version.setter
+    def ca_private_key_pem_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "ca_private_key_pem_wo_version", value)
 
     @_builtins.property
     @pulumi.getter(name="earlyRenewalHours")
@@ -171,6 +206,8 @@ class _LocallySignedCertState:
                  ca_cert_pem: pulumi.Input[Optional[_builtins.str]] = None,
                  ca_key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
                  ca_private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 ca_private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 ca_private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
                  cert_pem: pulumi.Input[Optional[_builtins.str]] = None,
                  cert_request_pem: pulumi.Input[Optional[_builtins.str]] = None,
                  early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
@@ -187,8 +224,11 @@ class _LocallySignedCertState:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         :param pulumi.Input[_builtins.str] ca_cert_pem: Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.str] ca_key_algorithm: Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
-        :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
-        :param pulumi.Input[_builtins.str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.str] ca_private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `ca_private_key_pem`, the value provided here is never persisted to Terraform state. Requires `ca_private_key_pem_wo_version` to be set, and exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.int] ca_private_key_pem_wo_version: The version of the `ca_private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+        :param pulumi.Input[_builtins.str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         :param pulumi.Input[_builtins.str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
@@ -207,6 +247,10 @@ class _LocallySignedCertState:
             pulumi.set(__self__, "ca_key_algorithm", ca_key_algorithm)
         if ca_private_key_pem is not None:
             pulumi.set(__self__, "ca_private_key_pem", ca_private_key_pem)
+        if ca_private_key_pem_wo is not None:
+            pulumi.set(__self__, "ca_private_key_pem_wo", ca_private_key_pem_wo)
+        if ca_private_key_pem_wo_version is not None:
+            pulumi.set(__self__, "ca_private_key_pem_wo_version", ca_private_key_pem_wo_version)
         if cert_pem is not None:
             pulumi.set(__self__, "cert_pem", cert_pem)
         if cert_request_pem is not None:
@@ -268,7 +312,7 @@ class _LocallySignedCertState:
     @pulumi.getter(name="caPrivateKeyPem")
     def ca_private_key_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
         """
         return pulumi.get(self, "ca_private_key_pem")
 
@@ -277,10 +321,35 @@ class _LocallySignedCertState:
         pulumi.set(self, "ca_private_key_pem", value)
 
     @_builtins.property
+    @pulumi.getter(name="caPrivateKeyPemWo")
+    def ca_private_key_pem_wo(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `ca_private_key_pem`, the value provided here is never persisted to Terraform state. Requires `ca_private_key_pem_wo_version` to be set, and exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
+        """
+        return pulumi.get(self, "ca_private_key_pem_wo")
+
+    @ca_private_key_pem_wo.setter
+    def ca_private_key_pem_wo(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "ca_private_key_pem_wo", value)
+
+    @_builtins.property
+    @pulumi.getter(name="caPrivateKeyPemWoVersion")
+    def ca_private_key_pem_wo_version(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        The version of the `ca_private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+        """
+        return pulumi.get(self, "ca_private_key_pem_wo_version")
+
+    @ca_private_key_pem_wo_version.setter
+    def ca_private_key_pem_wo_version(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "ca_private_key_pem_wo_version", value)
+
+    @_builtins.property
     @pulumi.getter(name="certPem")
     def cert_pem(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         """
         return pulumi.get(self, "cert_pem")
 
@@ -406,6 +475,8 @@ class LocallySignedCert(pulumi.CustomResource):
                  allowed_uses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  ca_cert_pem: pulumi.Input[Optional[_builtins.str]] = None,
                  ca_private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 ca_private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 ca_private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
                  cert_request_pem: pulumi.Input[Optional[_builtins.str]] = None,
                  early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
                  is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -460,7 +531,10 @@ class LocallySignedCert(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         :param pulumi.Input[_builtins.str] ca_cert_pem: Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
-        :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.str] ca_private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `ca_private_key_pem`, the value provided here is never persisted to Terraform state. Requires `ca_private_key_pem_wo_version` to be set, and exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.int] ca_private_key_pem_wo_version: The version of the `ca_private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
         :param pulumi.Input[_builtins.str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
@@ -535,6 +609,8 @@ class LocallySignedCert(pulumi.CustomResource):
                  allowed_uses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  ca_cert_pem: pulumi.Input[Optional[_builtins.str]] = None,
                  ca_private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+                 ca_private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+                 ca_private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
                  cert_request_pem: pulumi.Input[Optional[_builtins.str]] = None,
                  early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
                  is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -556,9 +632,9 @@ class LocallySignedCert(pulumi.CustomResource):
             if ca_cert_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'ca_cert_pem'")
             __props__.__dict__["ca_cert_pem"] = ca_cert_pem
-            if ca_private_key_pem is None and not opts.urn:
-                raise TypeError("Missing required property 'ca_private_key_pem'")
             __props__.__dict__["ca_private_key_pem"] = None if ca_private_key_pem is None else pulumi.Output.secret(ca_private_key_pem)
+            __props__.__dict__["ca_private_key_pem_wo"] = None if ca_private_key_pem_wo is None else pulumi.Output.secret(ca_private_key_pem_wo)
+            __props__.__dict__["ca_private_key_pem_wo_version"] = ca_private_key_pem_wo_version
             if cert_request_pem is None and not opts.urn:
                 raise TypeError("Missing required property 'cert_request_pem'")
             __props__.__dict__["cert_request_pem"] = cert_request_pem
@@ -574,7 +650,7 @@ class LocallySignedCert(pulumi.CustomResource):
             __props__.__dict__["ready_for_renewal"] = None
             __props__.__dict__["validity_end_time"] = None
             __props__.__dict__["validity_start_time"] = None
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["caPrivateKeyPem"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["caPrivateKeyPem", "caPrivateKeyPemWo"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(LocallySignedCert, __self__).__init__(
             'tls:index/locallySignedCert:LocallySignedCert',
@@ -590,6 +666,8 @@ class LocallySignedCert(pulumi.CustomResource):
             ca_cert_pem: pulumi.Input[Optional[_builtins.str]] = None,
             ca_key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
             ca_private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            ca_private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+            ca_private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
             cert_pem: pulumi.Input[Optional[_builtins.str]] = None,
             cert_request_pem: pulumi.Input[Optional[_builtins.str]] = None,
             early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
@@ -610,8 +688,11 @@ class LocallySignedCert(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] allowed_uses: List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `any_extended`, `cert_signing`, `client_auth`, `code_signing`, `content_commitment`, `crl_signing`, `data_encipherment`, `decipher_only`, `digital_signature`, `email_protection`, `encipher_only`, `ipsec_end_system`, `ipsec_tunnel`, `ipsec_user`, `key_agreement`, `key_encipherment`, `microsoft_commercial_code_signing`, `microsoft_kernel_code_signing`, `microsoft_server_gated_crypto`, `netscape_server_gated_crypto`, `ocsp_signing`, `server_auth`, `timestamping`.
         :param pulumi.Input[_builtins.str] ca_cert_pem: Certificate data of the Certificate Authority (CA) in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.str] ca_key_algorithm: Name of the algorithm used when generating the private key provided in `ca_private_key_pem`.
-        :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
-        :param pulumi.Input[_builtins.str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        :param pulumi.Input[_builtins.str] ca_private_key_pem: Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.str] ca_private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+               Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `ca_private_key_pem`, the value provided here is never persisted to Terraform state. Requires `ca_private_key_pem_wo_version` to be set, and exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
+        :param pulumi.Input[_builtins.int] ca_private_key_pem_wo_version: The version of the `ca_private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+        :param pulumi.Input[_builtins.str] cert_pem: Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         :param pulumi.Input[_builtins.str] cert_request_pem: Certificate request data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
         :param pulumi.Input[_builtins.int] early_renewal_hours: The resource will consider the certificate to have expired the given number of hours before its actual expiry time. This can be useful to deploy an updated certificate in advance of the expiration of the current certificate. However, the old certificate remains valid until its true expiration time, since this resource does not (and cannot) support certificate revocation. Also, this advance update can only be performed should the Terraform configuration be applied during the early renewal period. (default: `0`)
         :param pulumi.Input[_builtins.bool] is_ca_certificate: Is the generated certificate representing a Certificate Authority (CA) (default: `false`).
@@ -630,6 +711,8 @@ class LocallySignedCert(pulumi.CustomResource):
         __props__.__dict__["ca_cert_pem"] = ca_cert_pem
         __props__.__dict__["ca_key_algorithm"] = ca_key_algorithm
         __props__.__dict__["ca_private_key_pem"] = ca_private_key_pem
+        __props__.__dict__["ca_private_key_pem_wo"] = ca_private_key_pem_wo
+        __props__.__dict__["ca_private_key_pem_wo_version"] = ca_private_key_pem_wo_version
         __props__.__dict__["cert_pem"] = cert_pem
         __props__.__dict__["cert_request_pem"] = cert_request_pem
         __props__.__dict__["early_renewal_hours"] = early_renewal_hours
@@ -668,17 +751,34 @@ class LocallySignedCert(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="caPrivateKeyPem")
-    def ca_private_key_pem(self) -> pulumi.Output[_builtins.str]:
+    def ca_private_key_pem(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format.
+        Private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
         """
         return pulumi.get(self, "ca_private_key_pem")
+
+    @_builtins.property
+    @pulumi.getter(name="caPrivateKeyPemWo")
+    def ca_private_key_pem_wo(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
+        Write-only private key of the Certificate Authority (CA) used to sign the certificate, in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. Unlike `ca_private_key_pem`, the value provided here is never persisted to Terraform state. Requires `ca_private_key_pem_wo_version` to be set, and exactly one of `ca_private_key_pem` or `ca_private_key_pem_wo` must be set.
+        """
+        return pulumi.get(self, "ca_private_key_pem_wo")
+
+    @_builtins.property
+    @pulumi.getter(name="caPrivateKeyPemWoVersion")
+    def ca_private_key_pem_wo_version(self) -> pulumi.Output[Optional[_builtins.int]]:
+        """
+        The version of the `ca_private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate to be re-issued when rotating the CA key.
+        """
+        return pulumi.get(self, "ca_private_key_pem_wo_version")
 
     @_builtins.property
     @pulumi.getter(name="certPem")
     def cert_pem(self) -> pulumi.Output[_builtins.str]:
         """
-        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using `trimspace()`.
+        Certificate data in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format. **NOTE**: the [underlying](https://pkg.go.dev/encoding/pem#Encode) [libraries](https://pkg.go.dev/golang.org/x/crypto/ssh#MarshalAuthorizedKey) that generate this value append a `\\n` at the end of the PEM. In case this disrupts your use case, we recommend using [`trimspace()`](https://www.terraform.io/language/functions/trimspace).
         """
         return pulumi.get(self, "cert_pem")
 
