@@ -45,7 +45,7 @@ var metadata []byte
 func Provider() tfbridge.ProviderInfo {
 	info := tfbridge.ProviderInfo{
 		P:            pf.ShimProvider(shim.NewProvider()),
-		Name:         "tls",
+		Name:         tlsPkg,
 		Description:  "A Pulumi package to create TLS resources in Pulumi programs.",
 		Keywords:     []string{"pulumi", "tls"},
 		License:      "Apache-2.0",
@@ -94,7 +94,6 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		EnableZeroDefaultSchemaVersion: true,
-		EnableAccurateBridgePreview:    true,
 	}
 
 	info.MustComputeTokens(tftokens.SingleModule(

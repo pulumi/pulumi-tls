@@ -29,10 +29,7 @@ import (
 //go:embed schema-embed.json
 var pulumiSchema []byte
 
-//go:embed bridge-metadata.json
-var bridgeMetadata []byte
-
 func main() {
-	meta := tfbridge.ProviderMetadata{PackageSchema: pulumiSchema, BridgeMetadata: bridgeMetadata}
+	meta := tfbridge.ProviderMetadata{PackageSchema: pulumiSchema}
 	tfbridge.Main(context.Background(), "tls", tls.Provider(), meta)
 }
