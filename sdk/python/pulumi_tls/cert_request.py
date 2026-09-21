@@ -307,7 +307,7 @@ class CertRequest(pulumi.CustomResource):
                  private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
-                 subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
+                 subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict', 'outputs.CertRequestSubject']]] = None,
                  uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         """
@@ -344,7 +344,7 @@ class CertRequest(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
         :param pulumi.Input[_builtins.int] private_key_pem_wo_version: The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
-        :param pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+        :param pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict', 'outputs.CertRequestSubject']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
         ...
@@ -399,7 +399,7 @@ class CertRequest(pulumi.CustomResource):
                  private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
                  private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
-                 subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
+                 subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict', 'outputs.CertRequestSubject']]] = None,
                  uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -438,7 +438,7 @@ class CertRequest(pulumi.CustomResource):
             private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
             private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
             private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
-            subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']]] = None,
+            subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict', 'outputs.CertRequestSubject']]] = None,
             uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'CertRequest':
         """
         Get an existing CertRequest resource's state with the given name, id, and optional extra
@@ -455,7 +455,7 @@ class CertRequest(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] private_key_pem_wo: **NOTE:** This field is write-only and its value will not be updated in state as part of read operations.
                Write-only private key in [PEM (RFC 1421)](https://datatracker.ietf.org/doc/html/rfc1421) format, that the certificate will belong to. Unlike `private_key_pem`, the value provided here is never persisted to Terraform state. Requires `private_key_pem_wo_version` to be set, and exactly one of `private_key_pem` or `private_key_pem_wo` must be set.
         :param pulumi.Input[_builtins.int] private_key_pem_wo_version: The version of the `private_key_pem_wo` write-only private key. Because the write-only key is not stored in state, this version is the only signal the provider has that the key changed: increment it to force the certificate request to be re-issued when rotating the key.
-        :param pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
+        :param pulumi.Input[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict', 'outputs.CertRequestSubject']] subject: The subject for which a certificate is being requested. The acceptable arguments are all optional and their naming is based upon [Issuer Distinguished Names (RFC5280)](https://tools.ietf.org/html/rfc5280#section-4.1.2.4) section.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] uris: List of URIs for which a certificate is being requested (i.e. certificate subjects).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
