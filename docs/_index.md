@@ -340,7 +340,7 @@ public class App {
 {{% /choosable %}}
 {{% choosable language hcl %}}
 ```hcl
-pulumi {
+terraform {
   required_providers {
     aws = {
       source = "pulumi/aws"
@@ -357,11 +357,17 @@ pulumi {
 # THIS IS NOT RECOMMENDED FOR PRODUCTION SERVICES.
 # See the detailed documentation of each resource for further
 # security considerations and other practical tradeoffs.
-resource "tls_privatekey" "example" {
+resource "tls_private_key" "example" {
+  lifecycle {
+    create_before_destroy = true
+  }
   algorithm = "ECDSA"
 }
-resource "tls_selfsignedcert" "example" {
-  private_key_pem       = tls_privatekey.example.private_key_pem
+resource "tls_self_signed_cert" "example" {
+  lifecycle {
+    create_before_destroy = true
+  }
+  private_key_pem       = tls_private_key.example.private_key_pem
   validity_period_hours = 12
   # Generate a new certificate if Pulumi is run within three
   # hours of the certificate's expiration time.
@@ -375,10 +381,13 @@ resource "tls_selfsignedcert" "example" {
   }
 }
 # For example, this can be used to populate an AWS IAM server certificate.
-resource "aws_iam_servercertificate" "example" {
+resource "aws_iam_server_certificate" "example" {
+  lifecycle {
+    create_before_destroy = true
+  }
   name             = "example_self_signed_cert"
-  certificate_body = tls_selfsignedcert.example.cert_pem
-  private_key      = tls_privatekey.example.private_key_pem
+  certificate_body = tls_self_signed_cert.example.cert_pem
+  private_key      = tls_private_key.example.private_key_pem
 }
 ```
 
@@ -535,7 +544,7 @@ public class App {
 {{% /choosable %}}
 {{% choosable language hcl %}}
 ```hcl
-pulumi {
+terraform {
   required_providers {
     tls = {
       source = "pulumi/tls"
@@ -543,7 +552,7 @@ pulumi {
   }
 }
 
-data "tls_getcertificate" "test" {
+data "tls_certificate" "test" {
   url = "https://example.com"
 }
 
@@ -701,7 +710,7 @@ public class App {
 {{% /choosable %}}
 {{% choosable language hcl %}}
 ```hcl
-pulumi {
+terraform {
   required_providers {
     tls = {
       source = "pulumi/tls"
@@ -709,7 +718,7 @@ pulumi {
   }
 }
 
-data "tls_getcertificate" "test" {
+data "tls_certificate" "test" {
   url = "https://example.com"
 }
 

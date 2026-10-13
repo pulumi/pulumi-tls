@@ -17,7 +17,7 @@ import * as utilities from "./utilities";
  * import * as tls from "@pulumi/tls";
  *
  * const ed25519_example = new tls.PrivateKey("ed25519-example", {algorithm: "ED25519"});
- * // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+ * // Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
  * const privateKeyPem_example = tls.getPublicKeyOutput({
  *     privateKeyPem: ed25519_example.privateKeyPem,
  * });
@@ -102,7 +102,7 @@ export interface GetPublicKeyResult {
  * import * as tls from "@pulumi/tls";
  *
  * const ed25519_example = new tls.PrivateKey("ed25519-example", {algorithm: "ED25519"});
- * // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+ * // Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
  * const privateKeyPem_example = tls.getPublicKeyOutput({
  *     privateKeyPem: ed25519_example.privateKeyPem,
  * });

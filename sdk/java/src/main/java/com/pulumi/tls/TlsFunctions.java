@@ -57,13 +57,13 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         final var example = TlsFunctions.getCertificate(GetCertificateArgs.builder()
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
      *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
      *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *     }
@@ -157,13 +157,13 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         final var example = TlsFunctions.getCertificate(GetCertificateArgs.builder()
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
      *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
      *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *     }
@@ -257,13 +257,13 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         final var example = TlsFunctions.getCertificate(GetCertificateArgs.builder()
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
      *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
      *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *     }
@@ -357,13 +357,13 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         final var example = TlsFunctions.getCertificate(GetCertificateArgs.builder()
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
      *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
      *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *     }
@@ -457,13 +457,13 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         final var example = TlsFunctions.getCertificate(GetCertificateArgs.builder()
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
      *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
      *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *     }
@@ -557,13 +557,13 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         final var example = TlsFunctions.getCertificate(GetCertificateArgs.builder()
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
      *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
      *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *     }
@@ -657,13 +657,13 @@ public final class TlsFunctions {
      *             .build());
      * 
      *         final var example = TlsFunctions.getCertificate(GetCertificateArgs.builder()
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *         var exampleIamOpenidConnectProvider = new IamOpenidConnectProvider("exampleIamOpenidConnectProvider", IamOpenidConnectProviderArgs.builder()
      *             .clientIdList(Arrays.asList("sts.amazonaws.com"))
      *             .thumbprintList(Arrays.asList(example.certificates()[0].sha1Fingerprint()))
-     *             .url(exampleEksCluster.identity()[0].oidc()[0].issuer())
+     *             .url(exampleEksCluster.get("identity")[0].get("oidc")[0].get("issuer"))
      *             .build());
      * 
      *     }
@@ -755,7 +755,7 @@ public final class TlsFunctions {
      *             .algorithm("ED25519")
      *             .build());
      * 
-     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         // Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
@@ -813,7 +813,7 @@ public final class TlsFunctions {
      *             .algorithm("ED25519")
      *             .build());
      * 
-     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         // Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
@@ -871,7 +871,7 @@ public final class TlsFunctions {
      *             .algorithm("ED25519")
      *             .build());
      * 
-     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         // Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
@@ -929,7 +929,7 @@ public final class TlsFunctions {
      *             .algorithm("ED25519")
      *             .build());
      * 
-     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         // Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
@@ -987,7 +987,7 @@ public final class TlsFunctions {
      *             .algorithm("ED25519")
      *             .build());
      * 
-     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         // Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
@@ -1045,7 +1045,7 @@ public final class TlsFunctions {
      *             .algorithm("ED25519")
      *             .build());
      * 
-     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         // Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
@@ -1103,7 +1103,7 @@ public final class TlsFunctions {
      *             .algorithm("ED25519")
      *             .build());
      * 
-     *         // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+     *         // Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
      *         final var privateKeyPem-example = TlsFunctions.getPublicKey(GetPublicKeyArgs.builder()
      *             .privateKeyPem(ed25519_example.privateKeyPem())
      *             .build());
