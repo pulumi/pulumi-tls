@@ -149,7 +149,7 @@ def get_public_key(private_key_openssh: Optional[_builtins.str] = None,
     import pulumi_tls as tls
 
     ed25519_example = tls.PrivateKey("ed25519-example", algorithm="ED25519")
-    # Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+    # Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
     private_key_pem_example = tls.get_public_key_output(private_key_pem=ed25519_example.private_key_pem)
     # Public key loaded from filesystem, using the Open SSH (RFC 4716) format
     private_key_openssh_example = tls.get_public_key(private_key_openssh=std.file(input="~/.ssh/id_rsa_rfc4716").result)
@@ -190,7 +190,7 @@ def get_public_key_output(private_key_openssh: pulumi.Input[Optional[Optional[_b
     import pulumi_tls as tls
 
     ed25519_example = tls.PrivateKey("ed25519-example", algorithm="ED25519")
-    # Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+    # Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
     private_key_pem_example = tls.get_public_key_output(private_key_pem=ed25519_example.private_key_pem)
     # Public key loaded from filesystem, using the Open SSH (RFC 4716) format
     private_key_openssh_example = tls.get_public_key(private_key_openssh=std.file(input="~/.ssh/id_rsa_rfc4716").result)

@@ -32,7 +32,7 @@ namespace Pulumi.Tls
         ///         Algorithm = "ED25519",
         ///     });
         /// 
-        ///     // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+        ///     // Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
         ///     var privateKeyPem_example = Tls.GetPublicKey.Invoke(new()
         ///     {
         ///         PrivateKeyPem = ed25519_example.PrivateKeyPem,
@@ -74,7 +74,7 @@ namespace Pulumi.Tls
         ///         Algorithm = "ED25519",
         ///     });
         /// 
-        ///     // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+        ///     // Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
         ///     var privateKeyPem_example = Tls.GetPublicKey.Invoke(new()
         ///     {
         ///         PrivateKeyPem = ed25519_example.PrivateKeyPem,
@@ -116,7 +116,7 @@ namespace Pulumi.Tls
         ///         Algorithm = "ED25519",
         ///     });
         /// 
-        ///     // Public key loaded from a terraform-generated private key, using the PEM (RFC 1421) format
+        ///     // Public key loaded from a pulumi-generated private key, using the PEM (RFC 1421) format
         ///     var privateKeyPem_example = Tls.GetPublicKey.Invoke(new()
         ///     {
         ///         PrivateKeyPem = ed25519_example.PrivateKeyPem,
