@@ -1,7 +1,0 @@
-name: private-key-tls-py
-runtime:
-  name: python
-  options:
-    virtualenv: venv
-description: A simple example of generating a TLS private key.
-

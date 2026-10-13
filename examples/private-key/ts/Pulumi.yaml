@@ -1,3 +1,0 @@
-name: private-key-tls-ts
-runtime: nodejs
-description: A simple example of generating a TLS private key.
