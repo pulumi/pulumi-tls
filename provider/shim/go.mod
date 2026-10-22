@@ -1,10 +1,10 @@
 module github.com/hashicorp/terraform-provider-tls/shim
 
-go 1.26.8
+go 1.26.10
 
 require (
 	github.com/hashicorp/terraform-plugin-framework v1.19.0
-	github.com/hashicorp/terraform-provider-tls v1.2.1-0.20260910152143-623d9ccc2d96
+	github.com/hashicorp/terraform-provider-tls v1.2.1-0.20261021144736-25872ff38975
 )
 
 require (
@@ -20,8 +20,8 @@ require (
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
-	golang.org/x/crypto v0.56.0 // indirect
-	golang.org/x/net v0.58.0 // indirect
-	golang.org/x/sys v0.47.0 // indirect
-	golang.org/x/text v0.41.0 // indirect
+	golang.org/x/crypto v0.58.0 // indirect
+	golang.org/x/net v0.61.0 // indirect
+	golang.org/x/sys v0.49.0 // indirect
+	golang.org/x/text v0.43.0 // indirect
 )
