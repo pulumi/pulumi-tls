@@ -375,7 +375,7 @@ resource "tls_self_signed_cert" "example" {
   # Reasonable set of uses for a server SSL certificate.
   allowed_uses = ["key_encipherment", "digital_signature", "server_auth"]
   dns_names    = ["example.com", "example.net"]
-  subject = {
+  subject {
     common_name  = "example.com"
     organization = "ACME Examples, Inc"
   }
