@@ -228,7 +228,9 @@ compare_sdk_%: .make/mise_install bin/$(CODEGEN) .make/schema | mise_env
 build_registry_docs: .make/build_registry_docs
 .make/build_registry_docs: .make/mise_install bin/$(CODEGEN)
 .make/build_registry_docs: | mise_env
-	bin/$(CODEGEN) registry-docs --out $(WORKING_DIR)/docs
+	@# Run through `mise exec` so tool install dirs precede mise shims on PATH. Example conversion
+	@# runs `pulumi convert` from a temp dir, where shims cannot resolve the repo's tools.
+	mise exec -- bin/$(CODEGEN) registry-docs --out $(WORKING_DIR)/docs
 	@touch $@
 .PHONY: build_registry_docs
 
@@ -315,7 +317,8 @@ tfgen_no_deps: .make/schema
 # Traditional approach: Use codegen binary for schema generation
 .make/schema: bin/$(CODEGEN) .make/mise_install .make/upstream
 .make/schema: | mise_env
-	$(WORKING_DIR)/bin/$(CODEGEN) schema --out provider/cmd/$(PROVIDER)
+	@# See build_registry_docs: `mise exec` keeps example conversion working when shims lead PATH.
+	mise exec -- $(WORKING_DIR)/bin/$(CODEGEN) schema --out provider/cmd/$(PROVIDER)
 	(cd provider && VERSION=$(PROVIDER_VERSION) go generate cmd/$(PROVIDER)/main.go)
 	@touch $@
 tfgen_build_only: bin/$(CODEGEN)
