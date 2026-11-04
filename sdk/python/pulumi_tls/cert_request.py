@@ -473,6 +473,30 @@ class CertRequest(pulumi.CustomResource):
         __props__.__dict__["uris"] = uris
         return CertRequest(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            cert_request_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
+            subject: pulumi.Input[Optional[Union['CertRequestSubjectArgs', 'CertRequestSubjectArgsDict', 'outputs.CertRequestSubject']]] = None,
+            uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["certRequestPem"] = cert_request_pem
+        __props__["dnsNames"] = dns_names
+        __props__["ipAddresses"] = ip_addresses
+        __props__["keyAlgorithm"] = key_algorithm
+        __props__["privateKeyPem"] = private_key_pem
+        __props__["privateKeyPemWo"] = private_key_pem_wo
+        __props__["privateKeyPemWoVersion"] = private_key_pem_wo_version
+        __props__["subject"] = subject
+        __props__["uris"] = uris
+        return pulumi.runtime.exists_resource(None, 'tls:index/certRequest:CertRequest', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="certRequestPem")
     def cert_request_pem(self) -> pulumi.Output[_builtins.str]:

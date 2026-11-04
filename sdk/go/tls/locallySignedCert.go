@@ -252,6 +252,12 @@ func (LocallySignedCertState) ElementType() reflect.Type {
 	return reflect.TypeOf((*locallySignedCertState)(nil)).Elem()
 }
 
+// LocallySignedCertExists checks whether an existing LocallySignedCert resource with the given ID exists.
+func LocallySignedCertExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *LocallySignedCertState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("tls:index/locallySignedCert:LocallySignedCert", id, state, "", opts...)
+}
+
 type locallySignedCertArgs struct {
 	// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `anyExtended`, `certSigning`, `clientAuth`, `codeSigning`, `contentCommitment`, `crlSigning`, `dataEncipherment`, `decipherOnly`, `digitalSignature`, `emailProtection`, `encipherOnly`, `ipsecEndSystem`, `ipsecTunnel`, `ipsecUser`, `keyAgreement`, `keyEncipherment`, `microsoftCommercialCodeSigning`, `microsoftKernelCodeSigning`, `microsoftServerGatedCrypto`, `netscapeServerGatedCrypto`, `ocspSigning`, `serverAuth`, `timestamping`.
 	AllowedUses []string `pulumi:"allowedUses"`
