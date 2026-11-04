@@ -168,6 +168,12 @@ func (CertRequestState) ElementType() reflect.Type {
 	return reflect.TypeOf((*certRequestState)(nil)).Elem()
 }
 
+// CertRequestExists checks whether an existing CertRequest resource with the given ID exists.
+func CertRequestExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *CertRequestState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("tls:index/certRequest:CertRequest", id, state, "", opts...)
+}
+
 type certRequestArgs struct {
 	// List of DNS names for which a certificate is being requested (i.e. certificate subjects).
 	DnsNames []string `pulumi:"dnsNames"`

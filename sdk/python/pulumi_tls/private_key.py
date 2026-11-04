@@ -448,6 +448,32 @@ class PrivateKey(pulumi.CustomResource):
         __props__.__dict__["rsa_bits"] = rsa_bits
         return PrivateKey(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            algorithm: pulumi.Input[Optional[_builtins.str]] = None,
+            ecdsa_curve: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_openssh: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_pem_pkcs8: pulumi.Input[Optional[_builtins.str]] = None,
+            public_key_fingerprint_md5: pulumi.Input[Optional[_builtins.str]] = None,
+            public_key_fingerprint_sha256: pulumi.Input[Optional[_builtins.str]] = None,
+            public_key_openssh: pulumi.Input[Optional[_builtins.str]] = None,
+            public_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            rsa_bits: pulumi.Input[Optional[_builtins.int]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["algorithm"] = algorithm
+        __props__["ecdsaCurve"] = ecdsa_curve
+        __props__["privateKeyOpenssh"] = private_key_openssh
+        __props__["privateKeyPem"] = private_key_pem
+        __props__["privateKeyPemPkcs8"] = private_key_pem_pkcs8
+        __props__["publicKeyFingerprintMd5"] = public_key_fingerprint_md5
+        __props__["publicKeyFingerprintSha256"] = public_key_fingerprint_sha256
+        __props__["publicKeyOpenssh"] = public_key_openssh
+        __props__["publicKeyPem"] = public_key_pem
+        __props__["rsaBits"] = rsa_bits
+        return pulumi.runtime.exists_resource(None, 'tls:index/privateKey:PrivateKey', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter
     def algorithm(self) -> pulumi.Output[_builtins.str]:

@@ -256,6 +256,12 @@ func (SelfSignedCertState) ElementType() reflect.Type {
 	return reflect.TypeOf((*selfSignedCertState)(nil)).Elem()
 }
 
+// SelfSignedCertExists checks whether an existing SelfSignedCert resource with the given ID exists.
+func SelfSignedCertExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *SelfSignedCertState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("tls:index/selfSignedCert:SelfSignedCert", id, state, "", opts...)
+}
+
 type selfSignedCertArgs struct {
 	// List of key usages allowed for the issued certificate. Values are defined in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and combine flags defined by both [Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.3) and [Extended Key Usages](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12). Accepted values: `anyExtended`, `certSigning`, `clientAuth`, `codeSigning`, `contentCommitment`, `crlSigning`, `dataEncipherment`, `decipherOnly`, `digitalSignature`, `emailProtection`, `encipherOnly`, `ipsecEndSystem`, `ipsecTunnel`, `ipsecUser`, `keyAgreement`, `keyEncipherment`, `microsoftCommercialCodeSigning`, `microsoftKernelCodeSigning`, `microsoftServerGatedCrypto`, `netscapeServerGatedCrypto`, `ocspSigning`, `serverAuth`, `timestamping`.
 	AllowedUses []string `pulumi:"allowedUses"`

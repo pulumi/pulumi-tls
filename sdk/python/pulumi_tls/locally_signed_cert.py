@@ -725,6 +725,44 @@ class LocallySignedCert(pulumi.CustomResource):
         __props__.__dict__["validity_start_time"] = validity_start_time
         return LocallySignedCert(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            allowed_uses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            ca_cert_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            ca_key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
+            ca_private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            ca_private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+            ca_private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
+            cert_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            cert_request_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
+            is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
+            max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
+            ready_for_renewal: pulumi.Input[Optional[_builtins.bool]] = None,
+            set_subject_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+            validity_end_time: pulumi.Input[Optional[_builtins.str]] = None,
+            validity_period_hours: pulumi.Input[Optional[_builtins.int]] = None,
+            validity_start_time: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["allowedUses"] = allowed_uses
+        __props__["caCertPem"] = ca_cert_pem
+        __props__["caKeyAlgorithm"] = ca_key_algorithm
+        __props__["caPrivateKeyPem"] = ca_private_key_pem
+        __props__["caPrivateKeyPemWo"] = ca_private_key_pem_wo
+        __props__["caPrivateKeyPemWoVersion"] = ca_private_key_pem_wo_version
+        __props__["certPem"] = cert_pem
+        __props__["certRequestPem"] = cert_request_pem
+        __props__["earlyRenewalHours"] = early_renewal_hours
+        __props__["isCaCertificate"] = is_ca_certificate
+        __props__["maxPathLength"] = max_path_length
+        __props__["readyForRenewal"] = ready_for_renewal
+        __props__["setSubjectKeyId"] = set_subject_key_id
+        __props__["validityEndTime"] = validity_end_time
+        __props__["validityPeriodHours"] = validity_period_hours
+        __props__["validityStartTime"] = validity_start_time
+        return pulumi.runtime.exists_resource(None, 'tls:index/locallySignedCert:LocallySignedCert', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="allowedUses")
     def allowed_uses(self) -> pulumi.Output[Sequence[_builtins.str]]:

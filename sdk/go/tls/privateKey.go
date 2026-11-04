@@ -192,6 +192,12 @@ func (PrivateKeyState) ElementType() reflect.Type {
 	return reflect.TypeOf((*privateKeyState)(nil)).Elem()
 }
 
+// PrivateKeyExists checks whether an existing PrivateKey resource with the given ID exists.
+func PrivateKeyExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *PrivateKeyState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("tls:index/privateKey:PrivateKey", id, state, "", opts...)
+}
+
 type privateKeyArgs struct {
 	// Name of the algorithm to use when generating the private key. Currently-supported values are: `RSA`, `ECDSA`, `ED25519`.
 	Algorithm string `pulumi:"algorithm"`

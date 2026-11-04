@@ -850,6 +850,50 @@ class SelfSignedCert(pulumi.CustomResource):
         __props__.__dict__["validity_start_time"] = validity_start_time
         return SelfSignedCert(resource_name, opts=opts, __props__=__props__)
 
+    @staticmethod
+    def exists(id: pulumi.Input[str],
+            opts: Optional[pulumi.ResourceOptions] = None,
+            allowed_uses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            cert_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            dns_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            early_renewal_hours: pulumi.Input[Optional[_builtins.int]] = None,
+            ip_addresses: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            is_ca_certificate: pulumi.Input[Optional[_builtins.bool]] = None,
+            key_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
+            max_path_length: pulumi.Input[Optional[_builtins.int]] = None,
+            private_key_pem: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_pem_wo: pulumi.Input[Optional[_builtins.str]] = None,
+            private_key_pem_wo_version: pulumi.Input[Optional[_builtins.int]] = None,
+            ready_for_renewal: pulumi.Input[Optional[_builtins.bool]] = None,
+            set_authority_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+            set_subject_key_id: pulumi.Input[Optional[_builtins.bool]] = None,
+            subject: pulumi.Input[Optional[Union['SelfSignedCertSubjectArgs', 'SelfSignedCertSubjectArgsDict', 'outputs.SelfSignedCertSubject']]] = None,
+            uris: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            validity_end_time: pulumi.Input[Optional[_builtins.str]] = None,
+            validity_period_hours: pulumi.Input[Optional[_builtins.int]] = None,
+            validity_start_time: pulumi.Input[Optional[_builtins.str]] = None) -> pulumi.Output[bool]:
+        __props__: dict = {}
+        __props__["allowedUses"] = allowed_uses
+        __props__["certPem"] = cert_pem
+        __props__["dnsNames"] = dns_names
+        __props__["earlyRenewalHours"] = early_renewal_hours
+        __props__["ipAddresses"] = ip_addresses
+        __props__["isCaCertificate"] = is_ca_certificate
+        __props__["keyAlgorithm"] = key_algorithm
+        __props__["maxPathLength"] = max_path_length
+        __props__["privateKeyPem"] = private_key_pem
+        __props__["privateKeyPemWo"] = private_key_pem_wo
+        __props__["privateKeyPemWoVersion"] = private_key_pem_wo_version
+        __props__["readyForRenewal"] = ready_for_renewal
+        __props__["setAuthorityKeyId"] = set_authority_key_id
+        __props__["setSubjectKeyId"] = set_subject_key_id
+        __props__["subject"] = subject
+        __props__["uris"] = uris
+        __props__["validityEndTime"] = validity_end_time
+        __props__["validityPeriodHours"] = validity_period_hours
+        __props__["validityStartTime"] = validity_start_time
+        return pulumi.runtime.exists_resource(None, 'tls:index/selfSignedCert:SelfSignedCert', id, __props__, opts or pulumi.ResourceOptions())
+
     @_builtins.property
     @pulumi.getter(name="allowedUses")
     def allowed_uses(self) -> pulumi.Output[Sequence[_builtins.str]]:
